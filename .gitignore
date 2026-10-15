@@ -1,0 +1,17 @@
+node_modules/
+dist/
+releases/
+.idea/
+.DS_Store
+*.pem
+.superpowers/
+.env
+.env.*
+!.env.example
+*.key
+docs/drag-import.png
+docs/verification.md
+docs/json-design.md
+docs/json-plan.md
+docs/json-diff-design.md
+docs/json-diff-verification.md

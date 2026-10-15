@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>LisTools · JSON 对比</title>
+    <link rel="icon" href="/icons/icon-48.png" />
+  </head>
+  <body class="diff-page">
+    <header class="app-header">
+      <a class="brand" href="./index.html" aria-label="LisTools 首页"><span class="brand-mark">Li</span>LisTools</a>
+      <span class="header-divider"></span><span class="header-description">开发者工具箱</span>
+      <span class="local-badge"><span></span>本地处理</span>
+    </header>
+    <div class="app-layout">
+      <aside class="sidebar" aria-label="工具导航">
+        <p class="nav-label">工具</p>
+        <a class="nav-item" href="./index.html"><span class="json-icon">{ }</span>JSON 解析</a>
+        <a class="nav-item active" href="./diff.html" aria-current="page"><span class="json-icon">±</span>JSON 对比</a>
+        <div class="sidebar-footer">LisTools <span id="app-version"></span></div>
+      </aside>
+      <main>
+        <section class="page-heading"><div><h1>JSON 对比</h1><p>忽略排版与对象键顺序，数组按索引比较。</p></div><span class="keyboard-hint"><kbd>⌘ / Ctrl</kbd> + <kbd>Enter</kbd> 开始对比</span></section>
+        <section class="diff-summary" aria-label="差异汇总">
+          <strong id="diff-total" role="status" aria-live="polite">等待对比</strong>
+          <span class="diff-count added">+ 新增 <b id="count-added">—</b></span>
+          <span class="diff-count removed">− 删除 <b id="count-removed">—</b></span>
+          <span class="diff-count modified">~ 修改 <b id="count-modified">—</b></span>
+          <span id="diff-duration"></span>
+        </section>
+        <div class="toolbar" aria-label="对比操作">
+          <button class="primary" id="compare">开始对比</button><button id="cancel" hidden>取消</button>
+          <button id="swap">交换左右</button><button id="clear" class="quiet">清空</button>
+          <span class="toolbar-spacer"></span><label class="check-label"><input type="checkbox" id="only-diff" checked />收起未变化行</label>
+        </div>
+        <details class="diff-inputs" id="inputs" open>
+          <summary>输入内容 <span>粘贴或向左右两侧拖入 JSON 文件</span></summary>
+          <div class="diff-input-grid">
+            <section class="panel" data-diff-side="left" aria-label="原 JSON 输入面板"><div class="panel-heading"><h2>原 JSON</h2><span id="left-file">左侧 · 比较基准</span><button id="left-import">导入原文件</button><input id="left-file-input" type="file" accept=".json,.txt,application/json,text/plain" hidden /></div><label for="left-source" class="sr-only">原 JSON 输入</label><textarea id="left-source" class="diff-source" placeholder="粘贴原 JSON，或拖入文件…" wrap="off" spellcheck="false"></textarea></section>
+            <section class="panel" data-diff-side="right" aria-label="新 JSON 输入面板"><div class="panel-heading"><h2>新 JSON</h2><span id="right-file">右侧 · 比较目标</span><button id="right-import">导入新文件</button><input id="right-file-input" type="file" accept=".json,.txt,application/json,text/plain" hidden /></div><label for="right-source" class="sr-only">新 JSON 输入</label><textarea id="right-source" class="diff-source" placeholder="粘贴新 JSON，或拖入文件…" wrap="off" spellcheck="false"></textarea></section>
+          </div>
+        </details>
+        <div class="diff-navigation" aria-label="差异导航">
+          <button id="previous" disabled>上一处</button><label>第 <input id="diff-index" aria-label="差异编号" type="number" min="1" value="1" disabled /> / <span id="diff-length">0</span> 处</label><button id="next" disabled>下一处</button>
+          <span id="change-kind"></span><code id="change-path">差异将按 JSON 路径逐处定位</code>
+        </div>
+        <section class="diff-result panel" aria-label="双栏对比结果">
+          <div class="diff-result-titles"><span data-diff-side="left">原 JSON <small>− 删除 / 修改前</small></span><span data-diff-side="right">新 JSON <small>+ 新增 / 修改后</small></span></div>
+          <div class="placeholder" id="diff-placeholder"><span class="empty-braces">{ } ± { }</span><strong id="diff-placeholder-title">放入两份 JSON，查看差异</strong><p id="diff-placeholder-description">新增、删除和修改会分别标记，顶部统计全部差异点。</p><pre id="diff-error" hidden></pre><button id="locate-error" hidden>定位输入错误</button></div>
+          <div id="diff-view" hidden></div>
+        </section>
+        <footer class="workbench-footer"><span>数据仅在本地浏览器处理，不上传、不保存输入内容。</span><span>一个字段变化算一处，新增或删除完整节点各算一处。</span></footer>
+      </main>
+    </div>
+    <div id="file-drop-overlay" class="file-drop-overlay" role="status" aria-live="polite" hidden><strong>拖入左侧或右侧，替换对应的 JSON</strong><span>松开后自动读取，两侧就绪后开始对比</span></div>
+    <div id="notification" role="status" aria-live="polite" hidden></div>
+    <script type="module" src="/src/diff.js"></script>
+  </body>
+</html>
