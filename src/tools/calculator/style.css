@@ -1,0 +1,9 @@
+.numeric-result {display:block;font-family:var(--mono);font-size:26px;line-height:1.5;min-height:48px;overflow-wrap:anywhere;white-space:pre-wrap;}
+.numeric-keypad {display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin:14px 0;direction:ltr;}
+.numeric-keypad button {min-height:40px;font-family:var(--mono);}
+.numeric-history {list-style:none;padding:0;max-height:320px;overflow:auto;}
+.numeric-history li {padding:10px 0;border-bottom:1px solid var(--border);overflow-wrap:anywhere;}
+.numeric-history button {font-family:var(--mono);text-align:start;max-width:100%;overflow-wrap:anywhere;}
+.numeric-result-row {display:grid;grid-template-columns:minmax(120px,1fr) minmax(0,2fr) auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);}
+.numeric-result-row output {overflow-wrap:anywhere;font-family:var(--mono);}
+@media(max-width:600px){.numeric-result-row{grid-template-columns:1fr}.numeric-keypad{gap:4px}.numeric-keypad button{padding:8px 2px}.numeric-result{font-size:22px}}

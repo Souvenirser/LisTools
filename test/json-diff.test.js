@@ -28,6 +28,37 @@ test('忽略排版和对象键顺序，等价数值不产生误报', () => {
   assert.deepEqual(result.textChanges, []);
 });
 
+test('整数快捷路径与小数、指数保持同一精确数值语义', () => {
+  for (const [left, right] of [['-10', '-1e1'], ['1000', '1.000e3'], ['0', '-0e999'], ['9007199254740993000', '9007199254740993e3']]) {
+    assert.equal(compareJson(left, right).total, 0, `${left} -> ${right}`);
+  }
+});
+
+test('仅替换值时完整保留排版、UTF-16 坐标和祖先节点定位', () => {
+  const left = {a:'short', rows:[{n:1,text:'🙂'},{n:2,text:'long old value'}], z:null};
+  const right = {a:'line\nwith "quotes"', rows:[{n:100000,text:'🙂🙂🙂'},{n:2,text:'x'}], z:false};
+  const result = compareJson(JSON.stringify(left), JSON.stringify(right));
+  assert.equal(result.total, 5);
+  assert.equal(rebuilt(result), result.rightText);
+  assert.equal(result.rightText, compareJson(JSON.stringify(right), JSON.stringify(right)).rightText);
+  for (const change of result.changes) assert.ok(change.fromB <= change.anchorB && change.anchorB <= change.toB);
+});
+
+test('不同长度和类型的值替换与完整排版一致，连续编辑的坐标不累计漂移', () => {
+  let seed = 17;
+  const next = () => (seed = (seed * 1664525 + 1013904223) >>> 0);
+  const values = [null, false, true, 0, -12, 100000, '', '🙂', 'line\nquote"\\', 'x'.repeat(200)];
+  for (let round = 0; round < 40; round++) {
+    const left = {first:values[next() % values.length], rows:Array.from({length:12}, () => ({v:values[next() % values.length]})), last:values[next() % values.length]};
+    const right = structuredClone(left);
+    right.first = values[next() % values.length]; right.last = values[next() % values.length];
+    for (let i = 0; i < 5; i++) right.rows[next() % 12].v = values[next() % values.length];
+    const result = compareJson(JSON.stringify(left), JSON.stringify(right));
+    assert.equal(rebuilt(result), result.rightText);
+    assert.equal(result.rightText, compareJson(JSON.stringify(right), JSON.stringify(right)).rightText);
+  }
+});
+
 test('大整数、小数及巨大指数保持精确，数字和字符串不同', () => {
   for (const [left, right] of [
     ['9007199254740992', '9007199254740993'],
@@ -61,6 +92,9 @@ test('特殊字段名、数字字段名及转义路径不会丢失或与内部�
   assert.equal(JSON.parse(result.leftText).__proto__.a, 1);
   assert.equal(JSON.parse(result.leftText).isLosslessNumber, true);
   assert.equal(compareJson('1', '{"value":"1","isLosslessNumber":true}').total, 1);
+  assert.equal(compareJson('{"constructor":1,"toString":2}', '{}').counts.removed, 2);
+  assert.equal(compareJson('{"__proto__":{"polluted":true}}', '{}').counts.removed, 1);
+  assert.equal(Object.prototype.polluted, undefined);
 });
 
 test('非法 JSON、重复键、空输入明确指出左右侧和位置', () => {

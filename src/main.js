@@ -4,6 +4,7 @@ import { version } from '../package.json';
 import { createJsonController } from './tools/json/controller.js';
 import { bindFileDrop } from './tools/json/file-drop.js';
 import './style.css';
+import { t, onLanguageChange, errorText, createNotifier } from './i18n.js';
 
 const $ = (id) => document.getElementById(id);
 $('app-version').textContent = `v${version}`;
@@ -15,7 +16,8 @@ let resultText = '';
 let errorPosition;
 let inputVersion = 0;
 let filename = 'formatted.json';
-let toastTimer;
+let lastState = { status: 'empty' };
+let importedName = '';
 let largeResult = false;
 
 function size(bytes) {
@@ -24,22 +26,17 @@ function size(bytes) {
   return `${(bytes / 1024 / 1024).toFixed(2)} MB`;
 }
 
-function notify(message) {
-  clearTimeout(toastTimer);
-  $('notification').textContent = message;
-  $('notification').hidden = false;
-  toastTimer = setTimeout(() => { $('notification').hidden = true; }, 3500);
-}
+const notify = createNotifier();
 
 function renderMenu(items, { mode }) {
-  const labels = { text: '文本', tree: '树形', 'Expand all': '全部展开', 'Collapse all': '全部折叠', 'Search (Ctrl+F)': '搜索' };
+  const labels = { text: t('common.text'), tree: t('common.tree'), 'Expand all': t('common.expand'), 'Collapse all': t('common.collapse'), 'Search (Ctrl+F)': t('common.search') };
   return items.filter((item) => item.text !== 'table' && item.className !== 'jse-copy').map((item) => {
     const label = labels[item.text] || labels[item.title];
     const translated = label ? {
       ...item, icon: undefined, text: label,
       className: `${item.className || ''} lis-menu-label${item.text === 'tree' ? ' jse-last' : ''}`,
-      title: label === '搜索' ? '搜索 (Ctrl / ⌘ + F)' : label
-    } : item;
+      title: label === labels['Search (Ctrl+F)'] ? `${label} (Ctrl / ⌘ + F)` : label
+    } : translateMenuItem(item);
     if (mode === Mode.tree && largeResult && ['Expand all', 'Collapse all'].includes(item.title)) {
       return { ...translated, onClick: async () => {
         const currentEditor = editor;
@@ -48,7 +45,7 @@ function renderMenu(items, { mode }) {
         if (editor !== currentEditor || !resultText) return;
         if (item.title === 'Expand all') currentEditor.expand([], () => true);
         else currentEditor.collapse([], true);
-        notify('大 JSON 的批量展开/折叠使用文本视图，树形视图可按分支浏览。');
+        notify('json.largeTree');
       } };
     }
     return translated;
@@ -56,6 +53,8 @@ function renderMenu(items, { mode }) {
 }
 
 function render(state) {
+  lastState = state;
+  document.querySelector('.output-panel').dataset.status = state.status;
   resultText = '';
   errorPosition = undefined;
   for (const button of resultButtons) button.disabled = true;
@@ -63,8 +62,8 @@ function render(state) {
   $('placeholder').hidden = false;
   $('error-detail').hidden = true;
   $('locate-error').hidden = true;
-  $('result-info').textContent = '保留大整数与小数精度';
-  $('result-state').textContent = state.status === 'pending' ? '处理中…' : '就绪';
+  $('result-info').textContent = t('json.precision');
+  $('result-state').textContent = state.status === 'pending' ? t('common.processing') : t('common.ready');
   $('placeholder').classList.toggle('is-error', state.status === 'error');
   $('placeholder').setAttribute('aria-busy', String(state.status === 'pending'));
 
@@ -82,8 +81,8 @@ function render(state) {
             indentation: Number($('indent').value), tabSize: Number($('indent').value),
             maxDocumentSizeTextMode: 50 * 1024 * 1024,
             queryLanguages: [jsonQueryLanguage],
-            ariaLabel: 'JSON 解析结果', onRenderMenu: renderMenu,
-            onError: (error) => notify(`编辑器：${error.message}`)
+            ariaLabel: t('json.output'), onRenderMenu: renderMenu, onRenderContextMenu: renderContextMenu,
+            onError: (error) => notify('common.editorError', { message: error.message })
           }
         });
       } else {
@@ -93,25 +92,25 @@ function render(state) {
       resultText = state.text;
       for (const button of resultButtons) button.disabled = false;
       $('input-info').textContent = size(state.inputBytes);
-      $('result-info').textContent = `${size(state.outputBytes)} · ${state.text.length.toLocaleString()} 字符`;
-      $('result-state').textContent = '解析成功';
+      $('result-info').textContent = `${size(state.outputBytes)} · ${t('common.characters', { count: state.text.length })}`;
+      $('result-state').textContent = t('json.success');
     } catch (error) {
-      render({ status: 'error', message: `结果展示失败：${error.message}` });
+      render({ status: 'error', code: 'common.displayError', params: { message: error.message }, message: error.message });
     }
     return;
   }
 
   if (state.status === 'error') {
-    $('placeholder-title').textContent = 'JSON 解析失败';
-    $('placeholder-description').textContent = state.line ? `第 ${state.line} 行，第 ${state.column} 列` : '请检查输入内容，或重新尝试。';
-    $('error-detail').textContent = state.message;
+    $('placeholder-title').textContent = t('json.failed');
+    $('placeholder-description').textContent = state.line ? t('common.location', state) : t('common.retry');
+    $('error-detail').textContent = errorText(state);
     $('error-detail').hidden = false;
-    $('result-state').textContent = '输入有误';
+    $('result-state').textContent = t('common.error');
     errorPosition = state.position;
     $('locate-error').hidden = errorPosition === undefined;
   } else {
-    $('placeholder-title').textContent = state.status === 'pending' ? '正在解析 JSON…' : state.status === 'idle' ? '输入已更新' : '等待输入 JSON';
-    $('placeholder-description').textContent = state.status === 'pending' ? '大文件需要一些时间，仍可编辑或清空输入。' : state.status === 'idle' ? '点击「美化」或「压缩」查看结果。' : '美化后可切换文本或树形视图，展开或折叠节点。';
+    $('placeholder-title').textContent = state.status === 'pending' ? t('json.parsing') : state.status === 'idle' ? t('json.updated') : t('json.waiting');
+    $('placeholder-description').textContent = state.status === 'pending' ? t('json.largeHint') : state.status === 'idle' ? t('json.actionHint') : t('json.viewHint');
   }
   if (state.status !== 'pending' && editor) {
     void editor.destroy();
@@ -130,7 +129,7 @@ function process(action = 'format', wait = 0) {
 
 function inputChanged() {
   inputVersion += 1;
-  $('input-info').textContent = source.value ? `${source.value.length.toLocaleString()} 字符` : '原始 JSON';
+  $('input-info').textContent = source.value ? t('common.characters', { count: source.value.length }) : t('json.raw');
   if ($('auto-format').checked || !source.value.trim()) process('format', 350);
   else {
     controller.cancel();
@@ -150,8 +149,9 @@ $('auto-format').addEventListener('change', () => {
 $('clear').addEventListener('click', () => {
   source.value = '';
   $('file').value = '';
-  $('file-name').textContent = '支持对象、数组及 JSON 原始值';
+  $('file-name').textContent = t('json.supported');
   filename = 'formatted.json';
+  importedName = '';
   inputChanged();
   source.focus();
 });
@@ -166,11 +166,12 @@ async function loadFile(file) {
     if (current !== inputVersion) return;
     source.value = text;
     filename = `${file.name.replace(/\.[^.]+$/, '')}.formatted.json`;
-    $('file-name').textContent = file.name;
-    $('input-info').textContent = `${text.length.toLocaleString()} 字符`;
+    importedName = file.name;
+    $('file-name').textContent = importedName;
+    $('input-info').textContent = t('common.characters', { count: text.length });
     process();
   } catch (error) {
-    if (current === inputVersion) render({ status: 'error', message: `文件读取失败：${error.message}` });
+    if (current === inputVersion) render({ status: 'error', code: 'common.fileError', params: { message: error.message }, message: error.message });
   } finally {
     $('file').value = '';
   }
@@ -179,7 +180,7 @@ $('file').addEventListener('change', () => loadFile($('file').files[0]));
 bindFileDrop(document, {
   onFile: loadFile,
   onActive: (active) => { $('file-drop-overlay').hidden = !active; },
-  onError: notify
+  onError: () => notify('common.oneFile')
 });
 $('locate-error').addEventListener('click', () => {
   source.focus();
@@ -190,10 +191,10 @@ $('locate-error').addEventListener('click', () => {
 $('copy').addEventListener('click', async () => {
   try {
     await navigator.clipboard.writeText(resultText);
-    notify('已复制完整结果');
+    notify('common.copiedAll');
   } catch (error) {
     console.warn('Clipboard write failed:', error.name, error.message);
-    notify('剪贴板不可用，请使用下载保存完整结果。');
+    notify('common.copyFailed');
   }
 });
 $('download').addEventListener('click', () => {
@@ -205,9 +206,43 @@ $('download').addEventListener('click', () => {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 });
 document.addEventListener('keydown', (event) => {
+  if (event.target.closest?.('.tool-menu')) return;
   if ((event.metaKey || event.ctrlKey) && event.key === 'Enter') {
     event.preventDefault();
     process();
   }
 });
 window.addEventListener('pagehide', () => controller.cancel());
+
+// The public menu hooks update labels without resetting editor content or its history.
+function translateMenuItem(item) {
+  const translate = value => {
+    if (!value) return value;
+    const key = Object.entries({ 'Copy':'common.copy', 'Cut':'common.cut', 'Paste':'common.paste', 'Select all':'common.selectAll', 'Undo':'common.undo', 'Redo':'common.redo', 'Sort':'common.sort', 'Transform':'common.transform', 'Insert':'common.insert', 'Remove':'common.remove', 'Duplicate':'common.duplicate', 'Extract':'common.extract', 'Search':'common.search', 'Format':'json.format', 'Compact':'json.compact', 'Edit key':'common.key', 'Edit':'common.value', 'Value':'common.value', 'Structure':'common.tree' }).find(([name]) => value === name || value.startsWith(name + ' ') || value.startsWith(name + ' ('))?.[1];
+    const variant = /compacted|without indentation/.test(value) ? 'json.compact' : /formatted|formatted with indentation/.test(value) ? 'json.format' : undefined;
+    const label = key ? t(key) + (variant ? ` · ${t(variant)}` : '') : value;
+    return key ? label + (value.match(/\([^)]*Ctrl[^)]*\)/)?.[0] ? ` ${value.match(/\([^)]*Ctrl[^)]*\)/)[0]}` : '') : value;
+  };
+  return { ...item, ...(item.text ? { text:translate(item.text) } : {}), ...(item.title ? { title:translate(item.title) } : {}), ...(item.main ? { main:translateMenuItem(item.main) } : {}), ...(item.items ? { items:item.items.map(translateMenuItem) } : {}) };
+}
+// Results are read-only. Keep available context actions and omit disabled edit/type controls.
+function renderContextMenu(items) {
+  const prune = items => items.filter(item => !item.disabled && !item.main?.disabled)
+    .map(item => item.items ? { ...item, items:prune(item.items) } : item)
+    .filter(item => !item.items || item.items.some(child => child.type === 'button' || child.type === 'dropdown-button' || child.items?.length));
+  return prune(items).map(translateMenuItem);
+}
+function refreshLabels() {
+  const state = lastState;
+  $('input-info').textContent = source.value ? t('common.characters', { count:source.value.length }) : t('json.raw');
+  $('file-name').textContent = importedName || t('json.supported');
+  for (const option of $('indent').options) option.textContent = t('json.spaces', { count:Number(option.value) });
+  $('result-info').textContent = state.status === 'ready' ? `${size(state.outputBytes)} · ${t('common.characters', { count:state.text.length })}` : t('json.precision');
+  $('result-state').textContent = t(state.status === 'ready' ? 'json.success' : state.status === 'error' ? 'common.error' : state.status === 'pending' ? 'common.processing' : 'common.ready');
+  $('placeholder-title').textContent = t(state.status === 'error' ? 'json.failed' : state.status === 'pending' ? 'json.parsing' : state.status === 'idle' ? 'json.updated' : 'json.waiting');
+  $('placeholder-description').textContent = state.status === 'error' ? state.line ? t('common.location',state) : t('common.retry') : t(state.status === 'pending' ? 'json.largeHint' : state.status === 'idle' ? 'json.actionHint' : 'json.viewHint');
+  if (state.status === 'error') $('error-detail').textContent = errorText(state);
+  editor?.updateProps({ ariaLabel:t('json.output'), onRenderMenu:(items, context) => renderMenu(items, context), onRenderContextMenu:items => items.map(translateMenuItem) });
+}
+onLanguageChange(refreshLabels);
+refreshLabels();

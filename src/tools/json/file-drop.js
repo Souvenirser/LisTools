@@ -1,4 +1,4 @@
-export function bindFileDrop(target, { onFile, onActive, onError }) {
+export function bindFileDrop(target, { onFile, onFiles, allowMultiple = () => false, onActive, onError, multipleMessage = '请一次拖入一个 JSON 文件' }) {
   let depth = 0;
   const hasFiles = (event) => Array.from(event.dataTransfer?.types || []).includes('Files')
     || event.dataTransfer?.files.length > 0;
@@ -29,8 +29,12 @@ export function bindFileDrop(target, { onFile, onActive, onError }) {
     event.stopPropagation();
     reset();
     const files = event.dataTransfer.files;
+    if (allowMultiple()) {
+      onFiles(Array.from(files), event);
+      return;
+    }
     if (files.length !== 1) {
-      onError('请一次拖入一个 JSON 文件');
+      onError(multipleMessage);
       return;
     }
     onFile(files[0], event);

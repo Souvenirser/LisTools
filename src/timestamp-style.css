@@ -1,0 +1,43 @@
+.timestamp-page input { border: 1px solid var(--border); border-radius: 5px; background: var(--surface); min-width: 0; height: 40px; padding-inline: 10px; }
+.timestamp-page input[readonly] { font: 14px var(--mono); background: var(--slate-2); font-variant-numeric: tabular-nums; }
+.timestamp-page input[aria-invalid="true"] { border-color: var(--red-9); background: var(--error-bg); }
+.timezone-bar { flex-shrink: 0; padding: 14px 16px; flex-direction: row; align-items: center; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 14px; }
+.timezone-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; min-width: 0; }
+.timezone-controls label { font-weight: 600; }
+#time-zone { width: 260px; height: 40px; font-family: var(--mono); direction: ltr; }
+#device-time-zone { margin-inline-start: auto; color: var(--muted); font-size: 12px; }
+#timezone-error { width: 100%; margin: 0; }
+.clock-panel { flex-shrink: 0; margin-bottom: 18px; }
+#clock-context { margin-inline-end: auto; font-size: 12px; color: var(--muted); direction: ltr; }
+.clock-refresh { color: var(--muted); font-size: 12px; }
+.clock-values { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 16px; padding: 12px 16px; }
+.clock-value, .value-row { min-width: 0; }
+.clock-value > label, .value-row > label { display: block; margin-bottom: 7px; color: var(--muted); font-size: 12px; }
+.value-control { display: flex; align-items: center; gap: 8px; }
+.value-control input { width: 100%; flex: 1; }
+.value-control button { flex-shrink: 0; }
+.timestamp-workspace { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; flex-shrink: 0; }
+.converter-panel { border-top: 3px solid var(--blue-8); }
+#datetime-panel { border-top-color: var(--teal-8); }
+.converter-input { padding: 18px 16px 0; }
+.converter-input > label { display: block; margin-bottom: 10px; font-weight: 600; }
+.timestamp-source-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.converter-input input { width: 100%; font: 14px var(--mono); }
+.converter-input input::placeholder { color: var(--muted); }
+.timestamp-source-row input { flex: 1; min-width: 180px; }
+#timestamp-unit { height: 40px; }
+.converter-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 10px; }
+.converter-actions > span { margin-inline-start: auto; color: var(--muted); font-size: 12px; }
+.conversion-message { min-height: 44px; margin: 10px 0 0; color: var(--muted); font-size: 12px; line-height: 1.7; overflow-wrap: anywhere; }
+.timestamp-page .is-error { color: var(--error-text); background: var(--error-bg); border-inline-start: 3px solid var(--red-9); padding: 8px 10px; border-radius: 4px; }
+.conversion-results { padding: 0 16px 18px; }
+.conversion-context { border-top: 1px solid var(--border); padding-top: 12px; margin-bottom: 12px; color: var(--muted); font-size: 12px; overflow-wrap: anywhere; direction: ltr; }
+.value-row { margin-top: 12px; }
+#timestamp-panel .value-row:has(#timestamp-local), #datetime-panel .value-row:has(#datetime-seconds), #datetime-panel .value-row:has(#datetime-milliseconds) { background: var(--result-bg); border: 1px solid var(--result-border); border-radius: 7px; padding: 12px; }
+#timestamp-panel .value-row:has(#timestamp-local) > label, #datetime-panel .value-row:has(#datetime-seconds) > label, #datetime-panel .value-row:has(#datetime-milliseconds) > label { color: var(--result-text); font-weight: 600; }
+#timestamp-local, #datetime-seconds, #datetime-milliseconds { font-size: 22px; font-weight: 650; color: var(--result-text); background: transparent; border: 0; padding: 0; }
+#timestamp-local { font-size: 24px; }
+button[data-copy="timestamp-local"], button[data-copy="datetime-seconds"], button[data-copy="datetime-milliseconds"] { background: var(--accent); border-color: var(--accent); color: white; min-height: 40px; }
+.converter-footer { margin-top: auto; padding: 10px 16px; border-top: 1px solid var(--border); background: var(--slate-2); color: var(--muted); font-size: 12px; }
+@media(max-width:1250px) { .clock-values { grid-template-columns: 1fr 1fr; } .clock-value:first-child { grid-column: 1/-1; } .timestamp-workspace { grid-template-columns: 1fr; } }
+@media(max-width:760px) { #device-time-zone { margin-inline-start: 0; } .clock-values { grid-template-columns: 1fr; gap: 10px; } .converter-actions > span { flex-basis: 100%; } .clock-refresh { display: none; } }

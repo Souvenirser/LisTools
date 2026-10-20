@@ -1,0 +1,19 @@
+.tool-menu { width:360px; max-width:calc(100vw - 16px); max-height:560px; display:flex; flex-direction:column; overflow:hidden; padding:0; border:1px solid var(--border); border-radius:10px; background:var(--surface); color:var(--text); box-shadow:0 12px 40px #0002; font-size:14px; line-height:1.5; }
+#tool-menu { position:fixed; margin:0; max-height:min(560px,calc(100dvh - 96px)); }
+#tool-menu:not(:popover-open) { display:none; }
+.tool-menu-search { padding:12px; flex-shrink:0; border-bottom:1px solid var(--border); }
+.tool-menu-search input { width:100%; min-height:38px; border:1px solid var(--border); border-radius:6px; background:var(--surface); color:var(--text); padding:7px 10px; font:inherit; }
+.tool-menu-list { min-height:0; overflow-y:auto; overscroll-behavior:contain; padding:6px; }
+.tool-menu-link, .tool-menu summary { display:flex; align-items:center; gap:8px; min-height:42px; padding:8px; border-radius:6px; color:var(--text); text-decoration:none; cursor:pointer; list-style:none; }
+.tool-menu summary::-webkit-details-marker { display:none; }
+.tool-menu-link:hover, .tool-menu summary:hover { background:var(--slate-3); }
+.tool-menu-link[aria-current="page"] { background:var(--blue-3); color:var(--blue-11); font-weight:600; }
+.tool-menu-icon { display:inline-grid; place-items:center; width:28px; flex:0 0 28px; font:17px/1 var(--mono); direction:ltr; }
+.tool-menu-name { min-width:0; overflow-wrap:anywhere; }
+.tool-menu-name small { display:block; color:var(--muted); font-size:11px; font-weight:400; }
+.tool-menu-arrow { margin-inline-start:auto; font-size:20px; line-height:1; transition:transform .1s; }
+.tool-menu details[open] > summary > .tool-menu-arrow { transform:rotate(90deg); }
+.tool-menu-group { margin-inline-start:18px; border-inline-start:1px solid var(--border); padding-inline-start:4px; }
+.tool-menu-empty { margin:16px; color:var(--muted); }
+.tool-menu-footer { display:flex; flex-shrink:0; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px 12px; padding:10px 12px; border-top:1px solid var(--border); font-size:11px; color:var(--muted); }
+[dir="rtl"] .tool-menu-arrow { transform:rotate(180deg); }

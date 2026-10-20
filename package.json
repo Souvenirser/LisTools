@@ -1,9 +1,9 @@
 {
   "name": "listools",
-  "version": "1.0.0",
+  "version": "1.3.3",
   "private": true,
   "type": "module",
-  "description": "LisTools 开发者工具箱",
+  "description": "LisTools 开发与办公实用工具箱",
   "author": "souvenirser",
   "license": "MIT",
   "repository": {
@@ -18,22 +18,53 @@
     "dev": "vite --host 127.0.0.1",
     "test": "node --test test/*.test.js",
     "build": "vite build && node scripts/package.js",
-    "preview": "vite preview --host 127.0.0.1"
+    "preview": "vite preview --host 127.0.0.1",
+    "test:browser": "vite build && playwright test"
   },
   "dependencies": {
+    "@cloudflare/speedtest": "1.14.2",
+    "@codemirror/commands": "6.11.1",
     "@codemirror/lang-json": "6.0.2",
     "@codemirror/language": "6.13.1",
     "@codemirror/merge": "6.12.2",
     "@codemirror/search": "6.7.2",
     "@codemirror/state": "6.7.6",
     "@codemirror/view": "6.43.14",
+    "@eslint-community/regexpp": "4.12.2",
+    "@kayahr/text-encoding": "2.2.0",
+    "@noble/hashes": "2.4.0",
+    "@radix-ui/colors": "3.0.0",
+    "@scure/base": "2.4.0",
+    "browser-image-compression": "2.0.2",
+    "change-case": "5.4.4",
+    "colord": "2.10.0",
+    "crc-32": "1.2.2",
+    "croner": "10.0.1",
+    "cronstrue": "3.32.0",
+    "cropperjs": "2.3.0",
+    "decimal.js": "10.6.0",
+    "diff": "9.0.0",
+    "entities": "8.1.0",
+    "fast-xml-parser": "5.11.2",
+    "fflate": "0.8.2",
+    "i18next": "26.4.2",
+    "jsesc": "3.1.0",
     "jsonc-parser": "3.3.1",
+    "jsqr": "1.4.0",
     "lossless-json": "4.3.1",
+    "mathjs": "15.2.0",
     "microdiff": "1.6.0",
-    "vanilla-jsoneditor": "3.13.0"
+    "nanoid": "6.0.2",
+    "nzh": "1.0.14",
+    "papaparse": "5.7.0",
+    "pdf-lib": "1.17.1",
+    "qrcode": "1.5.4",
+    "temporal-polyfill": "1.0.6",
+    "vanilla-jsoneditor": "3.13.0",
+    "yaml": "2.9.1"
   },
   "devDependencies": {
-    "fflate": "0.8.2",
+    "@playwright/test": "1.64.1",
     "vite": "8.3.4"
   }
 }

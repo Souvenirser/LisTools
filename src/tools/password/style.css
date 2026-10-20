@@ -1,0 +1,8 @@
+.password-page .password-length { max-width: 330px; margin-top: 14px; }
+.password-page .check-label { align-items: center; gap: 7px; }
+.password-page .password-symbol-list { font-family: var(--mono); }
+.password-page .password-results { display: grid; gap: 10px; }
+.password-page .password-result { display: flex; align-items: start; gap: 10px; }
+.password-page .password-result input { min-width: 0; flex: 1; font-family: var(--mono); }
+.password-page .password-result button { flex-shrink: 0; }
+.password-page [hidden] { display: none !important; }

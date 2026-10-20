@@ -54,3 +54,56 @@ test('解析或 Worker 异常清理任务，后续仍可重新比较', () => {
   assert.equal(states.at(-1).status, 'error');
   assert.equal(workers[1].terminated, true);
 });
+
+test('切换文本模式发送模式信息，并隔离旧 JSON 结果', () => {
+  const { controller, workers, states } = fixture();
+  controller.compare('{}', '{}');
+  const old = workers[0].onmessage;
+  controller.compare('plain left', 'plain right', 'text');
+  assert.deepEqual(workers[1].sent[0], { type: 'compare', left: 'plain left', right: 'plain right', mode: 'text', reuseDocuments:true });
+  old({ data: { type: 'result', status: 'ready', total: 99 } });
+  assert.equal(states.at(-1).status, 'pending');
+});
+
+test('Worker 错误不透传英文，不把两侧数据判为不合法，失败后仍可重试', () => {
+  const { controller, workers, states } = fixture();
+  controller.compare('{}', '{}');
+  workers[0].onerror({ message: 'Failed to fetch dynamically imported module', preventDefault() {} });
+  const failure = states.at(-1);
+  assert.match(failure.message, /任务/);
+  assert.doesNotMatch(failure.message, /Failed|fetch/);
+  assert.equal(failure.issues?.[0].stage, 'worker');
+  assert.deepEqual(failure.validation, { left: 'unchecked', right: 'unchecked' });
+  controller.compare('{}', '{}');
+  assert.equal(states.at(-1).status, 'pending');
+});
+
+test('总耗时从主线程发起时计时，导入开始时间可传递，旧任务不能更新计时', () => {
+  const { controller, workers, states } = fixture();
+  const importedAt = performance.now() - 123;
+  controller.compare('{}', '{}', 'json', importedAt);
+  workers[0].onmessage({ data:{ status:'ready', total:0, durationMs:10 } });
+  assert.equal(states.at(-1).startedAt, importedAt);
+  assert.ok(states.at(-1).queuedAt >= importedAt);
+  const before = performance.now();
+  controller.compare('{}', '{}');
+  workers[1].onmessage({ data:{ status:'ready', total:0, durationMs:10 } });
+  assert.ok(states.at(-1).startedAt >= before);
+});
+
+test('文件读取时预加载 Worker，正式对比复用它，取消和加载失败均可清理', () => {
+  const { controller, workers, states } = fixture();
+  controller.prepare();
+  controller.compare('{}', '{}');
+  assert.equal(workers.length, 1);
+  assert.equal(workers[0].terminated, undefined);
+  assert.equal(workers[0].sent[0].type, 'compare');
+  controller.cancel();
+  assert.equal(workers[0].terminated, true);
+  controller.prepare();
+  workers[1].onerror({ preventDefault() {} });
+  assert.equal(workers[1].terminated, true);
+  controller.compare('{}', '{}');
+  assert.equal(workers.length, 3);
+  assert.equal(states.at(-1).status, 'pending');
+});

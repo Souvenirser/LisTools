@@ -1,0 +1,15 @@
+{
+  "title": "Chinese money uppercase",
+  "description": "Round amounts to cents and generate independent simplified and traditional Chinese financial text. Processing stays on your device.",
+  "amount": "Amount",
+  "hint": "Enter digits with optional thousands commas and decimal places. Negative and large values are supported. Values are rounded half up to two decimal places; scientific notation is not accepted.",
+  "convert": "Convert",
+  "numeric": "Numeric amount",
+  "grouped": "With thousands separators",
+  "simplified": "Simplified Chinese uppercase",
+  "traditional": "Traditional Chinese uppercase",
+  "copy": "Copy",
+  "roundedNotice": "Original {{original}} was rounded half up to {{rounded}}.",
+  "invalidAmount": "Enter a valid decimal amount, with correctly grouped optional thousands commas (up to 1,000 characters).",
+  "name": "Chinese money uppercase"
+}

@@ -1,23 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import vm from 'node:vm';
+import {pageConnectPolicy} from '../src/tools/shared/policy.js';
 
-test('扩展图标在本地打开工作台，不需要网页访问权限', () => {
+test('扩展图标打开离线工具菜单，不需要后台或网页访问权限', () => {
   const manifest = JSON.parse(fs.readFileSync(new URL('../public/manifest.json', import.meta.url)));
   assert.equal(manifest.manifest_version, 3);
-  assert.equal(manifest.name, 'LisTools - 开发者工具箱');
+  assert.equal(manifest.name, 'LisTools - 实用工具箱');
   assert.ok(!manifest.permissions?.length && !manifest.host_permissions?.length);
   assert.ok(!manifest.content_security_policy.extension_pages.includes('unsafe-eval'));
-  let click;
-  let opened;
-  vm.runInNewContext(fs.readFileSync(new URL('../public/background.js', import.meta.url), 'utf8'), {
-    chrome: {
-      action: { onClicked: { addListener(callback) { click = callback; } } },
-      runtime: { getURL: (file) => `chrome-extension://listools-test/${file}` },
-      tabs: { create(options) { opened = options.url; } }
-    }
-  });
-  click();
-  assert.equal(opened, 'chrome-extension://listools-test/index.html');
+  assert.equal(manifest.action.default_popup,'popup.html');
+  assert.ok(fs.existsSync(new URL(`../${manifest.action.default_popup}`,import.meta.url)));
+  assert.equal(manifest.background,undefined);
+  assert.equal(pageConnectPolicy(manifest.action.default_popup),"connect-src 'none'");
 });

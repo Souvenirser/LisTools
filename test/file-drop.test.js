@@ -71,6 +71,14 @@ test('多文件拖入给出提示，不静默覆盖当前输入', () => {
   assert.equal(active.at(-1), false);
 });
 
+test('其他工具可提供文件提示，JSON 默认行为保持兼容', () => {
+  const target=new EventTarget(); let message;
+  bindFileDrop(target,{onFile(){},onActive(){},onError:value=>message=value,multipleMessage:'请一次拖入一个文件'});
+  const event=new Event('drop',{cancelable:true});
+  event.dataTransfer={types:['Files'],files:[new File(['a'],'a'),new File(['b'],'b')]};
+  target.dispatchEvent(event); assert.equal(message,'请一次拖入一个文件');
+});
+
 test('大 JSON 文件完整传入，非法 JSON 由同一解析器报错', async () => {
   const { send, files } = fixture();
   const text = JSON.stringify({ text: 'x'.repeat(11000000), last: 'DROP_END' });
@@ -79,4 +87,13 @@ test('大 JSON 文件完整传入，非法 JSON 由同一解析器报错', async
   assert.equal(result.text, JSON.stringify(JSON.parse(text), null, 2));
   send('drop', [new File(['{"a": ]'], 'broken.json')]);
   assert.equal(transformJson(await files[1].text()).status, 'error');
+});
+
+test('only an explicitly enabled multi-file mode accepts a file queue', () => {
+  const target=new EventTarget(),batches=[],errors=[];let enabled=true;
+  bindFileDrop(target,{onFile:()=>assert.fail('unexpected single-file handler'),onFiles:files=>batches.push(files),allowMultiple:()=>enabled,onActive(){},onError:e=>errors.push(e)});
+  const files=[new File(['a'],'same.txt'),new File(['b'],'same.txt')];
+  const drop=()=>{const event=new Event('drop',{cancelable:true});event.dataTransfer={types:['Files'],files};target.dispatchEvent(event);return event;};
+  assert.ok(drop().defaultPrevented);assert.deepEqual(batches,[files]);
+  enabled=false;drop();assert.equal(batches.length,1);assert.equal(errors.length,1);
 });

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <title>网速测试 · LisTools</title>
+  <link rel="icon" href="/icons/icon-48.png" />
+</head>
+<body class="tool-page speedtest-page">
+  <header class="app-header">
+    <button type="button" class="brand" data-i18n-aria-label="common.navigation"><span class="brand-mark">Li</span>LisTools<span class="brand-caret" aria-hidden="true">▾</span></button>
+    <span class="header-divider"></span><span class="header-description" data-i18n="common.toolbox">开发者工具箱</span>
+    <span class="local-badge"><span></span><span data-zh="手动启动 · 公共测速节点" data-en="Manual start · Public speed test node"></span></span>
+  </header>
+  <div class="app-layout">
+    <main><div id="tool-root"></div><footer class="workbench-footer"><span data-zh="仅测速会连接公共节点；测试文本和其他工具数据不会发送。" data-en="Only speed tests connect to a public node. Other tool data is never sent."></span></footer></main>
+  </div>
+  <div id="notification" role="status" aria-live="polite" hidden></div>
+  <script type="module" src="/src/speedtest.js"></script>
+</body>
+</html>

@@ -30,11 +30,11 @@ export function createJsonController({ createWorker, onState }) {
         worker.onmessage = ({ data }) => finish(data);
         worker.onerror = (event) => {
           event.preventDefault();
-          finish({ status: 'error', message: event.message || '无法启动 JSON 解析任务' });
+          finish({ status: 'error', code: 'json.failed', message: event.message || '无法启动 JSON 解析任务' });
         };
         worker.postMessage({ source, action, indent });
       } catch (error) {
-        finish({ status: 'error', message: error.message });
+        finish({ status: 'error', code: 'json.failed', message: error.message });
       }
     }
     if (wait) timer = setTimeout(start, wait);

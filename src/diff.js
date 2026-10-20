@@ -1,32 +1,65 @@
 import { MergeView, Change } from '@codemirror/merge';
-import { EditorState } from '@codemirror/state';
-import { EditorView, lineNumbers, keymap, drawSelection } from '@codemirror/view';
+import { EditorState, Compartment } from '@codemirror/state';
+import { EditorView, lineNumbers, keymap, drawSelection, highlightActiveLine, placeholder } from '@codemirror/view';
 import { json } from '@codemirror/lang-json';
 import { syntaxHighlighting, defaultHighlightStyle, foldGutter } from '@codemirror/language';
-import { searchKeymap } from '@codemirror/search';
+import { searchKeymap, searchPanelOpen, closeSearchPanel, openSearchPanel, getSearchQuery, setSearchQuery } from '@codemirror/search';
+import { defaultKeymap, historyKeymap } from '@codemirror/commands';
 import { version } from '../package.json';
 import { bindFileDrop } from './tools/json/file-drop.js';
 import { createDiffController } from './tools/json-diff/controller.js';
+import { createEditorDiffConfig, historyExtensions, comparisonDocuments, sourceDocument } from './tools/json-diff/editor.js';
+import { errorResult, runtimeDiagnostic, readDiffFile } from './tools/json-diff/errors.js';
+import { createDiagnosticView } from './tools/json-diff/diagnostics.js';
 import './style.css';
 import './diff-style.css';
+import { t, language, onLanguageChange, createNotifier } from './i18n.js';
 
 const $ = id => document.getElementById(id);
 $('app-version').textContent = `v${version}`;
 const sources = { left: $('left-source'), right: $('right-source') };
 const versions = { left: 0, right: 0 };
 const reading = { left: false, right: false };
+const fileFailures = { left:undefined, right:undefined };
 const filenames = { left: '', right: '' };
 let merge;
+let renderedDocuments;
 let total = 0;
 let current = 0;
-let lastError;
-let toastTimer;
+let lastState = { status: 'idle' };
+let currentChange;
+let latestImportStartedAt;
+let pendingDocuments;
+const localeCompartments = { left:new Compartment(), right:new Compartment() };
+const mode = () => $('diff-mode').value;
+const contentName = () => mode() === 'json' ? 'JSON' : t('common.text');
+const inputLocales = { left:new Compartment(), right:new Compartment() };
+const inputViews = Object.fromEntries(['left', 'right'].map(side => [side, new EditorView({ parent:sources[side], extensions:inputExtensions(side) })]));
+const diagnostics = createDiagnosticView({ root:$('diff-error-panel'), sources:{left:inputViews.left.contentDOM, right:inputViews.right.contentDOM}, onLocate:locateError, contentName, t, language });
 
-function notify(message) {
-  clearTimeout(toastTimer);
-  $('notification').textContent = message;
-  $('notification').hidden = false;
-  toastTimer = setTimeout(() => { $('notification').hidden = true; }, 3500);
+const notify = createNotifier();
+
+function inputLocale(side) {
+  return [placeholder(t('diff.sourceHint', { name:t(side === 'left' ? 'diff.original' : 'diff.new', { name:contentName() }) })),
+    EditorView.contentAttributes.of({ 'aria-labelledby':`${side}-source-label`, spellcheck:'false', dir:'ltr' })];
+}
+function inputExtensions(side) {
+  return [drawSelection(), historyExtensions(), keymap.of([...searchKeymap, ...defaultKeymap, ...historyKeymap]), inputLocales[side].of(inputLocale(side)),
+    EditorView.updateListener.of(update => { if (update.docChanged) inputChanged(side); })];
+}
+function sourceText(side) { return inputViews[side].state.doc.toString(); }
+function setSource(side, doc) {
+  const view = inputViews[side];
+  if (view.state.doc === doc) return;
+  view.setState(EditorState.create({ doc:sourceDocument(doc), extensions:inputExtensions(side) }));
+}
+function inputChanged(side) {
+  if (merge) {
+    const other = side === 'left' ? 'right' : 'left';
+    setSource(other, (other === 'left' ? merge.a : merge.b).state.doc);
+  }
+  versions[side] += 1; reading[side] = false; fileFailures[side] = undefined; filenames[side] = '';
+  fileLabels(); invalidate();
 }
 
 function navigation() {
@@ -35,95 +68,132 @@ function navigation() {
   $('diff-index').disabled = !total;
   $('diff-index').value = total ? current + 1 : 1;
   $('diff-index').max = total || 1;
-  $('diff-length').textContent = total.toLocaleString();
+  $('diff-length').textContent = total || ['idle', 'ready'].includes(lastState.status) ? total.toLocaleString(language()) : '—';
 }
 
-function resetResult() {
+function destroyView() {
   merge?.destroy();
   merge = undefined;
+  renderedDocuments = undefined;
+}
+
+function resetSummary() {
   total = 0;
   current = 0;
-  lastError = undefined;
-  $('diff-view').hidden = true;
-  $('diff-placeholder').hidden = false;
-  $('diff-error').hidden = true;
-  $('locate-error').hidden = true;
+  diagnostics.clear();
   $('diff-total').classList.remove('equal');
   $('diff-duration').textContent = '';
+  $('diff-duration').title = '';
+  for (const name of Object.keys($('diff-duration').dataset)) delete $('diff-duration').dataset[name];
   $('change-kind').textContent = '';
   $('change-kind').className = '';
-  $('change-path').textContent = '差异将按 JSON 路径逐处定位';
+  $('change-path').textContent = t(mode() === 'json' ? 'diff.pathHint' : 'diff.lineHint');
   for (const name of ['added', 'removed', 'modified']) $(`count-${name}`).textContent = '—';
   navigation();
 }
 
-function extensions(label) {
+function extensions(side, previousState) {
   return [
-    lineNumbers(), drawSelection(), json(), foldGutter(), syntaxHighlighting(defaultHighlightStyle),
-    keymap.of(searchKeymap), EditorState.readOnly.of(true), EditorView.editable.of(false),
-    EditorView.contentAttributes.of({ 'aria-label': label, tabindex: '0' }),
-    EditorState.phrases.of({ '$ unchanged lines': '收起的 $ 行未变化内容', 'unchanged lines': '未变化行' })
+    lineNumbers(), drawSelection(), highlightActiveLine(), historyExtensions(previousState),
+    ...(mode() === 'json' ? [json(), foldGutter(), syntaxHighlighting(defaultHighlightStyle)] : []),
+    keymap.of([...searchKeymap, ...defaultKeymap, ...historyKeymap]),
+
+    EditorView.updateListener.of(update => {
+      if (!update.docChanged) return;
+      versions[side] += 1;
+      reading[side] = false;
+      filenames[side] = '';
+      fileLabels();
+      pendingDocuments = undefined;
+      controller.cancel();
+      render({ status: 'dirty' });
+    }),
+    localeCompartments[side].of(localeExtensions(side))
   ];
 }
 
 function render(state) {
-  resetResult();
+  const receivedAt = performance.now();
+  lastState = state;
+  currentChange = undefined;
+  document.body.dataset.status = state.status;
+  resetSummary();
   const pending = state.status === 'pending';
   $('compare').disabled = pending;
   $('cancel').hidden = !pending;
+  $('compare').textContent = t(merge ? 'diff.recompare' : 'diff.compare');
+  $('diff-view').hidden = !merge;
+  $('diff-placeholder').hidden = Boolean(merge);
   if (state.status === 'ready') {
     try {
+      diagnostics.status(mode() === 'json' ? state.validation : { left:'readable', right:'readable' });
+      const scrollTop = merge?.dom.scrollTop || 0;
       total = state.total;
-      $('diff-total').textContent = total ? `共 ${total.toLocaleString()} 处差异` : '0 处差异 · 完全一致';
+      $('diff-total').textContent = total ? t('diff.total', { count:total }) : t('diff.equal');
       $('diff-total').classList.toggle('equal', total === 0);
-      for (const name of ['added', 'removed', 'modified']) $(`count-${name}`).textContent = state.counts[name].toLocaleString();
-      $('diff-duration').textContent = `计算 ${state.durationMs.toLocaleString()} ms`;
+      for (const name of ['added', 'removed', 'modified']) $(`count-${name}`).textContent = state.counts[name].toLocaleString(language());
+      $('diff-duration').textContent = t('diff.duration', { duration:state.durationMs });
       $('diff-placeholder').hidden = true;
       $('diff-view').hidden = false;
       const changes = state.textChanges.map(c => new Change(c.fromA, c.toA, c.fromB, c.toB));
-      merge = new MergeView({
-        parent: $('diff-view'),
-        a: { doc: state.leftText, extensions: extensions('原 JSON 对比结果') },
-        b: { doc: state.rightText, extensions: extensions('新 JSON 对比结果') },
-        collapseUnchanged: $('only-diff').checked ? { margin: 3, minSize: 4 } : undefined,
-        diffConfig: { override: () => changes }, highlightChanges: true, gutter: true
-      });
+      const docs = comparisonDocuments(state, pendingDocuments);
+      pendingDocuments = undefined;
+      if (docs.left !== renderedDocuments?.left || docs.right !== renderedDocuments?.right) {
+        const previousA = merge?.a.state.doc.eq(docs.left) ? merge.a.state : undefined;
+        const previousB = merge?.b.state.doc.eq(docs.right) ? merge.b.state : undefined;
+        destroyView();
+        merge = new MergeView({
+          parent: $('diff-view'),
+          a: { doc: previousA?.doc || docs.left, selection: previousA?.selection, extensions: extensions('left', previousA) },
+          b: { doc: previousB?.doc || docs.right, selection: previousB?.selection, extensions: extensions('right', previousB) },
+          collapseUnchanged: $('only-diff').checked ? { margin: 3, minSize: 4 } : undefined,
+          diffConfig: createEditorDiffConfig(changes), highlightChanges: true, gutter: true
+        });
+        renderedDocuments = { left:merge.a.state.doc, right:merge.b.state.doc };
+      }
+      merge.dom.scrollTop = scrollTop;
       merge.a.dom.dataset.diffSide = 'left';
       merge.b.dom.dataset.diffSide = 'right';
       $('inputs').open = false;
+      $('compare').textContent = t('diff.recompare');
       navigation();
+      const builtAt = performance.now();
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        if (lastState !== state) return;
+        const paintedAt = performance.now();
+        const startedAt = state.startedAt ?? receivedAt, queuedAt = state.queuedAt ?? receivedAt;
+        const metrics = { totalMs:Math.round(paintedAt - startedAt), computeMs:state.durationMs,
+          readMs:Math.round(queuedAt - startedAt), responseMs:Math.round(receivedAt - queuedAt), renderMs:Math.round(paintedAt - receivedAt), renderBuildMs:Math.round(builtAt - receivedAt) };
+        state.elapsedMs = metrics.totalMs;
+        Object.assign($('diff-duration').dataset, metrics, state.phaseMs);
+        $('diff-duration').textContent = t('diff.duration', { duration:state.elapsedMs });
+        $('diff-duration').title = language() === 'zh-Hans'
+          ? `总耗时 ${metrics.totalMs} ms；读取及准备 ${metrics.readMs} ms；Worker 计算 ${metrics.computeMs} ms；首屏渲染 ${metrics.renderMs} ms`
+          : `Total ${metrics.totalMs} ms; input ${metrics.readMs} ms; worker computation ${metrics.computeMs} ms; first render ${metrics.renderMs} ms`;
+      }));
     } catch (error) {
       controller.cancel();
-      render({ status: 'error', message: `结果显示失败：${error.message}` });
+      render(errorResult([runtimeDiagnostic(error, 'render')], state.validation));
     }
     return;
   }
   if (state.status === 'error') {
-    lastError = state;
-    $('diff-total').textContent = '无法对比';
-    $('diff-placeholder-title').textContent = state.side ? `${state.side === 'left' ? '原' : '新'} JSON 解析失败` : '对比失败';
-    $('diff-placeholder-description').textContent = state.line ? `第 ${state.line} 行，第 ${state.column} 列` : '请检查输入或重新尝试。';
-    $('diff-error').textContent = state.message;
-    $('diff-error').hidden = false;
-    $('locate-error').hidden = state.position === undefined;
-    $('inputs').open = true;
+    pendingDocuments = undefined;
+    errorLabels(state);
+    $('diff-placeholder').hidden = true;
+    if (!merge) $('inputs').open = true;
   } else {
-    $('diff-total').textContent = pending ? (state.reading ? '正在读取文件…' : '正在对比…') : '等待对比';
-    $('diff-placeholder-title').textContent = pending ? (state.reading ? '正在读取本地文件' : '正在比较两份 JSON') : '放入两份 JSON，查看差异';
-    $('diff-placeholder-description').textContent = pending ? '可随时取消，或修改输入重新对比。' : '新增、删除和修改会分别标记，顶部统计全部差异点。';
+    if (pending && !state.reading) diagnostics.status({ left:'pending', right:'pending' });
+    statusLabels(state);
   }
 }
 
 function showChange(change) {
   if (!merge || !total) return;
   current = change.index;
+  currentChange = change;
   navigation();
-  const labels = { CREATE: ['新增', 'added'], REMOVE: ['删除', 'removed'], CHANGE: ['修改', 'modified'] };
-  const [label, style] = labels[change.kind];
-  $('change-kind').textContent = label;
-  $('change-kind').className = style;
-  $('change-path').textContent = change.pointer || '$（根值）';
-  $('change-path').title = change.pointer || '$（根值）';
+  changeLabels(change);
   const a = Math.min(change.anchorA, merge.a.state.doc.length);
   const b = Math.min(change.anchorB, merge.b.state.doc.length);
   merge.a.dispatch({ selection: { anchor: a } });
@@ -138,33 +208,60 @@ const controller = createDiffController({
 });
 
 function invalidate() {
+  pendingDocuments = undefined;
   controller.cancel();
+  destroyView();
   render({ status: 'idle' });
 }
-function compare() {
-  controller.compare(sources.left.value, sources.right.value);
+function syncEditors() {
+  if (!merge) return;
+  setSource('left', merge.a.state.doc);
+  setSource('right', merge.b.state.doc);
 }
-function compareIfReady() {
-  if (!reading.left && !reading.right && sources.left.value.trim() && sources.right.value.trim()) compare();
+function compare(startedAt) {
+  if (reading.left || reading.right) return;
+  if (typeof startedAt !== 'number') startedAt = performance.now();
+  const issues = Object.values(fileFailures).filter(Boolean);
+  if (issues.length) { render(errorResult(issues)); return; }
+  const left = merge ? merge.a.state.doc : inputViews.left.state.doc;
+  const right = merge ? merge.b.state.doc : inputViews.right.state.doc;
+  pendingDocuments = { left, right };
+  controller.compare(left.toString(), right.toString(), mode(), startedAt);
+}
+function compareIfReady(startedAt) {
+  const ready = side => mode() === 'text' ? inputViews[side].state.doc.length || filenames[side] : sourceText(side).trim();
+  if (!reading.left && !reading.right && ready('left') && ready('right')) compare(startedAt);
 }
 function fileLabels() {
-  $('left-file').textContent = filenames.left || '左侧 · 比较基准';
-  $('right-file').textContent = filenames.right || '右侧 · 比较目标';
+  $('left-file').textContent = filenames.left || t('diff.baseline');
+  $('right-file').textContent = filenames.right || t('diff.target');
 }
 async function loadFile(side, file) {
   if (!file) return;
+  latestImportStartedAt = performance.now();
+  syncEditors();
+  destroyView();
   const currentVersion = ++versions[side];
   reading[side] = true;
+  fileFailures[side] = undefined;
+  pendingDocuments = undefined;
   controller.cancel();
+  controller.prepare();
   render({ status: 'pending', reading: true });
   try {
-    const text = await file.text();
+    const text = await readDiffFile(file, side);
     if (versions[side] !== currentVersion) return;
-    sources[side].value = text;
+    const inputAt = performance.now();
+    setSource(side, text);
+    $(`${side}-file`).dataset.inputMs = Math.round(performance.now() - inputAt);
     filenames[side] = file.name;
     fileLabels();
   } catch (error) {
-    if (versions[side] === currentVersion) render({ status: 'error', message: `文件读取失败：${error.message}` });
+    if (versions[side] === currentVersion) {
+      controller.cancel();
+      fileFailures[side] = error.diagnostic || runtimeDiagnostic(error, 'read', side);
+      render(errorResult(Object.values(fileFailures).filter(Boolean)));
+    }
     return;
   } finally {
     if (versions[side] === currentVersion) reading[side] = false;
@@ -172,19 +269,14 @@ async function loadFile(side, file) {
   }
   if (versions[side] !== currentVersion) return;
   if (!reading.left && !reading.right) {
+    const issues = Object.values(fileFailures).filter(Boolean);
+    if (issues.length) { render(errorResult(issues)); return; }
     render({ status: 'idle' });
-    compareIfReady();
+    compareIfReady(latestImportStartedAt);
   }
 }
 
 for (const side of ['left', 'right']) {
-  sources[side].addEventListener('input', () => {
-    versions[side] += 1;
-    reading[side] = false;
-    filenames[side] = '';
-    fileLabels();
-    invalidate();
-  });
   $(`${side}-import`).addEventListener('click', () => $(`${side}-file-input`).click());
   $(`${side}-file-input`).addEventListener('change', () => loadFile(side, $(`${side}-file-input`).files[0]));
 }
@@ -192,29 +284,34 @@ bindFileDrop(document, {
   onFile: (file, event) => {
     const side = event.target.closest('[data-diff-side]')?.dataset.diffSide;
     if (side) void loadFile(side, file);
-    else notify('请把文件拖到左侧原 JSON 或右侧新 JSON 区域');
+    else notify('diff.dropSide');
   },
-  onActive: active => { $('file-drop-overlay').hidden = !active; }, onError: notify
+  onActive: active => { $('file-drop-overlay').hidden = !active; }, onError: () => notify('common.oneFile')
 });
 $('compare').addEventListener('click', compare);
 $('cancel').addEventListener('click', () => {
+  pendingDocuments = undefined;
   for (const side of ['left', 'right']) { versions[side] += 1; reading[side] = false; }
-  invalidate();
-  notify('已取消对比，可修改输入后重新开始');
+  controller.cancel();
+  render({ status: merge ? 'dirty' : 'idle' });
+  notify('diff.cancelled');
 });
 $('clear').addEventListener('click', () => {
-  for (const side of ['left', 'right']) { versions[side] += 1; reading[side] = false; sources[side].value = ''; filenames[side] = ''; }
+  for (const side of ['left', 'right']) { versions[side] += 1; reading[side] = false; fileFailures[side] = undefined; setSource(side, ''); filenames[side] = ''; }
   fileLabels();
   invalidate();
   $('inputs').open = true;
 });
 $('swap').addEventListener('click', () => {
-  for (const side of ['left', 'right']) { versions[side] += 1; reading[side] = false; }
-  [sources.left.value, sources.right.value] = [sources.right.value, sources.left.value];
+  syncEditors();
+  for (const side of ['left', 'right']) { versions[side] += 1; reading[side] = false; fileFailures[side] = undefined; }
+  const left = inputViews.left.state.doc, right = inputViews.right.state.doc;
+  setSource('left', right); setSource('right', left);
   [filenames.left, filenames.right] = [filenames.right, filenames.left];
   fileLabels();
   invalidate();
-  compareIfReady();
+  if (mode() === 'text') compare();
+  else compareIfReady();
 });
 function select(index) {
   if (!total) return;
@@ -229,13 +326,91 @@ $('diff-index').addEventListener('keydown', event => {
   if (event.key === 'Enter') { event.preventDefault(); select(Number($('diff-index').value) - 1); }
 });
 $('only-diff').addEventListener('change', () => merge?.reconfigure({ collapseUnchanged: $('only-diff').checked ? { margin: 3, minSize: 4 } : undefined }));
-$('locate-error').addEventListener('click', () => {
-  const source = sources[lastError.side];
-  source.focus();
-  source.setSelectionRange(lastError.position, lastError.position + 1);
-  source.scrollTop = Math.max(0, (lastError.line - 3) * parseFloat(getComputedStyle(source).lineHeight));
+function locateError(issue) {
+  if (!merge) $('inputs').open = true;
+  const view = merge ? issue.side === 'left' ? merge.a : merge.b : inputViews[issue.side];
+  const anchor = Math.min(issue.position, view.state.doc.length);
+  view.dispatch({ selection: { anchor, head:Math.min(anchor + (issue.length || 0), view.state.doc.length) }, effects: EditorView.scrollIntoView(anchor, { y: 'center', x:'center' }) });
+  view.focus();
+}
+$('inputs').addEventListener('toggle', () => { if ($('inputs').open) syncEditors(); });
+$('diff-mode').addEventListener('change', () => {
+  syncEditors();
+  invalidate();
+  refreshModeLabels();
+  compare();
 });
 document.addEventListener('keydown', event => {
-  if ((event.metaKey || event.ctrlKey) && event.key === 'Enter') { event.preventDefault(); compare(); }
-});
+  if (event.target.closest?.('.tool-menu')) return;
+  if ((event.metaKey || event.ctrlKey) && event.key === 'Enter') {
+    event.preventDefault();
+    event.stopPropagation();
+    compare();
+  }
+}, true);
 window.addEventListener('pagehide', () => controller.cancel());
+
+function localeExtensions(side) {
+  const phrases = { '$ unchanged lines':t('diff.unchanged'), 'unchanged lines':t('diff.unchangedLabel'), 'Find':t('common.search'), 'Replace':t('common.replace'), 'replace':t('common.replace'), 'replace all':t('common.replaceAll'), 'match case':t('common.matchCase'), 'regexp':t('common.regularExpression'), 'by word':t('common.wholeWord'), 'next':t('common.next'), 'previous':t('common.previous'), 'all':t('common.selectAll'), 'close':t('common.close'), 'by':t('common.replace') };
+  return [EditorState.phrases.of(phrases), EditorView.contentAttributes.of({ 'aria-label':t(side === 'left' ? 'diff.original' : 'diff.new', { name:contentName() }), tabindex:'0', dir:'ltr' })];
+}
+function refreshModeLabels() {
+  const text = mode() === 'text';
+  $('mode-description').textContent = t(text ? 'diff.textDescription' : 'diff.jsonDescription');
+  $('input-help').textContent = t('diff.inputHelp');
+  $('count-rule').textContent = t(text ? 'diff.textRule' : 'diff.jsonRule');
+  for (const side of ['left','right']) {
+    const label = t(side === 'left' ? 'diff.original' : 'diff.new', { name:contentName() });
+    $(`${side}-title`).textContent = label;
+    $(`${side}-result-title`).textContent = label;
+    $(`${side}-source-label`).textContent = label;
+    inputViews[side].dispatch({ effects:inputLocales[side].reconfigure(inputLocale(side)) });
+    sources[side].closest('[data-diff-side]').setAttribute('aria-label', label);
+    $(`${side}-file-input`).accept = text ? '.txt,.log,.md,.csv,.json,text/*,application/json' : '.json,.txt,application/json,text/plain';
+  }
+}
+function changeLabels(change) {
+  const style = { CREATE:'added', REMOVE:'removed', CHANGE:'modified' }[change.kind];
+  $('change-kind').textContent = t('diff.'+style);
+  $('change-kind').className = style;
+  $('change-path').textContent = change.lines ? t('diff.lines', change.lines) : change.pointer || t('diff.root');
+  $('change-path').title = $('change-path').textContent;
+}
+function errorLabels(state) {
+  $('diff-total').textContent = diagnostics.show(state);
+}
+function statusLabels(state) {
+  const pending = state.status === 'pending';
+  $('diff-total').textContent = t(state.status === 'dirty' ? 'diff.dirty' : pending ? state.reading ? 'diff.reading' : 'diff.comparing' : 'diff.waiting');
+  $('diff-placeholder-title').textContent = t(pending ? state.reading ? 'diff.readingTitle' : 'diff.comparingTitle' : 'diff.empty', { name:contentName() });
+  $('diff-placeholder-description').textContent = t(pending ? 'diff.pendingHint' : 'diff.legend');
+}
+onLanguageChange(() => {
+  refreshModeLabels(); fileLabels(); diagnostics.refresh();
+  $('compare').textContent = t(merge ? 'diff.recompare' : 'diff.compare');
+  if (lastState.status === 'ready') {
+    $('diff-total').textContent = total ? t('diff.total', { count:total }) : t('diff.equal');
+    $('diff-duration').textContent = t('diff.duration', { duration:lastState.elapsedMs ?? lastState.durationMs });
+    for (const name of ['added','removed','modified']) $(`count-${name}`).textContent = lastState.counts[name].toLocaleString(language());
+  } else if (lastState.status === 'error') errorLabels(lastState);
+  else statusLabels(lastState);
+  if (currentChange) changeLabels(currentChange);
+  else $('change-path').textContent = t(mode() === 'json' ? 'diff.pathHint' : 'diff.lineHint');
+  if (merge) for (const side of ['left','right']) {
+    const view = side === 'left' ? merge.a : merge.b;
+    const open = searchPanelOpen(view.state);
+    const query = getSearchQuery(view.state);
+    const active = document.activeElement;
+    const { scrollTop, scrollLeft } = view.scrollDOM;
+    if (open) closeSearchPanel(view);
+    view.dispatch({ effects:localeCompartments[side].reconfigure(localeExtensions(side)) });
+    if (open) {
+      openSearchPanel(view);
+      view.dispatch({ effects:setSearchQuery.of(query) });
+      active?.focus({ preventScroll:true });
+      view.scrollDOM.scrollTop = scrollTop; view.scrollDOM.scrollLeft = scrollLeft;
+    }
+  }
+  navigation();
+});
+refreshModeLabels(); fileLabels(); statusLabels(lastState); diagnostics.clear();

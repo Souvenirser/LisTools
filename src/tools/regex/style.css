@@ -1,0 +1,30 @@
+.regex-page .regex-pattern-field { flex: 3; }
+.regex-page .regex-flags-field { flex: 1; }
+.regex-page .regex-pattern-field textarea { min-height: 84px; direction: ltr; }
+.regex-page .regex-flags { display: flex; gap: 12px; flex-wrap: wrap; font-family: var(--mono); }
+.regex-page .regex-flags label { display: inline-flex; align-items: center; gap: 3px; font-weight: 400; }
+.regex-page #regex-flags { font-family: var(--mono); direction: ltr; }
+.regex-page .regex-editor-label { display: block; margin-block: 14px 7px; font-weight: 550; }
+.regex-page .regex-small-editor .cm-editor { height: 100px; min-height: 100px; }
+.regex-page .regex-small-editor .cm-content { min-height: 100px; }
+.regex-page .regex-small-editor .cm-scroller { max-height: 140px; }
+.regex-page .regex-match { background: #c5e8f5; border-radius: 2px; }
+.regex-page .regex-match.regex-selected { background: #ffe194; outline: 1px solid #b36a00; }
+.regex-page .regex-empty-match { display: inline-block; height: 1.1em; border-inline-start: 2px solid #2998bd; vertical-align: text-bottom; }
+.regex-page .regex-empty-match.regex-selected { border-color: #b36a00; }
+.regex-page .regex-table-scroll, .regex-page .regex-capture-scroll { overflow: auto; max-height: 340px; }
+.regex-page .regex-value { white-space: pre-wrap; font-family: var(--mono); max-width: 650px; min-width: 120px; }
+.regex-page .regex-match-select { font: inherit; cursor: pointer; padding: 3px 7px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); color: var(--text); }
+.regex-page .tool-table .is-selected { background: var(--subtle); }
+.regex-page .regex-capture-title { margin-block: 18px 10px; font-size: 14px; }
+.regex-page .regex-rule-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); max-height: 300px; overflow-y: auto; gap: 7px; margin-block: 12px; }
+.regex-page .regex-rule { text-align: start; border: 1px solid var(--border); border-radius: 5px; padding: 9px; background: var(--surface); color: var(--text); cursor: pointer; overflow-wrap: anywhere; }
+.regex-page .regex-rule[aria-pressed='true'] { border-color: var(--accent); background: var(--subtle); }
+.regex-page .regex-rule small { display: block; color: var(--muted); margin-top: 4px; font-size: 11px; }
+.regex-page .regex-rule-detail { overflow-wrap: anywhere; }
+.regex-page .regex-rule-detail h3 { margin-block: 15px 8px; font-size: 15px; }
+.regex-page .regex-rule-detail p { margin-block: 8px; font-size: 13px; }
+.regex-page .regex-rule-detail code { display: block; white-space: pre-wrap; direction: ltr; font-size: 12px; background: var(--subtle); padding: 8px; border-radius: 4px; }
+.regex-page select { min-height: 38px; padding: 7px 10px; border: 1px solid var(--border); border-radius: 5px; background: var(--surface); color: var(--text); }
+.regex-page [hidden] { display: none !important; }
+@media (max-width: 600px) { .regex-page .regex-rule-list { grid-template-columns: 1fr; } }

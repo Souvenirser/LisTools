@@ -1,0 +1,13 @@
+EFF Large Wordlist
+Copyright Electronic Frontier Foundation. Wordlist creator: Joseph Bonneau.
+
+Source: https://www.eff.org/files/2016/07/18/eff_large_wordlist.txt
+About: https://www.eff.org/dice
+Copyright policy: https://www.eff.org/copyright
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+License URL: https://creativecommons.org/licenses/by/4.0/
+Full license: LICENSE-CC-BY-4.0.txt in this directory.
+
+The source wordlist is included unchanged. LisTools parses its five-die keys
+and words locally for passphrase generation. No EFF endorsement is implied.
+Retrieved 2026-10-16.

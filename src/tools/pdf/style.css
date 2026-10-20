@@ -1,0 +1,5 @@
+.media-drop { display:block; border:2px dashed var(--border); padding:24px; text-align:center; cursor:pointer; border-radius:8px; margin-bottom:12px; }
+.media-queue { padding-inline-start:24px; }
+.media-queue li { padding:10px 0; border-bottom:1px solid var(--border); display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
+.media-file-name { flex:1; min-width:140px; overflow-wrap:anywhere; }
+.tool-page [hidden] { display:none!important; }
