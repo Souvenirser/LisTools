@@ -10,6 +10,7 @@
 .cron-description { font-size:16px; color:var(--result-text); }
 .cron-table-scroll { overflow-x:auto; margin:14px 0; }
 .cron-mono { font-family:var(--mono); white-space:nowrap; direction:ltr; text-align:start; }
+#cron-error-details { white-space:pre-wrap; overflow-wrap:anywhere; max-height:160px; overflow:auto; }
 #cron-fields td { vertical-align:top; }
 #cron-dates button { min-height:30px; font-size:12px; padding:4px 8px; }
 @media (max-width:900px) { .cron-context { grid-template-columns:1fr; } .cron-expression-field { grid-column:auto; } .cron-builder-row { grid-template-columns:100px minmax(130px,1fr); } .cron-builder-row input { grid-column:auto; } }

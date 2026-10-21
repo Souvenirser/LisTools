@@ -14,9 +14,9 @@ const definitions = {
 const aliases = { '@yearly':'0 0 1 1 *', '@annually':'0 0 1 1 *', '@monthly':'0 0 1 * *', '@weekly':'0 0 * * 0', '@daily':'0 0 * * *', '@midnight':'0 0 * * *', '@hourly':'0 * * * *' };
 const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
 const weekdays = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
-function fail(field, code, message, messageEn) { throw Object.assign(new RangeError(message), { field, code, messageEn }); }
+function fail(field, code, message, messageEn, params={}) { throw Object.assign(new RangeError(message), { field, code, messageEn, params }); }
 function fieldError(field) {
-  fail(field.id,'field',`${field.zh}字段“${field.value}”无效。范围为 ${field.min}–${field.max}；请检查列表、范围和步长语法。`,`${field.en} field “${field.value}” is invalid. Allowed range: ${field.min}–${field.max}; check list, range and step syntax.`);
+  fail(field.id,'field',`${field.zh}字段“${field.value}”无效。范围为 ${field.min}–${field.max}；请检查列表、范围和步长语法。`,`${field.en} field “${field.value}” is invalid. Allowed range: ${field.min}–${field.max}; check list, range and step syntax.`,{value:field.value,min:field.min,max:field.max});
 }
 function number(value, field, quartz) {
   let n;
@@ -74,7 +74,7 @@ export function parseCron(expression, dialect='linux') {
   const values=source.toUpperCase().split(/\s+/);
   const quartz=dialect==='quartz';
   if((dialect==='linux' && values.length!==5) || (dialect==='seconds' && values.length!==6) || (quartz && ![6,7].includes(values.length))) {
-    fail('expression','fieldCount',`当前方言需要 ${quartz ? '6 或 7' : dialect==='linux' ? '5' : '6'} 个字段，实际为 ${values.length} 个。`,`This syntax requires ${quartz ? '6 or 7' : dialect==='linux' ? '5' : '6'} fields; received ${values.length}.`);
+    fail('expression','fieldCount',`当前方言需要 ${quartz ? '6 或 7' : dialect==='linux' ? '5' : '6'} 个字段，实际为 ${values.length} 个。`,`This syntax requires ${quartz ? '6 or 7' : dialect==='linux' ? '5' : '6'} fields; received ${values.length}.`,{required:quartz?'6 / 7':dialect==='linux'?'5':'6',actual:values.length});
   }
   const ids=dialect==='linux' ? ['minute','hour','day','month','weekday'] : ['second','minute','hour','day','month','weekday',...(values.length===7 ? ['year'] : [])];
   const fields=ids.map((id,index)=>({...definitions[id],...(quartz && id==='weekday' ? {min:1} : {}),value:values[index]}));
@@ -127,7 +127,7 @@ export function evaluateCron(expression, { dialect='linux', timeZone=getDeviceTi
     }
     return { status:'ready', parsed, dates, timeZone, reference:start.isoTime, count:Number(count), exhausted:dates.length<Number(count) };
   } catch(error) {
-    return { status:'error', field:error.field || 'expression', code:error.code || 'invalid', message:error.message, messageEn:error.messageEn || 'Unable to calculate this expression. Check its fields and reference time.' };
+    return { status:'error', field:error.field || 'expression', code:error.code || 'invalid', params:error.params || {}, message:error.message, messageEn:error.messageEn || 'Unable to calculate this expression. Check its fields and reference time.' };
   } finally { job?.stop(); }
 }
 
