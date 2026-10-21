@@ -1,9 +1,41 @@
 .numeric-result {display:block;font-family:var(--mono);font-size:26px;line-height:1.5;min-height:48px;overflow-wrap:anywhere;white-space:pre-wrap;}
-.numeric-keypad {display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin:14px 0;direction:ltr;}
-.numeric-keypad button {min-height:40px;font-family:var(--mono);}
 .numeric-history {list-style:none;padding:0;max-height:320px;overflow:auto;}
 .numeric-history li {padding:10px 0;border-bottom:1px solid var(--border);overflow-wrap:anywhere;}
 .numeric-history button {font-family:var(--mono);text-align:start;max-width:100%;overflow-wrap:anywhere;}
 .numeric-result-row {display:grid;grid-template-columns:minmax(120px,1fr) minmax(0,2fr) auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);}
 .numeric-result-row output {overflow-wrap:anywhere;font-family:var(--mono);}
-@media(max-width:600px){.numeric-result-row{grid-template-columns:1fr}.numeric-keypad{gap:4px}.numeric-keypad button{padding:8px 2px}.numeric-result{font-size:22px}}
+@media(max-width:600px){.numeric-result-row{grid-template-columns:1fr}.numeric-result{font-size:22px}}
+
+.calculator-layout {display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,280px);gap:18px;align-items:start;}
+.calculator-page .language-control select {max-width:35vw;}
+.calculator-workbench {container-name:calculator;container-type:inline-size;}
+.calculator-sidebar {min-width:0;}
+.calculator-controls {display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;}
+.calculator-modes {display:flex;gap:4px;padding:4px;border-radius:9px;background:#e8edf2;}
+.calculator-modes button {border-color:transparent;background:transparent;min-height:40px;}
+.calculator-modes button[aria-pressed=true] {background:#fff;color:#16446e;border-color:#a8bfd5;font-weight:650;box-shadow:0 1px 3px #0001;}
+.calculator-controls .calculator-angle {display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:0;}
+.calculator-workbench #expression {width:100%;font:18px/1.6 var(--mono);min-height:48px;}
+.calculator-display {background:#f4f7fa;border:1px solid #cbd5df;border-radius:9px;padding:12px 16px;}
+.calculator-display label {color:var(--muted);}
+.calculator-workbench .numeric-result {min-height:52px;font-size:30px;}
+.calculator-keyboards {display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin:18px 0;}
+.calculator-keypad {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;min-width:0;}
+.calculator-workbench .calculator-key {min-width:0;min-height:48px;padding:8px 4px;font:18px/1.3 var(--mono);font-weight:550;border-radius:9px;border-color:#cbd2d9;background:#f1f3f5;color:#1c2024;box-shadow:0 2px 0 #0001;}
+.calculator-workbench .calculator-key:hover:enabled {background:#e1e5e9;border-color:#8d98a3;}
+.calculator-workbench .calculator-key--function {background:#e8f1fb;color:#16446e;border-color:#c1d5e9;font-size:16px;}
+.calculator-workbench .calculator-key--function:hover:enabled {background:#d5e6f7;border-color:#799fc6;}
+.calculator-workbench .calculator-key--operator {background:#ffe0b8;color:#713700;border-color:#e8bd88;font-size:21px;}
+.calculator-workbench .calculator-key--operator:hover:enabled {background:#ffd09b;border-color:#c58b46;}
+.calculator-workbench .calculator-key--equals {background:#c04b00;color:#fff;border-color:#a63f00;font-size:23px;font-weight:700;}
+.calculator-workbench .calculator-key--equals:hover:enabled {background:#a43e00;border-color:#863300;}
+.calculator-workbench .calculator-key--clear {background:#fde8e7;color:#962920;border-color:#e7bdb9;}
+.calculator-workbench .calculator-key--clear:hover:enabled {background:#f8d2cf;border-color:#c48a84;}
+.calculator-workbench .calculator-key:active:enabled {transform:translateY(1px);box-shadow:none;}
+.calculator-workbench .calculator-key:focus-visible {outline:3px solid #16446e;outline-offset:2px;}
+.calculator-workbench .calculator-key:disabled {opacity:.5;box-shadow:none;}
+.calculator-sidebar .numeric-history {max-height:520px;}
+.calculator-sidebar #business-details {margin:0;}
+@container calculator (min-width:640px){.calculator-keyboards.is-scientific{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:1100px){.calculator-layout{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.calculator-workbench{padding:12px}.calculator-keypad{gap:6px}.calculator-workbench .calculator-key{min-height:44px}.calculator-workbench .numeric-result{font-size:24px}.calculator-display{padding:10px}.calculator-modes button{padding-inline:10px}}

@@ -14,3 +14,12 @@ test('扩展图标打开离线工具菜单，不需要后台或网页访问权�
   assert.equal(manifest.background,undefined);
   assert.equal(pageConnectPolicy(manifest.action.default_popup),"connect-src 'none'");
 });
+
+test('通用扩展清单声明 Firefox 和 Safari 的最低版本与稳定身份', () => {
+  const manifest = JSON.parse(fs.readFileSync(new URL('../public/manifest.json', import.meta.url)));
+  assert.equal(manifest.minimum_chrome_version,'120');
+  assert.equal(manifest.browser_specific_settings?.gecko?.id,'listools@souvenirser.github.io');
+  assert.equal(manifest.browser_specific_settings?.gecko?.strict_min_version,'140.0');
+  assert.deepEqual(manifest.browser_specific_settings?.gecko?.data_collection_permissions,{required:['none']});
+  assert.equal(manifest.browser_specific_settings?.safari?.strict_min_version,'18.0');
+});

@@ -1,5 +1,6 @@
-import {version} from '../../../package.json';
+import {version,bugs} from '../../../package.json';
 import {pages,searchNavigation,currentTarget} from './navigation.js';
+import {mountFeedbackLink} from './feedback.js';
 import {t,language,onLanguageChange} from '../../i18n-runtime.js';
 import './menu.css';
 
@@ -14,6 +15,9 @@ export function mountToolMenu(root,{popup=false,close=()=>{}}={}) {
   root.classList.add('tool-menu');
   root.innerHTML=`<div class="tool-menu-search"><label class="sr-only" for="tool-menu-search"></label><input id="tool-menu-search" type="search" autocomplete="off" spellcheck="false" autofocus></div><nav class="tool-menu-list"></nav><p class="tool-menu-empty" role="status" hidden></p><footer class="tool-menu-footer"><span>LisTools <span id="app-version">v${version}</span></span><span class="tool-menu-hint"></span></footer>`;
   const search=root.querySelector('input'),list=root.querySelector('nav'),empty=root.querySelector('.tool-menu-empty');
+  const refreshFeedback=popup?mountFeedbackLink(root.querySelector('.tool-menu-footer'),()=>({
+    issuesUrl:bugs.url,tool:'toolbox',version,locale:language(),label:t('common.feedback'),hint:t('common.feedbackHint')
+  })):()=>{};
   let composing=false;
   function link(item,searchResult=false) {
     const element=document.createElement('a');element.href=`./${item.file}`;element.dataset.target=item.file;
@@ -48,6 +52,7 @@ export function mountToolMenu(root,{popup=false,close=()=>{}}={}) {
     list.setAttribute('aria-label',t('common.navigation'));
   }
   function translate() {
+    refreshFeedback();
     search.placeholder=t('menu.search');search.setAttribute('aria-label',t('menu.search'));
     root.querySelector('label').textContent=t('menu.search');root.querySelector('.tool-menu-hint').textContent=t(popup?'menu.newTab':'menu.keyboard');render();
   }
@@ -57,7 +62,8 @@ export function mountToolMenu(root,{popup=false,close=()=>{}}={}) {
     if(!popup && anchor.dataset.target===currentTarget(location.pathname,location.hash))event.preventDefault();
     if(popup){
       // Native anchors preserve modifier/middle-click behavior; normal launch closes the action popup.
-      if(globalThis.chrome?.tabs){event.preventDefault();void chrome.tabs.create({url:anchor.href}).then(()=>window.close());}
+      const tabs=globalThis.browser?.tabs || globalThis.chrome?.tabs;
+      if(tabs){event.preventDefault();void tabs.create({url:anchor.href}).then(()=>window.close());}
     }else close();
   });
   root.addEventListener('keydown',event=>{

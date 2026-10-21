@@ -8,5 +8,11 @@ export default defineConfig({
   outputDir:'.superpowers/sdd/listools-13-tools/browser-results',
   reporter:[['list'],['html',{outputFolder:'.superpowers/sdd/listools-13-tools/browser-report',open:'never'}]],
   webServer:process.env.LISTOOLS_TEST_URL?undefined:{command:'npm run preview -- --port 5174 --strictPort',url:'http://127.0.0.1:5174',reuseExistingServer:true,timeout:30000},
-  use:{baseURL:process.env.LISTOOLS_TEST_URL||'http://127.0.0.1:5174',locale:'en-US',viewport:{width:1360,height:960},headless:true,trace:'retain-on-failure',screenshot:'only-on-failure',launchOptions:{executablePath:process.env.LISTOOLS_CHROME||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'}}
+  use:{baseURL:process.env.LISTOOLS_TEST_URL||'http://127.0.0.1:5174',locale:'en-US',viewport:{width:1360,height:960},headless:true,trace:'retain-on-failure',screenshot:'only-on-failure'},
+  projects:[
+    {name:'chromium',use:{browserName:'chromium',launchOptions:{executablePath:process.env.LISTOOLS_CHROME||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'}}},
+    {name:'firefox',use:{browserName:'firefox'}},
+    {name:'webkit',use:{browserName:'webkit'}},
+    {name:'edge',use:{browserName:'chromium',...process.env.LISTOOLS_EDGE?{launchOptions:{executablePath:process.env.LISTOOLS_EDGE}}:{channel:'msedge'}}}
+  ]
 });

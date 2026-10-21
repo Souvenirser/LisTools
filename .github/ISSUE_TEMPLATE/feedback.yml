@@ -1,0 +1,58 @@
+name: 问题反馈 / Feedback
+description: 报告 LisTools 问题或提出改进建议 / Report an issue or suggest an improvement.
+title: "[LisTools] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        反馈及提交者的 GitHub 账号会公开显示。请勿填写公司内部资料、账号密码、密钥、真实业务数据或个人敏感信息；请使用脱敏或合成样例。
+        Your feedback and GitHub account will be public. Do not include confidential information, credentials, keys, real business data or sensitive personal information. Use sanitized or synthetic examples.
+  - type: dropdown
+    id: category
+    attributes:
+      label: 反馈类型 / Feedback type
+      options:
+        - 功能问题 / Bug
+        - 改进建议 / Improvement
+        - 其他 / Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题或建议描述 / Description
+      description: 说明实际遇到的问题或希望改进的内容。 / Describe what happened or what you would like to improve.
+    validations:
+      required: true
+  - type: input
+    id: tool
+    attributes:
+      label: 当前工具 / Tool
+      placeholder: "例如 / Example: Base64 (base64)"
+  - type: input
+    id: version
+    attributes:
+      label: LisTools 版本 / Version
+  - type: input
+    id: locale
+    attributes:
+      label: 界面语言 / UI language
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 复现步骤 / Steps to reproduce
+      placeholder: "1. 打开哪个工具 / Open a tool\n2. 执行什么操作 / Perform an action\n3. 出现什么问题 / Observe the issue"
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期结果 / Expected behavior
+  - type: input
+    id: environment
+    attributes:
+      label: 浏览器版本与操作系统 / Browser version and operating system
+      description: 按需手动填写；插件不会自动采集。 / Optional and entered manually; the extension does not collect this information.
+  - type: textarea
+    id: attachments
+    attributes:
+      label: 截图或脱敏样例 / Screenshots or sanitized examples
+      description: 可在此手动粘贴或拖入附件。 / Paste or drag attachments here if useful.

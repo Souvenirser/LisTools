@@ -47,3 +47,33 @@ test('localized diagnostics distinguish invalid numbers and trailing commas', as
   assert.equal(compareJson('{"n":01}', '{}').issues[0].translationCode, 2);
   assert.equal(compareJson('{"n":1,}', '{}').issues[0].translationCode, 4);
 });
+
+test('all language choices have fixed local flag metadata',()=>{
+  assert.equal(new Set(languages.map(item=>item.flag)).size,41);
+  for(const item of languages)assert.match(item.flag,/^[a-z]{2}$/,item.code);
+  const flag=code=>languages.find(item=>item.code===code).flag;
+  assert.equal(flag('zh-Hans'),'cn');assert.equal(flag('zh-Hant'),'cn');
+  assert.equal(flag('en'),'us');assert.equal(flag('pt'),'br');assert.equal(flag('ar'),'sa');
+});
+
+test('Cron resources cover every language, preserve syntax and contain no generation markers',()=>{
+ for(const {code} of languages){
+  const resource=JSON.parse(readFileSync(new URL(`../src/locales/${code}.json`,import.meta.url)));
+  const cron=flatten(resource.cron);
+  assert.ok(Object.keys(cron).length>=74,code);
+  for(const [key,value] of Object.entries(cron))assert.doesNotMatch(value,/_*LT\d+_*/i,`${code}:${key}`);
+  for(const syntax of ['L-n','nW','LW','nL','n#1–5','?'])assert.ok(cron.syntaxQuartz.includes(syntax),`${code}:${syntax}`);
+  for(const alias of ['@hourly','@daily'])assert.ok(cron['errors.alias'].includes(alias),`${code}:${alias}`);
+  assert.ok(cron['errors.questionMark'].includes('Quartz'),code);
+ }
+});
+
+test('Cron examples remain executable and occurrence explanations use actual numeric parameters',()=>{
+ for(const {code} of languages){
+  const {cron}=JSON.parse(readFileSync(new URL(`../src/locales/${code}.json`,import.meta.url)));
+  assert.ok(cron.values.includes('0,15,30'),`${code}: ASCII list example`);
+  assert.ok(cron.meanings.nth.includes('{{n}}'),`${code}: actual occurrence number`);
+  assert.ok(cron.meanings.lastWeekday.includes('{{weekdays}}'),`${code}: explicit weekday range`);
+  assert.ok(cron.meanings.nearest.includes('{{weekdays}}'),`${code}: explicit weekday range`);
+ }
+});

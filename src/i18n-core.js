@@ -1,10 +1,10 @@
 export const languages = [
-  ['zh-Hans','简体中文'],['zh-Hant','繁體中文'],['en','English'],['es','Español'],['fr','Français'],['de','Deutsch'],['pt','Português'],['ru','Русский'],['ja','日本語'],['ko','한국어'],
-  ['ar','العربية'],['hi','हिन्दी'],['bn','বাংলা'],['ur','اردو'],['id','Bahasa Indonesia'],['ms','Bahasa Melayu'],['vi','Tiếng Việt'],['th','ไทย'],['tr','Türkçe'],['fa','فارسی'],
-  ['it','Italiano'],['nl','Nederlands'],['pl','Polski'],['uk','Українська'],['ro','Română'],['cs','Čeština'],['hu','Magyar'],['el','Ελληνικά'],['sv','Svenska'],['da','Dansk'],
-  ['fi','Suomi'],['nb','Norsk bokmål'],['he','עברית'],['ta','தமிழ்'],['te','తెలుగు'],['mr','मराठी'],['gu','ગુજરાતી'],['pa-Guru','ਪੰਜਾਬੀ'],['kn','ಕನ್ನಡ'],['ml','മലയാളം'],
-  ['sw','Kiswahili'],['fil','Filipino'],['ne','नेपाली'],['si','සිංහල'],['my','မြန်မာ'],['km','ខ្មែរ'],['am','አማርኛ'],['ha','Hausa'],['yo','Yorùbá'],['zu','isiZulu']
-].map(([code, name]) => ({ code, name, dir: ['ar','fa','he','ur'].includes(code) ? 'rtl' : 'ltr' }));
+  ['zh-Hans','简体中文','cn'],['zh-Hant','繁體中文','cn'],['en','English','us'],['es','Español','es'],['fr','Français','fr'],['de','Deutsch','de'],['pt','Português','br'],['ru','Русский','ru'],['ja','日本語','jp'],['ko','한국어','kr'],
+  ['ar','العربية','sa'],['hi','हिन्दी','in'],['bn','বাংলা','bd'],['ur','اردو','pk'],['id','Bahasa Indonesia','id'],['ms','Bahasa Melayu','my'],['vi','Tiếng Việt','vn'],['th','ไทย','th'],['tr','Türkçe','tr'],['fa','فارسی','ir'],
+  ['it','Italiano','it'],['nl','Nederlands','nl'],['pl','Polski','pl'],['uk','Українська','ua'],['ro','Română','ro'],['cs','Čeština','cz'],['hu','Magyar','hu'],['el','Ελληνικά','gr'],['sv','Svenska','se'],['da','Dansk','dk'],
+  ['fi','Suomi','fi'],['nb','Norsk bokmål','no'],['he','עברית','il'],['ta','தமிழ்','in'],['te','తెలుగు','in'],['mr','मराठी','in'],['gu','ગુજરાતી','in'],['pa-Guru','ਪੰਜਾਬੀ','in'],['kn','ಕನ್ನಡ','in'],['ml','മലയാളം','in'],
+  ['sw','Kiswahili','tz'],['fil','Filipino','ph'],['ne','नेपाली','np'],['si','සිංහල','lk'],['my','မြန်မာ','mm'],['km','ខ្មែរ','kh'],['am','አማርኛ','et'],['ha','Hausa','ng'],['yo','Yorùbá','ng'],['zu','isiZulu','za']
+].map(([code, name, flag]) => ({ code, name, flag, dir: ['ar','fa','he','ur'].includes(code) ? 'rtl' : 'ltr' }));
 const supported = new Set(languages.map(item => item.code));
 export function matchLanguage(tag) {
   try {

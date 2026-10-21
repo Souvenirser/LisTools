@@ -1,21 +1,62 @@
 # LisTools
 
-独立的 Chrome 实用工具箱，覆盖开发和日常办公。提供 JSON、编码转换、计算器、日期、二维码、图片、PDF、文本、单位、计时等实用工具，复用开源编辑器和专用算法库。除手动测速连接公共节点外，其余工具均离线处理，不申请扩展权限。
+独立的浏览器实用工具箱，覆盖开发和日常办公。提供 JSON、编码转换、计算器、日期、二维码、图片、PDF、文本、单位、计时等实用工具，复用开源编辑器和专用算法库。除手动测速连接公共节点外，其余工具均离线处理，不申请网页访问权限。
 
 项目采用 [MIT 许可证](./LICENSE)，欢迎通过 [Issue](https://github.com/Souvenirser/LisTools/issues) 反馈问题，通过 Fork 和 Pull Request 提交改进，详见 [贡献指南](./CONTRIBUTING.md)。
 
-## 安装到 Chrome
+## 问题反馈
 
-需要 Chrome 120 或更新版本。
+各工具页面和工具栏弹窗底部提供“问题反馈 ↗”。点击后在新标签页打开 GitHub 反馈表单，登录 GitHub、填写并提交后创建公开 Issue；打开表单本身不代表已经提交。
 
-1. 将本地候选包 `releases/LisTools-1.3.3.zip` 解压到固定目录；已发布的历史版本也可从 [Releases](https://github.com/Souvenirser/LisTools/releases/latest) 下载。
-2. 在 Chrome 地址栏打开 `chrome://extensions`，开启右上角的 **开发者模式**。
+链接仅预填当前工具、LisTools 版本和界面语言，不读取或附带编辑器输入、文件、密码、令牌、剪贴板或日志。截图与浏览器信息由反馈者按需手动填写，请使用脱敏或合成样例。
+
+维护者需将 `.github/ISSUE_TEMPLATE/feedback.yml` 合并到仓库默认分支 `main`，表单才在线生效。接收通知时，在仓库选择 **Watch → Custom → Issues**，并在 [个人通知设置](https://github.com/settings/notifications) 为 Watching 开启 On GitHub 和 Email。通知由 GitHub 按账号设置投递，插件不发送邮件；安装扩展不会自动修改账号通知设置。
+
+## 浏览器与安装方式
+
+共用一套源码、一份 Manifest V3 清单和一个资源 ZIP，桌面端目标如下。浏览器核心兼容与已签名安装包是不同的交付阶段。
+
+| 浏览器 | 版本目标 | 安装方式 |
+| --- | --- | --- |
+| Chrome、Microsoft Edge | Chromium 120+ | 解压通用 ZIP，开启开发者模式后加载扩展目录 |
+| Brave、Opera、Vivaldi | Chromium 内核 120+ | 同一 ZIP，在各自扩展管理页加载解压目录；仍需各浏览器实机验证 |
+| Firefox 桌面版 | 140+ | 本地临时加载同一目录；普通版长期安装需要 Mozilla 签名后的 XPI 或 AMO 条目 |
+| Safari（macOS） | 18+（资源兼容目标） | 提供“添加临时扩展”入口的版本可临时加载同一 ZIP；长期分发或无此入口的版本使用 Apple 官方应用打包流程 |
+
+### Chrome、Edge、Brave、Opera、Vivaldi
+
+1. 从 [Releases](https://github.com/Souvenirser/LisTools/releases/latest) 下载 `LisTools-1.1.0.zip`，解压到固定目录。
+2. 打开浏览器扩展管理页：Chrome 为 `chrome://extensions`，Edge 为 `edge://extensions`，Brave 为 `brave://extensions`，Opera 为 `opera://extensions`，Vivaldi 为 `vivaldi://extensions`。开启 **开发者模式**。
 3. 点击 **加载已解压的扩展程序**，选择解压后直接包含 `manifest.json` 的目录。
 4. 固定 LisTools 图标，点击后展开工具菜单，选择工具会在新标签页打开。页面内点击左上角 LisTools 可切换工具。
 
-GitHub 的 **Source code** 压缩包是源码，需要按下文构建后加载 `dist/`。本项目目前通过 GitHub 分发扩展包，尚未上架 Chrome 应用商店；手动安装的版本需要自行下载更新并在扩展管理页重新加载。
+[Microsoft 官方迁移说明](https://learn.microsoft.com/en-us/microsoft-edge/extensions-chromium/developer-guide/port-chrome-extension)确认 Edge 复用 Chrome 的扩展 API 和清单；本项目不依赖 Chrome 专用后台服务。
 
-当前源码为 **v1.3.3 候选版本**，本地构建生成 `LisTools-1.3.3.zip`；保留旧版本扩展包，不自动发布。
+### Firefox
+
+解压同一个 ZIP，打开 `about:debugging#/runtime/this-firefox`，选择 **临时载入附加组件**，选择其中的 `manifest.json`。临时扩展在重启 Firefox 后移除。
+
+普通版 Firefox 的长期安装需要先通过 Mozilla 签名，可在 AMO 上架，也可选择自行分发已签名 XPI。将 ZIP 后缀改为 XPI 不会获得签名。本次构建输出为未签名资源包，不冒充可长期安装的 XPI。签名规则见 [Mozilla 分发说明](https://extensionworkshop.com/documentation/publish/signing-and-distribution-overview/)。清单固定扩展 ID，声明 Firefox 140+ 与无用户内容收集；手动测速仍会连接 README 下述公共测速节点。
+
+### Safari
+
+本地测试优先使用 [Apple 官方临时安装方式](https://developer.apple.com/documentation/safariservices/running-your-safari-web-extension)：
+
+1. 在 Safari **设置 → 高级** 中启用网页开发者功能，让 **开发者（Developer）** 标签页可见。
+2. 在 **设置 → 开发者** 中点击 **添加临时扩展（Add Temporary Extension…）**，按 Safari 提示完成本机身份验证。
+3. 选择通用 ZIP 或 `dist/` 目录，在扩展设置中查看、启用或重新加载 LisTools。临时扩展在退出 Safari 或 24 小时后移除，无需 Apple Developer 账号。
+
+上述步骤以设置中提供该入口的 Safari 为准。无此入口的旧版本、iOS 测试或长期分发，使用 [Apple 官方 Web Extension Packager](https://developer.apple.com/documentation/safariservices/packaging-a-web-extension-for-safari)复用同一份资源。可在 App Store Connect 上传 ZIP 转换，也可在安装完整 Xcode 的 Mac 上运行：
+
+```bash
+xcrun safari-web-extension-packager dist --app-name LisTools --bundle-identifier io.github.souvenirser.listools --macos-only --swift --copy-resources --project-location releases/safari-project --no-open
+```
+
+旧版 Xcode 中工具名为 `safari-web-extension-converter`。生成项目后，按 Apple 文档构建并在 Safari 设置中启用扩展；对外分发还需完成相应签名。WebKit 页面测试不能代替 Safari 实际扩展安装验收。本次未在用户的 Safari 中变更开发者设置或安装扩展；ZIP 包含临时加载及后续转换所需资源，不包含已签名 Safari 应用，也未替用户提交任何商店。
+
+GitHub 的 **Source code** 压缩包是源码，需要按下文构建后加载 `dist/`。手动安装的版本需要自行下载更新并在扩展管理页重新加载。
+
+当前正式版本为 **v1.1.0**，本地构建生成 `LisTools-1.1.0.zip`。此前 1.2–1.4 编号为本地开发候选包；正式发布以 GitHub Release 标签为准。实际浏览器验证范围见 [跨浏览器验收记录](./docs/browser-compatibility-verification.md)。
 
 ## 在 IntelliJ IDEA 中开发
 
@@ -37,9 +78,9 @@ npm run dev
 
 ## 界面语言与显示
 
-顶部语言菜单提供 50 种界面语言，使用各语言的母语名称。默认采用上次选择；首次访问匹配浏览器首选语言，无法匹配时使用英语。简体、繁体中文分别匹配，阿拉伯语、波斯语、希伯来语和乌尔都语使用从右向左的布局。
+顶部语言菜单提供 50 种界面语言，显示本地国旗图片和各语言的母语名称，支持按名称、语言代码搜索。简体、繁体均使用中国国旗，并以名称区分。默认采用上次选择；首次访问匹配浏览器首选语言，无法匹配时使用英语。简体、繁体中文分别匹配，阿拉伯语、波斯语、希伯来语和乌尔都语使用从右向左的布局。
 
-语言切换只更新界面，保留当前输入、转换结果、编辑器展开状态及对比位置；JSON、文件名、时间戳、ISO 时间和时区标识不参与翻译。所有语言包随扩展打包，离线可用，仅保存语言偏好。编辑器可定制的主要菜单和右键菜单已接入翻译；组件未开放翻译接口的内部提示保留原文。
+语言切换只更新界面，保留当前输入、转换结果、编辑器展开状态及对比位置；JSON、文件名、时间戳、ISO 时间和时区标识不参与翻译。切换只更新当前页面；其他已打开页面在刷新后采用新偏好。所有语言包和国旗随扩展打包，离线可用，仅保存语言偏好。编辑器可定制的主要菜单和右键菜单已接入翻译；组件未开放翻译接口的内部提示保留原文。
 
 蓝色按钮表示主要操作，浅青色突出时间转换结果，绿色、红色和琥珀色分别标记成功或新增、错误或删除、修改或待重新对比。代码内容始终从左向右显示。
 
@@ -133,7 +174,19 @@ MD5 是不可逆摘要，适用于校验和及旧系统兼容；不能用于密�
 
 实际测试、4 GiB 浏览器结果和截图见 [MD5 验收记录](./docs/md5-verification.md)。
 
-## 办公工具（v1.3.3）
+## 科学计算器
+
+计算器默认采用标准模式，可切换科学模式。数字键为浅灰、函数键为蓝灰、运算键为浅橙，等号为深橙，AC 为浅红；窄屏科学键盘放在数字键盘上方。办公快捷计算保留在折叠区域。
+
+- 默认 DEG（角度）；切换 RAD（弧度）后输入 `sin(pi/2)` 得到 1。反三角函数按相同角度制输出；切换角度制会取消计算并清空旧结果，切换标准 / 科学模式保留内容。
+- 支持 `sin/cos/tan`、`asin/acos/atan`、`log10(x)`、`ln(x)`、`log(x, base)`、`exp(x)`、平方/立方/任意次幂、`sqrt(x)`、`cbrt(x)`、`nthRoot(x, n)`、`x!`、`combinations(n, r)`、`permutations(n, r)`、`pi` 和 `e`。`log(x)` 保持 math.js 的自然对数语义。
+- 函数键按光标位置插入公式；选中文本后按单参数函数键会包裹选区。双参数函数显示说明与示例。Enter 或 `=` 计算，Esc 清空当前公式，⌫ 删除选区或光标前的字符，± 切换选区或整个表达式的符号。
+- Ans 使用上次成功计算的完整精度数值。历史最多 30 条，保存当时的角度和 Ans；点击复用时将 Ans 展开为当时数值。计算内容仅保存在当前页面内，刷新后恢复标准模式、DEG，清除 Ans 和历史。
+- 计算精度为 80 位有效数字，显示最多 24 位，显示舍入时标记 `≈`；复制使用完整计算值。循环小数和超越函数仍受有限精度限制；特殊角严格归约，不将极小合法值自动归零。实数范围外的计算、正切无定义、非法阶乘/排列组合均明确报错。
+
+复用现有 math.js、Worker、任务取消和 50 种语言资源，无新增依赖或权限。本地单元、浏览器、扩展包及体积检查见 [科学计算器验收记录](./docs/calculator-scientific-verification.md)。
+
+## 办公工具
 
 从左上角 LisTools 菜单选择「日常办公」，也可搜索名称直接进入。现有开发工具和转换子工具入口继续保留。
 
@@ -141,7 +194,7 @@ MD5 是不可逆摘要，适用于校验和及旧系统兼容；不能用于密�
 
 | 工具 | 功能 |
 | --- | --- |
-| 计算器 | 高精度表达式、百分比、常用函数、办公快捷公式、页面内记录 |
+| 计算器 | 标准 / 科学模式、DEG / RAD、对数与开方、阶乘与排列组合、Ans、高精度表达式、办公快捷公式、页面内记录 |
 | 日期计算 | 日历差、日期加减、年龄与周年日、工作日及自定义休息/补班日期 |
 | 二维码生成与识别 | Unicode 文字生成 PNG/SVG，文件、拖入和粘贴图片识别 |
 | 图片压缩与裁剪 | 裁剪、旋转、翻转、缩放、JPG/PNG/WebP 转换与压缩、队列和 ZIP |
@@ -160,9 +213,9 @@ MD5 是不可逆摘要，适用于校验和及旧系统兼容；不能用于密�
 
 计时器仅保存当前标签页的数字计时状态；关闭页面后不承诺后台提醒。其他输入、文件和结果不持久保存。
 
-运行 `npm test` 检查核心逻辑，运行 `npm run test:browser` 构建并验证真实浏览器功能；后者需要 Chrome，非 macOS 环境可通过 `LISTOOLS_CHROME` 指定浏览器可执行文件。本轮移除记录见 [Offer 对比移除验收](./docs/remove-offer-verification.md)，此前交互调整见 [用途与交互验收记录](./docs/tool-usability-verification.md)，之前版本的验收证据保留在 [办公工具原始记录](./docs/office-tools-verification.md)。
+运行 `npm test` 检查核心逻辑，运行 `npm run test:browser` 构建并验证 Chrome 页面；非 macOS 环境可通过 `LISTOOLS_CHROME` 指定浏览器可执行文件。`npx playwright install firefox webkit` 安装独立测试引擎后，运行 `npm run test:cross-browser` 验证 Chromium、Firefox、WebKit；`npm run test:edge` 使用已安装的 Edge，也可通过 `LISTOOLS_EDGE` 指定其可执行文件。页面测试与实际扩展安装分别记录。本轮移除记录见 [Offer 对比移除验收](./docs/remove-offer-verification.md)，此前交互调整见 [用途与交互验收记录](./docs/tool-usability-verification.md)，之前版本的验收证据保留在 [办公工具原始记录](./docs/office-tools-verification.md)。
 
-## 构建和加载 Chrome 扩展
+## 构建和加载浏览器扩展
 
 ```bash
 npm test
@@ -171,12 +224,12 @@ npm run build
 
 构建输出：
 
-- `dist/`：可直接加载的 Chrome Manifest V3 扩展。
-- `releases/LisTools-1.3.3.zip`：根目录包含 manifest.json 的完整扩展候选包。
+- `dist/`：共用的 Manifest V3 扩展资源，按上文各浏览器方式加载或转换。
+- `releases/LisTools-1.1.0.zip`：根目录包含 manifest.json 的完整资源包。
 
-Chrome 打开 `chrome://extensions`，开启开发者模式，点击 **加载已解压的扩展程序**，选择本项目的 `dist`。固定 LisTools 图标，点击图标打开工具菜单；JSON 工作台仍使用 `index.html`。无需使用 Chrome 的“打包扩展程序”功能。
+Chrome / Edge 等 Chromium 浏览器开启开发者模式，点击 **加载已解压的扩展程序**，选择本项目的 `dist`；Firefox 按上文临时加载，Safari 使用官方转换工具。固定 LisTools 图标，点击图标打开工具菜单；JSON 工作台仍使用 `index.html`。无需为 Edge 另写或另打包一套工具代码。
 
-本地更新代码后重新运行 `npm run build`，再在 Chrome 扩展管理页点击 LisTools 的重新加载按钮。未来发布商店时持续使用同一个扩展条目、递增 package.json 与 manifest.json 的版本并上传新的 ZIP，现有用户才能收到该条目的更新。GitHub 本身不会自动更新商店用户。
+本地更新代码后重新运行 `npm run build`，再在对应扩展管理页重新加载。各浏览器商店分别管理签名、审核和更新；发布时保留相同扩展身份并递增 package.json 与 manifest.json 的版本。GitHub 本身不会自动更新商店用户。
 
 ## 大文件边界
 
@@ -198,7 +251,7 @@ src/timestamp.js            时间戳页面、设备时区与复制交互
 src/tools/timestamp/core.js 双向时间转换与严格时区解析
 src/convert.js              编码与转换页面、文件输入与完整结果导出
 src/tools/convert/          静态工具目录、算法适配与本地 Worker
-public/manifest.json        Chrome 扩展清单
+public/manifest.json        通用 Manifest V3 扩展清单
 src/tools/shared/navigation.js 工具入口注册表
 src/tools/shared/office.js  办公工具页面和任务适配
 src/popup.js               图标工具菜单入口
@@ -208,13 +261,18 @@ docs/                       设计、实施与验收记录
 
 后续工具可放到 `src/tools/`，复用工作台导航。开源来源与许可证见 [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)。
 
-本次公开版本的验证范围见 [发布验证记录](./docs/release-verification.md)。
+本次公开版本的验证范围见 [1.1.0 发布验证记录](./docs/release-1.1.0.md)。
 
 ## 网速、Cron、密码与正则
 
-四项工具各有独立入口，全部复用统一侧栏和本地资源。新增界面提供中文、英文，其他语言回退英文。验收结果与环境限制见 [四类工具验收记录](./docs/four-tools-verification.md)。
+四项工具各有独立入口，全部复用统一侧栏和本地资源。Cron 界面覆盖 50 种语言；其他工具原有双语区域仍按各自说明回退。验收结果与环境限制见 [四类工具验收记录](./docs/four-tools-verification.md)。
 
 - **网速测试**：仅点击开始后连接 `speed.cloudflare.com/__down` 与 `__up`，显示下载、上传、HTTP 空闲及负载延迟和抖动。轻量档计划约 14.4 MiB，标准档约 166.4 MiB；可以提前结束，开销、失败和重传可能增加实际流量。单请求最多 15 秒，整体最多 120 秒，取消或超时保留部分样本并标明未完成。样本不足不显示为零；轻量档可能不足以充分测量高速网络。关闭 SDK 的额外结果上报和凭证；公共服务仍会接收到连接 IP 及合成流量。无定位、运营商查询、UDP 丢包测试或自动节点切换。
+
+测速结束后分别给下载、上传显示带本地 SVG 图片的七档评价：步行（低于 1 Mbps）、自行车（1–5）、摩托车（5–20）、汽车（20–100）、高铁（100–300）、飞机（300–1000）、火箭（1000 Mbps 及以上）；中间各档不包含上限。等级按原始 bits/s 判断，切换 MB/s / Mbps 或界面语言不会改变等级；未测得的数值不评为最慢，取消或超时保留部分结果并明确标注。复制与 JSON 下载增加 `ratings.download` / `ratings.upload` 等级 ID，原指标保留。
+
+工具页面已移除公共的 1600px 宽度上限，工作区随窗口铺开；测速页宽屏右侧展示图片评价，窄屏上下排列。七张插图原样复用 [Twemoji v16.0.1](https://github.com/jdecked/twemoji/tree/v16.0.1/assets/svg)，按 CC BY 4.0 附署名和许可证，本地打包，不使用 CDN。新增评价文案覆盖 50 种语言，分档仅描述吞吐速度，延迟和稳定性仍需结合原有指标判断。
+
 - **Cron 表达式**：明确选择 Linux 五字段、含秒六字段或 Quartz 六／七字段，提供说明、逐字段校验、模板、可视化生成和时区日期预览。Quartz 支持常用 `? L L-n W LW nL #`，年份 1970–2099；日与周恰好一个 `?`，星期编号与 Linux 不同。复杂特殊字符组合明确拒绝。夏令时缺失时间跳过、重复时间取首次；服务器调度器的 misfire 等策略可能不同。仅计算表达式，不执行命令或安装定时任务。
 - **随机密码与口令**：点击生成才运行；字符密码默认 20 位、支持 4–256 位、最多 100 条，支持字符类别、排除易混字符、自定义可打印 ASCII 字符集。类别要求使用完整候选重抽，不固定插入字符。词口令默认六词，使用本地 EFF 7776 词表和同一安全随机源；少数原词包含连字符。生成结果默认隐藏，修改参数或离开页面清空；只在主动点击时复制或下载。
 - **正则工具**：使用 JavaScript 原生 RegExp，支持匹配高亮、捕获组、提取、替换、30 条可搜索规则与语法帮助。命名和编号组区分未参与匹配与空字符串；支持原生字符串替换占位符，不运行用户脚本。任务在 Worker 中执行，2 秒超时，可取消；超过 256 KiB 的文本手动运行。输入 10 MiB，表达式及替换模板各 16 KiB，匹配最多 10000 条、高亮最多 1000 处。截断时不执行完整替换；输出最多 100 MiB，仅预览前 1 MiB，复制下载使用完整结果。生成孤立 Unicode 代理项的输出明确报错，建议使用 u/v 或调整表达式，避免 UTF-8 导出时静默替换字符。
@@ -223,7 +281,7 @@ docs/                       设计、实施与验收记录
 
 ## 工具菜单
 
-Chrome 工具栏图标打开轻量菜单，选择工具后在新标签页打开。页面左上角 `Li LisTools ▾` 打开同一目录，普通点击在当前标签页切换；Ctrl/Cmd + 点击或鼠标中键在新标签页打开。点击当前工具只关闭菜单。全站工具仍使用左上角菜单；编码与转换页面另设左侧转换工具列表。
+浏览器工具栏图标打开轻量菜单，选择工具后在新标签页打开。页面左上角 `Li LisTools ▾` 打开同一目录，普通点击在当前标签页切换；Ctrl/Cmd + 点击或鼠标中键在新标签页打开。点击当前工具只关闭菜单。全站工具仍使用左上角菜单；编码与转换页面另设左侧转换工具列表。
 
 菜单支持中文、英文、工具别名和已翻译的页面名称搜索。编码与转换放在开发工具分组中，进入页面后通过左侧列表直接选择，也可搜索直达 Base64、Hex、JWT 等子工具，MD5 搜索结果合并为一个入口。↑ / ↓ 移动、Enter 选择、Esc 关闭，也可使用 Tab / Shift+Tab；中文输入法组合期间不拦截候选操作。关闭菜单清空搜索条件，保留当前工作区的输入、结果与运行任务。
 

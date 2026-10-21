@@ -1,3 +1,4 @@
+import {selectLanguage} from './language-helpers.js';
 import { test, expect } from '@playwright/test';
 
 test('removed low-value tools are absent from navigation and search',async({page})=>{
@@ -8,7 +9,7 @@ test('removed low-value tools are absent from navigation and search',async({page
 test('text task examples demonstrate deduplication and extraction without writing patterns',async({page})=>{
  await page.goto('/text.html');await page.locator('#text-example').click();await expect(page.locator('#text-result')).toHaveValue('Alice\nBob\nCharlie');
  await page.locator('#text-task-extract').click();await page.locator('#text-example').click();await expect(page.locator('#text-result')).toHaveValue('alice@example.com\nbob@example.com');
- await page.locator('#language').selectOption('ar');await expect(page.locator('#text-result')).toHaveValue('alice@example.com\nbob@example.com');await expect(page.locator('#text-task-extract')).toHaveAttribute('aria-pressed','true');
+ await selectLanguage(page,'ar');await expect(page.locator('#text-result')).toHaveValue('alice@example.com\nbob@example.com');await expect(page.locator('#text-task-extract')).toHaveAttribute('aria-pressed','true');
 });
 test('PDF example generates a real merged download and can switch to a page extraction task',async({page})=>{
  await page.goto('/pdf.html');await page.locator('#pdf-example').click();await expect(page.locator('#pdf-result')).toBeVisible();await expect(page.locator('#pdf-queue li')).toHaveCount(2);

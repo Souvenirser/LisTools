@@ -1,5 +1,8 @@
 import {languages,t,language,onLanguageChange,setLanguage} from './i18n-runtime.js';
 import {mountHeaderMenu} from './tools/shared/menu.js';
+import {mountLanguageSelector} from './language-selector.js';
+import {feedbackTool,mountFeedbackLink} from './tools/shared/feedback.js';
+import {bugs,version} from '../package.json';
 export {t,language,onLanguageChange,errorText} from './i18n-runtime.js';
 
 export function translateDOM(root = document) {
@@ -19,21 +22,16 @@ export function translateDOM(root = document) {
 }
 
 mountHeaderMenu();
-const select=document.createElement('select');
-select.id='language';select.setAttribute('data-i18n-aria-label','common.language');
-for(const {code,name,dir} of languages){
-  const option=document.createElement('option');option.value=code;option.textContent=name;option.lang=code;option.dir=dir;select.append(option);
-}
-const label=document.createElement('label');label.className='language-control';
-const caption=document.createElement('span');caption.dataset.i18n='common.language';
-label.append(caption,select);document.querySelector('.app-header').append(label);
-select.addEventListener('change',async()=>{
-  try{await setLanguage(select.value,true);}catch{select.value=language();}
-});
+const feedbackFooter=document.querySelector('.workbench-footer');
+const refreshFeedback=feedbackFooter?mountFeedbackLink(feedbackFooter,()=>({
+  issuesUrl:bugs.url,tool:feedbackTool(location.pathname,location.hash),version,locale:language(),label:t('common.feedback'),hint:t('common.feedbackHint')
+})):()=>{};
+onLanguageChange(refreshFeedback);window.addEventListener('hashchange',refreshFeedback);
+const refreshLanguageSelector=mountLanguageSelector(document.querySelector('.app-header'),{languages,t,language,setLanguage});
 function applyLanguage(){
   document.documentElement.lang=language();
   document.documentElement.dir=languages.find(item=>item.code===language()).dir;
-  select.value=language();translateDOM();
+  refreshLanguageSelector();translateDOM();
 }
 onLanguageChange(applyLanguage);applyLanguage();
 export function createNotifier() {

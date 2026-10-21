@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { imagePlan, imageHeader, uniqueNames } from '../src/tools/images/core.js';
+import * as imageCore from '../src/tools/images/core.js';
 // Catches resizing in the wrong order, aspect distortion, and accidental target downsizing.
 test('image resize uses cropped geometry and retains resolution unless explicitly reduced', () => {
   assert.deepEqual(imagePlan(800,600,{width:400,height:500,aspect:true,scale:100}),{width:400,height:300});
@@ -16,3 +17,14 @@ test('rejects animated or unsupported media before decode and reads static PNG d
   assert.throws(()=>imageHeader(animation),{code:'images.animated'});
 });
 test('duplicate output names never overwrite ZIP entries',()=>assert.deepEqual(uniqueNames(['a.png','a.png','a-2.png','a.png']),['a.png','a-2.png','a-2-2.png','a-3.png']));
+
+test('JPEG output drops APP1 metadata while preserving image segments and scan bytes',async()=>{
+  assert.equal(typeof imageCore.removeJpegMetadata,'function');
+  const segment=(marker,value)=>{const body=Buffer.from(value);return Buffer.concat([Buffer.from([255,marker,(body.length+2)>>8,(body.length+2)&255]),body]);};
+  const start=Buffer.from([255,216]),app0=segment(224,'JFIF'),scan=Buffer.concat([segment(218,''),Buffer.from('Exif inside compressed pixels'),Buffer.from([255,217])]);
+  const blob=new Blob([start,app0,segment(225,'Exif\0\0private'),segment(225,'XMP private'),scan],{type:'image/jpeg'});
+  const result=await imageCore.removeJpegMetadata(blob);
+  assert.deepEqual(Buffer.from(await result.arrayBuffer()),Buffer.concat([start,app0,scan]));
+  assert.equal(result.type,'image/jpeg');
+  const png=new Blob(['png'],{type:'image/png'});assert.equal(await imageCore.removeJpegMetadata(png),png);
+});
