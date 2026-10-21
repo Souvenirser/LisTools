@@ -1,7 +1,29 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { speedConfig, plannedBytes, readResults } from '../src/tools/speedtest/core.js';
+import * as speedCore from '../src/tools/speedtest/core.js';
+import { readFileSync } from 'node:fs';
+import { languages } from '../src/i18n-core.js';
 import { createSpeedTestController } from '../src/tools/speedtest/controller.js';
+
+test('speed levels distinguish all seven raw throughput boundaries without rounding',()=>{
+  assert.equal(typeof speedCore.speedLevelFor,'function');
+  for(const [bps,id] of [[0,'walking'],[999999,'walking'],[1000000,'bicycle'],[4999999,'bicycle'],[5000000,'motorcycle'],[19999999,'motorcycle'],[20000000,'car'],[99999999,'car'],[100000000,'train'],[299999999,'train'],[300000000,'plane'],[999999999,'plane'],[1000000000,'rocket'],[8000000000,'rocket']])assert.equal(speedCore.speedLevelFor(bps)?.id,id,String(bps));
+  for(const bps of [null,undefined,NaN,Infinity,-1,'1000000'])assert.equal(speedCore.speedLevelFor(bps),undefined);
+});
+
+test('speed rating labels cover all fifty languages with matching placeholders',()=>{
+  const source=JSON.parse(readFileSync(new URL('../src/tools/speedtest/messages.json',import.meta.url),'utf8'));
+  const parameters=value=>[...value.matchAll(/\{\{([^}]+)\}\}/g)].map(match=>match[1]).sort();
+  for(const {code} of languages){
+    const resource=JSON.parse(readFileSync(new URL(`../src/locales/${code}.json`,import.meta.url),'utf8')).speedtestRating;
+    assert.deepEqual(Object.keys(resource||{}).sort(),Object.keys(source).sort(),code);
+    for(const [key,value] of Object.entries(source)){
+      assert.ok(resource[key]?.trim(),`${code}/${key}`);assert.deepEqual(parameters(resource[key]),parameters(value),`${code}/${key}`);
+      if(code==='en')assert.equal(resource[key],value,key);
+    }
+  }
+});
 
 test('both speed profiles disable telemetry and contain only fixed measurement endpoints',()=>{
   for(const profile of ['light','standard']) {

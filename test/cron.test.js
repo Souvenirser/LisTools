@@ -109,7 +109,7 @@ test('descriptions lazy-load Chinese locales and use Quartz weekday numbering', 
   assert.match(await describeCron(parsed,'en'),/Sunday/);
   assert.match(await describeCron(parsed,'zh-Hans'),/星期日|星期天|周日/);
   assert.match(await describeCron(parsed,'zh-Hant'),/星期日|星期天|週日/);
-  assert.match(await describeCron(parsed,'fr'),/Sunday/);
+  assert.match(await describeCron(parsed,'fr'),/dimanche/);
 });
 
 test('CSV and JSON exports carry the exact calculation context and all dates', async () => {
@@ -176,4 +176,17 @@ test('two-hour DST overlaps use the first occurrence without losing later same-d
   assert.deepEqual(utc(daily),['2026-10-24T23:30:00.000Z','2026-10-26T01:30:00.000Z']);
   const minutes=run('*/30 * * * *',{timeZone:'Antarctica/Troll',reference:'2026-10-25T01:00:00+00:00',count:3});
   assert.deepEqual(utc(minutes),['2026-10-25T03:00:00.000Z','2026-10-25T03:30:00.000Z','2026-10-25T04:00:00.000Z']);
+});
+
+test('Cron errors retain stable codes and interpolation parameters',()=>{
+ const field=run('61 * * * *');assert.equal(field.code,'field');assert.deepEqual(field.params,{value:'61',min:0,max:59});
+ const count=run('* * * *');assert.equal(count.code,'fieldCount');assert.deepEqual(count.params,{required:'5',actual:4});
+});
+
+test('Cron descriptions support Russian and signal localized fallback without English prose',async()=>{
+ const {describeCron}=await import('../src/tools/cron/description.js');
+ const parsed=parseCron('*/5 * * * *');
+ assert.match(await describeCron(parsed,'ru'),/минут/);
+ assert.equal(await describeCron(parsed,'hi'),null);
+ assert.equal(await describeCron(parseCron('0 0 9 L-3 * ?','quartz'),'ru'),null);
 });

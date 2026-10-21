@@ -14,6 +14,15 @@ test('calculator worker returns precision result and structured validation error
   const result=await request({taskId:9,input:'200 + 10%'});assert.equal(result.taskId,9);assert.equal(result.result.exact,'220');
   const failure=await request({taskId:10,input:'x=1'});assert.equal(failure.status,'error');assert.equal(failure.code,'calculator.notAllowed');assert.equal(failure.result,undefined);
 });
+test('calculator worker carries scientific context and remains usable after domain errors',async()=>{
+  const worker=workerAdapter();
+  const send=data=>new Promise(resolve=>{worker.onmessage=({data})=>resolve(data);worker.postMessage(data);});
+  try {
+    const failure=await send({taskId:20,input:'tan(pi/2)',angleUnit:'rad'});assert.equal(failure.code,'calculator.tanUndefined');assert.equal(failure.taskId,20);
+    const result=await send({taskId:21,input:'sin(pi/2)+Ans',angleUnit:'rad',ans:'0.3'});assert.equal(result.result.exact,'1.3');assert.deepEqual(result.result.context,{angleUnit:'rad',ans:'0.3'});
+    const business=await send({taskId:22,mode:'growth',first:'100',second:'120'});assert.equal(business.result.exact,'20');
+  } finally {worker.terminate();}
+});
 test('calculator invalidation and cancellation cannot publish a running worker result',async()=>{
   const states=[];const controller=createConversionController({createWorker:workerAdapter,onState:state=>states.push(state),timeoutMs:2000});
   controller.process({input:'9^99999'});controller.invalidate();

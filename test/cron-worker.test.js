@@ -12,10 +12,10 @@ async function request(data) {
   } finally { await worker.terminate(); }
 }
 
-test('Cron module worker returns validated dates, locale description and original task identity', async () => {
+test('Cron module worker returns language-neutral dates and original task identity', async () => {
   const result=await request({taskId:42,input:'0 0 9 ? * 1',options:{dialect:'quartz',timeZone:'UTC',reference:'2026-01-01T00:00:00Z',count:10,language:'zh-Hans'}});
   assert.equal(result.taskId,42); assert.equal(result.status,'ready'); assert.equal(result.dates.length,10);
-  assert.equal(result.dates[0].utcTime,'2026-01-04T09:00:00.000Z'); assert.match(result.description,/星期日|周日/);
+  assert.equal(result.dates[0].utcTime,'2026-01-04T09:00:00.000Z'); assert.equal(result.description,undefined); assert.equal(result.parsed.fields.length,6);
 });
 
 test('Cron worker returns structured field errors without producing stale dates', async () => {
