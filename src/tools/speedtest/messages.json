@@ -1,0 +1,21 @@
+{
+  "heading": "Speed rating",
+  "download": "Download",
+  "upload": "Upload",
+  "waiting": "Run a test to see download and upload ratings.",
+  "testing": "Testing… Ratings will appear when the test stops.",
+  "unavailable": "Not measured",
+  "partial": "Partial results: only the available measurements are rated.",
+  "scaleTitle": "Seven speed levels",
+  "scaleHint": "Illustrative throughput bands; latency and stability are shown separately.",
+  "below": "Below {{value}} {{unit}}",
+  "range": "{{min}}–<{{max}} {{unit}}",
+  "above": "{{value}} {{unit}} or more",
+  "walking": "Walking · Very slow",
+  "bicycle": "Bicycle · Slow",
+  "motorcycle": "Motorcycle · Moderate",
+  "car": "Car · Fairly fast",
+  "train": "High-speed train · Fast",
+  "plane": "Airplane · Very fast",
+  "rocket": "Rocket · Extremely fast"
+}

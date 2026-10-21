@@ -11,6 +11,8 @@ export function speedConfig(profile='light') {
 }
 export const plannedBytes=profile=>speedConfig(profile).measurements.reduce((total,item)=>total+(item.bytes || 0)*(item.count || 0),0);
 const finite=value=>typeof value==='number' && Number.isFinite(value) && value>=0;
+export const speedLevels=[['walking',0],['bicycle',1],['motorcycle',5],['car',20],['train',100],['plane',300],['rocket',1000]].map(([id,minimum])=>({id,minBps:minimum*1e6}));
+export const speedLevelFor=bps=>finite(bps)?speedLevels.findLast(level=>bps>=level.minBps):undefined;
 export function readResults(results) {
   const get=name=>results?.[name]?.() || [];
   const summary=results?.getSummary?.() || {};
