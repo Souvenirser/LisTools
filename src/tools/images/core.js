@@ -31,3 +31,18 @@ export function imageHeader(bytes) {
 export function uniqueNames(names) {
   const used=new Set();return names.map(name=>{name=name.replace(/[\\/]/g,'_');const dot=name.lastIndexOf('.'),base=dot<0?name:name.slice(0,dot),ext=dot<0?'':name.slice(dot);let candidate=name,index=2;while(used.has(candidate))candidate=`${base}-${index++}${ext}`;used.add(candidate);return candidate;});
 }
+
+export async function removeJpegMetadata(blob) {
+  if(blob.type!=='image/jpeg')return blob;
+  const view=new DataView(await blob.arrayBuffer()),parts=[];let pos=2,start=0;
+  while(pos+4<=view.byteLength) {
+    const marker=view.getUint16(pos);
+    if(marker===0xffda||marker===0xffd9)break;
+    const end=pos+2+view.getUint16(pos+2);
+    if(end>view.byteLength||end<=pos+2)break;
+    if(marker===0xffe1){parts.push(blob.slice(start,pos));start=end;}
+    pos=end;
+  }
+  if(!parts.length)return blob;
+  return new Blob([...parts,blob.slice(start)],{type:blob.type});
+}
