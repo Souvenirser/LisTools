@@ -14,7 +14,7 @@ export default defineConfig({
     headers: { 'Content-Security-Policy': extensionPolicy }
   },
   build: {
-    target: 'chrome120', license: { fileName: 'THIRD_PARTY_LICENSES.md' },
+    target: ['chrome120','firefox140','safari18'], license: { fileName: 'THIRD_PARTY_LICENSES.md' },
     rolldownOptions: { input: { ...Object.fromEntries(pages.filter(page=>!page.file.includes('#')).map(page=>[page.id,page.file])), popup:'popup.html' } }
   }
 });

@@ -52,3 +52,9 @@ LisTools 的 Li 字母图标为本项目原创几何字母标识。
 | [nzh](https://github.com/cnwhy/nzh) | 1.0.14 | BSD-2-Clause | 人民币简繁大写 |
 
 Playwright 为开发测试依赖，不进入扩展运行时。打包许可收集按实际依赖目录解析并区分同名不同版本，收集实际使用的嵌套依赖；构建不联网。面试邀请功能及其专用依赖 ics 已移除。
+
+语言选择器复用 Choices.js 11.2.4（MIT，含 Fuse.js），国旗图片来自 flag-icons 7.6.0（MIT）。构建只包含语言列表使用的 41 张本地 SVG，完整许可证随扩展打包。
+
+## 测速等级插图：Twemoji
+
+测速页的步行、自行车、摩托车、汽车、高铁、飞机、火箭 SVG 原样复用 [jdecked/twemoji v16.0.1](https://github.com/jdecked/twemoji/tree/v16.0.1/assets/svg)，未作修改。图形版权归 Twitter, Inc. 及其他 Twemoji 贡献者所有，以 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 授权；完整图形许可证随扩展保存在 `speed-levels/LICENSE-GRAPHICS.txt`。原始文件分别为 `1f6b6.svg`、`1f6b4.svg`、`1f3cd.svg`、`1f697.svg`、`1f684.svg`、`2708.svg`、`1f680.svg`。仅打包七张本地图形，不引入 Twemoji 运行库或 CDN 请求。
