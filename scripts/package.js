@@ -16,12 +16,15 @@ assert.ok(!manifest.permissions?.length && !manifest.host_permissions?.length);
 assert.equal(manifest.content_security_policy.extension_pages,extensionPolicy);
 assert.equal(manifest.action.default_popup,'popup.html');
 assert.ok(!manifest.background, '工具菜单不需要后台脚本');
+assert.ok(manifest.browser_specific_settings.gecko.id);
+assert.deepEqual(manifest.browser_specific_settings.gecko.data_collection_permissions,{required:['none']});
+assert.ok(manifest.browser_specific_settings.safari.strict_min_version);
 const entries=[...pages.filter(page=>!page.file.includes('#')).map(page=>page.file),manifest.action.default_popup];
 
 // Vite 的主入口许可报告不包含仅由 Worker 引用的依赖。
 const licensePath = path.join(dist, 'THIRD_PARTY_LICENSES.md');
 let licenses = await readFile(licensePath, 'utf8');
-const workerDependencies = ['microdiff','jsonc-parser','diff','@radix-ui/colors','i18next','@scure/base','entities','jsesc','@kayahr/text-encoding','yaml','fast-xml-parser','papaparse','@noble/hashes','crc-32','change-case','decimal.js','colord','fflate','@cloudflare/speedtest','croner','cronstrue','nanoid','@eslint-community/regexpp','mathjs','qrcode','jsqr','cropperjs','browser-image-compression','pdf-lib','nzh'];
+const workerDependencies = ['microdiff','jsonc-parser','diff','@radix-ui/colors','i18next','@scure/base','entities','jsesc','@kayahr/text-encoding','yaml','fast-xml-parser','papaparse','@noble/hashes','crc-32','change-case','decimal.js','colord','fflate','@cloudflare/speedtest','croner','cronstrue','choices.js','flag-icons','nanoid','@eslint-community/regexpp','mathjs','qrcode','jsqr','cropperjs','browser-image-compression','pdf-lib','nzh'];
 const supplemental = { 'change-case':'change-case-5.4.4.LICENSE', '@nodable/entities':'nodable-entities-3.1.0.LICENSE' };
 const visited = new Set();
 async function locatePackage(name,from) {
@@ -86,11 +89,14 @@ for (const { code } of languages) {
   if (code === 'en') continue; // English fallback is embedded in the common entry.
   assert.ok(Object.keys(files).some(name => name.startsWith(`assets/${code}-`) && name.endsWith('.js')), `扩展缺少语言包：${code}`);
 }
-for (const name of ['@radix-ui/colors', 'i18next']) assert.ok(licenses.includes(`## ${name} - `), `许可证缺失：${name}`);
+for (const name of ['@radix-ui/colors', 'i18next','choices.js','flag-icons','fuse.js']) assert.ok(licenses.includes(`## ${name} - `), `许可证缺失：${name}`);
+const flagCodes=new Set(languages.map(item=>item.flag));
+for(const flag of flagCodes)assert.ok(Object.keys(files).some(name=>name.startsWith(`assets/${flag}-`)&&name.endsWith('.svg')),`扩展缺少国旗：${flag}`);
+assert.equal(Object.keys(files).filter(name=>/^assets\/[a-z]{2}-[^/]+\.svg$/.test(name)).length,flagCodes.size,'仅打包语言列表使用的国旗');
 const archive = zipSync(files, { level: 6 });
 assert.ok(unzipSync(archive)['manifest.json'], 'ZIP 根目录必须包含 manifest.json');
 await mkdir(path.join(root, 'releases'), { recursive: true });
 const output = path.join(root, 'releases', `LisTools-${pkg.version}.zip`);
 await writeFile(output, archive);
-console.log(`Chrome 扩展：${dist}`);
-console.log(`发布 ZIP：${output} (${(archive.length / 1024 / 1024).toFixed(2)} MB)`);
+console.log(`浏览器扩展资源：${dist}`);
+console.log(`通用 ZIP：${output} (${(archive.length / 1024 / 1024).toFixed(2)} MB)`);
