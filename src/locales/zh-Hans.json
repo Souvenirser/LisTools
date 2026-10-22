@@ -193,7 +193,9 @@
     "format": "请使用 YYYY-MM-DD HH:mm:ss，最多保留三位小数；或使用带 Z / ±HH:mm 的 ISO 格式。",
     "invalidOffset": "日期、时间或 UTC 偏移量无效，请检查各部分。",
     "invalidDate": "日期或时间无效，请检查各部分。",
-    "ambiguous": "该本地时间因时区切换而不存在或重复。请修改时间，或添加明确的 UTC 偏移量，如 -04:00 或 -05:00。"
+    "ambiguous": "该本地时间因时区切换而不存在或重复。请修改时间，或添加明确的 UTC 偏移量，如 -04:00 或 -05:00。",
+    "zoneSearch": "搜索国家/地区、城市或时区…",
+    "zoneNoResults": "没有匹配的时区"
   },
   "diagnostic": {
     "valid": "有效",
@@ -230,14 +232,14 @@
     "processingFailed": "处理失败"
   },
   "md5": {
-    "name": "MD5 摘要",
-    "title": "MD5 摘要与校验",
-    "description": "支持文本、逐行批量、文件和 HMAC。所有处理均在浏览器内完成。",
+    "name": "MD5 校验",
+    "title": "MD5 校验",
+    "description": "计算文本或文件的 MD5，核对内容是否一致；支持逐行与 HMAC，全部本地处理。",
     "security": "MD5 是用于校验和及旧系统兼容的不可逆摘要。请勿用于密码存储或需要抗碰撞的签名。HMAC-MD5 仅用于兼容场景。",
     "modes": {
-      "text": "文本摘要",
+      "text": "文本 MD5",
       "lines": "逐行批量",
-      "files": "文件摘要",
+      "files": "文件 MD5",
       "hmac": "HMAC-MD5"
     },
     "representation": "输入表示方式",
@@ -251,8 +253,8 @@
     },
     "truncatedNote": "16 位兼容值取 Hex 结果中间的 16 个字符，并非完整的 MD5 摘要。",
     "auto": "自动计算短文本",
-    "run": "计算摘要",
-    "expected": "预期摘要",
+    "run": "计算 MD5",
+    "expected": "用于比对的 MD5",
     "expectedFormat": "预期表示方式",
     "compare": {
       "empty": "输入预期摘要以进行校验。",
@@ -277,7 +279,7 @@
     "line": "行",
     "filename": "文件名",
     "size": "字节数",
-    "digest": "摘要",
+    "digest": "MD5 校验值",
     "copyItem": "复制当前项",
     "downloadCsv": "导出 CSV",
     "downloadJson": "导出 JSON",
@@ -339,7 +341,11 @@
     "exampleNotice": "这是本地示例，你可以修改输入后再试一次。",
     "regexPurpose": "开发工具：按规则查找、提取或替换文字。可以先试一下提取订单编号的示例。",
     "orderNumbers": "提取订单编号",
-    "regexName": "正则测试（开发用）"
+    "regexName": "正则测试（开发用）",
+    "exampleConfirm": "载入示例会替换当前输入、文件和结果，是否继续？",
+    "presetConfirm": "用此预设替换自定义模式和标志吗？",
+    "match": "匹配",
+    "fileReadError": "无法读取文件：{{name}}"
   },
   "calculator": {
     "title": "计算器",
@@ -548,7 +554,12 @@
     "description": "图片太大无法上传时可压缩；也可裁掉多余区域、修改尺寸，或转换 PNG、JPG、WebP 格式。添加图片后处理并下载。",
     "compressTask": "压缩图片文件大小",
     "resizeTask": "修改图片宽高",
-    "formatTask": "转换图片格式"
+    "formatTask": "转换图片格式",
+    "importing": "正在导入图片，请稍候…",
+    "pngQuality": "质量仅适用于 JPEG/WebP。PNG 不使用质量参数；设置目标大小时可能减少颜色。",
+    "batchDone": "已处理 {{success}} 张图片。 · 失败: {{failed}}",
+    "growth": "+{{percent}}%",
+    "unchanged": "0%"
   },
   "text": {
     "name": "文本去重与提取",
@@ -618,7 +629,7 @@
     "energy": "能量",
     "power": "功率",
     "angle": "角度",
-    "search": "搜索单位（中文／英文）",
+    "search": "筛选原单位（英文／中文）",
     "value": "数值",
     "from": "原单位",
     "to": "主要目标单位",
@@ -766,6 +777,15 @@
     "finished": "倒计时结束。",
     "invalidDuration": "请输入 1 至 31,536,000 之间的整数秒数。",
     "soundUnavailable": "无法播放声音，倒计时仍会在页面上显示结束。"
+  },
+  "support": {
+    "title": "请作者喝咖啡",
+    "description": "如果 LisTools 帮到了你，欢迎请作者喝杯咖啡。",
+    "amount": "金额随心",
+    "scan": "使用支付宝扫码后自行输入金额。",
+    "voluntary": "完全自愿，不支持也可以正常使用全部功能。",
+    "privacy": "付款由支付宝处理，扩展不读取或保存支付信息。",
+    "qrAlt": "作者的支付宝收款二维码"
   },
   "speedtestRating": {
     "heading": "速度评价",

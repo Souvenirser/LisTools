@@ -193,7 +193,9 @@
     "format": "Használja a YYYY-MM-DD HH:mm:ss formátumot legfeljebb három tizedesjeggyel, vagy az ISO-formátumot Z / ±HH:mm eltolással.",
     "invalidOffset": "Érvénytelen dátum, idő vagy UTC-eltolás. Ellenőrizzen minden összetevőt.",
     "invalidDate": "Érvénytelen dátum vagy idő. Ellenőrizzen minden összetevőt.",
-    "ambiguous": "Ez a helyi időpont az időzóna átállítása miatt kimarad vagy ismétlődik. Módosítsa az időpontot, vagy adjon meg kifejezett UTC-eltolást, például -04:00 vagy -05:00."
+    "ambiguous": "Ez a helyi időpont az időzóna átállítása miatt kimarad vagy ismétlődik. Módosítsa az időpontot, vagy adjon meg kifejezett UTC-eltolást, például -04:00 vagy -05:00.",
+    "zoneSearch": "Ország, város vagy időzóna keresése…",
+    "zoneNoResults": "Nincs megfelelő időzóna"
   },
   "diagnostic": {
     "valid": "Érvényes",
@@ -230,8 +232,8 @@
     "processingFailed": "A feldolgozás sikertelen"
   },
   "md5": {
-    "name": "MD5-kivonat",
-    "title": "MD5-kivonat és ellenőrzés",
+    "name": "MD5-ellenőrzés",
+    "title": "MD5-ellenőrzés",
     "description": "Szöveg, sorok, fájlok és HMAC. Minden feldolgozás a böngészőben történik.",
     "security": "Az MD5 visszafordíthatatlan kivonat ellenőrzőösszegekhez és régi rendszerekkel való kompatibilitáshoz. Ne használja jelszavakhoz vagy ütközésálló aláírásokhoz. A HMAC-MD5 kompatibilitási funkció.",
     "modes": {
@@ -339,7 +341,11 @@
     "exampleNotice": "Ez egy helyi példa. Szerkessze a bemenetet, hogy kipróbálhassa saját tartalmait.",
     "regexPurpose": "Fejlesztői eszköz: szöveg keresése és kibontása minta segítségével, vagy a megfelelő szöveg cseréje. Először próbálja ki a rendelési szám példáját.",
     "orderNumbers": "Rendelési számok kibontása",
-    "regexName": "Regex tesztelés (fejlesztők)"
+    "regexName": "Regex tesztelés (fejlesztők)",
+    "exampleConfirm": "A példa lecseréli a jelenlegi bemenetet, fájlokat és eredményeket. Folytatja?",
+    "presetConfirm": "Lecseréli az egyéni mintát és jelzőket erre a beállításra?",
+    "match": "Egyezés",
+    "fileReadError": "A fájl nem olvasható: {{name}}"
   },
   "calculator": {
     "title": "Számológép",
@@ -548,7 +554,12 @@
     "description": "Lecsinyítsen egy képet a feltöltéshez, vágja ki a nem kívánt területeket, módosítsa a méreteit, vagy konvertálja PNG, JPG és WebP fájlokat. Adjon hozzá képeket, dolgozza fel, majd töltse le.",
     "compressTask": "Képméret tömörítése",
     "resizeTask": "Szélesség és magasság módosítása",
-    "formatTask": "Képformátum konvertálása"
+    "formatTask": "Képformátum konvertálása",
+    "importing": "Képek importálása, kérjük, várjon…",
+    "pngQuality": "A minőség csak JPEG/WebP esetén érvényes. A PNG figyelmen kívül hagyja; a célméret csökkentheti a színeket.",
+    "batchDone": "Feldolgozott {{success}} képek. · Sikertelen: {{failed}}",
+    "growth": "+{{percent}}%",
+    "unchanged": "0%"
   },
   "text": {
     "name": "Szövegtisztítás és kibontás",
@@ -618,7 +629,7 @@
     "energy": "Energia",
     "power": "Hatalom",
     "angle": "Szög",
-    "search": "Keresési egységek (angol / kínai)",
+    "search": "Forrásegységek szűrése (angol / kínai)",
     "value": "Érték",
     "from": "Az egységtől",
     "to": "Elsődleges cél",
@@ -766,6 +777,15 @@
     "finished": "A visszaszámlálás befejeződött.",
     "invalidDuration": "Enter egész számú másodperc 1 és 31 536 000 között.",
     "soundUnavailable": "A hang nem érhető el. A visszaszámlálás vizuálisan is befejeződik."
+  },
+  "support": {
+    "title": "Hívd meg a szerzőt egy kávéra",
+    "description": "Ha a LisTools segített, meghívhatod a szerzőt egy kávéra.",
+    "amount": "Az összeget te választod",
+    "scan": "Olvasd be az Alipay alkalmazással, és add meg az összeget.",
+    "voluntary": "A támogatás teljesen önkéntes. Minden funkció ingyenes marad.",
+    "privacy": "A fizetést az Alipay kezeli. A bővítmény nem olvas és nem tárol fizetési adatokat.",
+    "qrAlt": "A szerző Alipay QR-kódja fizetések fogadásához"
   },
   "speedtestRating": {
     "heading": "Sebességértékelés",

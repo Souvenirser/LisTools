@@ -193,7 +193,9 @@
     "format": "Utilisez YYYY-MM-DD HH:mm:ss, avec trois décimales au maximum, ou le format ISO avec Z / ±HH:mm.",
     "invalidOffset": "Date, heure ou décalage UTC invalide. Vérifiez tous les éléments.",
     "invalidDate": "Date ou heure invalide. Vérifiez tous les éléments.",
-    "ambiguous": "Cette heure locale est omise ou répétée lors d’un changement de fuseau horaire. Modifiez l’heure ou ajoutez un décalage UTC explicite, comme -04:00 ou -05:00."
+    "ambiguous": "Cette heure locale est omise ou répétée lors d’un changement de fuseau horaire. Modifiez l’heure ou ajoutez un décalage UTC explicite, comme -04:00 ou -05:00.",
+    "zoneSearch": "Rechercher un pays, une ville ou un fuseau…",
+    "zoneNoResults": "Aucun fuseau horaire correspondant"
   },
   "diagnostic": {
     "valid": "Valide",
@@ -230,8 +232,8 @@
     "processingFailed": "Échec du traitement"
   },
   "md5": {
-    "name": "Empreinte MD5",
-    "title": "Empreinte MD5 et vérification",
+    "name": "Vérification MD5",
+    "title": "Vérification MD5",
     "description": "Texte, lignes, fichiers et HMAC. Tout est traité dans votre navigateur.",
     "security": "MD5 est une empreinte irréversible destinée aux sommes de contrôle et à la compatibilité avec les anciens systèmes. Ne l'utilisez pas pour les mots de passe ni les signatures résistantes aux collisions. HMAC-MD5 est une fonction de compatibilité.",
     "modes": {
@@ -339,7 +341,11 @@
     "exampleNotice": "Ceci est un exemple local. Modifiez l'entrée pour essayer votre propre contenu.",
     "regexPurpose": "Outil de développement : recherchez et extrayez du texte à l'aide d'un modèle ou remplacez le texte correspondant. Essayez d'abord l'exemple du numéro de commande.",
     "orderNumbers": "Extraire les numéros de commande",
-    "regexName": "Tests Regex (développeurs)"
+    "regexName": "Tests Regex (développeurs)",
+    "exampleConfirm": "L’exemple remplacera la saisie, les fichiers et les résultats actuels. Continuer ?",
+    "presetConfirm": "Remplacer le motif et les indicateurs personnalisés par ce préréglage ?",
+    "match": "Correspondance",
+    "fileReadError": "Impossible de lire le fichier : {{name}}"
   },
   "calculator": {
     "title": "Calculatrice",
@@ -548,7 +554,12 @@
     "description": "Réduisez la taille d'une image pour le téléchargement, recadrez les zones indésirables, modifiez ses dimensions ou convertissez les fichiers PNG, JPG et WebP. Ajoutez des images, traitez, puis téléchargez.",
     "compressTask": "Compresser la taille de l'image",
     "resizeTask": "Modifier la largeur et la hauteur",
-    "formatTask": "Convertir le format d'image"
+    "formatTask": "Convertir le format d'image",
+    "importing": "Importation des images, veuillez patienter…",
+    "pngQuality": "La qualité concerne JPEG/WebP seulement. PNG l’ignore ; une taille cible peut réduire les couleurs.",
+    "batchDone": "Images {{success}} traitées. · Échec: {{failed}}",
+    "growth": "+{{percent}}%",
+    "unchanged": "0%"
   },
   "text": {
     "name": "Nettoyer et extraire le texte",
@@ -618,7 +629,7 @@
     "energy": "Énergie",
     "power": "Alimentation",
     "angle": "Angle",
-    "search": "Unités de recherche (anglais/chinois)",
+    "search": "Filtrer les unités sources (anglais / chinois)",
     "value": "Valeur",
     "from": "De l'unité",
     "to": "Cible principale",
@@ -766,6 +777,15 @@
     "finished": "Compte à rebours terminé.",
     "invalidDuration": "Enter un nombre entier de secondes compris entre 1 et 31 536 000.",
     "soundUnavailable": "Le son n'est pas disponible. Le compte à rebours se terminera toujours visuellement."
+  },
+  "support": {
+    "title": "Offrir un café à l’auteur",
+    "description": "Si LisTools vous a aidé, vous pouvez offrir un café à l’auteur.",
+    "amount": "Montant libre",
+    "scan": "Scannez avec Alipay et saisissez le montant.",
+    "voluntary": "Le soutien est facultatif. Toutes les fonctions restent gratuites.",
+    "privacy": "Alipay traite le paiement. L’extension ne lit ni ne conserve les informations de paiement.",
+    "qrAlt": "Code QR Alipay de l’auteur"
   },
   "speedtestRating": {
     "heading": "Évaluation de la vitesse",

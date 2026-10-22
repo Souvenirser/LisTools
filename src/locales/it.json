@@ -193,7 +193,9 @@
     "format": "Usa YYYY-MM-DD HH:mm:ss, con al massimo tre cifre decimali, o il formato ISO con Z / ±HH:mm.",
     "invalidOffset": "Data, ora o scostamento UTC non valido. Controlla tutti i componenti.",
     "invalidDate": "Data o ora non valida. Controlla tutti i componenti.",
-    "ambiguous": "Quest’ora locale è saltata o ripetuta a causa di un cambio di fuso orario. Modifica l’ora o aggiungi uno scostamento UTC esplicito, come -04:00 o -05:00."
+    "ambiguous": "Quest’ora locale è saltata o ripetuta a causa di un cambio di fuso orario. Modifica l’ora o aggiungi uno scostamento UTC esplicito, come -04:00 o -05:00.",
+    "zoneSearch": "Cerca paese, città o fuso orario…",
+    "zoneNoResults": "Nessun fuso orario corrispondente"
   },
   "diagnostic": {
     "valid": "Valido",
@@ -230,8 +232,8 @@
     "processingFailed": "Elaborazione non riuscita"
   },
   "md5": {
-    "name": "Impronta MD5",
-    "title": "Impronta MD5 e verifica",
+    "name": "Verifica MD5",
+    "title": "Verifica MD5",
     "description": "Testo, righe, file e HMAC. Tutta l'elaborazione avviene nel browser.",
     "security": "MD5 è un'impronta irreversibile per somme di controllo e compatibilità con sistemi precedenti. Non usarla per password o firme resistenti alle collisioni. HMAC-MD5 è una funzione di compatibilità.",
     "modes": {
@@ -339,7 +341,11 @@
     "exampleNotice": "Questo è un esempio locale. Modifica l'input per provare i tuoi contenuti.",
     "regexPurpose": "Strumento per sviluppatori: trova ed estrai il testo utilizzando un modello o sostituisci il testo corrispondente. Prova prima l'esempio del numero d'ordine.",
     "orderNumbers": "Estrarre i numeri dell'ordine",
-    "regexName": "Test Regex (sviluppatori)"
+    "regexName": "Test Regex (sviluppatori)",
+    "exampleConfirm": "L’esempio sostituirà i dati, i file e i risultati attuali. Continuare?",
+    "presetConfirm": "Sostituire schema e flag personalizzati con questo modello?",
+    "match": "Corrispondenza",
+    "fileReadError": "Impossibile leggere il file: {{name}}"
   },
   "calculator": {
     "title": "Calcolatrice",
@@ -548,7 +554,12 @@
     "description": "Rimpicciolisci un'immagine per il caricamento, ritaglia le aree indesiderate, modificane le dimensioni o converti PNG, JPG e WebP. Aggiungi immagini, elabora, quindi scarica.",
     "compressTask": "Comprimi la dimensione dell'immagine",
     "resizeTask": "Modifica larghezza e altezza",
-    "formatTask": "Converti il formato dell'immagine"
+    "formatTask": "Converti il formato dell'immagine",
+    "importing": "Importazione delle immagini, attendere…",
+    "pngQuality": "La qualità vale solo per JPEG/WebP. PNG la ignora; una dimensione obiettivo può ridurre i colori.",
+    "batchDone": "Immagini {{success}} elaborate. · Non riuscito: {{failed}}",
+    "growth": "+{{percent}}%",
+    "unchanged": "0%"
   },
   "text": {
     "name": "Pulisci ed estrai il testo",
@@ -618,7 +629,7 @@
     "energy": "Energia",
     "power": "Potenza",
     "angle": "Angolo",
-    "search": "Unità di ricerca (inglese/cinese)",
+    "search": "Filtra unità di origine (inglese / cinese)",
     "value": "Valore",
     "from": "Dall'unità",
     "to": "Obiettivo primario",
@@ -766,6 +777,15 @@
     "finished": "Conto alla rovescia completato.",
     "invalidDuration": "Enter un numero intero di secondi compreso tra 1 e 31.536.000.",
     "soundUnavailable": "L'audio non è disponibile. Il conto alla rovescia terminerà comunque visivamente."
+  },
+  "support": {
+    "title": "Offri un caffè all’autore",
+    "description": "Se LisTools ti è stato utile, puoi offrire un caffè all’autore.",
+    "amount": "Importo a tua scelta",
+    "scan": "Scansiona con Alipay e inserisci l’importo.",
+    "voluntary": "Il sostegno è facoltativo. Tutte le funzioni restano gratuite.",
+    "privacy": "Alipay gestisce il pagamento. L’estensione non legge né salva i dati di pagamento.",
+    "qrAlt": "Codice QR Alipay dell’autore per ricevere pagamenti"
   },
   "speedtestRating": {
     "heading": "Valutazione della velocità",

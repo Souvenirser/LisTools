@@ -193,7 +193,9 @@
     "format": "Gunakan YYYY-MM-DD HH:mm:ss dengan sehingga tiga digit pecahan, atau format ISO dengan Z / ±HH:mm.",
     "invalidOffset": "Tarikh, waktu atau ofset UTC tidak sah. Semak semua komponennya.",
     "invalidDate": "Tarikh atau waktu tidak sah. Semak semua komponennya.",
-    "ambiguous": "Waktu tempatan ini dilangkau atau berulang akibat peralihan zon waktu. Ubah waktu atau tambah ofset UTC yang jelas seperti -04:00 atau -05:00."
+    "ambiguous": "Waktu tempatan ini dilangkau atau berulang akibat peralihan zon waktu. Ubah waktu atau tambah ofset UTC yang jelas seperti -04:00 atau -05:00.",
+    "zoneSearch": "Cari negara, bandar atau zon waktu…",
+    "zoneNoResults": "Tiada zon waktu yang sepadan"
   },
   "diagnostic": {
     "valid": "Sah",
@@ -230,8 +232,8 @@
     "processingFailed": "Pemprosesan gagal"
   },
   "md5": {
-    "name": "Ringkasan MD5",
-    "title": "Ringkasan dan pengesahan MD5",
+    "name": "Semakan MD5",
+    "title": "Semakan MD5",
     "description": "Teks, baris, fail dan HMAC. Semua pemprosesan kekal dalam pelayar anda.",
     "security": "MD5 ialah ringkasan sehala untuk jumlah semak dan keserasian sistem lama. Jangan gunakannya untuk kata laluan atau tandatangan yang tahan perlanggaran. HMAC-MD5 ialah ciri keserasian.",
     "modes": {
@@ -339,7 +341,11 @@
     "exampleNotice": "Ini ialah contoh tempatan. Edit input untuk mencuba kandungan anda sendiri.",
     "regexPurpose": "Alat pembangun: cari dan ekstrak teks menggunakan corak atau gantikan teks yang sepadan. Cuba contoh nombor pesanan dahulu.",
     "orderNumbers": "Ekstrak nombor pesanan",
-    "regexName": "Ujian Regex (pembangun)"
+    "regexName": "Ujian Regex (pembangun)",
+    "exampleConfirm": "Memuatkan contoh akan menggantikan input, fail dan hasil semasa. Teruskan?",
+    "presetConfirm": "Gantikan corak dan bendera tersuai dengan pratetap ini?",
+    "match": "Padankan",
+    "fileReadError": "Tidak dapat membaca fail: {{name}}"
   },
   "calculator": {
     "title": "Kalkulator",
@@ -548,7 +554,12 @@
     "description": "Jadikan imej lebih kecil untuk memuat naik, memangkas kawasan yang tidak diingini, menukar dimensinya atau menukar PNG, JPG dan WebP. Tambahkan imej, proses, kemudian muat turun.",
     "compressTask": "Mampatkan saiz imej",
     "resizeTask": "Tukar lebar dan tinggi",
-    "formatTask": "Tukar format imej"
+    "formatTask": "Tukar format imej",
+    "importing": "Mengimport imej, sila tunggu…",
+    "pngQuality": "Kualiti hanya untuk JPEG/WebP. PNG mengabaikannya; saiz sasaran mungkin mengurangkan warna.",
+    "batchDone": "Imej {{success}} yang diproses. · Gagal: {{failed}}",
+    "growth": "+{{percent}}%",
+    "unchanged": "0%"
   },
   "text": {
     "name": "Bersihkan dan ekstrak teks",
@@ -618,7 +629,7 @@
     "energy": "Tenaga",
     "power": "Kuasa",
     "angle": "Sudut",
-    "search": "Cari unit (Bahasa Inggeris / Cina)",
+    "search": "Tapis unit sumber (Inggeris / Cina)",
     "value": "Nilai",
     "from": "Dari unit",
     "to": "Sasaran utama",
@@ -766,6 +777,15 @@
     "finished": "Undur detik selesai.",
     "invalidDuration": "Enter bilangan keseluruhan saat dari 1 hingga 31,536,000.",
     "soundUnavailable": "Bunyi tidak tersedia. Kira detik masih akan selesai secara visual."
+  },
+  "support": {
+    "title": "Belanja penulis kopi",
+    "description": "Jika LisTools membantu anda, anda boleh belanja penulis secawan kopi.",
+    "amount": "Jumlah mengikut pilihan anda",
+    "scan": "Imbas dengan Alipay dan masukkan jumlah sendiri.",
+    "voluntary": "Sokongan sepenuhnya sukarela. Semua ciri kekal percuma.",
+    "privacy": "Alipay mengendalikan pembayaran. Sambungan tidak membaca atau menyimpan maklumat pembayaran.",
+    "qrAlt": "Kod QR Alipay penulis untuk menerima pembayaran"
   },
   "cron": {
     "title": "Cron ungkapan",

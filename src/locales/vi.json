@@ -193,7 +193,9 @@
     "format": "Dùng YYYY-MM-DD HH:mm:ss với tối đa ba chữ số thập phân, hoặc dạng ISO có Z / ±HH:mm.",
     "invalidOffset": "Ngày, giờ hoặc độ lệch UTC không hợp lệ. Kiểm tra mọi thành phần.",
     "invalidDate": "Ngày hoặc giờ không hợp lệ. Kiểm tra mọi thành phần.",
-    "ambiguous": "Giờ địa phương này bị bỏ qua hoặc lặp lại khi chuyển múi giờ. Hãy đổi giờ hoặc thêm độ lệch UTC rõ ràng như -04:00 hoặc -05:00."
+    "ambiguous": "Giờ địa phương này bị bỏ qua hoặc lặp lại khi chuyển múi giờ. Hãy đổi giờ hoặc thêm độ lệch UTC rõ ràng như -04:00 hoặc -05:00.",
+    "zoneSearch": "Tìm quốc gia, thành phố hoặc múi giờ…",
+    "zoneNoResults": "Không có múi giờ phù hợp"
   },
   "diagnostic": {
     "valid": "Hợp lệ",
@@ -230,8 +232,8 @@
     "processingFailed": "Xử lý thất bại"
   },
   "md5": {
-    "name": "Giá trị băm MD5",
-    "title": "Băm và xác minh MD5",
+    "name": "Kiểm tra MD5",
+    "title": "Kiểm tra MD5",
     "description": "Văn bản, từng dòng, tệp và HMAC. Mọi xử lý đều diễn ra trong trình duyệt của bạn.",
     "security": "MD5 là giá trị băm một chiều dùng cho tổng kiểm tra và khả năng tương thích hệ thống cũ. Không dùng cho mật khẩu hoặc chữ ký cần chống va chạm. HMAC-MD5 là tính năng tương thích.",
     "modes": {
@@ -339,7 +341,11 @@
     "exampleNotice": "Đây là một ví dụ cục bộ. Chỉnh sửa đầu vào để thử nội dung của riêng bạn.",
     "regexPurpose": "Công cụ dành cho nhà phát triển: tìm và trích xuất văn bản bằng mẫu hoặc thay thế văn bản phù hợp. Hãy thử ví dụ về số thứ tự trước.",
     "orderNumbers": "Trích xuất số đơn hàng",
-    "regexName": "Kiểm tra Regex (nhà phát triển)"
+    "regexName": "Kiểm tra Regex (nhà phát triển)",
+    "exampleConfirm": "Tải ví dụ sẽ thay thế dữ liệu nhập, tệp và kết quả hiện tại. Tiếp tục?",
+    "presetConfirm": "Thay mẫu và cờ tùy chỉnh bằng mẫu đặt sẵn này?",
+    "match": "Khớp",
+    "fileReadError": "Không thể đọc tệp: {{name}}"
   },
   "calculator": {
     "title": "Máy tính",
@@ -548,7 +554,12 @@
     "description": "Tạo hình ảnh nhỏ hơn để tải lên, cắt các vùng không mong muốn, thay đổi kích thước hoặc chuyển đổi PNG, JPG và WebP. Thêm hình ảnh, xử lý, sau đó tải xuống.",
     "compressTask": "Nén kích thước ảnh",
     "resizeTask": "Thay đổi chiều rộng và chiều cao",
-    "formatTask": "Chuyển đổi định dạng ảnh"
+    "formatTask": "Chuyển đổi định dạng ảnh",
+    "importing": "Đang nhập hình ảnh, vui lòng đợi…",
+    "pngQuality": "Chất lượng chỉ áp dụng cho JPEG/WebP. PNG bỏ qua; kích thước đích có thể giảm số màu.",
+    "batchDone": "Đã xử lý ảnh {{success}}. · Thất bại: {{failed}}",
+    "growth": "+{{percent}}%",
+    "unchanged": "0%"
   },
   "text": {
     "name": "Làm sạch và trích xuất văn bản",
@@ -618,7 +629,7 @@
     "energy": "Năng lượng",
     "power": "Nguồn điện",
     "angle": "Góc",
-    "search": "Đơn vị tìm kiếm (tiếng Anh / tiếng Trung)",
+    "search": "Lọc đơn vị nguồn (tiếng Anh / tiếng Trung)",
     "value": "Giá trị",
     "from": "Từ đơn vị",
     "to": "Mục tiêu chính",
@@ -766,6 +777,15 @@
     "finished": "Đếm ngược đã hoàn tất.",
     "invalidDuration": "Enter toàn bộ số giây từ 1 đến 31.536.000.",
     "soundUnavailable": "Không có âm thanh. Việc đếm ngược vẫn sẽ kết thúc một cách trực quan."
+  },
+  "support": {
+    "title": "Mời tác giả một ly cà phê",
+    "description": "Nếu LisTools hữu ích với bạn, bạn có thể mời tác giả một ly cà phê.",
+    "amount": "Số tiền tùy tâm",
+    "scan": "Quét bằng Alipay rồi tự nhập số tiền.",
+    "voluntary": "Ủng hộ hoàn toàn tự nguyện. Mọi tính năng vẫn miễn phí.",
+    "privacy": "Alipay xử lý thanh toán. Tiện ích không đọc hoặc lưu thông tin thanh toán.",
+    "qrAlt": "Mã QR nhận tiền Alipay của tác giả"
   },
   "cron": {
     "title": "Cron biểu thức",
