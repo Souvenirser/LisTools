@@ -16,7 +16,7 @@
       <main>
         <section class="page-heading"><div><h1><span data-i18n="timestamp.name">时间戳转换</span></h1><p><span data-i18n="timestamp.description">秒与毫秒双向转换，按所选时区展示时间。</span></p></div><span class="keyboard-hint"><span data-i18n="timestamp.automatic">输入后自动转换</span></span></section>
         <section class="timezone-bar panel" aria-label="转换时区" data-i18n-aria-label="timestamp.zone">
-          <div class="timezone-controls"><label for="time-zone"><span data-i18n="timestamp.zone">时区</span></label><select id="time-zone" aria-describedby="device-time-zone timezone-error"></select><button id="restore-time-zone"><span data-i18n="timestamp.restore">恢复设备时区</span></button></div>
+          <div class="timezone-controls"><label id="timezone-caption" for="time-zone"><span data-i18n="timestamp.zone">时区</span></label><select id="time-zone" aria-describedby="device-time-zone timezone-error"></select><button id="restore-time-zone"><span data-i18n="timestamp.restore">恢复设备时区</span></button></div>
           <span id="device-time-zone"></span><p id="timezone-error" class="is-error" role="status" hidden></p>
         </section>
         <section class="clock-panel panel" aria-labelledby="clock-title">
