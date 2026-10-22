@@ -2,9 +2,10 @@ import imageCompression from 'browser-image-compression';
 import { imagePlan, imageHeader, mediaError, uniqueNames, removeJpegMetadata } from './core.js';
 self.onmessage=async({data:{taskId,input,options}})=>{
   try {
-    const results=[];let totalSize=0;
+    const results=[],failures=[];let totalSize=0;
     for(let i=0;i<input.length;i++) {
-      const file=input[i];imageHeader(new Uint8Array(await file.blob.arrayBuffer()));
+      const file=input[i];
+      try{imageHeader(new Uint8Array(await file.blob.arrayBuffer()));
       const bitmap=await createImageBitmap(file.blob,{imageOrientation:'from-image'});
       let resized,canvas;
       try {
@@ -35,12 +36,14 @@ self.onmessage=async({data:{taskId,input,options}})=>{
       }
       resized=await removeJpegMetadata(resized);
       const outputBitmap=await createImageBitmap(resized);let width,height;try{width=outputBitmap.width;height=outputBitmap.height;}finally{outputBitmap.close();}
-      totalSize+=resized.size;if(totalSize>100*1024*1024)throw mediaError('images.limit');
+      if(totalSize+resized.size>100*1024*1024)throw mediaError('images.limit');
+      totalSize+=resized.size;
       const extension={'image/jpeg':'jpg','image/png':'png','image/webp':'webp'}[resized.type];
-      results.push({blob:resized,name:`${file.name.replace(/\.[^.]+$/,'')}.${extension}`,width,height,originalSize:file.originalSize,originalWidth:file.originalWidth,originalHeight:file.originalHeight,targetMet:!target||resized.size<=target});
+      results.push({fileId:file.fileId,blob:resized,name:`${file.name.replace(/\.[^.]+$/,'')}.${extension}`,width,height,originalSize:file.originalSize,originalWidth:file.originalWidth,originalHeight:file.originalHeight,targetMet:!target||resized.size<=target});
+      }catch(error){failures.push({fileId:file.fileId,code:typeof error.code==='string'&&error.code.startsWith('images.')?error.code:'images.failed',params:error.params});}
       self.postMessage({taskId,event:'progress',done:i+1,total:input.length});
     }
     const names=uniqueNames(results.map(r=>r.name));results.forEach((r,i)=>r.name=names[i]);
-    self.postMessage({taskId,status:'ready',result:{results}});
+    self.postMessage({taskId,status:'ready',result:{results,failures}});
   } catch(error){self.postMessage({taskId,status:'error',code:typeof error.code==='string'&&error.code.startsWith('images.')?error.code:'images.failed',params:error.params});}
 };

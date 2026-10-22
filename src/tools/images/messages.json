@@ -59,5 +59,10 @@
   "description": "Make an image smaller for uploading, crop unwanted areas, change its dimensions, or convert PNG, JPG and WebP. Add images, process, then download.",
   "compressTask": "Compress image size",
   "resizeTask": "Change width and height",
-  "formatTask": "Convert image format"
+  "formatTask": "Convert image format",
+  "importing": "Importing images, please wait…",
+  "pngQuality": "Quality applies to JPEG/WebP only. PNG ignores quality; a target size may reduce colors.",
+  "batchDone": "Processed {{success}} images. · Failed: {{failed}}",
+  "growth": "+{{percent}}%",
+  "unchanged": "0%"
 }
