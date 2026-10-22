@@ -1,3 +1,4 @@
+import {registerContentCheck} from './tools/shared/content-state.js';
 import { mountTool, copyText, downloadText, notify } from './tools/shared/page.js';
 import { t, language, onLanguageChange, translateDOM } from './i18n.js';
 import { getDeviceTimeZone, timestampToTime } from './tools/timestamp/core.js';
@@ -181,3 +182,7 @@ onLanguageChange(()=>{
 });
 window.addEventListener('pagehide',()=>controller.cancel());
 syntaxNote();loadBuilder();renderState();calculate();
+
+let cronEngaged=false;document.querySelector('#tool-root').addEventListener('input',()=>{cronEngaged=true;});document.querySelector('#cron-run').addEventListener('click',()=>{cronEngaged=true;});
+
+registerContentCheck(()=>Boolean($('cron-expression').value&&($('cron-expression').value!=='*/5 * * * *'||cronEngaged)));

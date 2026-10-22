@@ -1,3 +1,4 @@
+import {registerContentCheck} from './tools/shared/content-state.js';
 import { initTool, $, showError, clearStatus } from './tools/shared/office.js';
 import { copyText } from './tools/shared/page.js';
 import { t, onLanguageChange } from './i18n.js';
@@ -9,3 +10,7 @@ let result;
 function render(){for(const key of outputs){$('money-'+key).textContent=result?.[key]||'';$('copy-'+key).disabled=!result;}$('money-rounding').textContent=result?.didRound?t('money.roundedNotice',{original:result.original,rounded:result.rounded}):'';}
 function run(){clearStatus();try{result=formatMoney($('money-input').value);}catch(error){result=undefined;showError(error);}render();}
 $('money-run').addEventListener('click',run);$('money-input').addEventListener('keydown',event=>{if(event.key==='Enter')run();});$('money-input').addEventListener('input',()=>{result=undefined;clearStatus();render();});for(const key of outputs)$('copy-'+key).addEventListener('click',()=>{if(result)copyText(result[key]);});onLanguageChange(render);run();
+
+let moneyEngaged=false;document.querySelector('#tool-root').addEventListener('input',()=>{moneyEngaged=true;});document.querySelector('#money-run').addEventListener('click',()=>{moneyEngaged=true;});
+
+registerContentCheck(()=>Boolean($('money-input').value&&($('money-input').value!=='1234567.89'||moneyEngaged)));

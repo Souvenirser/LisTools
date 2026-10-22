@@ -175,8 +175,8 @@ export function createMd5View({source,output,setDocument,setEditable,controller,
     const data=exportMd5(mode==='files'?files:items,format(),type,labels);const url=URL.createObjectURL(new Blob([data],{type:type==='json'?'application/json;charset=utf-8':'text/csv;charset=utf-8'}));
     const link=document.createElement('a');link.href=url;link.download=`listools-md5.${type}`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   });
-  return {get mode(){return mode;},onState,onEvent,execute,changed,importFiles,translate,
-    activate(){active=true;setEditable(true);document.body.classList.add('md5-page');controls.hidden=false;actions.hidden=false;single.hidden=false;translate();onState({status:'idle'});},
+  return {hasContent:()=>active&&Boolean(files.length||items.length||$('md5-key').value||$('md5-expected').value),get mode(){return mode;},onState,onEvent,execute,changed,importFiles,translate,
+    activate({inputFile}={}){active=true;setEditable(true);document.body.classList.add('md5-page');controls.hidden=false;actions.hidden=false;single.hidden=false;if(inputFile){mode='files';$('md5-mode').value=mode;importFiles([inputFile instanceof File?inputFile:new File([inputFile],'listools-bytes')]);}translate();onState({status:'idle'});},
     deactivate(){active=false;clearKey();items=[];files=[];fileTable();document.body.classList.remove('md5-page');controls.hidden=true;actions.hidden=true;single.hidden=true;table.hidden=true;},
     clearKey};
 }

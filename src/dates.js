@@ -1,3 +1,4 @@
+import {registerContentCheck} from './tools/shared/content-state.js';
 import { Temporal } from 'temporal-polyfill/implementation';
 import { initTool, $, showError, clearStatus } from './tools/shared/office.js';
 import { copyText } from './tools/shared/page.js';
@@ -23,3 +24,5 @@ for(const id of Object.keys(computations)){
 }
 for(const edge of ['start','end'])$(`date-today-${edge}`).addEventListener('click',()=>{$(`date-${edge}`).value=Temporal.Now.plainDateISO().toString();results.difference=undefined;render('difference');clearStatus();});
 onLanguageChange(()=>Object.keys(renderers).forEach(render));
+
+registerContentCheck(()=>Object.values(results).some(value=>value!==undefined)||['date-start','date-end','date-base','date-reference','work-start','work-end'].some(id=>$(id).value!==today)||$('date-origin').value!=='2000-01-01'||$('date-amount').value!=='7'||Boolean($('date-off').value||$('date-work').value));

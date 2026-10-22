@@ -1,3 +1,4 @@
+import {registerContentCheck} from './tools/shared/content-state.js';
 import { mountTool, tr, copyText, downloadText, localize } from './tools/shared/page.js';
 import { onLanguageChange } from './i18n.js';
 import { parseWordlist } from './tools/password/core.js';
@@ -119,3 +120,5 @@ $('password-results').addEventListener('click', event => {
 window.addEventListener('pagehide', () => controller.clear());
 onLanguageChange(() => { localize(root); render(state); });
 mountTool('password'); render(state);
+
+registerContentCheck(()=>state.values.length>0||Boolean($('password-custom').value));
