@@ -14,7 +14,7 @@ test('all ten office tools are independent offline extension entries',()=>{
     assert.ok(page,`missing tool ${id}`);
     assert.equal(page.file,`${id}.html`);
     assert.equal(pageConnectPolicy(page.file),"connect-src 'none'");
-    const html=readFileSync(new URL(`../${page.file}`,import.meta.url),'utf8');
+    const html=readFileSync(new URL(`../pages/${page.file}`,import.meta.url),'utf8');
     assert.ok(html.includes(`/src/${id}.js`));
   }
   assert.equal(pages.filter(page=>!page.file.includes('#')).length,18);

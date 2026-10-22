@@ -2,6 +2,14 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as navigation from '../src/tools/shared/navigation.js';
 
+test('MD5 uses a plain checksum name without changing its stable route', () => {
+  const md5=navigation.pages.find(page=>page.id==='md5');
+  assert.equal(md5.zh,'MD5 校验');
+  assert.equal(md5.en,'MD5 checksum');
+  assert.equal(md5.file,'convert.html#md5');
+  assert.equal(navigation.searchNavigation('MD5 校验')[0].file,'convert.html#md5');
+});
+
 test('search directly opens conversion subtools and deduplicates MD5 routes', () => {
   assert.equal(typeof navigation.searchNavigation, 'function');
   assert.equal(navigation.searchNavigation('base64url')[0].file, 'convert.html#base64url');

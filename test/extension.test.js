@@ -10,7 +10,7 @@ test('扩展图标打开离线工具菜单，不需要后台或网页访问权�
   assert.ok(!manifest.permissions?.length && !manifest.host_permissions?.length);
   assert.ok(!manifest.content_security_policy.extension_pages.includes('unsafe-eval'));
   assert.equal(manifest.action.default_popup,'popup.html');
-  assert.ok(fs.existsSync(new URL(`../${manifest.action.default_popup}`,import.meta.url)));
+  assert.ok(fs.existsSync(new URL(`../pages/${manifest.action.default_popup}`,import.meta.url)));
   assert.equal(manifest.background,undefined);
   assert.equal(pageConnectPolicy(manifest.action.default_popup),"connect-src 'none'");
 });
