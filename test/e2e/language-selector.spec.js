@@ -114,6 +114,7 @@ for(const width of [640,900,1440])test(`shared language controls stay aligned on
   for(const file of files){
    await page.goto(`/${file}`);await expect(page.locator('html')).toHaveAttribute('lang',code);
    const control=page.locator('.language-control .choices');await expect(control).toBeVisible();
+   await expect.poll(()=>control.locator('.choices__list--single img').evaluate(image=>image.complete&&image.naturalWidth>0),{message:file}).toBe(true);
    const metrics=await page.locator('.language-control').evaluate(element=>{
     const style=getComputedStyle(element),control=element.querySelector('.choices'),inner=element.querySelector('.choices__inner'),image=control.querySelector('img');
     const box=control.getBoundingClientRect();return {display:style.display,gap:style.gap,margin:style.marginBlock,top:box.top,bottom:box.bottom,left:box.left,right:box.right,height:box.height,font:getComputedStyle(inner).fontSize,imageLoaded:image.complete&&image.naturalWidth>0,overflow:document.documentElement.scrollWidth>innerWidth+2};

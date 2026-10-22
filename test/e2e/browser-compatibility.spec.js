@@ -18,7 +18,7 @@ test('JSON precision and structural diff run in their local workers',async({page
 });
 
 test('timezone conversion and MD5 keep exact output in each engine',async({page})=>{
-  await page.goto('/timestamp.html');await page.locator('#time-zone').selectOption('UTC');await page.locator('#timestamp-source').fill('0');await expect(page.locator('#timestamp-local')).toHaveValue('1970-01-01 00:00:00.000');
+  await page.goto('/timestamp.html');const zones=page.locator('.timezone-controls .choices');await zones.click();await zones.locator('input[type=search]').fill('UTC');await zones.locator('[data-choice][data-value="UTC"]').click();await page.locator('#timestamp-source').fill('0');await expect(page.locator('#timestamp-local')).toHaveValue('1970-01-01 00:00:00.000');
   await page.goto('/convert.html#md5');await page.locator('#convert-source .cm-content').fill('abc');await expect(page.locator('#md5-values input').first()).toHaveValue('900150983cd24fb0d6963f7d28e17f72');
 });
 

@@ -1,6 +1,8 @@
 import {selectLanguage} from './language-helpers.js';
 import { test, expect } from '@playwright/test';
 
+test.beforeEach(async({page})=>{page.on('dialog',dialog=>dialog.accept());});
+
 test('removed low-value tools are absent from navigation and search',async({page})=>{
  await page.goto('/text.html');await page.locator('button.brand').click();
  for(const name of ['interview','experience','salary']){await page.locator('#tool-menu-search').fill(name);await expect(page.locator(`#tool-menu a[data-target="${name}.html"]`)).toHaveCount(0);}
@@ -27,7 +29,7 @@ test('developer regex example explains extraction with actual order numbers',asy
  await page.goto('/regex.html');await page.locator('#regex-example').click();await expect(page.locator('#regex-output .cm-content')).toHaveText('ORDER-1024ORDER-2048');await expect(page.locator('#regex-operation')).toHaveValue('extract');
 });
 test('choosing the regex task preserves the original user text',async({page})=>{
- await page.goto('/regex.html');await page.locator('#regex-source .cm-content').fill('My order: ORDER-7777');await page.locator('#regex-task-extract').click();
+ await page.goto('/regex.html');await page.locator('#regex-pattern').fill('ORDER-\\d+');await page.locator('#regex-source .cm-content').fill('My order: ORDER-7777');await page.locator('#regex-task-extract').click();
  await expect(page.locator('#regex-source .cm-content')).toHaveText('My order: ORDER-7777');await expect(page.locator('#regex-output .cm-content')).toHaveText('ORDER-7777');
 });
 test('regex example resets old capture selection before using a capture-free pattern',async({page})=>{
