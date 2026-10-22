@@ -193,7 +193,9 @@
     "format": "Folosește YYYY-MM-DD HH:mm:ss, cu cel mult trei zecimale, sau formatul ISO cu Z / ±HH:mm.",
     "invalidOffset": "Dată, oră sau decalaj UTC nevalid. Verifică toate componentele.",
     "invalidDate": "Dată sau oră nevalidă. Verifică toate componentele.",
-    "ambiguous": "Această oră locală este omisă sau repetată la o tranziție de fus orar. Schimbă ora sau adaugă un decalaj UTC explicit, precum -04:00 sau -05:00."
+    "ambiguous": "Această oră locală este omisă sau repetată la o tranziție de fus orar. Schimbă ora sau adaugă un decalaj UTC explicit, precum -04:00 sau -05:00.",
+    "zoneSearch": "Caută țară, oraș sau fus orar…",
+    "zoneNoResults": "Niciun fus orar corespunzător"
   },
   "diagnostic": {
     "valid": "Valid",
@@ -230,8 +232,8 @@
     "processingFailed": "Procesare nereușită"
   },
   "md5": {
-    "name": "Amprentă MD5",
-    "title": "Amprentă MD5 și verificare",
+    "name": "Verificare MD5",
+    "title": "Verificare MD5",
     "description": "Text, linii, fișiere și HMAC. Toată procesarea are loc în browser.",
     "security": "MD5 este o amprentă ireversibilă pentru sume de control și compatibilitate cu sisteme vechi. Nu o folosiți pentru parole sau semnături rezistente la coliziuni. HMAC-MD5 este o funcție de compatibilitate.",
     "modes": {
@@ -339,7 +341,11 @@
     "exampleNotice": "Acesta este un exemplu local. Editați intrarea pentru a încerca propriul conținut.",
     "regexPurpose": "Instrument pentru dezvoltatori: găsiți și extrageți text folosind un model sau înlocuiți textul potrivit. Încercați mai întâi exemplul cu numărul de comandă.",
     "orderNumbers": "Extrageți numerele de comandă",
-    "regexName": "Testare Regex (dezvoltatori)"
+    "regexName": "Testare Regex (dezvoltatori)",
+    "exampleConfirm": "Exemplul va înlocui datele, fișierele și rezultatele curente. Continuați?",
+    "presetConfirm": "Înlocuiți modelul și marcajele personalizate cu această presetare?",
+    "match": "Potrivire",
+    "fileReadError": "Fișierul nu a putut fi citit: {{name}}"
   },
   "calculator": {
     "title": "Calculator",
@@ -548,7 +554,12 @@
     "description": "Faceți o imagine mai mică pentru încărcare, decupați zonele nedorite, modificați dimensiunile acesteia sau convertiți PNG, JPG și WebP. Adăugați imagini, procesați, apoi descărcați.",
     "compressTask": "Comprimați dimensiunea imaginii",
     "resizeTask": "Modificați lățimea și înălțimea",
-    "formatTask": "Convertiți formatul imaginii"
+    "formatTask": "Convertiți formatul imaginii",
+    "importing": "Se importă imaginile, așteptați…",
+    "pngQuality": "Calitatea se aplică doar JPEG/WebP. PNG o ignoră; o dimensiune țintă poate reduce culorile.",
+    "batchDone": "Imagini {{success}} procesate. · Eșuat: {{failed}}",
+    "growth": "+{{percent}}%",
+    "unchanged": "0%"
   },
   "text": {
     "name": "Curăță și extrage text",
@@ -618,7 +629,7 @@
     "energy": "Energie",
     "power": "Putere",
     "angle": "Unghi",
-    "search": "Unități de căutare (engleză/chineză)",
+    "search": "Filtrați unitățile sursă (engleză / chineză)",
     "value": "Valoare",
     "from": "De la unitate",
     "to": "Țintă principală",
@@ -766,6 +777,15 @@
     "finished": "Numărătoarea inversă s-a încheiat.",
     "invalidDuration": "Enter un număr întreg de secunde de la 1 la 31.536.000.",
     "soundUnavailable": "Sunetul este indisponibil. Numărătoarea inversă se va termina în continuare vizual."
+  },
+  "support": {
+    "title": "Oferă-i autorului o cafea",
+    "description": "Dacă LisTools te-a ajutat, îi poți oferi autorului o cafea.",
+    "amount": "Alege suma dorită",
+    "scan": "Scanează cu Alipay și introdu suma.",
+    "voluntary": "Sprijinul este complet opțional. Toate funcțiile rămân gratuite.",
+    "privacy": "Alipay procesează plata. Extensia nu citește și nu salvează informațiile de plată.",
+    "qrAlt": "Codul QR Alipay al autorului pentru încasări"
   },
   "speedtestRating": {
     "heading": "Evaluarea vitezei",

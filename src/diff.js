@@ -1,3 +1,4 @@
+import {registerContentCheck} from './tools/shared/content-state.js';
 import { MergeView, Change } from '@codemirror/merge';
 import { EditorState, Compartment } from '@codemirror/state';
 import { EditorView, lineNumbers, keymap, drawSelection, highlightActiveLine, placeholder } from '@codemirror/view';
@@ -414,3 +415,5 @@ onLanguageChange(() => {
   navigation();
 });
 refreshModeLabels(); fileLabels(); statusLabels(lastState); diagnostics.clear();
+
+registerContentCheck(()=>Boolean(sourceText('left')||sourceText('right')||filenames.left||filenames.right));

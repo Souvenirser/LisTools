@@ -193,7 +193,9 @@
     "format": "Verwenden Sie YYYY-MM-DD HH:mm:ss mit bis zu drei Nachkommastellen oder das ISO-Format mit Z / ±HH:mm.",
     "invalidOffset": "Ungültiges Datum, ungültige Uhrzeit oder ungültiger UTC-Versatz. Prüfen Sie alle Bestandteile.",
     "invalidDate": "Ungültiges Datum oder ungültige Uhrzeit. Prüfen Sie alle Bestandteile.",
-    "ambiguous": "Diese Ortszeit wird durch eine Zeitzonenumstellung übersprungen oder wiederholt. Ändern Sie die Zeit oder ergänzen Sie einen expliziten UTC-Versatz wie -04:00 oder -05:00."
+    "ambiguous": "Diese Ortszeit wird durch eine Zeitzonenumstellung übersprungen oder wiederholt. Ändern Sie die Zeit oder ergänzen Sie einen expliziten UTC-Versatz wie -04:00 oder -05:00.",
+    "zoneSearch": "Land, Stadt oder Zeitzone suchen…",
+    "zoneNoResults": "Keine passende Zeitzone"
   },
   "diagnostic": {
     "valid": "Gültig",
@@ -231,7 +233,7 @@
   },
   "md5": {
     "name": "MD5-Prüfsumme",
-    "title": "MD5-Prüfsumme und Prüfung",
+    "title": "MD5-Prüfsumme",
     "description": "Text, Zeilen, Dateien und HMAC. Die gesamte Verarbeitung erfolgt in Ihrem Browser.",
     "security": "MD5 ist eine unumkehrbare Prüfsumme für Integritätsprüfungen und Altkompatibilität. Nicht für Passwörter oder kollisionsresistente Signaturen verwenden. HMAC-MD5 dient der Kompatibilität.",
     "modes": {
@@ -339,7 +341,11 @@
     "exampleNotice": "Dies ist ein lokales Beispiel. Bearbeiten Sie die Eingabe, um Ihre eigenen Inhalte auszuprobieren.",
     "regexPurpose": "Entwicklertool: Suchen und extrahieren Sie Text mithilfe eines Musters oder ersetzen Sie passenden Text. Probieren Sie zunächst das Beispiel mit der Bestellnummer aus.",
     "orderNumbers": "Bestellnummern extrahieren",
-    "regexName": "Regex-Tests (Entwickler)"
+    "regexName": "Regex-Tests (Entwickler)",
+    "exampleConfirm": "Das Beispiel ersetzt die aktuellen Eingaben, Dateien und Ergebnisse. Fortfahren?",
+    "presetConfirm": "Benutzerdefiniertes Muster und Flags durch diese Vorlage ersetzen?",
+    "match": "Abgleichen",
+    "fileReadError": "Datei konnte nicht gelesen werden: {{name}}"
   },
   "calculator": {
     "title": "Rechner",
@@ -548,7 +554,12 @@
     "description": "Verkleinern Sie ein Bild zum Hochladen, beschneiden Sie unerwünschte Bereiche, ändern Sie seine Abmessungen oder konvertieren Sie PNG, JPG und WebP. Bilder hinzufügen, verarbeiten und dann herunterladen.",
     "compressTask": "Bildgröße komprimieren",
     "resizeTask": "Breite und Höhe ändern",
-    "formatTask": "Bildformat konvertieren"
+    "formatTask": "Bildformat konvertieren",
+    "importing": "Bilder werden importiert, bitte warten…",
+    "pngQuality": "Qualität gilt nur für JPEG/WebP. PNG ignoriert sie; eine Zielgröße kann Farben reduzieren.",
+    "batchDone": "Verarbeitete {{success}}-Bilder. · Fehlgeschlagen: {{failed}}",
+    "growth": "+{{percent}}%",
+    "unchanged": "0%"
   },
   "text": {
     "name": "Text bereinigen und extrahieren",
@@ -618,7 +629,7 @@
     "energy": "Energie",
     "power": "Leistung",
     "angle": "Winkel",
-    "search": "Sucheinheiten (Englisch / Chinesisch)",
+    "search": "Quelleinheiten filtern (Englisch / Chinesisch)",
     "value": "Wert",
     "from": "Von der Einheit",
     "to": "Primäres Ziel",
@@ -766,6 +777,15 @@
     "finished": "Countdown abgeschlossen.",
     "invalidDuration": "Enter eine ganze Anzahl von Sekunden von 1 bis 31.536.000.",
     "soundUnavailable": "Ton ist nicht verfügbar. Der Countdown wird noch optisch beendet."
+  },
+  "support": {
+    "title": "Dem Autor einen Kaffee spendieren",
+    "description": "Wenn LisTools dir geholfen hat, kannst du dem Autor einen Kaffee spendieren.",
+    "amount": "Betrag frei wählbar",
+    "scan": "Mit Alipay scannen und den Betrag selbst eingeben.",
+    "voluntary": "Die Unterstützung ist freiwillig. Alle Funktionen bleiben kostenlos.",
+    "privacy": "Alipay wickelt die Zahlung ab. Die Erweiterung liest oder speichert keine Zahlungsdaten.",
+    "qrAlt": "Alipay-Zahlungs-QR-Code des Autors"
   },
   "speedtestRating": {
     "heading": "Geschwindigkeitsbewertung",

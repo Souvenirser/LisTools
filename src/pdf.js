@@ -1,3 +1,4 @@
+import {mediaWorkspace} from './tools/shared/workspace.js';
 import { addTaskGuide } from './tools/shared/task-guide.js';
 import samples from './tools/pdf/examples.json';
 import { t, onLanguageChange, translateDOM } from './i18n.js';
@@ -11,8 +12,10 @@ initTool('pdf',`<section class="tool-card" id="pdf-drop"><h2 ${label('import')}>
 <section class="tool-card"><div class="tool-fields"><label class="field"><span ${label('mode')}></span><select id="pdf-mode">${modes.map(m=>`<option value="${m}" ${label(m)}></option>`).join('')}</select></label></div><h2 ${label('queue')}></h2><ol id="pdf-queue" class="media-queue"></ol><div class="tool-actions"><button id="pdf-sort" ${label('sort')}></button><button id="pdf-clear" ${label('clear')}></button><button id="pdf-inspect" ${label('inspect')}></button></div></section>
 <section class="tool-card"><div class="tool-fields"><label class="field" id="pdf-pages-field"><span ${label('pages')}></span><input id="pdf-pages" dir="ltr" placeholder="1-3,5" value="1"><span class="tool-note" ${label('rangeHelp')}></span></label><label class="field" id="pdf-rotation-field"><span ${label('rotation')}></span><select id="pdf-rotation" dir="ltr"><option value="90">90°</option><option value="180">180°</option><option value="270">270°</option></select></label><label class="field" id="pdf-size-field"><span ${label('pageSize')}></span><select id="pdf-page-size"><option value="a4" ${label('a4')}></option><option value="original" ${label('original')}></option></select></label><label class="field" id="pdf-orientation-field"><span ${label('orientation')}></span><select id="pdf-orientation"><option value="portrait" ${label('portrait')}></option><option value="landscape" ${label('landscape')}></option></select></label></div><p class="tool-note" ${label('preservation')}></p><div class="tool-actions"><button id="pdf-run" class="primary" ${label('run')}></button><button id="pdf-cancel" ${label('cancel')}></button></div></section>
 <section class="tool-card" id="pdf-result" hidden><h2 ${label('output')}></h2><p id="pdf-output-info"></p><p id="pdf-output-order" class="tool-output" dir="ltr"></p><button id="pdf-download" ${label('download')}></button></section>`);
-let files=[],result,generation=0;
+let files=[],result,generation=0,busy=false;
+addEventListener('pagehide',()=>{generation++;});
 function renderQueue(){
+  setBusy(busy);
   const list=$('pdf-queue');list.replaceChildren();
   if(!files.length){const row=document.createElement('li');row.textContent=t('pdf.emptyQueue');list.append(row);}
   files.forEach((file,index)=>{
@@ -26,7 +29,7 @@ function renderResult(){
   $('pdf-output-info').textContent=t('pdf.outputInfo',{name:result.name,count:result.pageCount,size:(result.bytes.byteLength/1024).toFixed(1)});
   $('pdf-output-order').textContent=result.order?t('pdf.outputOrder',{pages:result.order.join(', ')}):'';
 }
-function setBusy(value){$('pdf-run').disabled=value;$('pdf-inspect').disabled=value;$('pdf-cancel').disabled=!value;}
+function setBusy(value){busy=value;$('pdf-run').disabled=value||!files.length;$('pdf-inspect').disabled=value||!files.length;$('pdf-cancel').disabled=!value;}
 const runner=taskRunner(()=>new Worker(new URL('./tools/pdf/worker.js',import.meta.url),{type:'module'}),{
   timeoutMs:120000,onState:state=>setBusy(state.status==='pending'),onEvent:event=>setStatus('pdf.progress',event),
   onResult:state=>{const value=state.result;if(value.files){value.files.forEach((f,i)=>{if(files[i])files[i].pageCount=f.pageCount;});renderQueue();setStatus('pdf.inspected',{count:value.pageCount});}else{result=value;renderResult();setStatus('pdf.done',{count:value.pageCount});}}
@@ -39,12 +42,13 @@ async function addFiles(incoming){
 }
 async function run(inspect=false){
   invalidate();const token=generation;
+  let reading;
   try{
     if(!files.length)throw mediaError('pdf.noFiles');const mode=inspect?'inspect':$('pdf-mode').value,isImages=mode==='images';
-    if(files.some(f=>isImages?!/\.(jpe?g|png|webp)$/i.test(f.name):!/\.pdf$/i.test(f.name)))throw mediaError('pdf.fileType');
-    setBusy(true);const input=[];for(const f of files){input.push({name:f.name,type:f.blob.type,bytes:await f.blob.arrayBuffer()});if(token!==generation)return;}
+    const wrong=files.find(f=>isImages?!/\.(jpe?g|png|webp)$/i.test(f.name):!/\.pdf$/i.test(f.name));if(wrong)throw mediaError('pdf.fileType',{name:wrong.name});
+    setBusy(true);const input=[];for(const f of files){reading=f;input.push({name:f.name,type:f.blob.type,bytes:await f.blob.arrayBuffer()});if(token!==generation)return;}
     runner.process({input,options:{mode,pages:$('pdf-pages').value,rotation:Number($('pdf-rotation').value),pageSize:$('pdf-page-size').value,orientation:$('pdf-orientation').value}});
-  }catch(error){setBusy(false);showError(error);}
+  }catch(error){if(token!==generation)return;setBusy(false);showError(error.code?error:mediaError('office.fileReadError',{name:reading?.name||''}));}
 }
 function updateFields(){const mode=$('pdf-mode').value;$('pdf-pages-field').hidden=!['extract','reorder','delete','rotate'].includes(mode);$('pdf-rotation-field').hidden=mode!=='rotate';$('pdf-size-field').hidden=mode!=='images';$('pdf-orientation-field').hidden=mode!=='images'||$('pdf-page-size').value==='original';}
 $('pdf-files').onchange=event=>{addFiles(event.target.files);event.target.value='';};
@@ -59,6 +63,7 @@ renderQueue();setBusy(false);updateFields();
 
 $('pdf-mode').closest('.tool-fields').hidden=true;
 const pdfGuide=addTaskGuide('pdf',modes.map(id=>({id,key:`pdf.${id}`})),{
+ hasContent:()=>files.length>0||Boolean(result),
  choose(mode){$('pdf-mode').value=mode;$('pdf-mode').dispatchEvent(new Event('input'));},
  async example(mode){
   invalidate();files=[];renderQueue();$('pdf-mode').value=mode;updateFields();
@@ -79,3 +84,5 @@ const pdfAdvanced=document.createElement('details');pdfAdvanced.innerHTML='<summ
 $('pdf-task-merge').parentElement.after(pdfAdvanced);
 for(const mode of ['reorder','delete','rotate'])pdfAdvanced.querySelector('.task-choices').append($(`pdf-task-${mode}`));
 translateDOM(pdfAdvanced);
+
+mediaWorkspace('pdf');

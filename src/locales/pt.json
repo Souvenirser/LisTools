@@ -193,7 +193,9 @@
     "format": "Use YYYY-MM-DD HH:mm:ss, com até três casas decimais, ou o formato ISO com Z / ±HH:mm.",
     "invalidOffset": "Data, hora ou deslocamento UTC inválido. Confira todos os componentes.",
     "invalidDate": "Data ou hora inválida. Confira todos os componentes.",
-    "ambiguous": "Esta hora local é omitida ou repetida por uma transição de fuso horário. Altere a hora ou adicione um deslocamento UTC explícito, como -04:00 ou -05:00."
+    "ambiguous": "Esta hora local é omitida ou repetida por uma transição de fuso horário. Altere a hora ou adicione um deslocamento UTC explícito, como -04:00 ou -05:00.",
+    "zoneSearch": "Pesquisar país, cidade ou fuso horário…",
+    "zoneNoResults": "Nenhum fuso horário correspondente"
   },
   "diagnostic": {
     "valid": "Válido",
@@ -230,8 +232,8 @@
     "processingFailed": "Falha no processamento"
   },
   "md5": {
-    "name": "Resumo MD5",
-    "title": "Resumo MD5 e verificação",
+    "name": "Verificação MD5",
+    "title": "Verificação MD5",
     "description": "Texto, linhas, arquivos e HMAC. Todo o processamento ocorre no navegador.",
     "security": "MD5 é um resumo irreversível para somas de verificação e compatibilidade legada. Não o use para senhas ou assinaturas resistentes a colisões. HMAC-MD5 é um recurso de compatibilidade.",
     "modes": {
@@ -339,7 +341,11 @@
     "exampleNotice": "Este é um exemplo local. Edite a entrada para testar seu próprio conteúdo.",
     "regexPurpose": "Ferramenta de desenvolvedor: encontre e extraia texto usando um padrão ou substitua o texto correspondente. Experimente primeiro o exemplo do número do pedido.",
     "orderNumbers": "Extrair números de pedidos",
-    "regexName": "Teste Regex (desenvolvedores)"
+    "regexName": "Teste Regex (desenvolvedores)",
+    "exampleConfirm": "O exemplo substituirá a entrada, os arquivos e os resultados atuais. Continuar?",
+    "presetConfirm": "Substituir o padrão e os sinalizadores personalizados por esta predefinição?",
+    "match": "Corresponder",
+    "fileReadError": "Não foi possível ler o arquivo: {{name}}"
   },
   "calculator": {
     "title": "Calculadora",
@@ -548,7 +554,12 @@
     "description": "Reduza uma imagem para upload, corte áreas indesejadas, altere suas dimensões ou converta PNG, JPG e WebP. Adicione imagens, processe e baixe.",
     "compressTask": "Compactar tamanho da imagem",
     "resizeTask": "Alterar largura e altura",
-    "formatTask": "Converter formato de imagem"
+    "formatTask": "Converter formato de imagem",
+    "importing": "Importando imagens, aguarde…",
+    "pngQuality": "A qualidade aplica-se apenas a JPEG/WebP. PNG ignora-a; um tamanho alvo pode reduzir as cores.",
+    "batchDone": "Imagens {{success}} processadas. · Falhou: {{failed}}",
+    "growth": "+{{percent}}%",
+    "unchanged": "0%"
   },
   "text": {
     "name": "Limpe e extraia texto",
@@ -618,7 +629,7 @@
     "energy": "Energia",
     "power": "Poder",
     "angle": "Ângulo",
-    "search": "Unidades de pesquisa (inglês/chinês)",
+    "search": "Filtrar unidades de origem (inglês / chinês)",
     "value": "Valor",
     "from": "Da unidade",
     "to": "Alvo principal",
@@ -766,6 +777,15 @@
     "finished": "Contagem regressiva concluída.",
     "invalidDuration": "Enter um número inteiro de segundos de 1 a 31.536.000.",
     "soundUnavailable": "O som não está disponível. A contagem regressiva ainda terminará visualmente."
+  },
+  "support": {
+    "title": "Ofereça um café ao autor",
+    "description": "Se o LisTools ajudou você, pode oferecer um café ao autor.",
+    "amount": "Escolha o valor",
+    "scan": "Leia o código com o Alipay e digite o valor.",
+    "voluntary": "O apoio é opcional. Todas as funções continuam gratuitas.",
+    "privacy": "O Alipay processa o pagamento. A extensão não lê nem armazena informações de pagamento.",
+    "qrAlt": "Código QR do Alipay do autor"
   },
   "speedtestRating": {
     "heading": "Avaliação de velocidade",

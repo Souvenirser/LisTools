@@ -1,3 +1,4 @@
+import {actionArea} from './tools/shared/workspace.js';
 import { addTaskGuide } from './tools/shared/task-guide.js';
 import { initTool, showError, taskRunner } from './tools/shared/office.js';
 import { copyText, downloadText } from './tools/shared/page.js';
@@ -8,21 +9,21 @@ initTool('text',`<div class="tool-grid"><section class="tool-card"><h2 data-i18n
 let result,counts,countOnly=false,importGeneration=0,countTimer;
 function renderCounts(){ $('text-counts').textContent=counts?t('text.countSummary',counts):''; $('text-result-note').textContent=result&&(result.previewTruncated||result.truncated)?t(result.truncated?'text.matchTruncated':'text.previewTruncated'):'';}
 function resetResult(){result=undefined;$('text-result').value='';for(const id of ['copy','download','use'])$(`text-${id}`).disabled=true;renderCounts();}
-const runner=taskRunner(()=>new Worker(new URL('./tools/text/worker.js',import.meta.url),{type:'module'}),{onResult(value){counts=value.counts;if(!countOnly){result=value;$('text-result').value=value.preview;for(const id of ['copy','download','use'])$(`text-${id}`).disabled=false;}renderCounts();},timeoutMs:60000});
+const runner=taskRunner(()=>new Worker(new URL('./tools/text/worker.js',import.meta.url),{type:'module'}),{onState(state){$('text-cancel').disabled=state.status!=='pending';},onResult(value){counts=value.counts;if(!countOnly){result=value;$('text-result').value=value.preview;for(const id of ['copy','download','use'])$(`text-${id}`).disabled=false;}renderCounts();},timeoutMs:60000});
 function run(operation=$('text-operation').value){clearTimeout(countTimer);countOnly=operation==='count';const request={input:$('text-input').value,operation,locale:language(),style:$('text-case').value,ending:$('text-newline').value,find:$('text-find').value,replacement:$('text-replacement').value,kind:$('text-kind').value,dedupe:$('text-dedupe').checked,phone:$('text-mask-phone').checked,email:$('text-mask-email').checked,id:$('text-mask-id').checked};if(operation==='lines')request.operation='lines',request.lineOperation=$('text-lines').value;runner.process(request);}
 $('text-run').onclick=()=>run();$('text-count').onclick=()=>run('count');$('text-cancel').onclick=()=>{clearTimeout(countTimer);importGeneration++;runner.cancel();};
-$('text-input').oninput=()=>{importGeneration++;runner.invalidate();resetResult();counts=undefined;renderCounts();clearTimeout(countTimer);countTimer=setTimeout(()=>run('count'),300);};
+$('text-input').oninput=()=>{importGeneration++;runner.invalidate();resetResult();counts=undefined;renderCounts();clearTimeout(countTimer);countTimer=setTimeout(()=>run('count'),300);$('text-cancel').disabled=false;};
 $('text-operation').onchange=()=>{runner.invalidate();for(const element of document.querySelectorAll('[data-options]'))element.hidden=element.dataset.options!==$('text-operation').value;};
 for(const element of $('tool-root').querySelectorAll('select,input:not([type=file])'))element.addEventListener('change',()=>{runner.invalidate();resetResult();});
 for(const id of ['find','replacement'])$(`text-${id}`).oninput=()=>{runner.invalidate();resetResult();};
 $('text-clear').onclick=()=>{$('text-input').value='';$('text-input').oninput();};
 $('text-copy').onclick=async()=>{if(result)await copyText(await result.blob.text());};
 $('text-download').onclick=()=>{if(result)downloadText(result.blob,'text-result.txt');};
-$('text-use').onclick=async()=>{if(result){const source=result,generation=importGeneration;const value=await source.blob.text();if(generation!==importGeneration||result!==source)return;if(new Blob([value]).size>10*1024**2)return showError({code:'text.inputLimit'});$('text-input').value=value;$('text-input').oninput();}};
+$('text-use').onclick=async()=>{if(result){const source=result,generation=importGeneration;$('text-cancel').disabled=false;try{const value=await source.blob.text();if(generation!==importGeneration||result!==source)return;if(new Blob([value]).size>10*1024**2)return showError({code:'text.inputLimit'});$('text-input').value=value;$('text-input').oninput();}finally{if(generation===importGeneration)$('text-cancel').disabled=true;}}};
 async function importFile(file){const generation=++importGeneration;runner.invalidate();if(!file)return;resetResult();counts=undefined;renderCounts();if(file.size>10*1024**2)return showError({code:'text.inputLimit'});try{const value=new TextDecoder('utf-8',{fatal:true}).decode(await file.arrayBuffer());if(generation!==importGeneration)return;$('text-input').value=value;$('text-input').oninput();}catch{if(generation===importGeneration)showError({code:'text.invalidText'});}}
 $('text-file').onchange=()=>{void importFile($('text-file').files[0]);$('text-file').value='';};
 $('text-input').ondragover=event=>event.preventDefault();$('text-input').ondrop=event=>{event.preventDefault();void importFile(event.dataTransfer.files[0]);};
-onLanguageChange(()=>{renderCounts();if($('text-input').value)run('count');});
+onLanguageChange(renderCounts);
 
 addEventListener('pagehide',()=>{clearTimeout(countTimer);importGeneration++;});
 
@@ -32,6 +33,7 @@ const textFields=$('text-operation').closest('.tool-fields');textFields.before(t
 const textOptions=$('text-run').closest('section');document.querySelector('#tool-root .tool-grid').before(textOptions);
 const textActions=$('text-input').parentElement.querySelector('.tool-actions');textActions.prepend($('text-run'),$('text-cancel'));
 const guide=addTaskGuide('text',[{id:'dedupe',key:'text.dedupe'},{id:'extract',key:'text.extract'},{id:'replace',key:'text.replace'},{id:'mask',key:'text.mask'}],{
+ hasContent:()=>Boolean($('text-input').value||$('text-find').value||$('text-replacement').value||result),
  choose(task){$('text-operation').value=task==='dedupe'?'lines':task;if(task==='dedupe')$('text-lines').value='dedupe';$('text-operation').dispatchEvent(new Event('change'));},
  example(){
   const operation=$('text-operation').value;
@@ -41,8 +43,12 @@ const guide=addTaskGuide('text',[{id:'dedupe',key:'text.dedupe'},{id:'extract',k
  }
 });
 $('text-operation').addEventListener('change',()=>guide.select($('text-operation').value==='lines'?'dedupe':$('text-operation').value));
-const textGuide=$('text-task-dedupe').closest('section');textGuide.append(textAdvanced);
+const textGuide=$('text-task-dedupe').closest('section');const textHelp=textGuide.querySelector('.task-help');textHelp.id='text-advanced';textHelp.append(textFields);textAdvanced.remove();
 textOptions.querySelector('h2').remove();textOptions.querySelector('.tool-actions').remove();
 const showTextOptions=()=>{textOptions.hidden=!['extract','replace','mask'].includes($('text-operation').value);};
 $('text-operation').addEventListener('change',showTextOptions);showTextOptions();
 translateDOM(textAdvanced);
+
+actionArea($('text-run').closest('.tool-actions'),$('tool-status'));
+
+$('text-cancel').disabled=true;

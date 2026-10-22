@@ -1,3 +1,4 @@
+import {actionArea} from './tools/shared/workspace.js';
 import { addTaskGuide } from './tools/shared/task-guide.js';
 import { t } from './i18n.js';
 import {EditorState,StateEffect,StateField} from '@codemirror/state';
@@ -152,6 +153,7 @@ function renderMatches() {
   table.append(head,body);$('regex-captures').replaceChildren(table);
 }
 function render(state) {
+  $('regex-status').dataset.taskState=state.status;
   lastState=state;result=state.status==='ready'?state:undefined;active=0;
   $('regex-cancel').disabled=state.status!=='pending';
   for(const id of ['regex-copy','regex-download','regex-json'])$(id).disabled=!result;
@@ -174,6 +176,7 @@ function renderRules() {
   $('regex-rule-list').replaceChildren(...found.map(rule=> {
     const button=el('button',tr(...rule.name),'regex-rule');button.type='button';button.dataset.rule=rule.id;button.title=tr(...rule.description);button.setAttribute('aria-pressed',String(selectedRule?.id===rule.id));
     button.append(el('small',tr(...rule.tags)));button.addEventListener('click',()=> {
+      if(($('regex-pattern').value!==$('regex-pattern').defaultValue||$('regex-flags').value!==$('regex-flags').defaultValue)&&($('regex-pattern').value!==rule.pattern||$('regex-flags').value!==rule.flags)&&!confirm(t('office.presetConfirm')))return;
       selectedRule=rule;$('regex-pattern').value=rule.pattern;$('regex-flags').value=rule.flags;renderFlags();renderRules();inputChanged();
     });return button;
   }));
@@ -214,7 +217,11 @@ regexHeading.querySelector('p').removeAttribute('data-zh');regexHeading.querySel
 function regexOrderTask(useExample=false){
  suppressChanges=true;$('regex-pattern').value='ORDER-\\d+';$('regex-flags').value='g';$('regex-operation').value='extract';$('regex-group').value='0';if(useExample)setDoc(source,'Alice: ORDER-1024\nBob: ORDER-2048');suppressChanges=false;renderFlags();operationChanged();execute();
 }
-addTaskGuide('regex',[{id:'extract',key:'office.orderNumbers'}],{choose:()=>regexOrderTask(),example:()=>regexOrderTask(true)});
+const regexGuide=addTaskGuide('regex',['match','extract','replace'].map(id=>({id,key:id==='match'?'office.match':`text.${id}`})),{hasContent:()=>source.state.doc.length>0||replacement.state.doc.length>0||Boolean(result)||['regex-pattern','regex-flags'].some(id=>$(id).value!==$(id).defaultValue),choose:task=>{$('regex-operation').value=task;operationChanged();},example:()=>{regexOrderTask(true);regexGuide.select('extract');}});
 const regexAdvanced=document.createElement('details');regexAdvanced.innerHTML='<summary data-i18n="office.advanced"></summary>';
 const flagField=$('regex-flags').closest('.field');flagField.before(regexAdvanced);regexAdvanced.append(flagField);
 for(const element of [regexAdvanced,regexHeading]){const translate=()=>{for(const node of element.querySelectorAll('[data-i18n]'))node.textContent=t(node.dataset.i18n);};onLanguageChange(translate);translate();}
+
+$('regex-operation').addEventListener('change',()=>regexGuide.select($('regex-operation').value));
+
+actionArea($('regex-run').closest('.tool-actions'),$('regex-status'));

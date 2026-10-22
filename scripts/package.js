@@ -89,10 +89,10 @@ for (const { code } of languages) {
   if (code === 'en') continue; // English fallback is embedded in the common entry.
   assert.ok(Object.keys(files).some(name => name.startsWith(`assets/${code}-`) && name.endsWith('.js')), `扩展缺少语言包：${code}`);
 }
-for (const name of ['@radix-ui/colors', 'i18next','choices.js','flag-icons','fuse.js']) assert.ok(licenses.includes(`## ${name} - `), `许可证缺失：${name}`);
-const flagCodes=new Set(languages.map(item=>item.flag));
+for (const name of ['@radix-ui/colors', 'i18next','choices.js','flag-icons','fuse.js','@vvo/tzdb']) assert.ok(licenses.includes(`## ${name} - `), `许可证缺失：${name}`);
+const flagCodes=new Set((await readdir(path.join(root,'node_modules/flag-icons/flags/4x3'))).filter(name=>/^[a-z]{2}\.svg$/.test(name)).map(name=>name.slice(0,2)));
 for(const flag of flagCodes)assert.ok(Object.keys(files).some(name=>name.startsWith(`assets/${flag}-`)&&name.endsWith('.svg')),`扩展缺少国旗：${flag}`);
-assert.equal(Object.keys(files).filter(name=>/^assets\/[a-z]{2}-[^/]+\.svg$/.test(name)).length,flagCodes.size,'仅打包语言列表使用的国旗');
+assert.equal(Object.keys(files).filter(name=>/^assets\/[a-z]{2}-[^/]+\.svg$/.test(name)).length,flagCodes.size,'国家和地区国旗必须完整且不重复');
 const archive = zipSync(files, { level: 6 });
 assert.ok(unzipSync(archive)['manifest.json'], 'ZIP 根目录必须包含 manifest.json');
 await mkdir(path.join(root, 'releases'), { recursive: true });

@@ -193,7 +193,9 @@
     "format": "Lo YYYY-MM-DD HH:mm:ss pẹ̀lú iye lẹ́yìn àmì ìdá tí kò ju mẹ́ta lọ, tàbí ISO pẹ̀lú Z / ±HH:mm.",
     "invalidOffset": "Ọjọ́, àkókò tàbí ìyapa UTC kò tọ́. Ṣàyẹ̀wò gbogbo apá.",
     "invalidDate": "Ọjọ́ tàbí àkókò kò tọ́. Ṣàyẹ̀wò gbogbo apá.",
-    "ambiguous": "A fo tàbí tún àkókò agbègbè yìí ṣe ní ìyípadà agbègbè àkókò. Yí àkókò padà tàbí fi ìyapa UTC tó ṣe kedere kún, bí -04:00 tàbí -05:00."
+    "ambiguous": "A fo tàbí tún àkókò agbègbè yìí ṣe ní ìyípadà agbègbè àkókò. Yí àkókò padà tàbí fi ìyapa UTC tó ṣe kedere kún, bí -04:00 tàbí -05:00.",
+    "zoneSearch": "Wa orílẹ̀-èdè, ìlú tàbí agbègbè àkókò…",
+    "zoneNoResults": "Kò sí agbègbè àkókò tó bá mu"
   },
   "diagnostic": {
     "valid": "Ó péye",
@@ -230,8 +232,8 @@
     "processingFailed": "Ìṣètò kùnà"
   },
   "md5": {
-    "name": "Àkótán MD5",
-    "title": "Àkótán MD5 àti ìmúdájú",
+    "name": "Ìṣàyẹ̀wò MD5",
+    "title": "Ìṣàyẹ̀wò MD5",
     "description": "Ọ̀rọ̀, àwọn ìlà, fáìlì àti HMAC. Gbogbo iṣẹ́ náà wáyé nínú aṣàwákiri rẹ.",
     "security": "MD5 jẹ́ àkótán tí a kò lè yí padà fún àpapọ̀ àyẹ̀wò àti ìbámu pẹ̀lú àwọn ètò àtijọ́. Má ṣe lò ó fún ọ̀rọ̀ aṣínà tàbí ìbuwọ́lù tó lè dojú kọ ìkọlù àkótán. HMAC-MD5 jẹ́ ẹ̀yà ìbámu.",
     "modes": {
@@ -339,7 +341,11 @@
     "exampleNotice": "Àpẹẹrẹ yìí ń ṣiṣẹ́ lórí ẹ̀rọ rẹ. Ṣàtúnṣe ohun tí a fi wọlé láti gbìyànjú àkóónú tirẹ.",
     "regexPurpose": "Irinṣẹ́ àwọn olùgbékalẹ̀: wá, yọ tàbí rọ́pò ọ̀rọ̀ nípasẹ̀ ìlànà. Kọ́kọ́ gbìyànjú àpẹẹrẹ yíyọ nọ́ńbà àṣẹ.",
     "orderNumbers": "Yọ àwọn nọ́ńbà àṣẹ",
-    "regexName": "Ìdánwò Regex (fún àwọn olùgbékalẹ̀)"
+    "regexName": "Ìdánwò Regex (fún àwọn olùgbékalẹ̀)",
+    "exampleConfirm": "Àpẹẹrẹ yìí yóò rọ́pò ìwọlé, àwọn fáìlì àti àbájáde tó wà. Tẹ̀síwájú?",
+    "presetConfirm": "Ṣé kí àtòjọ yìí rọ́pò àpẹẹrẹ àti àwọn àsíá àkànṣe?",
+    "match": "Báramu",
+    "fileReadError": "Kò lè ka fáìlì: {{name}}"
   },
   "calculator": {
     "title": "Ẹ̀rọ ìṣírò",
@@ -548,7 +554,12 @@
     "description": "Dín ìwọ̀n fáìlì àwòrán kù fún ìgbéjáde, gé àwọn apá tí o kò fẹ́, yí fífẹ̀ àti gíga padà, tàbí yí PNG, JPG àti WebP padà. Fi àwòrán kún un, ṣe iṣẹ́ náà, kí o sì gba àbájáde sílẹ̀.",
     "compressTask": "Dín ìwọ̀n fáìlì àwòrán kù",
     "resizeTask": "Yí fífẹ̀ àti gíga padà",
-    "formatTask": "Yí irú fáìlì àwòrán padà"
+    "formatTask": "Yí irú fáìlì àwòrán padà",
+    "importing": "Àwọn àwòrán ń wọlé, jọ̀wọ́ dúró…",
+    "pngQuality": "Dídára kan JPEG/WebP nìkan. PNG kò lò ó; ìwọ̀n àfojúsùn lè dín àwọ̀ kù.",
+    "batchDone": "A ti ṣiṣẹ́ lórí àwòrán {{success}}. · Ó kùnà: {{failed}}",
+    "growth": "+{{percent}}%",
+    "unchanged": "0%"
   },
   "text": {
     "name": "Mọ ọ̀rọ̀ kí o sì yọ ohun tí o nílò",
@@ -618,7 +629,7 @@
     "energy": "Agbára",
     "power": "Agbára fún ẹyọ àkókò",
     "angle": "Igun",
-    "search": "Wá àwọn ẹyọ ìwọ̀n (Gẹ̀ẹ́sì / Ṣáínà)",
+    "search": "Ṣàyẹ̀wò àwọn ẹyọ orísun (Gẹ̀ẹ́sì / Ṣáínà)",
     "value": "Iye",
     "from": "Ẹyọ ìwọ̀n ìpilẹ̀ṣẹ̀",
     "to": "Àfojúsùn àkọ́kọ́",
@@ -766,6 +777,15 @@
     "finished": "Ìkà àkókò tó kù ti parí.",
     "invalidDuration": "Tẹ odidi ìṣẹ́jú àáyá láti 1 sí 31,536,000 wọlé.",
     "soundUnavailable": "Kò ṣeé mú ìró jáde. Ìkà àkókò tó kù yóò ṣì parí lójú ìwòye."
+  },
+  "support": {
+    "title": "Ra kọfí fún òǹkọ̀wé",
+    "description": "Tí LisTools bá ti ràn ọ́ lọ́wọ́, o lè ra ife kọfí fún òǹkọ̀wé.",
+    "amount": "Yan iye tí o fẹ́",
+    "scan": "Ṣàyẹ̀wò kóòdù náà pẹ̀lú Alipay kí o sì tẹ iye náà fúnra rẹ.",
+    "voluntary": "Ìtìlẹ́yìn jẹ́ àṣàyàn pátápátá. Gbogbo iṣẹ́ yóò ṣì jẹ́ ọ̀fẹ́.",
+    "privacy": "Alipay ló ń bójú tó ìsanwó. Àfikún náà kì í ka tàbí tọ́jú ìsọfúnni ìsanwó.",
+    "qrAlt": "Kóòdù QR Alipay ti òǹkọ̀wé fún gbígba owó"
   },
   "cron": {
     "title": "Cron ikosile",

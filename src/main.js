@@ -1,3 +1,4 @@
+import {registerContentCheck} from './tools/shared/content-state.js';
 import { createJSONEditor, jsonQueryLanguage, Mode } from 'vanilla-jsoneditor';
 import { parse, stringify } from 'lossless-json';
 import { version } from '../package.json';
@@ -19,6 +20,9 @@ let filename = 'formatted.json';
 let lastState = { status: 'empty' };
 let importedName = '';
 let largeResult = false;
+let importError;
+const importStatus=document.createElement('p');importStatus.id='json-import-status';importStatus.className='tool-status';importStatus.setAttribute('role','status');importStatus.hidden=true;source.after(importStatus);
+function showImportStatus(key){importError=key;importStatus.hidden=!key;importStatus.textContent=key?t(key):'';}
 
 function size(bytes) {
   if (bytes < 1024) return `${bytes} B`;
@@ -129,6 +133,7 @@ function process(action = 'format', wait = 0) {
 
 function inputChanged() {
   inputVersion += 1;
+  showImportStatus();
   $('input-info').textContent = source.value ? t('common.characters', { count: source.value.length }) : t('json.raw');
   if ($('auto-format').checked || !source.value.trim()) process('format', 350);
   else {
@@ -159,11 +164,11 @@ $('import').addEventListener('click', () => $('file').click());
 async function loadFile(file) {
   if (!file) return;
   const current = ++inputVersion;
-  controller.cancel();
-  render({ status: 'pending' });
+  showImportStatus('common.processing');
   try {
-    const text = await file.text();
+    const text = new TextDecoder('utf-8',{fatal:true}).decode(await file.arrayBuffer());
     if (current !== inputVersion) return;
+    showImportStatus();
     source.value = text;
     filename = `${file.name.replace(/\.[^.]+$/, '')}.formatted.json`;
     importedName = file.name;
@@ -171,7 +176,7 @@ async function loadFile(file) {
     $('input-info').textContent = t('common.characters', { count: text.length });
     process();
   } catch (error) {
-    if (current === inputVersion) render({ status: 'error', code: 'common.fileError', params: { message: error.message }, message: error.message });
+    if (current === inputVersion) showImportStatus('diagnostic.InvalidEncoding');
   } finally {
     $('file').value = '';
   }
@@ -212,7 +217,7 @@ document.addEventListener('keydown', (event) => {
     process();
   }
 });
-window.addEventListener('pagehide', () => controller.cancel());
+window.addEventListener('pagehide', () => {inputVersion++;controller.cancel();showImportStatus();});
 
 // The public menu hooks update labels without resetting editor content or its history.
 function translateMenuItem(item) {
@@ -233,6 +238,7 @@ function renderContextMenu(items) {
   return prune(items).map(translateMenuItem);
 }
 function refreshLabels() {
+  if(importError)showImportStatus(importError);
   const state = lastState;
   $('input-info').textContent = source.value ? t('common.characters', { count:source.value.length }) : t('json.raw');
   $('file-name').textContent = importedName || t('json.supported');
@@ -246,3 +252,5 @@ function refreshLabels() {
 }
 onLanguageChange(refreshLabels);
 refreshLabels();
+
+registerContentCheck(()=>Boolean(source.value||resultText));

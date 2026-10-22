@@ -28,7 +28,7 @@ export async function processText(request={}) {
   } else if(operation==='replace') {
    if(!request.find) return failure('emptyFind');
    const pieces=input.split(request.find);
-   if(encoder.encode(input).length+(pieces.length-1)*encoder.encode(request.replacement||'').length>limits.output) return failure('outputLimit');
+   if(encoder.encode(input).length+(pieces.length-1)*(encoder.encode(request.replacement||'').length-encoder.encode(request.find).length)>limits.output) return failure('outputLimit');
    output=pieces.join(request.replacement||'');
   } else if(operation==='extract') {
    if(!['email','phone','url'].includes(request.kind)) return failure('invalidOperation');

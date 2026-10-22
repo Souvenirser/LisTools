@@ -193,7 +193,9 @@
     "format": "Tumia YYYY-MM-DD HH:mm:ss, na hadi tarakimu tatu za sehemu, au muundo wa ISO wenye Z / ±HH:mm.",
     "invalidOffset": "Tarehe, muda au tofauti ya UTC si halali. Kagua sehemu zote.",
     "invalidDate": "Tarehe au muda si halali. Kagua sehemu zote.",
-    "ambiguous": "Muda huu wa eneo hurukwa au kurudiwa wakati ukanda wa saa unapobadilika. Badilisha muda au ongeza tofauti wazi ya UTC kama -04:00 au -05:00."
+    "ambiguous": "Muda huu wa eneo hurukwa au kurudiwa wakati ukanda wa saa unapobadilika. Badilisha muda au ongeza tofauti wazi ya UTC kama -04:00 au -05:00.",
+    "zoneSearch": "Tafuta nchi, jiji au ukanda wa saa…",
+    "zoneNoResults": "Hakuna ukanda wa saa unaolingana"
   },
   "diagnostic": {
     "valid": "Halali",
@@ -230,8 +232,8 @@
     "processingFailed": "Uchakataji umeshindwa"
   },
   "md5": {
-    "name": "Muhtasari wa MD5",
-    "title": "Muhtasari wa MD5 na uthibitishaji",
+    "name": "Ukaguzi wa MD5",
+    "title": "Ukaguzi wa MD5",
     "description": "Maandishi, mistari, faili na HMAC. Uchakataji wote hufanyika kwenye kivinjari chako.",
     "security": "MD5 ni muhtasari usioweza kurudishwa kwa jumla za ukaguzi na uoanifu wa mifumo ya zamani. Usiutumie kwa nywila au saini zinazostahimili migongano. HMAC-MD5 ni kipengele cha uoanifu.",
     "modes": {
@@ -339,7 +341,11 @@
     "exampleNotice": "Huu ni mfano wa ndani. Hariri ingizo ili kujaribu maudhui yako mwenyewe.",
     "regexPurpose": "Zana ya Msanidi: tafuta na utoe maandishi kwa kutumia mchoro, au ubadilishe maandishi yanayolingana. Jaribu mfano wa nambari ya agizo kwanza.",
     "orderNumbers": "Nunua nambari za agizo",
-    "regexName": "Jaribio la Regex (watengenezaji)"
+    "regexName": "Jaribio la Regex (watengenezaji)",
+    "exampleConfirm": "Kupakia mfano kutabadilisha ingizo, faili na matokeo ya sasa. Endelea?",
+    "presetConfirm": "Ubadilishe muundo na bendera maalum kwa mpangilio huu?",
+    "match": "Linganisha",
+    "fileReadError": "Imeshindwa kusoma faili: {{name}}"
   },
   "calculator": {
     "title": "Kikokotoo",
@@ -548,7 +554,12 @@
     "description": "Fanya taswira kuwa ndogo kwa kupakiwa, punguza maeneo yasiyotakikana, badilisha vipimo vyake, au ubadilishe PNG, JPG na WebP. Ongeza picha, chakata, kisha upakue.",
     "compressTask": "Finyaza ukubwa wa picha",
     "resizeTask": "Badilisha upana na urefu",
-    "formatTask": "Badilisha umbizo la picha"
+    "formatTask": "Badilisha umbizo la picha",
+    "importing": "Inaleta picha, tafadhali subiri…",
+    "pngQuality": "Ubora hutumika kwa JPEG/WebP pekee. PNG huupuuza; ukubwa lengwa unaweza kupunguza rangi.",
+    "batchDone": "Picha za {{success}} zimechakatwa. · Imeshindwa: {{failed}}",
+    "growth": "+{{percent}}%",
+    "unchanged": "0%"
   },
   "text": {
     "name": "Safisha na toa maandishi",
@@ -618,7 +629,7 @@
     "energy": "Nishati",
     "power": "Nguvu",
     "angle": "Pembe",
-    "search": "Vitengo vya utafutaji (Kiingereza / Kichina)",
+    "search": "Chuja vipimo vya chanzo (Kiingereza / Kichina)",
     "value": "Thamani",
     "from": "Kutoka kitengo",
     "to": "Lengo la msingi",
@@ -766,6 +777,15 @@
     "finished": "Kuhesabu kumekamilika.",
     "invalidDuration": "Enter idadi nzima ya sekunde kutoka 1 hadi 31,536,000.",
     "soundUnavailable": "Sauti haipatikani. Muda uliosalia bado utaisha kwa kuonekana."
+  },
+  "support": {
+    "title": "Mnunulie mwandishi kahawa",
+    "description": "Ikiwa LisTools imekusaidia, unaweza kumnunulia mwandishi kahawa.",
+    "amount": "Chagua kiasi upendacho",
+    "scan": "Changanua kwa Alipay na uweke kiasi mwenyewe.",
+    "voluntary": "Msaada ni wa hiari kabisa. Vipengele vyote vinabaki bila malipo.",
+    "privacy": "Alipay hushughulikia malipo. Kiendelezi hakisomi wala kuhifadhi taarifa za malipo.",
+    "qrAlt": "Msimbo wa QR wa Alipay wa mwandishi wa kupokea malipo"
   },
   "cron": {
     "title": "Usemi wa Cron",

@@ -193,7 +193,9 @@
     "format": "En fazla üç kesir basamağıyla YYYY-MM-DD HH:mm:ss veya Z / ±HH:mm içeren ISO biçimini kullanın.",
     "invalidOffset": "Tarih, saat veya UTC ofseti geçersiz. Tüm bileşenleri kontrol edin.",
     "invalidDate": "Tarih veya saat geçersiz. Tüm bileşenleri kontrol edin.",
-    "ambiguous": "Bu yerel zaman saat dilimi geçişinde atlanır veya tekrarlanır. Zamanı değiştirin ya da -04:00 veya -05:00 gibi açık bir UTC ofseti ekleyin."
+    "ambiguous": "Bu yerel zaman saat dilimi geçişinde atlanır veya tekrarlanır. Zamanı değiştirin ya da -04:00 veya -05:00 gibi açık bir UTC ofseti ekleyin.",
+    "zoneSearch": "Ülke, şehir veya saat dilimi ara…",
+    "zoneNoResults": "Eşleşen saat dilimi yok"
   },
   "diagnostic": {
     "valid": "Geçerli",
@@ -230,8 +232,8 @@
     "processingFailed": "İşleme başarısız"
   },
   "md5": {
-    "name": "MD5 özeti",
-    "title": "MD5 özeti ve doğrulama",
+    "name": "MD5 doğrulama",
+    "title": "MD5 doğrulama",
     "description": "Metin, satırlar, dosyalar ve HMAC. Tüm işlemler tarayıcınızda gerçekleşir.",
     "security": "MD5, sağlama toplamları ve eski sistemlerle uyumluluk için geri döndürülemez bir özettir. Parolalar veya çakışmaya dayanıklı imzalar için kullanmayın. HMAC-MD5 bir uyumluluk özelliğidir.",
     "modes": {
@@ -339,7 +341,11 @@
     "exampleNotice": "Bu yerel bir örnektir. Kendi içeriğinizi denemek için girişi düzenleyin.",
     "regexPurpose": "Geliştirici aracı: bir desen kullanarak metni bulun ve çıkarın veya eşleşen metni değiştirin. Önce sipariş numarası örneğini deneyin.",
     "orderNumbers": "Sipariş numaralarını çıkar",
-    "regexName": "Regex testi (geliştiriciler)"
+    "regexName": "Regex testi (geliştiriciler)",
+    "exampleConfirm": "Örnek, mevcut girdiyi, dosyaları ve sonuçları değiştirecek. Devam edilsin mi?",
+    "presetConfirm": "Özel desen ve bayraklar bu ön ayarla değiştirilsin mi?",
+    "match": "Eşleştir",
+    "fileReadError": "Dosya okunamadı: {{name}}"
   },
   "calculator": {
     "title": "Hesap Makinesi",
@@ -548,7 +554,12 @@
     "description": "Yüklemek için bir görseli küçültün, istenmeyen alanları kırpın, boyutlarını değiştirin veya PNG, JPG ve WebP'yi dönüştürün. Görüntüleri ekleyin, işleyin ve ardından indirin.",
     "compressTask": "Görüntü boyutunu sıkıştır",
     "resizeTask": "Genişliği ve yüksekliği değiştir",
-    "formatTask": "Görüntü formatını dönüştür"
+    "formatTask": "Görüntü formatını dönüştür",
+    "importing": "Görseller içe aktarılıyor, lütfen bekleyin…",
+    "pngQuality": "Kalite yalnızca JPEG/WebP için geçerlidir. PNG bunu yok sayar; hedef boyut renkleri azaltabilir.",
+    "batchDone": "İşlenen {{success}} görüntüler. · Başarısız: {{failed}}",
+    "growth": "+{{percent}}%",
+    "unchanged": "0%"
   },
   "text": {
     "name": "Metni temizleyin ve çıkarın",
@@ -618,7 +629,7 @@
     "energy": "Enerji",
     "power": "Güç",
     "angle": "Açı",
-    "search": "Arama birimleri (İngilizce / Çince)",
+    "search": "Kaynak birimleri filtrele (İngilizce / Çince)",
     "value": "Değer",
     "from": "Birimden",
     "to": "Birincil hedef",
@@ -766,6 +777,15 @@
     "finished": "Geri sayım tamamlandı.",
     "invalidDuration": "Enter 1'den 31.536.000'e kadar tam saniye sayısı.",
     "soundUnavailable": "Ses kullanılamıyor. Geri sayım yine de görsel olarak bitecek."
+  },
+  "support": {
+    "title": "Yazara bir kahve ısmarla",
+    "description": "LisTools işinize yaradıysa yazara bir kahve ısmarlayabilirsiniz.",
+    "amount": "Tutarı siz seçin",
+    "scan": "Alipay ile tarayın ve tutarı kendiniz girin.",
+    "voluntary": "Destek tamamen isteğe bağlıdır. Tüm özellikler ücretsiz kalır.",
+    "privacy": "Ödemeyi Alipay işler. Uzantı ödeme bilgilerini okumaz veya saklamaz.",
+    "qrAlt": "Yazarın Alipay ödeme alma QR kodu"
   },
   "speedtestRating": {
     "heading": "Hız değerlendirmesi",

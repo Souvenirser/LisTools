@@ -193,7 +193,9 @@
     "format": "Použijte YYYY-MM-DD HH:mm:ss s nejvýše třemi desetinnými místy nebo formát ISO se Z / ±HH:mm.",
     "invalidOffset": "Neplatné datum, čas nebo posun UTC. Zkontrolujte všechny části.",
     "invalidDate": "Neplatné datum nebo čas. Zkontrolujte všechny části.",
-    "ambiguous": "Tento místní čas je kvůli změně časového pásma přeskočen nebo se opakuje. Změňte čas nebo přidejte explicitní posun UTC, například -04:00 nebo -05:00."
+    "ambiguous": "Tento místní čas je kvůli změně časového pásma přeskočen nebo se opakuje. Změňte čas nebo přidejte explicitní posun UTC, například -04:00 nebo -05:00.",
+    "zoneSearch": "Hledat zemi, město nebo časové pásmo…",
+    "zoneNoResults": "Žádné odpovídající časové pásmo"
   },
   "diagnostic": {
     "valid": "Platné",
@@ -230,8 +232,8 @@
     "processingFailed": "Zpracování se nezdařilo"
   },
   "md5": {
-    "name": "Otisk MD5",
-    "title": "Otisk MD5 a ověření",
+    "name": "Kontrola MD5",
+    "title": "Kontrola MD5",
     "description": "Text, řádky, soubory a HMAC. Veškeré zpracování probíhá v prohlížeči.",
     "security": "MD5 je nevratný otisk pro kontrolní součty a kompatibilitu se staršími systémy. Nepoužívejte jej pro hesla ani podpisy odolné vůči kolizím. HMAC-MD5 slouží ke kompatibilitě.",
     "modes": {
@@ -339,7 +341,11 @@
     "exampleNotice": "Toto je místní příklad. Upravte vstup a vyzkoušejte svůj vlastní obsah.",
     "regexPurpose": "Vývojářský nástroj: vyhledejte a extrahujte text pomocí vzoru nebo nahraďte odpovídající text. Nejprve vyzkoušejte příklad s číslem objednávky.",
     "orderNumbers": "Extrahujte čísla objednávek",
-    "regexName": "Testování regulárního výrazu (vývojáři)"
+    "regexName": "Testování regulárního výrazu (vývojáři)",
+    "exampleConfirm": "Načtení příkladu nahradí aktuální vstup, soubory a výsledky. Pokračovat?",
+    "presetConfirm": "Nahradit vlastní vzor a příznaky touto předvolbou?",
+    "match": "Shoda",
+    "fileReadError": "Soubor nelze přečíst: {{name}}"
   },
   "calculator": {
     "title": "Kalkulačka",
@@ -548,7 +554,12 @@
     "description": "Zmenšení obrázku pro odeslání, oříznutí nežádoucích oblastí, změna jeho rozměrů nebo převod PNG, JPG a WebP. Přidejte obrázky, zpracujte a stáhněte.",
     "compressTask": "Komprimujte velikost obrázku",
     "resizeTask": "Změňte šířku a výšku",
-    "formatTask": "Převést formát obrázku"
+    "formatTask": "Převést formát obrázku",
+    "importing": "Importují se obrázky, čekejte prosím…",
+    "pngQuality": "Kvalita platí jen pro JPEG/WebP. PNG ji ignoruje; cílová velikost může snížit počet barev.",
+    "batchDone": "Zpracované obrázky {{success}}. · Selhalo: {{failed}}",
+    "growth": "+{{percent}}%",
+    "unchanged": "0%"
   },
   "text": {
     "name": "Vyčistěte a extrahujte text",
@@ -618,7 +629,7 @@
     "energy": "Energie",
     "power": "Výkon",
     "angle": "Úhel",
-    "search": "Hledat jednotky (angličtina / čínština)",
+    "search": "Filtrovat zdrojové jednotky (angličtina / čínština)",
     "value": "Hodnota",
     "from": "Z jednotky",
     "to": "Primární cíl",
@@ -766,6 +777,15 @@
     "finished": "Odpočítávání dokončeno.",
     "invalidDuration": "Enter celý počet sekund od 1 do 31 536 000.",
     "soundUnavailable": "Zvuk není dostupný. Odpočítávání bude stále dokončeno vizuálně."
+  },
+  "support": {
+    "title": "Pozvat autora na kávu",
+    "description": "Pokud vám LisTools pomohl, můžete autora pozvat na kávu.",
+    "amount": "Částka je na vás",
+    "scan": "Naskenujte kód v Alipay a sami zadejte částku.",
+    "voluntary": "Podpora je zcela dobrovolná. Všechny funkce zůstávají zdarma.",
+    "privacy": "Platbu zpracovává Alipay. Rozšíření nečte ani neukládá platební údaje.",
+    "qrAlt": "QR kód Alipay autora pro příjem plateb"
   },
   "speedtestRating": {
     "heading": "Hodnocení rychlosti",

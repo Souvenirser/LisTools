@@ -193,7 +193,9 @@
     "format": "Yi amfani da YYYY-MM-DD HH:mm:ss, da har zuwa lambobi uku bayan ɗigo, ko tsarin ISO mai Z / ±HH:mm.",
     "invalidOffset": "Rana, lokaci ko bambancin UTC ba ya inganta. Duba duk sassan.",
     "invalidDate": "Rana ko lokaci ba ya inganta. Duba duk sassan.",
-    "ambiguous": "Ana tsallake ko maimaita wannan lokacin gida a sauyin yankin lokaci. Canza lokacin ko ƙara takamaiman bambancin UTC kamar -04:00 ko -05:00."
+    "ambiguous": "Ana tsallake ko maimaita wannan lokacin gida a sauyin yankin lokaci. Canza lokacin ko ƙara takamaiman bambancin UTC kamar -04:00 ko -05:00.",
+    "zoneSearch": "Nemo ƙasa, birni ko yankin lokaci…",
+    "zoneNoResults": "Babu yankin lokaci da ya dace"
   },
   "diagnostic": {
     "valid": "Mai inganci",
@@ -230,8 +232,8 @@
     "processingFailed": "Sarrafa bayanai ya kasa"
   },
   "md5": {
-    "name": "Taƙaitaccen MD5",
-    "title": "Taƙaitaccen MD5 da tabbatarwa",
+    "name": "Tabbatarwar MD5",
+    "title": "Tabbatarwar MD5",
     "description": "Rubutu, layuka, fayiloli da HMAC. Duk sarrafawa yana faruwa a burauzarka.",
     "security": "MD5 taƙaitawa ce da ba a iya juyawa don jimlar bincike da dacewa da tsofaffin tsarin. Kada a yi amfani da ita don kalmomin sirri ko sa hannun da ke jure karo. HMAC-MD5 fasalin dacewa ne.",
     "modes": {
@@ -339,7 +341,11 @@
     "exampleNotice": "Wannan misali ne na gida. Shirya shigarwar don gwada abun cikin ku.",
     "regexPurpose": "kayan aikin haɓakawa: nemo kuma cire rubutu ta amfani da tsari, ko maye gurbin rubutun da ya dace. Gwada misalin lambar oda tukuna.",
     "orderNumbers": "Cire lambobi",
-    "regexName": "Gwajin Regex (masu haɓakawa)"
+    "regexName": "Gwajin Regex (masu haɓakawa)",
+    "exampleConfirm": "Loda misalin zai maye gurbin bayanan shigarwa, fayiloli da sakamakon yanzu. A ci gaba?",
+    "presetConfirm": "A maye gurbin tsarin da tutocin da aka tsara da wannan saitin?",
+    "match": "Daidaita",
+    "fileReadError": "An kasa karanta fayil: {{name}}"
   },
   "calculator": {
     "title": "Kalkuleta",
@@ -548,7 +554,12 @@
     "description": "Yi ƙaramin hoto don lodawa, yanke wuraren da ba'a so, canza girmansa, ko canza PNG, JPG da Yanar gizo. Ƙara hotuna, aiwatarwa, sannan zazzagewa.",
     "compressTask": "Matsa girman hoton",
     "resizeTask": "Canja faɗi da tsayi",
-    "formatTask": "Canza tsarin hoto"
+    "formatTask": "Canza tsarin hoto",
+    "importing": "Ana shigo da hotuna, a jira…",
+    "pngQuality": "Inganci na JPEG/WebP ne kawai. PNG baya amfani da shi; girman da aka nufa na iya rage launuka.",
+    "batchDone": "Hotunan {{success}} da aka sarrafa. · Ya gaza: {{failed}}",
+    "growth": "+{{percent}}%",
+    "unchanged": "0%"
   },
   "text": {
     "name": "Tsabtace kuma cire rubutu",
@@ -618,7 +629,7 @@
     "energy": "Makamashi",
     "power": "Power",
     "angle": "kwana",
-    "search": "Rukunin Bincike (Turanci / Sinanci)",
+    "search": "Tace raka’o’in tushe (Turanci / Sinanci)",
     "value": "darajar",
     "from": "Daga raka'a",
     "to": "Babban manufa",
@@ -766,6 +777,15 @@
     "finished": "Kidaya ya cika.",
     "invalidDuration": "Enter cikakken adadin daƙiƙa daga 1 zuwa 31,536,000.",
     "soundUnavailable": "Babu sauti. Ƙididdigar za ta ƙare ta gani."
+  },
+  "support": {
+    "title": "Saya wa marubuci kofi",
+    "description": "Idan LisTools ya taimaka maka, za ka iya saya wa marubuci kofi.",
+    "amount": "Zaɓi adadin da kake so",
+    "scan": "Yi sikanin da Alipay sannan ka shigar da adadin da kanka.",
+    "voluntary": "Tallafi na son rai ne. Duk fasaloli za su kasance kyauta.",
+    "privacy": "Alipay ne ke sarrafa biyan kuɗi. Ƙarin manhajar ba ya karanta ko adana bayanan biyan kuɗi.",
+    "qrAlt": "Lambar QR ta Alipay ta marubuci don karɓar kuɗi"
   },
   "cron": {
     "title": "Cron magana",

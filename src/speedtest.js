@@ -1,3 +1,4 @@
+import {registerContentCheck} from './tools/shared/content-state.js';
 import { mountTool, tr, localize, copyText, downloadText } from './tools/shared/page.js';
 import { t, translateDOM, onLanguageChange } from './i18n.js';
 import { plannedBytes, speedLevels, speedLevelFor } from './tools/speedtest/core.js';
@@ -136,3 +137,5 @@ $('speed-copy').addEventListener('click',()=>{if(['complete','incomplete'].inclu
 $('speed-download').addEventListener('click',()=>{if(['complete','incomplete'].includes(state.status))downloadText(JSON.stringify(resultSummary(),null,2),'listools-speedtest.json','application/json');});
 new ResizeObserver(draw).observe($('speed-chart'));window.addEventListener('resize',draw);
 onLanguageChange(()=>{localize();render();});window.addEventListener('pagehide',()=>controller.dispose());render();
+
+registerContentCheck(()=>state.status!=='idle');

@@ -1,10 +1,27 @@
 .timestamp-page input { border: 1px solid var(--border); border-radius: 5px; background: var(--surface); min-width: 0; height: 40px; padding-inline: 10px; }
 .timestamp-page input[readonly] { font: 14px var(--mono); background: var(--slate-2); font-variant-numeric: tabular-nums; }
 .timestamp-page input[aria-invalid="true"] { border-color: var(--red-9); background: var(--error-bg); }
-.timezone-bar { flex-shrink: 0; padding: 14px 16px; flex-direction: row; align-items: center; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 14px; }
+.timezone-bar { flex-shrink: 0; padding: 14px 16px; flex-direction: row; align-items: center; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 14px; overflow:visible; }
 .timezone-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; min-width: 0; }
 .timezone-controls label { font-weight: 600; }
-#time-zone { width: 260px; height: 40px; font-family: var(--mono); direction: ltr; }
+.timezone-controls { max-width:100%; }
+.timezone-controls .choices { width:380px; max-width:100%; min-width:0; margin:0; font-size:14px; overflow:visible; }
+.timezone-controls .choices__inner { display:flex; align-items:center; min-height:40px; height:40px; padding:0 32px 0 10px!important; border:1px solid var(--border); border-radius:5px; background:var(--surface); font-size:14px; }
+.timezone-controls .choices[dir=rtl] .choices__inner { padding-inline:10px 32px!important; }
+.timezone-controls .choices__list--single { min-width:0; width:100%; padding:0; }
+.timezone-controls .choices__list--single .choices__item,.timezone-controls [data-choice][data-value] { display:flex; align-items:center; gap:10px; min-width:0; }
+.timezone-flag { width:20px; height:15px; flex:0 0 20px; object-fit:cover; border-radius:1px; line-height:15px; }
+.timezone-option-text { display:flex; flex-direction:column; min-width:0; text-align:start; }
+.timezone-controls .choices__list--single .timezone-option-text { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.timezone-option-text bdi { font:12px/1.5 var(--mono); color:var(--muted); overflow-wrap:anywhere; }
+.timezone-controls .choices__list--dropdown { border:1px solid var(--border); border-radius:5px; background:var(--surface); z-index:200; text-align:start; }
+.timezone-controls .choices__list--dropdown .choices__list { max-height:min(300px,calc(100dvh - 280px)); }
+.timezone-controls .choices__list--dropdown [data-choice][data-value] { min-height:48px; padding:8px 10px; }
+.timezone-controls .choices__input { width:100%; margin:0; padding:10px; border:0; border-block-end:1px solid var(--border); border-radius:0; background:var(--surface); color:var(--text); font:inherit; }
+.timezone-controls .choices__item--choice.is-highlighted { background:var(--blue-3); }
+.timezone-controls .choices.is-focused .choices__inner,.timezone-controls .choices.is-open .choices__inner { border-color:var(--accent); }
+.timezone-controls .choices:focus-visible { outline:2px solid var(--accent); outline-offset:2px; border-radius:5px; }
+.timezone-controls .choices[data-type*=select-one]::after { inset-inline-end:12px; inset-inline-start:auto; }
 #device-time-zone { margin-inline-start: auto; color: var(--muted); font-size: 12px; }
 #timezone-error { width: 100%; margin: 0; }
 .clock-panel { flex-shrink: 0; margin-bottom: 18px; }

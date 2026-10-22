@@ -193,7 +193,9 @@
     "format": "Sebenzisa YYYY-MM-DD HH:mm:ss, nezinombolo ezingadluli kwezintathu ngemuva kwephoyinti, noma i-ISO ene-Z / ±HH:mm.",
     "invalidOffset": "Usuku, isikhathi noma umehluko we-UTC akuvumelekile. Hlola zonke izingxenye.",
     "invalidDate": "Usuku noma isikhathi asivumelekile. Hlola zonke izingxenye.",
-    "ambiguous": "Lesi sikhathi sendawo siyeqiwa noma siphindwe ekushintsheni kwendawo yesikhathi. Shintsha isikhathi noma wengeze umehluko ocacile we-UTC njenge--04:00 noma -05:00."
+    "ambiguous": "Lesi sikhathi sendawo siyeqiwa noma siphindwe ekushintsheni kwendawo yesikhathi. Shintsha isikhathi noma wengeze umehluko ocacile we-UTC njenge--04:00 noma -05:00.",
+    "zoneSearch": "Sesha izwe, idolobha noma indawo yesikhathi…",
+    "zoneNoResults": "Azikho izindawo zesikhathi ezifanayo"
   },
   "diagnostic": {
     "valid": "Ivumelekile",
@@ -230,8 +232,8 @@
     "processingFailed": "Ukucubungula kuhlulekile"
   },
   "md5": {
-    "name": "Isifinyezo se-MD5",
-    "title": "Isifinyezo se-MD5 nokuqinisekisa",
+    "name": "Ukuhlola i-MD5",
+    "title": "Ukuhlola i-MD5",
     "description": "Umbhalo, imigqa, amafayela ne-HMAC. Konke ukucutshungulwa kwenzeka esipheqululini sakho.",
     "security": "I-MD5 iyisifinyezo esingabuyiseki samasheke esamba nokusebenzisana nezinhlelo ezindala. Ungayisebenziseli amaphasiwedi noma amasiginesha amelana nokushayisana. I-HMAC-MD5 iyisici sokusebenzisana.",
     "modes": {
@@ -339,7 +341,11 @@
     "exampleNotice": "Lesi isibonelo sendawo. Hlela okokufaka ukuze uzame okwakho okuqukethwe.",
     "regexPurpose": "Ithuluzi likanjiniyela: thola futhi ukhiphe umbhalo usebenzisa iphethini, noma shintsha umbhalo ofanayo. Zama isibonelo senombolo ye-oda kuqala.",
     "orderNumbers": "Khipha izinombolo ze-oda",
-    "regexName": "Ukuhlola kwe-Regex (abathuthukisi)"
+    "regexName": "Ukuhlola kwe-Regex (abathuthukisi)",
+    "exampleConfirm": "Ukulayisha isibonelo kuzoshintsha okufakiwe, amafayela nemiphumela yamanje. Qhubeka?",
+    "presetConfirm": "Shintsha iphethini namafulegi akho ngalokhu okulungiselelwe?",
+    "match": "Fanisa",
+    "fileReadError": "Ifayela alifundekanga: {{name}}"
   },
   "calculator": {
     "title": "Isibali",
@@ -548,7 +554,12 @@
     "description": "Yenza isithombe sibe sincane ukuze silayishwe, nqampuna izindawo ezingafuneki, shintsha ubukhulu baso, noma uguqule i-PNG, i-JPG ne-WebP. Engeza izithombe, cubungula, bese ulanda.",
     "compressTask": "Cindezela usayizi wesithombe",
     "resizeTask": "Shintsha ububanzi nobude",
-    "formatTask": "Guqula ifomethi yesithombe"
+    "formatTask": "Guqula ifomethi yesithombe",
+    "importing": "Kungeniswa izithombe, sicela ulinde…",
+    "pngQuality": "Ikhwalithi isebenza ku-JPEG/WebP kuphela. I-PNG ayiyisebenzisi; usayizi ohlosiwe unganciphisa imibala.",
+    "batchDone": "Kucutshungulwe izithombe ze-{{success}}. · Kwehlulekile: {{failed}}",
+    "growth": "+{{percent}}%",
+    "unchanged": "0%"
   },
   "text": {
     "name": "Hlanza futhi ukhiphe umbhalo",
@@ -618,7 +629,7 @@
     "energy": "Amandla",
     "power": "Amandla",
     "angle": "I-Engeli",
-    "search": "Sesha amayunithi (isiNgisi / isiShayina)",
+    "search": "Hlunga amayunithi omthombo (isiNgisi / isiShayina)",
     "value": "Inani",
     "from": "Kusuka kuyunithi",
     "to": "Ithagethi eyinhloko",
@@ -766,6 +777,15 @@
     "finished": "Ukubala wehla kuqediwe.",
     "invalidDuration": "Enter inani eliphelele lamasekhondi ukusuka ku-1 kuye ku-31,536,000.",
     "soundUnavailable": "Umsindo awutholakali. Ukubala wehla kusazophela ngokubonakalayo."
+  },
+  "support": {
+    "title": "Thengela umbhali ikhofi",
+    "description": "Uma i-LisTools ikusizile, ungathengela umbhali inkomishi yekhofi.",
+    "amount": "Khetha inani olithandayo",
+    "scan": "Skena nge-Alipay bese uzifakela inani.",
+    "voluntary": "Ukusekela kungokuzithandela ngokuphelele. Zonke izici zihlala zimahhala.",
+    "privacy": "I-Alipay icubungula inkokhelo. Isandiso asifundi noma sigcine imininingwane yokukhokha.",
+    "qrAlt": "Ikhodi ye-QR ye-Alipay yombhali yokwamukela izinkokhelo"
   },
   "cron": {
     "title": "Cron isisho",

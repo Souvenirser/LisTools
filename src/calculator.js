@@ -1,3 +1,4 @@
+import {registerContentCheck} from './tools/shared/content-state.js';
 import { initTool, $, clearStatus, taskRunner } from './tools/shared/office.js';
 import { copyText } from './tools/shared/page.js';
 import { t, translateDOM, onLanguageChange } from './i18n.js';
@@ -31,11 +32,11 @@ initTool('calculator',`
 </aside>
 </div>`);
 
-let result,ans,argumentHint,history=[];
+let result,ans,argumentHint,standardResult=false,standardRequest=false,history=[];
 const runner=taskRunner(()=>new Worker(new URL('./tools/calculator/worker.js',import.meta.url),{type:'module'}),{
   timeoutMs:2500,
   onResult(state){
-    result=state.result;ans=result.exact;
+    result=state.result;ans=result.exact;standardResult=standardRequest&&$('calc-mode-standard').getAttribute('aria-pressed')==='true';
     $('result').textContent=(result.approximate?'≈ ':'')+result.display;
     $('approximate').hidden=!result.approximate;$('copy').disabled=false;
     history.unshift(result);history=history.slice(0,30);renderHistory();renderContext();
@@ -62,10 +63,10 @@ function renderHistory(){
   }));
 }
 function invalidate(){
-  runner.invalidate();clearStatus();result=undefined;$('result').textContent='';$('copy').disabled=true;$('approximate').hidden=true;renderContext();
+  standardResult=standardRequest=false;runner.invalidate();clearStatus();result=undefined;$('result').textContent='';$('copy').disabled=true;$('approximate').hidden=true;renderContext();
 }
 function run(business=false){
-  clearStatus();result=undefined;$('copy').disabled=true;$('result').textContent='';$('approximate').hidden=true;renderContext();
+  standardResult=false;standardRequest=!business&&$('calc-mode-standard').getAttribute('aria-pressed')==='true';clearStatus();result=undefined;$('copy').disabled=true;$('result').textContent='';$('approximate').hidden=true;renderContext();
   runner.process(business?{mode:$('mode').value,first:$('first').value,second:$('second').value}:{input:$('expression').value,angleUnit:$('angle-unit').value,ans});
 }
 function clear(){ $('expression').value='';argumentHint=undefined;renderArgumentHint();invalidate();$('expression').focus(); }
@@ -73,7 +74,14 @@ function renderArgumentHint(){ $('argument-hint').hidden=!argumentHint;$('argume
 function pressKey(key){
   if(key.id==='equals'){run();return;}
   if(key.id==='clear'){clear();return;}
-  const input=$('expression');let start=input.selectionStart,end=input.selectionEnd,text=key.token;
+  const input=$('expression');
+  if(standardResult&&result&&input.selectionStart===input.selectionEnd){
+    if(['+','-','*','/','%'].includes(key.id)||key.fn||key.id==='negate')input.value=`(${result.exact})`;
+    else if(key.kind==='number')input.value='';
+    input.setSelectionRange(input.value.length,input.value.length);
+    if(key.fn||key.id==='negate')input.select();
+  }
+  let start=input.selectionStart,end=input.selectionEnd,text=key.token;
   const selected=input.value.slice(start,end);
   if(key.id==='backspace'){
     if(start===end&&start>0)start-=Array.from(input.value.slice(0,start)).at(-1).length;
@@ -114,18 +122,27 @@ for(const [id,keys] of [['keypad',standard],['scientific-keypad',scientific]])fo
   button.addEventListener('click',()=>pressKey(key));$(id).append(button);
 }
 for(const calcMode of ['standard','scientific'])$(`calc-mode-${calcMode}`).addEventListener('click',()=>{
+  standardResult=standardRequest=false;
   for(const mode of ['standard','scientific'])$(`calc-mode-${mode}`).setAttribute('aria-pressed',String(mode===calcMode));
   $('scientific-keypad').hidden=calcMode!=='scientific';$('calculator-keyboards').classList.toggle('is-scientific',calcMode==='scientific');
 });
 $('business-run').addEventListener('click',()=>run(true));$('cancel').addEventListener('click',()=>runner.cancel());
 for(const id of ['expression','first','second','mode'])$(id).addEventListener('input',()=>{argumentHint=undefined;renderArgumentHint();invalidate();});
 $('angle-unit').addEventListener('change',invalidate);
+$('expression').addEventListener('pointerdown',()=>{standardResult=standardRequest=false;});
 $('expression').addEventListener('keydown',event=>{
   if(event.isComposing)return;
   if(['Enter','='].includes(event.key)){event.preventDefault();run();}
   else if(event.key==='Escape'){event.preventDefault();clear();}
+  else if(!event.ctrlKey&&!event.metaKey&&!event.altKey&&$('calc-mode-standard').getAttribute('aria-pressed')==='true'){
+    const key=standard.find(key=>key.id===event.key||key.id==='backspace'&&event.key==='Backspace');
+    if(key){event.preventDefault();pressKey(key);}
+    else if(['ArrowLeft','ArrowRight','Home','End','Delete'].includes(event.key))standardResult=standardRequest=false;
+  }
 });
 for(const id of ['first','second'])$(id).addEventListener('keydown',event=>{if(event.key==='Enter')run(true);});
 $('copy').addEventListener('click',()=>{if(result)copyText(result.exact);});
 onLanguageChange(()=>{renderHistory();renderContext();renderArgumentHint();});
 translateDOM($('tool-root'));
+
+registerContentCheck(()=>Boolean(result||history.length||['expression','first','second'].some(id=>$(id).value&&$(id).value!==$(id).defaultValue)));

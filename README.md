@@ -25,7 +25,7 @@
 
 ### Chrome、Edge、Brave、Opera、Vivaldi
 
-1. 从 [Releases](https://github.com/Souvenirser/LisTools/releases/latest) 下载 `LisTools-1.1.0.zip`，解压到固定目录。
+1. 从 [Releases](https://github.com/Souvenirser/LisTools/releases/latest) 下载 `LisTools-1.1.1.zip`，解压到固定目录。
 2. 打开浏览器扩展管理页：Chrome 为 `chrome://extensions`，Edge 为 `edge://extensions`，Brave 为 `brave://extensions`，Opera 为 `opera://extensions`，Vivaldi 为 `vivaldi://extensions`。开启 **开发者模式**。
 3. 点击 **加载已解压的扩展程序**，选择解压后直接包含 `manifest.json` 的目录。
 4. 固定 LisTools 图标，点击后展开工具菜单，选择工具会在新标签页打开。页面内点击左上角 LisTools 可切换工具。
@@ -56,7 +56,7 @@ xcrun safari-web-extension-packager dist --app-name LisTools --bundle-identifier
 
 GitHub 的 **Source code** 压缩包是源码，需要按下文构建后加载 `dist/`。手动安装的版本需要自行下载更新并在扩展管理页重新加载。
 
-当前正式版本为 **v1.1.0**，本地构建生成 `LisTools-1.1.0.zip`。此前 1.2–1.4 编号为本地开发候选包；正式发布以 GitHub Release 标签为准。实际浏览器验证范围见 [跨浏览器验收记录](./docs/browser-compatibility-verification.md)。
+当前正式版本为 **v1.1.1**，本地构建生成 `LisTools-1.1.1.zip`。此前 1.2–1.4 编号为本地开发候选包；正式发布以 GitHub Release 标签为准。实际浏览器验证范围见 [跨浏览器验收记录](./docs/browser-compatibility-verification.md)。
 
 ## 在 IntelliJ IDEA 中开发
 
@@ -121,7 +121,7 @@ JSON 对比会分别校验两侧输入，每侧展示首个错误，避免一个
 
 ## 时间戳转换
 
-从左上角 LisTools 菜单选择「时间戳转换」进入。默认读取系统设置的设备时区，不申请地理定位；可下拉选择 IANA 时区，或点击「恢复设备时区」。读取失败时回退 UTC 并显示提示。时间和时区转换均在本地完成，资源包含在扩展内，无需联网。
+从左上角 LisTools 菜单选择「时间戳转换」进入。默认读取系统设置的设备时区，不申请地理定位；下拉菜单显示国旗、国家/地区、城市和 IANA 时区，可搜索“中国”、`India`、`New York` 或 `Asia/Shanghai`，也可点击「恢复设备时区」。UTC 使用地球图标。读取失败时回退 UTC 并显示提示。时间和时区转换均在本地完成，资源包含在扩展内，无需联网。
 
 - 顶部每秒刷新当前时间、秒时间戳和毫秒时间戳，分别支持复制屏幕显示值。
 - 「时间戳 → 时间」支持自动识别 10 位秒和 13 位毫秒；0 直接处理，其他长度（含早期和负时间戳）可手动选择单位。输入为十进制整数，不支持小数和科学计数法。
@@ -159,9 +159,9 @@ JSON 对比会分别校验两侧输入，每侧展示首个错误，避免一个
 
 输入、结果、JWT、HMAC 密钥不进入历史、日志、地址或持久存储；地址仅记录工具 ID。HTML/SVG 仅作为数据处理，不执行、不加载外部资源。没有任意脚本、AES/RSA、配方链或目录批处理。使用说明和实际验收边界见 [转换工作台验收记录](./docs/convert-verification.md)。
 
-## MD5 摘要与校验
+## MD5 校验
 
-从侧栏「MD5 摘要」进入 `convert.html#md5`，也可在转换目录搜索“MD5 加密”。复用已安装的 @noble/hashes、@scure/base、字符编码模块、PapaParse 和转换工作台，不增加生产依赖。
+从侧栏「MD5 校验」进入 `convert.html#md5`，计算文本、文件的 MD5 校验值，或与已有校验值比对。原有“MD5 摘要”“MD5 加密”搜索别名继续可用。复用已安装的 @noble/hashes、@scure/base、字符编码模块、PapaParse 和转换工作台，不增加生产依赖。
 
 - **文本**：默认 UTF-8，可选现有字符集、Hex 或 Base64 字节输入。小文本延迟 350 ms 自动计算；空串需手动点击计算。
 - **逐行批量**：最多 10 MiB / 10,000 行，保留行号、空格、重复行和中间空行；末尾换行不增加记录。可选择跳过空行，提供当前项复制、CSV / JSON 导出，默认不导出原文。
@@ -225,7 +225,7 @@ npm run build
 构建输出：
 
 - `dist/`：共用的 Manifest V3 扩展资源，按上文各浏览器方式加载或转换。
-- `releases/LisTools-1.1.0.zip`：根目录包含 manifest.json 的完整资源包。
+- `releases/LisTools-1.1.1.zip`：根目录包含 manifest.json 的完整资源包。
 
 Chrome / Edge 等 Chromium 浏览器开启开发者模式，点击 **加载已解压的扩展程序**，选择本项目的 `dist`；Firefox 按上文临时加载，Safari 使用官方转换工具。固定 LisTools 图标，点击图标打开工具菜单；JSON 工作台仍使用 `index.html`。无需为 Edge 另写或另打包一套工具代码。
 
@@ -240,6 +240,7 @@ Chrome / Edge 等 Chromium 浏览器开启开发者模式，点击 **加载已�
 ## 项目结构
 
 ```text
+pages/                       HTML 工具页与弹窗入口
 src/main.js                  工作台及浏览器交互
 src/tools/json/core.js       无损解析与序列化
 src/tools/json/controller.js 可取消的任务生命周期
@@ -259,9 +260,11 @@ test/                       核心与任务切换回归
 docs/                       设计、实施与验收记录
 ```
 
+Vite 以 `pages/` 为页面根目录，`src/` 和 `public/` 仍在项目根目录。开发访问地址和扩展入口保持为 `/index.html`、`/cron.html`、`/popup.html` 等，构建输出仍在 `dist/`，无需在地址中添加 `pages/`。
+
 后续工具可放到 `src/tools/`，复用工作台导航。开源来源与许可证见 [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)。
 
-本次公开版本的验证范围见 [1.1.0 发布验证记录](./docs/release-1.1.0.md)。
+本次公开版本的修复及验证范围见 [1.1.1 发布记录](./docs/release-1.1.1.md)；[1.1.0记录](./docs/release-1.1.0.md)继续保留。
 
 ## 网速、Cron、密码与正则
 
@@ -281,7 +284,7 @@ docs/                       设计、实施与验收记录
 
 ## 工具菜单
 
-浏览器工具栏图标打开轻量菜单，选择工具后在新标签页打开。页面左上角 `Li LisTools ▾` 打开同一目录，普通点击在当前标签页切换；Ctrl/Cmd + 点击或鼠标中键在新标签页打开。点击当前工具只关闭菜单。全站工具仍使用左上角菜单；编码与转换页面另设左侧转换工具列表。
+浏览器工具栏图标打开轻量菜单，选择工具后在新标签页打开。页面左上角 `Li LisTools ▾` 打开同一目录，当前工具有用户内容时，其他工具在新标签页打开；空白页面在当前标签页切换。同一转换工作台的子工具保留当前输入。Ctrl/Cmd + 点击或鼠标中键仍在新标签页打开。点击当前工具只关闭菜单。全站工具仍使用左上角菜单；编码与转换页面另设左侧转换工具列表。
 
 菜单支持中文、英文、工具别名和已翻译的页面名称搜索。编码与转换放在开发工具分组中，进入页面后通过左侧列表直接选择，也可搜索直达 Base64、Hex、JWT 等子工具，MD5 搜索结果合并为一个入口。↑ / ↓ 移动、Enter 选择、Esc 关闭，也可使用 Tab / Shift+Tab；中文输入法组合期间不拦截候选操作。关闭菜单清空搜索条件，保留当前工作区的输入、结果与运行任务。
 

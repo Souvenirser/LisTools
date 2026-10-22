@@ -25,11 +25,11 @@ test('dates handles leap days, constrained month shifts and custom working dates
 });
 
 test('units searches Chinese aliases, swaps primary targets and converts temperatures',async({page})=>{
-  await page.goto('/units.html');await page.locator('#unit-all').uncheck();await page.locator('#unit-search').fill('千米');await page.locator('#unit-from').selectOption('km');await page.locator('#unit-to').selectOption('m');await page.locator('#unit-run').click();await expect(page.locator('#unit-results output')).toHaveText('1000');
-  await page.locator('#unit-swap').click();await expect(page.locator('#unit-from')).toHaveValue('m');await expect(page.locator('#unit-to')).toHaveValue('km');await expect(page.locator('#unit-results output')).toHaveText('0.001');
-  await page.locator('#unit-category').selectOption('temperature');await page.locator('#unit-from').selectOption('degF');await page.locator('#unit-to').selectOption('degC');await page.locator('#unit-value').fill('32');await page.locator('#unit-run').click();await expect(page.locator('#unit-results output')).toHaveText('0');
-  await page.locator('#unit-all').check();await page.locator('#unit-run').click();await expect(page.locator('#unit-results output')).toHaveCount(3);
-  await selectLanguage(page,'ar');await expect(page.locator('#unit-value')).toHaveValue('32');await expect(page.locator('#unit-results output')).toHaveCount(3);
+  await page.goto('/units.html');await page.locator('#unit-all').uncheck();await page.locator('#unit-search').fill('千米');await page.locator('#unit-from').selectOption('km');await page.locator('#unit-to').selectOption('m');await page.locator('#unit-run').click();await expect(page.locator('#unit-primary')).toContainText('1000');
+  await page.locator('#unit-swap').click();await expect(page.locator('#unit-from')).toHaveValue('m');await expect(page.locator('#unit-to')).toHaveValue('km');await expect(page.locator('#unit-primary')).toContainText('0.001');
+  await page.locator('#unit-category').selectOption('temperature');await page.locator('#unit-from').selectOption('degF');await page.locator('#unit-to').selectOption('degC');await page.locator('#unit-value').fill('32');await page.locator('#unit-run').click();await expect(page.locator('#unit-primary')).toContainText('= 0');
+  await page.locator('#unit-all').check();await page.locator('#unit-run').click();await expect(page.locator('#unit-results output')).toHaveCount(2);
+  await selectLanguage(page,'ar');await expect(page.locator('#unit-value')).toHaveValue('32');await expect(page.locator('#unit-results output')).toHaveCount(2);
 });
 
 test('money rounds without precision loss and exposes both Chinese scripts',async({page})=>{

@@ -1,0 +1,41 @@
+{
+  "version": "1.1.1",
+  "date": "2026-10-22",
+  "sha256": "988c434203d83239490a18e8cd73a4100747326fd494457537a7ef540db7dfe8",
+  "bytes": 3409167,
+  "archiveFiles": 480,
+  "htmlPages": 19,
+  "supportExcluded": true,
+  "browserVersions": {
+    "chrome": "155.0.8059.85",
+    "extensionChromeForTesting": "149.0.7827.55",
+    "webkit": "27.2"
+  },
+  "tests": {
+    "unit": {
+      "passed": 284,
+      "failed": 0
+    },
+    "chrome155": {
+      "passed": 168,
+      "failed": 0
+    },
+    "webkit27_2": {
+      "passed": 166,
+      "failed": 0,
+      "skipped": 2
+    },
+    "visualMatrix": {
+      "passed": 200,
+      "failed": 0
+    }
+  },
+  "compatibilityGaps": [
+    "Chrome120 exitsSIGTRAP before loading extension",
+    "Firefox157 exits Could not find profile folder",
+    "Real mobile soft keyboard and native screen reader not tested",
+    "WebKit BFCache-specific two tests skipped; executed with actual Chromium BFCache instead",
+    "50locale resources complete; native-speaker wording audit not claimed"
+  ],
+  "sourceMatchesTestedCandidate": true
+}

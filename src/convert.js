@@ -1,3 +1,4 @@
+import {registerContentCheck} from './tools/shared/content-state.js';
 import { version } from '../package.json';
 import { EditorState, Compartment, Transaction } from '@codemirror/state';
 import { EditorView, lineNumbers, highlightActiveLine, keymap } from '@codemirror/view';
@@ -115,7 +116,13 @@ function chooseTool(next) {
   history.replaceState(null,'',`#${tool.id}`);
   $('tool-title').textContent=label(tool.name);$('tool-hint').textContent=label(tool.hint);
   renderOptions();renderCatalog(true);
-  if(tool.id==='md5') {file=undefined;filePreview='';$('input-mode').value='text';md5.activate();} else {lastState={status:'idle'};document.querySelector('.page-heading h1').textContent=t('common.convert');document.title=`${t('common.convert')} · LisTools`;translate();inputChanged();}
+  if(tool.id==='md5') {md5.activate({inputFile:$('input-mode').value==='file'?file:undefined});} else {
+    const binary=$('input-mode').value==='file';
+    source.dispatch({effects:editable.reconfigure([EditorState.readOnly.of(binary),EditorView.editable.of(!binary)])});
+    if(binary)setDocument(source,filePreview);
+    lastState={status:'idle'};document.querySelector('.page-heading h1').textContent=t('common.convert');document.title=`${t('common.convert')} · LisTools`;translate();inputChanged();
+    if(binary&&file&&!filePreview)void importFile(file);
+  }
 }
 async function importFile(next) {
   if(next.size>limits.file) {notify(tr('文件超过 50 MiB，未导入','File exceeds 50 MiB; not imported'));return;}
@@ -183,3 +190,5 @@ function translate() {
 }
 $('app-version').textContent=`v${version}`;
 onLanguageChange(translate);translate();chooseTool(tool);
+
+registerContentCheck(()=>Boolean(file||source.state.doc.length||result||md5.hasContent()));

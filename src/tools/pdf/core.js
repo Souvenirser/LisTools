@@ -2,6 +2,7 @@ import { PDFDocument, degrees } from 'pdf-lib';
 import { zipSync } from 'fflate';
 import { imageHeader, mediaError } from '../images/core.js';
 const fail=code=>{throw mediaError(`pdf.${code}`);};
+async function fromFile(file,task){try{return await task();}catch(error){error.params={...error.params,name:file.name};throw error;}}
 export function parsePages(text,count) {
   if(!String(text).trim())fail('rangeError');const pages=[];
   for(const part of String(text).split(',')) {
@@ -33,15 +34,15 @@ export async function processPdf({files,mode,pages='',rotation=90,pageSize='a4',
   if(files.length>100||files.reduce((n,f)=>n+f.bytes.byteLength,0)>100*1024*1024)fail('limit');
   const out=await PDFDocument.create();let count=0,outputOrder;
   if(mode==='images') {
-    let totalPixels=0;for(const file of files){let header;try{header=imageHeader(new Uint8Array(file.bytes));}catch(error){fail(error.code==='images.dimensions'?'limit':'imageDecode');}totalPixels+=header.width*header.height;if(totalPixels>120_000_000)fail('limit');}
+    let totalPixels=0;for(const file of files){const header=await fromFile(file,()=>{try{return imageHeader(new Uint8Array(file.bytes));}catch(error){fail(error.code==='images.dimensions'?'limit':'imageDecode');}});totalPixels+=header.width*header.height;if(totalPixels>120_000_000)fail('limit');}
     for(let i=0;i<files.length;i++) {
-      const image=await embedImage(out,files[i]);let w=image.width,h=image.height;
+      const image=await fromFile(files[i],()=>embedImage(out,files[i]));let w=image.width,h=image.height;
       if(pageSize==='a4'){[w,h]=orientation==='landscape'?[841.89,595.28]:[595.28,841.89];}
       const page=out.addPage([w,h]),scale=Math.min(w/image.width,h/image.height);page.drawImage(image,{x:(w-image.width*scale)/2,y:(h-image.height*scale)/2,width:image.width*scale,height:image.height*scale});progress({done:i+1,total:files.length});
     }
     count=files.length;outputOrder=files.map(f=>f.name);
   } else {
-    const docs=[];for(let i=0;i<files.length;i++){docs.push(await load(files[i].bytes));progress({done:i+1,total:files.length});}
+    const docs=[];for(let i=0;i<files.length;i++){docs.push(await fromFile(files[i],()=>load(files[i].bytes)));progress({done:i+1,total:files.length});}
     count=docs.reduce((n,d)=>n+d.getPageCount(),0);if(count>1000)fail('limit');
     if(mode==='inspect')return {files:docs.map((d,i)=>({name:files[i].name,pageCount:d.getPageCount()})),pageCount:count};
     if(mode==='merge') {outputOrder=[];for(let i=0;i<docs.length;i++){const pdf=docs[i];for(const page of await out.copyPages(pdf,pdf.getPageIndices()))out.addPage(page);outputOrder.push(...pdf.getPageIndices().map(p=>`${files[i].name}: ${p+1}`));}}

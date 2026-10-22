@@ -193,7 +193,9 @@
     "format": "Brug YYYY-MM-DD HH:mm:ss med op til tre decimaler eller ISO-format med Z / ±HH:mm.",
     "invalidOffset": "Ugyldig dato, tid eller UTC-forskydning. Kontrollér alle dele.",
     "invalidDate": "Ugyldig dato eller tid. Kontrollér alle dele.",
-    "ambiguous": "Denne lokale tid springes over eller gentages ved et tidszoneskift. Ret tiden, eller tilføj en udtrykkelig UTC-forskydning som -04:00 eller -05:00."
+    "ambiguous": "Denne lokale tid springes over eller gentages ved et tidszoneskift. Ret tiden, eller tilføj en udtrykkelig UTC-forskydning som -04:00 eller -05:00.",
+    "zoneSearch": "Søg efter land, by eller tidszone…",
+    "zoneNoResults": "Ingen matchende tidszoner"
   },
   "diagnostic": {
     "valid": "Gyldig",
@@ -231,7 +233,7 @@
   },
   "md5": {
     "name": "MD5-kontrolsum",
-    "title": "MD5-kontrolsum og verificering",
+    "title": "MD5-kontrolsum",
     "description": "Tekst, linjer, filer og HMAC. Al behandling sker i din browser.",
     "security": "MD5 er en irreversibel kontrolsum til integritetskontrol og kompatibilitet med ældre systemer. Brug den ikke til adgangskoder eller kollisionssikre signaturer. HMAC-MD5 er en kompatibilitetsfunktion.",
     "modes": {
@@ -339,7 +341,11 @@
     "exampleNotice": "Dette er et lokalt eksempel. Rediger inputtet for at prøve dit eget indhold.",
     "regexPurpose": "Udviklerværktøj: Find og udtræk tekst ved hjælp af et mønster, eller erstat matchende tekst. Prøv ordrenummer eksemplet først.",
     "orderNumbers": "Udtræk ordrenumre",
-    "regexName": "Regex-test (udviklere)"
+    "regexName": "Regex-test (udviklere)",
+    "exampleConfirm": "Eksemplet erstatter aktuelle input, filer og resultater. Vil du fortsætte?",
+    "presetConfirm": "Erstat brugerdefineret mønster og flag med denne forudindstilling?",
+    "match": "Match",
+    "fileReadError": "Kunne ikke læse filen: {{name}}"
   },
   "calculator": {
     "title": "Lommeregner",
@@ -548,7 +554,12 @@
     "description": "Gør et billede mindre til upload, beskær uønskede områder, skift dets dimensioner, eller konverter PNG, JPG og WebP. Tilføj billeder, bearbejd, og download derefter.",
     "compressTask": "Komprimer billedstørrelse",
     "resizeTask": "Skift bredde og højde",
-    "formatTask": "Konverter billedformat"
+    "formatTask": "Konverter billedformat",
+    "importing": "Importerer billeder, vent venligst…",
+    "pngQuality": "Kvalitet gælder kun JPEG/WebP. PNG ignorerer den; en målstørrelse kan reducere farver.",
+    "batchDone": "Behandlede {{success}}-billeder. · Mislykkedes: {{failed}}",
+    "growth": "+{{percent}}%",
+    "unchanged": "0%"
   },
   "text": {
     "name": "Rens og udtræk tekst",
@@ -618,7 +629,7 @@
     "energy": "Energi",
     "power": "Strøm",
     "angle": "Vinkel",
-    "search": "Søgenheder (engelsk / kinesisk)",
+    "search": "Filtrer kildeenheder (engelsk / kinesisk)",
     "value": "Værdi",
     "from": "Fra enhed",
     "to": "Primært mål",
@@ -766,6 +777,15 @@
     "finished": "Nedtælling afsluttet.",
     "invalidDuration": "Enter et helt antal sekunder fra 1 til 31.536.000.",
     "soundUnavailable": "Lyden er ikke tilgængelig. Nedtællingen vil stadig afslutte visuelt."
+  },
+  "support": {
+    "title": "Giv forfatteren en kop kaffe",
+    "description": "Hvis LisTools har hjulpet dig, kan du give forfatteren en kop kaffe.",
+    "amount": "Vælg selv beløbet",
+    "scan": "Scan med Alipay, og indtast selv beløbet.",
+    "voluntary": "Støtte er helt frivillig. Alle funktioner forbliver gratis.",
+    "privacy": "Alipay behandler betalingen. Udvidelsen læser eller gemmer ikke betalingsoplysninger.",
+    "qrAlt": "Forfatterens Alipay-QR-kode til at modtage betalinger"
   },
   "speedtestRating": {
     "heading": "Hastighedsvurdering",

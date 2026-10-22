@@ -193,7 +193,9 @@
     "format": "Gebruik YYYY-MM-DD HH:mm:ss met maximaal drie decimalen, of ISO-formaat met Z / ±HH:mm.",
     "invalidOffset": "Ongeldige datum, tijd of UTC-tijdsverschil. Controleer alle onderdelen.",
     "invalidDate": "Ongeldige datum of tijd. Controleer alle onderdelen.",
-    "ambiguous": "Deze lokale tijd wordt overgeslagen of herhaald door een tijdzoneovergang. Wijzig de tijd of voeg een expliciet UTC-tijdsverschil toe, zoals -04:00 of -05:00."
+    "ambiguous": "Deze lokale tijd wordt overgeslagen of herhaald door een tijdzoneovergang. Wijzig de tijd of voeg een expliciet UTC-tijdsverschil toe, zoals -04:00 of -05:00.",
+    "zoneSearch": "Zoek land, stad of tijdzone…",
+    "zoneNoResults": "Geen overeenkomende tijdzones"
   },
   "diagnostic": {
     "valid": "Geldig",
@@ -230,8 +232,8 @@
     "processingFailed": "Verwerking mislukt"
   },
   "md5": {
-    "name": "MD5-controlesom",
-    "title": "MD5-controlesom en verificatie",
+    "name": "MD5-controle",
+    "title": "MD5-controle",
     "description": "Tekst, regels, bestanden en HMAC. Alles wordt in uw browser verwerkt.",
     "security": "MD5 is een onomkeerbare controlesom voor integriteitscontrole en compatibiliteit met oude systemen. Gebruik het niet voor wachtwoorden of botsingsbestendige handtekeningen. HMAC-MD5 is een compatibiliteitsfunctie.",
     "modes": {
@@ -339,7 +341,11 @@
     "exampleNotice": "Dit is een lokaal voorbeeld. Bewerk de invoer om uw eigen inhoud te proberen.",
     "regexPurpose": "Ontwikkelaarstool: zoek en extraheer tekst met behulp van een patroon, of vervang overeenkomende tekst. Probeer eerst het voorbeeld met het bestelnummer.",
     "orderNumbers": "Bestelnummers extraheren",
-    "regexName": "Regex testen (ontwikkelaars)"
+    "regexName": "Regex testen (ontwikkelaars)",
+    "exampleConfirm": "Het voorbeeld vervangt de huidige invoer, bestanden en resultaten. Doorgaan?",
+    "presetConfirm": "Aangepast patroon en vlaggen vervangen door deze voorinstelling?",
+    "match": "Overeenkomst",
+    "fileReadError": "Kan bestand niet lezen: {{name}}"
   },
   "calculator": {
     "title": "Rekenmachine",
@@ -548,7 +554,12 @@
     "description": "Maak een afbeelding kleiner om te uploaden, snijd ongewenste gebieden bij, wijzig de afmetingen ervan of converteer PNG, JPG en WebP. Voeg afbeeldingen toe, verwerk en download vervolgens.",
     "compressTask": "Afbeeldingsgrootte comprimeren",
     "resizeTask": "Wijzig de breedte en hoogte",
-    "formatTask": "Afbeeldingsformaat converteren"
+    "formatTask": "Afbeeldingsformaat converteren",
+    "importing": "Afbeeldingen importeren, even geduld…",
+    "pngQuality": "Kwaliteit geldt alleen voor JPEG/WebP. PNG negeert dit; een doelgrootte kan kleuren verminderen.",
+    "batchDone": "{{success}}-afbeeldingen verwerkt. · Mislukt: {{failed}}",
+    "growth": "+{{percent}}%",
+    "unchanged": "0%"
   },
   "text": {
     "name": "Tekst opschonen en extraheren",
@@ -618,7 +629,7 @@
     "energy": "Energie",
     "power": "Vermogen",
     "angle": "Hoek",
-    "search": "Zoekeenheden (Engels / Chinees)",
+    "search": "Broneenheden filteren (Engels / Chinees)",
     "value": "Waarde",
     "from": "Van toestel",
     "to": "Primaire doelgroep",
@@ -766,6 +777,15 @@
     "finished": "Aftellen voltooid.",
     "invalidDuration": "Enter een geheel aantal seconden van 1 tot 31.536.000.",
     "soundUnavailable": "Geluid is niet beschikbaar. Het aftellen eindigt nog steeds visueel."
+  },
+  "support": {
+    "title": "Trakteer de maker op koffie",
+    "description": "Heeft LisTools je geholpen? Dan kun je de maker op een kop koffie trakteren.",
+    "amount": "Kies zelf het bedrag",
+    "scan": "Scan met Alipay en voer zelf het bedrag in.",
+    "voluntary": "Steunen is volledig vrijwillig. Alle functies blijven gratis.",
+    "privacy": "Alipay verwerkt de betaling. De extensie leest of bewaart geen betaalgegevens.",
+    "qrAlt": "Alipay-QR-code van de maker om betalingen te ontvangen"
   },
   "speedtestRating": {
     "heading": "Snelheidsbeoordeling",

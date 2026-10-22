@@ -1,6 +1,8 @@
+import {registerContentCheck} from './tools/shared/content-state.js';
 import { version } from '../package.json';
 import { timestampToTime, timeToTimestamp, getDeviceTimeZone } from './tools/timestamp/core.js';
-import { t, onLanguageChange, errorText, createNotifier } from './i18n.js';
+import { t, language, onLanguageChange, errorText, createNotifier } from './i18n.js';
+import { mountTimeZoneSelector } from './timezone-selector.js';
 import './style.css';
 import './timestamp-style.css';
 
@@ -10,18 +12,14 @@ const notify = createNotifier();
 let clockTimer, device, clockResult;
 const results = {};
 const timeZones = new Set(['UTC', ...Intl.supportedValuesOf('timeZone')]);
+const zonePicker = mountTimeZoneSelector($('time-zone'),{t,language});
 function deviceLabel() {
   $('device-time-zone').textContent = device.fallback ? t('timestamp.fallback') : t('timestamp.device', { zone:device.timeZone });
 }
 function useDeviceTimeZone() {
   device = getDeviceTimeZone();
   timeZones.add(device.timeZone);
-  $('time-zone').replaceChildren(...[...timeZones].sort().map(zone => {
-    const option = document.createElement('option');
-    option.value = zone; option.textContent = zone;
-    return option;
-  }));
-  $('time-zone').value = device.timeZone;
+  zonePicker.setZones(timeZones,device.timeZone);
   deviceLabel();
 }
 function fillResults(panel, result) {
@@ -89,6 +87,7 @@ document.addEventListener('click', async event => {
   }
 });
 onLanguageChange(() => {
+  zonePicker.refresh();
   deviceLabel();
   for (const prefix of ['timestamp','datetime']) labels(prefix, results[prefix]);
   if (clockResult?.status === 'error') $('timezone-error').textContent = errorText(clockResult);
@@ -98,3 +97,5 @@ function startClock() { clearInterval(clockTimer); renderClock(); clockTimer = s
 startClock();
 window.addEventListener('pageshow', startClock);
 window.addEventListener('pagehide', () => clearInterval(clockTimer));
+
+registerContentCheck(()=>Boolean($('timestamp-source').value||$('datetime-source').value));

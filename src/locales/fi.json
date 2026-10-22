@@ -193,7 +193,9 @@
     "format": "Käytä muotoa YYYY-MM-DD HH:mm:ss, enintään kolme desimaalia, tai ISO-muotoa, jossa on Z / ±HH:mm.",
     "invalidOffset": "Virheellinen päivämäärä, aika tai UTC-poikkeama. Tarkista kaikki osat.",
     "invalidDate": "Virheellinen päivämäärä tai aika. Tarkista kaikki osat.",
-    "ambiguous": "Tämä paikallinen aika ohitetaan tai toistuu aikavyöhykkeen siirtymässä. Muuta aikaa tai lisää tarkka UTC-poikkeama, kuten -04:00 tai -05:00."
+    "ambiguous": "Tämä paikallinen aika ohitetaan tai toistuu aikavyöhykkeen siirtymässä. Muuta aikaa tai lisää tarkka UTC-poikkeama, kuten -04:00 tai -05:00.",
+    "zoneSearch": "Hae maata, kaupunkia tai aikavyöhykettä…",
+    "zoneNoResults": "Ei vastaavia aikavyöhykkeitä"
   },
   "diagnostic": {
     "valid": "Kelvollinen",
@@ -230,8 +232,8 @@
     "processingFailed": "Käsittely epäonnistui"
   },
   "md5": {
-    "name": "MD5-tiiviste",
-    "title": "MD5-tiiviste ja tarkistus",
+    "name": "MD5-tarkistussumma",
+    "title": "MD5-tarkistussumma",
     "description": "Teksti, rivit, tiedostot ja HMAC. Kaikki käsittely tapahtuu selaimessasi.",
     "security": "MD5 on yksisuuntainen tiiviste tarkistussummia ja vanhojen järjestelmien yhteensopivuutta varten. Älä käytä sitä salasanoihin tai törmäyksenkestäviin allekirjoituksiin. HMAC-MD5 on yhteensopivuustoiminto.",
     "modes": {
@@ -339,7 +341,11 @@
     "exampleNotice": "Tämä on paikallinen esimerkki. Muokkaa syötettä kokeillaksesi omaa sisältöäsi.",
     "regexPurpose": "Kehittäjätyökalu: etsi ja poimi tekstiä kuvion avulla tai korvaa vastaava teksti. Kokeile ensin tilausnumeroesimerkkiä.",
     "orderNumbers": "Pura tilausnumerot",
-    "regexName": "Regex-testaus (kehittäjät)"
+    "regexName": "Regex-testaus (kehittäjät)",
+    "exampleConfirm": "Esimerkki korvaa nykyisen syötteen, tiedostot ja tulokset. Jatketaanko?",
+    "presetConfirm": "Korvataanko oma kuvio ja liput tällä esiasetuksella?",
+    "match": "Vastaavuus",
+    "fileReadError": "Tiedoston lukeminen epäonnistui: {{name}}"
   },
   "calculator": {
     "title": "Laskin",
@@ -548,7 +554,12 @@
     "description": "Pienennä kuvaa latausta varten, rajaa ei-toivottuja alueita, muuta sen mittoja tai muunna PNG, JPG ja WebP. Lisää kuvia, käsittele ja lataa.",
     "compressTask": "Pakkaa kuvan koko",
     "resizeTask": "Muuta leveyttä ja korkeutta",
-    "formatTask": "Muunna kuvamuoto"
+    "formatTask": "Muunna kuvamuoto",
+    "importing": "Tuodaan kuvia, odota…",
+    "pngQuality": "Laatu koskee vain JPEG/WebP-kuvia. PNG ohittaa sen; tavoitekoko voi vähentää värejä.",
+    "batchDone": "Käsitellyt {{success}}-kuvat. · Epäonnistui: {{failed}}",
+    "growth": "+{{percent}}%",
+    "unchanged": "0%"
   },
   "text": {
     "name": "Puhdista ja pura teksti",
@@ -618,7 +629,7 @@
     "energy": "Energiaa",
     "power": "Virtaa",
     "angle": "Kulma",
-    "search": "Hakuyksiköt (englanti / kiina)",
+    "search": "Suodata lähtöyksiköitä (englanti / kiina)",
     "value": "Arvo",
     "from": "Yksiköstä",
     "to": "Ensisijainen kohde",
@@ -766,6 +777,15 @@
     "finished": "Lähtölaskenta valmis.",
     "invalidDuration": "Enter kokonaismäärä sekunteja 1 - 31 536 000.",
     "soundUnavailable": "Ääni ei ole saatavilla. Lähtölaskenta päättyy silti visuaalisesti."
+  },
+  "support": {
+    "title": "Tarjoa tekijälle kahvi",
+    "description": "Jos LisTools on auttanut sinua, voit tarjota tekijälle kahvin.",
+    "amount": "Valitse summa itse",
+    "scan": "Skannaa Alipaylla ja kirjoita summa itse.",
+    "voluntary": "Tukeminen on vapaaehtoista. Kaikki toiminnot pysyvät maksuttomina.",
+    "privacy": "Alipay käsittelee maksun. Laajennus ei lue eikä tallenna maksutietoja.",
+    "qrAlt": "Tekijän Alipay-QR-koodi maksujen vastaanottamiseen"
   },
   "speedtestRating": {
     "heading": "Nopeusarvio",

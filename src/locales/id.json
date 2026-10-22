@@ -193,7 +193,9 @@
     "format": "Gunakan YYYY-MM-DD HH:mm:ss dengan maksimal tiga digit pecahan, atau format ISO dengan Z / ±HH:mm.",
     "invalidOffset": "Tanggal, waktu, atau offset UTC tidak valid. Periksa semua komponennya.",
     "invalidDate": "Tanggal atau waktu tidak valid. Periksa semua komponennya.",
-    "ambiguous": "Waktu lokal ini terlewat atau berulang akibat transisi zona waktu. Ubah waktu atau tambahkan offset UTC eksplisit seperti -04:00 atau -05:00."
+    "ambiguous": "Waktu lokal ini terlewat atau berulang akibat transisi zona waktu. Ubah waktu atau tambahkan offset UTC eksplisit seperti -04:00 atau -05:00.",
+    "zoneSearch": "Cari negara, kota, atau zona waktu…",
+    "zoneNoResults": "Tidak ada zona waktu yang cocok"
   },
   "diagnostic": {
     "valid": "Valid",
@@ -230,8 +232,8 @@
     "processingFailed": "Pemrosesan gagal"
   },
   "md5": {
-    "name": "Ringkasan MD5",
-    "title": "Ringkasan dan verifikasi MD5",
+    "name": "Verifikasi MD5",
+    "title": "Verifikasi MD5",
     "description": "Teks, baris, berkas, dan HMAC. Semua pemrosesan dilakukan di peramban Anda.",
     "security": "MD5 adalah ringkasan satu arah untuk checksum dan kompatibilitas sistem lama. Jangan gunakan untuk kata sandi atau tanda tangan yang tahan benturan. HMAC-MD5 merupakan fitur kompatibilitas.",
     "modes": {
@@ -339,7 +341,11 @@
     "exampleNotice": "Ini adalah contoh lokal. Edit masukan untuk mencoba konten Anda sendiri.",
     "regexPurpose": "Alat pengembang: temukan dan ekstrak teks menggunakan pola, atau ganti teks yang cocok. Coba contoh nomor pesanan terlebih dahulu.",
     "orderNumbers": "Ekstrak nomor pesanan",
-    "regexName": "Pengujian regex (pengembang)"
+    "regexName": "Pengujian regex (pengembang)",
+    "exampleConfirm": "Memuat contoh akan mengganti masukan, file, dan hasil saat ini. Lanjutkan?",
+    "presetConfirm": "Ganti pola dan flag khusus dengan preset ini?",
+    "match": "Cocokkan",
+    "fileReadError": "Tidak dapat membaca berkas: {{name}}"
   },
   "calculator": {
     "title": "Kalkulator",
@@ -548,7 +554,12 @@
     "description": "Memperkecil gambar untuk diunggah, memotong area yang tidak diinginkan, mengubah dimensinya, atau mengonversi PNG, JPG, dan WebP. Tambahkan gambar, proses, lalu unduh.",
     "compressTask": "Kompres ukuran gambar",
     "resizeTask": "Ubah lebar dan tinggi",
-    "formatTask": "Konversi format gambar"
+    "formatTask": "Konversi format gambar",
+    "importing": "Mengimpor gambar, harap tunggu…",
+    "pngQuality": "Kualitas hanya berlaku untuk JPEG/WebP. PNG mengabaikannya; ukuran target dapat mengurangi warna.",
+    "batchDone": "Memproses gambar {{success}}. · Gagal: {{failed}}",
+    "growth": "+{{percent}}%",
+    "unchanged": "0%"
   },
   "text": {
     "name": "Bersihkan dan ekstrak teks",
@@ -618,7 +629,7 @@
     "energy": "Energi",
     "power": "Kekuatan",
     "angle": "Sudut",
-    "search": "Unit pencarian (Bahasa Inggris / Mandarin)",
+    "search": "Filter satuan asal (Inggris / Mandarin)",
     "value": "Nilai",
     "from": "Dari unit",
     "to": "Target utama",
@@ -766,6 +777,15 @@
     "finished": "Hitung mundur selesai.",
     "invalidDuration": "Enter bilangan bulat dari 1 hingga 31.536.000.",
     "soundUnavailable": "Suara tidak tersedia. Hitung mundur akan tetap selesai secara visual."
+  },
+  "support": {
+    "title": "Traktir penulis kopi",
+    "description": "Jika LisTools membantu Anda, silakan traktir penulis secangkir kopi.",
+    "amount": "Nominal sesuka Anda",
+    "scan": "Pindai dengan Alipay dan masukkan nominal sendiri.",
+    "voluntary": "Dukungan sepenuhnya sukarela. Semua fitur tetap gratis.",
+    "privacy": "Alipay memproses pembayaran. Ekstensi tidak membaca atau menyimpan informasi pembayaran.",
+    "qrAlt": "Kode QR Alipay penulis untuk menerima pembayaran"
   },
   "cron": {
     "title": "ekspresi Cron",
