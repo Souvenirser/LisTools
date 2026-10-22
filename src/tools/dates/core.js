@@ -16,13 +16,20 @@ export function shiftDate(start,amount,unit) {
 }
 export function parseDateList(value) {return String(value).split(/[\s,;]+/).filter(Boolean).map(value=>date(value).toString());}
 export function businessDays(start,end,{off=[],work=[],inclusive=false}={}) {
-  let a=date(start),b=date(end),sign=1;
-  if(Temporal.PlainDate.compare(a,b)>0){[a,b]=[b,a];sign=-1;}
-  const count=a.until(b,{largestUnit:'days'}).days+(inclusive?1:0);
+  const a=date(start),b=date(end),sign=Temporal.PlainDate.compare(a,b)>0?-1:1;
+  const count=Math.abs(a.until(b,{largestUnit:'days'}).days)+(inclusive?1:0);
   if(count>366000) fail('rangeTooLarge');
   const holidays=new Set(off.map(value=>date(value).toString())),overrides=new Set(work.map(value=>date(value).toString()));
-  let total=0;
-  for(let i=0;i<count;i++,a=a.add({days:1})) {const key=a.toString();if(overrides.has(key)||(!holidays.has(key)&&a.dayOfWeek<=5))total++;}
+  const first=sign>0?a:b.add({days:inclusive?0:1});
+  const last=first.add({days:count});
+  let total=Math.floor(count/7)*5;
+  for(let i=0;i<count%7;i++)if(first.add({days:i}).dayOfWeek<=5)total++;
+  for(const key of new Set([...holidays,...overrides])){
+    const day=date(key);
+    if(Temporal.PlainDate.compare(day,first)<0||Temporal.PlainDate.compare(day,last)>=0)continue;
+    const normal=day.dayOfWeek<=5,actual=overrides.has(key)||(!holidays.has(key)&&normal);
+    total+=Number(actual)-Number(normal);
+  }
   return sign*total;
 }
 export function dateMilestone(origin,reference) {
