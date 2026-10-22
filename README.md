@@ -25,7 +25,7 @@
 
 ### Chrome、Edge、Brave、Opera、Vivaldi
 
-1. 从 [Releases](https://github.com/Souvenirser/LisTools/releases/latest) 下载 `LisTools-1.1.0.zip`，解压到固定目录。
+1. 从 [Releases](https://github.com/Souvenirser/LisTools/releases/latest) 下载 `LisTools-1.1.1.zip`，解压到固定目录。
 2. 打开浏览器扩展管理页：Chrome 为 `chrome://extensions`，Edge 为 `edge://extensions`，Brave 为 `brave://extensions`，Opera 为 `opera://extensions`，Vivaldi 为 `vivaldi://extensions`。开启 **开发者模式**。
 3. 点击 **加载已解压的扩展程序**，选择解压后直接包含 `manifest.json` 的目录。
 4. 固定 LisTools 图标，点击后展开工具菜单，选择工具会在新标签页打开。页面内点击左上角 LisTools 可切换工具。
