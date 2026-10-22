@@ -4,7 +4,7 @@ export const pages = [
   {id:'json',file:'index.html',key:'json.name',icon:'{ }',zh:'JSON 解析',en:'JSON parser'},
   {id:'diff',file:'diff.html',key:'diff.name',icon:'±',zh:'JSON / 文本对比',en:'JSON / text comparison'},
   {id:'timestamp',file:'timestamp.html',key:'timestamp.name',icon:'◷',zh:'时间戳转换',en:'Timestamp converter'},
-  {id:'md5',file:'convert.html#md5',key:'md5.name',icon:'#',zh:'MD5 摘要',en:'MD5 digest'},
+  {id:'md5',file:'convert.html#md5',key:'md5.name',icon:'#',zh:'MD5 校验',en:'MD5 checksum'},
   {id:'convert',file:'convert.html',key:'common.convert',icon:'⇄',zh:'编码与转换',en:'Encoding & conversion'},
   {id:'speedtest',file:'speedtest.html',key:'common.speedtest',icon:'↯',zh:'网速测试',en:'Speed test'},
   {id:'cron',file:'cron.html',key:'common.cron',icon:'▦',zh:'Cron 表达式',en:'Cron expressions'},

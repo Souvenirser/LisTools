@@ -3,6 +3,7 @@ import {pages,searchNavigation,currentTarget} from './navigation.js';
 import {mountFeedbackLink} from './feedback.js';
 import {t,language,onLanguageChange} from '../../i18n-runtime.js';
 import './menu.css';
+import {hasUserContent} from './content-state.js';
 
 const label=item=>item.key?t(item.key):(item.name || [item.zh,item.en])[language().startsWith('zh')?0:1];
 const iconText=(icon,text)=>{
@@ -22,7 +23,7 @@ export function mountToolMenu(root,{popup=false,close=()=>{}}={}) {
   function link(item,searchResult=false) {
     const element=document.createElement('a');element.href=`./${item.file}`;element.dataset.target=item.file;
     element.className='tool-menu-link';element.append(...iconText(item.icon || '⇄',label(item)));
-    if(popup){element.target='_blank';element.rel='noopener';}
+    if(popup||(!popup&&new URL(element.href).pathname!==location.pathname&&hasUserContent())){element.target='_blank';element.rel='noopener';}
     if(!popup && item.file===currentTarget(location.pathname,location.hash))element.setAttribute('aria-current','page');
     if(searchResult && item.category){
       const context=document.createElement('small');context.textContent=item.category[language().startsWith('zh')?0:1];element.querySelector('.tool-menu-name').append(context);
@@ -59,7 +60,10 @@ export function mountToolMenu(root,{popup=false,close=()=>{}}={}) {
   root.addEventListener('click',event=>{
     const anchor=event.target.closest('a[data-target]');
     if(!anchor || event.button!==0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)return;
-    if(!popup && anchor.dataset.target===currentTarget(location.pathname,location.hash))event.preventDefault();
+    if(!popup){
+      if(anchor.dataset.target===currentTarget(location.pathname,location.hash))event.preventDefault();
+      else if(new URL(anchor.href).pathname!==location.pathname&&hasUserContent()){anchor.target='_blank';anchor.rel='noopener';}
+    }
     if(popup){
       // Native anchors preserve modifier/middle-click behavior; normal launch closes the action popup.
       const tabs=globalThis.browser?.tabs || globalThis.chrome?.tabs;
@@ -91,6 +95,7 @@ export function mountToolMenu(root,{popup=false,close=()=>{}}={}) {
 export function mountHeaderMenu() {
   const trigger=document.querySelector('button.brand');
   if(!trigger)return;
+  const cue=document.createElement('span');cue.className='toolbox-cue';trigger.append(cue);const refreshCue=()=>{cue.textContent=language().startsWith('zh')?'工具箱':t('common.tools');};onLanguageChange(refreshCue);refreshCue();
   const popover=document.createElement('div');popover.id='tool-menu';popover.setAttribute('popover','auto');
   document.body.append(popover);trigger.setAttribute('popovertarget',popover.id);trigger.setAttribute('aria-controls',popover.id);trigger.setAttribute('aria-expanded','false');
   const menu=mountToolMenu(popover,{close:()=>{popover.hidePopover();trigger.focus();}});
