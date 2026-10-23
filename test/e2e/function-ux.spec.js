@@ -1,10 +1,10 @@
 import {test,expect} from '@playwright/test';
 import {selectLanguage} from './language-helpers.js';
 
-test('four task groups open the current group and popup opens office groups',async({page})=>{
+test('four task groups start collapsed and task search still finds the primary tool',async({page})=>{
  await page.goto('/qr.html');await page.locator('button.brand').click();await expect(page.locator('#tool-menu nav>details')).toHaveCount(4);
- await expect(page.locator('#tool-menu nav>details').nth(1)).toHaveAttribute('open','');
- await page.goto('/popup.html');await expect(page.locator('nav>details[open]')).toHaveCount(2);
+ await expect(page.locator('#tool-menu nav>details[open]')).toHaveCount(0);
+ await page.goto('/popup.html');await expect(page.locator('nav>details[open]')).toHaveCount(0);
  await page.locator('#tool-menu-search').fill('deduplicate');await expect(page.locator('nav a').first()).toHaveAttribute('href','./text.html#dedupe');await expect(page.locator('nav a small').first()).not.toBeEmpty();
 });
 

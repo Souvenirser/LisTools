@@ -4,7 +4,7 @@ import {mountFeedbackLink} from './feedback.js';
 import {t,language,onLanguageChange} from '../../i18n-runtime.js';
 import './menu.css';
 import {hasUserContent} from './content-state.js';
-import {menuOrderKey,normalizeMenuOrder,readMenuOrder,saveMenuOrder} from './menu-order.js';
+import {menuOrderKey,normalizeMenuOrder,readMenuOrder,saveMenuOrder,menuExpandedKey,readMenuExpanded,saveMenuExpanded} from './menu-order.js';
 
 const label=item=>item.key?t(item.key):(item.name || [item.zh,item.en])[language().startsWith('zh')?0:1];
 const iconText=(icon,text)=>{
@@ -19,8 +19,13 @@ export function mountToolMenu(root,{popup=false,close=()=>{}}={}) {
   const search=root.querySelector('input'),list=root.querySelector('nav'),empty=root.querySelector('.tool-menu-empty');
   const controls=document.createElement('div');controls.className='tool-menu-order-controls';controls.innerHTML='<button id="menu-edit" type="button"></button><div class="tool-menu-order-actions" hidden><button id="menu-save" type="button" class="primary"></button><button id="menu-cancel" type="button"></button><button id="menu-reset" type="button"></button></div><div class="tool-menu-move-actions" hidden><button id="menu-up" type="button">↑</button><button id="menu-down" type="button">↓</button></div><p id="menu-sort-status" role="status" aria-live="polite"></p>';list.before(controls);
   const button=id=>root.querySelector('#menu-'+id),status=button('sort-status');
-  let draft,selected,sortables=[],savedSearch='',loadingSort=false,normalOpen,editOpen=new Set(),revision=0;
+  let draft,selected,sortables=[],savedSearch='',loadingSort=false,expanded=new Set(readMenuExpanded()),editOpen=new Set(),revision=0;
   const editing=()=>Boolean(draft);
+  function setExpanded(node,open){
+    const groups=editing()?editOpen:expanded,id=node.dataset.groupId;if(groups.has(id)===open)return;
+    if(open)groups.add(id);else groups.delete(id);
+    if(!editing())saveMenuExpanded([...expanded]);
+  }
   function stopSorting(){for(const sortable of sortables)sortable.destroy();sortables=[];}
   function handle(name){const node=document.createElement('button');node.type='button';node.className='tool-menu-sort-handle';node.textContent='⠿';node.setAttribute('aria-label',t('workspace.sortHandle',{name}));return node;}
   function announce(key,params){status.dataset.key=key;status.dataset.params=JSON.stringify(params||{});status.textContent=t(key,params);}
@@ -35,7 +40,7 @@ export function mountToolMenu(root,{popup=false,close=()=>{}}={}) {
     for(const body of list.querySelectorAll('.tool-menu-group'))sortables.push(new Sortable(body,{...options,draggable:'.tool-menu-sort-row'}));
   }
   function finish(save){if(!draft)return;const saved=save&&saveMenuOrder(draft);draft=undefined;selected=undefined;search.disabled=false;search.value=savedSearch;render();announce(save?saved?'workspace.saved':'workspace.notSaved':'workspace.sortHint');button('edit').focus();}
-  button('edit').onclick=async()=>{if(loadingSort)return;loadingSort=true;savedSearch=search.value;search.value='';search.disabled=true;editOpen.clear();normalOpen=new Map([...list.querySelectorAll(':scope>details')].map(node=>[node.dataset.groupId,node.open]));draft=readMenuOrder();announce('workspace.sortHint');render();loadingSort=false;};
+  button('edit').onclick=async()=>{if(loadingSort)return;loadingSort=true;savedSearch=search.value;search.value='';search.disabled=true;editOpen.clear();draft=readMenuOrder();announce('workspace.sortHint');render();loadingSort=false;};
   button('save').onclick=()=>finish(true);button('cancel').onclick=()=>finish(false);button('reset').onclick=()=>{draft=normalizeMenuOrder();render();announce('workspace.sortHint');};button('up').onclick=()=>move(-1);button('down').onclick=()=>move(1);
   const refreshFeedback=popup?mountFeedbackLink(root.querySelector('.tool-menu-footer'),()=>({
     issuesUrl:bugs.url,tool:'toolbox',version,locale:language(),label:t('common.feedback'),hint:t('common.feedbackHint')
@@ -66,21 +71,21 @@ export function mountToolMenu(root,{popup=false,close=()=>{}}={}) {
     details.append(summary,body);return details;
   }
   function render() {
+    if(!draft)expanded=new Set(readMenuExpanded());
     revision++;stopSorting();selected=undefined;root.classList.toggle('is-sorting',editing());button('edit').hidden=editing();root.querySelector('.tool-menu-order-actions').hidden=!editing();root.querySelector('.tool-menu-move-actions').hidden=!editing();button('up').disabled=button('down').disabled=true;
     const query=search.value.trim();
     if(query){const matches=searchNavigation(query,t),primary=matches.filter(item=>!item.secondary),secondary=matches.filter(item=>item.secondary);list.replaceChildren(...primary.map(item=>link(item,true)));if(secondary.length){const heading=document.createElement('p');heading.className='tool-menu-secondary';heading.textContent=t('ux.otherMatches');list.append(heading,...secondary.map(item=>link(item,true)));}}
     else {
       const order=draft||readMenuOrder();
-      const groups=order.groups.map((id,index)=>{
+      const groups=order.groups.map(id=>{
         const {key,icon}=toolGroups.find(item=>item.id===id),items=order.items[id].map(id=>pages.find(page=>page.id===id));
         const node=group(t(key),icon,items.map(page=>{if(!draft)return link(page);const row=document.createElement('div');row.className='tool-menu-sort-row';row.dataset.toolId=page.id;row.append(handle(label(page)),...iconText(page.icon,label(page)));return row;}));node.dataset.groupId=id;
         if(draft)node.querySelector('summary').prepend(handle(t(key)));
-        node.open=popup?index<2:items.some(item=>item.file===currentTarget(location.pathname,location.hash)||item.file===location.pathname.split('/').pop());
-        if(draft)node.open=editOpen.has(id);else if(normalOpen?.has(id))node.open=normalOpen.get(id);
+        node.open=draft?editOpen.has(id):expanded.has(id);
         return node;
       });
       list.replaceChildren(...groups);
-      if(draft)void activateSorting(revision);else normalOpen=undefined;
+      if(draft)void activateSorting(revision);
     }
     refreshCurrent();
     empty.hidden=list.children.length!==0;empty.textContent=t('menu.noResults');
@@ -95,6 +100,8 @@ export function mountToolMenu(root,{popup=false,close=()=>{}}={}) {
   }
   root.addEventListener('click',event=>{
     if(editing()){const row=event.target.closest('.tool-menu-sort-row,summary');if(row){if(event.target.closest('.tool-menu-sort-handle'))event.preventDefault();selectRow(row.matches('summary')?row.parentElement:row);}if(event.target.closest('a'))event.preventDefault();return;}
+    const summary=event.target.closest('summary');
+    if(summary?.parentElement.parentElement===list){setExpanded(summary.parentElement,!summary.parentElement.open);return;}
     const anchor=event.target.closest('a[data-target]');
     if(!anchor || event.button!==0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)return;
     if(!popup){
@@ -127,9 +134,12 @@ export function mountToolMenu(root,{popup=false,close=()=>{}}={}) {
   search.addEventListener('compositionstart',()=>{composing=true;});
   search.addEventListener('compositionend',()=>{composing=false;render();});
   search.addEventListener('input',()=>{if(!composing)render();});
-  list.addEventListener('toggle',event=>{if(editing()&&event.target.matches('details[data-group-id]')){if(event.target.open)editOpen.add(event.target.dataset.groupId);else editOpen.delete(event.target.dataset.groupId);}},true);
+  list.addEventListener('toggle',event=>{
+    const node=event.target;if(node.parentElement!==list||!node.matches('details[data-group-id]'))return;
+    setExpanded(node,node.open);
+  },true);
   list.addEventListener('focusin',event=>{if(editing()&&event.target.matches('.tool-menu-sort-handle'))selectRow(event.target.closest('.tool-menu-sort-row')||event.target.closest('details'));});
-  addEventListener('storage',event=>{if(event.key===menuOrderKey&&!editing())render();});
+  addEventListener('storage',event=>{if((event.key===menuOrderKey||event.key===menuExpandedKey||event.key===null)&&!editing())render();});
   addEventListener('hashchange',refreshCurrent);
   onLanguageChange(translate);translate();
   return {open(){render();search.focus();},reset(){if(editing())finish(false);composing=false;search.value='';render();}};

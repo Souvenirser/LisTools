@@ -1,0 +1,93 @@
+{
+  "version": "1.1.4",
+  "date": "2026-10-23",
+  "scope": [
+    "shared persisted category expansion",
+    "page/popup live synchronization",
+    "adaptive popup height"
+  ],
+  "tests": {
+    "unit": {
+      "passed": 299,
+      "failed": 0,
+      "command": "node --test --test-concurrency=1 test/*.test.js"
+    },
+    "browser": {
+      "passed": 206,
+      "skipped": 1,
+      "failed": 0,
+      "flaky": 0,
+      "projects": [
+        "chromium",
+        "edge",
+        "webkit"
+      ],
+      "scope": [
+        "menu-expansion",
+        "menu-sorting",
+        "navigation-audit",
+        "function-ux",
+        "content-navigation",
+        "site-ux"
+      ]
+    },
+    "extension": {
+      "version": "1.1.4",
+      "engine": "149.0.7827.55",
+      "offline": true,
+      "firstUse": "all four collapsed in both menus",
+      "sync": "both directions including explicit collapse",
+      "reopenAndReload": true,
+      "persistentBrowserRestart": true,
+      "collapsedHeight": 417,
+      "expandedHeight": 560,
+      "scrollingWithinCap": true,
+      "errors": [],
+      "external": []
+    }
+  },
+  "artifact": {
+    "version": "1.1.4",
+    "kind": "Chrome MV3 release",
+    "files": 487,
+    "zipBytes": 4198164,
+    "unpackedBytes": 12656948,
+    "sha256": "41fa2a22052bb20b7a238a00ff4effdeb1463f54d0504e3f931dc6ffdb1530b6",
+    "html": [
+      "calculator.html",
+      "convert.html",
+      "cron.html",
+      "dates.html",
+      "diff.html",
+      "draw.html",
+      "images.html",
+      "index.html",
+      "money.html",
+      "password.html",
+      "pdf.html",
+      "popup.html",
+      "qr.html",
+      "regex.html",
+      "speedtest.html",
+      "text.html",
+      "timer.html",
+      "timestamp.html",
+      "units.html"
+    ],
+    "newRuntimeDependencies": 0,
+    "permissions": [],
+    "hostPermissions": [],
+    "supportExcluded": true,
+    "zipMatchesDirectory": true
+  },
+  "history": {
+    "preservedZips": 30,
+    "supportWipPreserved": true
+  },
+  "limits": [
+    "Firefox and Chrome 120 not revalidated in this patch; previous environment startup failures remain unresolved.",
+    "Popup document loaded as an extension page; native headless toolbar popup lifecycle not verified.",
+    "WebKit page tests do not verify Safari extension installation.",
+    "Chrome Web Store submission not performed."
+  ]
+}
