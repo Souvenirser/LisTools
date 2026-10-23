@@ -91,7 +91,7 @@ async function renderDescription() {
   if(revision===descriptionRequest && state===source && language()===locale && description)$('cron-description').textContent=description;
 }
 function renderState() {
-  const ready=state.status==='ready';const next=$('cron-next');if(next)next.textContent=ready&&state.dates.length?t('ux.nextExecution')+' · '+state.dates[0].localTime:'';
+  const ready=state.status==='ready';const effective=$('cron-effective-context');if(effective){effective.hidden=!ready;effective.textContent=ready?t('refinement.cronContext',{dialect:$('cron-dialect').selectedOptions[0].textContent,count:state.parsed.fields.length,zone:state.timeZone}):'';}const next=$('cron-next');if(next)next.textContent=ready&&state.dates.length?t('ux.nextExecution')+' · '+state.dates[0].localTime:'';
   $('cron-status').textContent=({idle:t('cron.idle'),pending:t('common.processing'),ready:t('cron.found',{count:state.dates?.length || 0}),error:t('common.error'),cancelled:t('office.cancelled')})[state.status] || '';
   $('cron-cancel').disabled=state.status!=='pending';
   for(const id of ['cron-copy-dates','cron-download-csv','cron-download-json']) $(id).disabled=!ready || !state.dates.length;
@@ -200,3 +200,5 @@ addTaskGuide('cron',[{id:'parse',key:'ux.parseCron'},{id:'build',key:'ux.buildCr
 const nextExecution=document.createElement('p');nextExecution.id='cron-next';nextExecution.className='result-conclusion';$('cron-description').after(nextExecution);
 const presets=document.querySelector('.cron-presets'),presetButtons=[...presets.querySelectorAll('button')],presetSelect=document.createElement('select');presetSelect.id='cron-presets';presets.prepend(presetSelect);for(const button of presetButtons)button.hidden=true;
 function refreshCronPresets(){presetSelect.replaceChildren(...[['',t('ux.templates')],...presetButtons.map(button=>[button.dataset.preset,button.textContent])].map(([value,text])=>{const option=document.createElement('option');option.value=value;option.textContent=text;return option;}));presetSelect.setAttribute('aria-label',t('ux.templates'));}presetSelect.onchange=()=>{presetButtons.find(button=>button.dataset.preset===presetSelect.value)?.click();presetSelect.value='';};onLanguageChange(refreshCronPresets);refreshCronPresets();translateDOM(previewSettings);renderState();
+
+const effectiveContext=document.createElement('p');effectiveContext.id='cron-effective-context';effectiveContext.className='tool-note';$('cron-description').before(effectiveContext);renderState();

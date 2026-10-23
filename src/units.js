@@ -3,7 +3,7 @@ import 'choices.js/public/assets/styles/choices.min.css';
 import {registerContentCheck} from './tools/shared/content-state.js';
 import { initTool, $, showError, clearStatus, setStatus, submitForm } from './tools/shared/office.js';
 import { copyText } from './tools/shared/page.js';
-import { t, language, onLanguageChange } from './i18n.js';
+import { t, language, onLanguageChange, translateDOM } from './i18n.js';
 import { categories, units, findUnits, convertUnits } from './tools/units/core.js';
 import './tools/calculator/style.css';
 initTool('units',`<section class="tool-card"><div class="tool-fields"><div class="field"><label for="unit-category" data-i18n="units.category"></label><select id="unit-category">${categories.map(category=>`<option value="${category}" data-i18n="units.${category}"></option>`).join('')}</select></div><div class="field"><label for="unit-search" data-i18n="units.search"></label><input id="unit-search" type="search" autocomplete="off"></div><div class="field"><label for="unit-value" data-i18n="units.value"></label><input id="unit-value" value="1" inputmode="decimal" dir="ltr"></div></div><div class="tool-fields"><div class="field"><label for="unit-from" data-i18n="units.from"></label><select id="unit-from" dir="ltr"></select></div><div class="field"><label for="unit-to" data-i18n="units.to"></label><select id="unit-to" dir="ltr"></select></div></div><div class="tool-actions"><button id="unit-run" class="primary" data-i18n="units.convert"></button><button id="unit-swap" data-i18n="units.swap"></button><label class="check-label"><input id="unit-all" type="checkbox"><span data-i18n="units.allTargets"></span></label></div><p id="unit-empty" class="tool-note" data-i18n="units.noMatches" hidden></p><p class="tool-note" data-i18n="units.precision"></p></section><section class="tool-card"><h2 data-i18n="units.result"></h2><p id="unit-primary" class="unit-primary" dir="ltr"></p><div id="unit-results" aria-live="polite"></div><div class="tool-actions"><button id="unit-copy" data-i18n="units.copy" disabled></button></div></section><section class="tool-card"><h2 data-i18n="units.other"></h2><a href="./convert.html" data-i18n="units.otherLink"></a></section>`);
@@ -29,7 +29,7 @@ function unitName(id){
  return `${name||id} (${symbol})`;
 }
 function render(){
-  $('unit-copy').disabled=!result;$('unit-results').replaceChildren();$('unit-primary').textContent='';if(!result)return;
+  $('unit-copy').disabled=!result;for(const id of ['unit-copy-equation','unit-copy-all'])if($(id))$(id).disabled=!result;if($('unit-copy-all'))$('unit-copy-all').hidden=!$('unit-all').checked;$('unit-results').replaceChildren();$('unit-primary').textContent='';if(!result)return;
   const primary=result.results.find(item=>item.unit===$('unit-to').value);
   $('unit-primary').textContent=`${result.input} ${unitName(result.from)} = ${primary.approximate?'≈ ':''}${primary.display} ${unitName(primary.unit)}`;
   for(const item of result.results.filter(item=>item.unit!==$('unit-to').value)){const row=document.createElement('div');row.className='numeric-result-row';const unit=document.createElement('span'),output=document.createElement('output'),button=document.createElement('button');unit.textContent=unitName(item.unit);unit.dir=output.dir='ltr';output.textContent=`${item.approximate?'≈ ':''}${item.display}`;button.textContent=t('units.copyOne');button.setAttribute('aria-label',`${t('units.copyOne')} · ${item.unit}`);button.addEventListener('click',()=>copyText(item.value));row.append(unit,output,button);$('unit-results').append(row);}
@@ -37,7 +37,7 @@ function render(){
 function invalidate(){const had=Boolean(result);result=undefined;clearStatus({keepStale:true});render();if(had)setStatus('ux.stale');}
 function run(){clearStatus();try{result=convertUnits($('unit-value').value,$('unit-from').value,$('unit-all').checked?[$('unit-to').value,...units.filter(unit=>unit.category===$('unit-category').value&&unit.id!==$('unit-to').value).map(unit=>unit.id)]:[$('unit-to').value]);}catch(error){result=undefined;showError(error);}render();}
 $('unit-category').addEventListener('change',()=>{$('unit-search').value='';populate();invalidate();});$('unit-search').addEventListener('input',populate);for(const id of ['unit-value','unit-from','unit-to','unit-all'])$(id).addEventListener('input',invalidate);
-$('unit-run').addEventListener('click',run);$('unit-swap').addEventListener('click',()=>{const source=$('unit-from').value,target=$('unit-to').value;$('unit-search').value='';populate();unitPickers.get('unit-from').setChoiceByValue(target);unitPickers.get('unit-to').setChoiceByValue(source);invalidate();run();});$('unit-copy').addEventListener('click',()=>{if(result)copyText(result.results.map(item=>`${item.value} ${item.unit}`).join('\n'));});onLanguageChange(()=>{populate();render();});populate();run();
+$('unit-run').addEventListener('click',run);$('unit-swap').addEventListener('click',()=>{const source=$('unit-from').value,target=$('unit-to').value;$('unit-search').value='';populate();unitPickers.get('unit-from').setChoiceByValue(target);unitPickers.get('unit-to').setChoiceByValue(source);invalidate();run();});$('unit-copy').addEventListener('click',()=>{if(result)copyText(result.results.find(item=>item.unit===$('unit-to').value).value);});onLanguageChange(()=>{populate();render();});populate();run();
 
 let unitsEngaged=false;document.querySelector('#tool-root').addEventListener('input',()=>{unitsEngaged=true;});document.querySelector('#unit-run').addEventListener('click',()=>{unitsEngaged=true;});
 
@@ -55,3 +55,7 @@ populate();
 const unitInput=$('unit-value').closest('.field');$('unit-from').closest('.field').before(unitInput);
 const unitResultCard=$('unit-primary').closest('section');$('unit-from').closest('section').append(unitResultCard);unitResultCard.classList.add('unit-inline-result');
 submitForm($('unit-from').closest('section'),$('unit-run'));
+
+$('unit-copy').dataset.i18n='units.copyOne';
+for(const [id,key] of [['unit-copy-equation','copyEquation'],['unit-copy-all','copyAllConversions']]){const button=document.createElement('button');button.id=id;button.type='button';button.dataset.i18n='refinement.'+key;$('unit-copy').parentElement.append(button);button.onclick=()=>{if(result)copyText(id==='unit-copy-equation'?$('unit-primary').textContent:result.results.map(item=>`${item.value} ${item.unit}`).join('\n'));};}
+translateDOM($('unit-copy').parentElement);render();

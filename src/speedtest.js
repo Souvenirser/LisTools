@@ -141,3 +141,5 @@ new ResizeObserver(draw).observe($('speed-chart'));window.addEventListener('resi
 onLanguageChange(()=>{localize();render();});window.addEventListener('pagehide',()=>controller.dispose());render();
 
 registerContentCheck(()=>state.status!=='idle');
+
+const ratingScope=document.createElement('p');ratingScope.className='tool-note';ratingScope.dataset.i18n='refinement.speedScope';$('speed-rating').append(ratingScope);ratingScope.textContent=t('refinement.speedScope');

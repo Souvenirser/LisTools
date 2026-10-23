@@ -53,3 +53,18 @@
 .dates-page .date-result output{overflow-wrap:anywhere}.unit-picker .choices__list--single .choices__item{white-space:normal;overflow-wrap:anywhere}.unit-picker .choices__inner{padding-inline-end:28px}.money-results{align-self:start}.media-workspace .workspace-input{min-width:0}.media-workspace .office-results{max-height:70dvh;overflow:auto}.password-results{max-height:60dvh;overflow:auto}
 .qr-page .workspace-action-fixed,.draw-page #draw-input+.workspace-action-fixed{margin:0}
 @media(max-width:760px){.regex-page .has-workspace-focus{margin-bottom:12px}.regex-page .task-guide{margin-bottom:8px}.regex-workspace-controls{margin-bottom:8px}.regex-workspace-controls label[for=regex-pattern]{margin-top:0}}
+
+/* Imported files and completed outputs take priority over repeated instructions. */
+.media-workspace.has-files .workspace-input>[id$="-drop"]{padding:12px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}
+.media-workspace.has-files .workspace-input>[id$="-drop"]>h2,.media-workspace.has-files .workspace-input>[id$="-drop"]>.media-drop{display:none}
+.media-import-errors{flex-basis:100%;overflow-wrap:anywhere}.media-import-errors:empty{display:none}.media-import-errors p{margin:8px 0;font-size:.875rem}
+.media-inline-result{margin:16px 0 0!important;padding:16px 0 0!important;border:0!important;border-top:1px solid var(--border)!important;box-shadow:none!important;background:transparent}
+.media-inline-result h2{font-size:1.125rem}.media-inline-result p{overflow-wrap:anywhere}.media-inline-result .tool-output{font-size:.875rem;max-height:160px;overflow:auto}
+.queue-drag-handle{cursor:grab;touch-action:none;color:var(--muted);font-size:1.25rem}.queue-drag-handle:active{cursor:grabbing}.media-queue-row button{flex-shrink:0}.compression-settings{display:grid;gap:12px}.compression-settings label{min-width:0}
+@media(min-width:1100px){.workspace-options{position:static}.media-workspace.has-files{align-items:start}}
+
+.timer-state{text-align:center;margin:8px 0;font-weight:600;color:var(--muted)}
+#qr-output-meta{text-align:center}#images-jpeg-warning{margin-block:12px}#cron-effective-context{font-weight:600}
+#unit-copy-equation,#unit-copy-all{white-space:normal;overflow-wrap:anywhere}.date-result>h2{color:var(--muted);font-size:1rem}
+
+.workspace-options>.media-inline-result:first-child{border-top:0!important;padding-top:0!important;margin-top:0!important;margin-bottom:20px!important;border-bottom:1px solid var(--border)!important;padding-bottom:16px!important}
