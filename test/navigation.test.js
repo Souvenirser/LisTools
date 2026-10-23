@@ -53,3 +53,13 @@ test('ordinary task search prefers text tasks and preserves every advanced conve
  assert.equal(navigation.currentTarget('/qr.html','#recognize'),'qr.html#recognize');
  assert.equal(navigation.currentTarget('/qr.html','#unknown'),'qr.html');
 });
+
+
+test('task aliases stay inside their parent tool',()=>{
+ for(const query of ['邮箱','email','手机号','phone']){
+  const files=navigation.searchNavigation(query).map(item=>item.file);
+  assert.ok(files.includes('text.html#extract'));
+  assert.ok(!files.includes('pdf.html#extract'),query+' must not match PDF page extraction');
+ }
+ assert.ok(navigation.searchNavigation('PDF 提取').some(item=>item.file==='pdf.html#extract'));
+});

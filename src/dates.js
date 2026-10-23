@@ -20,7 +20,7 @@ const computations={difference:()=>difference($('date-start').value,$('date-end'
 function render(id){const output=$(id+'-output');output.replaceChildren();if(results[id]!==undefined){const [first,...rest]=renderers[id](results[id]).split('\n'),main=document.createElement('strong');main.className='date-conclusion';main.textContent=first;output.append(main,document.createTextNode(rest.length?'\n'+rest.join('\n'):''));}$(id+'-copy').disabled=results[id]===undefined;}
 for(const id of Object.keys(computations)){
   $(id+'-run').addEventListener('click',()=>{clearStatus();try{results[id]=computations[id]();render(id);}catch(error){results[id]=undefined;render(id);showError(error);}});
-  $(id+'-copy').addEventListener('click',()=>{const values={difference:[$('date-start').value,$('date-end').value],shift:[$('date-base').value,$('date-amount').value+' '+$('date-unit').selectedOptions[0].textContent],milestone:[$('date-origin').value,$('date-reference').value],workdays:[$('work-start').value,$('work-end').value]}[id];const rule=id==='difference'||id==='workdays'?t($(id==='difference'?'date-inclusive':'work-inclusive').checked?'dates.inclusive':'ux.excludeEnd'):'';copyText([...values,rule,$(id+'-output').textContent].filter(Boolean).join('\n'));});
+  $(id+'-copy').addEventListener('click',()=>{const values={difference:[$('date-start').value,$('date-end').value],shift:[$('date-base').value,$('date-amount').value+' '+$('date-unit').selectedOptions[0].textContent],milestone:[$('date-origin').value,$('date-reference').value],workdays:[$('work-start').value,$('work-end').value]}[id];const rule=id==='difference'||id==='workdays'?t($(id==='difference'?'date-inclusive':'work-inclusive').checked?'dates.inclusive':'ux.excludeEnd'):'';const exceptions=id==='workdays'?[t('dates.off')+': '+($('date-off').value||'—'),t('dates.work')+': '+($('date-work').value||'—')]:[];copyText([...values,rule,...exceptions,$(id+'-output').textContent].filter(Boolean).join('\n'));});
   const card=$(id+'-run').closest('section');card.addEventListener('input',()=>{const had=results[id]!==undefined;results[id]=undefined;render(id);clearStatus({keepStale:true});if(had)setStatus('ux.stale');});
 }
 for(const edge of ['start','end'])$(`date-today-${edge}`).addEventListener('click',()=>{$(`date-${edge}`).value=Temporal.Now.plainDateISO().toString();results.difference=undefined;render('difference');clearStatus();});
@@ -32,8 +32,8 @@ for(const [index,card] of dateCards.entries()){
   card.classList.add('date-task');
   const input=document.createElement('div'),output=document.createElement('div');output.className='date-result';
   const id=dateTasks[index],actions=$(id+'-run').parentElement;
-  input.append(...card.childNodes);card.append(input,output);
-  const heading=document.createElement('h2');heading.dataset.i18n=`dates.${id==='difference'?'difference':id}`;output.append(heading,$(id+'-output'),$(id+'-copy'));
+  input.append(...card.childNodes);card.append(input,output);input.querySelector('h2').dataset.i18n='refinement.dateInput';
+  const heading=document.createElement('h2');heading.dataset.i18n='common.result';output.append(heading,$(id+'-output'),$(id+'-copy'));
   if(id==='workdays'){
     const details=document.createElement('details');details.innerHTML='<summary><span data-i18n="dates.off"></span> / <span data-i18n="dates.work"></span></summary>';
     actions.before(details);details.append($('date-off').closest('.field'),$('date-work').closest('.field'));

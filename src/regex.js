@@ -1,7 +1,7 @@
 import {actionArea} from './tools/shared/workspace.js';
 import { addTaskGuide } from './tools/shared/task-guide.js';
 import { textLabel as tr } from './tools/shared/labels.js';
-import { t } from './i18n.js';
+import { t, translateDOM } from './i18n.js';
 import {EditorState,StateEffect,StateField} from '@codemirror/state';
 import {Decoration,EditorView,WidgetType} from '@codemirror/view';
 import {createConversionController} from './tools/convert/controller.js';
@@ -249,3 +249,5 @@ const matchDetails=$('regex-match-rows').closest('section'),matchDisclosure=docu
 $('regex-run').closest('section').classList.add('regex-workspace-controls');
 
 matchDisclosure.before($('regex-previous').closest('.tool-actions'));
+
+const extractHelp=document.createElement('p');extractHelp.className='tool-note';extractHelp.dataset.i18n='refinement.regexExtractHelp';$('regex-group-field').append(extractHelp);translateDOM(extractHelp.parentElement);

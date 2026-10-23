@@ -100,7 +100,7 @@ function options() {
 function updateOptions() {
   const phrase = $('password-mode').value === 'passphrase', custom = $('password-custom-mode').checked;
   $('password-character-options').hidden = phrase; $('password-passphrase-options').hidden = !phrase;
-  $('password-custom-field').hidden = !custom;if($('password-advanced'))$('password-advanced').hidden=phrase;if(document.querySelector('.password-workspace'))$('password-length').closest('.field').hidden=phrase; $('password-classes').disabled = custom;
+  $('password-custom-field').hidden = !custom;if($('password-advanced'))$('password-advanced').hidden=phrase;if(document.querySelector('.password-workspace'))$('password-length').closest('.field').hidden=phrase; $('password-classes').disabled = custom;const policy=$('password-policy');if(policy)policy.hidden=phrase||custom;
   controller.invalidate();
 }
 for (const field of root.querySelectorAll('input, select')) {
@@ -133,3 +133,5 @@ const passwordGuide=addTaskGuide('password',[{id:'characters',key:'ux.passwordMo
 $('password-mode').addEventListener('change',()=>passwordGuide.select($('password-mode').value));translateDOM(passwordAdvanced);
 
 const plaintextNote=document.createElement('p');plaintextNote.id='password-plaintext';plaintextNote.className='tool-note';plaintextNote.dataset.i18n='ux.plaintextExport';plaintextNote.textContent=t('ux.plaintextExport');$('password-download').closest('.tool-actions').after(plaintextNote);
+
+const passwordPolicy=document.createElement('p');passwordPolicy.id='password-policy';passwordPolicy.className='tool-note';passwordPolicy.dataset.i18n='refinement.passwordPolicy';$('password-generate').closest('.tool-actions').after(passwordPolicy);passwordPolicy.textContent=t('refinement.passwordPolicy');passwordPolicy.hidden=$('password-mode').value==='passphrase'||$('password-custom-mode').checked;

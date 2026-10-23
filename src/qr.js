@@ -61,8 +61,10 @@ function syncQrOutput(mode){if(!$('qr-output-panel'))return;const generating=mod
 syncQrOutput('generate');translateDOM(qrOutput);
 
 const qrEmpty=document.createElement('div');qrEmpty.className='result-empty';qrEmpty.id='qr-empty';qrOutput.insertBefore(qrEmpty,$('qr-canvas'));
-function refreshQrEmpty(){const empty=$('qr-empty');if(!empty)return;const generating=$('qr-task-generate').getAttribute('aria-pressed')==='true';empty.hidden=generating?Boolean(svg):Boolean($('qr-result').value);empty.textContent=t(generating?'qr.empty':'qr.drop');}
+function refreshQrEmpty(){const empty=$('qr-empty');if(!empty)return;const generating=$('qr-task-generate').getAttribute('aria-pressed')==='true';empty.hidden=generating?Boolean(svg):Boolean($('qr-result').value);empty.textContent=t(generating?'qr.empty':'qr.drop');const meta=$('qr-output-meta');if(meta){meta.hidden=!generating||!svg;meta.textContent=svg?t('refinement.qrInfo',{size:$('qr-canvas').width,level:$('qr-level').value}):'';}}
 function qrSettings(){qrAdvanced.querySelector('summary').textContent=`${t('ux.qrSettings')}: ${$('qr-size').value} · ${t('qr.level')}: ${$('qr-level').value}`;refreshQrEmpty();}
 for(const id of ['qr-size','qr-level'])$(id).addEventListener('input',qrSettings);onLanguageChange(qrSettings);qrSettings();
 
 qrAdvanced.before(document.querySelector('.workspace-action-area'));
+
+const qrMeta=document.createElement('p');qrMeta.id='qr-output-meta';qrMeta.className='tool-note';$('qr-canvas').before(qrMeta);refreshQrEmpty();
