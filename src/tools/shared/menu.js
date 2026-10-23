@@ -54,7 +54,7 @@ export function mountToolMenu(root,{popup=false,close=()=>{}}={}) {
     element.dataset.toolId=item.id;
     if(popup||(!popup&&new URL(element.href).pathname!==location.pathname&&hasUserContent())){element.target='_blank';element.rel='noopener';}
     if(searchResult && item.summaryKey){
-      const context=document.createElement('small');context.textContent=t(item.summaryKey);element.querySelector('.tool-menu-name').append(context);
+      const context=document.createElement('small');context.textContent=(item.parentKey?t(item.parentKey)+' · ':'')+t(item.summaryKey);element.querySelector('.tool-menu-name').append(context);
     }
     return element;
   }
