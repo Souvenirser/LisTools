@@ -4,34 +4,38 @@
 .speed-chart-card {grid-area:chart;min-width:0;}
 .speed-layout > .tool-card {margin:0;}
 .speed-rating {grid-area:rating;min-width:0;}
-.speed-rating h3 {font-size:14px;margin:20px 0 12px;}
+.speed-rating h3 {font-size:1rem;margin:20px 0 12px;}
 .speed-rating-card {display:grid;grid-template-columns:72px minmax(0,1fr);gap:12px;align-items:center;margin:12px 0;padding:14px 12px;border:1px solid #b6d4f2;border-radius:9px;background:#eff6fd;color:#123f6c;}
 .speed-rating-upload {background:#fff1f0;border-color:#efc1be;color:#8e292d;}
 .speed-rating-card.is-unavailable {grid-template-columns:minmax(0,1fr);background:var(--subtle);border-color:var(--border);color:var(--muted);}
 .speed-rating-card img {display:block;width:72px;height:72px;object-fit:contain;}
-.speed-rating-card strong {display:block;font-size:19px;line-height:1.4;margin:6px 0;overflow-wrap:anywhere;}
-.speed-rating-label {font-size:12px;}
-.speed-rating-value {display:block;font-size:15px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;}
+.speed-rating-card strong {display:block;font-size:1.1875rem;line-height:1.4;margin:6px 0;overflow-wrap:anywhere;}
+.speed-rating-label {font-size:.875rem;}
+.speed-rating-value {display:block;font-size:0.9375rem;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;}
 #speed-level-scale {list-style:none;padding:0;margin:0;display:grid;gap:4px;}
 #speed-level-scale li {display:grid;grid-template-columns:34px minmax(0,1fr);align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--border);}
 #speed-level-scale img {display:block;object-fit:contain;}
-#speed-level-scale strong {display:block;font-size:13px;font-weight:550;overflow-wrap:anywhere;}
-#speed-level-scale span {display:block;font-size:12px;color:var(--muted);overflow-wrap:anywhere;}
+#speed-level-scale strong {display:block;font-size:.875rem;font-weight:550;overflow-wrap:anywhere;}
+#speed-level-scale span {display:block;font-size:.875rem;color:var(--muted);overflow-wrap:anywhere;}
 .speed-metrics { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 14px; }
 .speed-metrics .tool-card { display: flex; flex-direction: column; gap: 10px; margin-bottom: 0; }
-.speed-metrics strong { font-size: 22px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
-.speed-metrics .speed-value-pending { color: var(--muted); font-size: 18px; font-weight: 500; }
+.speed-metrics strong { font-size: 1.375rem; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.speed-metrics .speed-value-pending { color: var(--muted); font-size: 1.125rem; font-weight: 500; }
 #speed-progress { width: 100%; accent-color: var(--accent); }
 .speed-chart-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
-.speed-chart-legend { display: flex; gap: 20px; color: var(--muted); font-size: 12px; }
+.speed-chart-legend { display: flex; gap: 20px; color: var(--muted); font-size: .875rem; }
 .speed-chart-legend span { display: inline-flex; align-items: center; gap: 7px; }
 .speed-chart-legend span::before { content: ''; width: 18px; height: 3px; border-radius: 2px; background: #0d74ce; }
 .speed-chart-legend .speed-legend-upload::before { background: #ce2c31; }
 .speed-chart-frame { position: relative; padding: 12px 12px 10px; border: 1px solid var(--border); border-radius: 8px; background: linear-gradient(180deg,var(--slate-1),var(--surface)); direction: ltr; }
-#speed-chart-unit { color: var(--muted); font-size: 12px; padding-inline-start: 2px; }
+#speed-chart-unit { color: var(--muted); font-size: .875rem; padding-inline-start: 2px; }
 #speed-chart { display: block; width: 100%; height: 240px; }
-#speed-chart-axis { color: var(--muted); font-size: 12px; text-align: center; padding-inline-start: 42px; }
+#speed-chart-axis { color: var(--muted); font-size: .875rem; text-align: center; padding-inline-start: 42px; }
 #speed-chart-empty { position: absolute; inset: 40px 18px 45px 64px; margin: 0; display: grid; place-items: center; pointer-events: none; }
-#speed-chart-empty span { padding: 10px 16px; border-radius: 6px; background: var(--surface); color: var(--muted); font-size: 13px; text-align: center; }
+#speed-chart-empty span { padding: 10px 16px; border-radius: 6px; background: var(--surface); color: var(--muted); font-size: .875rem; text-align: center; }
 @media(max-width:1100px) { .speed-layout {grid-template-columns:minmax(0,1fr);grid-template-areas:'controls' 'rating' 'metrics' 'chart';} .speed-metrics { grid-template-columns: repeat(2,minmax(0,1fr)); } #speed-rating-results {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;} #speed-level-scale {grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 18px;} }
 @media(max-width:600px) { .speed-metrics,#speed-rating-results,#speed-level-scale { grid-template-columns: 1fr; } }
+
+.speed-layout{grid-template-columns:minmax(0,1fr) 320px;gap:24px}.speed-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.speed-metrics strong{font-size:2rem}.speed-secondary{margin-block:16px}.speed-secondary strong{font-size:1.25rem}.speed-rating-value{font-size:1rem}#speed-loaded-details summary,#speed-scale-details summary{font-weight:600;padding-block:12px;cursor:pointer}#speed-primary-metrics [data-metric=downloadBps] strong{color:#0d74ce}#speed-primary-metrics [data-metric=uploadBps] strong{color:#ce2c31}
+@media(max-width:1100px){.speed-layout{grid-template-columns:minmax(0,1fr);grid-template-areas:'controls' 'metrics' 'rating' 'chart'}}
+@media(max-width:600px){.speed-metrics{grid-template-columns:1fr}.speed-metrics .tool-card{padding:16px}.speed-secondary{grid-template-columns:repeat(2,minmax(0,1fr))}.speed-secondary strong{font-size:1.125rem}}
