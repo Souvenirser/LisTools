@@ -53,7 +53,7 @@ test('time zone search is bounded accessible offline and usable at 320px RTL',as
 test('MD5 navigation and page use a plain checksum name while keeping original results',async({page})=>{
  await page.goto('/convert.html#md5');await selectLanguage(page,'zh-Hans');
  await expect(page.locator('h1')).toContainText('MD5 校验');
- await page.locator('#convert-source .cm-content').fill('abc');await expect(page.locator('#md5-values input').first()).toHaveValue('900150983cd24fb0d6963f7d28e17f72');
+ await page.locator('#convert-source .cm-content').fill('abc');await expect(page.locator('#md5-values textarea').first()).toHaveValue('900150983cd24fb0d6963f7d28e17f72');
  await page.locator('button.brand').click();await page.locator('#tool-menu-search').fill('MD5');
  await expect(page.locator('#tool-menu a[data-target="convert.html#md5"] .tool-menu-name')).toContainText('MD5 校验');
 });

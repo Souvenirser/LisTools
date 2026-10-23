@@ -40,11 +40,11 @@ test('Ans history freezes its original full-precision value and angle context',a
   await page.locator('#calc-mode-scientific').click();await page.locator('#angle-unit').selectOption('rad');await input.focus();await input.press('Escape');
   await page.locator('[data-key="ans"]').click();await input.pressSequentially('*10');await input.press('Enter');await expect(page.locator('#result')).toHaveText('3');
   await input.fill('9');await input.press('Enter');await expect(page.locator('#result')).toHaveText('9');
-  await page.locator('#angle-unit').selectOption('deg');await page.locator('#history button').nth(1).click();await expect(input).toHaveValue('(0.3)*10');await expect(page.locator('#angle-unit')).toHaveValue('rad');
+  await page.locator('#angle-unit').selectOption('deg');if(await page.locator('#calculator-history-toggle').getAttribute('aria-expanded')!=='true')await page.locator('#calculator-history-toggle').click();await page.locator('#history button').nth(1).click();await expect(input).toHaveValue('(0.3)*10');await expect(page.locator('#angle-unit')).toHaveValue('rad');
   await input.press('Enter');await expect(page.locator('#result')).toHaveText('3');
   await input.fill('2Ans');await input.press('Enter');await expect(page.locator('#result')).toHaveText('6');
   await input.fill('9');await input.press('Enter');await expect(page.locator('#result')).toHaveText('9');
-  await page.locator('#history button').nth(1).click();await expect(input).toHaveValue('2(3)');await input.press('Enter');await expect(page.locator('#result')).toHaveText('6');
+  if(await page.locator('#calculator-history-toggle').getAttribute('aria-expanded')!=='true')await page.locator('#calculator-history-toggle').click();await page.locator('#history button').nth(1).click();await expect(input).toHaveValue('2(3)');await input.press('Enter');await expect(page.locator('#result')).toHaveText('6');
 });
 
 test('scientific colored keys stay usable in a narrow RTL layout',async({page})=>{

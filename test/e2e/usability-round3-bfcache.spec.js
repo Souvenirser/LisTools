@@ -1,0 +1,26 @@
+import {test,expect} from '@playwright/test';
+import {readdir,stat} from 'node:fs/promises';
+import {selectLanguage} from './language-helpers.js';
+test.skip(({browserName})=>browserName!=='chromium','BFCache launch flags are Chromium-specific');
+test.use({launchOptions:{executablePath:process.env.LISTOOLS_CHROME||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',ignoreDefaultArgs:['--disable-back-forward-cache']}});
+async function open(page,name){await page.addInitScript(()=>addEventListener('pageshow',event=>window.wasCached=event.persisted));await page.goto(`/${name}.html`);await selectLanguage(page,'en');}
+async function restore(page,name){await page.goto('/text.html');await page.goBack({waitUntil:'commit',timeout:5000}).catch(error=>{if(!page.url().includes(`/${name}.html`))throw error;});await page.waitForFunction(()=>window.wasCached===true);}
+
+test('T4 two real cached restores retain selected JSON difference and allow accurate navigation',async({page})=>{
+ await open(page,'diff');await page.locator('#left-source .cm-content').fill('{"a":1,"b":2,"c":3}');await page.locator('#right-source .cm-content').fill('{"a":4,"b":5,"c":6}');await page.locator('#compare').click();await expect(page.locator('#change-path')).toHaveText('/a');await page.locator('#next').click();await expect(page.locator('#change-path')).toHaveText('/b');
+ for(let i=0;i<2;i++){await restore(page,'diff');await expect(page.locator('#diff-index')).toHaveValue('2');await expect(page.locator('#change-path')).toHaveText('/b');await expect(page.locator('#next')).toBeEnabled();await page.locator('#next').click();await expect(page.locator('#diff-index')).toHaveValue('3');await expect(page.locator('#change-path')).toHaveText('/c');await page.locator('#previous').click();await expect(page.locator('#change-path')).toHaveText('/b');}
+});
+test('T5 two real cached restores keep QR canvas, SVG and downloads without a cancelled notice',async({page})=>{
+ await open(page,'qr');await page.locator('#qr-input').fill('cached QR');await page.locator('#qr-generate').click();await expect(page.locator('#qr-canvas')).toBeVisible();
+ for(let i=0;i<2;i++){await restore(page,'qr');await expect(page.locator('#qr-input')).toHaveValue('cached QR');await expect(page.locator('#qr-canvas')).toBeVisible();await expect(page.locator('#qr-png')).toBeEnabled();const pending=page.waitForEvent('download');await page.locator('#qr-svg').click();expect((await pending).suggestedFilename()).toBe('qrcode.svg');await expect(page.locator('#tool-status')).not.toContainText(/cancelled/i);}
+});
+test('T6 cached speed test is stopped and may restart manually without automatic traffic',async({page})=>{
+ const chunks=await Promise.all((await readdir('dist/assets')).filter(name=>/^speedtest-.*\.js$/.test(name)).map(async name=>({name,size:(await stat(`dist/assets/${name}`)).size})));const sdk=chunks.sort((a,b)=>b.size-a.size)[0].name;
+ await page.route(`**/assets/${sdk}`,route=>route.fulfill({contentType:'application/javascript',body:'export default class {results={getSummary:()=>({download:8e6,upload:null,latency:24,jitter:3}),getDownloadBandwidthPoints:()=>[{bps:8e6,duration:20,bytes:1024}],getUploadBandwidthPoints:()=>[],getUnloadedLatencyPoints:()=>[24]};play(){window.speedStarts=(window.speedStarts||0)+1;this.onResultsChange();}pause(){}}'}));
+ await open(page,'speedtest');await page.locator('#speed-start').click();await expect(page.locator('#speed-cancel')).toBeEnabled();await expect.poll(()=>page.evaluate(()=>window.speedStarts)).toBe(1);
+ for(let i=0;i<2;i++){await restore(page,'speedtest');await expect(page.locator('#speed-start')).toBeEnabled();await expect(page.locator('#speed-cancel')).toBeDisabled();expect(await page.evaluate(()=>window.speedStarts)).toBe(i+1);await expect(page.locator('#speed-rating-partial')).toBeVisible();await page.locator('#speed-start').click();await expect.poll(()=>page.evaluate(()=>window.speedStarts)).toBe(i+2);}
+ await page.locator('#speed-cancel').click();
+});
+test('Review cached return during text import shows cancellation and preserves completed result',async({page})=>{
+ await page.addInitScript(()=>{const original=Blob.prototype.arrayBuffer;Blob.prototype.arrayBuffer=async function(){if(this instanceof File&&this.name==='slow.txt')await new Promise(resolve=>window.releaseText=resolve);return original.call(this);};});await open(page,'text');await page.locator('#text-input').fill('old\nold');await page.locator('#text-run').click();await expect(page.locator('#text-result')).toHaveValue('old');await page.locator('#text-file').setInputFiles({name:'slow.txt',mimeType:'text/plain',buffer:Buffer.from('late')});await page.waitForFunction(()=>Boolean(window.releaseText));await page.goto('/qr.html');await page.goBack({waitUntil:'commit',timeout:5000}).catch(error=>{if(!page.url().includes('/text.html'))throw error;});await page.waitForFunction(()=>window.wasCached);await expect(page.locator('#tool-status')).toContainText(/cancelled/i);await expect(page.locator('#text-cancel')).toBeDisabled();await page.evaluate(()=>window.releaseText());await expect(page.locator('#text-input')).toHaveValue('old\nold');await expect(page.locator('#text-result')).toHaveValue('old');
+});
