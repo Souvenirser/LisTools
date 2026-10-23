@@ -1,3 +1,4 @@
+import {textKey} from '../shared/label-key.js';
 // Metadata only: algorithms and encoding tables are loaded inside the Worker.
 const label=(zh,en=zh)=>[zh,en];
 const choices=values=>values.map(v=>Array.isArray(v)?v:[v,v,v]);
@@ -6,7 +7,7 @@ const direction=(zh='编码',en='Encode',reverseZh='解码',reverseEn='Decode')=
 const encodings=['utf-8','utf-16le','utf-16be','gbk','gb18030','big5','shift_jis','euc-kr','windows-1252'];
 const charset=()=>select('charset','文本字符集','Text charset',encodings);
 const entry=(id,zh,en,category,options=[],aliases='',hint=['',''])=>({id,name:label(zh,en),category,options,aliases,hint});
-export const categories=[['encoding','基础编码','Byte encoding'],['escape','转义与 URL','Escapes & URL'],['charset','字符集','Character sets'],['format','格式转换','Data formats'],['digest','摘要与令牌','Hashes & tokens'],['compression','压缩','Compression'],['number','数值与单位','Numbers & units'],['text','文本处理','Text']].map(([id,zh,en])=>({id,name:label(zh,en)}));
+export const categories=[['encoding','基础编码','Byte encoding'],['escape','转义与 URL','Escapes & URL'],['charset','字符集','Character sets'],['format','格式转换','Data formats'],['digest','校验与令牌','Hashes & tokens'],['compression','压缩','Compression'],['number','数值与单位','Numbers & units'],['text','文本处理','Text']].map(([id,zh,en])=>({id,name:label(zh,en)}));
 const wire=key=>select(key,key==='inputFormat'?'输入表示':'输出表示',key==='inputFormat'?'Input representation':'Output representation',[['raw','原始文本 / 文件字节','Raw text / file bytes'],'base64','hex']);
 export const tools=[
   ...[['base64','Base64'],['base64url','Base64URL'],['base32','Base32'],['base32hex','Base32Hex'],['base58','Base58 Bitcoin'],['hex','Hex'],['binary','二进制字节串','Binary bytes']].map(([id,zh,en])=>entry(id,zh,en || zh,'encoding',[direction(),charset()],'encode decode 编码 解码',label('解码先产生原始字节；字符集仅用于编码文本和解码预览。Base58 遵从上游限制：原始字节 2 KiB / 编码文本 4 KiB。','Decoding produces bytes. Charset controls text encoding and decoded preview. Base58 follows upstream limits: 2 KiB of raw bytes / 4 KiB of encoded text.'))),
@@ -32,7 +33,8 @@ export const tools=[
   entry('normalize','Unicode 规范化','Unicode normalization','text',[select('form','规范形式','Normalization',['NFC','NFD','NFKC','NFKD'])],'unicode normalize NFC NFD NFKC NFKD',label('显式修改 Unicode 码点表示；NFKC / NFKD 会折叠兼容字符。','Explicitly changes Unicode codepoint representation. NFKC / NFKD fold compatibility characters.'))
 ];
 export const defaults=tool=>Object.fromEntries(tool.options.map(option=>[option.key,option.value]));
-export function findTools(query='',category='') {
+export function findTools(query='',category='',translate=()=> '') {
+  if(typeof category==='function'){translate=category;category='';}
   const terms=query.toLowerCase().trim().split(/\s+/);
-  return tools.filter(tool=>(!category || tool.category===category) && terms.every(term=>[tool.id,...tool.name,tool.aliases,...categories.find(c=>c.id===tool.category).name].join(' ').toLowerCase().includes(term)));
+  return tools.filter(tool=>(!category || tool.category===category) && terms.every(term=>[tool.id,...tool.name,tool.aliases,translate(textKey(tool.name[1])),translate(textKey(categories.find(c=>c.id===tool.category).name[1])),...categories.find(c=>c.id===tool.category).name].join(' ').toLowerCase().includes(term)));
 }
