@@ -60,3 +60,53 @@ Playwright 为开发测试依赖，不进入扩展运行时。打包许可收集
 ## 测速等级插图：Twemoji
 
 测速页的步行、自行车、摩托车、汽车、高铁、飞机、火箭 SVG 原样复用 [jdecked/twemoji v16.0.1](https://github.com/jdecked/twemoji/tree/v16.0.1/assets/svg)，未作修改。图形版权归 Twitter, Inc. 及其他 Twemoji 贡献者所有，以 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 授权；完整图形许可证随扩展保存在 `speed-levels/LICENSE-GRAPHICS.txt`。原始文件分别为 `1f6b6.svg`、`1f6b4.svg`、`1f3cd.svg`、`1f697.svg`、`1f684.svg`、`2708.svg`、`1f680.svg`。仅打包七张本地图形，不引入 Twemoji 运行库或 CDN 请求。
+
+## Unicode CLDR 48.0.0 unit names
+
+Unit display names for the existing unit converter are a static subset of [Unicode CLDR JSON 48.0.0](https://github.com/unicode-org/cldr-json/tree/48.0.0/cldr-json/cldr-units-full). Standard symbols Wh and grad are retained where CLDR has no matching unit. No CLDR runtime or online request is included.
+
+UNICODE LICENSE V3
+
+COPYRIGHT AND PERMISSION NOTICE
+
+Copyright © 2015-2024 Unicode, Inc.
+
+NOTICE TO USER: Carefully read the following legal agreement. BY
+DOWNLOADING, INSTALLING, COPYING OR OTHERWISE USING DATA FILES, AND/OR
+SOFTWARE, YOU UNEQUIVOCALLY ACCEPT, AND AGREE TO BE BOUND BY, ALL OF THE
+TERMS AND CONDITIONS OF THIS AGREEMENT. IF YOU DO NOT AGREE, DO NOT
+DOWNLOAD, INSTALL, COPY, DISTRIBUTE OR USE THE DATA FILES OR SOFTWARE.
+
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of data files and any associated documentation (the "Data Files") or
+software and any associated documentation (the "Software") to deal in the
+Data Files or Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, and/or sell
+copies of the Data Files or Software, and to permit persons to whom the
+Data Files or Software are furnished to do so, provided that either (a)
+this copyright and permission notice appear with all copies of the Data
+Files or Software, or (b) this copyright and permission notice appear in
+associated Documentation.
+
+THE DATA FILES AND SOFTWARE ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF
+THIRD PARTY RIGHTS.
+
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR HOLDERS INCLUDED IN THIS NOTICE
+BE LIABLE FOR ANY CLAIM, OR ANY SPECIAL INDIRECT OR CONSEQUENTIAL DAMAGES,
+OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,
+WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION,
+ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THE DATA
+FILES OR SOFTWARE.
+
+Except as contained in this notice, the name of a copyright holder shall
+not be used in advertising or otherwise to promote the sale, use or other
+dealings in these Data Files or Software without prior written
+authorization of the copyright holder.
+
+SPDX-License-Identifier: Unicode-3.0
+
+## SortableJS
+
+SortableJS 1.15.7 (MIT), https://github.com/SortableJS/Sortable/tree/1.15.7, provides local menu drag sorting. Its full license is included in THIRD_PARTY_LICENSES.md in the extension bundle. No CDN is used.
