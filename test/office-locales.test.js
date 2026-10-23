@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { languages } from '../src/i18n-core.js';
-const ids=['office','calculator','dates','qr','images','text','units','money','pdf','draw','timer'];
+const ids=['office','calculator','dates','qr','images','text','units','money','pdf','draw','timer','workspace'];
 const base=JSON.parse(readFileSync(new URL('../src/locales/en.json',import.meta.url),'utf8'));
 const parameters=text=>[...text.matchAll(/\{\{([^}]+)\}\}/g)].map(match=>match[1]).sort();
 test('all new office labels and diagnostics have complete fifty-language resources',()=>{
@@ -19,8 +19,10 @@ test('all new office labels and diagnostics have complete fifty-language resourc
   }
 });
 test('English message manifests are synchronized with the shipped language source',()=>{
-  for(const id of ids.filter(id=>id!=='office')){
+  for(const id of ids.filter(id=>!['office','workspace'].includes(id))){
     const messages=JSON.parse(readFileSync(new URL(`../src/tools/${id}/messages.json`,import.meta.url),'utf8'));
     for(const [key,value] of Object.entries(messages))assert.equal(base[id][key],value,`${id}.${key}`);
   }
 });
+
+test('all fifty languages include every supported unit label from the offline CLDR subset',async()=>{const {units}=await import('../src/tools/units/core.js');for(const {code}of languages){const resource=JSON.parse(readFileSync(new URL(`../src/locales/${code}.json`,import.meta.url),'utf8'));assert.deepEqual(Object.keys(resource.unitNames).sort(),units.map(unit=>unit.id).sort(),code);for(const value of Object.values(resource.unitNames))assert.ok(typeof value==='string'&&value.trim(),code);}});

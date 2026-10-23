@@ -25,7 +25,7 @@ test('calculator and Cron share identical language control geometry',async({page
 test('Cron language changes preserve dates, generator edits and worker task',async({page})=>{
   await page.addInitScript(()=>{window.cronRequests=[];const Native=window.Worker;window.Worker=class extends Native{postMessage(data,...rest){if(data.input&&data.options?.dialect)window.cronRequests.push(data);return super.postMessage(data,...rest);}};});
   await page.goto('/cron.html');await expect(page.locator('#cron-dates tbody tr')).toHaveCount(10);
-  await page.locator('.cron-builder summary').click();const value=page.locator('#cron-builder-fields input').first();await value.fill('17');
+  await page.locator('#cron-task-build').click();const value=page.locator('#cron-builder-fields input').first();await value.fill('17');
   const dates=await page.locator('#cron-dates tbody').textContent();const reference=await page.locator('#cron-result-context').textContent();
   const requests=await page.evaluate(()=>window.cronRequests.length);
   await selectLanguage(page,'ru');await page.waitForTimeout(550);
@@ -119,7 +119,7 @@ for(const width of [640,900,1440])test(`shared language controls stay aligned on
     const style=getComputedStyle(element),control=element.querySelector('.choices'),inner=element.querySelector('.choices__inner'),image=control.querySelector('img');
     const box=control.getBoundingClientRect();return {display:style.display,gap:style.gap,margin:style.marginBlock,top:box.top,bottom:box.bottom,left:box.left,right:box.right,height:box.height,font:getComputedStyle(inner).fontSize,imageLoaded:image.complete&&image.naturalWidth>0,overflow:document.documentElement.scrollWidth>innerWidth+2};
    });
-   expect(metrics.display,file).toBe('flex');expect(metrics.gap,file).toBe('8px');expect(metrics.margin,file).toBe('0px');expect(metrics.height,file).toBe(38);expect(metrics.font,file).toBe('14px');expect(metrics.imageLoaded,file).toBe(true);expect(metrics.left,file).toBeGreaterThanOrEqual(0);expect(metrics.right,file).toBeLessThanOrEqual(width);expect(metrics.bottom,file).toBeLessThanOrEqual(72);expect(metrics.overflow,file).toBe(false);
+   expect(metrics.display,file).toBe('flex');expect(metrics.gap,file).toBe('8px');expect(metrics.margin,file).toBe('0px');expect(metrics.height,file).toBe(44);expect(metrics.font,file).toBe('16px');expect(metrics.imageLoaded,file).toBe(true);expect(metrics.left,file).toBeGreaterThanOrEqual(0);expect(metrics.right,file).toBeLessThanOrEqual(width);expect(metrics.bottom,file).toBeLessThanOrEqual(72);expect(metrics.overflow,file).toBe(false);
   }
  }
 });
@@ -141,17 +141,17 @@ test('late Cron description imports cannot replace the latest choice',async({pag
 
 test('Cron weekday presets and month rules retain exact syntax and occurrence numbers',async({page})=>{
  test.setTimeout(60000);const {readFileSync}=await import('node:fs');
- await page.goto('/cron.html');await page.locator('.cron-builder summary').click();await page.locator('#cron-auto').uncheck();await page.locator('#cron-dialect').selectOption('quartz');await page.locator('#cron-zone').fill('UTC');await page.locator('#cron-reference').fill('2026-02-01T00:00:00Z');
+ await page.goto('/cron.html');await page.locator('#cron-task-build').click();await page.locator('#cron-auto').uncheck();await page.locator('#cron-dialect').selectOption('quartz');await page.locator('#cron-zone').fill('UTC');await page.locator('#cron-preview-settings summary').click();await page.locator('#cron-reference').fill('2026-02-01T00:00:00Z');
  for(const code of ['zh-Hans','zh-Hant','en','ru','de','ar','hi','ja','ko','fr','fil']){
   await selectLanguage(page,code);const {cron}=JSON.parse(readFileSync(new URL(`../../src/locales/${code}.json`,import.meta.url)));
   const weekdays=await page.evaluate(locale=>{const f=new Intl.DateTimeFormat(locale,{weekday:'long',timeZone:'UTC'});return [1,5].map(day=>f.format(Date.UTC(2024,0,day))).join('–');},code);
   await expect(page.locator('[data-preset=weekdays]')).toHaveText(`${weekdays} 09:00`);
   for(const [expression,token,key] of [['0 0 9 LW * ?','LW','lastWeekday'],['0 0 9 1W * ?','1W','nearest'],['0 0 9 ? * MON#3','MON#3','nth'],['0 0 9 L-3 * ?','L-3','offset']]){
-   await page.locator('#cron-expression').fill(expression);await page.locator('#cron-run').click();await expect(page.locator('#cron-dates tbody tr')).toHaveCount(10);
+   await page.locator('#cron-task-parse').click();await page.locator('#cron-expression').fill(expression);await page.locator('#cron-run').click();await expect(page.locator('#cron-dates tbody tr')).toHaveCount(10);
    const row=page.locator('#cron-fields tbody tr').filter({has:page.locator('td',{hasText:new RegExp('^'+token+'$')})});
    await expect(row.locator('td').last()).toHaveText(cron.meanings[key].replace('{{weekdays}}',weekdays).replace('{{n}}','3').replace('{{days}}','3'));
   }
-  await page.locator('#cron-builder-load').click();const select=page.locator('#cron-builder-fields select').first();await select.selectOption('list');
+  await page.locator('#cron-task-build').click();await page.locator('#cron-builder-load').click();const select=page.locator('#cron-builder-fields select').first();await select.selectOption('list');
   await expect(select.locator('option[value=every]')).toHaveText(cron.meanings.every);await expect(page.locator('#cron-builder-fields input').first()).toHaveAttribute('placeholder',/0,15,30/);
  }
 });

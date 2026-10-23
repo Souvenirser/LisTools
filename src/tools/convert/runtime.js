@@ -48,9 +48,8 @@ export async function executeConversion(toolId, input, options = {}, overrides =
       extension:result.extension || (kind === 'text' ? 'txt' : 'bin'), notice
     };
   } catch (error) {
-    const match = error.message.match(/(?:at position|position)\s+(\d+)/i);
-    const position = error.position ?? (match ? Number(match[1]) : undefined);
+    const position = error.position;
     const prefix = typeof input === 'string' && position !== undefined ? input.slice(0,position).split(/\r\n|\r|\n/) : [];
-    return { status:'error', message:error.message.slice(0,600), position, line:error.line ?? (prefix.length || undefined), column:error.column ?? (prefix.length ? prefix.at(-1).length + 1 : undefined) };
+    return { status:'error', code:error.code || 'ConversionError', message:error.message.slice(0,600), position, line:error.line ?? (prefix.length || undefined), column:error.column ?? (prefix.length ? prefix.at(-1).length + 1 : undefined) };
   }
 }

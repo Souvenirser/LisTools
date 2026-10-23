@@ -43,10 +43,10 @@ test('partial tests never rate an unavailable measurement as a slow connection',
 test('speed page fills wide screens and keeps rating pictures inside narrow RTL screens',async({page})=>{
   await page.setViewportSize({width:2550,height:1107});await page.goto('/speedtest.html');
   const root=await page.locator('#tool-root').boundingBox(),panel=await page.locator('#speed-rating').boundingBox(),controls=await page.locator('#speed-controls').boundingBox();
-  expect(root.width).toBeGreaterThan(2400);expect(panel.x).toBeGreaterThan(controls.x+controls.width);expect(root.x+root.width).toBeGreaterThan(2500);
+  expect(root.width).toBe(1920);expect(panel.x).toBeGreaterThan(controls.x+controls.width);expect(Math.abs(root.x-(2550-1920)/2)).toBeLessThanOrEqual(1);
   await selectLanguage(page,'ar');
   for(const width of [640,320]){
     await page.setViewportSize({width,height:960});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
-    for(const image of await page.locator('#speed-level-scale img').all())expect(await image.evaluate(element=>element.complete&&element.naturalWidth>0)).toBe(true);
+    await page.locator('#speed-scale-details summary').click();for(const image of await page.locator('#speed-level-scale img').all())expect(await image.evaluate(element=>element.complete&&element.naturalWidth>0)).toBe(true);
   }
 });

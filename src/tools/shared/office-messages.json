@@ -32,7 +32,7 @@
   "exampleNotice": "This is a local example. Edit the input to try your own content.",
   "regexPurpose": "Developer tool: find and extract text using a pattern, or replace matching text. Try the order-number example first.",
   "orderNumbers": "Extract order numbers",
-  "regexName": "Regex testing (developers)",
+  "regexName": "Regex testing",
   "exampleConfirm": "Loading the example will replace the current input, files and results. Continue?",
   "presetConfirm": "Replace the custom pattern and flags with this preset?",
   "match": "Match",

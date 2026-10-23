@@ -1,3 +1,4 @@
+import {addTaskGuide} from './tools/shared/task-guide.js';
 import {registerContentCheck} from './tools/shared/content-state.js';
 import { mountTool, copyText, downloadText, notify } from './tools/shared/page.js';
 import { t, language, onLanguageChange, translateDOM } from './i18n.js';
@@ -90,7 +91,7 @@ async function renderDescription() {
   if(revision===descriptionRequest && state===source && language()===locale && description)$('cron-description').textContent=description;
 }
 function renderState() {
-  const ready=state.status==='ready';
+  const ready=state.status==='ready';const next=$('cron-next');if(next)next.textContent=ready&&state.dates.length?t('ux.nextExecution')+' · '+state.dates[0].localTime:'';
   $('cron-status').textContent=({idle:t('cron.idle'),pending:t('common.processing'),ready:t('cron.found',{count:state.dates?.length || 0}),error:t('common.error'),cancelled:t('office.cancelled')})[state.status] || '';
   $('cron-cancel').disabled=state.status!=='pending';
   for(const id of ['cron-copy-dates','cron-download-csv','cron-download-json']) $(id).disabled=!ready || !state.dates.length;
@@ -186,3 +187,16 @@ syntaxNote();loadBuilder();renderState();calculate();
 let cronEngaged=false;document.querySelector('#tool-root').addEventListener('input',()=>{cronEngaged=true;});document.querySelector('#cron-run').addEventListener('click',()=>{cronEngaged=true;});
 
 registerContentCheck(()=>Boolean($('cron-expression').value&&($('cron-expression').value!=='*/5 * * * *'||cronEngaged)));
+
+const cronSettings=$('cron-input-title').closest('section'),cronResults=$('cron-result-title').closest('section'),cronLayout=document.createElement('div');cronLayout.className='cron-workspace';cronSettings.before(cronLayout);cronLayout.append(cronSettings,cronResults);cronLayout.after(document.querySelector('.cron-builder'));
+const fieldDetails=document.createElement('details');fieldDetails.innerHTML='<summary data-i18n="cron.field"></summary>';const fieldTable=$('cron-fields').parentElement;cronResults.append(fieldDetails);fieldDetails.append(fieldTable);translateDOM(fieldDetails);
+
+const cronCompact=document.createElement('div');cronCompact.className='tool-fields cron-compact-fields';document.querySelector('.cron-context').prepend(cronCompact);cronCompact.append($('cron-dialect').closest('.field'),$('cron-count').closest('.field'));fieldDetails.prepend($('cron-syntax-note'));fieldDetails.prepend(fieldDetails.querySelector('summary'));
+
+const previewSettings=document.createElement('details');previewSettings.id='cron-preview-settings';previewSettings.innerHTML='<summary data-i18n="ux.previewSettings"></summary><div class="tool-fields"></div>';const cronContext=cronSettings.querySelector('.cron-context');cronSettings.querySelector('.tool-actions').after(previewSettings);previewSettings.querySelector('div').append($('cron-count').closest('.field'),$('cron-reference').closest('.field'),$('cron-now'));
+cronContext.prepend($('cron-expression').closest('.field'));$('cron-zone').closest('.field').append($('cron-device-zone'));
+const cronBuilder=document.querySelector('.cron-builder');cronBuilder.classList.remove('tool-card');previewSettings.before(cronBuilder);cronBuilder.hidden=true;
+addTaskGuide('cron',[{id:'parse',key:'ux.parseCron'},{id:'build',key:'ux.buildCron'}],{choose(task){cronBuilder.hidden=task!=='build';cronBuilder.open=task==='build';$('cron-run').hidden=task==='build';$('cron-builder-apply').classList.toggle('primary',task==='build');}});
+const nextExecution=document.createElement('p');nextExecution.id='cron-next';nextExecution.className='result-conclusion';$('cron-description').after(nextExecution);
+const presets=document.querySelector('.cron-presets'),presetButtons=[...presets.querySelectorAll('button')],presetSelect=document.createElement('select');presetSelect.id='cron-presets';presets.prepend(presetSelect);for(const button of presetButtons)button.hidden=true;
+function refreshCronPresets(){presetSelect.replaceChildren(...[['',t('ux.templates')],...presetButtons.map(button=>[button.dataset.preset,button.textContent])].map(([value,text])=>{const option=document.createElement('option');option.value=value;option.textContent=text;return option;}));presetSelect.setAttribute('aria-label',t('ux.templates'));}presetSelect.onchange=()=>{presetButtons.find(button=>button.dataset.preset===presetSelect.value)?.click();presetSelect.value='';};onLanguageChange(refreshCronPresets);refreshCronPresets();translateDOM(previewSettings);renderState();

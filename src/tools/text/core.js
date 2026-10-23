@@ -20,7 +20,7 @@ export async function processText(request={}) {
  if(typeof input!=='string' || !input.isWellFormed()) return failure('invalidText');
  if(encoder.encode(input).length>limits.input) return failure('inputLimit');
  try {
-  let output=input,truncated=false;
+  let output=input,truncated=false;const summary={};
   if(['lines','case','newline'].includes(operation)) {
    const result=await executeConversion(operation,input,operation==='lines'?{...request,operation:request.lineOperation||'dedupe'}:request);
    if(result.status==='error') return failure('conversionError');
@@ -29,22 +29,23 @@ export async function processText(request={}) {
    if(!request.find) return failure('emptyFind');
    const pieces=input.split(request.find);
    if(encoder.encode(input).length+(pieces.length-1)*(encoder.encode(request.replacement||'').length-encoder.encode(request.find).length)>limits.output) return failure('outputLimit');
-   output=pieces.join(request.replacement||'');
+   output=pieces.join(request.replacement||'');summary.replacements=pieces.length-1;
   } else if(operation==='extract') {
    if(!['email','phone','url'].includes(request.kind)) return failure('invalidOperation');
    const result=await runRegex({input,pattern:patterns[request.kind],flags:'giu',operation:'extract'});
    if(result.status==='error') return failure('conversionError');
    let extracted=result.matches.map(match=>match.value);
    if(request.dedupe) extracted=[...new Set(extracted)];
-   output=extracted.join('\n');truncated=result.truncated;
+   output=extracted.join('\n');truncated=result.truncated;summary.matches=result.matches.length;summary.items=extracted.length;
   } else if(operation==='mask') {
    for(const kind of ['id','phone','email']) if(request[kind]) {
-    output=output.replace(new RegExp(patterns[kind],'gu'),value=>kind==='phone'?`${value.slice(0,3)}****${value.slice(-4)}`:kind==='id'?`${value.slice(0,6)}********${value.slice(-4)}`:`${value[0]}***${value.slice(value.indexOf('@'))}`);
+    output=output.replace(new RegExp(patterns[kind],'gu'),value=>{summary.masked=(summary.masked||0)+1;return kind==='phone'?`${value.slice(0,3)}****${value.slice(-4)}`:kind==='id'?`${value.slice(0,6)}********${value.slice(-4)}`:`${value[0]}***${value.slice(value.indexOf('@'))}`;});
    }
   } else if(operation!=='count') return failure('invalidOperation');
+  if(operation==='lines'){summary.inputLines=input?input.split(/\r\n|\r|\n/).length:0;summary.outputLines=output?output.split(/\r\n|\r|\n/).length:0;}
   const blob=new Blob([output],{type:'text/plain;charset=utf-8'});
   if(blob.size>limits.output) return failure('outputLimit');
   const preview=blob.size>limits.preview?new TextDecoder().decode(await blob.slice(0,limits.preview).arrayBuffer(),{stream:true}):output;
-  return {status:'ready',blob,preview,outputBytes:blob.size,counts:countText(input,locale),truncated,previewTruncated:blob.size>limits.preview};
+  return {status:'ready',summary,blob,preview,outputBytes:blob.size,counts:countText(input,locale),truncated,previewTruncated:blob.size>limits.preview};
  } catch {return failure('conversionError');}
 }

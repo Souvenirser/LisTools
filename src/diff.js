@@ -31,11 +31,26 @@ let lastState = { status: 'idle' };
 let currentChange;
 let latestImportStartedAt;
 let pendingDocuments;
+let restoration;
 const localeCompartments = { left:new Compartment(), right:new Compartment() };
 const mode = () => $('diff-mode').value;
 const contentName = () => mode() === 'json' ? 'JSON' : t('common.text');
 const inputLocales = { left:new Compartment(), right:new Compartment() };
 const inputViews = Object.fromEntries(['left', 'right'].map(side => [side, new EditorView({ parent:sources[side], extensions:inputExtensions(side) })]));
+const stackedResults=matchMedia('(max-width:760px)');
+let resultStacked=stackedResults.matches;
+let mergeScrollTop=0;
+function resultLayout(transfer=false){
+ if(!merge)return;
+ const currentMerge=merge,stacked=stackedResults.matches,top=mergeScrollTop,panes=[merge.a.dom.parentElement,merge.b.dom.parentElement];
+ for(const [index,pane]of panes.entries()){const label=$(index?'right-result-title':'left-result-title').textContent;pane.dataset.label=label;pane.setAttribute('role','group');pane.setAttribute('aria-label',label);}
+ merge.a.requestMeasure();merge.b.requestMeasure();
+ // Restore after CodeMirror has measured the new scroll container.
+ if(transfer)requestAnimationFrame(()=>{if(merge!==currentMerge||stacked!==stackedResults.matches)return;for(const pane of panes)pane.scrollTop=stacked?top:0;merge.dom.scrollTop=stacked?0:top;});
+}
+stackedResults.addEventListener('change',()=>{resultStacked=stackedResults.matches;resultLayout(true);});
+const overview=document.createElement('div');overview.className='diff-overview';
+document.querySelector('.toolbar').after(overview);overview.append(document.querySelector('.diff-summary'),document.querySelector('.diff-navigation'));
 const diagnostics = createDiagnosticView({ root:$('diff-error-panel'), sources:{left:inputViews.left.contentDOM, right:inputViews.right.contentDOM}, onLocate:locateError, contentName, t, language });
 
 const notify = createNotifier();
@@ -45,7 +60,7 @@ function inputLocale(side) {
     EditorView.contentAttributes.of({ 'aria-labelledby':`${side}-source-label`, spellcheck:'false', dir:'ltr' })];
 }
 function inputExtensions(side) {
-  return [drawSelection(), historyExtensions(), keymap.of([...searchKeymap, ...defaultKeymap, ...historyKeymap]), inputLocales[side].of(inputLocale(side)),
+  return [lineNumbers(),drawSelection(), historyExtensions(), keymap.of([...searchKeymap, ...defaultKeymap, ...historyKeymap]), inputLocales[side].of(inputLocale(side)),
     EditorView.updateListener.of(update => { if (update.docChanged) inputChanged(side); })];
 }
 function sourceText(side) { return inputViews[side].state.doc.toString(); }
@@ -64,9 +79,9 @@ function inputChanged(side) {
 }
 
 function navigation() {
-  $('previous').disabled = !total || current === 0;
-  $('next').disabled = !total || current === total - 1;
-  $('diff-index').disabled = !total;
+  $('previous').disabled = Boolean(restoration) || !total || current === 0;
+  $('next').disabled = Boolean(restoration) || !total || current === total - 1;
+  $('diff-index').disabled = Boolean(restoration) || !total;
   $('diff-index').value = total ? current + 1 : 1;
   $('diff-index').max = total || 1;
   $('diff-length').textContent = total || ['idle', 'ready'].includes(lastState.status) ? total.toLocaleString(language()) : '—';
@@ -117,8 +132,10 @@ function render(state) {
   const receivedAt = performance.now();
   lastState = state;
   currentChange = undefined;
-  document.body.dataset.status = state.status;
+  document.body.dataset.status = state.status;document.body.classList.toggle('has-comparison',state.status==='ready'||Boolean(merge));
+  inputLayout();
   resetSummary();
+  const inputSummary=document.querySelector('.diff-inputs>summary>span');if(inputSummary){inputSummary.dataset.i18n=state.status==='ready'||merge?'ux.diffModifyInput':'diff.inputs';inputSummary.textContent=t(inputSummary.dataset.i18n);}
   const pending = state.status === 'pending';
   $('compare').disabled = pending;
   $('cancel').hidden = !pending;
@@ -128,7 +145,7 @@ function render(state) {
   if (state.status === 'ready') {
     try {
       diagnostics.status(mode() === 'json' ? state.validation : { left:'readable', right:'readable' });
-      const scrollTop = merge?.dom.scrollTop || 0;
+      const scrollTop = merge ? stackedResults.matches?merge.a.dom.parentElement.scrollTop:merge.dom.scrollTop : 0;
       total = state.total;
       $('diff-total').textContent = total ? t('diff.total', { count:total }) : t('diff.equal');
       $('diff-total').classList.toggle('equal', total === 0);
@@ -151,12 +168,17 @@ function render(state) {
           diffConfig: createEditorDiffConfig(changes), highlightChanges: true, gutter: true
         });
         renderedDocuments = { left:merge.a.state.doc, right:merge.b.state.doc };
+        const currentMerge=merge;
+        merge.dom.addEventListener('scroll',()=>{if(merge===currentMerge&&!resultStacked&&merge.dom.scrollHeight>merge.dom.clientHeight)mergeScrollTop=merge.dom.scrollTop;},{passive:true});
+        for(const view of [merge.a,merge.b])view.dom.parentElement.addEventListener('scroll',()=>{const pane=view.dom.parentElement;if(merge===currentMerge&&resultStacked&&pane.scrollHeight>pane.clientHeight)mergeScrollTop=pane.scrollTop;},{passive:true});
       }
-      merge.dom.scrollTop = scrollTop;
+      mergeScrollTop=scrollTop;
       merge.a.dom.dataset.diffSide = 'left';
       merge.b.dom.dataset.diffSide = 'right';
       $('inputs').open = false;
+      inputLayout();resultLayout(true);
       $('compare').textContent = t('diff.recompare');
+      if(restoration){current=Math.min(restoration.index,total-1);if(total)controller.select(current);else restoration=undefined;}
       navigation();
       const builtAt = performance.now();
       requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -179,6 +201,7 @@ function render(state) {
     return;
   }
   if (state.status === 'error') {
+    restoration=undefined;
     pendingDocuments = undefined;
     errorLabels(state);
     $('diff-placeholder').hidden = true;
@@ -195,6 +218,11 @@ function showChange(change) {
   currentChange = change;
   navigation();
   changeLabels(change);
+  if(restoration){
+    const saved=restoration;restoration=undefined;
+    for(const [view,position] of [[merge.a,saved.a],[merge.b,saved.b]]){view.dispatch({selection:position.selection});view.scrollDOM.scrollTop=position.top;view.scrollDOM.scrollLeft=position.left;}
+    window.scrollTo(saved.x,saved.y);navigation();return;
+  }
   const a = Math.min(change.anchorA, merge.a.state.doc.length);
   const b = Math.min(change.anchorB, merge.b.state.doc.length);
   merge.a.dispatch({ selection: { anchor: a } });
@@ -209,6 +237,7 @@ const controller = createDiffController({
 });
 
 function invalidate() {
+  restoration=undefined;
   pendingDocuments = undefined;
   controller.cancel();
   destroyView();
@@ -291,6 +320,7 @@ bindFileDrop(document, {
 });
 $('compare').addEventListener('click', compare);
 $('cancel').addEventListener('click', () => {
+  restoration=undefined;
   pendingDocuments = undefined;
   for (const side of ['left', 'right']) { versions[side] += 1; reading[side] = false; }
   controller.cancel();
@@ -315,7 +345,7 @@ $('swap').addEventListener('click', () => {
   else compareIfReady();
 });
 function select(index) {
-  if (!total) return;
+  if (!total || restoration) return;
   current = Math.max(0, Math.min(total - 1, Math.trunc(Number(index) || 0)));
   navigation();
   controller.select(current);
@@ -334,7 +364,9 @@ function locateError(issue) {
   view.dispatch({ selection: { anchor, head:Math.min(anchor + (issue.length || 0), view.state.doc.length) }, effects: EditorView.scrollIntoView(anchor, { y: 'center', x:'center' }) });
   view.focus();
 }
-$('inputs').addEventListener('toggle', () => { if ($('inputs').open) syncEditors(); });
+function inputLayout(){document.body.classList.toggle('editing-comparison',Boolean(merge)&&$('inputs').open);$('diff-edit-inputs').hidden=!merge||$('inputs').open;for(const view of [inputViews.left,inputViews.right,merge?.a,merge?.b])view?.requestMeasure();}
+$('diff-edit-inputs').addEventListener('click',()=>{$('inputs').open=true;inputLayout();});
+$('inputs').addEventListener('toggle', () => { if ($('inputs').open) syncEditors();inputLayout(); });
 $('diff-mode').addEventListener('change', () => {
   syncEditors();
   invalidate();
@@ -349,7 +381,17 @@ document.addEventListener('keydown', event => {
     compare();
   }
 }, true);
-window.addEventListener('pagehide', () => controller.cancel());
+window.addEventListener('pagehide', event => {
+  if(event.persisted&&lastState.status==='ready'&&merge&&total){
+    const position=view=>({selection:view.state.selection,top:view.scrollDOM.scrollTop,left:view.scrollDOM.scrollLeft});
+    restoration={index:current,a:position(merge.a),b:position(merge.b),x:scrollX,y:scrollY};
+  }
+  for(const side of ['left','right']){versions[side]++;reading[side]=false;}
+  controller.cancel();
+  if(lastState.status==='pending'){restoration=undefined;render({status:merge?'dirty':'idle'});}
+  navigation();
+});
+window.addEventListener('pageshow',event=>{if(event.persisted&&restoration)compare();});
 
 function localeExtensions(side) {
   const phrases = { '$ unchanged lines':t('diff.unchanged'), 'unchanged lines':t('diff.unchangedLabel'), 'Find':t('common.search'), 'Replace':t('common.replace'), 'replace':t('common.replace'), 'replace all':t('common.replaceAll'), 'match case':t('common.matchCase'), 'regexp':t('common.regularExpression'), 'by word':t('common.wholeWord'), 'next':t('common.next'), 'previous':t('common.previous'), 'all':t('common.selectAll'), 'close':t('common.close'), 'by':t('common.replace') };
@@ -388,6 +430,7 @@ function statusLabels(state) {
 }
 onLanguageChange(() => {
   refreshModeLabels(); fileLabels(); diagnostics.refresh();
+  resultLayout();
   $('compare').textContent = t(merge ? 'diff.recompare' : 'diff.compare');
   if (lastState.status === 'ready') {
     $('diff-total').textContent = total ? t('diff.total', { count:total }) : t('diff.equal');

@@ -24,7 +24,7 @@ const entries=[...pages.filter(page=>!page.file.includes('#')).map(page=>page.fi
 // Vite 的主入口许可报告不包含仅由 Worker 引用的依赖。
 const licensePath = path.join(dist, 'THIRD_PARTY_LICENSES.md');
 let licenses = await readFile(licensePath, 'utf8');
-const workerDependencies = ['microdiff','jsonc-parser','diff','@radix-ui/colors','i18next','@scure/base','entities','jsesc','@kayahr/text-encoding','yaml','fast-xml-parser','papaparse','@noble/hashes','crc-32','change-case','decimal.js','colord','fflate','@cloudflare/speedtest','croner','cronstrue','choices.js','flag-icons','nanoid','@eslint-community/regexpp','mathjs','qrcode','jsqr','cropperjs','browser-image-compression','pdf-lib','nzh'];
+const workerDependencies = ['microdiff','jsonc-parser','diff','@radix-ui/colors','i18next','@scure/base','entities','jsesc','@kayahr/text-encoding','yaml','fast-xml-parser','papaparse','@noble/hashes','crc-32','change-case','decimal.js','colord','fflate','@cloudflare/speedtest','croner','cronstrue','choices.js','flag-icons','nanoid','@eslint-community/regexpp','mathjs','qrcode','jsqr','cropperjs','browser-image-compression','pdf-lib','nzh','sortablejs'];
 const supplemental = { 'change-case':'change-case-5.4.4.LICENSE', '@nodable/entities':'nodable-entities-3.1.0.LICENSE' };
 const visited = new Set();
 async function locatePackage(name,from) {
@@ -89,7 +89,7 @@ for (const { code } of languages) {
   if (code === 'en') continue; // English fallback is embedded in the common entry.
   assert.ok(Object.keys(files).some(name => name.startsWith(`assets/${code}-`) && name.endsWith('.js')), `扩展缺少语言包：${code}`);
 }
-for (const name of ['@radix-ui/colors', 'i18next','choices.js','flag-icons','fuse.js','@vvo/tzdb']) assert.ok(licenses.includes(`## ${name} - `), `许可证缺失：${name}`);
+for (const name of ['@radix-ui/colors', 'i18next','choices.js','flag-icons','fuse.js','@vvo/tzdb','sortablejs']) assert.ok(licenses.includes(`## ${name} - `), `许可证缺失：${name}`);
 const flagCodes=new Set((await readdir(path.join(root,'node_modules/flag-icons/flags/4x3'))).filter(name=>/^[a-z]{2}\.svg$/.test(name)).map(name=>name.slice(0,2)));
 for(const flag of flagCodes)assert.ok(Object.keys(files).some(name=>name.startsWith(`assets/${flag}-`)&&name.endsWith('.svg')),`扩展缺少国旗：${flag}`);
 assert.equal(Object.keys(files).filter(name=>/^assets\/[a-z]{2}-[^/]+\.svg$/.test(name)).length,flagCodes.size,'国家和地区国旗必须完整且不重复');

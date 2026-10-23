@@ -1,27 +1,33 @@
-.tool-menu { width:360px; max-width:calc(100vw - 16px); max-height:560px; display:flex; flex-direction:column; overflow:hidden; padding:0; border:1px solid var(--border); border-radius:10px; background:var(--surface); color:var(--text); box-shadow:0 12px 40px #0002; font-size:14px; line-height:1.5; }
+.tool-menu { width:360px; max-width:calc(100vw - 16px); max-height:560px; display:flex; flex-direction:column; overflow:hidden; padding:0; border:1px solid var(--border); border-radius:10px; background:var(--surface); color:var(--text); box-shadow:0 12px 40px #0002; font-size:1rem; line-height:1.5; }
 #tool-menu { position:fixed; margin:0; max-height:min(560px,calc(100dvh - 96px)); }
 #tool-menu:not(:popover-open) { display:none; }
 .tool-menu-search { padding:12px; flex-shrink:0; border-bottom:1px solid var(--border); }
-.tool-menu-search input { width:100%; min-height:38px; border:1px solid var(--border); border-radius:6px; background:var(--surface); color:var(--text); padding:7px 10px; font:inherit; }
+.tool-menu-search input { width:100%; min-height:44px; border:1px solid var(--border); border-radius:6px; background:var(--surface); color:var(--text); padding:7px 10px; font:inherit; }
 .tool-menu-list { min-height:0; overflow-y:auto; overscroll-behavior:contain; padding:6px; }
-.tool-menu-link, .tool-menu summary { display:flex; align-items:center; gap:8px; min-height:42px; padding:8px; border-radius:6px; color:var(--text); text-decoration:none; cursor:pointer; list-style:none; }
+.tool-menu-link, .tool-menu summary { display:flex; align-items:center; gap:8px; min-height:44px; padding:8px; border-radius:6px; color:var(--text); text-decoration:none; cursor:pointer; list-style:none; }
 .tool-menu summary::-webkit-details-marker { display:none; }
 .tool-menu-link:hover, .tool-menu summary:hover { background:var(--slate-3); }
-.tool-menu-link[aria-current="page"] { background:var(--blue-3); color:var(--blue-11); font-weight:600; }
-.tool-menu-icon { display:inline-grid; place-items:center; width:28px; flex:0 0 28px; font:17px/1 var(--mono); direction:ltr; }
+.tool-menu-link[aria-current="page"] { background:var(--blue-3); color:var(--blue-12); font-weight:600; }
+.tool-menu-icon { display:inline-grid; place-items:center; width:28px; flex:0 0 28px; font:1.0625rem/1 var(--mono); direction:ltr; }
 .tool-menu-name { min-width:0; overflow-wrap:anywhere; }
-.tool-menu-name small { display:block; color:var(--muted); font-size:11px; font-weight:400; }
-.tool-menu-arrow { margin-inline-start:auto; font-size:20px; line-height:1; transition:transform .1s; }
+.tool-menu-name small { display:block; color:var(--muted); font-size:.875rem; font-weight:400; }
+.tool-menu-arrow { margin-inline-start:auto; font-size:1.25rem; line-height:1; transition:transform .1s; }
 .tool-menu details[open] > summary > .tool-menu-arrow { transform:rotate(90deg); }
 .tool-menu-group { margin-inline-start:18px; border-inline-start:1px solid var(--border); padding-inline-start:4px; }
 .tool-menu-empty { margin:16px; color:var(--muted); }
-.tool-menu-footer { display:flex; flex-shrink:0; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px 12px; padding:10px 12px; border-top:1px solid var(--border); font-size:11px; color:var(--muted); }
+.tool-menu-footer { display:flex; flex-shrink:0; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px 12px; padding:10px 12px; border-top:1px solid var(--border); font-size:.875rem; color:var(--muted); }
 .feedback-link { display:inline-flex; align-items:center; min-height:24px; color:var(--blue-11); text-decoration:none; white-space:nowrap; }
 .feedback-link:hover { text-decoration:underline; }
 .workbench-footer > .feedback-link { margin-inline-start:auto; }
-.tool-menu-support { display:flex; align-items:center; justify-content:center; gap:6px; width:100%; min-height:32px; padding:6px 8px; border-radius:6px; color:var(--blue-11); font-size:12px; text-decoration:none; overflow-wrap:anywhere; }
-.tool-menu-support:hover { background:var(--blue-3); }
+.tool-menu-support { display:flex; align-items:center; justify-content:center; gap:6px; width:100%; min-height:44px; padding:6px 8px; border-radius:6px; color:var(--blue-11); font-size:.875rem; text-decoration:none; overflow-wrap:anywhere; }
+.tool-menu-support:hover { background:var(--blue-3); color:var(--blue-12); }
 [dir="rtl"] .tool-menu-arrow { transform:rotate(180deg); }
-.toolbox-cue{font-size:12px;font-weight:500;border-inline-start:1px solid var(--border);padding-inline-start:10px;margin-inline-start:4px;color:var(--muted)}
-@media(max-width:480px){button.brand{gap:5px}.toolbox-cue{padding-inline-start:5px;font-size:11px}}
-@media(max-width:480px){button.brand{position:relative}.toolbox-cue{position:absolute;inset-inline-start:0;bottom:-12px;border:0;padding:0;margin:0;max-width:100%;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+.tool-menu-secondary{font-size:.875rem;color:var(--muted);padding:8px;margin:8px 0 0;border-top:1px solid var(--border)}
+.tool-menu-order-controls{flex-shrink:0;padding:0 12px 8px;border-bottom:1px solid var(--border)}
+.tool-menu-order-controls button{font:inherit;font-size:1rem;min-height:44px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);padding:6px 10px;cursor:pointer}
+.tool-menu-order-controls .primary{background:var(--blue-11);border-color:var(--blue-11);color:white}
+.tool-menu-order-actions,.tool-menu-move-actions{display:flex;flex-wrap:wrap;gap:8px}.tool-menu-move-actions{margin-top:8px}
+#menu-sort-status{font-size:.875rem;line-height:1.5;margin:6px 0 0;overflow-wrap:anywhere}#menu-sort-status:empty{display:none}
+.tool-menu-sort-row{display:flex;align-items:center;gap:10px;min-height:44px;padding:4px 8px;border-radius:6px;min-width:0}.tool-menu-sort-handle{flex:0 0 36px;min-height:44px;width:36px;border:0;border-radius:6px;background:transparent;color:var(--muted);font:1.25rem/1 system-ui;cursor:grab;touch-action:none}
+.tool-menu-sort-row .tool-menu-name{flex:1;overflow-wrap:anywhere}.is-sort-selected{outline:2px solid var(--blue-8);outline-offset:-2px}.tool-menu-sort-ghost{opacity:.35;background:var(--blue-3)}.tool-menu.is-sorting summary{padding-inline-start:4px}.tool-menu.is-sorting .tool-menu-list{overscroll-behavior:contain}.tool-menu.is-sorting .tool-menu-sort-handle:focus-visible{outline:2px solid var(--blue-11)}
+.tool-menu.is-sorting .tool-menu-search{display:none}.tool-menu.is-sorting summary{min-height:48px;padding-block:2px}.tool-menu-sort-row{padding-block:2px}

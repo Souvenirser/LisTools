@@ -7,10 +7,10 @@
     <title data-i18n="diff.name">LisTools · JSON / 文本对比</title>
     <link rel="icon" href="/icons/icon-48.png" />
   </head>
-  <body class="diff-page">
+  <body class="diff-page" data-layout="editor">
     <header class="app-header">
       <button type="button" class="brand" data-i18n-aria-label="common.navigation"><span class="brand-mark">Li</span>LisTools<span class="brand-caret" aria-hidden="true">▾</span></button>
-      <span class="header-divider"></span><span class="header-description"><span data-i18n="common.toolbox">开发者工具箱</span></span>
+      <span class="header-divider"></span><span class="header-description"><span data-i18n="common.toolbox">实用工具箱</span></span>
     </header>
     <div class="app-layout">
       <main>
@@ -26,7 +26,8 @@
           <label class="select-label"><span data-i18n="diff.mode">对比模式</span><select id="diff-mode" aria-label="对比模式" data-i18n-aria-label="diff.mode"><option value="json" data-i18n="diff.jsonMode">JSON 结构</option><option value="text" data-i18n="diff.textMode">纯文本</option></select></label>
           <button class="primary" id="compare"><span data-i18n="diff.compare">开始对比</span></button><button id="cancel" hidden><span data-i18n="common.cancel">取消</span></button>
           <button id="swap"><span data-i18n="diff.swap">交换左右</span></button><button id="clear" class="quiet"><span data-i18n="common.clear">清空</span></button>
-          <span class="toolbar-spacer"></span><label class="check-label"><input type="checkbox" id="only-diff" checked /><span data-i18n="diff.fold">收起未变化行</span></label>
+          <button id="diff-edit-inputs" hidden data-i18n="ux.diffModifyInput">修改输入</button>
+          <span class="toolbar-spacer"></span><label class="check-label"><input type="checkbox" id="only-diff" /><span data-i18n="diff.fold">收起未变化行</span></label>
         </div>
         <div id="diff-error-panel" role="region" aria-label="中文错误详情" aria-live="polite" hidden></div>
         <details class="diff-inputs" id="inputs" open>

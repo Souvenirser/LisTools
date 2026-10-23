@@ -38,5 +38,5 @@ export function createSpeedTestController({onState,loadEngine=async()=>(await im
       engine.play();
     } catch {if(id===generation)finish('error','无法启动测速 / Could not start the speed test.');}
   }
-  return {start,cancel:()=>finish('cancelled'),clear:()=>{stop();onState({status:'idle'});},dispose:stop};
+  return {start,cancel:()=>finish('cancelled'),clear:()=>{stop();onState({status:'idle'});},dispose:()=>{if(running)finish('cancelled');else stop();}};
 }

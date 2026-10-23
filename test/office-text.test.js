@@ -25,3 +25,9 @@ test('extraction uses embedded format boundaries and reports match truncation',a
  const result=await processText({input:'x 13812345678 1138123456789 https://example.com/a a+b@example.org',operation:'extract',kind:'phone'});assert.equal(result.preview,'13812345678');
  const many=await processText({input:'13812345678 '.repeat(10001),operation:'extract',kind:'phone',dedupe:true});assert.equal(many.preview,'13812345678');assert.equal(many.truncated,true);
 });
+test('operation summaries use full processed content without changing exports',async()=>{
+ const lines=await processText({input:'a\nb\na',operation:'lines',lineOperation:'dedupe'});assert.deepEqual(lines.summary,{inputLines:3,outputLines:2});assert.equal(await lines.blob.text(),'a\nb');
+ const extract=await processText({input:'a@example.com a@example.com',operation:'extract',kind:'email',dedupe:true});assert.equal(extract.summary.matches,2);assert.equal(extract.summary.items,1);
+ const replace=await processText({input:'a.a.a',operation:'replace',find:'.',replacement:'-'});assert.equal(replace.summary.replacements,2);
+ const mask=await processText({input:'13812345678',operation:'mask',phone:true});assert.equal(mask.summary.masked,1);
+});

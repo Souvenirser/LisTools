@@ -8,7 +8,7 @@ export function createMd5View({source,output,setDocument,setEditable,controller,
   const $=id=>document.getElementById(id);
   const controls=document.createElement('section');controls.id='md5-controls';controls.className='md5-controls';
   controls.innerHTML=`<div class="md5-fields">
-    <label><span data-i18n="common.tools"></span><select id="md5-mode"></select></label>
+    <label><span data-i18n="common.type"></span><select id="md5-mode"></select></label>
     <label id="md5-representation-field"><span data-i18n="md5.representation"></span><select id="md5-representation"></select></label>
     <label id="md5-format-field" hidden><span data-i18n="md5.outputFormat"></span><select id="md5-format"></select></label>
     <label id="md5-skip-field" class="check-label" hidden><input id="md5-skip" type="checkbox"><span data-i18n="md5.skipEmpty"></span></label>
@@ -26,10 +26,10 @@ export function createMd5View({source,output,setDocument,setEditable,controller,
   const actions=document.createElement('section');actions.id='md5-actions';
   actions.innerHTML=`<div class="toolbar"><button id="md5-run" class="primary" data-i18n="md5.run"></button><button id="md5-cancel" data-i18n="common.cancel" disabled></button><label id="md5-auto-field" class="check-label"><input id="md5-auto" type="checkbox" checked><span data-i18n="md5.auto"></span></label><span class="toolbar-spacer"></span><button id="md5-copy-item" data-i18n="md5.copyItem" hidden></button><button id="md5-copy-all" data-i18n="common.copyAll" disabled></button><button id="md5-csv" data-i18n="md5.downloadCsv" hidden disabled></button><button id="md5-json" data-i18n="md5.downloadJson" hidden disabled></button><button id="md5-clear" class="quiet" data-i18n="common.clear"></button></div>
   <progress id="md5-progress" max="1" value="0" hidden></progress><p id="md5-status" role="status" aria-live="polite"></p><p id="md5-truncated" class="md5-help" data-i18n="md5.truncatedNote"></p><p class="md5-security" data-i18n="md5.security"></p>`;
-  document.querySelector('.convert-actions').before(actions);
+  document.querySelector('.convert-editors').before(actions);
   const formats=['hex32lower','hex32upper','hex16lower','hex16upper','base64'];
   const modes=['text','lines','files','hmac'];
-  let active=false,mode='text',items=[],files=[],state={status:'idle'},progress;
+  let active=false,mode='text',items=[],files=[],state={status:'idle'},progress,parkedText;
   const format=()=>$('md5-format').value || 'hex32lower';
   const error=item=>t(`md5.errors.${item.errorCode || 'unknown'}`,item.errorParams);
   const bytes=n=>n>=1024**3?`${(n/1024**3).toFixed(2)} GiB`:n>=1024**2?`${(n/1024**2).toFixed(1)} MiB`:n>=1024?`${(n/1024).toFixed(1)} KiB`:`${n} B`;
@@ -42,10 +42,13 @@ export function createMd5View({source,output,setDocument,setEditable,controller,
   for(const value of formats) {
     const row=document.createElement('div');row.className=`md5-value${value==='hex32lower'?' md5-primary':''}`;
     const label=document.createElement('label');label.dataset.i18n=`md5.formats.${value}`;label.htmlFor=`md5-value-${value}`;
-    const input=document.createElement('input');input.id=label.htmlFor;input.readOnly=true;input.dir='ltr';input.spellcheck=false;
+    const input=document.createElement('textarea');input.rows=2;input.id=label.htmlFor;input.readOnly=true;input.dir='ltr';input.spellcheck=false;
     const button=document.createElement('button');button.dataset.i18n='common.copy';button.disabled=true;button.addEventListener('click',()=>copy(input.value));
     row.append(label,input,button);$('md5-values').append(row);valueFields.set(value,{input,button});
   }
+  const other=document.createElement('details');other.id='md5-other-formats';other.innerHTML='<summary data-i18n="md5.outputFormat"></summary>';
+  $('md5-values').append(other);for(const row of [...$('md5-values').children])if(row!==other&&!row.classList.contains('md5-primary'))other.append(row);
+  const resultActions=document.createElement('div');resultActions.className='md5-result-actions toolbar';document.querySelector('.convert-editors').after(resultActions);resultActions.append($('md5-copy-all'),$('md5-copy-item'),$('md5-csv'),$('md5-json'));
   async function copy(value) {if(!value)return;try{await navigator.clipboard.writeText(value);notify(t('common.copied'));}catch{notify(t('common.copyFailed'));}}
   function comparison(hex,expected,representation,target) {
     const match=hex?compareMd5(hex,expected,representation):{status:'empty'};
@@ -75,7 +78,7 @@ export function createMd5View({source,output,setDocument,setEditable,controller,
       const name=document.createElement('td');name.textContent=row.name;name.dir='ltr';
       const size=document.createElement('td');size.textContent=String(row.size);size.dir='ltr';
       const status=document.createElement('td');status.innerHTML='<span data-file-status></span><progress max="1" value="0"></progress>';
-      const digest=document.createElement('td');const value=document.createElement('input');value.readOnly=true;value.dir='ltr';value.dataset.fileDigest='';value.setAttribute('aria-label',t('md5.digest'));
+      const digest=document.createElement('td');const value=document.createElement('textarea');value.rows=2;value.readOnly=true;value.dir='ltr';value.dataset.fileDigest='';value.setAttribute('aria-label',t('md5.digest'));
       const button=document.createElement('button');button.dataset.i18n='common.copy';button.addEventListener('click',()=>copy(value.value));digest.append(value,button);
       const expected=document.createElement('td');const input=document.createElement('input');input.dir='ltr';input.autocomplete='off';input.spellcheck=false;input.value=row.expected || '';input.setAttribute('aria-label',t('md5.expected'));
       const select=document.createElement('select');select.append(...['hex32lower','base64','hex16lower'].map(format=>makeOption(format,`md5.formats.${format}`)));select.value=row.expectedFormat || 'hex32lower';select.dataset.i18nAriaLabel='md5.expectedFormat';select.setAttribute('aria-label',t('md5.expectedFormat'));
@@ -120,6 +123,7 @@ export function createMd5View({source,output,setDocument,setEditable,controller,
     $('md5-file-count').textContent=files.length?`${files.length} / ${md5Limits.files}`:'';
   }
   function onState(next) {
+    if(!active)return;
     if(next.status==='idle'&&state.status==='pending'&&mode==='hmac')clearKey();
     state=next;
     if(next.status==='idle')reset();
@@ -144,14 +148,15 @@ export function createMd5View({source,output,setDocument,setEditable,controller,
     }
   }
   function importFiles(selected) {
+    if(!selected.length)return;
+    if(selected.length>md5Limits.files){notify(t('md5.errors.fileCount'));return;}
     controller.invalidate();clearKey();
-    if(selected.length>md5Limits.files){files=[];fileTable();notify(t('md5.errors.fileCount'));return;}
     files=selected.map((file,index)=>({id:String(index),file,name:file.name,size:file.size,status:'queued',expected:'',expectedFormat:'hex32lower'}));
     fileTable();layout();
   }
   function translate() {
-    translateDOM(controls);translateDOM(single);translateDOM(actions);translateDOM(table);
-    for(const tr of table.querySelectorAll('tr'))for(const input of tr.querySelectorAll('input'))input.setAttribute('aria-label',t(input.readOnly?'md5.digest':'md5.expected'));
+    translateDOM(controls);translateDOM(single);translateDOM(actions);translateDOM(resultActions);translateDOM(table);
+    for(const tr of table.querySelectorAll('tr'))for(const input of tr.querySelectorAll('input,[data-file-digest]'))input.setAttribute('aria-label',t(input.readOnly?'md5.digest':'md5.expected'));
     layout();renderResults(false);statusText();
     $('tool-title').textContent=t('md5.title');$('tool-hint').textContent=t('md5.description');
     document.querySelector('.page-heading h1').textContent=t('md5.title');document.querySelector('.page-heading p').textContent=t('md5.description');document.title=`${t('md5.title')} · LisTools`;
@@ -175,8 +180,8 @@ export function createMd5View({source,output,setDocument,setEditable,controller,
     const data=exportMd5(mode==='files'?files:items,format(),type,labels);const url=URL.createObjectURL(new Blob([data],{type:type==='json'?'application/json;charset=utf-8':'text/csv;charset=utf-8'}));
     const link=document.createElement('a');link.href=url;link.download=`listools-md5.${type}`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   });
-  return {hasContent:()=>active&&Boolean(files.length||items.length||$('md5-key').value||$('md5-expected').value),get mode(){return mode;},onState,onEvent,execute,changed,importFiles,translate,
-    activate({inputFile}={}){active=true;setEditable(true);document.body.classList.add('md5-page');controls.hidden=false;actions.hidden=false;single.hidden=false;if(inputFile){mode='files';$('md5-mode').value=mode;importFiles([inputFile instanceof File?inputFile:new File([inputFile],'listools-bytes')]);}translate();onState({status:'idle'});},
-    deactivate(){active=false;clearKey();items=[];files=[];fileTable();document.body.classList.remove('md5-page');controls.hidden=true;actions.hidden=true;single.hidden=true;table.hidden=true;},
+  return {hasContent:()=>Boolean(files.length||active&&(items.length||$('md5-key').value||$('md5-expected').value)),getInputFiles:()=>files.map(row=>row.file),get mode(){return mode;},onState,onEvent,execute,changed,importFiles,translate,
+    activate({inputFile}={}){active=true;setEditable(true);document.body.classList.add('md5-page');controls.hidden=false;actions.hidden=false;resultActions.hidden=false;single.hidden=false;if(inputFile&&!(files.length===1&&files[0].file===inputFile)){mode='files';$('md5-mode').value=mode;importFiles([inputFile instanceof File?inputFile:new File([inputFile],'listools-bytes')]);}if(mode!=='files'&&parkedText!==undefined&&parkedText!==source.state.doc.toString())onState({status:'idle'});translate();renderResults();},
+    deactivate(){if(active){parkedText=source.state.doc.toString();if(state.status==='pending')controller.cancel();}active=false;clearKey();document.body.classList.remove('md5-page');controls.hidden=true;actions.hidden=true;resultActions.hidden=true;single.hidden=true;table.hidden=true;},
     clearKey};
 }

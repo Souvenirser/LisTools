@@ -96,3 +96,11 @@ test('overall timeout preserves partial statistics and stops the engine',async()
   assert.equal(states.at(-1).status,'incomplete');assert.equal(states.at(-1).reason,'timeout');
   assert.ok(engine.paused);controller.dispose();
 });
+
+test('leaving a running speed test records partial cancellation and permits restart',async()=>{
+ const states=[],engines=[];
+ class Engine{results={getSummary:()=>({download:8e6})};constructor(){engines.push(this);}play(){}pause(){this.paused=true;}}
+ const controller=createSpeedTestController({onState:state=>states.push(state),loadEngine:async()=>Engine});
+ await controller.start();controller.dispose();assert.equal(states.at(-1).status,'incomplete');assert.equal(states.at(-1).reason,'cancelled');assert.ok(engines[0].paused);
+ const count=states.length;controller.dispose();assert.equal(states.length,count);await controller.start();assert.equal(states.at(-1).status,'running');engines[1].onFinish();controller.dispose();assert.equal(states.at(-1).status,'complete');
+});

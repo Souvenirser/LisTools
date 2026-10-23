@@ -1,3 +1,4 @@
+import {textKey} from '../shared/label-key.js';
 // These are intentionally small format checks/extractors. Limits are shown beside
 // each rule; none claims to validate identity, reachability or a complete standard.
 const rule=(id,name,pattern,flags,tags,description,limitation,positive,negative)=>({id,name,pattern,flags,tags,description,limitation,positive,negative});
@@ -63,7 +64,7 @@ export const rules=[
   rule('json-number',['JSON 数字形状','JSON number shape'],String.raw`^-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?$`,'',
     ['数据 JSON 数字','data JSON number'],['检查 JSON 数字词法形状','Checks JSON number lexical syntax'],['不检查数值精度或有限性，不解析完整 JSON','No precision or finite-range check; not a full JSON parser'],['-0.5e+2','0'],['+1','01']),
 ];
-export function findRules(query='') {
+export function findRules(query='',translate=()=> '') {
   const needle=query.trim().toLocaleLowerCase();
-  return rules.filter(item=>!needle || [item.id,item.pattern,...item.name,...item.tags,...item.description,...item.limitation].join(' ').toLocaleLowerCase().includes(needle));
+  return rules.filter(item=>!needle || [item.id,item.pattern,...[item.name,item.tags,item.description,item.limitation].map(pair=>translate(textKey(pair[1]))),...item.name,...item.tags,...item.description,...item.limitation].join(' ').toLocaleLowerCase().includes(needle));
 }

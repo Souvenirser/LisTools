@@ -1,25 +1,25 @@
 .tool-page #tool-root { width: 100%; padding-bottom: 24px; }
 .tool-page .page-heading { margin-bottom: 20px; }
-.tool-card { border: 1px solid var(--border); border-radius: 9px; padding: 18px; background: var(--surface); min-width: 0; margin-bottom: 16px; }
+.tool-card { border: 1px solid var(--border); border-radius: 10px; padding: 24px; background: var(--surface); min-width: 0; margin-bottom: 24px; }
 .tool-card > h2 { margin-bottom: 14px; }
-.tool-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; }
+.tool-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; align-items:start; }
 .tool-fields { display: flex; flex-wrap: wrap; gap: 14px; align-items: end; }
 .field { display: flex; flex-direction: column; gap: 6px; min-width: 140px; flex: 1; }
 .field label { font-weight: 550; }
-.tool-page main input:not([type='checkbox']):not([type='radio']), .tool-page main textarea { width: 100%; min-height: 38px; padding: 8px 10px; border: 1px solid var(--border); border-radius: 5px; background: var(--surface); }
+.tool-page main input:not([type='checkbox']):not([type='radio']), .tool-page main textarea { width: 100%; min-height:44px; padding: 8px 10px; border: 1px solid var(--border); border-radius: 5px; background: var(--surface); }
 .tool-page main textarea { min-height: 90px; font-family: var(--mono); }
 .tool-page fieldset { border: 1px solid var(--border); border-radius: 6px; margin: 14px 0; padding: 12px; }
 .tool-page legend { color: var(--muted); padding: 0 5px; }
 .tool-page .check-label { display: inline-flex; margin: 6px 16px 6px 0; }
 .tool-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 14px 0; }
-.tool-note { color: var(--muted); font-size: 12px; line-height: 1.7; overflow-wrap: anywhere; }
+.tool-note { color: var(--muted); font-size: .875rem; line-height: 1.7; overflow-wrap: anywhere; }
 .tool-error { color: var(--error-text); background: var(--error-bg); border: 1px solid var(--error-border); padding: 12px; border-radius: 5px; white-space: pre-wrap; }
-.tool-status { min-height: 24px; font-size: 13px; margin-block: 10px; overflow-wrap: anywhere; }
+.tool-status { min-height: 24px; font-size: .875rem; margin-block: 10px; overflow-wrap: anywhere; }
 .tool-output { font-family: var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; }
-.tool-table { width: 100%; border-collapse: collapse; text-align: start; font-size: 13px; }
+.tool-table { width: 100%; border-collapse: collapse; text-align: start; font-size: .875rem; }
 .tool-table th,.tool-table td { padding: 9px 10px; border-bottom: 1px solid var(--border); text-align: start; vertical-align: top; overflow-wrap: anywhere; }
 .tool-table th { color: var(--muted); font-weight: 550; }
-.tool-page .cm-editor { min-height: 220px; height: 100%; border: 1px solid var(--border); border-radius: 5px; overflow: hidden; font-size: 14px; direction: ltr; }
+.tool-page .cm-editor { min-height: 220px; height: 100%; border: 1px solid var(--border); border-radius: 5px; overflow: hidden; font-size: 1rem; line-height:1.625; direction: ltr; }
 .tool-page .cm-scroller { overflow: auto; max-height: 520px; font-family: var(--mono); }
 .tool-page .cm-content { min-height: 220px; }
 .tool-page details { margin-block: 12px; }
