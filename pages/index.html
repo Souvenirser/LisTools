@@ -7,10 +7,10 @@
     <title data-i18n="json.title">LisTools · JSON 解析与美化</title>
     <link rel="icon" href="/icons/icon-48.png" />
   </head>
-  <body>
+  <body data-layout="editor">
     <header class="app-header">
       <button type="button" class="brand" data-i18n-aria-label="common.navigation"><span class="brand-mark">Li</span>LisTools<span class="brand-caret" aria-hidden="true">▾</span></button>
-      <span class="header-divider"></span><span class="header-description"><span data-i18n="common.toolbox">开发者工具箱</span></span>
+      <span class="header-divider"></span><span class="header-description"><span data-i18n="common.toolbox">实用工具箱</span></span>
     </header>
     <div class="app-layout">
       <main>
@@ -25,13 +25,10 @@
           <label class="select-label"><span data-i18n="json.indent">缩进</span> <select id="indent" aria-label="缩进空格" data-i18n-aria-label="json.indent"><option value="2">2</option><option value="4">4</option></select></label>
           <label class="check-label"><input type="checkbox" id="auto-format" checked /><span data-i18n="json.auto">自动美化</span></label>
           <span class="toolbar-spacer"></span>
-          <button id="import"><span data-i18n="common.import">导入文件</span></button>
-          <input id="file" type="file" accept=".json,.txt,application/json,text/plain" hidden dir="ltr" />
-          <button id="clear" class="quiet"><span data-i18n="common.clear">清空</span></button>
         </div>
         <div class="workspace">
           <section class="panel input-panel" aria-label="JSON 输入面板" data-i18n-aria-label="common.input">
-            <div class="panel-heading"><h2><span data-i18n="common.input">输入</span></h2><span id="input-info"><span data-i18n="json.raw">原始 JSON</span></span></div>
+            <div class="panel-heading"><h2><span data-i18n="common.input">输入</span></h2><span id="input-info"><span data-i18n="json.raw">原始 JSON</span></span><span class="input-actions"><button id="import"><span data-i18n="common.import">导入文件</span></button><input id="file" type="file" accept=".json,.txt,application/json,text/plain" hidden dir="ltr" /><button id="clear" class="quiet"><span data-i18n="common.clear">清空</span></button></span></div>
             <label for="source" class="sr-only"><span data-i18n="json.source">JSON 输入</span></label>
             <textarea id="source" placeholder="在这里粘贴 JSON，或直接拖入 JSON 文件…" spellcheck="false" wrap="off" autocapitalize="off" autocomplete="off" data-i18n-placeholder="json.sourceHint" dir="ltr"></textarea>
             <div class="panel-footer"><span id="file-name"><span data-i18n="json.supported">支持对象、数组及 JSON 原始值</span></span><span>UTF-8</span></div>
