@@ -3,7 +3,7 @@ import {t,onLanguageChange} from '../../i18n.js';
 export function actionArea(actions,status=document.getElementById('tool-status')){
  actions.classList.add('workspace-actions');
  const area=document.createElement('div');area.className='workspace-action-area';actions.before(area);area.append(actions);if(status)area.append(status);
- const media=matchMedia('(max-width:1099px), (max-height:700px)');
+ const media=matchMedia('(max-width:1099px), (max-height:800px)');
  function resize(){
    const keyboard=visualViewport&&visualViewport.height<innerHeight*.7;
    const fixed=media.matches&&!keyboard;
@@ -28,15 +28,17 @@ export function mediaWorkspace(id){
  const input=document.createElement('div');input.className='workspace-input';layout.append(input);input.append(drop,queue);
  settings.classList.add('workspace-options');layout.append(settings);
  const count=document.createElement('span');count.className='queue-count';const heading=queue.querySelector('h2'),title=document.createElement('span');title.dataset.i18n=heading.dataset.i18n;title.textContent=heading.textContent;heading.removeAttribute('data-i18n');heading.replaceChildren(title,count);
- const refreshCount=()=>{count.textContent=` · ${document.querySelectorAll(`#${id}-queue li:not(.is-error) .media-file-name`).length}`;};new MutationObserver(refreshCount).observe(document.getElementById(`${id}-queue`),{childList:true});refreshCount();
+ const refreshCount=()=>{const total=queue.querySelectorAll('.media-file-name').length;queue.hidden=!queue.querySelector('.media-file-name,.is-error');const reason=document.getElementById(id+'-run-reason');if(reason)reason.hidden=total>0;count.textContent=` · ${document.querySelectorAll(`#${id}-queue li:not(.is-error) .media-file-name`).length}`;};new MutationObserver(refreshCount).observe(document.getElementById(`${id}-queue`),{childList:true});refreshCount();
+ const fileInput=document.getElementById(id+'-files'),choose=document.createElement('button');choose.id=id+'-choose';choose.type='button';choose.dataset.i18n=id==='images'?'ux.chooseImages':'ux.choosePdf';fileInput.before(choose);fileInput.hidden=true;choose.onclick=()=>fileInput.click();
+ const reason=document.createElement('p');reason.id=id+'-run-reason';reason.className='tool-note';reason.dataset.i18n='ux.addFiles';document.getElementById(id+'-run').closest('.tool-actions').before(reason);
  const actions=actionArea(document.getElementById(`${id}-run`).closest('.tool-actions'));
  for(const parent of [input,settings]){
-   const notes=parent===input?[...drop.querySelectorAll('.tool-note')]:[...settings.querySelectorAll(':scope > .tool-note')];
+   const notes=parent===input?[...drop.querySelectorAll('.tool-note')]:[...settings.querySelectorAll(':scope > .tool-note:not([data-i18n="images.jpegNotice"]):not([id$="-run-reason"])')];
    if(!notes.length)continue;
    let details=parent===settings?settings.querySelector('details'):null;
-   if(!details){details=document.createElement('details');const summary=document.createElement('summary');summary.dataset.i18n='office.advanced';details.append(summary);notes[0].before(details);}
+   if(!details){details=document.createElement('details');const summary=document.createElement('summary');summary.dataset.i18n=parent===input?'ux.fileLimits':id==='pdf'?'ux.preservation':'ux.advanced';details.append(summary);notes[0].before(details);}
    details.classList.add('workspace-help');details.append(...notes);
  }
- const refresh=()=>{for(const node of root.querySelectorAll('.workspace-help summary'))node.textContent=t('office.advanced');};onLanguageChange(refresh);refresh();
+ const refresh=()=>{for(const node of root.querySelectorAll('[data-i18n^="ux."]'))node.textContent=t(node.dataset.i18n);choose.dataset.i18n=id==='pdf'&&document.getElementById('pdf-mode').value==='images'?'ux.chooseImages':id==='images'?'ux.chooseImages':'ux.choosePdf';choose.textContent=t(choose.dataset.i18n);if(id==='pdf'){const title=drop.querySelector('h2');title.dataset.i18n=choose.dataset.i18n;title.textContent=t(choose.dataset.i18n);}};if(id==='pdf')document.getElementById('pdf-mode').addEventListener('input',refresh);onLanguageChange(refresh);refresh();refreshCount();
  return actions;
 }

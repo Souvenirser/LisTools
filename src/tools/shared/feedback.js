@@ -7,7 +7,7 @@ const routes=new Map(entries.map(item=>[item.file,item.id]));
 const locales=new Set(languages.map(item=>item.code));
 
 export function feedbackTool(pathname,hash='') {
-  return routes.get(currentTarget(pathname,hash)) || 'toolbox';
+  const target=currentTarget(pathname,hash);return routes.get(target) || routes.get(target?.split('#')[0]) || 'toolbox';
 }
 export function buildFeedbackUrl({issuesUrl,tool='toolbox',version,locale='en'}) {
   if(!locales.has(locale))locale='en';
