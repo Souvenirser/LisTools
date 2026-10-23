@@ -1,0 +1,136 @@
+{
+  "version": "1.1.3",
+  "date": "2026-10-23",
+  "baseline": "v1.1.2 / 2be15241951cd1f92aead0d6380c0118609800ae",
+  "unit": {
+    "baselinePassed": 294,
+    "finalPassed": 296,
+    "failed": 0,
+    "publicCommand": "node --test --test-concurrency=1 test/*.test.js",
+    "parallelRecheck": "One existing 50 MB diff test hit the wall-clock budget under parallel load. Isolated and serial full runs passed without algorithm/test changes."
+  },
+  "browser": {
+    "projects": [
+      "chromium",
+      "edge",
+      "webkit"
+    ],
+    "passed": 878,
+    "skipped": 7,
+    "failed": 0,
+    "flaky": 0,
+    "target": "exact final Chrome extension directory via local HTTP preview"
+  },
+  "focusedNewBrowserCases": 22,
+  "visual": {
+    "states": 43,
+    "pageErrors": [],
+    "wholePageOverflow": [],
+    "desktop": "1440x900",
+    "mobile": "390x844",
+    "popup": "360x560"
+  },
+  "nativeMV3": {
+    "version": "1.1.3",
+    "pages": [
+      "index.html",
+      "diff.html",
+      "timestamp.html",
+      "convert.html#md5",
+      "convert.html",
+      "speedtest.html",
+      "cron.html",
+      "password.html",
+      "regex.html",
+      "calculator.html",
+      "dates.html",
+      "qr.html",
+      "images.html",
+      "text.html",
+      "units.html",
+      "money.html",
+      "pdf.html",
+      "draw.html",
+      "timer.html"
+    ],
+    "offline": true,
+    "calculator": "0.3",
+    "diff": "500 rows compared",
+    "qr": "Chinese QR generated",
+    "pdf": "real drag order [400,200] preserved in merged PDF; rejected import keeps result",
+    "images": "real drag order preserved in downloaded ZIP",
+    "menuOrder": "popup saved order appears on QR page",
+    "focus": "German text focus loaded offline",
+    "errors": [],
+    "external": [],
+    "engine": "149.0.7827.55",
+    "popupLifecycle": "unavailable: browserContext.waitForEvent: Timeout 5000ms exceeded while waiting for event \"page\""
+  },
+  "locales": {
+    "count": 50,
+    "newKeysPerLocale": 31,
+    "keyAndPlaceholderChecks": "passed",
+    "representativeVisualLanguages": [
+      "zh-Hans",
+      "en",
+      "de",
+      "ar"
+    ],
+    "nativeProofreadingAllLocales": false,
+    "translation": "Project UI text only; approved Google translation drafts plus parameter checks. No user input was transmitted."
+  },
+  "dependencies": {
+    "newRuntime": 0,
+    "changedVersions": [],
+    "sortable": "existing 1.15.7"
+  },
+  "package": {
+    "asset": "LisTools-1.1.3.zip",
+    "files": 487,
+    "htmlFiles": 19,
+    "zipBytes": 4198067,
+    "unpackedBytes": 12656637,
+    "sha256": "2d51ced66a95dfefccf4db48855758b20f9a2878006c50c322295fd0903f8832",
+    "oldZipBytes": 4156949,
+    "zipDeltaBytes": 41118,
+    "zipDeltaPercent": 0.99,
+    "unpackedDeltaBytes": 124298,
+    "supportIncluded": false,
+    "permissions": [],
+    "hostPermissions": [],
+    "zipMatchesDirectory": true,
+    "chromeMetadata": "browser_specific_settings removed from Chrome asset only; generic source manifest retained"
+  },
+  "scope": {
+    "navEntries": 19,
+    "standaloneTools": 18,
+    "converters": 37,
+    "defaultPage": "index.html",
+    "removedRecruitingToolsRestored": false,
+    "newServices": 0,
+    "newPermissions": 0
+  },
+  "review": {
+    "independentReview": "completed",
+    "fixed": [
+      "Selected PDF removal requires explicit reselection instead of silently falling back.",
+      "Compression mode is the single owner of target/resize control visibility.",
+      "Settings heading targets direct heading instead of the prepended result summary."
+    ]
+  },
+  "limits": [
+    "Firefox launch failed before opening a page: profile folder unavailable.",
+    "Chrome 120 launch process closed before page load; minimum-version verification is not passed.",
+    "WebKit page testing is not native Safari extension acceptance.",
+    "Headless Chrome native toolbar popup lifecycle unavailable; popup page and shared menu state passed.",
+    "Physical touch devices, screen-reader acceptance and fifty-language native proofreading were not completed."
+  ],
+  "preservation": {
+    "originalBaselineFiles": 307,
+    "preCopyAllMatched": true,
+    "unaffectedFilesHashMatched": 231,
+    "originalSupportAndGuardUnchanged": true,
+    "historicalPackagesToVerify": 26,
+    "historicalPackagesVerified": 26
+  }
+}
