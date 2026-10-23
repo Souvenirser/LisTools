@@ -1,5 +1,5 @@
 import {registerContentCheck} from './tools/shared/content-state.js';
-import { initTool, $, clearStatus, taskRunner } from './tools/shared/office.js';
+import { initTool, $, clearStatus, setStatus, taskRunner } from './tools/shared/office.js';
 import { copyText } from './tools/shared/page.js';
 import { t, translateDOM, onLanguageChange } from './i18n.js';
 import './tools/calculator/style.css';
@@ -13,10 +13,10 @@ initTool('calculator',`
       <button id="calc-mode-scientific" aria-pressed="false" data-i18n="calculator.scientific"></button>
     </div>
     <label class="calculator-angle" for="angle-unit"><span data-i18n="calculator.angleUnit"></span>
-      <select id="angle-unit"><option value="deg" data-i18n="calculator.degrees"></option><option value="rad" data-i18n="calculator.radians"></option></select>
+      <select id="angle-unit"><option value="deg">DEG</option><option value="rad">RAD</option></select>
     </label>
   </div>
-  <div class="field"><label for="expression" data-i18n="calculator.expression"></label><input id="expression" dir="ltr" autocomplete="off" spellcheck="false" value="200 + 10%" aria-describedby="expression-hint argument-hint"></div>
+  <div class="field"><label for="expression" data-i18n="calculator.expression"></label><input id="expression" dir="ltr" autocomplete="off" spellcheck="false" placeholder="" data-i18n-placeholder="ux.calculatorExample" aria-describedby="expression-hint argument-hint"></div>
   <p id="expression-hint" class="tool-note" data-i18n="calculator.expressionHint"></p>
   <p id="argument-hint" class="tool-note" hidden></p>
   <div class="calculator-display"><label for="result" data-i18n="calculator.result"></label><output id="result" class="numeric-result" dir="ltr" aria-live="polite"></output><span id="result-context" class="tool-note" hidden></span></div>
@@ -48,11 +48,12 @@ function renderContext(){
   $('result-context').textContent=result?.usesAngle?t(`calculator.${result.context.angleUnit==='deg'?'degrees':'radians'}`):'';
 }
 function renderHistory(){
+  const toggle=$('calculator-history-toggle');if(toggle)toggle.disabled=!history.length;
   $('history-empty').hidden=history.length>0;
   $('history').replaceChildren(...history.map(item=>{
     const li=document.createElement('li'),button=document.createElement('button');
     const context=item.usesAngle?` · ${item.context.angleUnit.toUpperCase()}`:'';
-    button.textContent=`${item.expression} = ${item.approximate?'≈ ':''}${item.display}${context}`;
+    button.textContent=`${item.expression} = ${item.approximate?'≈ ':''}${item.display}`;if(context){const note=document.createElement('small');note.textContent=context.slice(3);button.append(note);}
     button.title=t('calculator.reuse');button.dir='ltr';
     button.addEventListener('click',()=>{
       // Successful expressions only contain whitelisted names; also freeze implicit products such as 2Ans.
@@ -63,13 +64,13 @@ function renderHistory(){
   }));
 }
 function invalidate(){
-  standardResult=standardRequest=false;runner.invalidate();clearStatus();result=undefined;$('result').textContent='';$('copy').disabled=true;$('approximate').hidden=true;renderContext();
+  const had=Boolean(result);standardResult=standardRequest=false;runner.invalidate();clearStatus({keepStale:true});if(had)setStatus('ux.stale');result=undefined;$('result').textContent=$('expression').value?'':'0';$('copy').disabled=true;$('approximate').hidden=true;renderContext();
 }
 function run(business=false){
   standardResult=false;standardRequest=!business&&$('calc-mode-standard').getAttribute('aria-pressed')==='true';clearStatus();result=undefined;$('copy').disabled=true;$('result').textContent='';$('approximate').hidden=true;renderContext();
   runner.process(business?{mode:$('mode').value,first:$('first').value,second:$('second').value}:{input:$('expression').value,angleUnit:$('angle-unit').value,ans});
 }
-function clear(){ $('expression').value='';argumentHint=undefined;renderArgumentHint();invalidate();$('expression').focus(); }
+function clear(){ $('expression').value='';argumentHint=undefined;renderArgumentHint();invalidate();clearStatus();$('expression').focus(); }
 function renderArgumentHint(){ $('argument-hint').hidden=!argumentHint;$('argument-hint').textContent=argumentHint?t('calculator.argumentHint',argumentHint):''; }
 function pressKey(key){
   if(key.id==='equals'){run();return;}
@@ -124,6 +125,7 @@ for(const [id,keys] of [['keypad',standard],['scientific-keypad',scientific]])fo
 for(const calcMode of ['standard','scientific'])$(`calc-mode-${calcMode}`).addEventListener('click',()=>{
   standardResult=standardRequest=false;
   for(const mode of ['standard','scientific'])$(`calc-mode-${mode}`).setAttribute('aria-pressed',String(mode===calcMode));
+  document.querySelector('.calculator-layout').dataset.calcMode=calcMode;
   $('scientific-keypad').hidden=calcMode!=='scientific';$('calculator-keyboards').classList.toggle('is-scientific',calcMode==='scientific');
 });
 $('business-run').addEventListener('click',()=>run(true));$('cancel').addEventListener('click',()=>runner.cancel());
@@ -146,3 +148,13 @@ onLanguageChange(()=>{renderHistory();renderContext();renderArgumentHint();});
 translateDOM($('tool-root'));
 
 registerContentCheck(()=>Boolean(result||history.length||['expression','first','second'].some(id=>$(id).value&&$(id).value!==$(id).defaultValue)));
+
+document.querySelector('.calculator-layout').dataset.calcMode='standard';
+$('result').after($('copy'));
+
+$('result').textContent='0';const calcExample=document.createElement('button');calcExample.id='calculator-example';calcExample.type='button';calcExample.className='quiet';calcExample.dataset.i18n='ux.viewExample';calcExample.textContent=t('ux.viewExample');document.querySelector('.calculator-sidebar').prepend(calcExample);calcExample.onclick=()=>{if(($('expression').value||history.length)&&!confirm(t('office.exampleConfirm')))return;$('expression').value='200 + 10%';invalidate();$('expression').focus();};
+
+const historyCard=$('history').closest('section'),historyToggle=document.createElement('button');historyToggle.id='calculator-history-toggle';historyToggle.type='button';historyToggle.disabled=true;historyToggle.dataset.i18n='calculator.history';historyToggle.textContent=t('calculator.history');historyToggle.setAttribute('aria-expanded','false');
+const calcLayout=document.querySelector('.calculator-layout'),sidebar=document.querySelector('.calculator-sidebar');document.querySelector('.tool-heading').append(historyToggle);historyCard.hidden=true;
+historyToggle.onclick=()=>{historyCard.hidden=!historyCard.hidden;historyToggle.setAttribute('aria-expanded',String(!historyCard.hidden));calcLayout.classList.toggle('history-open',!historyCard.hidden);};
+sidebar.classList.add('calculator-secondary');

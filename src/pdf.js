@@ -2,7 +2,7 @@ import {mediaWorkspace} from './tools/shared/workspace.js';
 import { addTaskGuide } from './tools/shared/task-guide.js';
 import samples from './tools/pdf/examples.json';
 import { t, onLanguageChange, translateDOM } from './i18n.js';
-import { $, initTool, taskRunner, setStatus, showError } from './tools/shared/office.js';
+import { $, initTool, taskRunner, clearStatus, setStatus, showError } from './tools/shared/office.js';
 import { downloadText } from './tools/shared/page.js';
 import { mediaError } from './tools/images/core.js';
 import './tools/pdf/style.css';
@@ -15,11 +15,11 @@ initTool('pdf',`<section class="tool-card" id="pdf-drop"><h2 ${label('import')}>
 let files=[],result,generation=0,busy=false;
 addEventListener('pagehide',()=>{generation++;});
 function renderQueue(){
-  setBusy(busy);
+  setBusy(busy);updateFields();
   const list=$('pdf-queue');list.replaceChildren();
   if(!files.length){const row=document.createElement('li');row.textContent=t('pdf.emptyQueue');list.append(row);}
   files.forEach((file,index)=>{
-    const row=document.createElement('li'),name=document.createElement('span');name.className='media-file-name';name.textContent=`${file.name} · ${(file.size/1024).toFixed(1)} KiB${file.pageCount!==undefined?' · '+t('pdf.pageCount',{count:file.pageCount}):''}`;row.append(name);
+    const row=document.createElement('li'),name=document.createElement('span');name.className='media-file-name';name.textContent=`${file.name} · ${(file.size/1024).toFixed(1)} KiB${file.pageCount!==undefined?' · '+t('pdf.pageCount',{count:file.pageCount}):' · '+t('uiText.unknownPages')}`;row.append(name);
     for(const action of ['up','down','remove']){const button=document.createElement('button');button.textContent=t(`pdf.${action}`);button.setAttribute('aria-label',`${t(`pdf.${action}`)} · ${file.name}`);button.disabled=action==='up'&&index===0||action==='down'&&index===files.length-1;button.onclick=()=>{invalidate();if(action==='remove')files.splice(index,1);else{const other=index+(action==='up'?-1:1);[files[index],files[other]]=[files[other],files[index]];}renderQueue();};row.append(button);}
     list.append(row);
   });
@@ -36,8 +36,9 @@ const runner=taskRunner(()=>new Worker(new URL('./tools/pdf/worker.js',import.me
 });
 function invalidate(){generation++;runner.invalidate();result=undefined;renderResult();}
 async function addFiles(incoming){
-  invalidate();const list=Array.from(incoming);
+  const list=Array.from(incoming);if(!list.length)return;
   if(files.length+list.length>100||files.reduce((n,f)=>n+f.size,0)+list.reduce((n,f)=>n+f.size,0)>100*1024*1024){showError(mediaError('pdf.limit'));return;}
+  invalidate();
   files.push(...list.map(blob=>({blob,name:blob.name,size:blob.size})));renderQueue();
 }
 async function run(inspect=false){
@@ -50,15 +51,15 @@ async function run(inspect=false){
     runner.process({input,options:{mode,pages:$('pdf-pages').value,rotation:Number($('pdf-rotation').value),pageSize:$('pdf-page-size').value,orientation:$('pdf-orientation').value}});
   }catch(error){if(token!==generation)return;setBusy(false);showError(error.code?error:mediaError('office.fileReadError',{name:reading?.name||''}));}
 }
-function updateFields(){const mode=$('pdf-mode').value;$('pdf-pages-field').hidden=!['extract','reorder','delete','rotate'].includes(mode);$('pdf-rotation-field').hidden=mode!=='rotate';$('pdf-size-field').hidden=mode!=='images';$('pdf-orientation-field').hidden=mode!=='images'||$('pdf-page-size').value==='original';}
+function updateFields(){const mode=$('pdf-mode').value;$('pdf-run').textContent=t('ux.pdfRun',{action:t('pdf.'+mode),count:files.length});$('pdf-files').accept=mode==='images'?'image/jpeg,image/png,image/webp':'application/pdf';$('pdf-pages-field').hidden=!['extract','reorder','delete','rotate'].includes(mode);$('pdf-rotation-field').hidden=mode!=='rotate';$('pdf-size-field').hidden=mode!=='images';$('pdf-orientation-field').hidden=mode!=='images'||$('pdf-page-size').value==='original';}
 $('pdf-files').onchange=event=>{addFiles(event.target.files);event.target.value='';};
 $('pdf-drop').ondragover=event=>event.preventDefault();$('pdf-drop').ondrop=event=>{event.preventDefault();addFiles(event.dataTransfer.files);};
 for(const id of ['pdf-mode','pdf-pages','pdf-rotation','pdf-page-size','pdf-orientation'])$(id).addEventListener('input',()=>{invalidate();updateFields();});
 $('pdf-sort').onclick=()=>{invalidate();files.sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true}));renderQueue();};
-$('pdf-clear').onclick=()=>{invalidate();files=[];renderQueue();};$('pdf-run').onclick=()=>run();$('pdf-inspect').onclick=()=>run(true);
+$('pdf-clear').onclick=()=>{invalidate();files=[];renderQueue();clearStatus();};$('pdf-run').onclick=()=>run();$('pdf-inspect').onclick=()=>run(true);
 $('pdf-cancel').onclick=()=>{generation++;runner.cancel();setBusy(false);setStatus('pdf.cancelled');};
 $('pdf-download').onclick=()=>{if(result)downloadText(new Blob([result.bytes],{type:result.type}),result.name);};
-onLanguageChange(()=>{renderQueue();renderResult();translateDOM($('tool-root'));});
+onLanguageChange(()=>{renderQueue();renderResult();translateDOM($('tool-root'));updateFields();});
 renderQueue();setBusy(false);updateFields();
 
 $('pdf-mode').closest('.tool-fields').hidden=true;
@@ -79,8 +80,8 @@ const pdfGuide=addTaskGuide('pdf',modes.map(id=>({id,key:`pdf.${id}`})),{
   await run();
  }
 });
-$('pdf-mode').addEventListener('input',()=>pdfGuide.select($('pdf-mode').value));
-const pdfAdvanced=document.createElement('details');pdfAdvanced.innerHTML='<summary data-i18n="office.advanced"></summary><div class="task-choices"></div>';
+$('pdf-mode').addEventListener('input',()=>pdfGuide.select($('pdf-mode').value));$('pdf-run').removeAttribute('data-i18n');
+const pdfAdvanced=document.createElement('details');pdfAdvanced.innerHTML='<summary data-i18n="uiText.pageAdjust"></summary><div class="task-choices"></div>';
 $('pdf-task-merge').parentElement.after(pdfAdvanced);
 for(const mode of ['reorder','delete','rotate'])pdfAdvanced.querySelector('.task-choices').append($(`pdf-task-${mode}`));
 translateDOM(pdfAdvanced);
