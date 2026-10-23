@@ -26,3 +26,9 @@ test('English message manifests are synchronized with the shipped language sourc
 });
 
 test('all fifty languages include every supported unit label from the offline CLDR subset',async()=>{const {units}=await import('../src/tools/units/core.js');for(const {code}of languages){const resource=JSON.parse(readFileSync(new URL(`../src/locales/${code}.json`,import.meta.url),'utf8'));assert.deepEqual(Object.keys(resource.unitNames).sort(),units.map(unit=>unit.id).sort(),code);for(const value of Object.values(resource.unitNames))assert.ok(typeof value==='string'&&value.trim(),code);}});
+
+
+test('product-refinement UI has fifty complete localized templates with stable parameters',()=>{
+ const expected=base.refinement;
+ for(const {code} of languages){const actual=JSON.parse(readFileSync(new URL(`../src/locales/${code}.json`,import.meta.url),'utf8')).refinement;assert.deepEqual(Object.keys(actual).sort(),Object.keys(expected).sort(),code);for(const [key,value]of Object.entries(actual)){assert.ok(value.trim()&&!/__9\d{3}__|\[\[9\d{3}\]\]/.test(value),code+'/'+key);assert.deepEqual(parameters(value),parameters(expected[key]),code+'/'+key);}}
+});
