@@ -32,7 +32,7 @@ async function embedImage(pdf,file) {
 export async function processPdf({files,mode,pages='',rotation=90,pageSize='a4',orientation='portrait'},progress=()=>{}) {
   if(!Array.isArray(files)||!files.length)fail('noFiles');
   if(files.length>100||files.reduce((n,f)=>n+f.bytes.byteLength,0)>100*1024*1024)fail('limit');
-  const out=await PDFDocument.create();let count=0,outputOrder;
+  const out=await PDFDocument.create();let count=0,outputOrder,sourceFiles;
   if(mode==='images') {
     let totalPixels=0;for(const file of files){const header=await fromFile(file,()=>{try{return imageHeader(new Uint8Array(file.bytes));}catch(error){fail(error.code==='images.dimensions'?'limit':'imageDecode');}});totalPixels+=header.width*header.height;if(totalPixels>120_000_000)fail('limit');}
     for(let i=0;i<files.length;i++) {
@@ -43,6 +43,7 @@ export async function processPdf({files,mode,pages='',rotation=90,pageSize='a4',
     count=files.length;outputOrder=files.map(f=>f.name);
   } else {
     const docs=[];for(let i=0;i<files.length;i++){docs.push(await fromFile(files[i],()=>load(files[i].bytes)));progress({done:i+1,total:files.length});}
+    sourceFiles=docs.map((doc,index)=>({name:files[index].name,pageCount:doc.getPageCount()}));
     count=docs.reduce((n,d)=>n+d.getPageCount(),0);if(count>1000)fail('limit');
     if(mode==='inspect')return {files:docs.map((d,i)=>({name:files[i].name,pageCount:d.getPageCount()})),pageCount:count};
     if(mode==='merge') {outputOrder=[];for(let i=0;i<docs.length;i++){const pdf=docs[i];for(const page of await out.copyPages(pdf,pdf.getPageIndices()))out.addPage(page);outputOrder.push(...pdf.getPageIndices().map(p=>`${files[i].name}: ${p+1}`));}}
@@ -50,7 +51,7 @@ export async function processPdf({files,mode,pages='',rotation=90,pageSize='a4',
       if(docs.length!==1)fail('singleFile');const pdf=docs[0],all=pdf.getPageIndices();
       if(mode==='split') {
         const entries={};let totalBytes=0;for(let i=0;i<count;i++){const part=await PDFDocument.create();part.addPage((await part.copyPages(pdf,[i]))[0]);const bytes=await part.save();totalBytes+=bytes.length;if(totalBytes>100*1024*1024)fail('limit');entries[`page-${i+1}.pdf`]=bytes;progress({done:i+1,total:count});}
-        const bytes=zipSync(entries,{level:0});if(bytes.length>100*1024*1024)fail('limit');return {bytes,name:'pages.zip',type:'application/zip',pageCount:count,order:all.map(i=>i+1)};
+        const bytes=zipSync(entries,{level:0});if(bytes.length>100*1024*1024)fail('limit');return {bytes,name:'pages.zip',type:'application/zip',pageCount:count,order:all.map(i=>i+1),sourceFiles};
       }
       const selected=parsePages(pages,count);let order;
       if(mode==='extract'||mode==='reorder') {order=selected;if(mode==='reorder'&&selected.length!==count)fail('completeOrder');}
@@ -63,5 +64,5 @@ export async function processPdf({files,mode,pages='',rotation=90,pageSize='a4',
     }
   }
   const bytes=await out.save();if(bytes.length>100*1024*1024)fail('limit');
-  return {bytes,name:`${mode}.pdf`,type:'application/pdf',pageCount:count,order:outputOrder};
+  return {bytes,name:`${mode}.pdf`,type:'application/pdf',pageCount:count,order:outputOrder,sourceFiles};
 }
