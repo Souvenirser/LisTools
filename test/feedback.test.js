@@ -25,3 +25,6 @@ test('link prefills match editable text fields in the GitHub form',()=>{
   assert.equal(fields.get('description')?.validations.required,true);
   for(const id of ['reproduction','expected','environment','attachments'])assert.ok(fields.has(id));
 });
+test('task addresses retain their parent tool in public feedback metadata',()=>{
+ for(const [tool,task] of [['qr','recognize'],['text','extract'],['pdf','rotate'],['dates','workdays'],['images','crop'],['draw','numbers'],['timer','stopwatch']])assert.equal(feedbackTool('/'+tool+'.html','#'+task),tool);
+});

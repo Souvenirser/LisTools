@@ -41,3 +41,15 @@ test('current target distinguishes conversion tools and normalizes fallback hash
     ['/convert.html','#unknown','convert.html#base64'],['/popup.html','',undefined]
   ]) assert.equal(navigation.currentTarget(path,hash),want);
 });
+
+test('ordinary task search prefers text tasks and preserves every advanced conversion',()=>{
+ assert.deepEqual(navigation.toolGroups.map(group=>group.id),['daily','files','developer','network']);
+ assert.equal(navigation.pages.find(page=>page.id==='password').group,'network');
+ for(const [query,task]of [['去重','dedupe'],['大小写','case'],['换行','newline']]){
+  const matches=navigation.searchNavigation(query);assert.equal(matches[0].file,`text.html#${task}`);
+  assert.ok(matches.some(item=>item.file.startsWith('convert.html#')&&item.secondary));
+ }
+ assert.ok(navigation.searchNavigation('提取 PDF').some(item=>item.file==='pdf.html#extract'));
+ assert.equal(navigation.currentTarget('/qr.html','#recognize'),'qr.html#recognize');
+ assert.equal(navigation.currentTarget('/qr.html','#unknown'),'qr.html');
+});
