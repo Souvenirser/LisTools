@@ -6,3 +6,6 @@
 .password-page .password-result input { min-width: 0; flex: 1; font-family: var(--mono); }
 .password-page .password-result button { flex-shrink: 0; }
 .password-page [hidden] { display: none !important; }
+
+.password-workspace{display:grid;grid-template-columns:minmax(320px,420px) minmax(0,1fr);gap:24px;align-items:start}.password-page .password-length{max-width:none}.password-page .tool-fields{align-items:start}.password-page .password-result{align-items:stretch}.password-page .password-result input{font-size:1rem;min-height:44px}
+@media(max-width:900px){.password-workspace{grid-template-columns:minmax(0,1fr)}}
