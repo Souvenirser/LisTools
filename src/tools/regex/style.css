@@ -36,3 +36,7 @@
 #regex-rules-panel input{font:inherit;min-height:44px;width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:8px}
 
 #regex-common-flags{align-items:center;gap:6px}#regex-common-flags label{gap:4px}#regex-common-flags #regex-rules-open{margin-inline-start:auto;padding-inline:8px}
+
+.regex-page #tool-root #regex-pattern{font-size:18px;line-height:28px;min-height:56px;font-family:var(--mono)}
+.regex-page #regex-source .cm-editor,.regex-page #regex-output .cm-editor,.regex-page #regex-source .cm-content,.regex-page #regex-output .cm-content{font-size:18px;line-height:28px}
+.regex-page .regex-pattern-field>label,.regex-page #regex-group-field>label,.regex-page .regex-workspace-controls label,.regex-page .task-choices button{font-size:16px}
