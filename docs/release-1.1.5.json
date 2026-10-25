@@ -1,0 +1,80 @@
+{
+  "version": "1.1.5",
+  "date": "2026-10-25",
+  "scope": [
+    "18 tool pages and MD5 view",
+    "37 conversion tools",
+    "flag timezone picker for Cron",
+    "readability and spacing",
+    "safe file import and result preservation",
+    "native popup footer within host height"
+  ],
+  "unitTests": {
+    "passed": 299,
+    "failed": 0,
+    "releaseSourceRechecked": true
+  },
+  "browsers": {
+    "chromium": {
+      "version": "156.0.8078.47",
+      "passed": 464
+    },
+    "edge": {
+      "version": "155.0.4283.62",
+      "passed": 464
+    },
+    "webkit": {
+      "version": "Playwright 1.64.1 / WebKit 2370",
+      "passed": 457,
+      "skipped": 7
+    }
+  },
+  "extension": {
+    "version": "149.0.7827.55",
+    "passed": 14,
+    "offline": true,
+    "externalRequests": 0,
+    "pageErrors": 0,
+    "languagesLoaded": 50,
+    "nativeZoom": 2,
+    "popupConditions": [
+      "800x600",
+      "1920x1440",
+      "800x600 with 125% display scale"
+    ],
+    "popupStatesPassed": 27
+  },
+  "layout": {
+    "widths": [
+      320,
+      390,
+      768,
+      1366,
+      1440,
+      1920,
+      2560
+    ],
+    "spacingStates": 581,
+    "pageStateScreenshots": 380,
+    "focusScreenshots": 5,
+    "languageRetentionCases": 114
+  },
+  "artifact": {
+    "name": "LisTools-1.1.5.zip",
+    "sha256": "97f40a6410ad1fb1f987082856ca0744c49e96737185fb4869e9050b8f59975e",
+    "bytes": 4295616,
+    "files": 487,
+    "zipMatchesLoadableDirectory": true,
+    "rebuiltReleaseSourceMatchesTestedPackage": true,
+    "permissions": [],
+    "hostPermissions": [],
+    "supportExcluded": true,
+    "newDependencies": 0
+  },
+  "limitations": [
+    "Firefox157 and Chrome120 failed during local browser startup, not counted as passed.",
+    "WebKit skips one Chromium CDP touch case and six Chromium-specific BFCache cases.",
+    "Safari native extension install, VoiceOver, physical touch and all-language native review not executed.",
+    "Chrome Web Store submission is separate and not performed by this release."
+  ]
+}
