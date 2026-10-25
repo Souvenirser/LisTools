@@ -1,4 +1,3 @@
-.password-page .password-length { max-width: 330px; margin-top: 14px; }
 .password-page .check-label { align-items: center; gap: 7px; }
 .password-page .password-symbol-list { font-family: var(--mono); }
 .password-page .password-results { display: grid; gap: 10px; }
@@ -7,5 +6,5 @@
 .password-page .password-result button { flex-shrink: 0; }
 .password-page [hidden] { display: none !important; }
 
-.password-workspace{display:grid;grid-template-columns:minmax(320px,420px) minmax(0,1fr);gap:24px;align-items:start}.password-page .password-length{max-width:none}.password-page .tool-fields{align-items:start}.password-page .password-result{align-items:stretch}.password-page .password-result input{font-size:1rem;min-height:44px}
+.password-workspace{display:grid;grid-template-columns:minmax(320px,420px) minmax(0,1fr);gap:24px;align-items:start}.password-page .tool-fields{align-items:start}.password-page .password-result{align-items:stretch}.password-page .password-result input{font-size:1rem;min-height:44px}
 @media(max-width:900px){.password-workspace{grid-template-columns:minmax(0,1fr)}}
