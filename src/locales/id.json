@@ -1581,5 +1581,277 @@
     "passwordPolicy": "Tipe karakter yang dipilih membentuk kumpulan yang diizinkan. Aktifkan “Memerlukan setiap jenis” untuk menyertakan setiap jenis yang dipilih di setiap kata sandi.",
     "speedScope": "Peringkat menggambarkan kecepatan transfer. Latensi dan jitter diukur secara terpisah.",
     "viewResult": "Lihat hasilnya"
+  },
+  "redesign": {
+    "calculatorOriginal": "Nilai asli",
+    "calculatorNew": "Nilai baru",
+    "calculatorPrice": "Harga asli",
+    "calculatorOff": "Persentase diskon (%)",
+    "calculatorPart": "Bagian",
+    "calculatorWhole": "Utuh",
+    "calculatorPercent": "Persentase (%)",
+    "expressionResult": "Hasil ekspresi · {{expression}}",
+    "businessResult": "{{mode}} · {{expression}}",
+    "workdayExceptions": "Hari libur: {{off}} · Tanggal kerja: {{work}}",
+    "copyDisplayedEquation": "Salin persamaan yang ditampilkan",
+    "drawShuffle": "Daftar acak",
+    "drawGroups": "Buat grup",
+    "timerOtherRunning": "{{mode}} sedang berjalan",
+    "timerSessionHelp": "Memuat ulang tab ini akan memulihkan kedua pengatur waktu, termasuk waktu jam yang telah berlalu untuk pengatur waktu yang berjalan. Status disimpan di penyimpanan sesi tab ini.",
+    "pdfAddPdf": "Tambahkan file PDF untuk tugas ini.",
+    "pdfAddImages": "Tambahkan gambar PNG, JPG atau WebP untuk membuat PDF.",
+    "pdfChooseCurrent": "Pilih PDF untuk diproses dari daftar PDF saat ini.",
+    "qrRecognizeEmpty": "Teks yang dikenali akan muncul di sini. Pilih, jatuhkan, atau tempel gambar di area masukan.",
+    "textIdle": "Jalankan operasi untuk melihat hasilnya di sini.",
+    "textStale": "Masukan atau opsi diubah. Jalankan operasi lagi.",
+    "textEmpty": "Selesai tanpa keluaran.",
+    "textInputStats": "Masukan: {{summary}}",
+    "textOutputBytes": "Keluaran: {{bytes}} UTF-8 byte",
+    "textNewlineSummary": "Akhir baris: {{format}} · {{bytes}} UTF-8 byte",
+    "cropNote": "Menyimpan penyesuaian pemotongan hanya berlaku pada gambar yang dipilih. Ekspor terlebih dahulu menyimpan penyesuaian pemotongan gambar yang belum disimpan, lalu memproses setiap gambar yang dimasukkan dalam antrean menggunakan penyesuaian pemotongan yang disimpan atau gambar asli.",
+    "cropSaveCurrent": "Simpan pemangkasan untuk gambar ini",
+    "cropDirty": "Perubahan pemotongan gambar yang belum disimpan untuk {{name}}. Ekspor akan menyimpan perubahan ini terlebih dahulu.",
+    "cropSaved": "Pemangkasan gambar tersimpan untuk {{name}}. Ini akan digunakan dalam ekspor gambar batch.",
+    "cropOriginal": "{{name}} tidak memiliki pemotongan gambar yang disimpan. Ekspor menggunakan gambar aslinya kecuali Anda menyesuaikan pemangkasan.",
+    "cropExportBatch": "Ekspor {{count}} gambar · gambar dengan pemangkasan tersimpan: {{cropped}}",
+    "cropSaveExport": "Simpan pemotongan gambar saat ini dan ekspor gambar {{count}}"
+  },
+  "direct": {
+    "developer": {
+      "convert": {
+        "base64": {
+          "input": "Teks mentah / bita berkas",
+          "output": "Base64 Teks",
+          "usage": "Konversi: Teks mentah / bita berkas → Base64 Teks."
+        },
+        "base64url": {
+          "input": "Teks mentah / bita berkas",
+          "output": "Base64URL Teks",
+          "usage": "Konversi: Teks mentah / bita berkas → Base64URL Teks."
+        },
+        "base32": {
+          "input": "Teks mentah / bita berkas",
+          "output": "Base32 Teks",
+          "usage": "Konversi: Teks mentah / bita berkas → Base32 Teks."
+        },
+        "base32hex": {
+          "input": "Teks mentah / bita berkas",
+          "output": "Base32Hex Teks",
+          "usage": "Konversi: Teks mentah / bita berkas → Base32Hex Teks."
+        },
+        "base58": {
+          "input": "Teks mentah / bita berkas",
+          "output": "Base58 Teks",
+          "usage": "Merepresentasikan byte dengan alfabet Bitcoin Base58."
+        },
+        "hex": {
+          "input": "Teks mentah / bita berkas",
+          "output": "Byte heksadesimal",
+          "usage": "Konversi: Teks mentah / bita berkas ↔ Byte heksadesimal."
+        },
+        "binary": {
+          "input": "Teks mentah / bita berkas",
+          "output": "Rangkaian byte biner",
+          "usage": "Merepresentasikan setiap byte sebagai delapan digit biner."
+        },
+        "url-component": {
+          "input": "Teks tanpa escape",
+          "output": "Teks komponen URL",
+          "usage": "Mengodekan satu parameter URL atau komponen jalur.",
+          "help": "Menggunakan encodeURIComponent / decodeURIComponent. Spasi menjadi %20; tanda + literal menjadi %2B."
+        },
+        "uri": {
+          "input": "URI lengkap",
+          "output": "URI dengan escape",
+          "usage": "Melakukan escape URI lengkap sambil mempertahankan pemisah URI.",
+          "help": "Menggunakan encodeURI / decodeURI dan mempertahankan pemisah URI seperti : / ? #. Gunakan komponen URL untuk satu nilai parameter."
+        },
+        "form": {
+          "input": "Kunci / nilai tanpa escape",
+          "output": "Teks komponen formulir",
+          "usage": "Mengodekan satu kunci atau nilai formulir.",
+          "help": "Menggunakan aturan application/x-www-form-urlencoded. Spasi menjadi +; tanda + literal menjadi %2B."
+        },
+        "html-entities": {
+          "input": "Teks biasa",
+          "output": "Entitas HTML",
+          "usage": "Konversi: Teks biasa ↔ Entitas HTML.",
+          "help": "Melakukan escape dan dekode entitas HTML. Mengonversi teks tanpa mengurai atau mengeksekusi HTML."
+        },
+        "xml-entities": {
+          "input": "Teks biasa",
+          "output": "Entitas XML",
+          "usage": "Konversi: Teks biasa ↔ Entitas XML.",
+          "help": "Melakukan escape dan dekode entitas XML tanpa mengurai dokumen XML atau mengeksekusi input."
+        },
+        "json-string": {
+          "input": "Teks biasa",
+          "output": "String JSON dengan tanda kutip",
+          "usage": "Konversi: Teks biasa ↔ String JSON dengan tanda kutip.",
+          "help": "Output yang dikodekan mencakup tanda kutip pembatas. Dekode memerlukan literal string JSON yang lengkap."
+        },
+        "unicode": {
+          "input": "Teks biasa",
+          "output": "Escape Unicode",
+          "usage": "Konversi: Teks biasa ↔ Escape Unicode.",
+          "help": "Mengodekan UTF-16 sebagai escape \\uXXXX. Mendekode sintaks escape yang didukung tanpa mengeksekusi input."
+        },
+        "codepoints": {
+          "input": "Unicode Teks",
+          "output": "Daftar titik kode U+",
+          "usage": "Memeriksa atau menyusun kembali titik kode Unicode.",
+          "help": "Mengodekan daftar titik kode U+ heksadesimal. Dekode menyusun kembali teks, termasuk karakter tambahan."
+        },
+        "charset": {
+          "input": "Teks Unicode / berkas dalam pengodean sumber",
+          "output": "Byte dalam pengodean tujuan",
+          "usage": "Mengodekan byte menggunakan himpunan karakter tujuan."
+        },
+        "json-yaml": {
+          "input": "JSON dokumen",
+          "output": "YAML dokumen",
+          "usage": "Konversi: JSON dokumen ↔ YAML dokumen."
+        },
+        "xml-json": {
+          "input": "XML dokumen",
+          "output": "Array JSON berurutan",
+          "usage": "Konversi: XML dokumen ↔ Array JSON berurutan."
+        },
+        "csv-json": {
+          "input": "CSV tabel",
+          "output": "Baris JSON",
+          "usage": "Konversi: CSV tabel ↔ Baris JSON."
+        },
+        "tsv-json": {
+          "input": "TSV tabel",
+          "output": "Baris JSON",
+          "usage": "Konversi: TSV tabel ↔ Baris JSON."
+        },
+        "jsonl": {
+          "input": "JSON Lines",
+          "output": "Array JSON",
+          "usage": "Konversi: JSON Lines ↔ Array JSON."
+        },
+        "query-json": {
+          "input": "String kueri",
+          "output": "Objek JSON berisi array string",
+          "usage": "Mengonversi parameter kueri berulang menjadi array string."
+        },
+        "md5": {
+          "input": "Teks / berkas / baris teks",
+          "output": "Ringkasan",
+          "usage": "Menghitung checksum MD5 dan membandingkan nilai yang diharapkan."
+        },
+        "hash": {
+          "input": "Teks mentah / bita berkas",
+          "output": "Hash heksadesimal dari algoritma yang dipilih",
+          "usage": "Menghitung hash dari byte asli teks atau berkas."
+        },
+        "hmac": {
+          "input": "Teks pesan / byte berkas + kunci",
+          "output": "Hash HMAC heksadesimal",
+          "usage": "Menghitung HMAC dengan kunci untuk tugas ini."
+        },
+        "jwt": {
+          "input": "JWT tiga bagian",
+          "output": "JSON yang didekode",
+          "usage": "Membaca header dan muatan JWT tanpa memverifikasi tanda tangan."
+        },
+        "gzip": {
+          "input": "Teks mentah / bita berkas",
+          "output": "Byte Gzip (representasi terpilih)",
+          "usage": "Mengompresi atau mendekompresi satu aliran Gzip."
+        },
+        "zlib": {
+          "input": "Teks mentah / bita berkas",
+          "output": "Byte Zlib (representasi terpilih)",
+          "usage": "Mengompresi atau mendekompresi aliran Zlib."
+        },
+        "deflate": {
+          "input": "Teks mentah / bita berkas",
+          "output": "Byte Deflate mentah (representasi terpilih)",
+          "usage": "Mengompresi atau mendekompresi data Deflate mentah."
+        },
+        "radix": {
+          "input": "Bilangan bulat dalam basis sumber",
+          "output": "Bilangan bulat dalam basis tujuan",
+          "usage": "Konversi: Bilangan bulat dalam basis sumber → Bilangan bulat dalam basis tujuan."
+        },
+        "bytes-unit": {
+          "input": "Nilai dalam satuan sumber",
+          "output": "Nilai dalam satuan tujuan",
+          "usage": "Mengonversi bit, byte, serta satuan SI dan IEC."
+        },
+        "duration-unit": {
+          "input": "Durasi dalam satuan sumber",
+          "output": "Durasi dalam satuan tujuan",
+          "usage": "Mengonversi durasi tetap tanpa perhitungan kalender."
+        },
+        "color": {
+          "input": "HEX / RGB / HSL / HSV JSON",
+          "output": "Format warna terpilih",
+          "usage": "Mengonversi representasi warna sambil mempertahankan alfa."
+        },
+        "case": {
+          "input": "Teks / nama",
+          "output": "Teks dalam gaya penamaan terpilih",
+          "usage": "Konversi: Teks / nama → Teks dalam gaya penamaan terpilih."
+        },
+        "lines": {
+          "input": "Baris teks",
+          "output": "Baris teks yang diproses",
+          "usage": "Menerapkan satu operasi terpilih pada baris teks."
+        },
+        "newline": {
+          "input": "Teks dengan akhir baris",
+          "output": "Teks dengan LF / CRLF / CR terpilih",
+          "usage": "Konversi: Teks dengan akhir baris → Teks dengan LF / CRLF / CR terpilih."
+        },
+        "normalize": {
+          "input": "Unicode Teks",
+          "output": "Teks dalam bentuk normalisasi terpilih",
+          "usage": "Menerapkan normalisasi Unicode pada titik kode."
+        }
+      },
+      "jsonCancelled": "Dibatalkan. Input Anda dipertahankan; jalankan lagi saat siap.",
+      "convertHelp": "Penggunaan dan batasan",
+      "fileReplace": "Ganti berkas",
+      "md5CopyFile": "Salin checksum untuk {{name}}",
+      "copyIso": "Salin ISO",
+      "copyIsoDate": "Salin eksekusi {{index}} sebagai ISO",
+      "regexNotRun": "Belum dijalankan",
+      "regexStale": "Input berubah. Jalankan untuk memperbarui hasil.",
+      "speedNetwork": "Alat ini terhubung ke Cloudflare dan menggunakan data jaringan. Permintaan pengujian dimulai hanya setelah Anda memulainya.",
+      "speedSettings": "Pengaturan pengujian",
+      "speedSummary": "{{profile}} · {{unit}} · hingga {{budget}} MiB",
+      "customZone": "Zona waktu IANA khusus",
+      "regexNoMatches": "Tidak ada kecocokan"
+    },
+    "daily": {
+      "unitDetails": "Konversi lain dan presisi",
+      "moneyEmpty": "Masukkan jumlah lalu konversikan untuk melihat hasilnya.",
+      "listHelp": "Satu entri per baris. Baris kosong diabaikan; entri duplikat tetap terpisah sampai Anda menghapusnya.",
+      "dedupe": "Hapus entri duplikat",
+      "drawEntries": "Undi entri · {{count}}",
+      "drawGroups": "Buat grup · {{count}}",
+      "drawMembers": "Kelompokkan entri · {{count}} per grup",
+      "drawNumbers": "Undi angka · {{count}}",
+      "discountHelp": "Harga awal 100, potongan 20% → harga setelah diskon 80.",
+      "countdownHelp": "Untuk menghitung mundur, gunakan hari ini sebagai awal dan pilih target sebagai akhir. Target sebelumnya menghasilkan jumlah hari negatif.",
+      "anniversaryHelp": "Usia peringatan menggunakan hari terakhir bulan Februari untuk tanggal 29 Februari di tahun non-kabisat.",
+      "unitPrecision": "≈ menandai pembulatan tampilan hingga 24 digit signifikan; penyalinan mempertahankan hingga 80 digit. Faktor mengikuti definisi mathjs; galon dan ons cair adalah satuan AS.",
+      "discountReduction": "Persentase diskon (%)"
+    },
+    "files": {
+      "fileActions": "Tindakan berkas",
+      "discardCrop": "Buang penyesuaian pemotongan yang belum disimpan?",
+      "pastedImage": "Gambar yang ditempel",
+      "lineDedupeHelp": "Mencocokkan setiap baris lengkap secara persis, termasuk spasi dan besar kecil huruf. Mempertahankan kemunculan pertama.",
+      "lineSortHelp": "Mengurutkan berdasarkan unit kode Unicode. Ini bukan urutan bahasa atau angka.",
+      "imageInfo": "{{name}} · {{width}} × {{height}} px"
+    },
+    "shared": {
+      "viewResult": "Lihat hasilnya"
+    }
   }
 }

@@ -1581,5 +1581,277 @@
     "passwordPolicy": "Seçilen karakter türleri izin verilen havuzu oluşturur. Seçilen her türün her parolaya dahil edilmesi için \"Her türü gerektir\" seçeneğini etkinleştirin.",
     "speedScope": "Derecelendirmeler aktarım hızını tanımlar. Gecikme ve titreşim ayrı ayrı ölçülür.",
     "viewResult": "Sonucu görüntüle"
+  },
+  "redesign": {
+    "calculatorOriginal": "Orijinal değer",
+    "calculatorNew": "Yeni değer",
+    "calculatorPrice": "Orijinal fiyat",
+    "calculatorOff": "Yüzde kapalı (%)",
+    "calculatorPart": "Parça",
+    "calculatorWhole": "Bütün",
+    "calculatorPercent": "Yüzde (%)",
+    "expressionResult": "İfade sonucu · {{expression}}",
+    "businessResult": "{{mode}} · {{expression}}",
+    "workdayExceptions": "İzin günleri: {{off}} · Çalışma tarihleri: {{work}}",
+    "copyDisplayedEquation": "Görüntülenen denklemi kopyala",
+    "drawShuffle": "Karışık liste",
+    "drawGroups": "Gruplar oluştur",
+    "timerOtherRunning": "{{mode}} çalışıyor",
+    "timerSessionHelp": "Bu sekmenin yeniden yüklenmesi, çalışan zamanlayıcılar için geçen saat süresi de dahil olmak üzere her iki zamanlayıcıyı da geri yükler. Durum bu sekmenin oturum deposuna kaydedilir.",
+    "pdfAddPdf": "Bu görev için PDF dosyaları ekleyin.",
+    "pdfAddImages": "PDF oluşturmak için PNG, JPG veya WebP görselleri ekleyin.",
+    "pdfChooseCurrent": "Geçerli PDF listesinden işlenecek PDF'yi seçin.",
+    "qrRecognizeEmpty": "Tanınan metin burada görünecektir. Giriş alanına bir resim seçin, bırakın veya yapıştırın.",
+    "textIdle": "Sonucunu burada görmek için bir işlem çalıştırın.",
+    "textStale": "Giriş veya seçenekler değiştirildi. İşlemi yeniden çalıştırın.",
+    "textEmpty": "Hiçbir çıktı olmadan tamamlandı.",
+    "textInputStats": "Giriş: {{summary}}",
+    "textOutputBytes": "Çıktı: {{bytes}} UTF-8 bayt",
+    "textNewlineSummary": "Satır sonları: {{format}} · {{bytes}} UTF-8 bayt",
+    "cropNote": "Kırpma ayarının kaydedilmesi yalnızca seçilen görüntüye uygulanır. Dışa aktarma, önce o görüntünün kaydedilmemiş kırpma ayarını kaydeder, ardından sıradaki her görüntüyü kayıtlı kırpma ayarını veya orijinal görüntüyü kullanarak işler.",
+    "cropSaveCurrent": "Bu görsel için kırpmayı kaydet",
+    "cropDirty": "{{name}} için kaydedilmemiş resim kırpma değişiklikleri. Dışa aktarma işlemi öncelikle bu değişiklikleri kaydedecektir.",
+    "cropSaved": "{{name}} için kaydedilen resim kırpma. Toplu görüntü aktarımında kullanılacaktır.",
+    "cropOriginal": "{{name}}'de kayıtlı resim kırpma işlemi yok. Kırpmayı ayarlamadığınız sürece dışa aktarma orijinal görüntüsünü kullanır.",
+    "cropExportBatch": "{{count}} görüntüyü dışa aktar · kayıtlı kırpmayla birlikte görüntüler: {{cropped}}",
+    "cropSaveExport": "Geçerli görsel kırpmayı kaydedin ve {{count}} görseli dışa aktarın"
+  },
+  "direct": {
+    "developer": {
+      "convert": {
+        "base64": {
+          "usage": "Baytları Base64 olarak gösterir.",
+          "input": "Metin / dosyanın ham baytları",
+          "output": "Base64 metni"
+        },
+        "base64url": {
+          "usage": "Baytları URL güvenli Base64 olarak gösterir.",
+          "input": "Metin / dosyanın ham baytları",
+          "output": "Base64URL metni"
+        },
+        "base32": {
+          "usage": "Baytları Base32 alfabesiyle gösterir.",
+          "input": "Metin / dosyanın ham baytları",
+          "output": "Base32 metni"
+        },
+        "base32hex": {
+          "usage": "Baytları Base32Hex alfabesiyle gösterir.",
+          "input": "Metin / dosyanın ham baytları",
+          "output": "Base32Hex metni"
+        },
+        "base58": {
+          "usage": "Baytları Bitcoin Base58 alfabesiyle gösterir.",
+          "input": "Metin / dosyanın ham baytları",
+          "output": "Base58 metni"
+        },
+        "hex": {
+          "usage": "Baytları onaltılık biçime veya bu biçimden dönüştürür.",
+          "input": "Metin / dosyanın ham baytları",
+          "output": "Onaltılık baytlar"
+        },
+        "binary": {
+          "usage": "Her baytı sekiz ikili basamakla gösterir.",
+          "input": "Metin / dosyanın ham baytları",
+          "output": "İkili bayt dizesi"
+        },
+        "url-component": {
+          "usage": "Tek bir URL parametresini veya yol bileşenini kodlar.",
+          "input": "Kaçış uygulanmamış metin",
+          "output": "URL bileşeni metni",
+          "help": "encodeURIComponent / decodeURIComponent kullanır. Boşluklar %20, düz + işareti %2B olur."
+        },
+        "uri": {
+          "usage": "URI ayraçlarını koruyarak tam URI'yi kaçış kodlarıyla kodlar.",
+          "input": "Tam URI",
+          "output": "Kaçış uygulanmış URI",
+          "help": "encodeURI / decodeURI kullanır ve : / ? # gibi URI ayraçlarını korur. Tek bir parametre değeri için URL bileşenini kullanın."
+        },
+        "form": {
+          "usage": "Tek bir form anahtarını veya değerini kodlar.",
+          "input": "Kaçış uygulanmamış anahtar / değer",
+          "output": "Form bileşeni metni",
+          "help": "application/x-www-form-urlencoded kurallarını kullanır. Boşluklar +, düz + işareti %2B olur."
+        },
+        "html-entities": {
+          "usage": "HTML içeriği için özel karakterleri kaçış kodlarına dönüştürür.",
+          "input": "Düz metin",
+          "output": "HTML varlıkları",
+          "help": "HTML varlıklarını kaçış kodlarına dönüştürür ve çözer. HTML'yi ayrıştırmadan veya çalıştırmadan metni dönüştürür."
+        },
+        "xml-entities": {
+          "usage": "Metni XML varlıklarına veya tersine dönüştürür.",
+          "input": "Düz metin",
+          "output": "XML varlıkları",
+          "help": "Bir XML belgesini ayrıştırmadan veya girdiyi çalıştırmadan XML varlıklarını kodlar ve çözer."
+        },
+        "json-string": {
+          "usage": "Tam bir JSON dize sabiti oluşturur veya okur.",
+          "input": "Düz metin",
+          "output": "Tırnaklı JSON dizesi",
+          "help": "Kodlanmış çıktı çevreleyen tırnakları içerir. Kod çözme, tam bir JSON dize sabiti gerektirir."
+        },
+        "unicode": {
+          "usage": "Metni Unicode kaçışlarına veya tersine dönüştürür.",
+          "input": "Düz metin",
+          "output": "Unicode kaçış dizileri",
+          "help": "UTF-16'yı \\uXXXX kaçışlarıyla kodlar. Girdiyi çalıştırmadan desteklenen kaçış sözdizimini çözer."
+        },
+        "codepoints": {
+          "usage": "Unicode kod noktalarını inceler veya yeniden oluşturur.",
+          "input": "Unicode metni",
+          "output": "U+ kod noktası listesi",
+          "help": "Onaltılık U+ kod noktalarının listesini kodlar. Kod çözme, ek düzlem karakterleri dahil metni yeniden oluşturur."
+        },
+        "charset": {
+          "usage": "Baytları hedef karakter kümesiyle kodlar.",
+          "input": "Unicode metni / kaynak kodlamalı dosya",
+          "output": "Hedef kodlamalı baytlar"
+        },
+        "json-yaml": {
+          "usage": "Belgeleri JSON ve YAML arasında dönüştürür.",
+          "input": "JSON belgesi",
+          "output": "YAML belgesi"
+        },
+        "xml-json": {
+          "usage": "XML ile sıralı JSON yapısını dönüştürür.",
+          "input": "XML belgesi",
+          "output": "Sıralı JSON dizisi"
+        },
+        "csv-json": {
+          "usage": "Virgülle ayrılmış tabloları ve JSON'u dönüştürür.",
+          "input": "CSV tablosu",
+          "output": "JSON satırları"
+        },
+        "tsv-json": {
+          "usage": "Sekmeyle ayrılmış tabloları ve JSON'u dönüştürür.",
+          "input": "TSV tablosu",
+          "output": "JSON satırları"
+        },
+        "jsonl": {
+          "usage": "JSON Lines ile JSON dizilerini dönüştürür.",
+          "input": "JSON Lines",
+          "output": "JSON dizisi"
+        },
+        "query-json": {
+          "usage": "Yinelenen sorgu parametrelerini dize dizilerine dönüştürür.",
+          "input": "Sorgu dizesi",
+          "output": "Dize dizilerinden oluşan JSON nesnesi"
+        },
+        "md5": {
+          "usage": "MD5 sağlama toplamını hesaplar ve beklenen değerlerle karşılaştırır.",
+          "input": "Metin / dosyalar / metin satırları",
+          "output": "MD5 sağlama toplamı"
+        },
+        "hash": {
+          "usage": "Metnin veya dosyanın özgün baytlarının özetini hesaplar.",
+          "input": "Metin / dosyanın ham baytları",
+          "output": "Seçilen algoritmanın onaltılık özeti"
+        },
+        "hmac": {
+          "usage": "Bu görev için bir anahtarla HMAC hesaplar.",
+          "input": "İleti metni / dosya baytları + anahtar",
+          "output": "Onaltılık HMAC özeti"
+        },
+        "jwt": {
+          "usage": "İmzaları doğrulamadan JWT üstbilgilerini ve yüklerini okur.",
+          "input": "Üç parçalı JWT",
+          "output": "Kodu çözülmüş JSON"
+        },
+        "gzip": {
+          "usage": "Tek bir Gzip akışını sıkıştırır veya açar.",
+          "input": "Metin / dosyanın ham baytları",
+          "output": "Gzip baytları (seçilen gösterim)"
+        },
+        "zlib": {
+          "usage": "Bir Zlib akışını sıkıştırır veya açar.",
+          "input": "Metin / dosyanın ham baytları",
+          "output": "Zlib baytları (seçilen gösterim)"
+        },
+        "deflate": {
+          "usage": "Ham Deflate verilerini sıkıştırır veya açar.",
+          "input": "Metin / dosyanın ham baytları",
+          "output": "Ham Deflate baytları (seçilen gösterim)"
+        },
+        "radix": {
+          "usage": "Bir tam sayıyı başka bir tabana dönüştürür.",
+          "input": "Kaynak tabandaki tam sayı",
+          "output": "Hedef tabandaki tam sayı"
+        },
+        "bytes-unit": {
+          "usage": "Bit, bayt, SI ve IEC birimlerini dönüştürür.",
+          "input": "Kaynak birimdeki değer",
+          "output": "Hedef birimdeki değer"
+        },
+        "duration-unit": {
+          "usage": "Takvim hesabı yapmadan sabit süreleri dönüştürür.",
+          "input": "Kaynak birimdeki süre",
+          "output": "Hedef birimdeki süre"
+        },
+        "color": {
+          "usage": "Alfa değerini koruyarak renk gösterimlerini dönüştürür.",
+          "input": "HEX / RGB / HSL / HSV JSON",
+          "output": "Seçilen renk biçimi"
+        },
+        "case": {
+          "usage": "Seçilen harf düzenini veya adlandırma stilini uygular.",
+          "input": "Metin / ad",
+          "output": "Seçilen adlandırma stilindeki metin"
+        },
+        "lines": {
+          "usage": "Metin satırlarına seçilen tek bir işlemi uygular.",
+          "input": "Metin satırları",
+          "output": "İşlenmiş metin satırları"
+        },
+        "newline": {
+          "usage": "Metnin satır sonlarını dönüştürür.",
+          "input": "Satır sonları içeren metin",
+          "output": "Seçilen LF / CRLF / CR içeren metin"
+        },
+        "normalize": {
+          "usage": "Kod noktalarına Unicode normalleştirmesi uygular.",
+          "input": "Unicode metni",
+          "output": "Seçilen normalleştirme biçimindeki metin"
+        }
+      },
+      "jsonCancelled": "İptal edildi. Girdiniz korundu; hazır olduğunuzda yeniden çalıştırın.",
+      "convertHelp": "Kullanım ve sınırlar",
+      "fileReplace": "Dosyaları değiştir",
+      "md5CopyFile": "{{name}} için sağlama toplamını kopyala",
+      "copyIso": "ISO kopyala",
+      "copyIsoDate": "{{index}}. çalıştırmayı ISO olarak kopyala",
+      "regexNotRun": "Çalıştırılmadı",
+      "regexNoMatches": "Eşleşme yok",
+      "regexStale": "Girdiler değişti. Sonuçları güncellemek için çalıştırın.",
+      "speedNetwork": "Bu araç Cloudflare'a bağlanır ve ağ verisi kullanır. Test istekleri yalnızca siz başlattıktan sonra gönderilir.",
+      "speedSettings": "Test ayarları",
+      "speedSummary": "{{profile}} · {{unit}} · en fazla {{budget}} MiB",
+      "customZone": "Özel IANA saat dilimi"
+    },
+    "daily": {
+      "countdownHelp": "Geri sayım için başlangıç olarak bugünü, bitiş olarak hedef tarihi seçin. Geçmiş hedefler negatif gün sayısı verir.",
+      "anniversaryHelp": "29 Şubat yıl dönümlerinde artık olmayan yıllar için şubatın son günü kullanılır.",
+      "unitDetails": "Diğer dönüşümler ve hassasiyet",
+      "moneyEmpty": "Sonucu görmek için bir tutar girip dönüştürün.",
+      "listHelp": "Her satıra bir kayıt girin. Boş satırlar yok sayılır; yinelenen kayıtlar siz kaldırana kadar ayrı kalır.",
+      "dedupe": "Yinelenen kayıtları kaldır",
+      "drawEntries": "Kayıt seç · {{count}}",
+      "drawGroups": "Grup oluştur · {{count}}",
+      "drawMembers": "Kayıtları grupla · grup başına {{count}}",
+      "drawNumbers": "Sayı seç · {{count}}",
+      "discountReduction": "İndirim yüzdesi (%)",
+      "discountHelp": "İlk fiyat 100, indirim %20 → indirimli fiyat 80.",
+      "unitPrecision": "Sonuçlar 24'e kadar anlamlı basamağı görüntüler. ≈ yuvarlamayı gösterir; kopyalama 80'e kadar anlamlı basamağı korur. Birim faktörler mathjs tanımlarını kullanır; Galon ve sıvı ons ABD birimleridir."
+    },
+    "files": {
+      "fileActions": "Dosya işlemleri",
+      "discardCrop": "Kaydedilmemiş kırpma ayarları silinsin mi?",
+      "imageInfo": "{{name}} · {{width}} × {{height}} piksel",
+      "pastedImage": "Yapıştırılan görüntü",
+      "lineDedupeHelp": "Boşluk ve büyük/küçük harf dahil tüm satırı tam olarak karşılaştırır. İlk görüleni tutar.",
+      "lineSortHelp": "Dil veya sayısal sıraya göre değil, Unicode kod birimlerine göre sıralar."
+    },
+    "shared": {
+      "viewResult": "Sonucu görüntüle"
+    }
   }
 }

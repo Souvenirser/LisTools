@@ -1581,5 +1581,277 @@
     "passwordPolicy": "Selected character types form the allowed pool. Enable “Require each type” to include every selected type in each password.",
     "speedScope": "Ratings describe transfer speed. Latency and jitter are measured separately.",
     "viewResult": "View result"
+  },
+  "redesign": {
+    "pdfAddPdf": "Add PDF files for this task.",
+    "pdfAddImages": "Add PNG, JPG or WebP images to create a PDF.",
+    "pdfChooseCurrent": "Choose the PDF to process from the current PDF list.",
+    "qrRecognizeEmpty": "Recognized text will appear here. Choose, drop or paste an image in the input area.",
+    "textIdle": "Run an operation to see its result here.",
+    "textStale": "Input or options changed. Run the operation again.",
+    "textEmpty": "Completed with no output.",
+    "textInputStats": "Input: {{summary}}",
+    "textOutputBytes": "Output: {{bytes}} UTF-8 bytes",
+    "textNewlineSummary": "Line endings: {{format}} · {{bytes}} UTF-8 bytes",
+    "cropNote": "Save applies to the selected image. Export saves its unsaved crop, then processes every queued image using each saved crop or original.",
+    "cropSaveCurrent": "Save crop for this image",
+    "cropDirty": "Unsaved crop changes for {{name}}. Export will save these changes first.",
+    "cropSaved": "Saved crop for {{name}}. It will be used in the batch export.",
+    "cropOriginal": "{{name}} has no saved crop. Export uses its original unless you change the crop.",
+    "cropExportBatch": "Export {{count}} images · {{cropped}} saved crops",
+    "cropSaveExport": "Save current crop and export {{count}} images",
+    "calculatorOriginal": "Original value",
+    "calculatorNew": "New value",
+    "calculatorPrice": "Original price",
+    "calculatorOff": "Percentage off (%)",
+    "calculatorPart": "Part",
+    "calculatorWhole": "Whole",
+    "calculatorPercent": "Percentage (%)",
+    "expressionResult": "Expression result · {{expression}}",
+    "businessResult": "{{mode}} · {{expression}}",
+    "workdayExceptions": "Days off: {{off}} · Working dates: {{work}}",
+    "copyDisplayedEquation": "Copy displayed equation",
+    "drawShuffle": "Shuffle list",
+    "drawGroups": "Create groups",
+    "timerOtherRunning": "{{mode}} is running",
+    "timerSessionHelp": "Reloading this tab restores both timers, including elapsed clock time for running timers. State is saved in this tab’s session storage."
+  },
+  "direct": {
+    "daily": {
+      "countdownHelp": "For a countdown, use today as the start and choose the target as the end. Past targets return a negative day count.",
+      "anniversaryHelp": "For February 29 anniversaries, non-leap years use the final day of February.",
+      "unitDetails": "Other conversions and precision",
+      "unitPrecision": "≈ marks display rounding to 24 significant digits; copying preserves up to 80. Factors follow mathjs; gallons and fluid ounces are US units.",
+      "moneyEmpty": "Enter an amount and convert it to see the result.",
+      "listHelp": "One entry per line. Blank lines are ignored; duplicate entries remain separate until you remove them.",
+      "dedupe": "Remove duplicate entries",
+      "drawEntries": "Draw entries · {{count}}",
+      "drawGroups": "Create groups · {{count}}",
+      "drawMembers": "Group entries · {{count}} per group",
+      "drawNumbers": "Draw numbers · {{count}}",
+      "discountReduction": "Percentage off (%)",
+      "discountHelp": "Original price 100, percentage off 20 → price after discount 80."
+    },
+    "files": {
+      "fileActions": "File actions",
+      "discardCrop": "Discard the unsaved crop adjustments?",
+      "imageInfo": "{{name}} · {{width}} × {{height}} px",
+      "pastedImage": "Pasted image",
+      "lineDedupeHelp": "Matches each complete line exactly, including spaces and case. Keeps the first occurrence.",
+      "lineSortHelp": "Sorts by Unicode code units. This is not language or numeric order."
+    },
+    "developer": {
+      "convert": {
+        "base64": {
+          "usage": "Represent bytes as Base64.",
+          "input": "Text / raw file bytes",
+          "output": "Base64 text"
+        },
+        "base64url": {
+          "usage": "Represent bytes as URL-safe Base64.",
+          "input": "Text / raw file bytes",
+          "output": "Base64URL text"
+        },
+        "base32": {
+          "usage": "Represent bytes using the Base32 alphabet.",
+          "input": "Text / raw file bytes",
+          "output": "Base32 text"
+        },
+        "base32hex": {
+          "usage": "Represent bytes using the Base32Hex alphabet.",
+          "input": "Text / raw file bytes",
+          "output": "Base32Hex text"
+        },
+        "base58": {
+          "usage": "Represent bytes using the Bitcoin Base58 alphabet.",
+          "input": "Text / raw file bytes",
+          "output": "Base58 text"
+        },
+        "hex": {
+          "usage": "Convert bytes to or from hexadecimal.",
+          "input": "Text / raw file bytes",
+          "output": "Hexadecimal bytes"
+        },
+        "binary": {
+          "usage": "Represent each byte as eight binary digits.",
+          "input": "Text / raw file bytes",
+          "output": "Binary byte string"
+        },
+        "url-component": {
+          "usage": "Encode one URL parameter or path component.",
+          "input": "Unescaped text",
+          "output": "URL component text",
+          "help": "Uses encodeURIComponent / decodeURIComponent. Spaces become %20; literal + becomes %2B."
+        },
+        "uri": {
+          "usage": "Escape a full URI while retaining URI delimiters.",
+          "input": "Full URI",
+          "output": "Escaped URI",
+          "help": "Uses encodeURI / decodeURI and preserves URI delimiters such as : / ? #. Use URL component for a single parameter value."
+        },
+        "form": {
+          "usage": "Encode one form key or value.",
+          "input": "Unescaped key / value",
+          "output": "Form component text",
+          "help": "Uses application/x-www-form-urlencoded rules. Spaces become +; literal + becomes %2B."
+        },
+        "html-entities": {
+          "usage": "Escape special characters for HTML content.",
+          "input": "Plain text",
+          "output": "HTML entities",
+          "help": "Escapes and decodes HTML entities. Converts text without parsing or executing HTML."
+        },
+        "xml-entities": {
+          "usage": "Convert text to or from XML entities.",
+          "input": "Plain text",
+          "output": "XML entities",
+          "help": "Escapes and decodes XML entities without parsing an XML document or executing input."
+        },
+        "json-string": {
+          "usage": "Create or read a complete JSON string literal.",
+          "input": "Plain text",
+          "output": "Quoted JSON string",
+          "help": "Encoded output includes surrounding quotes. Decoding requires a complete JSON string literal."
+        },
+        "unicode": {
+          "usage": "Convert text to or from Unicode escapes.",
+          "input": "Plain text",
+          "output": "Unicode escape sequences",
+          "help": "Encodes UTF-16 as \\uXXXX escapes. Decodes supported escape syntax without executing input."
+        },
+        "codepoints": {
+          "usage": "Inspect or reconstruct Unicode codepoints.",
+          "input": "Unicode text",
+          "output": "U+ codepoint list",
+          "help": "Encodes a list of hexadecimal U+ codepoints. Decoding reconstructs text, including supplementary characters."
+        },
+        "charset": {
+          "usage": "Encode bytes using a target character set.",
+          "input": "Unicode text / source-encoded file",
+          "output": "Target-encoded bytes"
+        },
+        "json-yaml": {
+          "usage": "Convert between JSON and YAML documents.",
+          "input": "JSON document",
+          "output": "YAML document"
+        },
+        "xml-json": {
+          "usage": "Convert XML and its ordered JSON structure.",
+          "input": "XML document",
+          "output": "Ordered JSON array"
+        },
+        "csv-json": {
+          "usage": "Convert comma-separated tables and JSON.",
+          "input": "CSV table",
+          "output": "JSON rows"
+        },
+        "tsv-json": {
+          "usage": "Convert tab-separated tables and JSON.",
+          "input": "TSV table",
+          "output": "JSON rows"
+        },
+        "jsonl": {
+          "usage": "Convert JSON Lines and JSON arrays.",
+          "input": "JSON Lines",
+          "output": "JSON array"
+        },
+        "query-json": {
+          "usage": "Convert repeated query parameters to string arrays.",
+          "input": "Query string",
+          "output": "JSON object of string arrays"
+        },
+        "md5": {
+          "usage": "Calculate an MD5 checksum and compare expected values.",
+          "input": "Text / files / text lines",
+          "output": "MD5 checksum"
+        },
+        "hash": {
+          "usage": "Hash the original bytes of text or a file.",
+          "input": "Text / raw file bytes",
+          "output": "Hex digest of the selected algorithm"
+        },
+        "hmac": {
+          "usage": "Calculate HMAC with a key for this task.",
+          "input": "Message text / file bytes + key",
+          "output": "Hex HMAC digest"
+        },
+        "jwt": {
+          "usage": "Read JWT headers and payloads without verifying signatures.",
+          "input": "Three-part JWT",
+          "output": "Decoded JSON"
+        },
+        "gzip": {
+          "usage": "Compress or decompress one Gzip stream.",
+          "input": "Text / raw file bytes",
+          "output": "Gzip bytes (selected representation)"
+        },
+        "zlib": {
+          "usage": "Compress or decompress a Zlib stream.",
+          "input": "Text / raw file bytes",
+          "output": "Zlib bytes (selected representation)"
+        },
+        "deflate": {
+          "usage": "Compress or decompress raw Deflate data.",
+          "input": "Text / raw file bytes",
+          "output": "Raw Deflate bytes (selected representation)"
+        },
+        "radix": {
+          "usage": "Convert an integer to another base.",
+          "input": "Integer in the source base",
+          "output": "Integer in the target base"
+        },
+        "bytes-unit": {
+          "usage": "Convert bits, bytes, SI and IEC units.",
+          "input": "Value in the source unit",
+          "output": "Value in the target unit"
+        },
+        "duration-unit": {
+          "usage": "Convert fixed durations without calendar arithmetic.",
+          "input": "Duration in the source unit",
+          "output": "Duration in the target unit"
+        },
+        "color": {
+          "usage": "Convert color representations while retaining alpha.",
+          "input": "HEX / RGB / HSL / HSV JSON",
+          "output": "Selected color format"
+        },
+        "case": {
+          "usage": "Apply the selected case or naming style.",
+          "input": "Text / name",
+          "output": "Text in the selected naming style"
+        },
+        "lines": {
+          "usage": "Apply one selected operation to text lines.",
+          "input": "Text lines",
+          "output": "Processed text lines"
+        },
+        "newline": {
+          "usage": "Convert text line endings.",
+          "input": "Text with line endings",
+          "output": "Text with selected LF / CRLF / CR"
+        },
+        "normalize": {
+          "usage": "Apply Unicode normalization to codepoints.",
+          "input": "Unicode text",
+          "output": "Text in the selected normalization form"
+        }
+      },
+      "jsonCancelled": "Cancelled. Your input is preserved; run again when ready.",
+      "convertHelp": "Usage and limits",
+      "fileReplace": "Replace files",
+      "md5CopyFile": "Copy checksum for {{name}}",
+      "copyIso": "Copy ISO",
+      "copyIsoDate": "Copy execution {{index}} as ISO",
+      "regexNotRun": "Not run",
+      "regexNoMatches": "No matches",
+      "regexStale": "Inputs changed. Run to update the results.",
+      "speedNetwork": "This tool connects to Cloudflare and uses network data. Test requests begin only after you start.",
+      "speedSettings": "Test settings",
+      "speedSummary": "{{profile}} · {{unit}} · up to {{budget}} MiB",
+      "customZone": "Custom IANA time zone"
+    },
+    "shared": {
+      "viewResult": "View result"
+    }
   }
 }

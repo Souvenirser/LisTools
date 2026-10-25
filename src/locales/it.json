@@ -1581,5 +1581,277 @@
     "passwordPolicy": "I tipi di carattere selezionati formano il pool consentito. Abilita \"Richiedi ogni tipo\" per includere ogni tipo selezionato in ciascuna password.",
     "speedScope": "Le valutazioni descrivono la velocità di trasferimento. Latenza e jitter vengono misurati separatamente.",
     "viewResult": "Visualizza risultato"
+  },
+  "redesign": {
+    "calculatorOriginal": "Valore originale",
+    "calculatorNew": "Nuovo valore",
+    "calculatorPrice": "Prezzo originale",
+    "calculatorOff": "Percentuale di sconto (%)",
+    "calculatorPart": "Parte",
+    "calculatorWhole": "Intero",
+    "calculatorPercent": "Percentuale (%)",
+    "expressionResult": "Risultato dell'espressione · {{expression}}",
+    "businessResult": "{{mode}} · {{expression}}",
+    "workdayExceptions": "Giorni liberi: {{off}} · Date lavorative: {{work}}",
+    "copyDisplayedEquation": "Copia l'equazione visualizzata",
+    "drawShuffle": "Elenco casuale",
+    "drawGroups": "Crea gruppi",
+    "timerOtherRunning": "{{mode}} è in esecuzione",
+    "timerSessionHelp": "Ricaricando questa scheda si ripristinano entrambi i timer, compreso il tempo trascorso per i timer in esecuzione. Lo stato viene salvato nella memoria della sessione di questa scheda.",
+    "pdfAddPdf": "Aggiungi file PDF per questa attività.",
+    "pdfAddImages": "Aggiungi immagini PNG, JPG o WebP per creare un PDF.",
+    "pdfChooseCurrent": "Scegli il PDF da elaborare dall'elenco dei PDF corrente.",
+    "qrRecognizeEmpty": "Il testo riconosciuto verrà visualizzato qui. Scegli, rilascia o incolla un'immagine nell'area di input.",
+    "textIdle": "Esegui un'operazione per visualizzarne il risultato qui.",
+    "textStale": "Input o opzioni modificati. Eseguire nuovamente l'operazione.",
+    "textEmpty": "Completato senza output.",
+    "textInputStats": "Ingresso: {{summary}}",
+    "textOutputBytes": "Uscita: {{bytes}} UTF-8 byte",
+    "textNewlineSummary": "Terminazioni di riga: {{format}} · {{bytes}} UTF-8 byte",
+    "cropNote": "Il salvataggio di una regolazione del ritaglio si applica solo all'immagine selezionata. L'esportazione salva prima la regolazione di ritaglio non salvata dell'immagine, quindi elabora ogni immagine in coda utilizzando la regolazione di ritaglio salvata o l'immagine originale.",
+    "cropSaveCurrent": "Salva il ritaglio per questa immagine",
+    "cropDirty": "Modifiche al ritaglio dell'immagine non salvate per {{name}}. L'esportazione salverà prima queste modifiche.",
+    "cropSaved": "Ritaglio immagine salvato per {{name}}. Verrà utilizzato nell'esportazione batch di immagini.",
+    "cropOriginal": "{{name}} non ha ritaglio di immagini salvato. L'esportazione utilizza l'immagine originale a meno che non si regoli il ritaglio.",
+    "cropExportBatch": "Esporta immagini {{count}} · immagini con ritaglio salvato: {{cropped}}",
+    "cropSaveExport": "Salva il ritaglio dell'immagine corrente ed esporta le immagini {{count}}"
+  },
+  "direct": {
+    "developer": {
+      "convert": {
+        "base64": {
+          "input": "Testo grezzo / byte del file",
+          "output": "Base64 Testo",
+          "usage": "Conversione: Testo grezzo / byte del file → Base64 Testo."
+        },
+        "base64url": {
+          "input": "Testo grezzo / byte del file",
+          "output": "Base64URL Testo",
+          "usage": "Conversione: Testo grezzo / byte del file → Base64URL Testo."
+        },
+        "base32": {
+          "input": "Testo grezzo / byte del file",
+          "output": "Base32 Testo",
+          "usage": "Conversione: Testo grezzo / byte del file → Base32 Testo."
+        },
+        "base32hex": {
+          "input": "Testo grezzo / byte del file",
+          "output": "Base32Hex Testo",
+          "usage": "Conversione: Testo grezzo / byte del file → Base32Hex Testo."
+        },
+        "base58": {
+          "input": "Testo grezzo / byte del file",
+          "output": "Base58 Testo",
+          "usage": "Rappresenta i byte con l'alfabeto Bitcoin Base58."
+        },
+        "hex": {
+          "input": "Testo grezzo / byte del file",
+          "output": "Byte esadecimali",
+          "usage": "Conversione: Testo grezzo / byte del file ↔ Byte esadecimali."
+        },
+        "binary": {
+          "input": "Testo grezzo / byte del file",
+          "output": "Sequenza di byte binari",
+          "usage": "Rappresenta ogni byte con otto cifre binarie."
+        },
+        "url-component": {
+          "input": "Testo senza escape",
+          "output": "Testo del componente URL",
+          "usage": "Codifica un parametro URL o un componente del percorso.",
+          "help": "Usa encodeURIComponent / decodeURIComponent. Gli spazi diventano %20; il segno + letterale diventa %2B."
+        },
+        "uri": {
+          "input": "URI completo",
+          "output": "URI con escape",
+          "usage": "Applica l'escape a un URI completo conservandone i delimitatori.",
+          "help": "Usa encodeURI / decodeURI e conserva delimitatori URI come : / ? #. Usa il componente URL per il valore di un singolo parametro."
+        },
+        "form": {
+          "input": "Chiave / valore senza escape",
+          "output": "Testo del componente del modulo",
+          "usage": "Codifica una chiave o un valore del modulo.",
+          "help": "Usa le regole application/x-www-form-urlencoded. Gli spazi diventano +; il segno + letterale diventa %2B."
+        },
+        "html-entities": {
+          "input": "Testo semplice",
+          "output": "Entità HTML",
+          "usage": "Conversione: Testo semplice ↔ Entità HTML.",
+          "help": "Applica l'escape e decodifica le entità HTML. Converte il testo senza analizzare o eseguire HTML."
+        },
+        "xml-entities": {
+          "input": "Testo semplice",
+          "output": "Entità XML",
+          "usage": "Conversione: Testo semplice ↔ Entità XML.",
+          "help": "Applica l'escape e decodifica le entità XML senza analizzare un documento XML né eseguire l'input."
+        },
+        "json-string": {
+          "input": "Testo semplice",
+          "output": "Stringa JSON tra virgolette",
+          "usage": "Conversione: Testo semplice ↔ Stringa JSON tra virgolette.",
+          "help": "L'output codificato include le virgolette di delimitazione. La decodifica richiede un valore letterale stringa JSON completo."
+        },
+        "unicode": {
+          "input": "Testo semplice",
+          "output": "Escape Unicode",
+          "usage": "Conversione: Testo semplice ↔ Escape Unicode.",
+          "help": "Codifica UTF-16 con sequenze di escape \\uXXXX. Decodifica la sintassi escape supportata senza eseguire l'input."
+        },
+        "codepoints": {
+          "input": "Unicode Testo",
+          "output": "Elenco di punti di codice U+",
+          "usage": "Esamina o ricostruisce i punti di codice Unicode.",
+          "help": "Codifica un elenco di punti di codice U+ esadecimali. La decodifica ricostruisce il testo, inclusi i caratteri supplementari."
+        },
+        "charset": {
+          "input": "Testo Unicode / file nella codifica di origine",
+          "output": "Byte nella codifica di destinazione",
+          "usage": "Codifica i byte usando il set di caratteri di destinazione."
+        },
+        "json-yaml": {
+          "input": "JSON documento",
+          "output": "YAML documento",
+          "usage": "Conversione: JSON documento ↔ YAML documento."
+        },
+        "xml-json": {
+          "input": "XML documento",
+          "output": "Array JSON ordinato",
+          "usage": "Conversione: XML documento ↔ Array JSON ordinato."
+        },
+        "csv-json": {
+          "input": "CSV tabella",
+          "output": "Righe JSON",
+          "usage": "Conversione: CSV tabella ↔ Righe JSON."
+        },
+        "tsv-json": {
+          "input": "TSV tabella",
+          "output": "Righe JSON",
+          "usage": "Conversione: TSV tabella ↔ Righe JSON."
+        },
+        "jsonl": {
+          "input": "JSON Lines",
+          "output": "Array JSON",
+          "usage": "Conversione: JSON Lines ↔ Array JSON."
+        },
+        "query-json": {
+          "input": "Stringa di query",
+          "output": "Oggetto JSON contenente array di stringhe",
+          "usage": "Converte parametri di query ripetuti in array di stringhe."
+        },
+        "md5": {
+          "input": "Testo / file / righe di testo",
+          "output": "Impronta",
+          "usage": "Calcola un checksum MD5 e confronta i valori attesi."
+        },
+        "hash": {
+          "input": "Testo grezzo / byte del file",
+          "output": "Digest esadecimale dell'algoritmo selezionato",
+          "usage": "Calcola l'hash dei byte originali di testo o file."
+        },
+        "hmac": {
+          "input": "Testo del messaggio / byte del file + chiave",
+          "output": "Digest HMAC esadecimale",
+          "usage": "Calcola HMAC con una chiave per questa attività."
+        },
+        "jwt": {
+          "input": "JWT in tre parti",
+          "output": "JSON decodificato",
+          "usage": "Legge intestazioni e payload JWT senza verificare le firme."
+        },
+        "gzip": {
+          "input": "Testo grezzo / byte del file",
+          "output": "Byte Gzip (rappresentazione selezionata)",
+          "usage": "Comprime o decomprime un singolo flusso Gzip."
+        },
+        "zlib": {
+          "input": "Testo grezzo / byte del file",
+          "output": "Byte Zlib (rappresentazione selezionata)",
+          "usage": "Comprime o decomprime un flusso Zlib."
+        },
+        "deflate": {
+          "input": "Testo grezzo / byte del file",
+          "output": "Byte Deflate grezzi (rappresentazione selezionata)",
+          "usage": "Comprime o decomprime dati Deflate grezzi."
+        },
+        "radix": {
+          "input": "Intero nella base di origine",
+          "output": "Intero nella base di destinazione",
+          "usage": "Conversione: Intero nella base di origine → Intero nella base di destinazione."
+        },
+        "bytes-unit": {
+          "input": "Valore nell'unità di origine",
+          "output": "Valore nell'unità di destinazione",
+          "usage": "Converte bit, byte e unità SI e IEC."
+        },
+        "duration-unit": {
+          "input": "Durata nell'unità di origine",
+          "output": "Durata nell'unità di destinazione",
+          "usage": "Converte durate fisse senza calcoli di calendario."
+        },
+        "color": {
+          "input": "HEX / RGB / HSL / HSV JSON",
+          "output": "Formato colore selezionato",
+          "usage": "Converte rappresentazioni del colore conservando il canale alfa."
+        },
+        "case": {
+          "input": "Testo / nome",
+          "output": "Testo nello stile di denominazione selezionato",
+          "usage": "Conversione: Testo / nome → Testo nello stile di denominazione selezionato."
+        },
+        "lines": {
+          "input": "Righe di testo",
+          "output": "Righe di testo elaborate",
+          "usage": "Applica una sola operazione selezionata alle righe di testo."
+        },
+        "newline": {
+          "input": "Testo con terminatori di riga",
+          "output": "Testo con LF / CRLF / CR selezionato",
+          "usage": "Conversione: Testo con terminatori di riga → Testo con LF / CRLF / CR selezionato."
+        },
+        "normalize": {
+          "input": "Unicode Testo",
+          "output": "Testo nella forma di normalizzazione selezionata",
+          "usage": "Applica la normalizzazione Unicode ai punti di codice."
+        }
+      },
+      "jsonCancelled": "Annullato. L'input è conservato; esegui di nuovo quando sei pronto.",
+      "convertHelp": "Uso e limiti",
+      "fileReplace": "Sostituisci file",
+      "md5CopyFile": "Copia checksum di {{name}}",
+      "copyIso": "Copia ISO",
+      "copyIsoDate": "Copia esecuzione {{index}} in formato ISO",
+      "regexNotRun": "Non eseguito",
+      "regexStale": "Gli input sono cambiati. Esegui per aggiornare i risultati.",
+      "speedNetwork": "Questo strumento si connette a Cloudflare e usa dati di rete. Le richieste di test iniziano solo dopo l'avvio.",
+      "speedSettings": "Impostazioni del test",
+      "speedSummary": "{{profile}} · {{unit}} · fino a {{budget}} MiB",
+      "customZone": "Fuso orario IANA personalizzato",
+      "regexNoMatches": "Nessuna corrispondenza"
+    },
+    "daily": {
+      "unitDetails": "Altre conversioni e precisione",
+      "moneyEmpty": "Inserisci un importo e convertilo per vedere il risultato.",
+      "listHelp": "Una voce per riga. Le righe vuote vengono ignorate; le voci duplicate restano separate finché non le rimuovi.",
+      "dedupe": "Rimuovi voci duplicate",
+      "drawEntries": "Estrai voci · {{count}}",
+      "drawGroups": "Crea gruppi · {{count}}",
+      "drawMembers": "Raggruppa voci · {{count}} per gruppo",
+      "drawNumbers": "Estrai numeri · {{count}}",
+      "discountHelp": "Prezzo originale 100, sconto 20% → prezzo scontato 80.",
+      "countdownHelp": "Per un conto alla rovescia, utilizza oggi come inizio e scegli l'obiettivo come fine. Gli obiettivi passati restituiscono un conteggio dei giorni negativo.",
+      "anniversaryHelp": "Le età dell'anniversario utilizzano l'ultimo giorno di febbraio per il 29 febbraio negli anni non bisestili.",
+      "unitPrecision": "≈ indica l’arrotondamento a 24 cifre significative; la copia conserva fino a 80 cifre. I fattori seguono mathjs; galloni e once fluide sono unità statunitensi.",
+      "discountReduction": "Percentuale di sconto (%)"
+    },
+    "files": {
+      "fileActions": "Azioni sui file",
+      "discardCrop": "Scartare le modifiche al ritaglio non salvate?",
+      "pastedImage": "Immagine incollata",
+      "lineDedupeHelp": "Confronta esattamente ogni riga completa, inclusi spazi e maiuscole. Mantiene la prima occorrenza.",
+      "lineSortHelp": "Ordina per unità di codice Unicode. Non è un ordinamento linguistico o numerico.",
+      "imageInfo": "{{name}} · {{width}} × {{height}} px"
+    },
+    "shared": {
+      "viewResult": "Visualizza risultato"
+    }
   }
 }

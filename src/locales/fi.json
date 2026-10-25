@@ -1581,5 +1581,277 @@
     "passwordPolicy": "Valitut merkkityypit muodostavat sallitun joukon. Ota käyttöön Vaadi jokainen tyyppi, jos haluat sisällyttää kaikki valitut tyypit kuhunkin salasanaan.",
     "speedScope": "Arvosanat kuvaavat siirtonopeutta. Latenssi ja värinä mitataan erikseen.",
     "viewResult": "Näytä tulos"
+  },
+  "redesign": {
+    "calculatorOriginal": "Alkuperäinen arvo",
+    "calculatorNew": "Uusi arvo",
+    "calculatorPrice": "Alkuperäinen hinta",
+    "calculatorOff": "Alennusprosentti (%)",
+    "calculatorPart": "osa",
+    "calculatorWhole": "Kokonainen",
+    "calculatorPercent": "prosenttiosuus (%)",
+    "expressionResult": "Lauseketulos · {{expression}}",
+    "businessResult": "{{mode}} · {{expression}}",
+    "workdayExceptions": "Vapaapäivät: {{off}} · Työpäivät: {{work}}",
+    "copyDisplayedEquation": "Kopioi näytettävä yhtälö",
+    "drawShuffle": "Sekoitusluettelo",
+    "drawGroups": "Luo ryhmiä",
+    "timerOtherRunning": "{{mode}} on käynnissä",
+    "timerSessionHelp": "Tämän välilehden lataaminen uudelleen palauttaa molemmat ajastimet, mukaan lukien käynnissä olevien ajastinten kuluneen kellonajan. Tila on tallennettu tämän välilehden istunnon tallennustilaan.",
+    "pdfAddPdf": "Lisää PDF-tiedostoja tätä tehtävää varten.",
+    "pdfAddImages": "Luo PDF-tiedosto lisäämällä PNG-, JPG- tai WebP-kuvia.",
+    "pdfChooseCurrent": "Valitse käsiteltävä PDF nykyisestä PDF-luettelosta.",
+    "qrRecognizeEmpty": "Tunnistettu teksti näkyy tässä. Valitse, pudota tai liitä kuva syöttöalueelle.",
+    "textIdle": "Suorita operaatio nähdäksesi sen tuloksen täällä.",
+    "textStale": "Syöttöä tai vaihtoehtoja muutettu. Suorita toimenpide uudelleen.",
+    "textEmpty": "Valmistettu ilman lähtöä.",
+    "textInputStats": "Syöttö: {{summary}}",
+    "textOutputBytes": "Lähtö: {{bytes}} UTF-8 tavua",
+    "textNewlineSummary": "Rivinpäätteet: {{format}} · {{bytes}} UTF-8 tavua",
+    "cropNote": "Rajaussäädön tallentaminen koskee vain valittua kuvaa. Vienti tallentaa ensin kyseisen kuvan tallentamattoman rajaussäädön ja käsittelee sitten jokaisen jonossa olevan kuvan käyttämällä sen tallennettua rajaussäätöä tai alkuperäistä kuvaa.",
+    "cropSaveCurrent": "Tallenna tämän kuvan rajaus",
+    "cropDirty": "Tallentamattomat kuvan rajausmuutokset kohteelle {{name}}. Vienti tallentaa nämä muutokset ensin.",
+    "cropSaved": "Tallennettu kuvan rajaus kohteelle {{name}}. Sitä käytetään eräkuvan viennissä.",
+    "cropOriginal": "{{name}} ei sisällä tallennettua kuvan rajausta. Vienti käyttää alkuperäistä kuvaa, ellet säädä rajausta.",
+    "cropExportBatch": "Vie {{count}} kuvaa · kuvat, joissa on tallennettu rajaus: {{cropped}}",
+    "cropSaveExport": "Tallenna nykyinen kuvan rajaus ja vie {{count}} kuvaa"
+  },
+  "direct": {
+    "daily": {
+      "countdownHelp": "Käytä lähtölaskennassa aloituksena tätä päivää ja lopetuksena kohdepäivää. Menneistä kohdepäivistä saadaan negatiivinen päivien määrä.",
+      "anniversaryHelp": "Helmikuun 29. päivän vuosipäivissä käytetään muina kuin karkausvuosina helmikuun viimeistä päivää.",
+      "unitDetails": "Muut muunnokset ja tarkkuus",
+      "unitPrecision": "≈ tarkoittaa, että näyttö on pyöristetty 24 merkitsevään numeroon; kopiointi säilyttää enintään 80. Kertoimet noudattavat mathjs-kirjastoa; gallonat ja nesteunssit ovat yhdysvaltalaisia yksiköitä.",
+      "moneyEmpty": "Syötä summa ja muunna se nähdäksesi tuloksen.",
+      "listHelp": "Yksi merkintä riville. Tyhjät rivit ohitetaan; toistuvat merkinnät säilyvät erillisinä, kunnes poistat ne.",
+      "dedupe": "Poista toistuvat merkinnät",
+      "drawEntries": "Arvo merkinnät · {{count}}",
+      "drawGroups": "Luo ryhmät · {{count}}",
+      "drawMembers": "Ryhmittele merkinnät · {{count}} ryhmää kohti",
+      "drawNumbers": "Arvo numerot · {{count}}",
+      "discountReduction": "Alennusprosentti (%)",
+      "discountHelp": "Alkuperäinen hinta 100, alennus 20 % → alennettu hinta 80."
+    },
+    "files": {
+      "fileActions": "Tiedostotoiminnot",
+      "discardCrop": "Hylätäänkö tallentamattomat rajausmuutokset?",
+      "imageInfo": "{{name}} · {{width}} × {{height}} px",
+      "pastedImage": "Liitetty kuva",
+      "lineDedupeHelp": "Vertaa kokonaisia rivejä täsmällisesti välilyönnit ja kirjainkoko mukaan lukien. Säilyttää ensimmäisen esiintymän.",
+      "lineSortHelp": "Lajittelee Unicode-koodiyksiköiden mukaan. Tämä ei ole kielellinen tai numeerinen järjestys."
+    },
+    "developer": {
+      "convert": {
+        "base64": {
+          "usage": "Esitä tavut Base64-muodossa.",
+          "input": "Teksti / tiedoston raakatavut",
+          "output": "Base64-teksti"
+        },
+        "base64url": {
+          "usage": "Esitä tavut URL-turvallisessa Base64-muodossa.",
+          "input": "Teksti / tiedoston raakatavut",
+          "output": "Base64URL-teksti"
+        },
+        "base32": {
+          "usage": "Esitä tavut Base32-merkistöllä.",
+          "input": "Teksti / tiedoston raakatavut",
+          "output": "Base32-teksti"
+        },
+        "base32hex": {
+          "usage": "Esitä tavut Base32Hex-merkistöllä.",
+          "input": "Teksti / tiedoston raakatavut",
+          "output": "Base32Hex-teksti"
+        },
+        "base58": {
+          "usage": "Esitä tavut Bitcoinin Base58-merkistöllä.",
+          "input": "Teksti / tiedoston raakatavut",
+          "output": "Base58-teksti"
+        },
+        "hex": {
+          "usage": "Muunna tavut heksadesimaalimuotoon tai takaisin.",
+          "input": "Teksti / tiedoston raakatavut",
+          "output": "Heksadesimaalitavut"
+        },
+        "binary": {
+          "usage": "Esitä jokainen tavu kahdeksana binäärinumerona.",
+          "input": "Teksti / tiedoston raakatavut",
+          "output": "Binäärinen tavujono"
+        },
+        "url-component": {
+          "usage": "Koodaa yksi URL-parametri tai polun osa.",
+          "input": "Suojaamaton teksti",
+          "output": "URL-osan teksti",
+          "help": "Käyttää encodeURIComponent / decodeURIComponent -toimintoja. Välilyönneistä tulee %20 ja kirjaimellisesta + -merkistä %2B."
+        },
+        "uri": {
+          "usage": "Lisää suojausmerkit koko URIin säilyttäen URI-erottimet.",
+          "input": "Täysi URI",
+          "output": "Suojattu URI",
+          "help": "Käyttää encodeURI / decodeURI -toimintoja ja säilyttää URI-erottimet, kuten : / ? #. Käytä URL-osaa yksittäisen parametrin arvolle."
+        },
+        "form": {
+          "usage": "Koodaa yksi lomakkeen avain tai arvo.",
+          "input": "Suojaamaton avain / arvo",
+          "output": "Lomakeosan teksti",
+          "help": "Käyttää application/x-www-form-urlencoded-sääntöjä. Välilyönneistä tulee + ja kirjaimellisesta + -merkistä %2B."
+        },
+        "html-entities": {
+          "usage": "Suojaa HTML-sisällön erikoismerkit.",
+          "input": "Pelkkä teksti",
+          "output": "HTML kokonaisuuksia",
+          "help": "Suojaa ja purkaa HTML-entiteettejä. Muuntaa tekstiä jäsentämättä tai suorittamatta HTML:ää."
+        },
+        "xml-entities": {
+          "usage": "Muunna teksti XML-entiteeteiksi tai takaisin.",
+          "input": "Pelkkä teksti",
+          "output": "XML kokonaisuuksia",
+          "help": "Suojaa ja purkaa XML-entiteettejä jäsentämättä XML-dokumenttia tai suorittamatta syötettä."
+        },
+        "json-string": {
+          "usage": "Luo tai lue kokonainen JSON-merkkijonoliteraali.",
+          "input": "Pelkkä teksti",
+          "output": "Lainausmerkeissä oleva JSON-merkkijono",
+          "help": "Koodattu tuloste sisältää ympäröivät lainausmerkit. Purkaminen vaatii kokonaisen JSON-merkkijonoliteraalin."
+        },
+        "unicode": {
+          "usage": "Muunna teksti Unicode-suojaussekvensseiksi tai takaisin.",
+          "input": "Pelkkä teksti",
+          "output": "Unicode-suojaussekvenssit",
+          "help": "Koodaa UTF-16:n \\uXXXX-suojaussekvensseiksi. Purkaa tuetun suojaussyntaksin suorittamatta syötettä."
+        },
+        "codepoints": {
+          "usage": "Tutki tai muodosta uudelleen Unicode-koodipisteitä.",
+          "input": "Unicode-teksti",
+          "output": "U+-koodipisteluettelo",
+          "help": "Koodaa luettelon heksadesimaalisista U+-koodipisteistä. Purkaminen muodostaa tekstin uudelleen, myös lisätasojen merkit."
+        },
+        "charset": {
+          "usage": "Koodaa tavut kohdemerkistöllä.",
+          "input": "Unicode-teksti / lähdekoodattu tiedosto",
+          "output": "Kohdekoodatut tavut"
+        },
+        "json-yaml": {
+          "usage": "Muunna JSON- ja YAML-dokumenttien välillä.",
+          "input": "JSON-dokumentti",
+          "output": "YAML-dokumentti"
+        },
+        "xml-json": {
+          "usage": "Muunna XML ja sen järjestetty JSON-rakenne.",
+          "input": "XML-dokumentti",
+          "output": "Järjestetty JSON-taulukko"
+        },
+        "csv-json": {
+          "usage": "Muunna pilkuilla eroteltuja taulukoita ja JSONia.",
+          "input": "CSV-taulukko",
+          "output": "JSON-rivit"
+        },
+        "tsv-json": {
+          "usage": "Muunna sarkaimilla eroteltuja taulukoita ja JSONia.",
+          "input": "TSV-taulukko",
+          "output": "JSON-rivit"
+        },
+        "jsonl": {
+          "usage": "Muunna JSON Lines ja JSON-taulukot.",
+          "input": "JSON Lines",
+          "output": "JSON-taulukko"
+        },
+        "query-json": {
+          "usage": "Muunna toistuvat kyselyparametrit merkkijonotaulukoiksi.",
+          "input": "Kyselymerkkijono",
+          "output": "Merkkijonotaulukoista koostuva JSON-objekti"
+        },
+        "md5": {
+          "usage": "Laske MD5-tarkistussumma ja vertaa odotettuja arvoja.",
+          "input": "Teksti / tiedostot / tekstirivit",
+          "output": "MD5-tarkistussumma"
+        },
+        "hash": {
+          "usage": "Laske tiiviste tekstin tai tiedoston alkuperäisistä tavuista.",
+          "input": "Teksti / tiedoston raakatavut",
+          "output": "Valitun algoritmin heksadesimaalitiiviste"
+        },
+        "hmac": {
+          "usage": "Laske HMAC tämän tehtävän avaimella.",
+          "input": "Viestiteksti / tiedoston tavut + avain",
+          "output": "Heksadesimaalinen HMAC-tiiviste"
+        },
+        "jwt": {
+          "usage": "Lue JWT-otsakkeet ja hyötykuormat tarkistamatta allekirjoituksia.",
+          "input": "Kolmiosainen JWT",
+          "output": "Purettu JSON"
+        },
+        "gzip": {
+          "usage": "Pakkaa tai pura yksi Gzip-virta.",
+          "input": "Teksti / tiedoston raakatavut",
+          "output": "Gzip-tavut (valittu esitystapa)"
+        },
+        "zlib": {
+          "usage": "Pakkaa tai pura Zlib-virta.",
+          "input": "Teksti / tiedoston raakatavut",
+          "output": "Zlib-tavut (valittu esitystapa)"
+        },
+        "deflate": {
+          "usage": "Pakkaa tai pura raaka Deflate-data.",
+          "input": "Teksti / tiedoston raakatavut",
+          "output": "Raa’at Deflate-tavut (valittu esitystapa)"
+        },
+        "radix": {
+          "usage": "Muunna kokonaisluku toiseen lukukantaan.",
+          "input": "Kokonaisluku lähdelukukannassa",
+          "output": "Kokonaisluku kohdelukukannassa"
+        },
+        "bytes-unit": {
+          "usage": "Muunna bitit, tavut sekä SI- ja IEC-yksiköt.",
+          "input": "Arvo lähdeyksikössä",
+          "output": "Arvo kohdeyksikössä"
+        },
+        "duration-unit": {
+          "usage": "Muunna kiinteät kestot ilman kalenterilaskentaa.",
+          "input": "Kesto lähdeyksikössä",
+          "output": "Kesto kohdeyksikössä"
+        },
+        "color": {
+          "usage": "Muunna väriesitykset säilyttäen alfakanava.",
+          "input": "HEX / RGB / HSL / HSV JSON",
+          "output": "Valittu värimuoto"
+        },
+        "case": {
+          "usage": "Käytä valittua kirjainkokoa tai nimeämistyyliä.",
+          "input": "Teksti / nimi",
+          "output": "Teksti valitussa nimeämistyylissä"
+        },
+        "lines": {
+          "usage": "Käytä yhtä valittua toimintoa tekstiriveihin.",
+          "input": "Tekstirivit",
+          "output": "Käsitellyt tekstirivit"
+        },
+        "newline": {
+          "usage": "Muunna tekstin rivinvaihdot.",
+          "input": "Teksti rivinvaihdoilla",
+          "output": "Teksti valitulla LF / CRLF / CR -rivinvaihdolla"
+        },
+        "normalize": {
+          "usage": "Käytä Unicode-normalisointia koodipisteisiin.",
+          "input": "Unicode-teksti",
+          "output": "Teksti valitussa normalisointimuodossa"
+        }
+      },
+      "jsonCancelled": "Peruutettu. Syötteesi säilytetään; suorita uudelleen, kun olet valmis.",
+      "convertHelp": "Käyttö ja rajoitukset",
+      "fileReplace": "Korvaa tiedostot",
+      "md5CopyFile": "Kopioi tiedoston {{name}} tarkistussumma",
+      "copyIso": "Kopioi ISO",
+      "copyIsoDate": "Kopioi suoritus {{index}} ISO-muodossa",
+      "regexNotRun": "Ei suoritettu",
+      "regexNoMatches": "Ei osumia",
+      "regexStale": "Syötteet ovat muuttuneet. Päivitä tulokset suorittamalla.",
+      "speedNetwork": "Tämä työkalu muodostaa yhteyden Cloudflareen ja kuluttaa verkkodataa. Testipyynnöt alkavat vasta, kun käynnistät testin.",
+      "speedSettings": "Testiasetukset",
+      "speedSummary": "{{profile}} · {{unit}} · enintään {{budget}} MiB",
+      "customZone": "Mukautettu IANA-aikavyöhyke"
+    },
+    "shared": {
+      "viewResult": "Näytä tulos"
+    }
   }
 }

@@ -1581,5 +1581,277 @@
     "passwordPolicy": "Ausgewählte Zeichentypen bilden den zulässigen Pool. Aktivieren Sie „Jeden Typ erforderlich“, um jeden ausgewählten Typ in jedes Passwort aufzunehmen.",
     "speedScope": "Bewertungen beschreiben die Übertragungsgeschwindigkeit. Latenz und Jitter werden separat gemessen.",
     "viewResult": "Ergebnis ansehen"
+  },
+  "redesign": {
+    "calculatorOriginal": "Ursprünglicher Wert",
+    "calculatorNew": "Neuer Wert",
+    "calculatorPrice": "Originalpreis",
+    "calculatorOff": "Rabatt (%)",
+    "calculatorPart": "Teilwert",
+    "calculatorWhole": "Gesamtwert",
+    "calculatorPercent": "Prozentsatz (%)",
+    "expressionResult": "Ausdrucksergebnis · {{expression}}",
+    "businessResult": "{{mode}} · {{expression}}",
+    "workdayExceptions": "Freie Tage: {{off}} · Arbeitstage: {{work}}",
+    "copyDisplayedEquation": "Angezeigte Gleichung kopieren",
+    "drawShuffle": "Liste mischen",
+    "drawGroups": "Gruppen erstellen",
+    "timerOtherRunning": "{{mode}} läuft",
+    "timerSessionHelp": "Beim Neuladen dieses Tabs werden beide Timer wiederhergestellt. Laufende Timer berücksichtigen die seitdem verstrichene Zeit. Der Zustand wird im Sitzungsspeicher dieses Tabs gespeichert.",
+    "pdfAddPdf": "Fügen Sie für diese Aufgabe PDF-Dateien hinzu.",
+    "pdfAddImages": "Fügen Sie PNG-, JPG- oder WebP-Bilder hinzu, um ein PDF zu erstellen.",
+    "pdfChooseCurrent": "Wählen Sie das zu verarbeitende PDF aus der aktuellen PDF-Liste aus.",
+    "qrRecognizeEmpty": "Erkannter Text wird hier angezeigt. Wählen Sie ein Bild aus, legen Sie es ab oder fügen Sie es in den Eingabebereich ein.",
+    "textIdle": "Führen Sie einen Vorgang aus, um das Ergebnis hier anzuzeigen.",
+    "textStale": "Eingabe oder Optionen geändert. Führen Sie den Vorgang erneut aus.",
+    "textEmpty": "Ohne Ausgabe abgeschlossen.",
+    "textInputStats": "Eingabe: {{summary}}",
+    "textOutputBytes": "Ausgabe: {{bytes}} UTF-8 Bytes",
+    "textNewlineSummary": "Zeilenenden: {{format}} · {{bytes}} UTF-8-Bytes",
+    "cropNote": "Speichern gilt nur für das ausgewählte Bild. Beim Export wird zuerst dessen ungespeicherter Zuschnitt gespeichert. Anschließend werden alle Bilder in der Warteschlange mit ihrem gespeicherten Zuschnitt oder als Original verarbeitet.",
+    "cropSaveCurrent": "Zuschnitt für dieses Bild speichern",
+    "cropDirty": "Ungespeicherte Änderungen am Zuschnitt von {{name}}. Beim Export werden diese Änderungen zuerst gespeichert.",
+    "cropSaved": "Zuschnitt für {{name}} gespeichert. Er wird beim Stapelexport verwendet.",
+    "cropOriginal": "Für {{name}} ist kein Zuschnitt gespeichert. Beim Export wird das Original verwendet, wenn Sie den Zuschnitt nicht ändern.",
+    "cropExportBatch": "{{count}} Bilder exportieren · {{cropped}} gespeicherte Zuschnitte",
+    "cropSaveExport": "Aktuellen Zuschnitt speichern und {{count}} Bilder exportieren"
+  },
+  "direct": {
+    "daily": {
+      "countdownHelp": "Für einen Countdown verwenden Sie heute als Start und das Ziel als Ende. Vergangene Ziele ergeben eine negative Tageszahl.",
+      "anniversaryHelp": "Für Jahrestage am 29. Februar gilt in Nichtschaltjahren der letzte Februartag.",
+      "unitDetails": "Weitere Umrechnungen und Genauigkeit",
+      "unitPrecision": "≈ kennzeichnet eine Anzeige, die auf 24 signifikante Stellen gerundet ist; beim Kopieren bleiben bis zu 80 erhalten. Faktoren folgen mathjs; Gallonen und Flüssigunzen sind US-Einheiten.",
+      "moneyEmpty": "Geben Sie einen Betrag ein und rechnen Sie ihn um, um das Ergebnis zu sehen.",
+      "listHelp": "Ein Eintrag pro Zeile. Leerzeilen werden ignoriert; doppelte Einträge bleiben getrennt, bis Sie sie entfernen.",
+      "dedupe": "Doppelte Einträge entfernen",
+      "drawEntries": "Einträge ziehen · {{count}}",
+      "drawGroups": "Gruppen erstellen · {{count}}",
+      "drawMembers": "Einträge gruppieren · {{count}} pro Gruppe",
+      "drawNumbers": "Zahlen ziehen · {{count}}",
+      "discountReduction": "Rabatt (%)",
+      "discountHelp": "Originalpreis 100, Preisnachlass 20 % → Preis nach Rabatt 80."
+    },
+    "files": {
+      "fileActions": "Dateiaktionen",
+      "discardCrop": "Ungespeicherte Zuschnittanpassungen verwerfen?",
+      "imageInfo": "{{name}} · {{width}} × {{height}} px",
+      "pastedImage": "Eingefügtes Bild",
+      "lineDedupeHelp": "Vergleicht vollständige Zeilen exakt, einschließlich Leerzeichen und Groß-/Kleinschreibung. Behält das erste Vorkommen.",
+      "lineSortHelp": "Sortiert nach Unicode-Codeeinheiten. Dies ist keine sprachliche oder numerische Reihenfolge."
+    },
+    "developer": {
+      "convert": {
+        "base64": {
+          "usage": "Bytes als Base64 darstellen.",
+          "input": "Text / ursprüngliche Dateibytes",
+          "output": "Base64-Text"
+        },
+        "base64url": {
+          "usage": "Bytes als URL-sicheres Base64 darstellen.",
+          "input": "Text / ursprüngliche Dateibytes",
+          "output": "Base64URL-Text"
+        },
+        "base32": {
+          "usage": "Bytes mit dem Base32-Alphabet darstellen.",
+          "input": "Text / ursprüngliche Dateibytes",
+          "output": "Base32-Text"
+        },
+        "base32hex": {
+          "usage": "Bytes mit dem Base32Hex-Alphabet darstellen.",
+          "input": "Text / ursprüngliche Dateibytes",
+          "output": "Base32Hex-Text"
+        },
+        "base58": {
+          "usage": "Bytes mit dem Bitcoin-Base58-Alphabet darstellen.",
+          "input": "Text / ursprüngliche Dateibytes",
+          "output": "Base58-Text"
+        },
+        "hex": {
+          "usage": "Bytes in Hexadezimaldarstellung umwandeln oder zurück.",
+          "input": "Text / ursprüngliche Dateibytes",
+          "output": "Hexadezimale Bytes"
+        },
+        "binary": {
+          "usage": "Jedes Byte als acht Binärziffern darstellen.",
+          "input": "Text / ursprüngliche Dateibytes",
+          "output": "Binäre Bytefolge"
+        },
+        "url-component": {
+          "usage": "Einen URL-Parameter oder Pfadbestandteil kodieren.",
+          "input": "Unmaskierter Text",
+          "output": "URL-Komponententext",
+          "help": "Verwendet encodeURIComponent / decodeURIComponent. Leerzeichen werden zu %20; ein wörtliches + wird zu %2B."
+        },
+        "uri": {
+          "usage": "Eine vollständige URI maskieren und URI-Trennzeichen beibehalten.",
+          "input": "Vollständige URI",
+          "output": "Maskierte URI",
+          "help": "Verwendet encodeURI / decodeURI und erhält URI-Trennzeichen wie : / ? #. Verwenden Sie für einen einzelnen Parameterwert die URL-Komponente."
+        },
+        "form": {
+          "usage": "Einen Formularschlüssel oder -wert kodieren.",
+          "input": "Unmaskierter Schlüssel / Wert",
+          "output": "Formularkomponententext",
+          "help": "Verwendet die Regeln von application/x-www-form-urlencoded. Leerzeichen werden zu +; ein wörtliches + wird zu %2B."
+        },
+        "html-entities": {
+          "usage": "Sonderzeichen für HTML-Inhalte maskieren.",
+          "input": "Klartext",
+          "output": "HTML-Entitäten",
+          "help": "Maskiert und dekodiert HTML-Entitäten. Konvertiert Text, ohne HTML zu parsen oder auszuführen."
+        },
+        "xml-entities": {
+          "usage": "Text in XML-Entitäten umwandeln oder zurück.",
+          "input": "Klartext",
+          "output": "XML-Entitäten",
+          "help": "Maskiert und dekodiert XML-Entitäten, ohne ein XML-Dokument zu parsen oder die Eingabe auszuführen."
+        },
+        "json-string": {
+          "usage": "Ein vollständiges JSON-Zeichenfolgenliteral erstellen oder lesen.",
+          "input": "Klartext",
+          "output": "JSON-Zeichenfolge in Anführungszeichen",
+          "help": "Die kodierte Ausgabe enthält umschließende Anführungszeichen. Die Dekodierung erfordert ein vollständiges JSON-Zeichenfolgenliteral."
+        },
+        "unicode": {
+          "usage": "Text in Unicode-Escape-Sequenzen umwandeln oder zurück.",
+          "input": "Klartext",
+          "output": "Unicode-Escape-Sequenzen",
+          "help": "Kodiert UTF-16 als \\uXXXX-Escape-Sequenzen. Dekodiert unterstützte Escape-Syntax, ohne die Eingabe auszuführen."
+        },
+        "codepoints": {
+          "usage": "Unicode-Codepunkte untersuchen oder rekonstruieren.",
+          "input": "Unicode-Text",
+          "output": "U+-Codepunktliste",
+          "help": "Kodiert eine Liste hexadezimaler U+-Codepunkte. Die Dekodierung rekonstruiert Text einschließlich ergänzender Zeichen."
+        },
+        "charset": {
+          "usage": "Bytes mit einem Zielzeichensatz kodieren.",
+          "input": "Unicode-Text / Datei mit Quellkodierung",
+          "output": "Bytes in Zielkodierung"
+        },
+        "json-yaml": {
+          "usage": "Zwischen JSON- und YAML-Dokumenten konvertieren.",
+          "input": "JSON-Dokument",
+          "output": "YAML-Dokument"
+        },
+        "xml-json": {
+          "usage": "XML und seine geordnete JSON-Struktur konvertieren.",
+          "input": "XML-Dokument",
+          "output": "Geordnetes JSON-Array"
+        },
+        "csv-json": {
+          "usage": "Kommagetrennte Tabellen und JSON konvertieren.",
+          "input": "CSV-Tabelle",
+          "output": "JSON-Zeilen"
+        },
+        "tsv-json": {
+          "usage": "Tabulatorgetrennte Tabellen und JSON konvertieren.",
+          "input": "TSV-Tabelle",
+          "output": "JSON-Zeilen"
+        },
+        "jsonl": {
+          "usage": "JSON Lines und JSON-Arrays konvertieren.",
+          "input": "JSON Lines",
+          "output": "JSON-Array"
+        },
+        "query-json": {
+          "usage": "Wiederholte Abfrageparameter in Zeichenfolgenarrays umwandeln.",
+          "input": "Abfragezeichenfolge",
+          "output": "JSON-Objekt mit Zeichenfolgenarrays"
+        },
+        "md5": {
+          "usage": "Eine MD5-Prüfsumme berechnen und mit erwarteten Werten vergleichen.",
+          "input": "Text / Dateien / Textzeilen",
+          "output": "MD5-Prüfsumme"
+        },
+        "hash": {
+          "usage": "Die ursprünglichen Bytes von Text oder einer Datei hashen.",
+          "input": "Text / ursprüngliche Dateibytes",
+          "output": "Hexadezimaler Hashwert des ausgewählten Algorithmus"
+        },
+        "hmac": {
+          "usage": "HMAC mit einem Schlüssel für diese Aufgabe berechnen.",
+          "input": "Nachrichtentext / Dateibytes + Schlüssel",
+          "output": "Hexadezimaler HMAC-Hashwert"
+        },
+        "jwt": {
+          "usage": "JWT-Header und -Nutzdaten ohne Signaturprüfung lesen.",
+          "input": "Dreiteiliges JWT",
+          "output": "Dekodiertes JSON"
+        },
+        "gzip": {
+          "usage": "Einen Gzip-Datenstrom komprimieren oder dekomprimieren.",
+          "input": "Text / ursprüngliche Dateibytes",
+          "output": "Gzip-Bytes (ausgewählte Darstellung)"
+        },
+        "zlib": {
+          "usage": "Einen Zlib-Datenstrom komprimieren oder dekomprimieren.",
+          "input": "Text / ursprüngliche Dateibytes",
+          "output": "Zlib-Bytes (ausgewählte Darstellung)"
+        },
+        "deflate": {
+          "usage": "Rohe Deflate-Daten komprimieren oder dekomprimieren.",
+          "input": "Text / ursprüngliche Dateibytes",
+          "output": "Rohe Deflate-Bytes (ausgewählte Darstellung)"
+        },
+        "radix": {
+          "usage": "Eine ganze Zahl in eine andere Basis umwandeln.",
+          "input": "Ganze Zahl in der Quellbasis",
+          "output": "Ganze Zahl in der Zielbasis"
+        },
+        "bytes-unit": {
+          "usage": "Bits, Bytes sowie SI- und IEC-Einheiten umrechnen.",
+          "input": "Wert in der Quelleinheit",
+          "output": "Wert in der Zieleinheit"
+        },
+        "duration-unit": {
+          "usage": "Feste Zeitspannen ohne Kalenderarithmetik umrechnen.",
+          "input": "Zeitspanne in der Quelleinheit",
+          "output": "Zeitspanne in der Zieleinheit"
+        },
+        "color": {
+          "usage": "Farbdarstellungen unter Beibehaltung des Alphawerts konvertieren.",
+          "input": "HEX / RGB / HSL / HSV JSON",
+          "output": "Ausgewähltes Farbformat"
+        },
+        "case": {
+          "usage": "Die ausgewählte Groß-/Kleinschreibung oder Namenskonvention anwenden.",
+          "input": "Text / Name",
+          "output": "Text in der ausgewählten Namenskonvention"
+        },
+        "lines": {
+          "usage": "Eine ausgewählte Operation auf Textzeilen anwenden.",
+          "input": "Textzeilen",
+          "output": "Verarbeitete Textzeilen"
+        },
+        "newline": {
+          "usage": "Zeilenenden von Text konvertieren.",
+          "input": "Text mit Zeilenenden",
+          "output": "Text mit ausgewähltem LF / CRLF / CR"
+        },
+        "normalize": {
+          "usage": "Unicode-Normalisierung auf Codepunkte anwenden.",
+          "input": "Unicode-Text",
+          "output": "Text in der ausgewählten Normalisierungsform"
+        }
+      },
+      "jsonCancelled": "Abgebrochen. Ihre Eingabe bleibt erhalten; starten Sie erneut, sobald Sie bereit sind.",
+      "convertHelp": "Verwendung und Grenzen",
+      "fileReplace": "Dateien ersetzen",
+      "md5CopyFile": "Prüfsumme für {{name}} kopieren",
+      "copyIso": "ISO kopieren",
+      "copyIsoDate": "Ausführung {{index}} als ISO kopieren",
+      "regexNotRun": "Nicht ausgeführt",
+      "regexNoMatches": "Keine Treffer",
+      "regexStale": "Eingaben geändert. Ausführen, um die Ergebnisse zu aktualisieren.",
+      "speedNetwork": "Dieses Werkzeug verbindet sich mit Cloudflare und verbraucht Datenvolumen. Testanfragen beginnen erst nach Ihrem Start.",
+      "speedSettings": "Testeinstellungen",
+      "speedSummary": "{{profile}} · {{unit}} · bis zu {{budget}} MiB",
+      "customZone": "Benutzerdefinierte IANA-Zeitzone"
+    },
+    "shared": {
+      "viewResult": "Ergebnis ansehen"
+    }
   }
 }

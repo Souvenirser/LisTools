@@ -1581,5 +1581,277 @@
     "passwordPolicy": "Valda teckentyper bildar den tillåtna poolen. Aktivera \"Kräv varje typ\" för att inkludera varje vald typ i varje lösenord.",
     "speedScope": "Betygen beskriver överföringshastigheten. Latens och jitter mäts separat.",
     "viewResult": "Visa resultat"
+  },
+  "redesign": {
+    "calculatorOriginal": "Ursprungligt värde",
+    "calculatorNew": "Nytt värde",
+    "calculatorPrice": "Ursprungligt pris",
+    "calculatorOff": "Procent rabatt (%)",
+    "calculatorPart": "Del",
+    "calculatorWhole": "Hela",
+    "calculatorPercent": "Procent (%)",
+    "expressionResult": "Uttrycksresultat · {{expression}}",
+    "businessResult": "{{mode}} · {{expression}}",
+    "workdayExceptions": "Lediga dagar: {{off}} · Arbetsdatum: {{work}}",
+    "copyDisplayedEquation": "Kopiera visade ekvation",
+    "drawShuffle": "Blanda lista",
+    "drawGroups": "Skapa grupper",
+    "timerOtherRunning": "{{mode}} körs",
+    "timerSessionHelp": "Om du laddar om den här fliken återställs båda timers, inklusive förfluten klocktid för att köra timer. Status sparas i denna fliks sessionslagring.",
+    "pdfAddPdf": "Lägg till PDF-filer för denna uppgift.",
+    "pdfAddImages": "Lägg till PNG-, JPG- eller WebP-bilder för att skapa en PDF.",
+    "pdfChooseCurrent": "Välj PDF-filen att bearbeta från den aktuella PDF-listan.",
+    "qrRecognizeEmpty": "Identifierad text kommer att visas här. Välj, släpp eller klistra in en bild i inmatningsområdet.",
+    "textIdle": "Kör en operation för att se resultatet här.",
+    "textStale": "Inmatning eller alternativ har ändrats. Kör operationen igen.",
+    "textEmpty": "Kompletterad utan utgång.",
+    "textInputStats": "Ingång: {{summary}}",
+    "textOutputBytes": "Utdata: {{bytes}} UTF-8 byte",
+    "textNewlineSummary": "Radslut: {{format}} · {{bytes}} UTF-8 byte",
+    "cropNote": "Att spara en beskärningsjustering gäller endast den valda bilden. Export sparar först bildens osparade beskärningsjustering och bearbetar sedan varje bild i kö med hjälp av dess sparade beskärningsjustering eller originalbild.",
+    "cropSaveCurrent": "Spara beskärning för den här bilden",
+    "cropDirty": "Osparade ändringar av bildbeskärning för {{name}}. Exporten sparar dessa ändringar först.",
+    "cropSaved": "Sparad bildbeskärning för {{name}}. Det kommer att användas i batchbildexporten.",
+    "cropOriginal": "{{name}} har ingen sparad bildbeskärning. Export använder sin ursprungliga bild om du inte justerar beskärningen.",
+    "cropExportBatch": "Exportera {{count}} bilder · bilder med sparad beskärning: {{cropped}}",
+    "cropSaveExport": "Spara aktuell bildbeskärning och exportera {{count}}-bilder"
+  },
+  "direct": {
+    "developer": {
+      "convert": {
+        "base64": {
+          "usage": "Representera byte som Base64.",
+          "input": "Text / filens originalbyte",
+          "output": "Base64-text"
+        },
+        "base64url": {
+          "usage": "Representera byte som URL-säker Base64.",
+          "input": "Text / filens originalbyte",
+          "output": "Base64URL-text"
+        },
+        "base32": {
+          "usage": "Representera byte med Base32-alfabetet.",
+          "input": "Text / filens originalbyte",
+          "output": "Base32-text"
+        },
+        "base32hex": {
+          "usage": "Representera byte med Base32Hex-alfabetet.",
+          "input": "Text / filens originalbyte",
+          "output": "Base32Hex-text"
+        },
+        "base58": {
+          "usage": "Representera byte med Bitcoin Base58-alfabetet.",
+          "input": "Text / filens originalbyte",
+          "output": "Base58-text"
+        },
+        "hex": {
+          "usage": "Omvandla byte till eller från hexadecimal form.",
+          "input": "Text / filens originalbyte",
+          "output": "Hexadecimala byte"
+        },
+        "binary": {
+          "usage": "Representera varje byte med åtta binära siffror.",
+          "input": "Text / filens originalbyte",
+          "output": "Binär bytesträng"
+        },
+        "url-component": {
+          "usage": "Koda en URL-parameter eller sökvägskomponent.",
+          "input": "Text utan escapekodning",
+          "output": "Text för URL-komponent",
+          "help": "Använder encodeURIComponent / decodeURIComponent. Blanksteg blir %20; ett bokstavligt + blir %2B."
+        },
+        "uri": {
+          "usage": "Escapekoda en fullständig URI och behåll URI-avgränsarna.",
+          "input": "Fullständig URI",
+          "output": "Escapekodad URI",
+          "help": "Använder encodeURI / decodeURI och bevarar URI-avgränsare som : / ? #. Använd URL-komponent för ett enskilt parametervärde."
+        },
+        "form": {
+          "usage": "Koda en formulärnyckel eller ett formulärvärde.",
+          "input": "Nyckel / värde utan escapekodning",
+          "output": "Text för formulärkomponent",
+          "help": "Följer reglerna för application/x-www-form-urlencoded. Blanksteg blir +; ett bokstavligt + blir %2B."
+        },
+        "html-entities": {
+          "usage": "Escapekoda specialtecken för HTML-innehåll.",
+          "input": "Oformaterad text",
+          "output": "HTML-entiteter",
+          "help": "Escapekodar och avkodar HTML-entiteter. Omvandlar text utan att tolka eller köra HTML."
+        },
+        "xml-entities": {
+          "usage": "Omvandla text till eller från XML-entiteter.",
+          "input": "Oformaterad text",
+          "output": "XML-entiteter",
+          "help": "Escapekodar och avkodar XML-entiteter utan att tolka ett XML-dokument eller köra inmatningen."
+        },
+        "json-string": {
+          "usage": "Skapa eller läs en fullständig JSON-strängliteral.",
+          "input": "Oformaterad text",
+          "output": "JSON-sträng inom citattecken",
+          "help": "Kodad utdata innehåller omgivande citattecken. Avkodning kräver en fullständig JSON-strängliteral."
+        },
+        "unicode": {
+          "usage": "Omvandla text till eller från Unicode-escapekoder.",
+          "input": "Oformaterad text",
+          "output": "Unicode-escapesekvenser",
+          "help": "Kodar UTF-16 som \\uXXXX-sekvenser. Avkodar escape-syntax som stöds utan att köra inmatningen."
+        },
+        "codepoints": {
+          "usage": "Granska eller återskapa Unicode-kodpunkter.",
+          "input": "Unicode-text",
+          "output": "Lista med U+-kodpunkter",
+          "help": "Kodar en lista med hexadecimala U+-kodpunkter. Avkodningen återskapar texten, även tilläggstecken."
+        },
+        "charset": {
+          "usage": "Koda byte med måluppsättningen av tecken.",
+          "input": "Unicode-text / fil med källkodning",
+          "output": "Byte med målkodning"
+        },
+        "json-yaml": {
+          "usage": "Omvandla dokument mellan JSON och YAML.",
+          "input": "JSON-dokument",
+          "output": "YAML-dokument"
+        },
+        "xml-json": {
+          "usage": "Omvandla XML och dess ordnade JSON-struktur.",
+          "input": "XML-dokument",
+          "output": "Ordnad JSON-array"
+        },
+        "csv-json": {
+          "usage": "Omvandla kommaseparerade tabeller och JSON.",
+          "input": "CSV-tabell",
+          "output": "JSON-rader"
+        },
+        "tsv-json": {
+          "usage": "Omvandla tabbseparerade tabeller och JSON.",
+          "input": "TSV-tabell",
+          "output": "JSON-rader"
+        },
+        "jsonl": {
+          "usage": "Omvandla JSON Lines och JSON-arrayer.",
+          "input": "JSON Lines",
+          "output": "JSON-array"
+        },
+        "query-json": {
+          "usage": "Omvandla upprepade frågeparametrar till strängarrayer.",
+          "input": "Frågesträng",
+          "output": "JSON-objekt med strängarrayer"
+        },
+        "md5": {
+          "usage": "Beräkna en MD5-kontrollsumma och jämför förväntade värden.",
+          "input": "Text / filer / textrader",
+          "output": "MD5-kontrollsumma"
+        },
+        "hash": {
+          "usage": "Hasha originalbyte i text eller en fil.",
+          "input": "Text / filens originalbyte",
+          "output": "Hexadecimalt hashvärde från vald algoritm"
+        },
+        "hmac": {
+          "usage": "Beräkna HMAC med en nyckel för denna uppgift.",
+          "input": "Meddelandetext / filbyte + nyckel",
+          "output": "Hexadecimalt HMAC-hashvärde"
+        },
+        "jwt": {
+          "usage": "Läs JWT-huvuden och nyttolaster utan signaturkontroll.",
+          "input": "Tredelad JWT",
+          "output": "Avkodad JSON"
+        },
+        "gzip": {
+          "usage": "Komprimera eller dekomprimera en Gzip-ström.",
+          "input": "Text / filens originalbyte",
+          "output": "Gzip-byte (vald representation)"
+        },
+        "zlib": {
+          "usage": "Komprimera eller dekomprimera en Zlib-ström.",
+          "input": "Text / filens originalbyte",
+          "output": "Zlib-byte (vald representation)"
+        },
+        "deflate": {
+          "usage": "Komprimera eller dekomprimera råa Deflate-data.",
+          "input": "Text / filens originalbyte",
+          "output": "Råa Deflate-byte (vald representation)"
+        },
+        "radix": {
+          "usage": "Omvandla ett heltal till en annan talbas.",
+          "input": "Heltal i källans talbas",
+          "output": "Heltal i målets talbas"
+        },
+        "bytes-unit": {
+          "usage": "Omvandla bitar, byte samt SI- och IEC-enheter.",
+          "input": "Värde i källenheten",
+          "output": "Värde i målenheten"
+        },
+        "duration-unit": {
+          "usage": "Omvandla fasta tidslängder utan kalenderberäkningar.",
+          "input": "Tidslängd i källenheten",
+          "output": "Tidslängd i målenheten"
+        },
+        "color": {
+          "usage": "Omvandla färgrepresentationer och behåll alfa.",
+          "input": "HEX / RGB / HSL / HSV JSON",
+          "output": "Valt färgformat"
+        },
+        "case": {
+          "usage": "Tillämpa valt skiftläge eller namngivningssätt.",
+          "input": "Text / namn",
+          "output": "Text med valt namngivningssätt"
+        },
+        "lines": {
+          "usage": "Tillämpa en vald åtgärd på textrader.",
+          "input": "Textrader",
+          "output": "Bearbetade textrader"
+        },
+        "newline": {
+          "usage": "Omvandla textens radslut.",
+          "input": "Text med radslut",
+          "output": "Text med valt LF / CRLF / CR"
+        },
+        "normalize": {
+          "usage": "Tillämpa Unicode-normalisering på kodpunkter.",
+          "input": "Unicode-text",
+          "output": "Text i vald normaliseringsform"
+        }
+      },
+      "jsonCancelled": "Avbrutet. Din inmatning finns kvar; kör igen när du är redo.",
+      "convertHelp": "Användning och begränsningar",
+      "fileReplace": "Ersätt filer",
+      "md5CopyFile": "Kopiera kontrollsumman för {{name}}",
+      "copyIso": "Kopiera ISO",
+      "copyIsoDate": "Kopiera körning {{index}} som ISO",
+      "regexNotRun": "Inte körd",
+      "regexNoMatches": "Inga träffar",
+      "regexStale": "Inmatningen har ändrats. Kör för att uppdatera resultaten.",
+      "speedNetwork": "Verktyget ansluter till Cloudflare och använder nätverksdata. Förfrågningar börjar först när du startar testet.",
+      "speedSettings": "Testinställningar",
+      "speedSummary": "{{profile}} · {{unit}} · upp till {{budget}} MiB",
+      "customZone": "Egen IANA-tidszon"
+    },
+    "daily": {
+      "countdownHelp": "För en nedräkning väljer du i dag som start och måldatumet som slut. Passerade datum ger ett negativt antal dagar.",
+      "anniversaryHelp": "För årsdagar den 29 februari används februaris sista dag under år som inte är skottår.",
+      "unitDetails": "Fler omvandlingar och precision",
+      "moneyEmpty": "Ange ett belopp och omvandla det för att se resultatet.",
+      "listHelp": "En post per rad. Tomma rader ignoreras; dubbletter förblir separata tills du tar bort dem.",
+      "dedupe": "Ta bort dubbletter",
+      "drawEntries": "Dra poster · {{count}}",
+      "drawGroups": "Skapa grupper · {{count}}",
+      "drawMembers": "Gruppera poster · {{count}} per grupp",
+      "drawNumbers": "Dra tal · {{count}}",
+      "discountReduction": "Rabatt i procent (%)",
+      "discountHelp": "Ordinarie pris 100, rabatt 20% → rabatterat pris 80.",
+      "unitPrecision": "Resultaten visar upp till 24 signifikanta siffror. ≈ markerar visar avrundning; kopiering bevarar upp till 80 signifikanta siffror. Enhetsfaktorer använder mathjs definitioner; gallons och fluid ounces är amerikanska enheter."
+    },
+    "files": {
+      "fileActions": "Filåtgärder",
+      "discardCrop": "Kasta osparade beskärningsändringar?",
+      "imageInfo": "{{name}} · {{width}} × {{height}} px",
+      "pastedImage": "Inklistrad bild",
+      "lineDedupeHelp": "Jämför hela raden exakt, inklusive blanksteg och skiftläge. Behåller den första förekomsten.",
+      "lineSortHelp": "Sorterar efter Unicode-kodenheter, inte språklig eller numerisk ordning."
+    },
+    "shared": {
+      "viewResult": "Visa resultat"
+    }
   }
 }

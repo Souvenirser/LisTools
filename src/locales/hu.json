@@ -1581,5 +1581,277 @@
     "passwordPolicy": "A kiválasztott karaktertípusok alkotják az engedélyezett készletet. Engedélyezze az „Minden típus megkövetelése” lehetőséget, hogy minden kiválasztott típust tartalmazzon minden jelszóban.",
     "speedScope": "A besorolások az átviteli sebességet írják le. A késleltetést és a jittert külön mérjük.",
     "viewResult": "Eredmény megtekintése"
+  },
+  "redesign": {
+    "calculatorOriginal": "Eredeti érték",
+    "calculatorNew": "Új érték",
+    "calculatorPrice": "Eredeti ár",
+    "calculatorOff": "Százalékos kedvezmény (%)",
+    "calculatorPart": "rész",
+    "calculatorWhole": "Egész",
+    "calculatorPercent": "százalék (%)",
+    "expressionResult": "Kifejezés eredménye · {{expression}}",
+    "businessResult": "{{mode}} · {{expression}}",
+    "workdayExceptions": "Szabadnapok: {{off}} · Munkaidő: {{work}}",
+    "copyDisplayedEquation": "A megjelenített egyenlet másolása",
+    "drawShuffle": "Véletlenszerű lejátszási lista",
+    "drawGroups": "Csoportok létrehozása",
+    "timerOtherRunning": "{{mode}} fut",
+    "timerSessionHelp": "A lap újratöltése visszaállítja mindkét időzítőt, beleértve a futó időzítők eltelt idejét is. Az állapot a lap munkamenet-tárhelyére kerül mentésre.",
+    "pdfAddPdf": "PDF-fájlok hozzáadása ehhez a feladathoz.",
+    "pdfAddImages": "PNG, JPG vagy WebP képek hozzáadása PDF létrehozásához.",
+    "pdfChooseCurrent": "Válassza ki a feldolgozni kívánt PDF-et az aktuális PDF-listából.",
+    "qrRecognizeEmpty": "A felismert szöveg itt fog megjelenni. Válasszon, dobjon vagy illesszen be egy képet a beviteli területre.",
+    "textIdle": "Futtasson le egy műveletet az eredmény megtekintéséhez.",
+    "textStale": "A bevitel vagy az opciók módosultak. Futtassa újra a műveletet.",
+    "textEmpty": "Kimenet nélkül elkészült.",
+    "textInputStats": "Bemenet: {{summary}}",
+    "textOutputBytes": "Kimenet: {{bytes}} UTF-8 bájt",
+    "textNewlineSummary": "Sorvégek: {{format}} · {{bytes}} UTF-8 bájt",
+    "cropNote": "A vágási beállítás mentése csak a kiválasztott képre vonatkozik. Az exportálás először elmenti a kép nem mentett vágási beállítását, majd minden sorba helyezett képet feldolgoz a mentett vágási korrekció vagy az eredeti kép használatával.",
+    "cropSaveCurrent": "Mentse a kivágást ehhez a képhez",
+    "cropDirty": "A {{name}} nem mentett képkivágási módosításai. Az exportálás először menti ezeket a módosításokat.",
+    "cropSaved": "Mentett képkivágás a {{name}} számára. A rendszer a kötegelt kép exportálásánál fogja használni.",
+    "cropOriginal": "A {{name}} nem rendelkezik mentett képkivágással. Az exportálás az eredeti képet használja, hacsak nem módosítja a kivágást.",
+    "cropExportBatch": "{{count}} kép exportálása · képek mentett körbevágással: {{cropped}}",
+    "cropSaveExport": "Mentse az aktuális képkivágást, és exportáljon {{count}} képet"
+  },
+  "direct": {
+    "developer": {
+      "convert": {
+        "base64": {
+          "input": "Nyers szöveg / fájlbájtok",
+          "output": "Base64 Szöveg",
+          "usage": "Átalakítás: Nyers szöveg / fájlbájtok → Base64 Szöveg."
+        },
+        "base64url": {
+          "input": "Nyers szöveg / fájlbájtok",
+          "output": "Base64URL Szöveg",
+          "usage": "Átalakítás: Nyers szöveg / fájlbájtok → Base64URL Szöveg."
+        },
+        "base32": {
+          "input": "Nyers szöveg / fájlbájtok",
+          "output": "Base32 Szöveg",
+          "usage": "Átalakítás: Nyers szöveg / fájlbájtok → Base32 Szöveg."
+        },
+        "base32hex": {
+          "input": "Nyers szöveg / fájlbájtok",
+          "output": "Base32Hex Szöveg",
+          "usage": "Átalakítás: Nyers szöveg / fájlbájtok → Base32Hex Szöveg."
+        },
+        "base58": {
+          "input": "Nyers szöveg / fájlbájtok",
+          "output": "Base58 Szöveg",
+          "usage": "Bájtok megjelenítése a Bitcoin Base58 ábécéjével."
+        },
+        "hex": {
+          "input": "Nyers szöveg / fájlbájtok",
+          "output": "Hexadecimális bájtok",
+          "usage": "Átalakítás: Nyers szöveg / fájlbájtok ↔ Hexadecimális bájtok."
+        },
+        "binary": {
+          "input": "Nyers szöveg / fájlbájtok",
+          "output": "Bináris bájtsorozat",
+          "usage": "Minden bájt megjelenítése nyolc bináris számjeggyel."
+        },
+        "url-component": {
+          "input": "Nem escape-elt szöveg",
+          "output": "URL-összetevő szövege",
+          "usage": "Egy URL-paraméter vagy útvonalösszetevő kódolása.",
+          "help": "encodeURIComponent / decodeURIComponent használatával. A szóközökből %20, a szó szerinti + jelből %2B lesz."
+        },
+        "uri": {
+          "input": "Teljes URI",
+          "output": "Escape-elt URI",
+          "usage": "Teljes URI escape-elése az URI-elválasztók megőrzésével.",
+          "help": "encodeURI / decodeURI használatával megőrzi az URI elválasztóit, például : / ? #. Egyetlen paraméter értékéhez használja az URL-összetevőt."
+        },
+        "form": {
+          "input": "Nem escape-elt kulcs / érték",
+          "output": "Űrlapösszetevő szövege",
+          "usage": "Egy űrlapkulcs vagy -érték kódolása.",
+          "help": "Az application/x-www-form-urlencoded szabályait használja. A szóközökből +, a szó szerinti + jelből %2B lesz."
+        },
+        "html-entities": {
+          "input": "Egyszerű szöveg",
+          "output": "HTML-entitások",
+          "usage": "Átalakítás: Egyszerű szöveg ↔ HTML-entitások.",
+          "help": "Escape-eli és dekódolja a HTML-entitásokat. A szöveget HTML elemzése vagy végrehajtása nélkül alakítja át."
+        },
+        "xml-entities": {
+          "input": "Egyszerű szöveg",
+          "output": "XML-entitások",
+          "usage": "Átalakítás: Egyszerű szöveg ↔ XML-entitások.",
+          "help": "Escape-eli és dekódolja az XML-entitásokat XML-dokumentum elemzése vagy a bemenet végrehajtása nélkül."
+        },
+        "json-string": {
+          "input": "Egyszerű szöveg",
+          "output": "Idézőjelezett JSON-karakterlánc",
+          "usage": "Átalakítás: Egyszerű szöveg ↔ Idézőjelezett JSON-karakterlánc.",
+          "help": "A kódolt kimenet tartalmazza a határoló idézőjeleket. Dekódoláshoz teljes JSON-karakterlánc-literál szükséges."
+        },
+        "unicode": {
+          "input": "Egyszerű szöveg",
+          "output": "Unicode escape-sorozatok",
+          "usage": "Átalakítás: Egyszerű szöveg ↔ Unicode escape-sorozatok.",
+          "help": "Az UTF-16 kódolását \\uXXXX escape-sorozatokkal adja meg. A támogatott escape-szintaxist a bemenet végrehajtása nélkül dekódolja."
+        },
+        "codepoints": {
+          "input": "Unicode Szöveg",
+          "output": "U+ kódpontok listája",
+          "usage": "Unicode-kódpontok vizsgálata vagy visszaállítása.",
+          "help": "Hexadecimális U+ kódpontlistát kódol. Dekódoláskor a szöveget a kiegészítő karakterekkel együtt állítja vissza."
+        },
+        "charset": {
+          "input": "Unicode-szöveg / forráskódolású fájl",
+          "output": "Célkódolású bájtok",
+          "usage": "Bájtok kódolása a cél karakterkészlettel."
+        },
+        "json-yaml": {
+          "input": "JSON dokumentum",
+          "output": "YAML dokumentum",
+          "usage": "Átalakítás: JSON dokumentum ↔ YAML dokumentum."
+        },
+        "xml-json": {
+          "input": "XML dokumentum",
+          "output": "Sorrendtartó JSON-tömb",
+          "usage": "Átalakítás: XML dokumentum ↔ Sorrendtartó JSON-tömb."
+        },
+        "csv-json": {
+          "input": "CSV táblázat",
+          "output": "JSON-sorok",
+          "usage": "Átalakítás: CSV táblázat ↔ JSON-sorok."
+        },
+        "tsv-json": {
+          "input": "TSV táblázat",
+          "output": "JSON-sorok",
+          "usage": "Átalakítás: TSV táblázat ↔ JSON-sorok."
+        },
+        "jsonl": {
+          "input": "JSON Lines",
+          "output": "JSON-tömb",
+          "usage": "Átalakítás: JSON Lines ↔ JSON-tömb."
+        },
+        "query-json": {
+          "input": "Lekérdezési karakterlánc",
+          "output": "Karakterlánc-tömböket tartalmazó JSON-objektum",
+          "usage": "Ismétlődő lekérdezési paraméterek átalakítása karakterlánc-tömbökké."
+        },
+        "md5": {
+          "input": "Szöveg / fájlok / szövegsorok",
+          "output": "Kivonat",
+          "usage": "MD5-ellenőrzőösszeg számítása és összehasonlítása az elvárt értékekkel."
+        },
+        "hash": {
+          "input": "Nyers szöveg / fájlbájtok",
+          "output": "A kiválasztott algoritmus hexadecimális kivonata",
+          "usage": "Szöveg vagy fájl eredeti bájtjainak kivonatolása."
+        },
+        "hmac": {
+          "input": "Üzenetszöveg / fájlbájtok + kulcs",
+          "output": "Hexadecimális HMAC-kivonat",
+          "usage": "HMAC számítása a feladat kulcsával."
+        },
+        "jwt": {
+          "input": "Háromrészes JWT",
+          "output": "Dekódolt JSON",
+          "usage": "JWT-fejlécek és -tartalmak olvasása az aláírások ellenőrzése nélkül."
+        },
+        "gzip": {
+          "input": "Nyers szöveg / fájlbájtok",
+          "output": "Gzip-bájtok (kiválasztott megjelenítés)",
+          "usage": "Egy Gzip-adatfolyam tömörítése vagy kibontása."
+        },
+        "zlib": {
+          "input": "Nyers szöveg / fájlbájtok",
+          "output": "Zlib-bájtok (kiválasztott megjelenítés)",
+          "usage": "Egy Zlib-adatfolyam tömörítése vagy kibontása."
+        },
+        "deflate": {
+          "input": "Nyers szöveg / fájlbájtok",
+          "output": "Nyers Deflate-bájtok (kiválasztott megjelenítés)",
+          "usage": "Nyers Deflate-adatok tömörítése vagy kibontása."
+        },
+        "radix": {
+          "input": "Egész szám a forrás számrendszerben",
+          "output": "Egész szám a cél számrendszerben",
+          "usage": "Átalakítás: Egész szám a forrás számrendszerben → Egész szám a cél számrendszerben."
+        },
+        "bytes-unit": {
+          "input": "Érték a forrás mértékegységben",
+          "output": "Érték a cél mértékegységben",
+          "usage": "Bitek, bájtok, SI- és IEC-egységek átváltása."
+        },
+        "duration-unit": {
+          "input": "Időtartam a forrás mértékegységben",
+          "output": "Időtartam a cél mértékegységben",
+          "usage": "Rögzített időtartamok átváltása naptári számítás nélkül."
+        },
+        "color": {
+          "input": "HEX / RGB / HSL / HSV JSON",
+          "output": "Kiválasztott színformátum",
+          "usage": "Színábrázolások átalakítása az alfaérték megőrzésével."
+        },
+        "case": {
+          "input": "Szöveg / név",
+          "output": "Szöveg a kiválasztott elnevezési stílusban",
+          "usage": "Átalakítás: Szöveg / név → Szöveg a kiválasztott elnevezési stílusban."
+        },
+        "lines": {
+          "input": "Szövegsorok",
+          "output": "Feldolgozott szövegsorok",
+          "usage": "Egyetlen kiválasztott művelet alkalmazása szövegsorokra."
+        },
+        "newline": {
+          "input": "Szöveg sorvégekkel",
+          "output": "Szöveg a kiválasztott LF / CRLF / CR sorvéggel",
+          "usage": "Átalakítás: Szöveg sorvégekkel → Szöveg a kiválasztott LF / CRLF / CR sorvéggel."
+        },
+        "normalize": {
+          "input": "Unicode Szöveg",
+          "output": "Szöveg a kiválasztott normalizálási formában",
+          "usage": "Unicode-normalizálás alkalmazása a kódpontokra."
+        }
+      },
+      "jsonCancelled": "Megszakítva. A bemenet megmaradt; ha készen áll, futtassa újra.",
+      "convertHelp": "Használat és korlátok",
+      "fileReplace": "Fájlok cseréje",
+      "md5CopyFile": "{{name}} ellenőrzőösszegének másolása",
+      "copyIso": "ISO másolása",
+      "copyIsoDate": "A(z) {{index}}. futtatás másolása ISO formátumban",
+      "regexNotRun": "Még nem futott",
+      "regexStale": "A bemenetek megváltoztak. Futtassa az eredmények frissítéséhez.",
+      "speedNetwork": "Ez az eszköz a Cloudflare-hez kapcsolódik és hálózati adatforgalmat használ. A tesztkérések csak az indítás után kezdődnek.",
+      "speedSettings": "Tesztbeállítások",
+      "speedSummary": "{{profile}} · {{unit}} · legfeljebb {{budget}} MiB",
+      "customZone": "Egyéni IANA-időzóna",
+      "regexNoMatches": "Nincs találat"
+    },
+    "daily": {
+      "unitDetails": "További átalakítások és pontosság",
+      "moneyEmpty": "Adjon meg egy összeget, majd alakítsa át az eredmény megtekintéséhez.",
+      "listHelp": "Soronként egy bejegyzés. Az üres sorokat figyelmen kívül hagyjuk; az ismétlődő bejegyzések eltávolításukig külön maradnak.",
+      "dedupe": "Ismétlődő bejegyzések eltávolítása",
+      "drawEntries": "Bejegyzések sorsolása · {{count}}",
+      "drawGroups": "Csoportok létrehozása · {{count}}",
+      "drawMembers": "Bejegyzések csoportosítása · csoportonként {{count}}",
+      "drawNumbers": "Számok sorsolása · {{count}}",
+      "discountHelp": "Eredeti ár: 100, árengedmény: 20% → kedvezményes ár: 80.",
+      "countdownHelp": "Visszaszámláláshoz használja a mai napot kezdésként, és válassza ki a célpontot a végén. A múltbeli célok negatív napszámot adnak vissza.",
+      "anniversaryHelp": "Az évfordulós korosztályok február utolsó napját használják február 29-re a nem szökőévekben.",
+      "unitPrecision": "≈ jelzi a megjelenített érték 24 szignifikáns számjegyre kerekítését; másoláskor legfeljebb 80 számjegy marad meg. A tényezők a mathjs definícióit követik; a gallon és a folyadékuncia amerikai egység.",
+      "discountReduction": "Százalékos kedvezmény (%)"
+    },
+    "files": {
+      "fileActions": "Fájlműveletek",
+      "discardCrop": "Elveti a nem mentett kivágási módosításokat?",
+      "pastedImage": "Beillesztett kép",
+      "lineDedupeHelp": "Minden teljes sort pontosan hasonlít össze, a szóközöket és a kis- és nagybetűket is. Az első előfordulást tartja meg.",
+      "lineSortHelp": "Unicode-kódegységek szerint rendez. Ez nem nyelvi vagy numerikus sorrend.",
+      "imageInfo": "{{name}} · {{width}} × {{height}} px"
+    },
+    "shared": {
+      "viewResult": "Eredmény megtekintése"
+    }
   }
 }

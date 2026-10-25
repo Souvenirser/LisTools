@@ -1581,5 +1581,277 @@
     "passwordPolicy": "Utvalgte tegntyper danner den tillatte gruppen. Aktiver \"Krev hver type\" for å inkludere hver valgte type i hvert passord.",
     "speedScope": "Rangeringer beskriver overføringshastighet. Latens og jitter måles separat.",
     "viewResult": "Se resultatet"
+  },
+  "redesign": {
+    "calculatorOriginal": "Opprinnelig verdi",
+    "calculatorNew": "Ny verdi",
+    "calculatorPrice": "Opprinnelig pris",
+    "calculatorOff": "Prosent avslag (%)",
+    "calculatorPart": "Del",
+    "calculatorWhole": "Helt",
+    "calculatorPercent": "Prosentandel (%)",
+    "expressionResult": "Uttrykksresultat · {{expression}}",
+    "businessResult": "{{mode}} · {{expression}}",
+    "workdayExceptions": "Fridager: {{off}} · Arbeidsdatoer: {{work}}",
+    "copyDisplayedEquation": "Kopier den viste ligningen",
+    "drawShuffle": "Blande listen",
+    "drawGroups": "Opprett grupper",
+    "timerOtherRunning": "{{mode}} kjører",
+    "timerSessionHelp": "Hvis du laster inn denne fanen på nytt, gjenopprettes begge tidtakerne, inkludert forløpt klokketid for løpende tidtakere. Status er lagret i denne fanens øktlagring.",
+    "pdfAddPdf": "Legg til PDF-filer for denne oppgaven.",
+    "pdfAddImages": "Legg til PNG-, JPG- eller WebP-bilder for å lage en PDF.",
+    "pdfChooseCurrent": "Velg PDF-en som skal behandles fra gjeldende PDF-liste.",
+    "qrRecognizeEmpty": "Gjenkjent tekst vil vises her. Velg, slipp eller lim inn et bilde i inndataområdet.",
+    "textIdle": "Kjør en operasjon for å se resultatet her.",
+    "textStale": "Inndata eller alternativer endret. Kjør operasjonen på nytt.",
+    "textEmpty": "Fullført uten utgang.",
+    "textInputStats": "Inndata: {{summary}}",
+    "textOutputBytes": "Utdata: {{bytes}} UTF-8 byte",
+    "textNewlineSummary": "Linjeavslutninger: {{format}} · {{bytes}} UTF-8 byte",
+    "cropNote": "Lagring av en beskjæringsjustering gjelder bare for det valgte bildet. Eksport lagrer først bildets ulagrede beskjæringsjustering, og behandler deretter hvert bilde i kø ved å bruke dets lagrede beskjæringsjustering eller originalbilde.",
+    "cropSaveCurrent": "Lagre beskjæring for dette bildet",
+    "cropDirty": "Ulagrede bildebeskjæringsendringer for {{name}}. Eksport vil lagre disse endringene først.",
+    "cropSaved": "Lagret bildebeskjæring for {{name}}. Det vil bli brukt i batchbildeeksporten.",
+    "cropOriginal": "{{name}} har ingen lagret bildebeskjæring. Eksport bruker originalbildet med mindre du justerer beskjæringen.",
+    "cropExportBatch": "Eksporter {{count}} bilder · bilder med lagret beskjæring: {{cropped}}",
+    "cropSaveExport": "Lagre gjeldende bildebeskjæring og eksporter {{count}}-bilder"
+  },
+  "direct": {
+    "developer": {
+      "convert": {
+        "base64": {
+          "input": "Rå tekst / filbyte",
+          "output": "Base64 Tekst",
+          "usage": "Konvertering: Rå tekst / filbyte → Base64 Tekst."
+        },
+        "base64url": {
+          "input": "Rå tekst / filbyte",
+          "output": "Base64URL Tekst",
+          "usage": "Konvertering: Rå tekst / filbyte → Base64URL Tekst."
+        },
+        "base32": {
+          "input": "Rå tekst / filbyte",
+          "output": "Base32 Tekst",
+          "usage": "Konvertering: Rå tekst / filbyte → Base32 Tekst."
+        },
+        "base32hex": {
+          "input": "Rå tekst / filbyte",
+          "output": "Base32Hex Tekst",
+          "usage": "Konvertering: Rå tekst / filbyte → Base32Hex Tekst."
+        },
+        "base58": {
+          "input": "Rå tekst / filbyte",
+          "output": "Base58 Tekst",
+          "usage": "Representerer byte med Bitcoin Base58-alfabetet."
+        },
+        "hex": {
+          "input": "Rå tekst / filbyte",
+          "output": "Heksadesimale byte",
+          "usage": "Konvertering: Rå tekst / filbyte ↔ Heksadesimale byte."
+        },
+        "binary": {
+          "input": "Rå tekst / filbyte",
+          "output": "Binær bytestreng",
+          "usage": "Representerer hver byte som åtte binære sifre."
+        },
+        "url-component": {
+          "input": "Tekst uten escape-koding",
+          "output": "Tekst for URL-komponent",
+          "usage": "Koder én URL-parameter eller stikomponent.",
+          "help": "Bruker encodeURIComponent / decodeURIComponent. Mellomrom blir %20; bokstavelig + blir %2B."
+        },
+        "uri": {
+          "input": "Fullstendig URI",
+          "output": "Escape-kodet URI",
+          "usage": "Escape-koder en fullstendig URI og beholder URI-skilletegn.",
+          "help": "Bruker encodeURI / decodeURI og beholder URI-skilletegn som : / ? #. Bruk URL-komponent for én parameterverdi."
+        },
+        "form": {
+          "input": "Nøkkel / verdi uten escape-koding",
+          "output": "Tekst for skjemakomponent",
+          "usage": "Koder én skjemanøkkel eller -verdi.",
+          "help": "Bruker reglene for application/x-www-form-urlencoded. Mellomrom blir +; bokstavelig + blir %2B."
+        },
+        "html-entities": {
+          "input": "Ren tekst",
+          "output": "HTML-entiteter",
+          "usage": "Konvertering: Ren tekst ↔ HTML-entiteter.",
+          "help": "Escape-koder og dekoder HTML-entiteter. Konverterer tekst uten å analysere eller kjøre HTML."
+        },
+        "xml-entities": {
+          "input": "Ren tekst",
+          "output": "XML-entiteter",
+          "usage": "Konvertering: Ren tekst ↔ XML-entiteter.",
+          "help": "Escape-koder og dekoder XML-entiteter uten å analysere et XML-dokument eller kjøre inndataene."
+        },
+        "json-string": {
+          "input": "Ren tekst",
+          "output": "JSON-streng med anførselstegn",
+          "usage": "Konvertering: Ren tekst ↔ JSON-streng med anførselstegn.",
+          "help": "Kodet utdata inkluderer anførselstegnene rundt strengen. Dekoding krever en fullstendig JSON-strenglitteral."
+        },
+        "unicode": {
+          "input": "Ren tekst",
+          "output": "Unicode-escape-sekvenser",
+          "usage": "Konvertering: Ren tekst ↔ Unicode-escape-sekvenser.",
+          "help": "Koder UTF-16 som \\uXXXX-sekvenser. Dekoder støttet escape-syntaks uten å kjøre inndataene."
+        },
+        "codepoints": {
+          "input": "Unicode Tekst",
+          "output": "Liste over U+-kodepunkter",
+          "usage": "Undersøker eller gjenoppbygger Unicode-kodepunkter.",
+          "help": "Koder en liste over heksadesimale U+-kodepunkter. Dekoding gjenoppbygger teksten, også tilleggstegn."
+        },
+        "charset": {
+          "input": "Unicode-tekst / fil med kildekoding",
+          "output": "Byte med målkoding",
+          "usage": "Koder byte med måltegnsettet."
+        },
+        "json-yaml": {
+          "input": "JSON dokument",
+          "output": "YAML dokument",
+          "usage": "Konvertering: JSON dokument ↔ YAML dokument."
+        },
+        "xml-json": {
+          "input": "XML dokument",
+          "output": "Ordnet JSON-array",
+          "usage": "Konvertering: XML dokument ↔ Ordnet JSON-array."
+        },
+        "csv-json": {
+          "input": "CSV tabell",
+          "output": "JSON-rader",
+          "usage": "Konvertering: CSV tabell ↔ JSON-rader."
+        },
+        "tsv-json": {
+          "input": "TSV tabell",
+          "output": "JSON-rader",
+          "usage": "Konvertering: TSV tabell ↔ JSON-rader."
+        },
+        "jsonl": {
+          "input": "JSON Lines",
+          "output": "JSON-array",
+          "usage": "Konvertering: JSON Lines ↔ JSON-array."
+        },
+        "query-json": {
+          "input": "Spørringsstreng",
+          "output": "JSON-objekt med strengearrayer",
+          "usage": "Konverterer gjentatte spørringsparametere til strengearrayer."
+        },
+        "md5": {
+          "input": "Tekst / filer / tekstlinjer",
+          "output": "Kontrollsum",
+          "usage": "Beregner en MD5-kontrollsum og sammenligner forventede verdier."
+        },
+        "hash": {
+          "input": "Rå tekst / filbyte",
+          "output": "Heksadesimalt sammendrag fra valgt algoritme",
+          "usage": "Beregner hash av opprinnelige byte i tekst eller fil."
+        },
+        "hmac": {
+          "input": "Meldingstekst / filbyte + nøkkel",
+          "output": "Heksadesimalt HMAC-sammendrag",
+          "usage": "Beregner HMAC med en nøkkel for denne oppgaven."
+        },
+        "jwt": {
+          "input": "JWT med tre deler",
+          "output": "Dekodet JSON",
+          "usage": "Leser JWT-hoder og nyttelast uten å bekrefte signaturer."
+        },
+        "gzip": {
+          "input": "Rå tekst / filbyte",
+          "output": "Gzip-byte (valgt representasjon)",
+          "usage": "Komprimerer eller dekomprimerer én Gzip-strøm."
+        },
+        "zlib": {
+          "input": "Rå tekst / filbyte",
+          "output": "Zlib-byte (valgt representasjon)",
+          "usage": "Komprimerer eller dekomprimerer en Zlib-strøm."
+        },
+        "deflate": {
+          "input": "Rå tekst / filbyte",
+          "output": "Rå Deflate-byte (valgt representasjon)",
+          "usage": "Komprimerer eller dekomprimerer rå Deflate-data."
+        },
+        "radix": {
+          "input": "Heltall i kildens grunntall",
+          "output": "Heltall i målets grunntall",
+          "usage": "Konvertering: Heltall i kildens grunntall → Heltall i målets grunntall."
+        },
+        "bytes-unit": {
+          "input": "Verdi i kildeenheten",
+          "output": "Verdi i målenheten",
+          "usage": "Konverterer bit, byte samt SI- og IEC-enheter."
+        },
+        "duration-unit": {
+          "input": "Varighet i kildeenheten",
+          "output": "Varighet i målenheten",
+          "usage": "Konverterer faste varigheter uten kalenderberegning."
+        },
+        "color": {
+          "input": "HEX / RGB / HSL / HSV JSON",
+          "output": "Valgt fargeformat",
+          "usage": "Konverterer fargerepresentasjoner og beholder alfa."
+        },
+        "case": {
+          "input": "Tekst / navn",
+          "output": "Tekst i valgt navnestil",
+          "usage": "Konvertering: Tekst / navn → Tekst i valgt navnestil."
+        },
+        "lines": {
+          "input": "Tekstlinjer",
+          "output": "Behandlede tekstlinjer",
+          "usage": "Bruker én valgt operasjon på tekstlinjer."
+        },
+        "newline": {
+          "input": "Tekst med linjeslutt",
+          "output": "Tekst med valgt LF / CRLF / CR",
+          "usage": "Konvertering: Tekst med linjeslutt → Tekst med valgt LF / CRLF / CR."
+        },
+        "normalize": {
+          "input": "Unicode Tekst",
+          "output": "Tekst i valgt normaliseringsform",
+          "usage": "Bruker Unicode-normalisering på kodepunkter."
+        }
+      },
+      "jsonCancelled": "Avbrutt. Inndataene er bevart; kjør på nytt når du er klar.",
+      "convertHelp": "Bruk og begrensninger",
+      "fileReplace": "Erstatt filer",
+      "md5CopyFile": "Kopier kontrollsum for {{name}}",
+      "copyIso": "Kopier ISO",
+      "copyIsoDate": "Kopier kjøring {{index}} som ISO",
+      "regexNotRun": "Ikke kjørt",
+      "regexStale": "Inndataene er endret. Kjør for å oppdatere resultatene.",
+      "speedNetwork": "Dette verktøyet kobler til Cloudflare og bruker nettverksdata. Testforespørsler starter først når du starter testen.",
+      "speedSettings": "Testinnstillinger",
+      "speedSummary": "{{profile}} · {{unit}} · opptil {{budget}} MiB",
+      "customZone": "Egendefinert IANA-tidssone",
+      "regexNoMatches": "Ingen treff"
+    },
+    "daily": {
+      "unitDetails": "Andre konverteringer og presisjon",
+      "moneyEmpty": "Skriv inn et beløp og konverter det for å se resultatet.",
+      "listHelp": "Én oppføring per linje. Tomme linjer ignoreres; duplikater forblir separate til du fjerner dem.",
+      "dedupe": "Fjern dupliserte oppføringer",
+      "drawEntries": "Trekk oppføringer · {{count}}",
+      "drawGroups": "Opprett grupper · {{count}}",
+      "drawMembers": "Grupper oppføringer · {{count}} per gruppe",
+      "drawNumbers": "Trekk tall · {{count}}",
+      "discountHelp": "Opprinnelig pris 100, avslag 20% → pris etter rabatt 80.",
+      "countdownHelp": "For en nedtelling, bruk i dag som start og velg målet som slutten. Tidligere mål gir et negativt antall dager.",
+      "anniversaryHelp": "Jubileumsaldre bruker siste dag i februar til 29. februar i ikke-skuddår.",
+      "unitPrecision": "≈ angir avrunding til 24 signifikante sifre i visningen; kopiering bevarer opptil 80. Faktorene følger mathjs; gallons og fluid ounces er amerikanske enheter.",
+      "discountReduction": "Prosent avslag (%)"
+    },
+    "files": {
+      "fileActions": "Filhandlinger",
+      "discardCrop": "Forkaste ulagrede beskjæringsjusteringer?",
+      "pastedImage": "Innlimt bilde",
+      "lineDedupeHelp": "Sammenligner hver fullstendige linje nøyaktig, inkludert mellomrom og store/små bokstaver. Beholder første forekomst.",
+      "lineSortHelp": "Sorterer etter Unicode-kodeenheter. Dette er ikke språklig eller numerisk rekkefølge.",
+      "imageInfo": "{{name}} · {{width}} × {{height}} px"
+    },
+    "shared": {
+      "viewResult": "Se resultatet"
+    }
   }
 }

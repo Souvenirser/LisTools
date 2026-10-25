@@ -1581,5 +1581,277 @@
     "passwordPolicy": "Geselecteerde tekentypen vormen de toegestane pool. Schakel 'Elk type vereisen' in om elk geselecteerd type in elk wachtwoord op te nemen.",
     "speedScope": "Beoordelingen beschrijven de overdrachtssnelheid. Latentie en jitter worden afzonderlijk gemeten.",
     "viewResult": "Bekijk resultaat"
+  },
+  "redesign": {
+    "calculatorOriginal": "Oorspronkelijke waarde",
+    "calculatorNew": "Nieuwe waarde",
+    "calculatorPrice": "Originele prijs",
+    "calculatorOff": "Percentage korting (%)",
+    "calculatorPart": "Deel",
+    "calculatorWhole": "Geheel",
+    "calculatorPercent": "Percentage (%)",
+    "expressionResult": "Resultaat van expressie · {{expression}}",
+    "businessResult": "{{mode}} · {{expression}}",
+    "workdayExceptions": "Vrije dagen: {{off}} · Werkdata: {{work}}",
+    "copyDisplayedEquation": "Kopieer de weergegeven vergelijking",
+    "drawShuffle": "Lijst in willekeurige volgorde",
+    "drawGroups": "Maak groepen",
+    "timerOtherRunning": "{{mode}} is actief",
+    "timerSessionHelp": "Als u dit tabblad opnieuw laadt, worden beide timers hersteld, inclusief de verstreken kloktijd voor lopende timers. De status wordt opgeslagen in de sessieopslag van dit tabblad.",
+    "pdfAddPdf": "Voeg PDF-bestanden toe voor deze taak.",
+    "pdfAddImages": "Voeg PNG-, JPG- of WebP-afbeeldingen toe om een ​​PDF te maken.",
+    "pdfChooseCurrent": "Kies de PDF die u wilt verwerken uit de huidige PDF-lijst.",
+    "qrRecognizeEmpty": "Herkende tekst verschijnt hier. Kies een afbeelding, zet deze neer of plak deze in het invoergebied.",
+    "textIdle": "Voer een bewerking uit om hier het resultaat te zien.",
+    "textStale": "Invoer of opties gewijzigd. Voer de bewerking opnieuw uit.",
+    "textEmpty": "Voltooid zonder uitvoer.",
+    "textInputStats": "Invoer: {{summary}}",
+    "textOutputBytes": "Uitvoer: {{bytes}} UTF-8 bytes",
+    "textNewlineSummary": "Regeleinden: {{format}} · {{bytes}} UTF-8 bytes",
+    "cropNote": "Het opslaan van een bijsnijdaanpassing is alleen van toepassing op de geselecteerde afbeelding. Bij Exporteren wordt eerst de niet-opgeslagen bijsnijdingsaanpassing van die afbeelding opgeslagen en vervolgens wordt elke afbeelding in de wachtrij verwerkt met behulp van de opgeslagen bijsnijdingsaanpassing of originele afbeelding.",
+    "cropSaveCurrent": "Bewaar bijsnijden voor deze afbeelding",
+    "cropDirty": "Niet-opgeslagen wijzigingen in het bijsnijden van afbeeldingen voor {{name}}. Exporteren slaat deze wijzigingen eerst op.",
+    "cropSaved": "Bijgesneden afbeelding opgeslagen voor {{name}}. Het wordt gebruikt bij de batch-image-export.",
+    "cropOriginal": "{{name}} heeft geen opgeslagen afbeeldingsbijsnijden. Bij Exporteren wordt de originele afbeelding gebruikt, tenzij u de bijsnijding aanpast.",
+    "cropExportBatch": "Exporteer {{count}} afbeeldingen · afbeeldingen met opgeslagen bijsnijden: {{cropped}}",
+    "cropSaveExport": "Sla de huidige bijsnijden van afbeeldingen op en exporteer {{count}} afbeeldingen"
+  },
+  "direct": {
+    "developer": {
+      "convert": {
+        "base64": {
+          "input": "Ruwe tekst / bestandsbytes",
+          "output": "Base64 Tekst",
+          "usage": "Conversie: Ruwe tekst / bestandsbytes → Base64 Tekst."
+        },
+        "base64url": {
+          "input": "Ruwe tekst / bestandsbytes",
+          "output": "Base64URL Tekst",
+          "usage": "Conversie: Ruwe tekst / bestandsbytes → Base64URL Tekst."
+        },
+        "base32": {
+          "input": "Ruwe tekst / bestandsbytes",
+          "output": "Base32 Tekst",
+          "usage": "Conversie: Ruwe tekst / bestandsbytes → Base32 Tekst."
+        },
+        "base32hex": {
+          "input": "Ruwe tekst / bestandsbytes",
+          "output": "Base32Hex Tekst",
+          "usage": "Conversie: Ruwe tekst / bestandsbytes → Base32Hex Tekst."
+        },
+        "base58": {
+          "input": "Ruwe tekst / bestandsbytes",
+          "output": "Base58 Tekst",
+          "usage": "Geeft bytes weer met het Bitcoin Base58-alfabet."
+        },
+        "hex": {
+          "input": "Ruwe tekst / bestandsbytes",
+          "output": "Hexadecimale bytes",
+          "usage": "Conversie: Ruwe tekst / bestandsbytes ↔ Hexadecimale bytes."
+        },
+        "binary": {
+          "input": "Ruwe tekst / bestandsbytes",
+          "output": "Binaire bytereeks",
+          "usage": "Geeft elke byte weer als acht binaire cijfers."
+        },
+        "url-component": {
+          "input": "Tekst zonder escape-codering",
+          "output": "Tekst van URL-component",
+          "usage": "Codeert één URL-parameter of padcomponent.",
+          "help": "Gebruikt encodeURIComponent / decodeURIComponent. Spaties worden %20; een letterlijke + wordt %2B."
+        },
+        "uri": {
+          "input": "Volledige URI",
+          "output": "URI met escape-codering",
+          "usage": "Voorziet een volledige URI van escape-codering en behoudt URI-scheidingstekens.",
+          "help": "Gebruikt encodeURI / decodeURI en behoudt URI-scheidingstekens zoals : / ? #. Gebruik URL-component voor één parameterwaarde."
+        },
+        "form": {
+          "input": "Sleutel / waarde zonder escape-codering",
+          "output": "Tekst van formuliercomponent",
+          "usage": "Codeert één formuliersleutel of -waarde.",
+          "help": "Gebruikt application/x-www-form-urlencoded-regels. Spaties worden +; een letterlijke + wordt %2B."
+        },
+        "html-entities": {
+          "input": "Platte tekst",
+          "output": "HTML-entiteiten",
+          "usage": "Conversie: Platte tekst ↔ HTML-entiteiten.",
+          "help": "Codeert en decodeert HTML-entiteiten. Converteert tekst zonder HTML te ontleden of uit te voeren."
+        },
+        "xml-entities": {
+          "input": "Platte tekst",
+          "output": "XML-entiteiten",
+          "usage": "Conversie: Platte tekst ↔ XML-entiteiten.",
+          "help": "Codeert en decodeert XML-entiteiten zonder een XML-document te ontleden of invoer uit te voeren."
+        },
+        "json-string": {
+          "input": "Platte tekst",
+          "output": "JSON-tekenreeks tussen aanhalingstekens",
+          "usage": "Conversie: Platte tekst ↔ JSON-tekenreeks tussen aanhalingstekens.",
+          "help": "De gecodeerde uitvoer bevat omliggende aanhalingstekens. Decodering vereist een volledige letterlijke JSON-tekenreeks."
+        },
+        "unicode": {
+          "input": "Platte tekst",
+          "output": "Unicode-escapes",
+          "usage": "Conversie: Platte tekst ↔ Unicode-escapes.",
+          "help": "Codeert UTF-16 als \\uXXXX-escapes. Decodeert ondersteunde escape-syntaxis zonder de invoer uit te voeren."
+        },
+        "codepoints": {
+          "input": "Unicode Tekst",
+          "output": "Lijst met U+-codepunten",
+          "usage": "Onderzoekt of herstelt Unicode-codepunten.",
+          "help": "Codeert een lijst met hexadecimale U+-codepunten. Decodering herstelt de tekst, inclusief aanvullende tekens."
+        },
+        "charset": {
+          "input": "Unicode-tekst / bestand in broncodering",
+          "output": "Bytes in doelcodering",
+          "usage": "Codeert bytes met de doeltekenset."
+        },
+        "json-yaml": {
+          "input": "JSON-document",
+          "output": "YAML-document",
+          "usage": "Conversie: JSON-document ↔ YAML-document."
+        },
+        "xml-json": {
+          "input": "XML-document",
+          "output": "Geordende JSON-array",
+          "usage": "Conversie: XML-document ↔ Geordende JSON-array."
+        },
+        "csv-json": {
+          "input": "CSV tabel",
+          "output": "JSON-rijen",
+          "usage": "Conversie: CSV tabel ↔ JSON-rijen."
+        },
+        "tsv-json": {
+          "input": "TSV tabel",
+          "output": "JSON-rijen",
+          "usage": "Conversie: TSV tabel ↔ JSON-rijen."
+        },
+        "jsonl": {
+          "input": "JSON Lines",
+          "output": "JSON-array",
+          "usage": "Conversie: JSON Lines ↔ JSON-array."
+        },
+        "query-json": {
+          "input": "Querytekenreeks",
+          "output": "JSON-object met tekenreeksarrays",
+          "usage": "Converteert herhaalde queryparameters naar tekenreeksarrays."
+        },
+        "md5": {
+          "input": "Tekst / bestanden / tekstregels",
+          "output": "Controlesom",
+          "usage": "Berekent een MD5-controlesom en vergelijkt verwachte waarden."
+        },
+        "hash": {
+          "input": "Ruwe tekst / bestandsbytes",
+          "output": "Hexadecimale digest van het gekozen algoritme",
+          "usage": "Hasht de oorspronkelijke bytes van tekst of een bestand."
+        },
+        "hmac": {
+          "input": "Berichttekst / bestandsbytes + sleutel",
+          "output": "Hexadecimale HMAC-digest",
+          "usage": "Berekent HMAC met een sleutel voor deze taak."
+        },
+        "jwt": {
+          "input": "JWT met drie delen",
+          "output": "Gedecodeerde JSON",
+          "usage": "Leest JWT-headers en inhoud zonder handtekeningen te verifiëren."
+        },
+        "gzip": {
+          "input": "Ruwe tekst / bestandsbytes",
+          "output": "Gzip-bytes (gekozen weergave)",
+          "usage": "Comprimeert of decomprimeert één Gzip-stroom."
+        },
+        "zlib": {
+          "input": "Ruwe tekst / bestandsbytes",
+          "output": "Zlib-bytes (gekozen weergave)",
+          "usage": "Comprimeert of decomprimeert een Zlib-stroom."
+        },
+        "deflate": {
+          "input": "Ruwe tekst / bestandsbytes",
+          "output": "Onbewerkte Deflate-bytes (gekozen weergave)",
+          "usage": "Comprimeert of decomprimeert onbewerkte Deflate-gegevens."
+        },
+        "radix": {
+          "input": "Geheel getal in het brontalstelsel",
+          "output": "Geheel getal in het doeltalstelsel",
+          "usage": "Conversie: Geheel getal in het brontalstelsel → Geheel getal in het doeltalstelsel."
+        },
+        "bytes-unit": {
+          "input": "Waarde in de broneenheid",
+          "output": "Waarde in de doeleenheid",
+          "usage": "Converteert bits, bytes en SI- en IEC-eenheden."
+        },
+        "duration-unit": {
+          "input": "Duur in de broneenheid",
+          "output": "Duur in de doeleenheid",
+          "usage": "Converteert vaste tijdsduren zonder kalenderberekeningen."
+        },
+        "color": {
+          "input": "HEX / RGB / HSL / HSV JSON",
+          "output": "Gekozen kleurformaat",
+          "usage": "Converteert kleurweergaven met behoud van alfa."
+        },
+        "case": {
+          "input": "Tekst / naam",
+          "output": "Tekst in de gekozen naamgevingsstijl",
+          "usage": "Conversie: Tekst / naam → Tekst in de gekozen naamgevingsstijl."
+        },
+        "lines": {
+          "input": "Tekstregels",
+          "output": "Verwerkte tekstregels",
+          "usage": "Past één gekozen bewerking toe op tekstregels."
+        },
+        "newline": {
+          "input": "Tekst met regeleinden",
+          "output": "Tekst met gekozen LF / CRLF / CR",
+          "usage": "Conversie: Tekst met regeleinden → Tekst met gekozen LF / CRLF / CR."
+        },
+        "normalize": {
+          "input": "Unicode Tekst",
+          "output": "Tekst in de gekozen normalisatievorm",
+          "usage": "Past Unicode-normalisatie toe op codepunten."
+        }
+      },
+      "jsonCancelled": "Geannuleerd. Uw invoer is behouden; voer opnieuw uit wanneer u klaar bent.",
+      "convertHelp": "Gebruik en beperkingen",
+      "fileReplace": "Bestanden vervangen",
+      "md5CopyFile": "Controlesom voor {{name}} kopiëren",
+      "copyIso": "ISO kopiëren",
+      "copyIsoDate": "Uitvoering {{index}} als ISO kopiëren",
+      "regexNotRun": "Niet uitgevoerd",
+      "regexStale": "De invoer is gewijzigd. Voer uit om de resultaten bij te werken.",
+      "speedNetwork": "Dit hulpmiddel maakt verbinding met Cloudflare en gebruikt netwerkgegevens. Testverzoeken beginnen pas nadat u start.",
+      "speedSettings": "Testinstellingen",
+      "speedSummary": "{{profile}} · {{unit}} · maximaal {{budget}} MiB",
+      "customZone": "Aangepaste IANA-tijdzone",
+      "regexNoMatches": "Geen overeenkomsten"
+    },
+    "daily": {
+      "unitDetails": "Andere conversies en nauwkeurigheid",
+      "moneyEmpty": "Voer een bedrag in en converteer het om het resultaat te zien.",
+      "listHelp": "Eén item per regel. Lege regels worden genegeerd; dubbele items blijven apart tot u ze verwijdert.",
+      "dedupe": "Dubbele items verwijderen",
+      "drawEntries": "Items loten · {{count}}",
+      "drawGroups": "Groepen maken · {{count}}",
+      "drawMembers": "Items groeperen · {{count}} per groep",
+      "drawNumbers": "Getallen loten · {{count}}",
+      "discountHelp": "Oorspronkelijke prijs 100, korting 20% → prijs na korting 80.",
+      "countdownHelp": "Voor het aftellen gebruikt u vandaag als begin en kiest u het doel als eind. Doelstellingen uit het verleden leveren een negatief aantal dagen op.",
+      "anniversaryHelp": "Jubileumleeftijden gebruiken de laatste dag van februari voor 29 februari in niet-schrikkeljaren.",
+      "unitPrecision": "≈ geeft afronding op 24 significante cijfers aan; bij kopiëren blijven maximaal 80 cijfers behouden. Factoren volgen mathjs; gallons en vloeibare ounces zijn Amerikaanse eenheden.",
+      "discountReduction": "Percentage korting (%)"
+    },
+    "files": {
+      "fileActions": "Bestandsacties",
+      "discardCrop": "Niet-opgeslagen bijsnijaanpassingen verwijderen?",
+      "pastedImage": "Geplakte afbeelding",
+      "lineDedupeHelp": "Vergelijkt elke volledige regel exact, inclusief spaties en hoofdletters. Behoudt de eerste vermelding.",
+      "lineSortHelp": "Sorteert op Unicode-code-eenheden. Dit is geen taalkundige of numerieke volgorde.",
+      "imageInfo": "{{name}} · {{width}} × {{height}} px"
+    },
+    "shared": {
+      "viewResult": "Bekijk resultaat"
+    }
   }
 }

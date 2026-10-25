@@ -1581,5 +1581,277 @@
     "passwordPolicy": "选中的字符类型组成可用范围。启用“每种类型至少一个”后，每条密码都会包含各选中类型。",
     "speedScope": "评级描述传输速度，延迟和抖动单独展示。",
     "viewResult": "查看结果"
+  },
+  "redesign": {
+    "pdfAddPdf": "请添加 PDF 文件以执行此任务。",
+    "pdfAddImages": "请添加 PNG、JPG 或 WebP 图片以创建 PDF。",
+    "pdfChooseCurrent": "请从当前 PDF 列表中选择要处理的文件。",
+    "qrRecognizeEmpty": "识别后的文本将显示在这里。请在输入区域选择、拖入或粘贴图片。",
+    "textIdle": "执行操作后，结果将显示在这里。",
+    "textStale": "输入或选项已更改，请重新执行操作。",
+    "textEmpty": "操作完成，输出为空。",
+    "textInputStats": "输入：{{summary}}",
+    "textOutputBytes": "输出：{{bytes}} 字节（UTF-8）",
+    "textNewlineSummary": "换行格式：{{format}} · {{bytes}} 字节（UTF-8）",
+    "cropNote": "保存仅应用于所选图片。导出会先保存其未保存的裁剪，再使用每张图片已保存的裁剪或原图处理整个队列。",
+    "cropSaveCurrent": "保存当前图片的裁剪",
+    "cropDirty": "{{name}} 的裁剪更改尚未保存。导出时会先保存这些更改。",
+    "cropSaved": "{{name}} 的裁剪已保存，将用于批量导出。",
+    "cropOriginal": "{{name}} 尚无已保存的裁剪。如果未修改裁剪，导出将使用原图。",
+    "cropExportBatch": "导出 {{count}} 张图片 · {{cropped}} 张已保存裁剪",
+    "cropSaveExport": "保存当前裁剪并导出 {{count}} 张图片",
+    "calculatorOriginal": "原值",
+    "calculatorNew": "新值",
+    "calculatorPrice": "原价",
+    "calculatorOff": "折扣百分比（%）",
+    "calculatorPart": "部分值",
+    "calculatorWhole": "整体值",
+    "calculatorPercent": "百分比（%）",
+    "expressionResult": "表达式结果 · {{expression}}",
+    "businessResult": "{{mode}} · {{expression}}",
+    "workdayExceptions": "自定义休息日：{{off}} · 自定义工作日：{{work}}",
+    "copyDisplayedEquation": "复制显示的等式",
+    "drawShuffle": "打乱名单",
+    "drawGroups": "生成分组",
+    "timerOtherRunning": "{{mode}}正在运行",
+    "timerSessionHelp": "重新加载此标签页会恢复两个计时器；运行中的计时器会计入实际经过的时间。状态保存在此标签页的会话存储中。"
+  },
+  "direct": {
+    "daily": {
+      "countdownHelp": "计算倒计时可将开始日期设为今天，结束日期设为目标日期。过去的目标日期会返回负数。",
+      "anniversaryHelp": "2 月 29 日的周年日期，在非闰年按 2 月最后一天计算。",
+      "unitDetails": "其他换算与精度说明",
+      "unitPrecision": "≈ 表示显示值已舍入至 24 位有效数字；复制最多保留 80 位。换算系数采用 mathjs；加仑和液量盎司均为美制单位。",
+      "moneyEmpty": "输入金额并转换，即可查看结果。",
+      "listHelp": "每行一个条目，空行会忽略；重复条目在去重前仍单独参与。",
+      "dedupe": "去除重复条目",
+      "drawEntries": "抽取 {{count}} 条",
+      "drawGroups": "分成 {{count}} 组",
+      "drawMembers": "每组 {{count}} 条",
+      "drawNumbers": "生成 {{count}} 个数字",
+      "discountReduction": "降价比例（%）",
+      "discountHelp": "原价 100，降价比例 20% → 折后价 80。"
+    },
+    "files": {
+      "fileActions": "文件操作",
+      "discardCrop": "放弃尚未保存的裁剪调整？",
+      "imageInfo": "{{name}} · {{width}} × {{height}} 像素",
+      "pastedImage": "粘贴的图片",
+      "lineDedupeHelp": "按整行精确匹配，区分大小写和空格，保留首次出现的行。",
+      "lineSortHelp": "按 Unicode 码元顺序排序，不按语言或数值大小排序。"
+    },
+    "developer": {
+      "convert": {
+        "base64": {
+          "usage": "用 Base64 传递二进制内容。",
+          "input": "原始文本 / 文件字节",
+          "output": "Base64 文本"
+        },
+        "base64url": {
+          "usage": "生成适合 URL 的 Base64。",
+          "input": "原始文本 / 文件字节",
+          "output": "Base64URL 文本"
+        },
+        "base32": {
+          "usage": "用 Base32 字符集表示字节。",
+          "input": "原始文本 / 文件字节",
+          "output": "Base32 文本"
+        },
+        "base32hex": {
+          "usage": "用扩展十六进制 Base32 表示字节。",
+          "input": "原始文本 / 文件字节",
+          "output": "Base32Hex 文本"
+        },
+        "base58": {
+          "usage": "生成 Bitcoin 字符集的 Base58。",
+          "input": "原始文本 / 文件字节",
+          "output": "Base58 文本"
+        },
+        "hex": {
+          "usage": "在字节和十六进制之间转换。",
+          "input": "原始文本 / 文件字节",
+          "output": "十六进制字节串"
+        },
+        "binary": {
+          "usage": "将每个字节表示为 8 位二进制。",
+          "input": "原始文本 / 文件字节",
+          "output": "二进制字节串"
+        },
+        "url-component": {
+          "usage": "编码 URL 中的单个参数或路径片段。",
+          "input": "未转义文本",
+          "output": "URL 组件文本",
+          "help": "使用 encodeURIComponent / decodeURIComponent；空格编码为 %20，原始 + 编码为 %2B。"
+        },
+        "uri": {
+          "usage": "转义完整 URI，保留 URI 分隔符。",
+          "input": "完整 URI",
+          "output": "转义后的 URI",
+          "help": "使用 encodeURI / decodeURI；保留 : / ? # 等 URI 分隔符。它不适合单个查询参数值。"
+        },
+        "form": {
+          "usage": "按表单规则编码单个键或值。",
+          "input": "未转义键 / 值",
+          "output": "表单组件文本",
+          "help": "按 application/x-www-form-urlencoded 规则；空格使用 +，原始 + 编码为 %2B。"
+        },
+        "html-entities": {
+          "usage": "转义用于 HTML 内容的特殊字符。",
+          "input": "原始文本",
+          "output": "HTML 实体文本",
+          "help": "使用 HTML 实体转义与解码；只转换文本，不解析或执行 HTML。"
+        },
+        "xml-entities": {
+          "usage": "在文本和 XML 实体之间转换。",
+          "input": "原始文本",
+          "output": "XML 实体文本",
+          "help": "使用 XML 实体转义与解码；不解析 XML 文档，不执行输入。"
+        },
+        "json-string": {
+          "usage": "生成或读取完整 JSON 字符串字面量。",
+          "input": "原始文本",
+          "output": "带引号的 JSON 字符串",
+          "help": "编码结果含两端引号；解码必须输入完整 JSON 字符串字面量。"
+        },
+        "unicode": {
+          "usage": "在文本和 Unicode 转义之间转换。",
+          "input": "原始文本",
+          "output": "Unicode 转义序列",
+          "help": "编码为 UTF-16 的 \\uXXXX 转义；解码只处理受支持的转义写法，不执行输入。"
+        },
+        "codepoints": {
+          "usage": "查看文本的 Unicode 码点。",
+          "input": "Unicode 文本",
+          "output": "U+ 码点列表",
+          "help": "编码生成 U+ 十六进制码点列表；解码从码点重建文本，支持补充平面字符。"
+        },
+        "charset": {
+          "usage": "按目标字符集生成字节。",
+          "input": "Unicode 文本 / 来源编码文件",
+          "output": "目标编码字节"
+        },
+        "json-yaml": {
+          "usage": "在 JSON 与 YAML 文档之间转换。",
+          "input": "JSON 文档",
+          "output": "YAML 文档"
+        },
+        "xml-json": {
+          "usage": "在 XML 与保序 JSON 结构之间转换。",
+          "input": "XML 文档",
+          "output": "保序 JSON 数组"
+        },
+        "csv-json": {
+          "usage": "在逗号分隔表格与 JSON 之间转换。",
+          "input": "CSV 表格",
+          "output": "JSON 行数组"
+        },
+        "tsv-json": {
+          "usage": "在制表符分隔表格与 JSON 之间转换。",
+          "input": "TSV 表格",
+          "output": "JSON 行数组"
+        },
+        "jsonl": {
+          "usage": "在逐行 JSON 与 JSON 数组之间转换。",
+          "input": "JSON Lines",
+          "output": "JSON 数组"
+        },
+        "query-json": {
+          "usage": "将重复查询参数转换为字符串数组。",
+          "input": "Query String",
+          "output": "键对应数组的 JSON 对象"
+        },
+        "md5": {
+          "usage": "计算 MD5 校验值并与预期值核对。",
+          "input": "文本 / 文件 / 逐行文本",
+          "output": "MD5 校验值"
+        },
+        "hash": {
+          "usage": "计算文本或文件原始字节的摘要。",
+          "input": "原始文本 / 文件字节",
+          "output": "所选算法的十六进制摘要"
+        },
+        "hmac": {
+          "usage": "使用当前任务密钥计算 HMAC。",
+          "input": "消息文本 / 文件字节 + 密钥",
+          "output": "HMAC 十六进制摘要"
+        },
+        "jwt": {
+          "usage": "读取 JWT 标头与载荷，不验证签名。",
+          "input": "三段式 JWT",
+          "output": "解码后的 JSON"
+        },
+        "gzip": {
+          "usage": "压缩或解压单个 Gzip 数据流。",
+          "input": "原始文本 / 文件字节",
+          "output": "Gzip 字节（所选表示）"
+        },
+        "zlib": {
+          "usage": "压缩或解压带 Zlib 封装的数据。",
+          "input": "原始文本 / 文件字节",
+          "output": "Zlib 字节（所选表示）"
+        },
+        "deflate": {
+          "usage": "处理无封装的原始 Deflate 数据。",
+          "input": "原始文本 / 文件字节",
+          "output": "原始 Deflate 字节（所选表示）"
+        },
+        "radix": {
+          "usage": "将大整数转换为另一进制。",
+          "input": "来源进制整数",
+          "output": "目标进制整数"
+        },
+        "bytes-unit": {
+          "usage": "换算位、字节及 SI / IEC 单位。",
+          "input": "来源单位数值",
+          "output": "目标单位数值"
+        },
+        "duration-unit": {
+          "usage": "换算固定时长，不进行日期运算。",
+          "input": "来源时长数值",
+          "output": "目标时长数值"
+        },
+        "color": {
+          "usage": "转换颜色表示并保留透明度。",
+          "input": "HEX / RGB / HSL / HSV JSON",
+          "output": "所选颜色格式"
+        },
+        "case": {
+          "usage": "将文本转换为所选大小写或命名风格。",
+          "input": "原始文本 / 名称",
+          "output": "所选命名风格文本"
+        },
+        "lines": {
+          "usage": "对每行执行所选的单一操作。",
+          "input": "逐行文本",
+          "output": "处理后的逐行文本"
+        },
+        "newline": {
+          "usage": "统一文本中的换行符。",
+          "input": "含换行的文本",
+          "output": "所选 LF / CRLF / CR 文本"
+        },
+        "normalize": {
+          "usage": "调整 Unicode 码点的规范表示。",
+          "input": "Unicode 文本",
+          "output": "所选规范形式文本"
+        }
+      },
+      "jsonCancelled": "已取消。输入已保留，可重新运行。",
+      "convertHelp": "用法与限制",
+      "fileReplace": "替换文件",
+      "md5CopyFile": "复制 {{name}} 的校验值",
+      "copyIso": "复制 ISO",
+      "copyIsoDate": "复制第 {{index}} 次执行的 ISO 时间",
+      "regexNotRun": "尚未运行",
+      "regexNoMatches": "没有匹配",
+      "regexStale": "输入已更改，请运行以更新结果。",
+      "speedNetwork": "此工具会连接 Cloudflare 测速服务并消耗网络流量。点击开始后才会发起测速请求。",
+      "speedSettings": "测速设置",
+      "speedSummary": "{{profile}} · {{unit}} · 预计 {{budget}} MiB",
+      "customZone": "自定义 IANA 时区"
+    },
+    "shared": {
+      "viewResult": "查看结果"
+    }
   }
 }

@@ -1581,5 +1581,277 @@
     "passwordPolicy": "Aina za wahusika zilizochaguliwa huunda kidimbwi kinachoruhusiwa. Washa \"Inahitaji kila aina\" ili kujumuisha kila aina iliyochaguliwa katika kila nenosiri.",
     "speedScope": "Ukadiriaji unaelezea kasi ya uhamishaji. Latency na jitter hupimwa tofauti.",
     "viewResult": "Tazama matokeo"
+  },
+  "redesign": {
+    "calculatorOriginal": "Thamani asili",
+    "calculatorNew": "Thamani mpya",
+    "calculatorPrice": "Bei ya asili",
+    "calculatorOff": "Asilimia ya punguzo (%)",
+    "calculatorPart": "Sehemu",
+    "calculatorWhole": "Nzima",
+    "calculatorPercent": "Asilimia (%)",
+    "expressionResult": "Matokeo ya kujieleza · {{expression}}",
+    "businessResult": "{{mode}} · {{expression}}",
+    "workdayExceptions": "Siku za kupumzika: {{off}} · Tarehe za kazi: {{work}}",
+    "copyDisplayedEquation": "Nakili mlinganyo ulioonyeshwa",
+    "drawShuffle": "Changanya orodha",
+    "drawGroups": "Unda vikundi",
+    "timerOtherRunning": "{{mode}} inaendeshwa",
+    "timerSessionHelp": "Kupakia upya kichupo hiki hurejesha vipima muda vyote viwili, ikijumuisha muda wa saa uliopita wa vipima muda vinavyoendeshwa. Hali huhifadhiwa katika hifadhi ya kipindi cha kichupo hiki.",
+    "pdfAddPdf": "Ongeza faili za PDF kwa kazi hii.",
+    "pdfAddImages": "Ongeza picha za PNG, JPG au WebP ili kuunda PDF.",
+    "pdfChooseCurrent": "Chagua PDF ya kuchakata kutoka kwa orodha ya sasa ya PDF.",
+    "qrRecognizeEmpty": "Maandishi yanayotambulika yataonekana hapa. Chagua, dondosha au ubandike picha katika eneo la ingizo.",
+    "textIdle": "Fanya operesheni ili kuona matokeo yake hapa.",
+    "textStale": "Ingizo au chaguo zimebadilishwa. Endesha operesheni tena.",
+    "textEmpty": "Imekamilika bila pato.",
+    "textInputStats": "Ingizo: {{summary}}",
+    "textOutputBytes": "Pato: {{bytes}} UTF-8 baiti",
+    "textNewlineSummary": "Mwisho wa mstari: {{format}} · {{bytes}} UTF-8 byte",
+    "cropNote": "Kuhifadhi marekebisho ya upunguzaji hutumika tu kwa picha iliyochaguliwa. Hamisha kwanza huhifadhi urekebishaji wa upunguzaji ambao haujahifadhiwa wa picha hiyo, kisha huchakata kila picha iliyo kwenye foleni kwa kutumia marekebisho yake ya upunguzaji yaliyohifadhiwa au picha asili.",
+    "cropSaveCurrent": "Hifadhi upunguzaji kwa picha hii",
+    "cropDirty": "Mabadiliko ya upunguzaji wa picha ambayo hayajahifadhiwa ya {{name}}. Uhamishaji utahifadhi mabadiliko haya kwanza.",
+    "cropSaved": "Upunguzaji wa picha uliohifadhiwa wa {{name}}. Itatumika katika uhamishaji wa picha bechi.",
+    "cropOriginal": "{{name}} haina upunguzaji wa picha uliohifadhiwa. Uhamishaji hutumia picha yake asili isipokuwa urekebishe upunguzaji.",
+    "cropExportBatch": "Hamisha {{count}} picha · picha zilizo na upunguzaji uliohifadhiwa: {{cropped}}",
+    "cropSaveExport": "Hifadhi upunguzaji wa picha wa sasa na usafirishaji {{count}} picha"
+  },
+  "direct": {
+    "developer": {
+      "convert": {
+        "base64": {
+          "usage": "Wakilisha baiti kwa Base64.",
+          "input": "Maandishi / baiti asili za faili",
+          "output": "Maandishi ya Base64"
+        },
+        "base64url": {
+          "usage": "Wakilisha baiti kwa Base64 salama kwa URL.",
+          "input": "Maandishi / baiti asili za faili",
+          "output": "Maandishi ya Base64URL"
+        },
+        "base32": {
+          "usage": "Wakilisha baiti kwa alfabeti ya Base32.",
+          "input": "Maandishi / baiti asili za faili",
+          "output": "Maandishi ya Base32"
+        },
+        "base32hex": {
+          "usage": "Wakilisha baiti kwa alfabeti ya Base32Hex.",
+          "input": "Maandishi / baiti asili za faili",
+          "output": "Maandishi ya Base32Hex"
+        },
+        "base58": {
+          "usage": "Wakilisha baiti kwa alfabeti ya Bitcoin Base58.",
+          "input": "Maandishi / baiti asili za faili",
+          "output": "Maandishi ya Base58"
+        },
+        "hex": {
+          "usage": "Badilisha baiti kwenda au kutoka mfumo wa heksadesimali.",
+          "input": "Maandishi / baiti asili za faili",
+          "output": "Baiti za heksadesimali"
+        },
+        "binary": {
+          "usage": "Wakilisha kila baiti kwa tarakimu nane za binari.",
+          "input": "Maandishi / baiti asili za faili",
+          "output": "Mfuatano wa baiti za binari"
+        },
+        "url-component": {
+          "usage": "Simba kigezo kimoja cha URL au sehemu ya njia.",
+          "input": "Maandishi bila utoroshaji",
+          "output": "Maandishi ya sehemu ya URL",
+          "help": "Hutumia encodeURIComponent / decodeURIComponent. Nafasi huwa %20; alama halisi ya + huwa %2B."
+        },
+        "uri": {
+          "usage": "Simba URI nzima huku ukihifadhi vitenganishi vya URI.",
+          "input": "URI kamili",
+          "output": "URI iliyosimbwa kwa utoroshaji",
+          "help": "Hutumia encodeURI / decodeURI na huhifadhi vitenganishi vya URI kama : / ? #. Kwa thamani moja ya kigezo, tumia sehemu ya URL."
+        },
+        "form": {
+          "usage": "Simba ufunguo mmoja au thamani ya fomu.",
+          "input": "Ufunguo / thamani bila utoroshaji",
+          "output": "Maandishi ya sehemu ya fomu",
+          "help": "Hufuata kanuni za application/x-www-form-urlencoded. Nafasi huwa +; alama halisi ya + huwa %2B."
+        },
+        "html-entities": {
+          "usage": "Simba vibambo maalumu kwa maudhui ya HTML.",
+          "input": "Maandishi ya kawaida",
+          "output": "Entiti za HTML",
+          "help": "Husimba na kufumbua entiti za HTML. Hubadilisha maandishi bila kuchanganua au kutekeleza HTML."
+        },
+        "xml-entities": {
+          "usage": "Badilisha maandishi kwenda au kutoka entiti za XML.",
+          "input": "Maandishi ya kawaida",
+          "output": "Entiti za XML",
+          "help": "Husimba na kufumbua entiti za XML bila kuchanganua hati ya XML au kutekeleza ingizo."
+        },
+        "json-string": {
+          "usage": "Unda au soma thamani halisi kamili ya mfuatano wa JSON.",
+          "input": "Maandishi ya kawaida",
+          "output": "Mfuatano wa JSON wenye alama za kunukuu",
+          "help": "Matokeo yaliyosimbwa yanajumuisha alama za kunukuu zinazoyazunguka. Kufumbua kunahitaji thamani halisi kamili ya mfuatano wa JSON."
+        },
+        "unicode": {
+          "usage": "Badilisha maandishi kwenda au kutoka mifululizo ya kutorosha ya Unicode.",
+          "input": "Maandishi ya kawaida",
+          "output": "Mifululizo ya kutorosha ya Unicode",
+          "help": "Husimba UTF-16 kama mifululizo ya \\uXXXX. Hufumbua sintaksia ya utoroshaji inayotumika bila kutekeleza ingizo."
+        },
+        "codepoints": {
+          "usage": "Kagua au unda upya nukta za msimbo za Unicode.",
+          "input": "Maandishi ya Unicode",
+          "output": "Orodha ya nukta za msimbo U+",
+          "help": "Husimba orodha ya nukta za msimbo U+ za heksadesimali. Kufumbua huunda maandishi upya, pamoja na vibambo vya ziada."
+        },
+        "charset": {
+          "usage": "Simba baiti kwa seti lengwa ya vibambo.",
+          "input": "Maandishi ya Unicode / faili iliyosimbwa kwa usimbaji chanzo",
+          "output": "Baiti zilizosimbwa kwa usimbaji lengwa"
+        },
+        "json-yaml": {
+          "usage": "Badilisha hati kati ya JSON na YAML.",
+          "input": "Hati ya JSON",
+          "output": "Hati ya YAML"
+        },
+        "xml-json": {
+          "usage": "Badilisha XML na muundo wake wa JSON wenye mpangilio.",
+          "input": "Hati ya XML",
+          "output": "Safu ya JSON yenye mpangilio"
+        },
+        "csv-json": {
+          "usage": "Badilisha majedwali yanayotenganishwa kwa koma na JSON.",
+          "input": "Jedwali la CSV",
+          "output": "Safu mlalo za JSON"
+        },
+        "tsv-json": {
+          "usage": "Badilisha majedwali yanayotenganishwa kwa tabo na JSON.",
+          "input": "Jedwali la TSV",
+          "output": "Safu mlalo za JSON"
+        },
+        "jsonl": {
+          "usage": "Badilisha JSON Lines na safu za JSON.",
+          "input": "JSON Lines",
+          "output": "Safu ya JSON"
+        },
+        "query-json": {
+          "usage": "Badilisha vigezo vya hoja vinavyojirudia kuwa safu za mifuatano.",
+          "input": "Mfuatano wa hoja",
+          "output": "Kipengee cha JSON cha safu za mifuatano"
+        },
+        "md5": {
+          "usage": "Hesabu jumla ya ukaguzi ya MD5 na ulinganishe thamani zinazotarajiwa.",
+          "input": "Maandishi / faili / mistari ya maandishi",
+          "output": "Jumla ya ukaguzi ya MD5"
+        },
+        "hash": {
+          "usage": "Hesabu hashi ya baiti asili za maandishi au faili.",
+          "input": "Maandishi / baiti asili za faili",
+          "output": "Muhtasari wa heksadesimali wa algoriti iliyochaguliwa"
+        },
+        "hmac": {
+          "usage": "Hesabu HMAC kwa ufunguo wa kazi hii.",
+          "input": "Maandishi ya ujumbe / baiti za faili + ufunguo",
+          "output": "Muhtasari wa HMAC wa heksadesimali"
+        },
+        "jwt": {
+          "usage": "Soma vichwa na maudhui ya JWT bila kuthibitisha saini.",
+          "input": "JWT yenye sehemu tatu",
+          "output": "JSON iliyofumbuliwa"
+        },
+        "gzip": {
+          "usage": "Bana au fungua mkondo mmoja wa Gzip.",
+          "input": "Maandishi / baiti asili za faili",
+          "output": "Baiti za Gzip (uwakilishi uliochaguliwa)"
+        },
+        "zlib": {
+          "usage": "Bana au fungua mkondo wa Zlib.",
+          "input": "Maandishi / baiti asili za faili",
+          "output": "Baiti za Zlib (uwakilishi uliochaguliwa)"
+        },
+        "deflate": {
+          "usage": "Bana au fungua data ghafi ya Deflate.",
+          "input": "Maandishi / baiti asili za faili",
+          "output": "Baiti ghafi za Deflate (uwakilishi uliochaguliwa)"
+        },
+        "radix": {
+          "usage": "Badilisha namba kamili kwenda msingi mwingine.",
+          "input": "Namba kamili katika msingi chanzo",
+          "output": "Namba kamili katika msingi lengwa"
+        },
+        "bytes-unit": {
+          "usage": "Badilisha biti, baiti na vipimo vya SI na IEC.",
+          "input": "Thamani katika kipimo chanzo",
+          "output": "Thamani katika kipimo lengwa"
+        },
+        "duration-unit": {
+          "usage": "Badilisha vipindi vya muda vilivyowekwa bila hesabu za kalenda.",
+          "input": "Kipindi katika kipimo chanzo",
+          "output": "Kipindi katika kipimo lengwa"
+        },
+        "color": {
+          "usage": "Badilisha maumbo ya rangi huku ukihifadhi alfa.",
+          "input": "HEX / RGB / HSL / HSV JSON",
+          "output": "Umbizo la rangi lililochaguliwa"
+        },
+        "case": {
+          "usage": "Tumia ukubwa wa herufi au mtindo wa majina uliochaguliwa.",
+          "input": "Maandishi / jina",
+          "output": "Maandishi katika mtindo wa majina uliochaguliwa"
+        },
+        "lines": {
+          "usage": "Tumia kitendo kimoja kilichochaguliwa kwa mistari ya maandishi.",
+          "input": "Mistari ya maandishi",
+          "output": "Mistari ya maandishi iliyochakatwa"
+        },
+        "newline": {
+          "usage": "Badilisha miisho ya mistari ya maandishi.",
+          "input": "Maandishi yenye miisho ya mistari",
+          "output": "Maandishi yenye LF / CRLF / CR iliyochaguliwa"
+        },
+        "normalize": {
+          "usage": "Tumia usanifishaji wa Unicode kwa nukta za msimbo.",
+          "input": "Maandishi ya Unicode",
+          "output": "Maandishi katika umbo la usanifishaji lililochaguliwa"
+        }
+      },
+      "jsonCancelled": "Imeghairiwa. Ingizo lako limehifadhiwa; endesha tena ukiwa tayari.",
+      "convertHelp": "Matumizi na mipaka",
+      "fileReplace": "Badilisha faili",
+      "md5CopyFile": "Nakili jumla ya ukaguzi ya {{name}}",
+      "copyIso": "Nakili ISO",
+      "copyIsoDate": "Nakili utekelezaji {{index}} kwa ISO",
+      "regexNotRun": "Haijaendeshwa",
+      "regexNoMatches": "Hakuna vinavyolingana",
+      "regexStale": "Maingizo yamebadilika. Endesha ili kusasisha matokeo.",
+      "speedNetwork": "Zana hii huunganisha na Cloudflare na hutumia data ya mtandao. Maombi ya jaribio huanza tu baada ya kuanzisha.",
+      "speedSettings": "Mipangilio ya jaribio",
+      "speedSummary": "{{profile}} · {{unit}} · hadi {{budget}} MiB",
+      "customZone": "Ukanda maalumu wa saa wa IANA"
+    },
+    "daily": {
+      "countdownHelp": "Kwa kuhesabu siku zilizobaki, chagua leo kuwa mwanzo na tarehe lengwa kuwa mwisho. Tarehe zilizopita hutoa idadi hasi ya siku.",
+      "anniversaryHelp": "Kwa kumbukumbu ya tarehe 29 Februari, miaka isiyo mirefu hutumia siku ya mwisho ya Februari.",
+      "unitDetails": "Mabadilisho mengine na usahihi",
+      "moneyEmpty": "Weka kiasi kisha ubadilishe ili kuona matokeo.",
+      "listHelp": "Ingizo moja kwa kila mstari. Mistari mitupu hupuuzwa; marudio hubaki tofauti hadi uyaondoe.",
+      "dedupe": "Ondoa maingizo yanayojirudia",
+      "drawEntries": "Chagua maingizo · {{count}}",
+      "drawGroups": "Unda vikundi · {{count}}",
+      "drawMembers": "Panga maingizo · {{count}} kwa kila kikundi",
+      "drawNumbers": "Chagua namba · {{count}}",
+      "discountReduction": "Asilimia ya punguzo (%)",
+      "discountHelp": "Bei ya awali 100, punguzo 20% → bei baada ya punguzo 80.",
+      "unitPrecision": "Matokeo yanaonyesha hadi tarakimu 24 muhimu. ≈ alama kuonyesha mviringo; kunakili huhifadhi hadi tarakimu 80 muhimu. Vipengele vya kitengo hutumia ufafanuzi wa mathjs; galoni na wakia za maji ni vitengo vya Marekani."
+    },
+    "files": {
+      "fileActions": "Vitendo vya faili",
+      "discardCrop": "Utupe marekebisho ya kukata picha ambayo hayajahifadhiwa?",
+      "imageInfo": "{{name}} · {{width}} × {{height}} pikseli",
+      "pastedImage": "Picha iliyobandikwa",
+      "lineDedupeHelp": "Hulinganisha mstari mzima kikamilifu, pamoja na nafasi na herufi kubwa/ndogo. Huhifadhi tukio la kwanza.",
+      "lineSortHelp": "Hupanga kwa vipashio vya msimbo wa Unicode, si mpangilio wa lugha au thamani za namba."
+    },
+    "shared": {
+      "viewResult": "Ona matokeo"
+    }
   }
 }
