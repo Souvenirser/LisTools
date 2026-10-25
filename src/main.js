@@ -11,6 +11,7 @@ const $ = (id) => document.getElementById(id);
 $('app-version').textContent = `v${version}`;
 const source = $('source');
 const resultButtons = document.querySelectorAll('[data-result]');
+const cancelButton=document.createElement('button');cancelButton.id='json-cancel';cancelButton.hidden=true;cancelButton.dataset.i18n='common.cancel';$('compact').after(cancelButton);
 const parser = { parse, stringify };
 let editor;
 let resultText = '';
@@ -58,6 +59,7 @@ function renderMenu(items, { mode }) {
 
 function render(state) {
   lastState = state;
+  cancelButton.hidden=state.status!=='pending';
   document.querySelector('.output-panel').dataset.status = state.status;
   resultText = '';
   errorPosition = undefined;
@@ -116,6 +118,7 @@ function render(state) {
     $('placeholder-title').textContent = state.status === 'pending' ? t('json.parsing') : state.status === 'idle' ? t('json.updated') : t('json.waiting');
     $('placeholder-description').textContent = state.status === 'pending' ? t('json.largeHint') : state.status === 'idle' ? t('json.actionHint') : t('json.viewHint');
   }
+  if(state.status==='cancelled')$('placeholder-description').textContent=t('direct.developer.jsonCancelled');
   if (state.status !== 'pending' && editor) {
     void editor.destroy();
     editor = undefined;
@@ -145,6 +148,7 @@ function inputChanged() {
 source.addEventListener('input', inputChanged);
 $('format').addEventListener('click', () => process());
 $('compact').addEventListener('click', () => process('compact'));
+cancelButton.addEventListener('click',()=>{controller.cancel();render({status:'cancelled'});});
 $('indent').addEventListener('change', () => process());
 $('auto-format').addEventListener('change', () => {
   controller.cancel();
@@ -238,6 +242,7 @@ function renderContextMenu(items) {
   return prune(items).map(translateMenuItem);
 }
 function refreshLabels() {
+  cancelButton.textContent=t('common.cancel');
   if(importError)showImportStatus(importError);
   const state = lastState;
   $('input-info').textContent = source.value ? t('common.characters', { count:source.value.length }) : t('json.raw');
@@ -247,6 +252,7 @@ function refreshLabels() {
   $('result-state').textContent = t(state.status === 'ready' ? 'json.success' : state.status === 'error' ? 'common.error' : state.status === 'pending' ? 'common.processing' : 'common.ready');
   $('placeholder-title').textContent = t(state.status === 'error' ? 'json.failed' : state.status === 'pending' ? 'json.parsing' : state.status === 'idle' ? 'json.updated' : 'json.waiting');
   $('placeholder-description').textContent = state.status === 'error' ? state.line ? t('common.location',state) : t('common.retry') : t(state.status === 'pending' ? 'json.largeHint' : state.status === 'idle' ? 'json.actionHint' : 'json.viewHint');
+  if(state.status==='cancelled')$('placeholder-description').textContent=t('direct.developer.jsonCancelled');
   if (state.status === 'error') $('error-detail').textContent = errorText(state);
   editor?.updateProps({ ariaLabel:t('json.output'), onRenderMenu:(items, context) => renderMenu(items, context), onRenderContextMenu:items => items.map(translateMenuItem) });
 }

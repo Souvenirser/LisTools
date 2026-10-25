@@ -2,6 +2,8 @@ import {addTaskGuide} from './tools/shared/task-guide.js';
 import {registerContentCheck} from './tools/shared/content-state.js';
 import { mountTool, copyText, downloadText, notify } from './tools/shared/page.js';
 import { t, language, onLanguageChange, translateDOM } from './i18n.js';
+import {mountTimeZoneSelector} from './timezone-selector.js';
+import './timestamp-style.css';
 import { getDeviceTimeZone, timestampToTime } from './tools/timestamp/core.js';
 import { createConversionController } from './tools/convert/controller.js';
 import { parseCron, buildCronField } from './tools/cron/core.js';
@@ -13,40 +15,49 @@ const $=id=>document.getElementById(id);
 const label=key=>`data-i18n="${key}"`;
 $('tool-root').innerHTML=`
   <div class="page-heading"><div><h1 ${label('cron.title')}></h1><p ${label('cron.description')}></p></div></div>
+  <div class="cron-workspace">
   <section class="tool-card" aria-labelledby="cron-input-title">
     <h2 id="cron-input-title" ${label('cron.context')}></h2>
     <div class="tool-fields cron-context">
-      <div class="field"><label for="cron-dialect" ${label('cron.syntax')}></label><select id="cron-dialect"><option value="linux">Linux (5)</option><option value="seconds" ${label('cron.withSeconds')}></option><option value="quartz">Quartz (6 / 7)</option></select></div>
       <div class="field cron-expression-field"><label for="cron-expression" ${label('cron.title')}></label><input id="cron-expression" value="*/5 * * * *" spellcheck="false" autocapitalize="off" autocomplete="off" dir="ltr" aria-describedby="cron-syntax-note cron-error"></div>
-      <div class="field"><label for="cron-zone" ${label('timestamp.zone')}></label><input id="cron-zone" list="cron-zones" autocomplete="off" spellcheck="false" dir="ltr"><datalist id="cron-zones"></datalist></div>
-      <div class="field"><label for="cron-reference" ${label('cron.reference')}></label><input id="cron-reference" placeholder="2026-01-01 09:00:00 / 2026-01-01T09:00:00Z" autocomplete="off" spellcheck="false" dir="ltr"></div>
-      <div class="field"><label for="cron-count" ${label('cron.count')}></label><select id="cron-count"><option>10</option><option>20</option><option>50</option><option>100</option></select></div>
+      <div class="field"><label for="cron-dialect" ${label('cron.syntax')}></label><select id="cron-dialect"><option value="linux">Linux (5)</option><option value="seconds" ${label('cron.withSeconds')}></option><option value="quartz">Quartz (6 / 7)</option></select></div>
+      <div class="field cron-timezone-field"><label id="cron-zone-caption" for="cron-zone-picker" ${label('timestamp.zone')}></label><div class="timezone-controls cron-timezone-controls"><select id="cron-zone-picker" aria-describedby="cron-error"></select><button id="cron-device-zone" ${label('timestamp.restore')}></button></div><details id="cron-custom-timezone"><summary ${label('direct.developer.customZone')}></summary><label for="cron-zone" class="sr-only" ${label('direct.developer.customZone')}></label><input id="cron-zone" list="cron-zones" autocomplete="off" spellcheck="false" dir="ltr"><datalist id="cron-zones"></datalist></details></div>
     </div>
-    <p id="cron-syntax-note" class="tool-note"></p>
-    <div class="tool-actions"><button id="cron-run" class="primary" ${label('cron.run')}></button><button id="cron-cancel" disabled ${label('common.cancel')}></button><button id="cron-now" ${label('timestamp.fillNow')}></button><button id="cron-device-zone" ${label('timestamp.restore')}></button><button id="cron-copy-expression" ${label('cron.copyExpression')}></button><label class="check-label"><input id="cron-auto" type="checkbox" checked><span ${label('cron.auto')}></span></label></div>
+    <div class="tool-actions"><button id="cron-run" class="primary" ${label('cron.run')}></button><button id="cron-cancel" disabled ${label('common.cancel')}></button><button id="cron-copy-expression" ${label('cron.copyExpression')}></button><label class="check-label"><input id="cron-auto" type="checkbox" checked><span ${label('cron.auto')}></span></label></div>
     <div id="cron-error" class="tool-error" role="alert" hidden><span id="cron-error-message"></span><details><summary data-i18n="cron.technicalDetails"></summary><pre id="cron-error-details" dir="ltr"></pre></details></div>
-    <div class="cron-presets"><span class="tool-note" ${label('cron.presets')}></span><button data-preset="minute" ${label('cron.everyMinute')}></button><button data-preset="five" ${label('cron.fiveMinutes')}></button><button data-preset="daily" ${label('cron.daily')}></button><button data-preset="weekdays"></button><button data-preset="monthly" ${label('cron.monthly')}></button></div>
-  </section>
-  <details class="tool-card cron-builder"><summary ${label('cron.builder')}></summary>
+    <div class="cron-presets"><label for="cron-presets" class="sr-only" data-i18n="ux.templates"></label><select id="cron-presets"></select><button hidden data-preset="minute" ${label('cron.everyMinute')}></button><button hidden data-preset="five" ${label('cron.fiveMinutes')}></button><button hidden data-preset="daily" ${label('cron.daily')}></button><button hidden data-preset="weekdays"></button><button hidden data-preset="monthly" ${label('cron.monthly')}></button></div>
+  <details class="cron-builder" hidden><summary ${label('cron.builder')}></summary>
     <p class="tool-note" ${label('cron.builderHint')}></p>
     <div class="tool-actions"><button id="cron-builder-load" ${label('cron.load')}></button><label id="cron-year-control" class="check-label" hidden><input id="cron-year" type="checkbox"><span ${label('cron.includeYear')}></span></label></div>
     <div id="cron-builder-fields"></div><p id="cron-builder-error" class="tool-error" role="alert" hidden></p>
     <div class="tool-actions"><button id="cron-builder-apply" ${label('cron.apply')}></button></div>
   </details>
+    <details id="cron-preview-settings"><summary data-i18n="ux.previewSettings"></summary><div class="tool-fields">
+      <div class="field"><label for="cron-count" ${label('cron.count')}></label><select id="cron-count"><option>10</option><option>20</option><option>50</option><option>100</option></select></div><div class="field"><label for="cron-reference" ${label('cron.reference')}></label><input id="cron-reference" placeholder="2026-01-01 09:00:00 / 2026-01-01T09:00:00Z" autocomplete="off" spellcheck="false" dir="ltr"></div><button id="cron-now" ${label('timestamp.fillNow')}></button>
+    </div></details>
+  </section>
   <section class="tool-card" aria-labelledby="cron-result-title"><div class="cron-result-heading"><h2 id="cron-result-title" ${label('cron.results')}></h2><span id="cron-status" class="tool-status" role="status" aria-live="polite"></span></div>
-    <p id="cron-description" class="cron-description"></p><p id="cron-result-context" class="tool-note"></p>
-    <div class="cron-table-scroll"><table class="tool-table" id="cron-fields"><thead><tr><th ${label('cron.field')}></th><th ${label('common.value')}></th><th ${label('cron.range')}></th><th ${label('cron.meaning')}></th></tr></thead><tbody></tbody></table></div>
+    <p id="cron-effective-context" class="tool-note"></p><p id="cron-description" class="cron-description"></p><p id="cron-next" class="result-conclusion"></p><p id="cron-result-context" class="tool-note"></p>
+
     <div class="tool-actions"><button id="cron-copy-dates" disabled ${label('cron.copyDates')}></button><button id="cron-download-csv" disabled ${label('common.download')}></button><button id="cron-download-json" disabled ${label('common.download')}></button></div>
-    <div class="cron-table-scroll"><table class="tool-table" id="cron-dates"><thead><tr><th>#</th><th ${label('timestamp.local')}></th><th ${label('cron.utcOffset')}></th><th ${label('timestamp.utc')}></th><th ${label('common.copy')}></th></tr></thead><tbody></tbody></table></div>
+    <div class="cron-table-scroll cron-dates-scroll"><table class="tool-table" id="cron-dates"><thead><tr><th>#</th><th ${label('timestamp.local')}></th><th ${label('direct.developer.copyIso')}></th></tr></thead><tbody></tbody></table></div>
     <p class="tool-note" ${label('cron.notes')}></p>
-  </section>`;
+    <details class="cron-field-details"><summary data-i18n="cron.field"></summary><p id="cron-syntax-note" class="tool-note"></p>
+    <div class="cron-table-scroll"><table class="tool-table" id="cron-fields"><thead><tr><th ${label('cron.field')}></th><th ${label('common.value')}></th><th ${label('cron.range')}></th><th ${label('cron.meaning')}></th></tr></thead><tbody></tbody></table></div>
+    </details>
+  </section>
+  </div>`;
 mountTool('cron');
 translateDOM($('tool-root'));
 const device=getDeviceTimeZone();
 $('cron-zone').value=device.timeZone;
 let zones=[];
 try { zones=Intl.supportedValuesOf('timeZone'); } catch { /* Manual IANA entry remains available. */ }
-$('cron-zones').replaceChildren(...[...new Set(['UTC',device.timeZone,...zones])].sort().map(zone=>{const option=document.createElement('option');option.value=zone;return option;}));
+const zoneValues=new Set(['UTC',device.timeZone,...zones]);
+const zonePicker=mountTimeZoneSelector($('cron-zone-picker'),{t,language,labelId:'cron-zone-caption'});zonePicker.setZones(zoneValues,device.timeZone);
+$('cron-zones').replaceChildren(...[...zoneValues].sort().map(zone=>{const option=document.createElement('option');option.value=zone;return option;}));
+$('cron-zone-picker').addEventListener('change',()=>{$('cron-zone').value=$('cron-zone-picker').value;inputChanged();});
+$('cron-zone').addEventListener('change',()=>{try{new Intl.DateTimeFormat('en',{timeZone:$('cron-zone').value});zoneValues.add($('cron-zone').value);zonePicker.setZones(zoneValues,$('cron-zone').value);}catch{/* Core validation reports an invalid custom zone. */}});
 let result, builderError, descriptionRequest=0, state={status:'idle'};
 const controller=createConversionController({
   timeoutMs:2000, createWorker:()=>new Worker(new URL('./tools/cron/worker.js',import.meta.url),{type:'module'}),
@@ -97,6 +108,7 @@ function renderState() {
   for(const id of ['cron-copy-dates','cron-download-csv','cron-download-json']) $(id).disabled=!ready || !state.dates.length;
   $('cron-error').hidden=state.status!=='error';
   $('cron-error-message').textContent=state.status==='error'?errorMessage(state):'';
+  $('cron-zone-picker').setAttribute('aria-invalid',String(state.status==='error'&&state.field==='timeZone'));if(state.status==='error'&&state.field==='timeZone')$('cron-custom-timezone').open=true;
   $('cron-error-details').textContent=state.status==='error'?`${state.code || state.errorCode || 'invalid'}: ${state.messageEn || state.message || ''}`:'';
   for(const [id,field] of [['cron-expression','expression'],['cron-zone','timeZone'],['cron-reference','reference']]) $(id).setAttribute('aria-invalid',String(state.status==='error' && (state.field===field || (field==='expression' && !['timeZone','reference','count'].includes(state.field)))));
   for(const format of ['csv','json'])$(`cron-download-${format}`).textContent=`${t('common.download')} ${format.toUpperCase()}`;
@@ -110,8 +122,8 @@ function renderState() {
   if(!ready) return;
   for(const field of state.parsed.fields) {const row=document.createElement('tr');cell(row,t(`cron.fields.${field.id}`));cell(row,field.value,true);cell(row,`${field.min}–${field.max}`,true);cell(row,meaning(field));fields.append(row);}
   state.dates.forEach((date,index)=>{
-    const row=document.createElement('tr');cell(row,index+1);cell(row,date.localTime,true);cell(row,date.offset,true);cell(row,date.utcTime,true);
-    const button=document.createElement('button');button.textContent=t('common.copy');button.setAttribute('aria-label',t('cron.copyDate',{index:index+1}));button.addEventListener('click',()=>copyText(date.isoTime));cell(row,'').append(button);dates.append(row);
+    const row=document.createElement('tr');cell(row,index+1);const dateCell=cell(row,'');const local=document.createElement('span');local.className='cron-local-time';local.textContent=date.localTime;const secondary=document.createElement('small');secondary.className='cron-time-context';secondary.textContent=`${date.utcTime} · UTC${date.offset}`;dateCell.append(local,secondary);
+    const button=document.createElement('button');button.textContent=t('direct.developer.copyIso');button.setAttribute('aria-label',`${button.textContent} · ${t('direct.developer.copyIsoDate',{index:index+1})}`);button.addEventListener('click',()=>copyText(date.isoTime));cell(row,'').append(button);dates.append(row);
   });
 }
 
@@ -166,9 +178,10 @@ for(const id of ['cron-expression','cron-zone','cron-reference']) $(id).addEvent
 $('cron-count').addEventListener('change',inputChanged);
 $('cron-dialect').addEventListener('change',()=>{syntaxNote();$('cron-year').checked=false;loadBuilder();inputChanged();});
 $('cron-auto').addEventListener('change',()=>{$('cron-auto').checked ? calculate(true) : controller.invalidate();});
+document.querySelector('.cron-workspace').addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.isComposing&&event.target.matches('#cron-expression,#cron-zone,#cron-reference')&&!$('cron-auto').checked){event.preventDefault();calculate();}});
 $('cron-run').addEventListener('click',()=>calculate());$('cron-cancel').addEventListener('click',()=>controller.cancel());
 $('cron-now').addEventListener('click',()=>{const now=timestampToTime(String(Date.now()),'milliseconds',$('cron-zone').value);if(now.status!=='ready')return notify(t('timestamp.invalidZone'));$('cron-reference').value=now.isoTime;inputChanged();});
-$('cron-device-zone').addEventListener('click',()=>{$('cron-zone').value=getDeviceTimeZone().timeZone;inputChanged();});
+$('cron-device-zone').addEventListener('click',()=>{const zone=getDeviceTimeZone().timeZone;zoneValues.add(zone);$('cron-zone').value=zone;zonePicker.setZones(zoneValues,zone);inputChanged();});
 $('cron-copy-expression').addEventListener('click',()=>copyText($('cron-expression').value));
 $('cron-copy-dates').addEventListener('click',()=>{if(result)copyText(result.dates.map(date=>`${date.isoTime}\t${date.utcTime}`).join('\n'));});
 for(const format of ['csv','json']) $(`cron-download-${format}`).addEventListener('click',()=>{if(result)downloadText(exportCron(result,format),`cron-dates.${format}`,format==='json'?'application/json;charset=utf-8':'text/csv;charset=utf-8');});
@@ -178,27 +191,20 @@ for(const button of document.querySelectorAll('[data-preset]')) button.addEventL
 });
 onLanguageChange(()=>{
   const scroll=[...document.querySelectorAll('main,.cron-table-scroll')].map(element=>[element,element.scrollTop,element.scrollLeft]);
-  syntaxNote();translateDOM($('tool-root'));for(const row of $('cron-builder-fields').children)builderParameters(row);renderBuilderError();renderState();
+  zonePicker.refresh();syntaxNote();translateDOM($('tool-root'));for(const row of $('cron-builder-fields').children)builderParameters(row);renderBuilderError();renderState();
   for(const [element,top,left] of scroll){element.scrollTop=top;element.scrollLeft=left;}
 });
 window.addEventListener('pagehide',()=>controller.cancel());
 syntaxNote();loadBuilder();renderState();calculate();
 
+$('cron-custom-timezone').append($('cron-device-zone'));
 let cronEngaged=false;document.querySelector('#tool-root').addEventListener('input',()=>{cronEngaged=true;});document.querySelector('#cron-run').addEventListener('click',()=>{cronEngaged=true;});
 
 registerContentCheck(()=>Boolean($('cron-expression').value&&($('cron-expression').value!=='*/5 * * * *'||cronEngaged)));
 
-const cronSettings=$('cron-input-title').closest('section'),cronResults=$('cron-result-title').closest('section'),cronLayout=document.createElement('div');cronLayout.className='cron-workspace';cronSettings.before(cronLayout);cronLayout.append(cronSettings,cronResults);cronLayout.after(document.querySelector('.cron-builder'));
-const fieldDetails=document.createElement('details');fieldDetails.innerHTML='<summary data-i18n="cron.field"></summary>';const fieldTable=$('cron-fields').parentElement;cronResults.append(fieldDetails);fieldDetails.append(fieldTable);translateDOM(fieldDetails);
-
-const cronCompact=document.createElement('div');cronCompact.className='tool-fields cron-compact-fields';document.querySelector('.cron-context').prepend(cronCompact);cronCompact.append($('cron-dialect').closest('.field'),$('cron-count').closest('.field'));fieldDetails.prepend($('cron-syntax-note'));fieldDetails.prepend(fieldDetails.querySelector('summary'));
-
-const previewSettings=document.createElement('details');previewSettings.id='cron-preview-settings';previewSettings.innerHTML='<summary data-i18n="ux.previewSettings"></summary><div class="tool-fields"></div>';const cronContext=cronSettings.querySelector('.cron-context');cronSettings.querySelector('.tool-actions').after(previewSettings);previewSettings.querySelector('div').append($('cron-count').closest('.field'),$('cron-reference').closest('.field'),$('cron-now'));
-cronContext.prepend($('cron-expression').closest('.field'));$('cron-zone').closest('.field').append($('cron-device-zone'));
-const cronBuilder=document.querySelector('.cron-builder');cronBuilder.classList.remove('tool-card');previewSettings.before(cronBuilder);cronBuilder.hidden=true;
+const cronBuilder=document.querySelector('.cron-builder');
 addTaskGuide('cron',[{id:'parse',key:'ux.parseCron'},{id:'build',key:'ux.buildCron'}],{choose(task){cronBuilder.hidden=task!=='build';cronBuilder.open=task==='build';$('cron-run').hidden=task==='build';$('cron-builder-apply').classList.toggle('primary',task==='build');}});
-const nextExecution=document.createElement('p');nextExecution.id='cron-next';nextExecution.className='result-conclusion';$('cron-description').after(nextExecution);
-const presets=document.querySelector('.cron-presets'),presetButtons=[...presets.querySelectorAll('button')],presetSelect=document.createElement('select');presetSelect.id='cron-presets';presets.prepend(presetSelect);for(const button of presetButtons)button.hidden=true;
-function refreshCronPresets(){presetSelect.replaceChildren(...[['',t('ux.templates')],...presetButtons.map(button=>[button.dataset.preset,button.textContent])].map(([value,text])=>{const option=document.createElement('option');option.value=value;option.textContent=text;return option;}));presetSelect.setAttribute('aria-label',t('ux.templates'));}presetSelect.onchange=()=>{presetButtons.find(button=>button.dataset.preset===presetSelect.value)?.click();presetSelect.value='';};onLanguageChange(refreshCronPresets);refreshCronPresets();translateDOM(previewSettings);renderState();
-
-const effectiveContext=document.createElement('p');effectiveContext.id='cron-effective-context';effectiveContext.className='tool-note';$('cron-description').before(effectiveContext);renderState();
+const presetButtons=[...document.querySelectorAll('[data-preset]')],presetSelect=$('cron-presets');
+function refreshCronPresets(){presetSelect.replaceChildren(...[['',t('ux.templates')],...presetButtons.map(button=>[button.dataset.preset,button.textContent])].map(([value,text])=>{const option=document.createElement('option');option.value=value;option.textContent=text;return option;}));presetSelect.setAttribute('aria-label',t('ux.templates'));}
+presetSelect.onchange=()=>{presetButtons.find(button=>button.dataset.preset===presetSelect.value)?.click();presetSelect.value='';};
+onLanguageChange(refreshCronPresets);refreshCronPresets();renderState();

@@ -1,5 +1,3 @@
-.diff-page main { padding-top: 20px; }
-.diff-page .page-heading { margin-bottom: 14px; }
 .diff-summary { display: flex; align-items: center; gap: 18px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 6px; margin-bottom: 13px; background: white; }
 #diff-total { font-size: 1.375rem; font-weight: 650; letter-spacing: -.5px; color: var(--text); min-width: 145px; }
 #diff-total.equal { color: var(--success-text); }
@@ -13,7 +11,7 @@
 .diff-inputs summary { color: var(--text); cursor: pointer; font-size: 1rem; padding-bottom: 8px; }
 .diff-inputs summary span { color: var(--muted); font-size: .875rem; margin-inline-start: 12px; }
 .diff-input-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.diff-input-grid .panel-heading { padding: 0 12px; gap: 8px; flex-basis: 38px; }
+.diff-input-grid .panel-heading { padding: 8px 16px; gap: 8px; flex-basis: auto; }
 .diff-input-grid .panel-heading > span { font-size: .875rem; color: var(--muted); flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .diff-input-grid button { min-height:44px; padding: 2px 7px; font-size: .875rem; }
 .diff-source { min-height: 60px; padding: 10px 12px; border: 0; outline: 0; color: var(--text); font: 1rem/1.7 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
@@ -27,7 +25,7 @@
 .diff-navigation { display: flex; align-items: center; gap: 8px; font-size: 1rem; color: var(--muted); margin-bottom: 10px; }
 .diff-navigation button { font-size: 1rem; min-height:44px; padding: 3px 9px; }
 .diff-navigation label { display: flex; align-items: center; gap: 5px; white-space: nowrap; }
-#diff-index { width: 65px; height: 27px; border: 1px solid var(--border); border-radius: 4px; background: white; padding: 3px 5px; color: var(--text); font-size: 1rem; }
+#diff-index { width:80px; min-height:44px; border: 1px solid var(--border); border-radius: 4px; background: white; padding: 3px 5px; color: var(--text); font-size: 1rem; }
 #change-kind { margin-inline-start: 6px; padding: 3px 6px; border-radius: 3px; font-size: .875rem; white-space: nowrap; }
 #change-path { color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 1rem; }
 .diff-result { flex: 1; min-height: 180px; }
@@ -62,7 +60,7 @@ body[data-status="error"] .diff-summary { background: var(--error-bg); border-co
 body[data-status="error"] #diff-total { color: var(--error-text); }
 .diff-inputs { flex-shrink: 0; }
 .diff-input-grid, .diff-result-titles, #diff-view { direction: ltr; }
-.diff-input-grid .panel-heading { flex-wrap: wrap; min-height: 52px; }
+.diff-input-grid .panel-heading { flex-wrap: wrap; min-height: 60px; height:auto; flex-shrink:0; }
 .diff-source { width: 100%; min-width: 0; overflow: auto; }
 .diff-navigation { flex-wrap: wrap; padding: 10px; background: var(--blue-2); border: 1px solid var(--blue-7); border-radius: 6px; flex-shrink: 0; }
 #change-path { min-width: 0; flex: 1; direction: ltr; text-align: start; }
@@ -92,7 +90,7 @@ body[data-status="error"] #diff-total { color: var(--error-text); }
 body[data-status="error"]:not(:has(.cm-mergeView)) .diff-result, body[data-status="error"]:not(:has(.cm-mergeView)) .diff-editor-help { display: none; }
 @media(max-width:760px) { #diff-error-panel { grid-template-columns: minmax(0, 1fr); } .diagnostic-location { display: block; margin: 4px 0 0; } }
 #diff-view .cm-mergeViewEditor:focus-within { box-shadow: inset 0 0 0 2px var(--blue-8); }
-@media(max-width:760px) { .diff-summary { gap: 10px; } .diff-input-grid { gap: 8px; } .diff-input-grid .panel-heading { padding: 8px; } .diff-input-grid h2 { font-size: 1rem; } .diff-input-grid .panel-heading > span:not(.validation-badge) { display: none; } .diff-inputs summary span { display: block; margin-inline-start: 0; } }
+@media(max-width:760px) { .diff-summary { gap: 10px; } .diff-input-grid { gap: 8px; } .diff-input-grid .panel-heading { padding: 8px 16px; } .diff-input-grid h2 { font-size: 1rem; } .diff-input-grid .panel-heading > span:not(.validation-badge) { display: none; } .diff-inputs summary span { display: block; margin-inline-start: 0; } }
 
 [dir="rtl"] .diff-input-grid .panel-heading, [dir="rtl"] .diff-result-titles > span, [dir="rtl"] .diagnostic-card { direction: rtl; }
 
@@ -118,7 +116,12 @@ body[data-status="error"]:not(:has(.cm-mergeView)) .diff-result, body[data-statu
 .diff-page #diff-view{height:0;min-height:var(--diff-reader-min)}
 .diff-page .diff-editor-help,.diff-page .diff-inputs:not([open]),.diff-page.editing-comparison .diff-result,.diff-page.editing-comparison .diff-overview{display:none}
 .diff-page .workbench-footer{padding-block:10px}
-@media(max-width:760px){.diff-page{--diff-reader-min:240px}.diff-page .diff-input-grid{grid-template-columns:minmax(0,1fr);height:auto;gap:12px}.diff-page .diff-inputs[open]{flex:none;min-height:0}.diff-page .diff-input-grid>.panel{min-height:294px}.diff-page #diff-view .cm-mergeView{min-width:560px}.diff-page #diff-view{overflow:auto}}
-@media(max-width:760px){.diff-page #diff-view{height:auto;overflow:hidden}.diff-page #diff-view .cm-mergeView{min-width:0;height:auto;overflow:visible}.diff-page #diff-view .cm-mergeViewEditors{flex-direction:column}.diff-page #diff-view .cm-mergeViewEditor{width:100%;height:240px;flex:none;overflow:auto}.diff-result-titles{display:none}}
-@media(max-width:760px){.diff-page #diff-view .cm-mergeViewEditor{height:284px}.diff-page #diff-view .cm-mergeViewEditor::before{content:attr(data-label);display:block;position:sticky;top:0;z-index:3;min-height:44px;padding:9px 14px;border-bottom:1px solid var(--border);background:var(--slate-2);font:600 1rem/1.6 system-ui;direction:ltr}}
+.diff-page:not(.has-comparison) #only-diff{display:none}.diff-page:not(.has-comparison) .check-label:has(#only-diff){display:none}
+@media(max-width:760px){.diff-input-grid .panel-heading h2{flex:1 1 auto}.diff-input-grid .panel-heading button{flex-basis:100%;width:100%}.diff-input-grid .panel-heading>.validation-badge{margin-inline-start:auto}}
+@media(max-width:999px){.diff-page{--diff-reader-min:240px}.diff-page .diff-input-grid{grid-template-columns:minmax(0,1fr);height:auto;gap:12px}.diff-page .diff-inputs[open]{flex:none;min-height:0}.diff-page .diff-input-grid>.panel{min-height:294px}.diff-page #diff-view .cm-mergeView{min-width:560px}.diff-page #diff-view{overflow:auto}}
+@media(max-width:999px){.diff-page #diff-view{height:auto;overflow:hidden}.diff-page #diff-view .cm-mergeView{min-width:0;height:auto;overflow:visible}.diff-page #diff-view .cm-mergeViewEditors{flex-direction:column}.diff-page #diff-view .cm-mergeViewEditor{width:100%;height:240px;flex:none;overflow:auto}.diff-result-titles{display:none}}
+@media(max-width:999px){.diff-page #diff-view .cm-mergeViewEditor{height:284px}.diff-page #diff-view .cm-mergeViewEditor::before{content:attr(data-label);display:block;position:sticky;top:0;z-index:3;min-height:44px;padding:9px 14px;border-bottom:1px solid var(--border);background:var(--slate-2);font:600 1rem/1.6 system-ui;direction:ltr}}
 .diff-page .select-label{flex-wrap:wrap;max-width:100%;min-width:0}
+
+/* Stacked panes size the document; desktop keeps one bounded merge viewport. */
+@media(max-width:999px){.diff-page .diff-result{flex:1 0 auto}}

@@ -1,8 +1,9 @@
+import {actionArea} from './tools/shared/workspace.js';
 import { addTaskGuide } from './tools/shared/task-guide.js';
 import {registerContentCheck} from './tools/shared/content-state.js';
 import { mountTool, copyText, downloadText, localize } from './tools/shared/page.js';
 import { textLabel as tr } from './tools/shared/labels.js';
-import { t, translateDOM, onLanguageChange } from './i18n.js';
+import { t, onLanguageChange } from './i18n.js';
 import { parseWordlist } from './tools/password/core.js';
 import { createPasswordController } from './tools/password/controller.js';
 import wordlistText from './tools/password/data/eff_large_wordlist.txt?raw';
@@ -11,26 +12,24 @@ import './tools/password/style.css';
 const root = document.getElementById('tool-root');
 root.innerHTML = `
   <div class="page-heading"><div><h1 data-i18n="uiText.s100a0613"></h1><p class="page-subtitle" data-i18n="uiText.s20bd3702"></p></div></div>
+  <div class="password-workspace">
   <section class="tool-card" aria-labelledby="password-settings-heading">
     <h2 id="password-settings-heading" data-i18n="uiText.sd5b958f5"></h2>
     <div class="tool-fields">
-      <div class="field"><label for="password-mode" data-i18n="uiText.s534e7732"></label><select id="password-mode"><option value="characters" data-i18n="uiText.s4b8a1772"></option><option value="passphrase" data-i18n="uiText.s2d79f6fa"></option></select></div>
+      <div class="field" hidden><label for="password-mode" data-i18n="uiText.s534e7732"></label><select id="password-mode"><option value="characters" data-i18n="uiText.s4b8a1772"></option><option value="passphrase" data-i18n="uiText.s2d79f6fa"></option></select></div>
       <div class="field"><label for="password-batch" data-i18n="uiText.s6e755606"></label><input id="password-batch" type="number" min="1" max="100" step="1" value="1" autocomplete="off"></div>
+      <div class="field"><label for="password-length" data-i18n="uiText.sf3f2bee5"></label><input id="password-length" type="number" min="4" max="256" step="1" value="20" autocomplete="off"></div>
     </div>
     <div id="password-character-options">
-      <div class="tool-fields password-length"><div class="field"><label for="password-length" data-i18n="uiText.sf3f2bee5"></label><input id="password-length" type="number" min="4" max="256" step="1" value="20" autocomplete="off"></div></div>
       <fieldset id="password-classes"><legend data-i18n="uiText.s796745cc"></legend>
         <label class="check-label"><input id="password-uppercase" type="checkbox" checked><span data-i18n="uiText.s53c8a7b9"></span></label>
         <label class="check-label"><input id="password-lowercase" type="checkbox" checked><span data-i18n="uiText.s2c84f21c"></span></label>
         <label class="check-label"><input id="password-digits" type="checkbox" checked><span data-i18n="uiText.sf3d1593f"></span></label>
         <label class="check-label"><input id="password-symbols" type="checkbox" checked><span data-i18n="uiText.se9c4c6a6"></span></label>
-        <p class="tool-note password-symbol-list" data-i18n="uiText.sd42ceab"></p>
+
         <label class="check-label"><input id="password-require-each" type="checkbox" checked><span data-i18n="uiText.s14932c20"></span></label>
       </fieldset>
-      <label class="check-label"><input id="password-custom-mode" type="checkbox"><span data-i18n="uiText.s28a4b316"></span></label>
-      <div class="field" id="password-custom-field" hidden><label for="password-custom" data-i18n="uiText.s7e7ddb81"></label><input id="password-custom" type="text" autocomplete="off" spellcheck="false"><p class="tool-note" data-i18n="uiText.s7150f798"></p></div>
-      <label class="check-label"><input id="password-ambiguous" type="checkbox"><span data-i18n="uiText.s9c482d76"></span></label>
-      <div class="field"><label for="password-exclusions" data-i18n="uiText.s6fd2b66a"></label><input id="password-exclusions" type="text" autocomplete="off" spellcheck="false"></div>
+
     </div>
     <div id="password-passphrase-options" hidden>
       <div class="tool-fields">
@@ -41,6 +40,14 @@ root.innerHTML = `
       <p class="tool-note"><a href="https://www.eff.org/dice" target="_blank" rel="noopener noreferrer">EFF Large Wordlist · Joseph Bonneau</a> · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a></p>
     </div>
     <div class="tool-actions"><button id="password-generate" class="primary" type="button" data-i18n="uiText.sc75562b2"></button><button id="password-clear" class="btn" type="button" data-i18n="uiText.sc6c3aeb4"></button></div>
+    <p id="password-policy" class="tool-note" data-i18n="refinement.passwordPolicy"></p>
+    <details id="password-advanced"><summary data-i18n="ux.advanced"></summary>
+      <label class="check-label"><input id="password-custom-mode" type="checkbox"><span data-i18n="uiText.s28a4b316"></span></label>
+      <div class="field" id="password-custom-field" hidden><label for="password-custom" data-i18n="uiText.s7e7ddb81"></label><input id="password-custom" type="text" autocomplete="off" spellcheck="false"><p class="tool-note" data-i18n="uiText.s7150f798"></p></div>
+      <label class="check-label"><input id="password-ambiguous" type="checkbox"><span data-i18n="uiText.s9c482d76"></span></label>
+      <div class="field"><label for="password-exclusions" data-i18n="uiText.s6fd2b66a"></label><input id="password-exclusions" type="text" autocomplete="off" spellcheck="false"></div>
+      <p class="tool-note password-symbol-list" data-i18n="uiText.sd42ceab"></p>
+    </details>
     <p class="tool-note" data-i18n="uiText.s19345554"></p>
   </section>
   <section class="tool-card" aria-labelledby="password-results-heading">
@@ -48,8 +55,10 @@ root.innerHTML = `
     <div id="password-error" class="tool-error" role="alert" hidden></div>
     <p id="password-status" class="tool-status" aria-live="polite"></p>
     <div class="tool-actions"><button id="password-show" class="btn" type="button" disabled></button><button id="password-copy-all" class="btn" type="button" data-i18n="uiText.s6aef5c37" disabled></button><button id="password-download" class="btn" type="button" data-i18n="uiText.s2ace7d31" disabled></button></div>
+    <p id="password-plaintext" class="tool-note" data-i18n="ux.plaintextExport"></p>
     <div id="password-results" class="password-results"></div>
-  </section>`;
+  </section>
+  </div>`;
 
 const $ = id => document.getElementById(id);
 const errors = {
@@ -111,6 +120,8 @@ $('password-generate').addEventListener('click', () => {
   if ($('password-mode').value === 'passphrase' && !wordlist) return render({values:[], visible:false, error:'wordlist'});
   controller.generate($('password-mode').value, options());
 });
+root.addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.isComposing&&event.target.matches('input:not([readonly]),select')){event.preventDefault();$('password-generate').click();}});
+actionArea($('password-generate').closest('.tool-actions'),$('password-status'),{resultTarget:'#password-results',hasResult:()=>state.values.length>0});
 $('password-clear').addEventListener('click', () => controller.clear());
 $('password-show').addEventListener('click', () => controller.toggleVisibility());
 $('password-copy-all').addEventListener('click', () => { const text = controller.text(); if (text) void copyText(text); });
@@ -125,13 +136,5 @@ mountTool('password'); render(state);
 
 registerContentCheck(()=>state.values.length>0||Boolean($('password-custom').value));
 
-const passwordSettings=$('password-settings-heading').closest('section'),passwordResults=$('password-results-heading').closest('section'),passwordLayout=document.createElement('div');passwordLayout.className='password-workspace';passwordSettings.before(passwordLayout);passwordLayout.append(passwordSettings,passwordResults);
-const passwordAdvanced=document.createElement('details');passwordAdvanced.id='password-advanced';passwordAdvanced.innerHTML='<summary data-i18n="ux.advanced"></summary>';$('password-character-options').append(passwordAdvanced);passwordAdvanced.append($('password-custom-mode').closest('label'),$('password-custom-field'),$('password-ambiguous').closest('label'),$('password-exclusions').closest('.field'));
-const passwordActions=$('password-generate').closest('.tool-actions'),passwordPrivacy=passwordSettings.querySelector(':scope>p.tool-note');passwordPrivacy.before(passwordActions,passwordAdvanced);passwordAdvanced.append(document.querySelector('.password-symbol-list'));const mainFields=$('password-batch').closest('.tool-fields');mainFields.append($('password-length').closest('.field'));
-$('password-mode').closest('.field').hidden=true;
 const passwordGuide=addTaskGuide('password',[{id:'characters',key:'ux.passwordMode'},{id:'passphrase',key:'ux.passphraseMode'}],{choose:mode=>{$('password-mode').value=mode;updateOptions();}});
-$('password-mode').addEventListener('change',()=>passwordGuide.select($('password-mode').value));translateDOM(passwordAdvanced);
-
-const plaintextNote=document.createElement('p');plaintextNote.id='password-plaintext';plaintextNote.className='tool-note';plaintextNote.dataset.i18n='ux.plaintextExport';plaintextNote.textContent=t('ux.plaintextExport');$('password-download').closest('.tool-actions').after(plaintextNote);
-
-const passwordPolicy=document.createElement('p');passwordPolicy.id='password-policy';passwordPolicy.className='tool-note';passwordPolicy.dataset.i18n='refinement.passwordPolicy';$('password-generate').closest('.tool-actions').after(passwordPolicy);passwordPolicy.textContent=t('refinement.passwordPolicy');passwordPolicy.hidden=$('password-mode').value==='passphrase'||$('password-custom-mode').checked;
+$('password-mode').addEventListener('change',()=>passwordGuide.select($('password-mode').value));

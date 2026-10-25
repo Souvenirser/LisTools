@@ -19,33 +19,41 @@ initTool('calculator',`
   <div class="field"><label for="expression" data-i18n="calculator.expression"></label><input id="expression" dir="ltr" autocomplete="off" spellcheck="false" placeholder="" data-i18n-placeholder="ux.calculatorExample" aria-describedby="expression-hint argument-hint"></div>
   <p id="expression-hint" class="tool-note" data-i18n="calculator.expressionHint"></p>
   <p id="argument-hint" class="tool-note" hidden></p>
-  <div class="calculator-display"><label for="result" data-i18n="calculator.result"></label><output id="result" class="numeric-result" dir="ltr" aria-live="polite"></output><span id="result-context" class="tool-note" hidden></span></div>
+  <div class="calculator-display"><label for="result" data-i18n="calculator.result"></label><output id="result" class="numeric-result" dir="ltr" aria-live="polite"></output><span id="result-source" class="tool-note" hidden></span><span id="result-context" class="tool-note" hidden></span></div>
   <p id="approximate" class="tool-note" data-i18n="calculator.approximate" hidden></p>
   <div id="calculator-keyboards" class="calculator-keyboards" dir="ltr"><div id="scientific-keypad" class="calculator-keypad" hidden></div><div id="keypad" class="calculator-keypad"></div></div>
   <div class="tool-actions"><button id="copy" data-i18n="calculator.copy" disabled></button><button id="cancel" data-i18n="calculator.cancel" disabled></button></div>
-  <p class="tool-note" data-i18n="calculator.keyboardHint"></p><p class="tool-note" data-i18n="calculator.precision"></p>
+  <p class="tool-note" data-i18n="calculator.keyboardHint"></p><p id="calculator-precision" class="tool-note" data-i18n="calculator.precision"></p>
   <details><summary data-i18n="calculator.functions"></summary><p class="tool-note" data-i18n="calculator.functionHelp"></p></details>
 </section>
 <aside class="calculator-sidebar">
   <section class="tool-card"><h2 data-i18n="calculator.history"></h2><p id="history-empty" class="tool-note" data-i18n="calculator.historyEmpty"></p><ul id="history" class="numeric-history"></ul></section>
-  <section class="tool-card"><details id="business-details"><summary data-i18n="calculator.business"></summary><div class="field"><label for="mode" data-i18n="calculator.mode"></label><select id="mode">${['growth','discount','share','part','whole'].map(mode=>`<option value="${mode}" data-i18n="calculator.${mode}"></option>`).join('')}</select></div><div class="tool-fields"><div class="field"><label for="first" data-i18n="calculator.first"></label><input id="first" dir="ltr" inputmode="decimal" value="100"></div><div class="field"><label for="second" data-i18n="calculator.second"></label><input id="second" dir="ltr" inputmode="decimal" value="120"></div></div><p class="tool-note" data-i18n="calculator.businessHint"></p><button id="business-run" data-i18n="calculator.calculate"></button></details></section>
+  <section class="tool-card"><details id="business-details"><summary data-i18n="calculator.business"></summary><div class="field"><label for="mode" data-i18n="calculator.mode"></label><select id="mode">${['growth','discount','share','part','whole'].map(mode=>`<option value="${mode}" data-i18n="calculator.${mode}"></option>`).join('')}</select></div><div class="tool-fields"><div class="field"><label for="first" data-i18n="calculator.first"></label><input id="first" dir="ltr" inputmode="decimal" value="100"></div><div class="field"><label for="second" data-i18n="calculator.second"></label><input id="second" dir="ltr" inputmode="decimal" value="120"></div></div><p id="business-hint" class="tool-note" data-i18n="calculator.businessHint"></p><button id="business-run" class="primary" data-i18n="calculator.calculate"></button><div class="calculator-business-result" id="business-result-panel" hidden><span id="business-result-source" class="tool-note"></span><output id="business-result" class="numeric-result" dir="ltr" aria-live="polite"></output><button id="business-copy" data-i18n="calculator.copy" disabled></button><p id="business-approximate" class="tool-note" data-i18n="calculator.approximate" hidden></p></div></details></section>
 </aside>
 </div>`);
 
-let result,ans,argumentHint,standardResult=false,standardRequest=false,history=[];
+let result,businessResult,businessMode,ans,argumentHint,resultSource,requestSource,standardResult=false,standardRequest=false,history=[];
 const runner=taskRunner(()=>new Worker(new URL('./tools/calculator/worker.js',import.meta.url),{type:'module'}),{
   timeoutMs:2500,
   onResult(state){
-    result=state.result;ans=result.exact;standardResult=standardRequest&&$('calc-mode-standard').getAttribute('aria-pressed')==='true';
+    result=state.result;resultSource=requestSource;ans=result.exact;standardResult=standardRequest&&$('calc-mode-standard').getAttribute('aria-pressed')==='true';
     $('result').textContent=(result.approximate?'≈ ':'')+result.display;
     $('approximate').hidden=!result.approximate;$('copy').disabled=false;
-    history.unshift(result);history=history.slice(0,30);renderHistory();renderContext();
+    if(requestSource?.mode){businessResult=result;businessMode=requestSource.mode;}
+    history.unshift(result);history=history.slice(0,30);renderHistory();renderContext();renderBusinessResult();
   },
   onState(state){$('cancel').disabled=state.status!=='pending';}
 });
 function renderContext(){
+  $('result-source').hidden=!result;
+  $('result-source').textContent=result?t(resultSource?.mode?'redesign.businessResult':'redesign.expressionResult',{expression:result.expression,mode:resultSource?.mode?t('calculator.'+resultSource.mode):''}):'';
   $('result-context').hidden=!result?.usesAngle;
   $('result-context').textContent=result?.usesAngle?t(`calculator.${result.context.angleUnit==='deg'?'degrees':'radians'}`):'';
+}
+function renderBusinessResult(){
+  $('business-result-panel').hidden=!businessResult;$('business-result').textContent=businessResult?(businessResult.approximate?'≈ ':'')+businessResult.display:'';
+  $('business-result-source').textContent=businessResult?t('redesign.businessResult',{mode:t('calculator.'+businessMode),expression:businessResult.expression}):'';
+  $('business-copy').disabled=!businessResult;$('business-approximate').hidden=!businessResult?.approximate;
 }
 function renderHistory(){
   const toggle=$('calculator-history-toggle');if(toggle)toggle.disabled=!history.length;
@@ -63,10 +71,13 @@ function renderHistory(){
     li.append(button);return li;
   }));
 }
-function invalidate(){
+function invalidate(clearBusiness=false){
+  if(clearBusiness){businessResult=undefined;renderBusinessResult();}
   const had=Boolean(result);standardResult=standardRequest=false;runner.invalidate();clearStatus({keepStale:true});if(had)setStatus('ux.stale');result=undefined;$('result').textContent=$('expression').value?'':'0';$('copy').disabled=true;$('approximate').hidden=true;renderContext();
 }
 function run(business=false){
+  requestSource=business?{mode:$('mode').value}:undefined;
+  if(business){businessResult=undefined;renderBusinessResult();}
   standardResult=false;standardRequest=!business&&$('calc-mode-standard').getAttribute('aria-pressed')==='true';clearStatus();result=undefined;$('copy').disabled=true;$('result').textContent='';$('approximate').hidden=true;renderContext();
   runner.process(business?{mode:$('mode').value,first:$('first').value,second:$('second').value}:{input:$('expression').value,angleUnit:$('angle-unit').value,ans});
 }
@@ -129,8 +140,8 @@ for(const calcMode of ['standard','scientific'])$(`calc-mode-${calcMode}`).addEv
   $('scientific-keypad').hidden=calcMode!=='scientific';$('calculator-keyboards').classList.toggle('is-scientific',calcMode==='scientific');
 });
 $('business-run').addEventListener('click',()=>run(true));$('cancel').addEventListener('click',()=>runner.cancel());
-for(const id of ['expression','first','second','mode'])$(id).addEventListener('input',()=>{argumentHint=undefined;renderArgumentHint();invalidate();});
-$('angle-unit').addEventListener('change',invalidate);
+for(const id of ['expression','first','second','mode'])$(id).addEventListener('input',()=>{argumentHint=undefined;renderArgumentHint();invalidate(id!=='expression');});
+$('angle-unit').addEventListener('change',()=>invalidate());
 $('expression').addEventListener('pointerdown',()=>{standardResult=standardRequest=false;});
 $('expression').addEventListener('keydown',event=>{
   if(event.isComposing)return;
@@ -144,13 +155,23 @@ $('expression').addEventListener('keydown',event=>{
 });
 for(const id of ['first','second'])$(id).addEventListener('keydown',event=>{if(event.key==='Enter')run(true);});
 $('copy').addEventListener('click',()=>{if(result)copyText(result.exact);});
-onLanguageChange(()=>{renderHistory();renderContext();renderArgumentHint();});
+$('business-copy').addEventListener('click',()=>{if(businessResult)copyText(businessResult.exact);});
+function renderBusinessLabels(){
+  const labels={growth:['Original','New'],discount:['Price','Off'],share:['Part','Whole'],part:['Whole','Percent'],whole:['Part','Percent']}[$('mode').value];
+  for(const [index,id]of ['first','second'].entries()){const label=document.querySelector(`label[for="${id}"]`);label.dataset.i18n=$('mode').value==='discount'&&index===1?'direct.daily.discountReduction':'redesign.calculator'+labels[index];label.textContent=t(label.dataset.i18n);}
+  $('business-hint').dataset.i18n=$('mode').value==='discount'?'direct.daily.discountHelp':'calculator.businessHint';$('business-hint').textContent=t($('business-hint').dataset.i18n);
+}
+$('mode').addEventListener('change',renderBusinessLabels);renderBusinessLabels();
+onLanguageChange(()=>{$('result').removeAttribute('data-empty');renderHistory();renderContext();renderBusinessResult();renderArgumentHint();renderBusinessLabels();});
 translateDOM($('tool-root'));
 
 registerContentCheck(()=>Boolean(result||history.length||['expression','first','second'].some(id=>$(id).value&&$(id).value!==$(id).defaultValue)));
 
 document.querySelector('.calculator-layout').dataset.calcMode='standard';
 $('result').after($('copy'));
+const display=document.querySelector('.calculator-display'),displayValue=document.createElement('div'),displayStatus=document.createElement('div'),displayContext=document.createElement('div');
+displayValue.className='calculator-result-value';displayStatus.className='calculator-status-slot';displayContext.className='calculator-result-meta';
+$('result').removeAttribute('data-empty');displayValue.append(...display.childNodes);displayContext.append(displayValue.querySelector('#result-source'),displayValue.querySelector('#result-context'));$('calculator-keyboards').after(displayContext);displayStatus.append($('tool-status'),$('approximate'));display.append(displayValue,displayStatus);
 
 $('result').textContent='0';const calcExample=document.createElement('button');calcExample.id='calculator-example';calcExample.type='button';calcExample.className='quiet';calcExample.dataset.i18n='ux.viewExample';calcExample.textContent=t('ux.viewExample');document.querySelector('.calculator-sidebar').prepend(calcExample);calcExample.onclick=()=>{if(($('expression').value||history.length)&&!confirm(t('office.exampleConfirm')))return;$('expression').value='200 + 10%';invalidate();$('expression').focus();};
 

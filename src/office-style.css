@@ -3,8 +3,8 @@
 
 /* The primary action and status share one place across file and text tools. */
 .task-guide{display:flex;align-items:center;flex-wrap:wrap;gap:8px 16px;padding:12px 16px;margin-bottom:14px}.task-guide .task-choices{flex:1;gap:6px}.task-guide .task-help{margin:0}.task-guide .task-help p{max-width:420px}.task-guide>button{margin-inline-start:auto}.task-guide>.tool-note{flex-basis:100%}.task-choices button{padding:8px 12px}.workspace-action-area{background:var(--surface);border-radius:8px;min-width:0}.workspace-action-area .tool-status{margin:0 0 8px}.workspace-action-area .tool-actions{margin-block:10px}.media-workspace{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:start}.media-workspace .tool-card{margin-bottom:0}.workspace-input{display:grid;gap:12px;min-width:0}.media-queue{max-height:290px;overflow:auto;margin-block:8px;padding:0;scrollbar-gutter:stable}.workspace-help{margin-block:4px!important}.media-drop{padding:16px;margin-bottom:8px}.workspace-options>.tool-fields{gap:10px}.workspace-options details{margin-block:6px}.workspace-options h2{margin-bottom:10px}.queue-count{color:var(--muted);font-size:1rem;font-weight:400}.unit-primary{font-size:clamp(20px,3vw,32px);font-weight:600;overflow-wrap:anywhere;padding-block:12px;font-variant-numeric:tabular-nums}.media-queue .is-error{color:var(--error-text);background:var(--error-bg);padding:10px}.tool-page main button,.tool-page main .btn{min-height:44px}.tool-page :focus-visible{outline:2px solid var(--blue-9);outline-offset:3px}.tool-page [aria-invalid=true]{border-color:var(--error-text)!important}
-@media(min-width:1100px){.media-workspace{grid-template-columns:minmax(0,1fr) minmax(320px,390px)}.workspace-options{position:sticky;top:0}.tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:1099px),(max-height:800px){.workspace-mobile .app-layout{height:calc(100dvh - 72px - var(--workspace-action-height,0px));min-height:0}.workspace-action-fixed{position:fixed;inset-inline:0;bottom:0;z-index:15;border-top:1px solid var(--border);border-radius:0;padding:4px 16px calc(4px + env(safe-area-inset-bottom));box-shadow:0 -4px 18px #0001}.workspace-action-fixed .tool-actions{margin-block:4px}.workspace-action-fixed .tool-status{max-height:20dvh;overflow:auto;padding:6px 10px}.tool-page main{scroll-padding-block:16px}.tool-card{padding:14px}.task-guide{gap:6px}.tool-heading{margin-bottom:12px}.media-queue{max-height:220px}.tool-page #text-input,.tool-page #text-result{min-height:150px;height:180px}.images-crop-container{height:300px}.workspace-action-fixed .check-label{font-size:.875rem}}
+@media(min-width:1200px){.media-workspace{grid-template-columns:minmax(0,1fr) 320px}.workspace-options{position:static}.tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:1099px),(max-height:800px){.workspace-mobile .app-layout{height:calc(100dvh - var(--app-header-height) - var(--workspace-action-height,0px));min-height:0}.workspace-action-fixed{position:fixed;inset-inline:0;bottom:0;z-index:15;border-top:1px solid var(--border);border-radius:0;padding:4px 16px calc(4px + env(safe-area-inset-bottom));box-shadow:0 -4px 18px #0001}.workspace-action-fixed .tool-actions{margin-block:4px}.workspace-action-fixed .tool-status{max-height:20dvh;overflow:auto;padding:6px 10px}.tool-page main{scroll-padding-block:16px}.tool-card{padding:14px}.task-guide{gap:6px}.tool-heading{margin-bottom:12px}.media-queue{max-height:220px}.tool-page #text-input,.tool-page #text-result{min-height:150px;height:180px}.images-crop-container{height:300px}.workspace-action-fixed .check-label{font-size:.875rem}}
 .task-guide .task-help .tool-fields{margin-block:10px}.task-guide>.tool-note{margin:0}.tool-page #images-quality-note{flex-basis:100%;margin:0}.workspace-input input[type=file]{min-height:44px}
 @media(max-width:1099px){.task-guide .task-choices{flex:1 1 100%;min-width:0}.task-guide .task-choices button{flex:1 1 120px;overflow-wrap:anywhere}.task-guide>.tool-note{order:4}.task-guide>.task-help{order:2}.task-guide>button{order:3;max-width:100%}}
 
@@ -24,7 +24,7 @@
 .result-empty{display:grid;place-content:center;min-height:240px;padding:24px;border:1px dashed var(--border);border-radius:8px;margin-block:16px;color:var(--muted);text-align:center;font-size:1rem;line-height:1.6}
 @media(max-width:1000px){.qr-page .tool-grid{grid-template-columns:1fr}.qr-page #qr-output-panel{min-height:240px}.qr-page .result-empty{min-height:160px}}
 
-@media(min-width:1100px){.media-workspace{grid-template-columns:minmax(0,1fr) 360px}}
+
 .tool-warning{padding:16px;border:1px solid var(--warning-border);border-radius:8px;background:var(--warning-bg);color:var(--warning-text);font-size:.875rem}
 .draw-workspace{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}.draw-workspace>div{min-width:0}
 .timer-page .tool-card{container-type:inline-size}.timer-page #timer-display{display:block;--timer-size:4.5rem;font-size:min(var(--timer-size),calc((100cqi - 3.1rem)/(var(--timer-digits,8)*.62)));line-height:1.4;font-variant-numeric:tabular-nums;margin-block:24px;direction:ltr;text-align:center;white-space:nowrap}.timer-milliseconds{font-size:1.25rem}.timer-duration-inputs{display:flex;gap:12px}.timer-duration-inputs>label{min-width:0;flex:1}.timer-page .tool-actions{justify-content:center}.timer-page #timer-duration-field{max-width:480px;margin-inline:auto}
@@ -61,10 +61,134 @@
 .media-inline-result{margin:16px 0 0!important;padding:16px 0 0!important;border:0!important;border-top:1px solid var(--border)!important;box-shadow:none!important;background:transparent}
 .media-inline-result h2{font-size:1.125rem}.media-inline-result p{overflow-wrap:anywhere}.media-inline-result .tool-output{font-size:.875rem;max-height:160px;overflow:auto}
 .queue-drag-handle{cursor:grab;touch-action:none;color:var(--muted);font-size:1.25rem}.queue-drag-handle:active{cursor:grabbing}.media-queue-row button{flex-shrink:0}.compression-settings{display:grid;gap:12px}.compression-settings label{min-width:0}
-@media(min-width:1100px){.workspace-options{position:static}.media-workspace.has-files{align-items:start}}
+@media(min-width:1200px){.media-workspace.has-files{align-items:start}}
 
 .timer-state{text-align:center;margin:8px 0;font-weight:600;color:var(--muted)}
 #qr-output-meta{text-align:center}#images-jpeg-warning{margin-block:12px}#cron-effective-context{font-weight:600}
 #unit-copy-equation,#unit-copy-all{white-space:normal;overflow-wrap:anywhere}.date-result>h2{color:var(--muted);font-size:1rem}
 
 .workspace-options>.media-inline-result:first-child{border-top:0!important;padding-top:0!important;margin-top:0!important;margin-bottom:20px!important;border-bottom:1px solid var(--border)!important;padding-bottom:16px!important}
+
+/* Shared workbench: tasks, a continuous editing surface, and quiet guidance. */
+.tool-card{border-radius:12px}
+.task-guide{margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border);gap:12px}
+.task-guide .task-choices{gap:8px}
+.task-guide .task-choices button{border-radius:8px;padding:10px 16px;font-weight:550}
+.task-guide .task-choices button[aria-pressed=true]{background:var(--blue-3);border-color:var(--blue-7);color:var(--blue-12);box-shadow:inset 0 -2px var(--blue-11)}
+.task-guide .task-choices button:hover:enabled{background:var(--slate-3)}
+.task-guide .task-choices button[aria-pressed=true]:hover{background:var(--blue-4)}
+.tool-status{background:var(--slate-3);color:var(--text);line-height:1.5}
+.tool-status:empty{display:none}
+.tool-status[data-task-state=pending]{background:var(--blue-3);color:var(--blue-12)}
+.tool-status[data-task-state=error],.tool-status.is-error{background:var(--error-bg);color:var(--error-text)}
+.tool-status[data-task-state=cancelled]{background:var(--warning-bg);color:var(--warning-text)}
+.editor-workspace{gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface)}
+.editor-workspace>.tool-card{border:0;border-radius:0;margin:0;padding:20px;min-width:0}
+.editor-workspace>.tool-card>h2{margin-bottom:16px}
+.editor-workspace textarea{border-color:var(--border);background:var(--surface)}
+.media-workspace{gap:24px}
+.media-workspace .workspace-input{border:1px solid var(--border);border-radius:12px;padding:24px;background:var(--surface);gap:16px}
+.media-workspace .workspace-input>.tool-card{border:0;border-radius:0;padding:0}
+.media-workspace.has-files .workspace-input>[id$="-drop"]{padding:0 0 16px;border-bottom:1px solid var(--border)}
+.media-workspace .workspace-options{padding:24px;min-width:0}
+.media-queue-row.is-selected{border-color:var(--blue-8);background:var(--blue-2)}
+.media-inline-result{border-radius:0}
+.qr-page .result-empty{min-height:120px;padding:24px 8px;color:var(--muted)}
+.qr-page #qr-input{font-family:inherit;line-height:1.6;padding:12px}
+.qr-page #qr-canvas{margin-block:20px}
+.date-task>.date-result{border:0;border-inline-start:1px solid var(--border);border-radius:0;padding-inline-start:24px}
+.date-result output{font-size:2.25rem;font-weight:600;line-height:1.35}
+.money-primary>output{font-size:1.5rem;line-height:1.65}
+.unit-primary{font-size:2.25rem;line-height:1.4}
+@media(min-width:1000px){.editor-workspace>.tool-card+.tool-card{border-inline-start:1px solid var(--border)}}
+@media(max-width:1199px){.media-workspace{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:999px){.editor-workspace>.tool-card+.tool-card{border-top:1px solid var(--border)}.date-task>.date-result{border:0;border-top:1px solid var(--border);padding:20px 0 0}.unit-primary{font-size:1.75rem}}
+@media(max-width:760px){.pdf-page-adjustments{display:none}.task-guide{padding-bottom:12px;margin-bottom:16px}.media-workspace .workspace-input,.media-workspace .workspace-options,.editor-workspace>.tool-card{padding:16px}.task-guide .task-select-label{font-weight:550}.date-result output{font-size:2rem}}
+
+.task-guide{border-radius:0}
+@media(max-width:1199px){.qr-page .tool-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* Tall stacked editors must size their parent before the footer is laid out. */
+.text-page #tool-root,.regex-page #tool-root{flex-shrink:0}
+@media(max-width:760px){
+ .regex-page[data-layout] .tool-heading{margin-bottom:16px}
+ .regex-page .task-guide{padding:0 0 8px;margin-bottom:8px;gap:8px}
+ .regex-page .task-guide .task-choices{gap:4px}
+ .regex-page .task-guide .task-choices button{padding:8px 2px;overflow-wrap:normal;hyphens:auto}
+ .regex-page .regex-workspace-controls{padding:12px;margin-bottom:8px}
+ .regex-page .regex-pattern-field>label,.regex-page #regex-common-flags label{margin-block:0}
+}
+
+/* Direct task workbenches: page-specific layouts share the existing controls. */
+/* Daily tools: keep each action beside its result, with secondary formats disclosed. */
+.money-page .money-workspace{grid-template-columns:minmax(0,1fr)}
+.money-page .money-results{width:100%;padding-top:0}
+.money-page .money-results .numeric-result-row{grid-template-columns:minmax(0,1fr) auto;column-gap:16px}
+.money-page .money-results .numeric-result-row>label{grid-column:1/-1}
+.money-page .money-results .numeric-result-row>button{justify-self:end;width:auto;min-width:0}
+.money-page #money-empty{margin:0;padding-block:4px}
+.money-page #money-rounding:empty{display:none}
+.money-page #money-other-formats{margin-bottom:0}
+.units-page #unit-more-results{margin-bottom:0}
+.units-page #unit-more-results .tool-note{margin-bottom:0}
+.draw-page .draw-list-meta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-block:8px}
+.draw-page .draw-list-meta #draw-total{margin:0}
+.draw-page .draw-workspace .tool-fields>.field{flex:1 1 120px;min-width:0}
+.draw-page #draw-count{max-width:180px}
+.draw-page #draw-input{margin-block-start:12px}
+.timer-page #timer-duration-field{width:100%}
+.timer-page #timer-settings>.tool-fields{margin-bottom:0}
+.timer-page #timer-state,.timer-page #timer-other-running{text-align:center}
+@media(max-width:600px){.money-page .money-results .numeric-result-row{grid-template-columns:minmax(0,1fr) auto}.money-page .money-results .numeric-result-row>button{max-width:100%}}
+
+/* Task-sized text parameters keep the run action beside the current controls. */
+.text-page .text-workspace-controls{align-items:end;gap:12px 24px}
+.text-page .text-workspace-controls .text-task-options{flex:0 1 auto;min-width:0;margin:0;max-width:760px}
+.text-page .text-task-options>.tool-fields{display:grid;grid-template-columns:minmax(180px,280px);align-items:start}
+.text-page .text-task-options [data-options=replace] .tool-fields{display:grid;grid-template-columns:repeat(2,minmax(180px,280px));align-items:start}
+.text-page .text-task-options select{max-width:280px}
+.text-page #text-kind{width:240px;max-width:100%}
+.text-page #text-line-help{max-width:60ch;margin:0 0 16px}
+.text-page .text-workspace-controls>.workspace-action-area{margin-top:0}
+.text-page .text-workspace-controls:has(.text-task-options>[data-options=mask]:not([hidden]))>.workspace-action-area{align-self:center}
+.text-page .text-task-options [data-options=mask]{display:flex;flex-wrap:wrap;gap:8px 20px;max-width:600px}
+.text-page .text-parameter-notes>.tool-note{margin:0 0 16px}
+.text-page .text-task-options [data-options=mask] .check-label{margin:0;min-height:44px;align-items:center}
+.text-page .text-task-options>[data-options=extract]{display:grid;grid-template-columns:240px max-content;align-items:end;gap:0 16px}
+.text-page .text-task-options [data-options=extract]>label[for=text-kind]{grid-column:1;grid-row:1}
+.text-page .text-task-options #text-kind{grid-column:1;grid-row:2}
+.text-page .text-task-options [data-options=extract]>.check-label{grid-column:2;grid-row:2;margin:0;min-height:44px;align-items:center}
+/* Keep name and source facts readable without stretching each queue row. */
+.images-page .media-file-name,.pdf-page .media-file-name{min-width:0;flex:1;line-height:1.45}
+.media-file-info{display:block;font-size:.875rem;color:var(--muted);font-weight:400}
+.images-page .media-queue,.pdf-page .media-queue{padding:0;list-style:none}
+.images-page .media-queue-row,.pdf-page .media-queue-row{display:flex;flex-wrap:nowrap;gap:12px;padding:12px 0}
+.images-page .images-thumb{width:48px;height:40px;flex-shrink:0}
+.media-file-actions{flex:0 0 auto;min-width:0;margin:0!important}
+.media-file-actions>summary{display:none}
+.media-file-actions>.tool-actions{margin:0;gap:4px;flex-wrap:nowrap}
+.tool-page .media-file-actions button{font-size:.875rem;padding-inline:9px}
+@media(max-width:760px){
+ .text-page .text-task-options .tool-fields{grid-template-columns:minmax(0,1fr)}
+ .text-page .text-workspace-controls .text-task-options{flex-basis:100%;max-width:none}
+ .text-page .text-task-options>[data-options=extract]{grid-template-columns:minmax(0,1fr)}
+ .text-page .text-task-options [data-options=extract]>.check-label{grid-column:1;grid-row:3}
+ .text-page .text-task-options select{width:auto;min-width:180px;max-width:100%}
+ .text-page .text-workspace-controls>.workspace-action-area{margin-top:0}
+.text-page .text-workspace-controls:has(.text-task-options>[data-options=mask]:not([hidden]))>.workspace-action-area{align-self:center}
+ .images-page .media-queue-row,.pdf-page .media-queue-row{flex-wrap:wrap;gap:8px}
+ .media-file-actions{order:3;flex-basis:100%;padding-inline-start:0}
+ .media-file-actions>summary{display:list-item;cursor:pointer;min-height:44px;font-size:.875rem;padding:7px 0}
+ .media-file-actions>.tool-actions{flex-wrap:wrap;margin-block:4px}
+ .media-file-actions button{min-height:44px}
+ .queue-drag-handle{order:2}
+}
+
+.field-error{margin:6px 0 0;color:var(--error-text);font-size:.875rem;line-height:1.5}.workspace-view-result{min-width:140px}.workspace-action-area[data-action-state="result-visible"]{display:none}.workspace-action-area[data-action-state="choose"] .workspace-actions{display:none}.workspace-import-action{min-height:44px}
+
+/* Form values remain readable at normal zoom. */
+.tool-page[data-layout="form"] main input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]),.tool-page[data-layout="form"] main select,.tool-page[data-layout="form"] main .choices__inner,.tool-page[data-layout="form"] main .choices__list--single{font-size:1.125rem;line-height:1.6}
+.dates-page .date-result output{font-size:1.125rem;font-weight:400;line-height:1.6}.dates-page .date-conclusion,.units-page .unit-primary{font-size:2.25rem;line-height:1.4}
+.tool-page .tool-heading p{font-size:1rem;line-height:1.6}
+.workspace-action-fixed .workspace-actions.is-busy>button:not([id$="-cancel"]):not(#cancel){display:none}
+.workspace-action-area[data-action-state="result-visible"]:has(.is-error:not([hidden]),.tool-error:not([hidden])){display:block}

@@ -37,7 +37,7 @@ const mode = () => $('diff-mode').value;
 const contentName = () => mode() === 'json' ? 'JSON' : t('common.text');
 const inputLocales = { left:new Compartment(), right:new Compartment() };
 const inputViews = Object.fromEntries(['left', 'right'].map(side => [side, new EditorView({ parent:sources[side], extensions:inputExtensions(side) })]));
-const stackedResults=matchMedia('(max-width:760px)');
+const stackedResults=matchMedia('(max-width:999px)');
 let resultStacked=stackedResults.matches;
 let mergeScrollTop=0;
 function resultLayout(transfer=false){
@@ -49,8 +49,6 @@ function resultLayout(transfer=false){
  if(transfer)requestAnimationFrame(()=>{if(merge!==currentMerge||stacked!==stackedResults.matches)return;for(const pane of panes)pane.scrollTop=stacked?top:0;merge.dom.scrollTop=stacked?0:top;});
 }
 stackedResults.addEventListener('change',()=>{resultStacked=stackedResults.matches;resultLayout(true);});
-const overview=document.createElement('div');overview.className='diff-overview';
-document.querySelector('.toolbar').after(overview);overview.append(document.querySelector('.diff-summary'),document.querySelector('.diff-navigation'));
 const diagnostics = createDiagnosticView({ root:$('diff-error-panel'), sources:{left:inputViews.left.contentDOM, right:inputViews.right.contentDOM}, onLocate:locateError, contentName, t, language });
 
 const notify = createNotifier();
@@ -136,12 +134,13 @@ function render(state) {
   inputLayout();
   resetSummary();
   const inputSummary=document.querySelector('.diff-inputs>summary>span');if(inputSummary){inputSummary.dataset.i18n=state.status==='ready'||merge?'ux.diffModifyInput':'diff.inputs';inputSummary.textContent=t(inputSummary.dataset.i18n);}
-  const pending = state.status === 'pending';
+  const pending = state.status === 'pending'||reading.left||reading.right;
   $('compare').disabled = pending;
   $('cancel').hidden = !pending;
   $('compare').textContent = t(merge ? 'diff.recompare' : 'diff.compare');
   $('diff-view').hidden = !merge;
   $('diff-placeholder').hidden = Boolean(merge);
+  refreshImportState();
   if (state.status === 'ready') {
     try {
       diagnostics.status(mode() === 'json' ? state.validation : { left:'readable', right:'readable' });
@@ -251,8 +250,7 @@ function syncEditors() {
 function compare(startedAt) {
   if (reading.left || reading.right) return;
   if (typeof startedAt !== 'number') startedAt = performance.now();
-  const issues = Object.values(fileFailures).filter(Boolean);
-  if (issues.length) { render(errorResult(issues)); return; }
+  for(const side of ['left','right'])fileFailures[side]=undefined;
   const left = merge ? merge.a.state.doc : inputViews.left.state.doc;
   const right = merge ? merge.b.state.doc : inputViews.right.state.doc;
   pendingDocuments = { left, right };
@@ -266,36 +264,43 @@ function fileLabels() {
   $('left-file').textContent = filenames.left || t('diff.baseline');
   $('right-file').textContent = filenames.right || t('diff.target');
 }
+function refreshImportState(){
+  const active=reading.left||reading.right;
+  $('diff-import-status').hidden=!active;$('diff-import-status').textContent=active?t('diff.reading'):'';
+  $('compare').disabled=active||lastState.status==='pending';$('cancel').hidden=!active&&lastState.status!=='pending';
+  for(const side of ['left','right'])$(`${side}-import`).setAttribute('aria-busy',String(reading[side]));
+}
 async function loadFile(side, file) {
   if (!file) return;
   latestImportStartedAt = performance.now();
-  syncEditors();
-  destroyView();
   const currentVersion = ++versions[side];
   reading[side] = true;
   fileFailures[side] = undefined;
-  pendingDocuments = undefined;
-  controller.cancel();
+  if(lastState.status==='pending'){controller.cancel();if(merge)lastState={status:'dirty'};}
   controller.prepare();
-  render({ status: 'pending', reading: true });
+  if(!merge)render({ status: 'pending', reading: true });else refreshImportState();
   try {
     const text = await readDiffFile(file, side);
     if (versions[side] !== currentVersion) return;
     const inputAt = performance.now();
+    syncEditors();
+    destroyView();pendingDocuments=undefined;controller.cancel();controller.prepare();
     setSource(side, text);
     $(`${side}-file`).dataset.inputMs = Math.round(performance.now() - inputAt);
     filenames[side] = file.name;
     fileLabels();
+    $('inputs').open=true;
   } catch (error) {
     if (versions[side] === currentVersion) {
-      controller.cancel();
       fileFailures[side] = error.diagnostic || runtimeDiagnostic(error, 'read', side);
-      render(errorResult(Object.values(fileFailures).filter(Boolean)));
+      const failure=errorResult(Object.values(fileFailures).filter(Boolean),lastState.validation);
+      if(merge)diagnostics.show(failure);else{controller.cancel();render(failure);}
     }
     return;
   } finally {
     if (versions[side] === currentVersion) reading[side] = false;
     $(`${side}-file-input`).value = '';
+    refreshImportState();
   }
   if (versions[side] !== currentVersion) return;
   if (!reading.left && !reading.right) {
@@ -320,11 +325,12 @@ bindFileDrop(document, {
 });
 $('compare').addEventListener('click', compare);
 $('cancel').addEventListener('click', () => {
+  const keepComparison=Boolean(merge)&&(reading.left||reading.right)&&lastState.status!=='pending';
   restoration=undefined;
   pendingDocuments = undefined;
   for (const side of ['left', 'right']) { versions[side] += 1; reading[side] = false; }
-  controller.cancel();
-  render({ status: merge ? 'dirty' : 'idle' });
+  if(!keepComparison){controller.cancel();render({ status: merge ? 'dirty' : 'idle' });}
+  refreshImportState();
   notify('diff.cancelled');
 });
 $('clear').addEventListener('click', () => {
@@ -430,6 +436,7 @@ function statusLabels(state) {
 }
 onLanguageChange(() => {
   refreshModeLabels(); fileLabels(); diagnostics.refresh();
+  refreshImportState();
   resultLayout();
   $('compare').textContent = t(merge ? 'diff.recompare' : 'diff.compare');
   if (lastState.status === 'ready') {

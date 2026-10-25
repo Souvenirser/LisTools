@@ -11,7 +11,7 @@ export function translateDOM(root = document) {
     for (const element of root.querySelectorAll(`[${marker}]`)) {
       const value = t(element.getAttribute(marker));
       if (attribute === 'text') element.textContent = value;
-      else element.setAttribute(attribute, value);
+      else element.setAttribute(attribute,attribute==='aria-label'&&element.matches('button.brand,.calculator-key')?`${element.matches('.brand')?element.textContent.replace('▾','').trim():element.textContent} · ${value}`:value);
     }
   }
   for (const button of root.querySelectorAll('[data-copy]')) {
@@ -52,3 +52,7 @@ if(['','index.html','diff.html','convert.html','regex.html','text.html'].include
  const focus=()=>import('./tools/shared/focus.js').then(module=>module.mountWorkspaceFocus());
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',focus,{once:true});else queueMicrotask(focus);
 }
+
+// The header may wrap with long translations or browser text zoom.
+const header=document.querySelector('.app-header');
+if(header)new ResizeObserver(()=>{const height=header.getBoundingClientRect().height;if(height)document.documentElement.style.setProperty('--app-header-height',`${height}px`);}).observe(header);

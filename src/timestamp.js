@@ -27,6 +27,8 @@ function fillResults(panel, result) {
   for (const field of panel.querySelectorAll('[data-field]')) {field.value = ready ? result[field.dataset.field] : '';fitResult(field);}
   for (const button of panel.querySelectorAll('[data-copy], [data-copy-all]')) button.disabled = !ready;
   panel.dataset.status = result.status;
+  const values=panel.querySelector('.conversion-results');if(values)values.hidden=!ready;
+  for(const field of panel.querySelectorAll('[data-field]'))fitResult(field);
 }
 function labels(prefix, result) {
   const ready = result.status === 'ready';
@@ -49,6 +51,7 @@ function convert(prefix) {
 function renderClock() {
   clockResult = timestampToTime(String(Date.now()), 'milliseconds', $('time-zone').value);
   fillResults(document.querySelector('.clock-panel'), clockResult);
+  $('clock-summary').textContent = clockResult.status === 'ready' ? clockResult.localTime.slice(0,19) : '';
   $('clock-context').textContent = clockResult.status === 'ready' ? `${clockResult.timeZone} · UTC${clockResult.offset}` : '';
   $('time-zone').setAttribute('aria-invalid', String(clockResult.status === 'error'));
   $('timezone-error').hidden = clockResult.status !== 'error';
@@ -100,10 +103,8 @@ window.addEventListener('pagehide', () => clearInterval(clockTimer));
 
 registerContentCheck(()=>Boolean($('timestamp-source').value||$('datetime-source').value));
 
-function fitResult(field){field.style.height='auto';field.style.height=`${Math.max(44,field.scrollHeight+2)}px`;}
-const resultWidths=new WeakMap();const resultObserver=new ResizeObserver(entries=>{for(const entry of entries)if(resultWidths.get(entry.target)!==entry.contentRect.width){resultWidths.set(entry.target,entry.contentRect.width);requestAnimationFrame(()=>fitResult(entry.target));}});
-for(const field of document.querySelectorAll('textarea[data-field]'))resultObserver.observe(field);
-
-const clockDetails=document.createElement('details');clockDetails.id='clock-details';clockDetails.innerHTML='<summary data-i18n="ux.clockInfo"></summary>';const clockPanel=document.querySelector('.clock-panel');clockPanel.before(clockDetails);clockDetails.append(clockPanel);
-for(const prefix of ['timestamp','datetime']){const panel=$(prefix+'-panel'),rows=[...panel.querySelectorAll('.value-row')],details=document.createElement('details');details.id=prefix+'-more-formats';details.innerHTML='<summary data-i18n="ux.moreTimeFormats"></summary>';rows[0].parentElement.append(details);for(const row of rows)if(!row.querySelector(prefix==='timestamp'?'#timestamp-local':'#datetime-seconds,#datetime-milliseconds'))details.append(row);}
-for(const details of document.querySelectorAll('#clock-details,#timestamp-more-formats,#datetime-more-formats'))details.querySelector('summary').textContent=t(details.querySelector('summary').dataset.i18n);
+function fitResult(field){if(!field.checkVisibility())return;field.style.height='auto';field.style.height=`${Math.max(44,field.scrollHeight+2)}px`;}
+function fitResults(){document.querySelectorAll('[data-field]').forEach(fitResult);}
+for(const details of document.querySelectorAll('details'))details.addEventListener('toggle',fitResults);
+addEventListener('resize',fitResults);
+onLanguageChange(fitResults);

@@ -4,7 +4,7 @@ import 'choices.js/public/assets/styles/choices.min.css';
 
 const flags=import.meta.glob('../node_modules/flag-icons/flags/4x3/[a-z][a-z].svg',{eager:true,import:'default',query:'?url&no-inline'});
 
-export function mountTimeZoneSelector(select,{t,language}) {
+export function mountTimeZoneSelector(select,{t,language,labelId='timezone-caption'}) {
   let zones=[],metadata=new Map();
   function decorate(element,choice,type) {
     const meta=metadata.get(choice.value);
@@ -20,7 +20,7 @@ export function mountTimeZoneSelector(select,{t,language}) {
     element.title=meta.selectedLabel;element.replaceChildren(mark,text);return element;
   }
   const choices=new Choices(select,{
-    allowHTML:false,shouldSort:false,itemSelectText:'',labelId:'timezone-caption',
+    allowHTML:false,shouldSort:false,itemSelectText:'',labelId,
     searchFields:['label','value','customProperties.search'],searchResultLimit:100,renderChoiceLimit:-1,
     fuseOptions:{threshold:0.1,ignoreLocation:true},
     searchPlaceholderValue:t('timestamp.zoneSearch'),
