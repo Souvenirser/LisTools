@@ -78,7 +78,7 @@ test('language changes preserve the selected regex match and editor selection',a
 
 test('timestamp result fields show complete values on narrow screens',async({page})=>{
  await page.setViewportSize({width:320,height:844});await page.goto('/timestamp.html');await page.locator('#timestamp-source').fill('1704067200123');
- await expect(page.locator('#timestamp-iso')).not.toHaveValue('');
+ await expect(page.locator('#timestamp-iso')).not.toHaveValue('');await page.locator('#timestamp-more-formats summary').click();await expect(page.locator('#timestamp-iso')).toBeVisible();
  expect(await page.locator('#timestamp-iso').evaluate(el=>el.scrollHeight<=el.clientHeight+1&&el.scrollWidth<=el.clientWidth+1)).toBe(true);
 });
 

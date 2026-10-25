@@ -23,7 +23,7 @@ test('ordinary and long timer displays fit narrow cards at normal and doubled te
 test('MD5 file results wrap in mobile cards and translate their accessible label',async({page})=>{
  await page.setViewportSize({width:320,height:844});await page.goto('/convert.html#md5');await page.locator('#md5-mode').selectOption('files');await page.locator('#md5-files').setInputFiles({name:'abc.txt',mimeType:'text/plain',buffer:Buffer.from('abc')});await page.locator('#md5-run').click();const digest=page.locator('[data-file-digest]');await expect(digest).toHaveValue('900150983cd24fb0d6963f7d28e17f72');
  expect(await page.locator('.md5-table-wrap').evaluate(el=>el.scrollWidth-el.clientWidth)).toBeLessThanOrEqual(1);
- await selectLanguage(page,'de');await expect(digest).toHaveAttribute('aria-label','Prüfsumme');await expect(digest).toHaveValue('900150983cd24fb0d6963f7d28e17f72');
+ await selectLanguage(page,'de');await expect(digest).toHaveAttribute('aria-label','Prüfsumme · abc.txt');await expect(digest).toHaveValue('900150983cd24fb0d6963f7d28e17f72');
 });
 
 test('first conversion failure has a translated technical details title',async({page})=>{

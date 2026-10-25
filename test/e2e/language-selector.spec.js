@@ -30,7 +30,7 @@ test('Cron language changes preserve dates, generator edits and worker task',asy
   const requests=await page.evaluate(()=>window.cronRequests.length);
   await selectLanguage(page,'ru');await page.waitForTimeout(550);
   expect(await page.evaluate(()=>window.cronRequests.length)).toBe(requests);
-  expect(await page.locator('#cron-dates tbody').textContent()).toBe(dates.replaceAll('Copy','Копировать'));
+  expect(await page.locator('#cron-dates tbody').textContent()).toBe(dates.replaceAll('Copy ISO','Копировать ISO'));
   expect(await page.locator('#cron-result-context').textContent()).toContain(reference.split(': ').at(-1));
   await expect(value).toHaveValue('17');
 });
@@ -86,7 +86,7 @@ test('all fifty Cron languages preserve calculated dates, exports and structured
  const {languages}=await import('../../src/i18n-core.js');
  const {readFileSync}=await import('node:fs');
  await page.goto('/cron.html');await expect(page.locator('#cron-dates tbody tr')).toHaveCount(10);
- const dates=await page.locator('#cron-dates tbody tr').evaluateAll(rows=>rows.map(row=>[...row.cells].slice(0,4).map(cell=>cell.textContent)));
+ const dates=await page.locator('#cron-dates tbody tr').evaluateAll(rows=>rows.map(row=>[...row.cells].slice(0,2).map(cell=>cell.textContent)));
  async function exported(){const download=page.waitForEvent('download');await page.locator('#cron-download-json').click();return readFileSync(await (await download).path(),'utf8');}
  const before=await exported();
  for(const {code} of languages){
@@ -94,7 +94,7 @@ test('all fifty Cron languages preserve calculated dates, exports and structured
   await selectLanguage(page,code);await expect(page.locator('h1')).toHaveText(resource.cron.title);await expect(page.locator('#cron-run')).toHaveText(resource.cron.run);
   await expect(page.locator('#cron-fields tbody td').first()).toHaveText(resource.cron.fields.minute);
   await expect(page.locator('.choices__list--single bdi')).toHaveText(languages.find(item=>item.code===code).name);
-  expect(await page.locator('#cron-dates tbody tr').evaluateAll(rows=>rows.map(row=>[...row.cells].slice(0,4).map(cell=>cell.textContent)))).toEqual(dates);
+  expect(await page.locator('#cron-dates tbody tr').evaluateAll(rows=>rows.map(row=>[...row.cells].slice(0,2).map(cell=>cell.textContent)))).toEqual(dates);
  }
  expect(await exported()).toBe(before);
  await page.locator('#cron-auto').uncheck();await page.locator('#cron-expression').fill('61 * * * *');await page.locator('#cron-run').click();await expect(page.locator('#cron-error')).toBeVisible();
@@ -141,7 +141,7 @@ test('late Cron description imports cannot replace the latest choice',async({pag
 
 test('Cron weekday presets and month rules retain exact syntax and occurrence numbers',async({page})=>{
  test.setTimeout(60000);const {readFileSync}=await import('node:fs');
- await page.goto('/cron.html');await page.locator('#cron-task-build').click();await page.locator('#cron-auto').uncheck();await page.locator('#cron-dialect').selectOption('quartz');await page.locator('#cron-zone').fill('UTC');await page.locator('#cron-preview-settings summary').click();await page.locator('#cron-reference').fill('2026-02-01T00:00:00Z');
+ await page.goto('/cron.html');await page.locator('#cron-task-build').click();await page.locator('#cron-auto').uncheck();await page.locator('#cron-dialect').selectOption('quartz');await page.locator('#cron-custom-timezone summary').click();await page.locator('#cron-zone').fill('UTC');await page.locator('#cron-preview-settings summary').click();await page.locator('#cron-reference').fill('2026-02-01T00:00:00Z');
  for(const code of ['zh-Hans','zh-Hant','en','ru','de','ar','hi','ja','ko','fr','fil']){
   await selectLanguage(page,code);const {cron}=JSON.parse(readFileSync(new URL(`../../src/locales/${code}.json`,import.meta.url)));
   const weekdays=await page.evaluate(locale=>{const f=new Intl.DateTimeFormat(locale,{weekday:'long',timeZone:'UTC'});return [1,5].map(day=>f.format(Date.UTC(2024,0,day))).join('–');},code);
