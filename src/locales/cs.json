@@ -1581,5 +1581,277 @@
     "passwordPolicy": "Vybrané typy postav tvoří povolený fond. Chcete-li do každého hesla zahrnout každý vybraný typ, povolte možnost „Vyžadovat každý typ“.",
     "speedScope": "Hodnocení popisuje přenosovou rychlost. Latence a jitter se měří samostatně.",
     "viewResult": "Zobrazit výsledek"
+  },
+  "redesign": {
+    "calculatorOriginal": "Původní hodnota",
+    "calculatorNew": "Nová hodnota",
+    "calculatorPrice": "Původní cena",
+    "calculatorOff": "Sleva v procentech (%)",
+    "calculatorPart": "Část",
+    "calculatorWhole": "Celý",
+    "calculatorPercent": "Procento (%)",
+    "expressionResult": "Výsledek výrazu · {{expression}}",
+    "businessResult": "{{mode}} · {{expression}}",
+    "workdayExceptions": "Volné dny: {{off}} · Pracovní data: {{work}}",
+    "copyDisplayedEquation": "Zkopírujte zobrazenou rovnici",
+    "drawShuffle": "Zamíchat seznam",
+    "drawGroups": "Vytvářejte skupiny",
+    "timerOtherRunning": "{{mode}} běží",
+    "timerSessionHelp": "Opětovným načtením této karty se obnoví oba časovače, včetně uplynulého času pro běžící časovače. Stav je uložen v úložišti relace této karty.",
+    "pdfAddPdf": "Přidejte soubory PDF pro tento úkol.",
+    "pdfAddImages": "Chcete-li vytvořit PDF, přidejte obrázky PNG, JPG nebo WebP.",
+    "pdfChooseCurrent": "Vyberte PDF ke zpracování z aktuálního seznamu PDF.",
+    "qrRecognizeEmpty": "Zde se zobrazí rozpoznaný text. Vyberte, přetáhněte nebo vložte obrázek do vstupní oblasti.",
+    "textIdle": "Spusťte operaci a její výsledek se zobrazí zde.",
+    "textStale": "Vstup nebo možnosti se změnily. Spusťte operaci znovu.",
+    "textEmpty": "Dokončeno bez výstupu.",
+    "textInputStats": "Vstup: {{summary}}",
+    "textOutputBytes": "Výstup: {{bytes}} UTF-8 bajtů",
+    "textNewlineSummary": "Konce řádků: {{format}} · {{bytes}} UTF-8 bajtů",
+    "cropNote": "Uložení úpravy oříznutí se vztahuje pouze na vybraný obrázek. Export nejprve uloží neuloženou úpravu oříznutí tohoto obrázku a poté zpracuje každý obrázek zařazený do fronty pomocí jeho uložené úpravy oříznutí nebo původního obrázku.",
+    "cropSaveCurrent": "Uložit oříznutí pro tento obrázek",
+    "cropDirty": "Neuložené změny oříznutí obrázku pro {{name}}. Export nejprve uloží tyto změny.",
+    "cropSaved": "Uloženo oříznutí obrázku pro {{name}}. Použije se při dávkovém exportu obrázku.",
+    "cropOriginal": "{{name}} nemá žádné uložené oříznutí obrázku. Export použije svůj původní obrázek, pokud neupravíte oříznutí.",
+    "cropExportBatch": "Exportovat obrázky {{count}} · obrázky s uloženým oříznutím: {{cropped}}",
+    "cropSaveExport": "Uložit aktuální oříznutí obrázku a exportovat obrázky {{count}}"
+  },
+  "direct": {
+    "daily": {
+      "countdownHelp": "Pro odpočet použijte dnešek jako začátek a cílové datum jako konec. Minulá data vrátí záporný počet dní.",
+      "anniversaryHelp": "U výročí 29. února se v nepřestupných letech použije poslední únorový den.",
+      "unitDetails": "Další převody a přesnost",
+      "unitPrecision": "≈ označuje zobrazení zaokrouhlené na 24 platných číslic; při kopírování se zachová až 80. Koeficienty odpovídají mathjs; galony a tekuté unce jsou americké jednotky.",
+      "moneyEmpty": "Zadejte částku a převeďte ji pro zobrazení výsledku.",
+      "listHelp": "Jeden záznam na řádek. Prázdné řádky se ignorují; duplicitní záznamy zůstávají samostatné, dokud je neodstraníte.",
+      "dedupe": "Odstranit duplicitní záznamy",
+      "drawEntries": "Vylosovat záznamy · {{count}}",
+      "drawGroups": "Vytvořit skupiny · {{count}}",
+      "drawMembers": "Seskupit záznamy · {{count}} na skupinu",
+      "drawNumbers": "Vylosovat čísla · {{count}}",
+      "discountReduction": "Sleva v procentech (%)",
+      "discountHelp": "Původní cena 100, sleva 20 % → cena po slevě 80."
+    },
+    "files": {
+      "fileActions": "Akce se soubory",
+      "discardCrop": "Zahodit neuložené úpravy ořezu?",
+      "imageInfo": "{{name}} · {{width}} × {{height}} px",
+      "pastedImage": "Vložený obrázek",
+      "lineDedupeHelp": "Porovnává přesně celé řádky včetně mezer a velikosti písmen. Zachová první výskyt.",
+      "lineSortHelp": "Řadí podle kódových jednotek Unicode. Nejde o jazykové ani číselné pořadí."
+    },
+    "developer": {
+      "convert": {
+        "base64": {
+          "usage": "Vyjádřit bajty jako Base64.",
+          "input": "Text / původní bajty souboru",
+          "output": "Text Base64"
+        },
+        "base64url": {
+          "usage": "Vyjádřit bajty jako Base64 bezpečné pro URL.",
+          "input": "Text / původní bajty souboru",
+          "output": "Text Base64URL"
+        },
+        "base32": {
+          "usage": "Vyjádřit bajty pomocí abecedy Base32.",
+          "input": "Text / původní bajty souboru",
+          "output": "Text Base32"
+        },
+        "base32hex": {
+          "usage": "Vyjádřit bajty pomocí abecedy Base32Hex.",
+          "input": "Text / původní bajty souboru",
+          "output": "Text Base32Hex"
+        },
+        "base58": {
+          "usage": "Vyjádřit bajty pomocí abecedy Bitcoin Base58.",
+          "input": "Text / původní bajty souboru",
+          "output": "Text Base58"
+        },
+        "hex": {
+          "usage": "Převést bajty do šestnáctkové soustavy nebo zpět.",
+          "input": "Text / původní bajty souboru",
+          "output": "Šestnáctkové bajty"
+        },
+        "binary": {
+          "usage": "Vyjádřit každý bajt osmi binárními číslicemi.",
+          "input": "Text / původní bajty souboru",
+          "output": "Binární řetězec bajtů"
+        },
+        "url-component": {
+          "usage": "Zakódovat jeden parametr URL nebo část cesty.",
+          "input": "Neescapovaný text",
+          "output": "Text komponenty URL",
+          "help": "Používá encodeURIComponent / decodeURIComponent. Mezery se změní na %20; doslovné + na %2B."
+        },
+        "uri": {
+          "usage": "Escapovat celou URI se zachováním oddělovačů URI.",
+          "input": "Plné URI",
+          "output": "Escapovaná URI",
+          "help": "Používá encodeURI / decodeURI a zachovává oddělovače URI jako : / ? #. Pro hodnotu jednoho parametru použijte komponentu URL."
+        },
+        "form": {
+          "usage": "Zakódovat jeden klíč nebo hodnotu formuláře.",
+          "input": "Neescapovaný klíč / hodnota",
+          "output": "Text komponenty formuláře",
+          "help": "Používá pravidla application/x-www-form-urlencoded. Mezery se změní na +; doslovné + na %2B."
+        },
+        "html-entities": {
+          "usage": "Escapovat speciální znaky pro obsah HTML.",
+          "input": "Prostý text",
+          "output": "HTML entity",
+          "help": "Escapuje a dekóduje entity HTML. Převádí text bez parsování nebo spouštění HTML."
+        },
+        "xml-entities": {
+          "usage": "Převést text na entity XML nebo zpět.",
+          "input": "Prostý text",
+          "output": "XML entity",
+          "help": "Escapuje a dekóduje entity XML bez parsování dokumentu XML nebo spouštění vstupu."
+        },
+        "json-string": {
+          "usage": "Vytvořit nebo přečíst úplný řetězcový literál JSON.",
+          "input": "Prostý text",
+          "output": "Řetězec JSON v uvozovkách",
+          "help": "Zakódovaný výstup obsahuje okolní uvozovky. Dekódování vyžaduje úplný řetězcový literál JSON."
+        },
+        "unicode": {
+          "usage": "Převést text na escape sekvence Unicode nebo zpět.",
+          "input": "Prostý text",
+          "output": "Escape sekvence Unicode",
+          "help": "Kóduje UTF-16 jako escape sekvence \\uXXXX. Dekóduje podporovanou escape syntaxi bez spouštění vstupu."
+        },
+        "codepoints": {
+          "usage": "Prohlédnout nebo rekonstruovat kódové body Unicode.",
+          "input": "Text Unicode",
+          "output": "Seznam kódových bodů U+",
+          "help": "Kóduje seznam šestnáctkových kódových bodů U+. Dekódování rekonstruuje text včetně doplňkových znaků."
+        },
+        "charset": {
+          "usage": "Zakódovat bajty pomocí cílové znakové sady.",
+          "input": "Text Unicode / soubor ve zdrojovém kódování",
+          "output": "Bajty v cílovém kódování"
+        },
+        "json-yaml": {
+          "usage": "Převádět mezi dokumenty JSON a YAML.",
+          "input": "Dokument JSON",
+          "output": "Dokument YAML"
+        },
+        "xml-json": {
+          "usage": "Převádět XML a jeho uspořádanou strukturu JSON.",
+          "input": "Dokument XML",
+          "output": "Uspořádané pole JSON"
+        },
+        "csv-json": {
+          "usage": "Převádět tabulky oddělené čárkami a JSON.",
+          "input": "Tabulka CSV",
+          "output": "Řádky JSON"
+        },
+        "tsv-json": {
+          "usage": "Převádět tabulky oddělené tabulátory a JSON.",
+          "input": "Tabulka TSV",
+          "output": "Řádky JSON"
+        },
+        "jsonl": {
+          "usage": "Převádět JSON Lines a pole JSON.",
+          "input": "JSON Lines",
+          "output": "Pole JSON"
+        },
+        "query-json": {
+          "usage": "Převést opakované parametry dotazu na pole řetězců.",
+          "input": "Řetězec dotazu",
+          "output": "Objekt JSON s poli řetězců"
+        },
+        "md5": {
+          "usage": "Vypočítat kontrolní součet MD5 a porovnat očekávané hodnoty.",
+          "input": "Text / soubory / řádky textu",
+          "output": "Kontrolní součet MD5"
+        },
+        "hash": {
+          "usage": "Vypočítat hash původních bajtů textu nebo souboru.",
+          "input": "Text / původní bajty souboru",
+          "output": "Šestnáctkový otisk vybraného algoritmu"
+        },
+        "hmac": {
+          "usage": "Vypočítat HMAC s klíčem pro tuto úlohu.",
+          "input": "Text zprávy / bajty souboru + klíč",
+          "output": "Šestnáctkový otisk HMAC"
+        },
+        "jwt": {
+          "usage": "Číst hlavičky a obsah JWT bez ověření podpisů.",
+          "input": "Třídílný JWT",
+          "output": "Dekódovaný JSON"
+        },
+        "gzip": {
+          "usage": "Komprimovat nebo dekomprimovat jeden proud Gzip.",
+          "input": "Text / původní bajty souboru",
+          "output": "Bajty Gzip (vybraná reprezentace)"
+        },
+        "zlib": {
+          "usage": "Komprimovat nebo dekomprimovat proud Zlib.",
+          "input": "Text / původní bajty souboru",
+          "output": "Bajty Zlib (vybraná reprezentace)"
+        },
+        "deflate": {
+          "usage": "Komprimovat nebo dekomprimovat surová data Deflate.",
+          "input": "Text / původní bajty souboru",
+          "output": "Surové bajty Deflate (vybraná reprezentace)"
+        },
+        "radix": {
+          "usage": "Převést celé číslo do jiné číselné soustavy.",
+          "input": "Celé číslo ve zdrojové soustavě",
+          "output": "Celé číslo v cílové soustavě"
+        },
+        "bytes-unit": {
+          "usage": "Převádět bity, bajty a jednotky SI a IEC.",
+          "input": "Hodnota ve zdrojové jednotce",
+          "output": "Hodnota v cílové jednotce"
+        },
+        "duration-unit": {
+          "usage": "Převádět pevné doby trvání bez kalendářních výpočtů.",
+          "input": "Doba trvání ve zdrojové jednotce",
+          "output": "Doba trvání v cílové jednotce"
+        },
+        "color": {
+          "usage": "Převádět reprezentace barev se zachováním alfa kanálu.",
+          "input": "HEX / RGB / HSL / HSV JSON",
+          "output": "Vybraný formát barvy"
+        },
+        "case": {
+          "usage": "Použít vybranou velikost písmen nebo styl pojmenování.",
+          "input": "Text / název",
+          "output": "Text ve vybraném stylu pojmenování"
+        },
+        "lines": {
+          "usage": "Použít jednu vybranou operaci na řádky textu.",
+          "input": "Řádky textu",
+          "output": "Zpracované řádky textu"
+        },
+        "newline": {
+          "usage": "Převést konce řádků textu.",
+          "input": "Text s konci řádků",
+          "output": "Text s vybraným LF / CRLF / CR"
+        },
+        "normalize": {
+          "usage": "Použít normalizaci Unicode na kódové body.",
+          "input": "Text Unicode",
+          "output": "Text ve vybrané normalizační formě"
+        }
+      },
+      "jsonCancelled": "Zrušeno. Vstup je zachován; spusťte znovu, až budete připraveni.",
+      "convertHelp": "Použití a omezení",
+      "fileReplace": "Nahradit soubory",
+      "md5CopyFile": "Kopírovat kontrolní součet pro {{name}}",
+      "copyIso": "Kopírovat ISO",
+      "copyIsoDate": "Kopírovat spuštění {{index}} jako ISO",
+      "regexNotRun": "Nespuštěno",
+      "regexNoMatches": "Žádné shody",
+      "regexStale": "Vstupy se změnily. Spuštěním aktualizujete výsledky.",
+      "speedNetwork": "Tento nástroj se připojuje ke Cloudflare a spotřebovává síťová data. Testovací požadavky začnou až po spuštění.",
+      "speedSettings": "Nastavení testu",
+      "speedSummary": "{{profile}} · {{unit}} · až {{budget}} MiB",
+      "customZone": "Vlastní časové pásmo IANA"
+    },
+    "shared": {
+      "viewResult": "Zobrazit výsledek"
+    }
   }
 }

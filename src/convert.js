@@ -28,7 +28,7 @@ const messages={
   drop:['拖入单个文件','Drop one file'],dropHint:['保留原始字节，导入后手动运行','Preserves raw bytes. Run manually after importing.']
 };
 let tool=tools.find(item=>item.id===location.hash.slice(1)) || tools[0];
-let file, filePreview='', fileRevision=0, result, lastState={status:'idle'}, options=defaults(tool), notificationTimer;
+let file, filePreview='', textBuffer='', fileRevision=0, result, lastState={status:'idle'}, options=defaults(tool), notificationTimer;
 const editable=new Compartment(), inputLocale=new Compartment(), outputLocale=new Compartment();
 let md5;
 function notify(message) {
@@ -58,7 +58,8 @@ function clearKey() {
     options.key=''; const field=$('option-key'); if(field) field.value='';
   }
 }
-function toolHint(){return tool.category==='encoding'?t(tool.id==='base58'?'ux.base58Hint':'ux.encodingHint'):label(tool.hint);}
+function toolHint(){return tool.category==='escape'?t(`direct.developer.convert.${tool.id}.help`):tool.category==='encoding'?t(tool.id==='base58'?'ux.base58Hint':'ux.encodingHint'):tool.hint===tool.usage?t(`direct.developer.convert.${tool.id}.usage`):label(tool.hint);}
+const usage=document.createElement('p');usage.id='convert-usage';const help=document.createElement('details');help.id='convert-help';const helpSummary=document.createElement('summary');helpSummary.dataset.i18n='direct.developer.convertHelp';help.append(helpSummary,$('tool-hint'));document.querySelector('.convert-tool-heading').append(usage,help);
 function render(state) {
   if(tool.id==='md5' && md5) {md5.onState(state);return;}
   lastState=state; result=state.status==='ready'?state:undefined;
@@ -122,6 +123,7 @@ function chooseTool(next) {
   const inputFiles=fromFiles?md5.getInputFiles():[];
   clearKey();md5.deactivate();controller.invalidate();fileRevision++;tool=next;options=defaults(tool);
   if(fromFiles){
+    if($('input-mode').value==='text')textBuffer=source.state.doc.toString();
     file=inputFiles.length===1&&inputFiles[0].size<=limits.file?inputFiles[0]:undefined;
     filePreview='';$('input-mode').value='file';setDocument(source,'');
     if(!file)notify(t('md5.chooseSingleFile'));
@@ -139,6 +141,7 @@ function chooseTool(next) {
 }
 async function importFile(next) {
   if(next.size>limits.file) {notify(t('uiText.se7c25cfb'));return;}
+  if($('input-mode').value==='text')textBuffer=source.state.doc.toString();
   controller.invalidate(); const revision=++fileRevision;
   file=next;$('input-mode').value='file'; source.dispatch({effects:editable.reconfigure([EditorState.readOnly.of(true),EditorView.editable.of(false)])});
   filePreview='';setDocument(source,'');inputInfo();
@@ -158,12 +161,13 @@ $('convert-file').addEventListener('change',()=> {const selected=$('convert-file
 $('input-mode').addEventListener('change',()=> {
   fileRevision++;controller.invalidate();
   const binary=$('input-mode').value==='file';
+  if(binary)textBuffer=source.state.doc.toString();
   source.dispatch({effects:editable.reconfigure([EditorState.readOnly.of(binary),EditorView.editable.of(!binary)])});
-  if(!binary) {file=undefined;filePreview='';setDocument(source,'');} else setDocument(source,filePreview);
-  inputChanged();
+  setDocument(source,binary?filePreview:textBuffer);inputInfo();conversionAction();
+  if(binary&&file&&!filePreview)void importFile(file);
 });
 $('convert-clear').addEventListener('click',()=> {
-  fileRevision++;file=undefined;filePreview='';clearKey();$('input-mode').value='text';
+  fileRevision++;file=undefined;filePreview='';textBuffer='';clearKey();$('input-mode').value='text';
   controller.invalidate();source.dispatch({effects:editable.reconfigure([EditorState.readOnly.of(false),EditorView.editable.of(true)])});setDocument(source,'');inputInfo();source.focus();
 });
 $('input-search').addEventListener('click',()=>openSearchPanel(source));$('output-search').addEventListener('click',()=>openSearchPanel(output));
@@ -186,7 +190,7 @@ $('result-to-input').addEventListener('click',async()=> {
   if(current.blob.size>limits.text) {notify(t('uiText.se64a1707'));return;}
   const text=decodeText(new Uint8Array(await current.blob.arrayBuffer()));
   if(result!==current)return;
-  validText(text);fileRevision++;file=undefined;filePreview='';$('input-mode').value='text';
+  validText(text);fileRevision++;textBuffer=text;$('input-mode').value='text';
   source.dispatch({effects:editable.reconfigure([EditorState.readOnly.of(false),EditorView.editable.of(true)])});setDocument(source,text);inputChanged();source.focus();
 });
 window.addEventListener('keydown',event=> {if(event.target.closest?.('.tool-menu'))return;if((event.ctrlKey || event.metaKey)&&event.key==='Enter'){event.preventDefault();execute();}});
@@ -196,30 +200,31 @@ bindFileDrop(document,{allowMultiple:()=>tool.id==='md5'&&md5.mode==='files',onF
 function translate() {
   translateDOM(convertError);
   renderCatalog();
+  helpSummary.textContent=t('direct.developer.convertHelp');
   const phrases={'Find':t('common.search'),'Replace':t('common.replace'),'replace':t('common.replace'),'replace all':t('common.replaceAll'),'match case':t('common.matchCase'),'regexp':t('common.regularExpression'),'by word':t('common.wholeWord'),'next':t('common.next'),'previous':t('common.previous'),'all':t('common.selectAll'),'close':t('common.close')};
   for(const [view,compartment,key] of [[source,inputLocale,'common.input'],[output,outputLocale,'common.result']])view.dispatch({effects:compartment.reconfigure([EditorState.phrases.of(phrases),EditorView.contentAttributes.of({'aria-label':t(key),dir:'ltr'})])});
   if(tool.id==='md5') {md5.translate();return;}
   for(const element of document.querySelectorAll('[data-convert]')) element.textContent=label(messages[element.dataset.convert]);
   $('tool-title').textContent=label(tool.name);$('tool-hint').textContent=toolHint();renderOptions();inputInfo();render(lastState);conversionAction();
 }
-const convertError=document.createElement('details');convertError.id='convert-error-detail';convertError.hidden=true;convertError.innerHTML='<summary data-i18n="cron.technicalDetails"></summary><pre id="convert-error-raw" dir="ltr"></pre>';$('convert-status').after(convertError);
-const catalog=document.querySelector('.convert-catalog'),catalogToggle=document.createElement('button');catalogToggle.id='convert-catalog-toggle';catalogToggle.type='button';catalogToggle.dataset.i18n='office.chooseTask';catalogToggle.textContent=t('office.chooseTask');document.querySelector('.convert-layout').before(catalogToggle);
+const convertError=$('convert-error-detail');
+const catalog=$('convert-catalog'),catalogToggle=$('convert-catalog-toggle');
 const catalogMedia=matchMedia('(max-width:1199px)');
 function closeCatalog(){if(catalog.hasAttribute('popover')&&catalog.matches(':popover-open'))catalog.hidePopover();}
 catalog.addEventListener('click',event=>{if(event.target.closest('a[href^="#"]'))closeCatalog();});
 function catalogLayout(){if(catalogMedia.matches)catalog.setAttribute('popover','auto');else{closeCatalog();catalog.removeAttribute('popover');}}
-catalogMedia.addEventListener('change',catalogLayout);catalogLayout();catalogToggle.onclick=()=>catalog.showPopover();catalog.addEventListener('toggle',event=>{catalogToggle.setAttribute('aria-expanded',String(event.newState==='open'));if(event.newState==='open')$('convert-search').focus();});catalogToggle.setAttribute('aria-controls','convert-catalog');catalog.id='convert-catalog';
-function conversionAction(){if(!$('convert-run'))return;const direction=tool.options.find(option=>option.key==='direction'),choice=direction?.values.find(value=>value[0]===options.direction);$('convert-run').textContent=choice?tr(choice[1],choice[2]):t('common.transform');
-  const formats={'json-yaml':['JSON','YAML'],'xml-json':['XML','JSON'],'csv-json':['CSV','JSON'],'tsv-json':['TSV','JSON'],jsonl:['JSONL','JSON'], 'query-json':['Query String','JSON']};
-  let pair=formats[tool.id];if(pair&&options.direction==='decode')pair=[...pair].reverse();
-  if(!pair&&['encoding','escape'].includes(tool.category)){pair=[t('common.text')+(options.charset?' · '+options.charset:''),label(tool.name)];if(options.direction==='decode')pair.reverse();}
-  if(!pair&&tool.category==='compression')pair=options.direction==='decode'?[label(tool.name),options.outputFormat]:[options.inputFormat,label(tool.name)];
-  if(!pair)pair=[t('common.input'),t('common.result')];
+catalogMedia.addEventListener('change',catalogLayout);catalogLayout();catalogToggle.onclick=()=>catalog.showPopover();catalog.addEventListener('toggle',event=>{catalogToggle.setAttribute('aria-expanded',String(event.newState==='open'));if(event.newState==='open')$('convert-search').focus();});
+function conversionAction(){if(!$('convert-run'))return;const direction=tool.options.find(option=>option.key==='direction'),choice=direction?.values.find(value=>value[0]===options.direction);const operation=tool.options.find(option=>['operation','style','form','ending','format'].includes(option.key)),operationChoice=operation?.values?.find(value=>value[0]===options[operation.key]);$('convert-run').textContent=choice?tr(choice[1],choice[2]):operationChoice?tr(operationChoice[1],operationChoice[2]):tool.id==='jwt'?tr('解码','Decode'):t(['hash','hmac'].includes(tool.id)?'calculator.calculate':'common.transform');
+  $('convert-usage').textContent=t(`direct.developer.convert.${tool.id}.usage`);
+  let pair=['input','output'].map(field=>t(`direct.developer.convert.${tool.id}.${field}`));
+  if(options.direction==='decode')pair.reverse();
+  if(tool.category==='encoding'&&options.charset){const textIndex=options.direction==='decode'?1:0;pair[textIndex]+=` · ${options.charset}`;}
+  if(tool.id==='charset')pair=[`${pair[0]} · ${$('input-mode').value==='file'?options.from:'Unicode'}`,`${pair[1]} · ${options.to}`];
+  if(tool.category==='compression'){pair=options.direction==='decode'?[`${label(tool.name)} · ${options.inputFormat}`,`${t('common.result')} · ${options.outputFormat}`]:[`${t('common.input')} · ${options.inputFormat}`,`${label(tool.name)} · ${options.outputFormat}`];}
+  if(['radix','bytes-unit','duration-unit'].includes(tool.id))pair=[`${pair[0]} · ${options.from}`,`${pair[1]} · ${options.to}`];
+  if(['hash','hmac'].includes(tool.id))pair[1]+=` · ${options.algorithm.toUpperCase()}`;
   $('convert-input-panel').querySelector('h2').textContent=pair[0];$('convert-output-panel').querySelector('h2').textContent=pair[1];
 }
-const colorChip=document.createElement('div');colorChip.id='convert-color';colorChip.hidden=true;$('convert-result').before(colorChip);
-const runActions=document.querySelector('.convert-actions');document.querySelector('.convert-editors').before(runActions);
-const outputActions=document.createElement('div');outputActions.className='convert-result-actions toolbar';$('convert-output-panel').append(outputActions);outputActions.append($('result-to-input'),$('convert-copy'),$('convert-download'));
 $('app-version').textContent=`v${version}`;
 onLanguageChange(translate);translate();chooseTool(tool);
 

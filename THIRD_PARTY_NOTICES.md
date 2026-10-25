@@ -110,3 +110,7 @@ SPDX-License-Identifier: Unicode-3.0
 ## SortableJS
 
 SortableJS 1.15.7 (MIT), https://github.com/SortableJS/Sortable/tree/1.15.7, provides local menu drag sorting. Its full license is included in THIRD_PARTY_LICENSES.md in the extension bundle. No CDN is used.
+
+## Lucide local menu icons
+
+Static SVG node subset from [lucide-static 1.61.0](https://www.npmjs.com/package/lucide-static/v/1.61.0), bundled locally without a runtime library or network requests. ISC license and the Feather-derived icons MIT license are retained in `licenses/lucide-1.61.0.LICENSE`.

@@ -3,7 +3,7 @@ import {registerContentCheck} from './content-state.js';
 import { showError } from './office.js';
 import {taskRoutes} from './navigation.js';
 
-export function addTaskGuide(id,tasks,{choose,example,hasContent,initialTask}){
+export function addTaskGuide(id,tasks,{choose,example,hasContent,initialTask,beforeChoose}){
   if(hasContent)registerContentCheck(hasContent);
   const guide=document.createElement('section');guide.className='tool-card task-guide';
   guide.innerHTML=`<div class="task-choices">${tasks.map(task=>`<button id="${id}-task-${task.id}" data-task="${task.id}" data-i18n="${task.key}" aria-pressed="false"></button>`).join('')}</div><details class="task-help"><summary data-i18n="ux.instructions"></summary><p class="tool-note" data-i18n="office.steps"></p></details><button id="${id}-example" data-i18n="ux.viewExample"></button><p class="tool-note" id="${id}-example-note" data-i18n="office.exampleNotice" hidden></p>`;
@@ -18,7 +18,11 @@ export function addTaskGuide(id,tasks,{choose,example,hasContent,initialTask}){
   document.querySelector('.tool-heading,.page-heading').after(guide);
   let selected=tasks[0].id;const routed=Boolean(taskRoutes[id]),requestedHash=location.hash.slice(1);let initialized=false;
   function select(value,write=true){if(!tasks.some(task=>task.id===value))return;const changed=selected!==value;selected=value;if(initialized&&write&&changed&&routed)history.replaceState(null,'','#'+value);if(picker)picker.value=value;for(const button of guide.querySelectorAll('[data-task]'))button.setAttribute('aria-pressed',String(button.dataset.task===value));}
-  function activate(value,push=false){const next=tasks.some(task=>task.id===value)?value:tasks[0].id;if(push&&routed&&location.hash!=='#'+next)history.pushState(null,'','#'+next);select(next,false);choose(next);for(let node=guide.querySelector('[data-task="'+next+'"]')?.parentElement;node&&node!==guide;node=node.parentElement)if(node.tagName==='DETAILS')node.open=true;}
+  function activate(value,push=false){
+    const next=tasks.some(task=>task.id===value)?value:tasks[0].id;
+    if(next!==selected&&beforeChoose?.(next,selected)===false){if(picker)picker.value=selected;if(routed&&location.hash!=='#'+selected)history.replaceState(null,'','#'+selected);return;}
+    if(push&&routed&&location.hash!=='#'+next)history.pushState(null,'','#'+next);select(next,false);choose(next);for(let node=guide.querySelector('[data-task="'+next+'"]')?.parentElement;node&&node!==guide;node=node.parentElement)if(node.tagName==='DETAILS')node.open=true;
+  }
   for(const button of guide.querySelectorAll('[data-task]'))button.onclick=()=>activate(button.dataset.task,true);
   if(routed)addEventListener('hashchange',()=>activate(location.hash.slice(1)));
   queueMicrotask(()=>{initialized=true;if(initialTask||routed&&requestedHash)activate(initialTask||requestedHash);});

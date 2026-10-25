@@ -15,6 +15,14 @@
     <div class="app-layout">
       <main>
         <section class="page-heading"><div><h1><span data-i18n="diff.name">JSON / 文本对比</span></h1><p id="mode-description"><span data-i18n="diff.jsonDescription">忽略排版与对象键顺序，数组按索引比较。</span></p></div><span class="keyboard-hint"><kbd>⌘ / Ctrl</kbd> + <kbd>Enter</kbd> <span data-i18n="diff.compare">对比当前内容</span></span></section>
+        <div class="toolbar" role="group" aria-label="对比操作" data-i18n-aria-label="common.tools">
+          <label class="select-label"><span data-i18n="diff.mode">对比模式</span><select id="diff-mode" aria-label="对比模式" data-i18n-aria-label="diff.mode"><option value="json" data-i18n="diff.jsonMode">JSON 结构</option><option value="text" data-i18n="diff.textMode">纯文本</option></select></label>
+          <button class="primary" id="compare"><span data-i18n="diff.compare">开始对比</span></button><button id="cancel" hidden><span data-i18n="common.cancel">取消</span></button>
+          <button id="swap"><span data-i18n="diff.swap">交换左右</span></button><button id="clear" class="quiet"><span data-i18n="common.clear">清空</span></button>
+          <button id="diff-edit-inputs" hidden data-i18n="ux.diffModifyInput">修改输入</button>
+          <span class="toolbar-spacer"></span><label class="check-label"><input type="checkbox" id="only-diff" /><span data-i18n="diff.fold">收起未变化行</span></label>
+        </div>
+        <div class="diff-overview">
         <section class="diff-summary" aria-label="差异汇总" data-i18n-aria-label="diff.summary">
           <strong id="diff-total" role="status" aria-live="polite"><span data-i18n="diff.waiting">等待对比</span></strong>
           <span class="diff-count added">+ <span data-i18n="diff.added">新增</span> <b id="count-added">—</b></span>
@@ -22,13 +30,12 @@
           <span class="diff-count modified">~ <span data-i18n="diff.modified">修改</span> <b id="count-modified">—</b></span>
           <span id="diff-duration"></span>
         </section>
-        <div class="toolbar" aria-label="对比操作" data-i18n-aria-label="common.tools">
-          <label class="select-label"><span data-i18n="diff.mode">对比模式</span><select id="diff-mode" aria-label="对比模式" data-i18n-aria-label="diff.mode"><option value="json" data-i18n="diff.jsonMode">JSON 结构</option><option value="text" data-i18n="diff.textMode">纯文本</option></select></label>
-          <button class="primary" id="compare"><span data-i18n="diff.compare">开始对比</span></button><button id="cancel" hidden><span data-i18n="common.cancel">取消</span></button>
-          <button id="swap"><span data-i18n="diff.swap">交换左右</span></button><button id="clear" class="quiet"><span data-i18n="common.clear">清空</span></button>
-          <button id="diff-edit-inputs" hidden data-i18n="ux.diffModifyInput">修改输入</button>
-          <span class="toolbar-spacer"></span><label class="check-label"><input type="checkbox" id="only-diff" /><span data-i18n="diff.fold">收起未变化行</span></label>
+        <div class="diff-navigation" role="group" aria-label="差异导航" data-i18n-aria-label="diff.navigation">
+          <button id="previous" disabled><span data-i18n="common.previous">上一处</span></button><label># <input id="diff-index" aria-label="差异编号" type="number" min="1" value="1" disabled data-i18n-aria-label="diff.index" dir="ltr" /> / <span id="diff-length">0</span></label><button id="next" disabled><span data-i18n="common.next">下一处</span></button>
+          <span id="change-kind"></span><code id="change-path"><span data-i18n="diff.pathHint">差异将按 JSON 路径逐处定位</span></code>
         </div>
+        </div>
+        <p id="diff-import-status" class="tool-note" role="status" hidden></p>
         <div id="diff-error-panel" role="region" aria-label="中文错误详情" aria-live="polite" hidden></div>
         <details class="diff-inputs" id="inputs" open>
           <summary><span data-i18n="diff.inputs">输入内容</span> <span id="input-help"><span data-i18n="diff.inputHelp">粘贴或向左右两侧拖入 JSON 文件</span></span></summary>
@@ -37,10 +44,6 @@
             <section class="panel" data-diff-side="right" aria-label="新 JSON 输入面板" data-i18n-aria-label="common.input"><div class="panel-heading"><h2 id="right-title">新 JSON</h2><span id="right-file"><span data-i18n="diff.target">右侧 · 比较目标</span></span><button id="right-import"><span data-i18n="diff.importNew">导入新文件</span></button><input id="right-file-input" type="file" accept=".json,.txt,application/json,text/plain" hidden dir="ltr" /></div><span id="right-source-label" class="sr-only">新 JSON 输入</span><div id="right-source" class="diff-source" dir="ltr"></div></section>
           </div>
         </details>
-        <div class="diff-navigation" aria-label="差异导航" data-i18n-aria-label="diff.navigation">
-          <button id="previous" disabled><span data-i18n="common.previous">上一处</span></button><label># <input id="diff-index" aria-label="差异编号" type="number" min="1" value="1" disabled data-i18n-aria-label="diff.index" dir="ltr" /> / <span id="diff-length">0</span></label><button id="next" disabled><span data-i18n="common.next">下一处</span></button>
-          <span id="change-kind"></span><code id="change-path"><span data-i18n="diff.pathHint">差异将按 JSON 路径逐处定位</span></code>
-        </div>
         <p class="diff-editor-help"><span data-i18n="diff.editHint">下方左右内容均可直接修改；修改后点击「重新对比」或按 Cmd/Ctrl + Enter 更新统计。</span></p>
         <section class="diff-result panel" aria-label="双栏对比结果" data-i18n-aria-label="common.result">
           <div class="diff-result-titles"><span data-diff-side="left"><b id="left-result-title">原 JSON</b> <small><span data-i18n="diff.before">可编辑 · 删除 / 修改前</span></small></span><span data-diff-side="right"><b id="right-result-title">新 JSON</b> <small><span data-i18n="diff.after">可编辑 · 新增 / 修改后</span></small></span></div>

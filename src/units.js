@@ -29,15 +29,16 @@ function unitName(id){
  return `${name||id} (${symbol})`;
 }
 function render(){
+  if($('unit-more-results'))$('unit-more-results').hidden=!result;
   $('unit-copy').disabled=!result;for(const id of ['unit-copy-equation','unit-copy-all'])if($(id))$(id).disabled=!result;if($('unit-copy-all'))$('unit-copy-all').hidden=!$('unit-all').checked;$('unit-results').replaceChildren();$('unit-primary').textContent='';if(!result)return;
   const primary=result.results.find(item=>item.unit===$('unit-to').value);
   $('unit-primary').textContent=`${result.input} ${unitName(result.from)} = ${primary.approximate?'≈ ':''}${primary.display} ${unitName(primary.unit)}`;
   for(const item of result.results.filter(item=>item.unit!==$('unit-to').value)){const row=document.createElement('div');row.className='numeric-result-row';const unit=document.createElement('span'),output=document.createElement('output'),button=document.createElement('button');unit.textContent=unitName(item.unit);unit.dir=output.dir='ltr';output.textContent=`${item.approximate?'≈ ':''}${item.display}`;button.textContent=t('units.copyOne');button.setAttribute('aria-label',`${t('units.copyOne')} · ${item.unit}`);button.addEventListener('click',()=>copyText(item.value));row.append(unit,output,button);$('unit-results').append(row);}
 }
 function invalidate(){const had=Boolean(result);result=undefined;clearStatus({keepStale:true});render();if(had)setStatus('ux.stale');}
-function run(){clearStatus();try{result=convertUnits($('unit-value').value,$('unit-from').value,$('unit-all').checked?[$('unit-to').value,...units.filter(unit=>unit.category===$('unit-category').value&&unit.id!==$('unit-to').value).map(unit=>unit.id)]:[$('unit-to').value]);}catch(error){result=undefined;showError(error);}render();}
+function run(explicit=false){clearStatus();try{result=convertUnits($('unit-value').value,$('unit-from').value,$('unit-all').checked?[$('unit-to').value,...units.filter(unit=>unit.category===$('unit-category').value&&unit.id!==$('unit-to').value).map(unit=>unit.id)]:[$('unit-to').value]);}catch(error){result=undefined;showError(error,{field:'unit-value',focus:explicit===true});}render();}
 $('unit-category').addEventListener('change',()=>{$('unit-search').value='';populate();invalidate();});$('unit-search').addEventListener('input',populate);for(const id of ['unit-value','unit-from','unit-to','unit-all'])$(id).addEventListener('input',invalidate);
-$('unit-run').addEventListener('click',run);$('unit-swap').addEventListener('click',()=>{const source=$('unit-from').value,target=$('unit-to').value;$('unit-search').value='';populate();unitPickers.get('unit-from').setChoiceByValue(target);unitPickers.get('unit-to').setChoiceByValue(source);invalidate();run();});$('unit-copy').addEventListener('click',()=>{if(result)copyText(result.results.find(item=>item.unit===$('unit-to').value).value);});onLanguageChange(()=>{populate();render();});populate();run();
+$('unit-run').addEventListener('click',()=>run(true));$('unit-swap').addEventListener('click',()=>{const source=$('unit-from').value,target=$('unit-to').value;$('unit-search').value='';populate();unitPickers.get('unit-from').setChoiceByValue(target);unitPickers.get('unit-to').setChoiceByValue(source);invalidate();run(true);});$('unit-copy').addEventListener('click',()=>{if(result)copyText(result.results.find(item=>item.unit===$('unit-to').value).value);});onLanguageChange(()=>{populate();render();});populate();run();
 
 let unitsEngaged=false;document.querySelector('#tool-root').addEventListener('input',()=>{unitsEngaged=true;});document.querySelector('#unit-run').addEventListener('click',()=>{unitsEngaged=true;});
 
@@ -57,5 +58,9 @@ const unitResultCard=$('unit-primary').closest('section');$('unit-from').closest
 submitForm($('unit-from').closest('section'),$('unit-run'));
 
 $('unit-copy').dataset.i18n='units.copyOne';
-for(const [id,key] of [['unit-copy-equation','copyEquation'],['unit-copy-all','copyAllConversions']]){const button=document.createElement('button');button.id=id;button.type='button';button.dataset.i18n='refinement.'+key;$('unit-copy').parentElement.append(button);button.onclick=()=>{if(result)copyText(id==='unit-copy-equation'?$('unit-primary').textContent:result.results.map(item=>`${item.value} ${item.unit}`).join('\n'));};}
+for(const [id,key] of [['unit-copy-equation','copyEquation'],['unit-copy-all','copyAllConversions']]){const button=document.createElement('button');button.id=id;button.type='button';button.dataset.i18n=id==='unit-copy-equation'?'redesign.copyDisplayedEquation':'refinement.'+key;$('unit-copy').parentElement.append(button);button.onclick=()=>{if(result)copyText(id==='unit-copy-equation'?$('unit-primary').textContent:result.results.map(item=>`${item.value} ${item.unit}`).join('\n'));};}
 translateDOM($('unit-copy').parentElement);render();
+
+const unitDetails=document.createElement('details');unitDetails.id='unit-more-results';unitDetails.innerHTML='<summary data-i18n="direct.daily.unitDetails"></summary>';
+const unitPrecision=document.querySelector('[data-i18n="units.precision"]');unitPrecision.dataset.i18n='direct.daily.unitPrecision';
+unitDetails.append($('unit-results'),unitPrecision);unitResultCard.append(unitDetails);translateDOM(unitDetails);render();

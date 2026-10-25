@@ -1581,5 +1581,277 @@
     "passwordPolicy": "Ang mga napiling uri ng character ay bumubuo sa pinapayagang pool. Paganahin ang \"Kailangan ang bawat uri\" upang isama ang bawat napiling uri sa bawat password.",
     "speedScope": "Inilalarawan ng mga rating ang bilis ng paglipat. Ang latency at jitter ay hiwalay na sinusukat.",
     "viewResult": "Tingnan ang resulta"
+  },
+  "redesign": {
+    "calculatorOriginal": "Orihinal na halaga",
+    "calculatorNew": "Bagong halaga",
+    "calculatorPrice": "Orihinal na presyo",
+    "calculatorOff": "Porsiyento ng bawas (%)",
+    "calculatorPart": "Bahagi",
+    "calculatorWhole": "buo",
+    "calculatorPercent": "Porsiyento (%)",
+    "expressionResult": "Resulta ng expression · {{expression}}",
+    "businessResult": "{{mode}} · {{expression}}",
+    "workdayExceptions": "Mga araw ng pahinga: {{off}} · Mga petsa ng trabaho: {{work}}",
+    "copyDisplayedEquation": "Kopyahin ang ipinakitang equation",
+    "drawShuffle": "Balasahin ang listahan",
+    "drawGroups": "Lumikha ng mga pangkat",
+    "timerOtherRunning": "{{mode}} ay tumatakbo",
+    "timerSessionHelp": "Ang pag-reload ng tab na ito ay nagpapanumbalik ng parehong mga timer, kabilang ang lumipas na oras ng orasan para sa pagpapatakbo ng mga timer. Naka-save ang estado sa storage ng session ng tab na ito.",
+    "pdfAddPdf": "Magdagdag ng mga PDF file para sa gawaing ito.",
+    "pdfAddImages": "Magdagdag ng PNG, JPG o WebP na mga larawan upang lumikha ng PDF.",
+    "pdfChooseCurrent": "Piliin ang PDF na ipoproseso mula sa kasalukuyang listahan ng PDF.",
+    "qrRecognizeEmpty": "Lalabas dito ang kinikilalang teksto. Pumili, mag-drop o mag-paste ng larawan sa lugar ng pag-input.",
+    "textIdle": "Magpatakbo ng isang operasyon upang makita ang resulta nito dito.",
+    "textStale": "Binago ang input o mga opsyon. Patakbuhin muli ang operasyon.",
+    "textEmpty": "Nakumpleto nang walang output.",
+    "textInputStats": "Input: {{summary}}",
+    "textOutputBytes": "Output: {{bytes}} UTF-8 byte",
+    "textNewlineSummary": "Mga pagtatapos ng linya: {{format}} · {{bytes}} UTF-8 byte",
+    "cropNote": "Ang pag-save ng pagsasaayos ng pag-crop ay nalalapat lamang sa napiling larawan. Ise-save muna ng pag-export ang hindi na-save na pagsasaayos ng pag-crop ng larawang iyon, pagkatapos ay pinoproseso ang bawat naka-queue na larawan gamit ang naka-save na pagsasaayos ng pag-crop o orihinal na larawan nito.",
+    "cropSaveCurrent": "I-save ang pag-crop para sa larawang ito",
+    "cropDirty": "Mga pagbabago sa hindi na-save na pag-crop ng larawan para sa {{name}}. Ise-save muna ng pag-export ang mga pagbabagong ito.",
+    "cropSaved": "Naka-save na pag-crop ng larawan para sa {{name}}. Gagamitin ito sa pag-export ng batch na imahe.",
+    "cropOriginal": "{{name}} ay walang naka-save na pag-crop ng larawan. Ginagamit ng export ang orihinal nitong larawan maliban kung ayusin mo ang pag-crop.",
+    "cropExportBatch": "I-export ang {{count}} na mga larawan · mga larawang may naka-save na pag-crop: {{cropped}}",
+    "cropSaveExport": "I-save ang kasalukuyang pag-crop ng larawan at i-export ang {{count}} na mga larawan"
+  },
+  "direct": {
+    "daily": {
+      "countdownHelp": "Para sa countdown, gawing simula ang araw na ito at wakas ang target na petsa. Negatibong bilang ng araw ang ibinabalik para sa mga nakaraang target.",
+      "anniversaryHelp": "Para sa anibersaryo ng Pebrero 29, ginagamit ang huling araw ng Pebrero sa mga taong hindi leap year.",
+      "unitDetails": "Iba pang conversion at katumpakan",
+      "unitPrecision": "Ang ≈ ay tanda ng pag-round sa 24 na makabuluhang digit sa display; hanggang 80 ang napapanatili sa pagkopya. Sinusunod ng mga factor ang mathjs; mga yunit ng US ang gallon at fluid ounce.",
+      "moneyEmpty": "Maglagay ng halaga at i-convert ito upang makita ang resulta.",
+      "listHelp": "Isang entry bawat linya. Hindi isinasama ang mga blangkong linya; mananatiling magkahiwalay ang mga duplicate hanggang alisin mo ang mga ito.",
+      "dedupe": "Alisin ang mga duplicate na entry",
+      "drawEntries": "Bumunot ng mga entry · {{count}}",
+      "drawGroups": "Gumawa ng mga grupo · {{count}}",
+      "drawMembers": "Igrupo ang mga entry · {{count}} bawat grupo",
+      "drawNumbers": "Bumunot ng mga numero · {{count}}",
+      "discountReduction": "Porsiyento ng bawas (%)",
+      "discountHelp": "Orihinal na presyo 100, bawas na 20 % → presyo pagkatapos ng diskuwento 80."
+    },
+    "files": {
+      "fileActions": "Mga aksiyon sa file",
+      "discardCrop": "Itapon ang mga hindi na-save na pagsasaayos sa crop?",
+      "imageInfo": "{{name}} · {{width}} × {{height}} px",
+      "pastedImage": "Idinikit na larawan",
+      "lineDedupeHelp": "Eksaktong inihahambing ang bawat buong linya, kasama ang mga espasyo at laki ng titik. Pinapanatili ang unang paglitaw.",
+      "lineSortHelp": "Inaayos ayon sa mga code unit ng Unicode. Hindi ito pagkakasunod-sunod ayon sa wika o bilang."
+    },
+    "developer": {
+      "convert": {
+        "base64": {
+          "usage": "Irepresenta ang mga byte bilang Base64.",
+          "input": "Teksto / orihinal na mga byte ng file",
+          "output": "Tekstong Base64"
+        },
+        "base64url": {
+          "usage": "Irepresenta ang mga byte bilang Base64 na ligtas para sa URL.",
+          "input": "Teksto / orihinal na mga byte ng file",
+          "output": "Tekstong Base64URL"
+        },
+        "base32": {
+          "usage": "Irepresenta ang mga byte gamit ang alpabetong Base32.",
+          "input": "Teksto / orihinal na mga byte ng file",
+          "output": "Tekstong Base32"
+        },
+        "base32hex": {
+          "usage": "Irepresenta ang mga byte gamit ang alpabetong Base32Hex.",
+          "input": "Teksto / orihinal na mga byte ng file",
+          "output": "Tekstong Base32Hex"
+        },
+        "base58": {
+          "usage": "Irepresenta ang mga byte gamit ang alpabetong Bitcoin Base58.",
+          "input": "Teksto / orihinal na mga byte ng file",
+          "output": "Tekstong Base58"
+        },
+        "hex": {
+          "usage": "I-convert ang mga byte papunta o mula sa hexadecimal.",
+          "input": "Teksto / orihinal na mga byte ng file",
+          "output": "Mga hexadecimal na byte"
+        },
+        "binary": {
+          "usage": "Irepresenta ang bawat byte bilang walong binary digit.",
+          "input": "Teksto / orihinal na mga byte ng file",
+          "output": "Binary na string ng byte"
+        },
+        "url-component": {
+          "usage": "I-encode ang isang parameter ng URL o bahagi ng path.",
+          "input": "Tekstong hindi na-escape",
+          "output": "Teksto ng bahagi ng URL",
+          "help": "Gumagamit ng encodeURIComponent / decodeURIComponent. Nagiging %20 ang mga espasyo; nagiging %2B ang literal na +."
+        },
+        "uri": {
+          "usage": "I-escape ang buong URI habang pinapanatili ang mga delimiter ng URI.",
+          "input": "Buong URI",
+          "output": "Na-escape na URI",
+          "help": "Gumagamit ng encodeURI / decodeURI at pinapanatili ang mga delimiter ng URI tulad ng : / ? #. Gamitin ang bahagi ng URL para sa iisang parameter value."
+        },
+        "form": {
+          "usage": "I-encode ang isang key o value ng form.",
+          "input": "Key / value na hindi na-escape",
+          "output": "Teksto ng bahagi ng form",
+          "help": "Gumagamit ng mga tuntunin ng application/x-www-form-urlencoded. Nagiging + ang mga espasyo; nagiging %2B ang literal na +."
+        },
+        "html-entities": {
+          "usage": "I-escape ang mga espesyal na character para sa HTML na nilalaman.",
+          "input": "Payak na teksto",
+          "output": "Mga HTML entity",
+          "help": "Nag-e-escape at nagde-decode ng mga HTML entity. Kino-convert ang teksto nang hindi bina-parse o pinapatakbo ang HTML."
+        },
+        "xml-entities": {
+          "usage": "I-convert ang teksto papunta o mula sa mga XML entity.",
+          "input": "Payak na teksto",
+          "output": "Mga XML entity",
+          "help": "Nag-e-escape at nagde-decode ng mga XML entity nang hindi bina-parse ang XML document o pinapatakbo ang input."
+        },
+        "json-string": {
+          "usage": "Gumawa o bumasa ng isang kumpletong JSON string literal.",
+          "input": "Payak na teksto",
+          "output": "JSON string na nasa panipi",
+          "help": "Kasama sa na-encode na output ang mga nakapaligid na panipi. Kailangan ng kumpletong JSON string literal upang mag-decode."
+        },
+        "unicode": {
+          "usage": "I-convert ang teksto papunta o mula sa mga Unicode escape.",
+          "input": "Payak na teksto",
+          "output": "Mga Unicode escape sequence",
+          "help": "Ine-encode ang UTF-16 bilang mga \\uXXXX escape. Dine-decode ang suportadong escape syntax nang hindi pinapatakbo ang input."
+        },
+        "codepoints": {
+          "usage": "Suriin o buuin muli ang mga codepoint ng Unicode.",
+          "input": "Tekstong Unicode",
+          "output": "Listahan ng mga U+ codepoint",
+          "help": "Ine-encode ang listahan ng mga hexadecimal na U+ codepoint. Binubuo muli ng pag-decode ang teksto, kasama ang mga karagdagang character."
+        },
+        "charset": {
+          "usage": "I-encode ang mga byte gamit ang target na character set.",
+          "input": "Tekstong Unicode / file sa source encoding",
+          "output": "Mga byte sa target encoding"
+        },
+        "json-yaml": {
+          "usage": "Mag-convert sa pagitan ng mga dokumentong JSON at YAML.",
+          "input": "Dokumentong JSON",
+          "output": "Dokumentong YAML"
+        },
+        "xml-json": {
+          "usage": "I-convert ang XML at ang nakaayos nitong istrakturang JSON.",
+          "input": "Dokumentong XML",
+          "output": "Nakaayos na JSON array"
+        },
+        "csv-json": {
+          "usage": "I-convert ang mga talahanayang pinaghihiwalay ng kuwit at JSON.",
+          "input": "Talahanayang CSV",
+          "output": "Mga hilera ng JSON"
+        },
+        "tsv-json": {
+          "usage": "I-convert ang mga talahanayang pinaghihiwalay ng tab at JSON.",
+          "input": "Talahanayang TSV",
+          "output": "Mga hilera ng JSON"
+        },
+        "jsonl": {
+          "usage": "I-convert ang JSON Lines at mga JSON array.",
+          "input": "JSON Lines",
+          "output": "JSON array"
+        },
+        "query-json": {
+          "usage": "I-convert ang mga paulit-ulit na query parameter sa mga string array.",
+          "input": "Query string",
+          "output": "JSON object na may mga string array"
+        },
+        "md5": {
+          "usage": "Kalkulahin ang MD5 checksum at ihambing sa mga inaasahang halaga.",
+          "input": "Teksto / mga file / mga linya ng teksto",
+          "output": "Checksum ng MD5"
+        },
+        "hash": {
+          "usage": "Kalkulahin ang hash ng orihinal na mga byte ng teksto o file.",
+          "input": "Teksto / orihinal na mga byte ng file",
+          "output": "Hex na digest ng napiling algorithm"
+        },
+        "hmac": {
+          "usage": "Kalkulahin ang HMAC gamit ang key para sa gawaing ito.",
+          "input": "Teksto ng mensahe / mga byte ng file + key",
+          "output": "Hex na HMAC digest"
+        },
+        "jwt": {
+          "usage": "Basahin ang mga header at payload ng JWT nang hindi bineberipika ang mga lagda.",
+          "input": "JWT na may tatlong bahagi",
+          "output": "Na-decode na JSON"
+        },
+        "gzip": {
+          "usage": "I-compress o i-decompress ang isang Gzip stream.",
+          "input": "Teksto / orihinal na mga byte ng file",
+          "output": "Mga Gzip byte (napiling representasyon)"
+        },
+        "zlib": {
+          "usage": "I-compress o i-decompress ang isang Zlib stream.",
+          "input": "Teksto / orihinal na mga byte ng file",
+          "output": "Mga Zlib byte (napiling representasyon)"
+        },
+        "deflate": {
+          "usage": "I-compress o i-decompress ang raw na datos ng Deflate.",
+          "input": "Teksto / orihinal na mga byte ng file",
+          "output": "Mga raw na Deflate byte (napiling representasyon)"
+        },
+        "radix": {
+          "usage": "I-convert ang integer sa ibang base.",
+          "input": "Integer sa source base",
+          "output": "Integer sa target base"
+        },
+        "bytes-unit": {
+          "usage": "I-convert ang mga bit, byte, at mga yunit ng SI at IEC.",
+          "input": "Halaga sa source unit",
+          "output": "Halaga sa target unit"
+        },
+        "duration-unit": {
+          "usage": "I-convert ang mga nakapirming tagal nang walang pagkalkula sa kalendaryo.",
+          "input": "Tagal sa source unit",
+          "output": "Tagal sa target unit"
+        },
+        "color": {
+          "usage": "I-convert ang mga representasyon ng kulay habang pinapanatili ang alpha.",
+          "input": "HEX / RGB / HSL / HSV JSON",
+          "output": "Napiling format ng kulay"
+        },
+        "case": {
+          "usage": "Ilapat ang napiling laki ng titik o istilo ng pagpapangalan.",
+          "input": "Teksto / pangalan",
+          "output": "Teksto sa napiling istilo ng pagpapangalan"
+        },
+        "lines": {
+          "usage": "Ilapat ang isang napiling operasyon sa mga linya ng teksto.",
+          "input": "Mga linya ng teksto",
+          "output": "Mga naprosesong linya ng teksto"
+        },
+        "newline": {
+          "usage": "I-convert ang mga pagtatapos ng linya ng teksto.",
+          "input": "Tekstong may mga pagtatapos ng linya",
+          "output": "Tekstong may napiling LF / CRLF / CR"
+        },
+        "normalize": {
+          "usage": "Ilapat ang Unicode normalization sa mga codepoint.",
+          "input": "Tekstong Unicode",
+          "output": "Teksto sa napiling normalization form"
+        }
+      },
+      "jsonCancelled": "Kinansela. Napanatili ang iyong input; patakbuhin muli kapag handa na.",
+      "convertHelp": "Paggamit at mga limitasyon",
+      "fileReplace": "Palitan ang mga file",
+      "md5CopyFile": "Kopyahin ang checksum ng {{name}}",
+      "copyIso": "Kopyahin ang ISO",
+      "copyIsoDate": "Kopyahin ang pagpapatakbo {{index}} bilang ISO",
+      "regexNotRun": "Hindi pa pinatakbo",
+      "regexNoMatches": "Walang tugma",
+      "regexStale": "Nagbago ang mga input. Patakbuhin upang i-update ang mga resulta.",
+      "speedNetwork": "Kumokonekta ang tool na ito sa Cloudflare at gumagamit ng network data. Magsisimula lamang ang mga kahilingan sa pagsubok kapag sinimulan mo.",
+      "speedSettings": "Mga setting ng pagsubok",
+      "speedSummary": "{{profile}} · {{unit}} · hanggang {{budget}} MiB",
+      "customZone": "Pasadyang IANA time zone"
+    },
+    "shared": {
+      "viewResult": "Tingnan ang resulta"
+    }
   }
 }

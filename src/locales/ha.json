@@ -1581,5 +1581,277 @@
     "passwordPolicy": "Nau'in halayen da aka zaɓa suna samar da tafkin da aka yarda. Kunna \"Bukatar kowane nau'i\" don haɗa kowane nau'in da aka zaɓa a cikin kowane kalmar sirri.",
     "speedScope": "Kimomi suna bayyana saurin canja wuri. Latency da jitter ana auna su daban.",
     "viewResult": "Duba sakamakon"
+  },
+  "redesign": {
+    "calculatorOriginal": "Ƙimar asali",
+    "calculatorNew": "Sabuwar darajar",
+    "calculatorPrice": "Farashin asali",
+    "calculatorOff": "Kashi kashi (%)",
+    "calculatorPart": "Sashe",
+    "calculatorWhole": "Gabaɗaya",
+    "calculatorPercent": "Kashi (%)",
+    "expressionResult": "Sakamakon magana · {{expression}}",
+    "businessResult": "{{mode}} · {{expression}}",
+    "workdayExceptions": "Ranakun hutu: {{off}} · Kwanakin aiki: {{work}}",
+    "copyDisplayedEquation": "Kwafi da aka nuna lissafin",
+    "drawShuffle": "Jerin gwano",
+    "drawGroups": "Ƙirƙiri ƙungiyoyi",
+    "timerOtherRunning": "{{mode}} yana gudana",
+    "timerSessionHelp": "Sake loda wannan shafin yana dawo da masu ƙidayar lokaci biyu, gami da ƙarshen lokacin agogo don masu ƙidayar lokaci. An ajiye jihar a cikin ma'ajiyar zaman wannan shafin.",
+    "pdfAddPdf": "Ƙara fayilolin PDF don wannan aikin.",
+    "pdfAddImages": "Ƙara hotuna PNG, JPG ko WebP don ƙirƙirar PDF.",
+    "pdfChooseCurrent": "Zaɓi PDF don aiwatarwa daga jerin PDF na yanzu.",
+    "qrRecognizeEmpty": "Gane rubutu zai bayyana a nan. Zaɓi, sauke ko liƙa hoto a yankin shigarwa.",
+    "textIdle": "Yi aiki don ganin sakamakonsa anan.",
+    "textStale": "An canza shigarwa ko zaɓuɓɓuka. sake gudanar da aikin.",
+    "textEmpty": "An kammala ba tare da fitarwa ba.",
+    "textInputStats": "Shigarwa: {{summary}}",
+    "textOutputBytes": "Fitowa: {{bytes}} UTF-8 bytes",
+    "textNewlineSummary": "Ƙarshen layi: {{format}} · {{bytes}} UTF-8 bytes",
+    "cropNote": "Ajiye daidaitawar shuka ya shafi hoton da aka zaɓa kawai. Fitarwa ta farko tana adana daidaitaccen shukar hoton da ba a ajiye ba, sannan aiwatar da kowane hoton da aka yi layi ta amfani da daidaitawar shukar da aka adana ko hoton asali.",
+    "cropSaveCurrent": "Ajiye girbi don wannan hoton",
+    "cropDirty": "Canje-canje na yanke hoton da ba a ajiye ba don {{name}}. Fitarwa zai ajiye waɗannan canje-canje da farko.",
+    "cropSaved": "An adana hoton yanke don {{name}}. Za a yi amfani da shi wajen fitar da hoton batch.",
+    "cropOriginal": "{{name}} ba shi da adana hoto. Fitarwa yana amfani da ainihin hoton sa sai dai idan kun daidaita shukar.",
+    "cropExportBatch": "Fitar da hotuna {{count}} · hotuna tare da adana amfanin gona: {{cropped}}",
+    "cropSaveExport": "Ajiye yanke hoto na yanzu kuma a fitar da hotuna {{count}}"
+  },
+  "direct": {
+    "daily": {
+      "countdownHelp": "Don ƙidayar baya, sa yau a matsayin farkon lokaci, sannan zaɓi ranar da ake nufi a matsayin ƙarshe. Ranakun da suka wuce suna ba da adadin kwanaki ƙasa da sifili.",
+      "anniversaryHelp": "Ga zagayowar ranar 29 ga Fabrairu, ana amfani da ranar ƙarshe ta Fabrairu a shekarun da ba na kabisat ba.",
+      "unitDetails": "Sauran juyawa da daidaito",
+      "unitPrecision": "≈ yana nuna an zagaye abin da ake nunawa zuwa muhimman lambobi 24; kwafi yana riƙe har 80. Abubuwan ninkawa suna bin mathjs; galan da oza na ruwa raka'o'in Amurka ne.",
+      "moneyEmpty": "Shigar da kuɗi ka juya shi don ganin sakamako.",
+      "listHelp": "Abu ɗaya a kowane layi. Ana tsallake layukan da babu komai; abubuwan da suka maimaitu suna zama daban har ka cire su.",
+      "dedupe": "Cire abubuwan da suka maimaitu",
+      "drawEntries": "Zaɓi abubuwa ta ƙuri'a · {{count}}",
+      "drawGroups": "Ƙirƙiri ƙungiyoyi · {{count}}",
+      "drawMembers": "Rarraba abubuwa · {{count}} a kowace ƙungiya",
+      "drawNumbers": "Zaɓi lambobi ta ƙuri'a · {{count}}",
+      "discountReduction": "Kashi kashi (%)",
+      "discountHelp": "Farashin asali 100, ragi 20 % → farashi bayan ragi 80."
+    },
+    "files": {
+      "fileActions": "Ayyukan fayil",
+      "discardCrop": "A watsar da gyare-gyaren yankan hoton da ba a adana ba?",
+      "imageInfo": "{{name}} · {{width}} × {{height}} px",
+      "pastedImage": "Hoton da aka liƙa",
+      "lineDedupeHelp": "Yana daidaita kowane cikakken layi daidai, har da sarari da manya/ƙananan haruffa. Yana riƙe bayyanar farko.",
+      "lineSortHelp": "Yana jera bisa raka'o'in lambar Unicode. Wannan ba tsarin harshe ko na ƙima ba ne."
+    },
+    "developer": {
+      "convert": {
+        "base64": {
+          "usage": "Wakilci baitoci a matsayin Base64.",
+          "input": "Rubutu / ainihin baitocin fayil",
+          "output": "Rubutun Base64"
+        },
+        "base64url": {
+          "usage": "Wakilci baitoci a matsayin Base64 mai aminci ga URL.",
+          "input": "Rubutu / ainihin baitocin fayil",
+          "output": "Rubutun Base64URL"
+        },
+        "base32": {
+          "usage": "Wakilci baitoci ta amfani da haruffan Base32.",
+          "input": "Rubutu / ainihin baitocin fayil",
+          "output": "Rubutun Base32"
+        },
+        "base32hex": {
+          "usage": "Wakilci baitoci ta amfani da haruffan Base32Hex.",
+          "input": "Rubutu / ainihin baitocin fayil",
+          "output": "Rubutun Base32Hex"
+        },
+        "base58": {
+          "usage": "Wakilci baitoci ta amfani da haruffan Bitcoin Base58.",
+          "input": "Rubutu / ainihin baitocin fayil",
+          "output": "Rubutun Base58"
+        },
+        "hex": {
+          "usage": "Juya baitoci zuwa ko daga tsarin tushe 16.",
+          "input": "Rubutu / ainihin baitocin fayil",
+          "output": "Baitoci a tsarin tushe 16"
+        },
+        "binary": {
+          "usage": "Wakilci kowane baiti da lambobin binari takwas.",
+          "input": "Rubutu / ainihin baitocin fayil",
+          "output": "Zaren baitoci na binari"
+        },
+        "url-component": {
+          "usage": "Ƙirƙiri lambar ma'aunin URL ɗaya ko ɓangaren hanya.",
+          "input": "Rubutu ba tare da alamomin kuɓuta ba",
+          "output": "Rubutun ɓangaren URL",
+          "help": "Yana amfani da encodeURIComponent / decodeURIComponent. Sarari yana zama %20; ainihin alamar + tana zama %2B."
+        },
+        "uri": {
+          "usage": "Yi amfani da alamomin kuɓuta a cikakken URI tare da riƙe masu raba URI.",
+          "input": "Cikakken URI",
+          "output": "URI mai alamomin kuɓuta",
+          "help": "Yana amfani da encodeURI / decodeURI kuma yana riƙe masu raba URI kamar : / ? #. Yi amfani da ɓangaren URL don ƙimar ma'auni guda ɗaya."
+        },
+        "form": {
+          "usage": "Ƙirƙiri lambar maɓalli ko ƙimar fom guda ɗaya.",
+          "input": "Maɓalli / ƙima ba tare da alamomin kuɓuta ba",
+          "output": "Rubutun ɓangaren fom",
+          "help": "Yana amfani da dokokin application/x-www-form-urlencoded. Sarari yana zama +; ainihin alamar + tana zama %2B."
+        },
+        "html-entities": {
+          "usage": "Yi amfani da alamomin kuɓuta ga haruffa na musamman a abun ciki na HTML.",
+          "input": "Rubutu kawai",
+          "output": "Abubuwan HTML",
+          "help": "Yana saka alamomin kuɓuta da warware abubuwan wakiltar haruffan HTML. Yana juya rubutu ba tare da tantance tsarin ko gudanar da HTML ba."
+        },
+        "xml-entities": {
+          "usage": "Juya rubutu zuwa ko daga abubuwan wakiltar haruffan XML.",
+          "input": "Rubutu kawai",
+          "output": "Abubuwan XML",
+          "help": "Yana saka alamomin kuɓuta da warware abubuwan wakiltar haruffan XML ba tare da tantance tsarin takardar XML ko gudanar da bayanan shigarwa ba."
+        },
+        "json-string": {
+          "usage": "Ƙirƙiri ko karanta cikakken rubutun zaren JSON kai tsaye.",
+          "input": "Rubutu kawai",
+          "output": "Zaren JSON cikin alamar zance",
+          "help": "Sakamakon da aka mayar lamba ya ƙunshi alamomin zance a kewaye. Warwarewa yana buƙatar cikakken rubutun zaren JSON kai tsaye."
+        },
+        "unicode": {
+          "usage": "Juya rubutu zuwa ko daga jerin alamomin kuɓuta na Unicode.",
+          "input": "Rubutu kawai",
+          "output": "Jerin alamomin kuɓuta na Unicode",
+          "help": "Yana mayar da UTF-16 zuwa alamomin kuɓuta \\uXXXX. Yana warware tsarin alamomin da ake tallafawa ba tare da gudanar da bayanan shigarwa ba."
+        },
+        "codepoints": {
+          "usage": "Bincika ko sake gina wuraren lambar Unicode.",
+          "input": "Rubutun Unicode",
+          "output": "Jerin wuraren lambar U+",
+          "help": "Yana mayar da jerin wuraren lambar U+ a tushe 16 zuwa lamba. Warwarewa yana sake gina rubutu, har da ƙarin haruffa."
+        },
+        "charset": {
+          "usage": "Ƙirƙiri lambar baitoci ta amfani da rukunin haruffan da ake nufi.",
+          "input": "Rubutun Unicode / fayil a tsarin lambar tushe",
+          "output": "Baitoci a tsarin lambar da ake nufi"
+        },
+        "json-yaml": {
+          "usage": "Juya tsakanin takardun JSON da YAML.",
+          "input": "Takardar JSON",
+          "output": "Takardar YAML"
+        },
+        "xml-json": {
+          "usage": "Juya XML da tsarin JSON nasa mai bin jeri.",
+          "input": "Takardar XML",
+          "output": "Jerin JSON mai tsari"
+        },
+        "csv-json": {
+          "usage": "Juya teburan da aka raba da waƙafi da JSON.",
+          "input": "Teburin CSV",
+          "output": "Layukan JSON"
+        },
+        "tsv-json": {
+          "usage": "Juya teburan da aka raba da tab da JSON.",
+          "input": "Teburin TSV",
+          "output": "Layukan JSON"
+        },
+        "jsonl": {
+          "usage": "Juya JSON Lines da jerin JSON.",
+          "input": "JSON Lines",
+          "output": "Jerin JSON"
+        },
+        "query-json": {
+          "usage": "Juya ma'aunan tambaya da suka maimaitu zuwa jerin zaren rubutu.",
+          "input": "Zaren tambaya",
+          "output": "Abun JSON mai jerin zaren rubutu"
+        },
+        "md5": {
+          "usage": "Lissafta jimillar tantancewar MD5 ka kwatanta da ƙimomin da ake sa ran samu.",
+          "input": "Rubutu / fayiloli / layukan rubutu",
+          "output": "Jimillar tabbatarwa MD5"
+        },
+        "hash": {
+          "usage": "Lissafta hash na ainihin baitocin rubutu ko fayil.",
+          "input": "Rubutu / ainihin baitocin fayil",
+          "output": "Taƙaitaccen hash a tushe 16 na hanyar lissafin da aka zaɓa"
+        },
+        "hmac": {
+          "usage": "Lissafta HMAC da maɓalli don wannan aikin.",
+          "input": "Rubutun saƙo / baitocin fayil + maɓalli",
+          "output": "Taƙaitaccen HMAC a tushe 16"
+        },
+        "jwt": {
+          "usage": "Karanta taken JWT da bayanansa ba tare da tantance sa hannu ba.",
+          "input": "JWT mai ɓangarori uku",
+          "output": "JSON da aka warware lambarsa"
+        },
+        "gzip": {
+          "usage": "Matsa ko warware matsin rafin Gzip guda ɗaya.",
+          "input": "Rubutu / ainihin baitocin fayil",
+          "output": "Baitocin Gzip (wakilcin da aka zaɓa)"
+        },
+        "zlib": {
+          "usage": "Matsa ko warware matsin rafin Zlib.",
+          "input": "Rubutu / ainihin baitocin fayil",
+          "output": "Baitocin Zlib (wakilcin da aka zaɓa)"
+        },
+        "deflate": {
+          "usage": "Matsa ko warware matsin bayanan Deflate marasa nade.",
+          "input": "Rubutu / ainihin baitocin fayil",
+          "output": "Baitocin Deflate marasa nade (wakilcin da aka zaɓa)"
+        },
+        "radix": {
+          "usage": "Juya cikakkiyar lamba zuwa wani tushe.",
+          "input": "Cikakkiyar lamba a tushen farko",
+          "output": "Cikakkiyar lamba a tushen da ake nufi"
+        },
+        "bytes-unit": {
+          "usage": "Juya bitoci, baitoci da raka'o'in SI da IEC.",
+          "input": "Ƙima a raka'ar farko",
+          "output": "Ƙima a raka'ar da ake nufi"
+        },
+        "duration-unit": {
+          "usage": "Juya tsayayyun tsawon lokaci ba tare da lissafin kalanda ba.",
+          "input": "Tsawon lokaci a raka'ar farko",
+          "output": "Tsawon lokaci a raka'ar da ake nufi"
+        },
+        "color": {
+          "usage": "Juya wakilcin launi tare da riƙe alfa.",
+          "input": "HEX / RGB / HSL / HSV JSON",
+          "output": "Tsarin launin da aka zaɓa"
+        },
+        "case": {
+          "usage": "Aiwatar da tsarin manya/ƙananan haruffa ko salon suna da aka zaɓa.",
+          "input": "Rubutu / suna",
+          "output": "Rubutu a salon sunan da aka zaɓa"
+        },
+        "lines": {
+          "usage": "Aiwatar da aikin da aka zaɓa guda ɗaya a kan layukan rubutu.",
+          "input": "Layukan rubutu",
+          "output": "Layukan rubutun da aka sarrafa"
+        },
+        "newline": {
+          "usage": "Juya alamomin ƙarshen layin rubutu.",
+          "input": "Rubutu mai alamomin ƙarshen layi",
+          "output": "Rubutu da LF / CRLF / CR da aka zaɓa"
+        },
+        "normalize": {
+          "usage": "Aiwatar da daidaitawar Unicode ga wuraren lamba.",
+          "input": "Rubutun Unicode",
+          "output": "Rubutu a tsarin daidaitawar da aka zaɓa"
+        }
+      },
+      "jsonCancelled": "An soke. An riƙe bayanan shigarka; sake gudanarwa idan ka shirya.",
+      "convertHelp": "Amfani da iyakoki",
+      "fileReplace": "Maye gurbin fayiloli",
+      "md5CopyFile": "Kwafi jimillar tantancewa ta {{name}}",
+      "copyIso": "Kwafi ISO",
+      "copyIsoDate": "Kwafi gudanarwa {{index}} a matsayin ISO",
+      "regexNotRun": "Ba a gudanar ba",
+      "regexNoMatches": "Babu ashana",
+      "regexStale": "Bayanan shigarwa sun canza. Gudanar don sabunta sakamako.",
+      "speedNetwork": "Wannan kayan aiki yana haɗuwa da Cloudflare kuma yana amfani da bayanan hanyar sadarwa. Buƙatun gwaji suna farawa ne kawai bayan ka fara.",
+      "speedSettings": "Saitunan gwaji",
+      "speedSummary": "{{profile}} · {{unit}} · har {{budget}} MiB",
+      "customZone": "Yankin lokaci na IANA na musamman"
+    },
+    "shared": {
+      "viewResult": "Duba sakamakon"
+    }
   }
 }

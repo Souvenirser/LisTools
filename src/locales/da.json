@@ -1581,5 +1581,277 @@
     "passwordPolicy": "Udvalgte tegntyper danner den tilladte pulje. Aktiver \"Kræv hver type\" for at inkludere hver valgte type i hver adgangskode.",
     "speedScope": "Bedømmelser beskriver overførselshastighed. Latens og jitter måles separat.",
     "viewResult": "Se resultat"
+  },
+  "redesign": {
+    "calculatorOriginal": "Oprindelig værdi",
+    "calculatorNew": "Ny værdi",
+    "calculatorPrice": "Original pris",
+    "calculatorOff": "Procent rabat (%)",
+    "calculatorPart": "Del",
+    "calculatorWhole": "Hele",
+    "calculatorPercent": "Procent (%)",
+    "expressionResult": "Udtryksresultat · {{expression}}",
+    "businessResult": "{{mode}} · {{expression}}",
+    "workdayExceptions": "Fridage: {{off}} · Arbejdsdatoer: {{work}}",
+    "copyDisplayedEquation": "Kopiér den viste ligning",
+    "drawShuffle": "Bland liste",
+    "drawGroups": "Opret grupper",
+    "timerOtherRunning": "{{mode}} kører",
+    "timerSessionHelp": "Genindlæsning af denne fane gendanner begge timere, inklusive forløbet urtid for kørende timere. Status gemmes i denne fanes sessionslager.",
+    "pdfAddPdf": "Tilføj PDF-filer til denne opgave.",
+    "pdfAddImages": "Tilføj PNG-, JPG- eller WebP-billeder for at oprette en PDF.",
+    "pdfChooseCurrent": "Vælg den PDF, der skal behandles, fra den aktuelle PDF-liste.",
+    "qrRecognizeEmpty": "Genkendt tekst vises her. Vælg, slip eller indsæt et billede i inputområdet.",
+    "textIdle": "Kør en operation for at se resultatet her.",
+    "textStale": "Input eller muligheder ændret. Kør operationen igen.",
+    "textEmpty": "Fuldført uden udgang.",
+    "textInputStats": "Input: {{summary}}",
+    "textOutputBytes": "Output: {{bytes}} UTF-8 bytes",
+    "textNewlineSummary": "Linjeafslutninger: {{format}} · {{bytes}} UTF-8 bytes",
+    "cropNote": "Lagring af en beskæringsjustering gælder kun for det valgte billede. Eksport gemmer først billedets ikke-gemte beskæringsjustering og behandler derefter hvert billede i kø ved hjælp af dets gemte beskæringsjustering eller originalbillede.",
+    "cropSaveCurrent": "Gem beskæring for dette billede",
+    "cropDirty": "Ikke-gemte billedbeskæringsændringer for {{name}}. Eksporten gemmer disse ændringer først.",
+    "cropSaved": "Gemt billedbeskæring for {{name}}. Det vil blive brugt i batch-billedeksporten.",
+    "cropOriginal": "{{name}} har ingen gemt billedbeskæring. Eksport bruger dets originale billede, medmindre du justerer beskæringen.",
+    "cropExportBatch": "Eksporter {{count}} billeder · billeder med gemt beskæring: {{cropped}}",
+    "cropSaveExport": "Gem den aktuelle billedbeskæring og eksporter {{count}} billeder"
+  },
+  "direct": {
+    "daily": {
+      "countdownHelp": "Brug i dag som start og måldatoen som slutning til en nedtælling. Tidligere måldatoer giver et negativt antal dage.",
+      "anniversaryHelp": "For årsdage den 29. februar bruges februars sidste dag i år uden skuddag.",
+      "unitDetails": "Andre omregninger og præcision",
+      "unitPrecision": "≈ markerer en visning afrundet til 24 betydende cifre; kopiering bevarer op til 80. Faktorer følger mathjs; gallon og fluid ounce er amerikanske enheder.",
+      "moneyEmpty": "Indtast et beløb, og omregn det for at se resultatet.",
+      "listHelp": "Én post pr. linje. Tomme linjer ignoreres; dubletter forbliver separate, indtil du fjerner dem.",
+      "dedupe": "Fjern dubletter",
+      "drawEntries": "Udtræk poster · {{count}}",
+      "drawGroups": "Opret grupper · {{count}}",
+      "drawMembers": "Gruppér poster · {{count}} pr. gruppe",
+      "drawNumbers": "Udtræk tal · {{count}}",
+      "discountReduction": "Procent rabat (%)",
+      "discountHelp": "Oprindelig pris 100, rabat 20 % → pris efter rabat 80."
+    },
+    "files": {
+      "fileActions": "Filhandlinger",
+      "discardCrop": "Kassér de ikke-gemte beskæringsjusteringer?",
+      "imageInfo": "{{name}} · {{width}} × {{height}} px",
+      "pastedImage": "Indsat billede",
+      "lineDedupeHelp": "Sammenligner hele linjer nøjagtigt, inklusive mellemrum og store/små bogstaver. Bevarer første forekomst.",
+      "lineSortHelp": "Sorterer efter Unicode-kodeenheder. Dette er ikke sproglig eller numerisk rækkefølge."
+    },
+    "developer": {
+      "convert": {
+        "base64": {
+          "usage": "Repræsenter bytes som Base64.",
+          "input": "Tekst / rå filbytes",
+          "output": "Base64-tekst"
+        },
+        "base64url": {
+          "usage": "Repræsenter bytes som URL-sikker Base64.",
+          "input": "Tekst / rå filbytes",
+          "output": "Base64URL-tekst"
+        },
+        "base32": {
+          "usage": "Repræsenter bytes med Base32-alfabetet.",
+          "input": "Tekst / rå filbytes",
+          "output": "Base32-tekst"
+        },
+        "base32hex": {
+          "usage": "Repræsenter bytes med Base32Hex-alfabetet.",
+          "input": "Tekst / rå filbytes",
+          "output": "Base32Hex-tekst"
+        },
+        "base58": {
+          "usage": "Repræsenter bytes med Bitcoin Base58-alfabetet.",
+          "input": "Tekst / rå filbytes",
+          "output": "Base58-tekst"
+        },
+        "hex": {
+          "usage": "Konvertér bytes til eller fra hexadecimal.",
+          "input": "Tekst / rå filbytes",
+          "output": "Hexadecimale bytes"
+        },
+        "binary": {
+          "usage": "Repræsenter hver byte som otte binære cifre.",
+          "input": "Tekst / rå filbytes",
+          "output": "Binær bytestreng"
+        },
+        "url-component": {
+          "usage": "Kod én URL-parameter eller stikomponent.",
+          "input": "Tekst uden escapes",
+          "output": "URL-komponenttekst",
+          "help": "Bruger encodeURIComponent / decodeURIComponent. Mellemrum bliver til %20; et bogstaveligt + bliver til %2B."
+        },
+        "uri": {
+          "usage": "Escape en fuld URI, mens URI-skilletegn bevares.",
+          "input": "Fuld URI",
+          "output": "Escapet URI",
+          "help": "Bruger encodeURI / decodeURI og bevarer URI-skilletegn som : / ? #. Brug URL-komponent til en enkelt parameterværdi."
+        },
+        "form": {
+          "usage": "Kod én formularnøgle eller -værdi.",
+          "input": "Nøgle / værdi uden escapes",
+          "output": "Formularkomponenttekst",
+          "help": "Bruger reglerne for application/x-www-form-urlencoded. Mellemrum bliver til +; et bogstaveligt + bliver til %2B."
+        },
+        "html-entities": {
+          "usage": "Escape specialtegn til HTML-indhold.",
+          "input": "Ren tekst",
+          "output": "HTML-entiteter",
+          "help": "Escaper og afkoder HTML-entiteter. Konverterer tekst uden at parse eller køre HTML."
+        },
+        "xml-entities": {
+          "usage": "Konvertér tekst til eller fra XML-entiteter.",
+          "input": "Ren tekst",
+          "output": "XML-entiteter",
+          "help": "Escaper og afkoder XML-entiteter uden at parse et XML-dokument eller køre input."
+        },
+        "json-string": {
+          "usage": "Opret eller læs en komplet JSON-strenglitteral.",
+          "input": "Ren tekst",
+          "output": "JSON-streng i anførselstegn",
+          "help": "Kodet output indeholder omgivende anførselstegn. Afkodning kræver en komplet JSON-strenglitteral."
+        },
+        "unicode": {
+          "usage": "Konvertér tekst til eller fra Unicode-escapes.",
+          "input": "Ren tekst",
+          "output": "Unicode-escape-sekvenser",
+          "help": "Koder UTF-16 som \\uXXXX-escapes. Afkoder understøttet escape-syntaks uden at køre input."
+        },
+        "codepoints": {
+          "usage": "Undersøg eller genskab Unicode-kodepunkter.",
+          "input": "Unicode-tekst",
+          "output": "Liste over U+-kodepunkter",
+          "help": "Koder en liste med hexadecimale U+-kodepunkter. Afkodning genskaber tekst, inklusive supplerende tegn."
+        },
+        "charset": {
+          "usage": "Kod bytes med et måltegnsæt.",
+          "input": "Unicode-tekst / fil i kildekodning",
+          "output": "Bytes i målkodning"
+        },
+        "json-yaml": {
+          "usage": "Konvertér mellem JSON- og YAML-dokumenter.",
+          "input": "JSON-dokument",
+          "output": "YAML-dokument"
+        },
+        "xml-json": {
+          "usage": "Konvertér XML og dets ordnede JSON-struktur.",
+          "input": "XML-dokument",
+          "output": "Ordnet JSON-array"
+        },
+        "csv-json": {
+          "usage": "Konvertér kommaseparerede tabeller og JSON.",
+          "input": "CSV-tabel",
+          "output": "JSON-rækker"
+        },
+        "tsv-json": {
+          "usage": "Konvertér tabulatorseparerede tabeller og JSON.",
+          "input": "TSV-tabel",
+          "output": "JSON-rækker"
+        },
+        "jsonl": {
+          "usage": "Konvertér JSON Lines og JSON-arrays.",
+          "input": "JSON Lines",
+          "output": "JSON-array"
+        },
+        "query-json": {
+          "usage": "Konvertér gentagne forespørgselsparametre til strengarrays.",
+          "input": "Forespørgselsstreng",
+          "output": "JSON-objekt med strengarrays"
+        },
+        "md5": {
+          "usage": "Beregn en MD5-kontrolsum, og sammenlign forventede værdier.",
+          "input": "Tekst / filer / tekstlinjer",
+          "output": "MD5-kontrolsum"
+        },
+        "hash": {
+          "usage": "Beregn hash af de oprindelige bytes i tekst eller en fil.",
+          "input": "Tekst / rå filbytes",
+          "output": "Hexadecimalt hashresultat for den valgte algoritme"
+        },
+        "hmac": {
+          "usage": "Beregn HMAC med en nøgle til denne opgave.",
+          "input": "Meddelelsestekst / filbytes + nøgle",
+          "output": "Hexadecimalt HMAC-resultat"
+        },
+        "jwt": {
+          "usage": "Læs JWT-headere og nyttedata uden at verificere signaturer.",
+          "input": "JWT med tre dele",
+          "output": "Afkodet JSON"
+        },
+        "gzip": {
+          "usage": "Komprimér eller dekomprimér én Gzip-strøm.",
+          "input": "Tekst / rå filbytes",
+          "output": "Gzip-bytes (valgt repræsentation)"
+        },
+        "zlib": {
+          "usage": "Komprimér eller dekomprimér en Zlib-strøm.",
+          "input": "Tekst / rå filbytes",
+          "output": "Zlib-bytes (valgt repræsentation)"
+        },
+        "deflate": {
+          "usage": "Komprimér eller dekomprimér rå Deflate-data.",
+          "input": "Tekst / rå filbytes",
+          "output": "Rå Deflate-bytes (valgt repræsentation)"
+        },
+        "radix": {
+          "usage": "Konvertér et heltal til en anden talbase.",
+          "input": "Heltal i kildens talbase",
+          "output": "Heltal i målets talbase"
+        },
+        "bytes-unit": {
+          "usage": "Omregn bit, bytes samt SI- og IEC-enheder.",
+          "input": "Værdi i kildeenheden",
+          "output": "Værdi i målenheden"
+        },
+        "duration-unit": {
+          "usage": "Omregn faste varigheder uden kalenderberegning.",
+          "input": "Varighed i kildeenheden",
+          "output": "Varighed i målenheden"
+        },
+        "color": {
+          "usage": "Konvertér farverepræsentationer, mens alfa bevares.",
+          "input": "HEX / RGB / HSL / HSV JSON",
+          "output": "Valgt farveformat"
+        },
+        "case": {
+          "usage": "Anvend den valgte brug af store/små bogstaver eller navngivningsstil.",
+          "input": "Tekst / navn",
+          "output": "Tekst i den valgte navngivningsstil"
+        },
+        "lines": {
+          "usage": "Anvend én valgt handling på tekstlinjer.",
+          "input": "Tekstlinjer",
+          "output": "Behandlede tekstlinjer"
+        },
+        "newline": {
+          "usage": "Konvertér tekstens linjeafslutninger.",
+          "input": "Tekst med linjeafslutninger",
+          "output": "Tekst med valgt LF / CRLF / CR"
+        },
+        "normalize": {
+          "usage": "Anvend Unicode-normalisering på kodepunkter.",
+          "input": "Unicode-tekst",
+          "output": "Tekst i den valgte normaliseringsform"
+        }
+      },
+      "jsonCancelled": "Annulleret. Dit input er bevaret; kør igen, når du er klar.",
+      "convertHelp": "Brug og begrænsninger",
+      "fileReplace": "Erstat filer",
+      "md5CopyFile": "Kopiér kontrolsum for {{name}}",
+      "copyIso": "Kopiér ISO",
+      "copyIsoDate": "Kopiér kørsel {{index}} som ISO",
+      "regexNotRun": "Ikke kørt",
+      "regexNoMatches": "Ingen match",
+      "regexStale": "Input er ændret. Kør for at opdatere resultaterne.",
+      "speedNetwork": "Dette værktøj forbinder til Cloudflare og bruger netværksdata. Testanmodninger begynder først, når du starter.",
+      "speedSettings": "Testindstillinger",
+      "speedSummary": "{{profile}} · {{unit}} · op til {{budget}} MiB",
+      "customZone": "Tilpasset IANA-tidszone"
+    },
+    "shared": {
+      "viewResult": "Se resultat"
+    }
   }
 }

@@ -14,11 +14,11 @@
 
 ## 浏览器与安装方式
 
-共用一套源码、一份 Manifest V3 清单和一个资源 ZIP，桌面端目标如下。浏览器核心兼容与已签名安装包是不同的交付阶段。
+共用一套源码、一份 Manifest V3 清单和一个资源 ZIP，桌面端兼容目标如下。此表不是逐版本实测认证：本版实际测试 Chrome 156 和 Edge 155；Chrome 120 因本机启动失败未完成验证。浏览器核心兼容与已签名安装包分别验收。
 
 | 浏览器 | 版本目标 | 安装方式 |
 | --- | --- | --- |
-| Chrome、Microsoft Edge | Chromium 120+ | 解压通用 ZIP，开启开发者模式后加载扩展目录 |
+| Chrome、Microsoft Edge | Chrome／Edge 120 及以上（兼容目标） | 解压通用 ZIP，开启开发者模式后加载扩展目录 |
 | Brave、Opera、Vivaldi | Chromium 内核 120+ | 同一 ZIP，在各自扩展管理页加载解压目录；仍需各浏览器实机验证 |
 | Firefox 桌面版 | 140+ | 本地临时加载同一目录；普通版长期安装需要 Mozilla 签名后的 XPI 或 AMO 条目 |
 | Safari（macOS） | 18+（资源兼容目标） | 提供“添加临时扩展”入口的版本可临时加载同一 ZIP；长期分发或无此入口的版本使用 Apple 官方应用打包流程 |
@@ -56,7 +56,7 @@ xcrun safari-web-extension-packager dist --app-name LisTools --bundle-identifier
 
 GitHub 的 **Source code** 压缩包是源码，需要按下文构建后加载 `dist/`。手动安装的版本需要自行下载更新并在扩展管理页重新加载。
 
-本轮发布构建版本为 **v1.1.4**，下载以 [GitHub Release](https://github.com/Souvenirser/LisTools/releases/tag/v1.1.4) 的版本标签和资产为准。`LisTools-1.1.4.zip` 面向 Chrome／Edge 上传或本地加载，根目录直接包含 `manifest.json`；Firefox／Safari 的通用资源请从源码构建 `dist/`，再按上文方式测试或转换。未发布支持页继续排除正式源码及安装包。本次未提交商店审核。此前 1.2–1.4 编号为本地开发候选包；正式发布以 GitHub Release 标签为准。测试结果和兼容边界见 [v1.1.4 验收记录](./docs/release-1.1.4.md)。
+本轮发布构建版本为 **v1.1.5**，下载以 [GitHub Release](https://github.com/Souvenirser/LisTools/releases/tag/v1.1.5) 的版本标签和资产为准。`LisTools-1.1.5.zip` 面向 Chrome／Edge 上传或本地加载，根目录直接包含 `manifest.json`；Firefox／Safari 的通用资源请从源码构建 `dist/`，再按上文方式测试或转换。未发布支持页继续排除正式源码及安装包。本次未提交商店审核。此前 1.2–1.4 编号为本地开发候选包；正式发布以 GitHub Release 标签为准。测试结果和兼容边界见 [v1.1.5 验收记录](./docs/release-1.1.5.md)。
 
 ## 文件处理与结果
 
@@ -231,7 +231,7 @@ npm run build
 构建输出：
 
 - `dist/`：共用的 Manifest V3 扩展资源，按上文各浏览器方式加载或转换。
-- `releases/LisTools-1.1.4.zip`：根目录包含 manifest.json 的完整资源包。
+- `releases/LisTools-1.1.5.zip`：根目录包含 manifest.json 的完整资源包。
 
 Chrome / Edge 等 Chromium 浏览器开启开发者模式，点击 **加载已解压的扩展程序**，选择本项目的 `dist`；Firefox 按上文临时加载，Safari 使用官方转换工具。固定 LisTools 图标，点击图标打开工具菜单；JSON 工作台仍使用 `index.html`。无需为 Edge 另写或另打包一套工具代码。
 
@@ -311,3 +311,14 @@ Vite 以 `pages/` 为页面根目录，`src/` 和 `public/` 仍在项目根目�
 后续修复菜单中 MD5 与编码转换同时选中的问题，并将工具名称统一为“正则测试”；最新候选目录及验证见[菜单选中态与名称修正](./docs/menu-active-fix-20261023/README.md)。
 
 全部主工具、37项转换和任务入口的选中态与命名复核，包含历史切换高亮修复及完整名称统一，见[全站选中态与命名核对](./docs/navigation-audit-20261023/README.md)。
+
+## 1.1.5 工作区与操作体验
+
+全站按任务控制宽度和阅读高度；统一正文、控件和帮助层级，减少重复标题和空白卡片。保留18个工具页面、MD5专用界面和全部37项转换，计算精度、文件算法、旧地址和会话格式保持。
+
+- Cron时区复用本地国旗搜索下拉，保留自定义IANA时区；正则及日期、单位等主要输入提高可读性。
+- 长JSON对比完整展示并能滚动到末尾；无效文件导入保护现有结果。PDF页数检查保留下载，图片未保存裁剪切换时确认。
+- 计算器结果和状态不推动键盘，办公计算就近展示；抽签、二维码、对比标题等间距统一。
+- 页面与弹窗继续共享分类排序和展开状态；小屏或显示缩放时菜单列表适配实际可用高度，版本和反馈入口保留可见。
+
+本版Chrome上传文件为 `LisTools-1.1.5.zip`。发布源码可直接 `npm ci && npm run build`；支持页草稿继续仅保留于原工作区。完整功能、跨浏览器及原生扩展验收见[1.1.5发布记录](./docs/release-1.1.5.md)。

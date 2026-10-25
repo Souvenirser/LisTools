@@ -19,6 +19,8 @@
           <div class="timezone-controls"><label id="timezone-caption" for="time-zone"><span data-i18n="timestamp.zone">时区</span></label><select id="time-zone" aria-describedby="device-time-zone timezone-error"></select><button id="restore-time-zone"><span data-i18n="timestamp.restore">恢复设备时区</span></button></div>
           <span id="device-time-zone"></span><p id="timezone-error" class="is-error" role="status" hidden></p>
         </section>
+        <details id="clock-details">
+          <summary><span data-i18n="ux.clockInfo"></span><output id="clock-summary" dir="ltr" aria-live="off"></output></summary>
         <section class="clock-panel panel" aria-labelledby="clock-title">
           <div class="panel-heading"><h2 id="clock-title"><span data-i18n="timestamp.now">当前时间</span></h2><span id="clock-context"></span><span class="clock-refresh"><span data-i18n="timestamp.refresh">每秒刷新</span></span></div>
           <div class="clock-values">
@@ -27,6 +29,7 @@
             <div class="clock-value"><label for="clock-milliseconds"><span data-i18n="timestamp.milliseconds">毫秒时间戳 · ms</span></label><div class="value-control"><textarea id="clock-milliseconds" data-field="milliseconds" readonly dir="ltr" rows="1" spellcheck="false"></textarea><button data-copy="clock-milliseconds" aria-label="复制当前毫秒时间戳" disabled data-i18n-aria-label="common.copy"><span data-i18n="common.copy">复制</span></button></div></div>
           </div>
         </section>
+        </details>
         <div class="timestamp-workspace">
           <section class="panel converter-panel" id="timestamp-panel" aria-labelledby="timestamp-title">
             <div class="panel-heading"><h2 id="timestamp-title"><span data-i18n="timestamp.toTime">时间戳 → 时间</span></h2><button data-copy-all="timestamp" disabled><span data-i18n="common.copyAll">复制全部</span></button></div>
@@ -39,10 +42,12 @@
             <div class="conversion-results">
               <div class="conversion-context" id="timestamp-context"><span data-i18n="common.result">转换结果</span></div>
               <div class="value-row"><label for="timestamp-local"><span data-i18n="timestamp.local">所选时区时间</span></label><div class="value-control"><textarea id="timestamp-local" data-field="localTime" readonly data-label-key="timestamp.local" dir="ltr" rows="1" spellcheck="false"></textarea><button data-copy="timestamp-local" aria-label="复制时间戳转换后的当地时间" disabled data-i18n-aria-label="common.copy"><span data-i18n="common.copy">复制</span></button></div></div>
+              <details id="timestamp-more-formats"><summary data-i18n="ux.moreTimeFormats"></summary>
               <div class="value-row"><label for="timestamp-utc"><span data-i18n="timestamp.utc">UTC 时间</span></label><div class="value-control"><textarea id="timestamp-utc" data-field="utcTime" readonly data-label-key="timestamp.utc" dir="ltr" rows="1" spellcheck="false"></textarea><button data-copy="timestamp-utc" aria-label="复制时间戳转换后的 UTC 时间" disabled data-i18n-aria-label="common.copy"><span data-i18n="common.copy">复制</span></button></div></div>
               <div class="value-row"><label for="timestamp-iso"><span data-i18n="timestamp.iso">ISO 时间 · 含偏移</span></label><div class="value-control"><textarea id="timestamp-iso" data-field="isoTime" readonly data-label-key="timestamp.iso" dir="ltr" rows="1" spellcheck="false"></textarea><button data-copy="timestamp-iso" aria-label="复制时间戳转换后的 ISO 时间" disabled data-i18n-aria-label="common.copy"><span data-i18n="common.copy">复制</span></button></div></div>
               <div class="value-row"><label for="timestamp-seconds"><span data-i18n="timestamp.seconds">秒时间戳 · s</span></label><div class="value-control"><textarea id="timestamp-seconds" data-field="seconds" readonly data-label-key="timestamp.seconds" dir="ltr" rows="1" spellcheck="false"></textarea><button data-copy="timestamp-seconds" aria-label="复制转换后的秒时间戳" disabled data-i18n-aria-label="common.copy"><span data-i18n="common.copy">复制</span></button></div></div>
               <div class="value-row"><label for="timestamp-milliseconds"><span data-i18n="timestamp.milliseconds">毫秒时间戳 · ms</span></label><div class="value-control"><textarea id="timestamp-milliseconds" data-field="milliseconds" readonly data-label-key="timestamp.milliseconds" dir="ltr" rows="1" spellcheck="false"></textarea><button data-copy="timestamp-milliseconds" aria-label="复制转换后的毫秒时间戳" disabled data-i18n-aria-label="common.copy"><span data-i18n="common.copy">复制</span></button></div></div>
+              </details>
             </div>
             <div class="converter-footer"><span data-i18n="timestamp.rounding">整数秒向下取整，毫秒完整保留。</span></div>
           </section>
@@ -58,9 +63,11 @@
               <div class="conversion-context" id="datetime-context"><span data-i18n="common.result">转换结果</span></div>
               <div class="value-row"><label for="datetime-seconds"><span data-i18n="timestamp.seconds">秒时间戳 · s</span></label><div class="value-control"><textarea id="datetime-seconds" data-field="seconds" readonly data-label-key="timestamp.seconds" dir="ltr" rows="1" spellcheck="false"></textarea><button data-copy="datetime-seconds" aria-label="复制日期转换后的秒时间戳" disabled data-i18n-aria-label="common.copy"><span data-i18n="common.copy">复制</span></button></div></div>
               <div class="value-row"><label for="datetime-milliseconds"><span data-i18n="timestamp.milliseconds">毫秒时间戳 · ms</span></label><div class="value-control"><textarea id="datetime-milliseconds" data-field="milliseconds" readonly data-label-key="timestamp.milliseconds" dir="ltr" rows="1" spellcheck="false"></textarea><button data-copy="datetime-milliseconds" aria-label="复制日期转换后的毫秒时间戳" disabled data-i18n-aria-label="common.copy"><span data-i18n="common.copy">复制</span></button></div></div>
+              <details id="datetime-more-formats"><summary data-i18n="ux.moreTimeFormats"></summary>
               <div class="value-row"><label for="datetime-local"><span data-i18n="timestamp.local">所选时区时间</span></label><div class="value-control"><textarea id="datetime-local" data-field="localTime" readonly data-label-key="timestamp.local" dir="ltr" rows="1" spellcheck="false"></textarea><button data-copy="datetime-local" aria-label="复制日期转换后的当地时间" disabled data-i18n-aria-label="common.copy"><span data-i18n="common.copy">复制</span></button></div></div>
               <div class="value-row"><label for="datetime-utc"><span data-i18n="timestamp.utc">UTC 时间</span></label><div class="value-control"><textarea id="datetime-utc" data-field="utcTime" readonly data-label-key="timestamp.utc" dir="ltr" rows="1" spellcheck="false"></textarea><button data-copy="datetime-utc" aria-label="复制日期转换后的 UTC 时间" disabled data-i18n-aria-label="common.copy"><span data-i18n="common.copy">复制</span></button></div></div>
               <div class="value-row"><label for="datetime-iso"><span data-i18n="timestamp.iso">ISO 时间 · 含偏移</span></label><div class="value-control"><textarea id="datetime-iso" data-field="isoTime" readonly data-label-key="timestamp.iso" dir="ltr" rows="1" spellcheck="false"></textarea><button data-copy="datetime-iso" aria-label="复制日期转换后的 ISO 时间" disabled data-i18n-aria-label="common.copy"><span data-i18n="common.copy">复制</span></button></div></div>
+              </details>
             </div>
             <div class="converter-footer"><span data-i18n="timestamp.rounding">整数秒向下取整，毫秒完整保留。</span><br /><span data-i18n="timestamp.dst">非法日期和夏令时跳过或重复的当地时间将被拒绝。</span></div>
           </section>

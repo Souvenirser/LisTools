@@ -1581,5 +1581,277 @@
     "passwordPolicy": "Các loại ký tự được chọn tạo thành nhóm được phép. Bật “Yêu cầu từng loại” để bao gồm mọi loại đã chọn trong mỗi mật khẩu.",
     "speedScope": "Xếp hạng mô tả tốc độ truyền tải. Độ trễ và jitter được đo riêng.",
     "viewResult": "Xem kết quả"
+  },
+  "redesign": {
+    "calculatorOriginal": "Giá trị ban đầu",
+    "calculatorNew": "Giá trị mới",
+    "calculatorPrice": "Giá gốc",
+    "calculatorOff": "Phần trăm giảm giá (%)",
+    "calculatorPart": "phần",
+    "calculatorWhole": "toàn bộ",
+    "calculatorPercent": "Tỷ lệ phần trăm (%)",
+    "expressionResult": "Kết quả biểu thức · {{expression}}",
+    "businessResult": "{{mode}} · {{expression}}",
+    "workdayExceptions": "Ngày nghỉ: {{off}} · Ngày làm việc: {{work}}",
+    "copyDisplayedEquation": "Sao chép phương trình hiển thị",
+    "drawShuffle": "Danh sách ngẫu nhiên",
+    "drawGroups": "Tạo nhóm",
+    "timerOtherRunning": "{{mode}} đang chạy",
+    "timerSessionHelp": "Tải lại tab này sẽ khôi phục cả hai bộ hẹn giờ, bao gồm cả thời gian đã trôi qua cho bộ hẹn giờ đang chạy. Trạng thái được lưu trong bộ lưu trữ phiên của tab này.",
+    "pdfAddPdf": "Thêm tệp PDF cho tác vụ này.",
+    "pdfAddImages": "Thêm hình ảnh PNG, JPG hoặc WebP để tạo PDF.",
+    "pdfChooseCurrent": "Chọn tệp PDF để xử lý từ danh sách PDF hiện tại.",
+    "qrRecognizeEmpty": "Văn bản được nhận dạng sẽ xuất hiện ở đây. Chọn, thả hoặc dán hình ảnh vào vùng nhập liệu.",
+    "textIdle": "Chạy một thao tác để xem kết quả của nó ở đây.",
+    "textStale": "Đầu vào hoặc tùy chọn đã thay đổi. Chạy lại thao tác.",
+    "textEmpty": "Đã hoàn thành mà không có đầu ra.",
+    "textInputStats": "Đầu vào: {{summary}}",
+    "textOutputBytes": "Đầu ra: {{bytes}} UTF-8 byte",
+    "textNewlineSummary": "Kết thúc dòng: {{format}} · {{bytes}} UTF-8 byte",
+    "cropNote": "Việc lưu điều chỉnh cắt xén chỉ áp dụng cho hình ảnh đã chọn. Trước tiên, xuất sẽ lưu điều chỉnh cắt xén chưa được lưu của hình ảnh đó, sau đó xử lý mọi hình ảnh được xếp hàng đợi bằng cách sử dụng điều chỉnh cắt xén đã lưu hoặc hình ảnh gốc.",
+    "cropSaveCurrent": "Lưu cắt xén cho hình ảnh này",
+    "cropDirty": "Các thay đổi cắt xén hình ảnh chưa được lưu cho {{name}}. Xuất sẽ lưu những thay đổi này trước tiên.",
+    "cropSaved": "Đã lưu cắt xén hình ảnh cho {{name}}. Nó sẽ được sử dụng trong việc xuất hình ảnh hàng loạt.",
+    "cropOriginal": "{{name}} chưa lưu ảnh cắt xén. Xuất sử dụng hình ảnh gốc trừ khi bạn điều chỉnh việc cắt xén.",
+    "cropExportBatch": "Xuất {{count}} hình ảnh · hình ảnh đã lưu cắt xén: {{cropped}}",
+    "cropSaveExport": "Lưu cắt xén hình ảnh hiện tại và xuất {{count}} hình ảnh"
+  },
+  "direct": {
+    "developer": {
+      "convert": {
+        "base64": {
+          "usage": "Biểu diễn byte dưới dạng Base64.",
+          "input": "Văn bản / byte gốc của tệp",
+          "output": "Văn bản Base64"
+        },
+        "base64url": {
+          "usage": "Biểu diễn byte dưới dạng Base64 an toàn cho URL.",
+          "input": "Văn bản / byte gốc của tệp",
+          "output": "Văn bản Base64URL"
+        },
+        "base32": {
+          "usage": "Biểu diễn byte bằng bảng ký tự Base32.",
+          "input": "Văn bản / byte gốc của tệp",
+          "output": "Văn bản Base32"
+        },
+        "base32hex": {
+          "usage": "Biểu diễn byte bằng bảng ký tự Base32Hex.",
+          "input": "Văn bản / byte gốc của tệp",
+          "output": "Văn bản Base32Hex"
+        },
+        "base58": {
+          "usage": "Biểu diễn byte bằng bảng ký tự Bitcoin Base58.",
+          "input": "Văn bản / byte gốc của tệp",
+          "output": "Văn bản Base58"
+        },
+        "hex": {
+          "usage": "Chuyển đổi byte sang hoặc từ dạng thập lục phân.",
+          "input": "Văn bản / byte gốc của tệp",
+          "output": "Byte thập lục phân"
+        },
+        "binary": {
+          "usage": "Biểu diễn mỗi byte bằng tám chữ số nhị phân.",
+          "input": "Văn bản / byte gốc của tệp",
+          "output": "Chuỗi byte nhị phân"
+        },
+        "url-component": {
+          "usage": "Mã hóa một tham số URL hoặc thành phần đường dẫn.",
+          "input": "Văn bản chưa mã hóa thoát",
+          "output": "Văn bản thành phần URL",
+          "help": "Dùng encodeURIComponent / decodeURIComponent. Khoảng trắng thành %20; dấu + nguyên dạng thành %2B."
+        },
+        "uri": {
+          "usage": "Mã hóa thoát toàn bộ URI và giữ các dấu phân cách URI.",
+          "input": "URI đầy đủ",
+          "output": "URI đã mã hóa thoát",
+          "help": "Dùng encodeURI / decodeURI và giữ các dấu phân cách URI như : / ? #. Với một giá trị tham số, dùng thành phần URL."
+        },
+        "form": {
+          "usage": "Mã hóa một khóa hoặc giá trị biểu mẫu.",
+          "input": "Khóa / giá trị chưa mã hóa thoát",
+          "output": "Văn bản thành phần biểu mẫu",
+          "help": "Theo quy tắc application/x-www-form-urlencoded. Khoảng trắng thành +; dấu + nguyên dạng thành %2B."
+        },
+        "html-entities": {
+          "usage": "Mã hóa thoát ký tự đặc biệt cho nội dung HTML.",
+          "input": "Văn bản thuần",
+          "output": "Thực thể HTML",
+          "help": "Mã hóa thoát và giải mã thực thể HTML. Chuyển đổi văn bản mà không phân tích hay thực thi HTML."
+        },
+        "xml-entities": {
+          "usage": "Chuyển văn bản sang hoặc từ thực thể XML.",
+          "input": "Văn bản thuần",
+          "output": "Thực thể XML",
+          "help": "Mã hóa thoát và giải mã thực thể XML mà không phân tích tài liệu XML hay thực thi dữ liệu nhập."
+        },
+        "json-string": {
+          "usage": "Tạo hoặc đọc một giá trị chuỗi JSON nguyên dạng đầy đủ.",
+          "input": "Văn bản thuần",
+          "output": "Chuỗi JSON có dấu ngoặc kép",
+          "help": "Kết quả mã hóa có dấu ngoặc kép bao ngoài. Giải mã yêu cầu một giá trị chuỗi JSON nguyên dạng đầy đủ."
+        },
+        "unicode": {
+          "usage": "Chuyển văn bản sang hoặc từ chuỗi thoát Unicode.",
+          "input": "Văn bản thuần",
+          "output": "Chuỗi thoát Unicode",
+          "help": "Mã hóa UTF-16 thành chuỗi thoát \\uXXXX. Giải mã cú pháp thoát được hỗ trợ mà không thực thi dữ liệu nhập."
+        },
+        "codepoints": {
+          "usage": "Xem hoặc dựng lại điểm mã Unicode.",
+          "input": "Văn bản Unicode",
+          "output": "Danh sách điểm mã U+",
+          "help": "Mã hóa danh sách điểm mã U+ thập lục phân. Giải mã dựng lại văn bản, kể cả ký tự bổ sung."
+        },
+        "charset": {
+          "usage": "Mã hóa byte bằng bộ ký tự đích.",
+          "input": "Văn bản Unicode / tệp dùng mã hóa nguồn",
+          "output": "Byte dùng mã hóa đích"
+        },
+        "json-yaml": {
+          "usage": "Chuyển đổi tài liệu giữa JSON và YAML.",
+          "input": "Tài liệu JSON",
+          "output": "Tài liệu YAML"
+        },
+        "xml-json": {
+          "usage": "Chuyển đổi XML và cấu trúc JSON có thứ tự tương ứng.",
+          "input": "Tài liệu XML",
+          "output": "Mảng JSON có thứ tự"
+        },
+        "csv-json": {
+          "usage": "Chuyển đổi bảng phân tách bằng dấu phẩy và JSON.",
+          "input": "Bảng CSV",
+          "output": "Các hàng JSON"
+        },
+        "tsv-json": {
+          "usage": "Chuyển đổi bảng phân tách bằng tab và JSON.",
+          "input": "Bảng TSV",
+          "output": "Các hàng JSON"
+        },
+        "jsonl": {
+          "usage": "Chuyển đổi JSON Lines và mảng JSON.",
+          "input": "JSON Lines",
+          "output": "Mảng JSON"
+        },
+        "query-json": {
+          "usage": "Chuyển tham số truy vấn lặp lại thành mảng chuỗi.",
+          "input": "Chuỗi truy vấn",
+          "output": "Đối tượng JSON chứa mảng chuỗi"
+        },
+        "md5": {
+          "usage": "Tính mã kiểm tra MD5 và so sánh với giá trị mong đợi.",
+          "input": "Văn bản / tệp / dòng văn bản",
+          "output": "Mã kiểm tra MD5"
+        },
+        "hash": {
+          "usage": "Băm các byte gốc của văn bản hoặc tệp.",
+          "input": "Văn bản / byte gốc của tệp",
+          "output": "Mã băm thập lục phân của thuật toán đã chọn"
+        },
+        "hmac": {
+          "usage": "Tính HMAC bằng khóa cho tác vụ này.",
+          "input": "Nội dung thông điệp / byte tệp + khóa",
+          "output": "Mã băm HMAC thập lục phân"
+        },
+        "jwt": {
+          "usage": "Đọc phần đầu và nội dung JWT mà không xác minh chữ ký.",
+          "input": "JWT ba phần",
+          "output": "JSON đã giải mã"
+        },
+        "gzip": {
+          "usage": "Nén hoặc giải nén một luồng Gzip.",
+          "input": "Văn bản / byte gốc của tệp",
+          "output": "Byte Gzip (cách biểu diễn đã chọn)"
+        },
+        "zlib": {
+          "usage": "Nén hoặc giải nén một luồng Zlib.",
+          "input": "Văn bản / byte gốc của tệp",
+          "output": "Byte Zlib (cách biểu diễn đã chọn)"
+        },
+        "deflate": {
+          "usage": "Nén hoặc giải nén dữ liệu Deflate thô.",
+          "input": "Văn bản / byte gốc của tệp",
+          "output": "Byte Deflate thô (cách biểu diễn đã chọn)"
+        },
+        "radix": {
+          "usage": "Chuyển một số nguyên sang cơ số khác.",
+          "input": "Số nguyên theo cơ số nguồn",
+          "output": "Số nguyên theo cơ số đích"
+        },
+        "bytes-unit": {
+          "usage": "Chuyển đổi bit, byte và đơn vị SI, IEC.",
+          "input": "Giá trị theo đơn vị nguồn",
+          "output": "Giá trị theo đơn vị đích"
+        },
+        "duration-unit": {
+          "usage": "Chuyển đổi khoảng thời gian cố định, không tính lịch.",
+          "input": "Khoảng thời gian theo đơn vị nguồn",
+          "output": "Khoảng thời gian theo đơn vị đích"
+        },
+        "color": {
+          "usage": "Chuyển đổi cách biểu diễn màu và giữ kênh alpha.",
+          "input": "HEX / RGB / HSL / HSV JSON",
+          "output": "Định dạng màu đã chọn"
+        },
+        "case": {
+          "usage": "Áp dụng kiểu chữ hoa/thường hoặc cách đặt tên đã chọn.",
+          "input": "Văn bản / tên",
+          "output": "Văn bản theo kiểu đặt tên đã chọn"
+        },
+        "lines": {
+          "usage": "Áp dụng một thao tác đã chọn cho các dòng văn bản.",
+          "input": "Các dòng văn bản",
+          "output": "Các dòng văn bản đã xử lý"
+        },
+        "newline": {
+          "usage": "Chuyển đổi ký tự kết thúc dòng.",
+          "input": "Văn bản có ký tự kết thúc dòng",
+          "output": "Văn bản dùng LF / CRLF / CR đã chọn"
+        },
+        "normalize": {
+          "usage": "Áp dụng chuẩn hóa Unicode cho điểm mã.",
+          "input": "Văn bản Unicode",
+          "output": "Văn bản theo dạng chuẩn hóa đã chọn"
+        }
+      },
+      "jsonCancelled": "Đã hủy. Dữ liệu nhập được giữ lại; hãy chạy lại khi sẵn sàng.",
+      "convertHelp": "Cách dùng và giới hạn",
+      "fileReplace": "Thay tệp",
+      "md5CopyFile": "Sao chép mã kiểm tra của {{name}}",
+      "copyIso": "Sao chép ISO",
+      "copyIsoDate": "Sao chép lần chạy {{index}} theo ISO",
+      "regexNotRun": "Chưa chạy",
+      "regexNoMatches": "Không có kết quả khớp",
+      "regexStale": "Dữ liệu nhập đã đổi. Chạy để cập nhật kết quả.",
+      "speedNetwork": "Công cụ kết nối Cloudflare và sử dụng dữ liệu mạng. Yêu cầu kiểm tra chỉ bắt đầu sau khi bạn nhấn bắt đầu.",
+      "speedSettings": "Cài đặt kiểm tra",
+      "speedSummary": "{{profile}} · {{unit}} · tối đa {{budget}} MiB",
+      "customZone": "Múi giờ IANA tùy chỉnh"
+    },
+    "daily": {
+      "countdownHelp": "Để đếm ngược, chọn hôm nay làm ngày bắt đầu và ngày đích làm ngày kết thúc. Ngày đích đã qua cho số ngày âm.",
+      "anniversaryHelp": "Với ngày kỷ niệm 29 tháng 2, năm không nhuận dùng ngày cuối tháng 2.",
+      "unitDetails": "Các phép đổi khác và độ chính xác",
+      "moneyEmpty": "Nhập số tiền rồi chuyển đổi để xem kết quả.",
+      "listHelp": "Mỗi dòng một mục. Bỏ qua dòng trống; các mục trùng vẫn tách biệt đến khi bạn xóa chúng.",
+      "dedupe": "Xóa các mục trùng",
+      "drawEntries": "Rút mục · {{count}}",
+      "drawGroups": "Tạo nhóm · {{count}}",
+      "drawMembers": "Chia mục · {{count}} mục mỗi nhóm",
+      "drawNumbers": "Rút số · {{count}}",
+      "discountReduction": "Phần trăm giảm giá (%)",
+      "discountHelp": "Giá gốc 100, giảm 20% → giá sau giảm 80.",
+      "unitPrecision": "Kết quả hiển thị tối đa 24 chữ số có nghĩa. ≈ dấu hiển thị làm tròn; sao chép bảo tồn tới 80 chữ số có nghĩa. Các hệ số đơn vị sử dụng định nghĩa mathjs; gallon và ounce chất lỏng là đơn vị của Hoa Kỳ."
+    },
+    "files": {
+      "fileActions": "Thao tác với tệp",
+      "discardCrop": "Bỏ các điều chỉnh cắt chưa lưu?",
+      "imageInfo": "{{name}} · {{width}} × {{height}} px",
+      "pastedImage": "Ảnh đã dán",
+      "lineDedupeHelp": "So khớp chính xác cả dòng, kể cả khoảng trắng và chữ hoa/thường. Giữ lần xuất hiện đầu tiên.",
+      "lineSortHelp": "Sắp xếp theo đơn vị mã Unicode, không theo ngôn ngữ hay giá trị số."
+    },
+    "shared": {
+      "viewResult": "Xem kết quả"
+    }
   }
 }

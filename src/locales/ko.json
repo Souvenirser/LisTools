@@ -1581,5 +1581,277 @@
     "passwordPolicy": "선택한 문자 유형이 허용되는 풀을 형성합니다. 각 비밀번호에 선택한 모든 유형을 포함하려면 \"각 유형 필요\"를 활성화하십시오.",
     "speedScope": "등급은 전송 속도를 나타냅니다. 지연 시간과 지터는 별도로 측정됩니다.",
     "viewResult": "결과 보기"
+  },
+  "redesign": {
+    "calculatorOriginal": "원래 값",
+    "calculatorNew": "새로운 가치",
+    "calculatorPrice": "원래 가격",
+    "calculatorOff": "할인율(%)",
+    "calculatorPart": "부품",
+    "calculatorWhole": "전체",
+    "calculatorPercent": "백분율(%)",
+    "expressionResult": "표현식 결과 · {{expression}}",
+    "businessResult": "{{mode}} · {{expression}}",
+    "workdayExceptions": "휴무일: {{off}} · 근무일: {{work}}",
+    "copyDisplayedEquation": "표시된 방정식 복사",
+    "drawShuffle": "목록 섞기",
+    "drawGroups": "그룹 만들기",
+    "timerOtherRunning": "{{mode}}이 실행 중입니다.",
+    "timerSessionHelp": "이 탭을 다시 로드하면 타이머 실행에 대한 경과 시계 시간을 포함하여 두 타이머가 모두 복원됩니다. 상태는 이 탭의 세션 저장소에 저장됩니다.",
+    "pdfAddPdf": "이 작업을 위해 PDF 파일을 추가하세요.",
+    "pdfAddImages": "PNG, JPG 또는 WebP 이미지를 추가하여 PDF를 만드세요.",
+    "pdfChooseCurrent": "현재 PDF 목록에서 처리할 PDF를 선택합니다.",
+    "qrRecognizeEmpty": "인식된 텍스트가 여기에 표시됩니다. 입력 영역에서 이미지를 선택하거나 놓거나 붙여넣습니다.",
+    "textIdle": "여기에서 작업을 실행하여 결과를 확인하세요.",
+    "textStale": "입력 또는 옵션이 변경되었습니다. 작업을 다시 실행하십시오.",
+    "textEmpty": "출력 없이 완료되었습니다.",
+    "textInputStats": "입력: {{summary}}",
+    "textOutputBytes": "출력: {{bytes}} UTF-8 바이트",
+    "textNewlineSummary": "줄 끝: {{format}} · {{bytes}} UTF-8 바이트",
+    "cropNote": "자르기 조정 저장은 선택한 이미지에만 적용됩니다. 내보내기는 먼저 해당 이미지의 저장되지 않은 자르기 조정을 저장한 다음 저장된 자르기 조정 또는 원본 이미지를 사용하여 대기 중인 모든 이미지를 처리합니다.",
+    "cropSaveCurrent": "이 이미지의 자르기 저장",
+    "cropDirty": "{{name}}에 대한 저장되지 않은 이미지 자르기 변경 사항입니다. 내보내기는 이러한 변경 사항을 먼저 저장합니다.",
+    "cropSaved": "{{name}}에 대한 이미지 자르기를 저장했습니다. 배치 이미지 내보내기에 사용됩니다.",
+    "cropOriginal": "{{name}}에는 저장된 이미지 자르기가 없습니다. 자르기를 조정하지 않는 한 내보내기는 원본 이미지를 사용합니다.",
+    "cropExportBatch": "{{count}} 이미지 내보내기 · 자르기가 저장된 이미지: {{cropped}}",
+    "cropSaveExport": "현재 이미지 자르기를 저장하고 {{count}} 이미지 내보내기"
+  },
+  "direct": {
+    "developer": {
+      "convert": {
+        "base64": {
+          "input": "원시 텍스트/파일 바이트",
+          "output": "Base64 텍스트",
+          "usage": "변환: 원시 텍스트/파일 바이트 → Base64 텍스트."
+        },
+        "base64url": {
+          "input": "원시 텍스트/파일 바이트",
+          "output": "Base64URL 텍스트",
+          "usage": "변환: 원시 텍스트/파일 바이트 → Base64URL 텍스트."
+        },
+        "base32": {
+          "input": "원시 텍스트/파일 바이트",
+          "output": "Base32 텍스트",
+          "usage": "변환: 원시 텍스트/파일 바이트 → Base32 텍스트."
+        },
+        "base32hex": {
+          "input": "원시 텍스트/파일 바이트",
+          "output": "Base32Hex 텍스트",
+          "usage": "변환: 원시 텍스트/파일 바이트 → Base32Hex 텍스트."
+        },
+        "base58": {
+          "input": "원시 텍스트/파일 바이트",
+          "output": "Base58 텍스트",
+          "usage": "Bitcoin Base58 문자 집합으로 바이트를 표현합니다."
+        },
+        "hex": {
+          "input": "원시 텍스트/파일 바이트",
+          "output": "16진수 바이트",
+          "usage": "변환: 원시 텍스트/파일 바이트 ↔ 16진수 바이트."
+        },
+        "binary": {
+          "input": "원시 텍스트/파일 바이트",
+          "output": "이진 바이트 문자열",
+          "usage": "각 바이트를 8자리 이진수로 표현합니다."
+        },
+        "url-component": {
+          "input": "이스케이프하지 않은 텍스트",
+          "output": "URL 구성 요소 텍스트",
+          "usage": "URL 매개변수나 경로 구성 요소 하나를 인코딩합니다.",
+          "help": "encodeURIComponent / decodeURIComponent를 사용합니다. 공백은 %20으로, 리터럴 +는 %2B로 바뀝니다."
+        },
+        "uri": {
+          "input": "전체 URI",
+          "output": "이스케이프한 URI",
+          "usage": "URI 구분자를 유지하며 전체 URI를 이스케이프합니다.",
+          "help": "encodeURI / decodeURI를 사용하며 : / ? # 같은 URI 구분자를 유지합니다. 단일 매개변수 값에는 URL 구성 요소를 사용하세요."
+        },
+        "form": {
+          "input": "이스케이프하지 않은 키 / 값",
+          "output": "폼 구성 요소 텍스트",
+          "usage": "폼 키 또는 값 하나를 인코딩합니다.",
+          "help": "application/x-www-form-urlencoded 규칙을 사용합니다. 공백은 +로, 리터럴 +는 %2B로 바뀝니다."
+        },
+        "html-entities": {
+          "input": "일반 텍스트",
+          "output": "HTML 엔터티",
+          "usage": "변환: 일반 텍스트 ↔ HTML 엔터티.",
+          "help": "HTML 엔터티를 이스케이프하고 디코딩합니다. HTML을 파싱하거나 실행하지 않고 텍스트를 변환합니다."
+        },
+        "xml-entities": {
+          "input": "일반 텍스트",
+          "output": "XML 엔터티",
+          "usage": "변환: 일반 텍스트 ↔ XML 엔터티.",
+          "help": "XML 문서를 파싱하거나 입력을 실행하지 않고 XML 엔터티를 이스케이프하고 디코딩합니다."
+        },
+        "json-string": {
+          "input": "일반 텍스트",
+          "output": "따옴표로 묶인 JSON 문자열",
+          "usage": "변환: 일반 텍스트 ↔ 따옴표로 묶인 JSON 문자열.",
+          "help": "인코딩 결과에는 양쪽 따옴표가 포함됩니다. 디코딩에는 완전한 JSON 문자열 리터럴이 필요합니다."
+        },
+        "unicode": {
+          "input": "일반 텍스트",
+          "output": "Unicode 이스케이프",
+          "usage": "변환: 일반 텍스트 ↔ Unicode 이스케이프.",
+          "help": "UTF-16을 \\uXXXX 이스케이프로 인코딩합니다. 입력을 실행하지 않고 지원되는 이스케이프 구문을 디코딩합니다."
+        },
+        "codepoints": {
+          "input": "Unicode 텍스트",
+          "output": "U+ 코드 포인트 목록",
+          "usage": "Unicode 코드 포인트를 확인하거나 복원합니다.",
+          "help": "16진수 U+ 코드 포인트 목록을 인코딩합니다. 디코딩하면 보충 문자를 포함한 텍스트를 복원합니다."
+        },
+        "charset": {
+          "input": "Unicode 텍스트 / 원본 인코딩 파일",
+          "output": "대상 인코딩 바이트",
+          "usage": "대상 문자 집합으로 바이트를 인코딩합니다."
+        },
+        "json-yaml": {
+          "input": "JSON 문서",
+          "output": "YAML 문서",
+          "usage": "변환: JSON 문서 ↔ YAML 문서."
+        },
+        "xml-json": {
+          "input": "XML 문서",
+          "output": "순서를 유지한 JSON 배열",
+          "usage": "변환: XML 문서 ↔ 순서를 유지한 JSON 배열."
+        },
+        "csv-json": {
+          "input": "CSV 표",
+          "output": "JSON 행",
+          "usage": "변환: CSV 표 ↔ JSON 행."
+        },
+        "tsv-json": {
+          "input": "TSV 표",
+          "output": "JSON 행",
+          "usage": "변환: TSV 표 ↔ JSON 행."
+        },
+        "jsonl": {
+          "input": "JSON Lines",
+          "output": "JSON 배열",
+          "usage": "변환: JSON Lines ↔ JSON 배열."
+        },
+        "query-json": {
+          "input": "쿼리 문자열",
+          "output": "문자열 배열을 포함한 JSON 객체",
+          "usage": "반복되는 쿼리 매개변수를 문자열 배열로 변환합니다."
+        },
+        "md5": {
+          "input": "텍스트 / 파일 / 텍스트 줄",
+          "output": "다이제스트",
+          "usage": "MD5 체크섬을 계산하고 예상 값과 비교합니다."
+        },
+        "hash": {
+          "input": "원시 텍스트/파일 바이트",
+          "output": "선택한 알고리즘의 16진수 다이제스트",
+          "usage": "텍스트나 파일의 원본 바이트로 해시를 계산합니다."
+        },
+        "hmac": {
+          "input": "메시지 텍스트 / 파일 바이트 + 키",
+          "output": "16진수 HMAC 다이제스트",
+          "usage": "이 작업의 키로 HMAC을 계산합니다."
+        },
+        "jwt": {
+          "input": "세 부분으로 된 JWT",
+          "output": "디코딩된 JSON",
+          "usage": "서명을 검증하지 않고 JWT 헤더와 페이로드를 읽습니다."
+        },
+        "gzip": {
+          "input": "원시 텍스트/파일 바이트",
+          "output": "Gzip 바이트 (선택한 표현)",
+          "usage": "Gzip 스트림 하나를 압축하거나 풉니다."
+        },
+        "zlib": {
+          "input": "원시 텍스트/파일 바이트",
+          "output": "Zlib 바이트 (선택한 표현)",
+          "usage": "Zlib 스트림을 압축하거나 풉니다."
+        },
+        "deflate": {
+          "input": "원시 텍스트/파일 바이트",
+          "output": "원시 Deflate 바이트 (선택한 표현)",
+          "usage": "원시 Deflate 데이터를 압축하거나 풉니다."
+        },
+        "radix": {
+          "input": "원본 진법의 정수",
+          "output": "대상 진법의 정수",
+          "usage": "변환: 원본 진법의 정수 → 대상 진법의 정수."
+        },
+        "bytes-unit": {
+          "input": "원본 단위의 값",
+          "output": "대상 단위의 값",
+          "usage": "비트, 바이트, SI 및 IEC 단위를 변환합니다."
+        },
+        "duration-unit": {
+          "input": "원본 단위의 기간",
+          "output": "대상 단위의 기간",
+          "usage": "달력 계산 없이 고정 기간을 변환합니다."
+        },
+        "color": {
+          "input": "HEX / RGB / HSL / HSV JSON",
+          "output": "선택한 색상 형식",
+          "usage": "알파 값을 유지하며 색상 표현을 변환합니다."
+        },
+        "case": {
+          "input": "텍스트 / 이름",
+          "output": "선택한 명명 방식의 텍스트",
+          "usage": "변환: 텍스트 / 이름 → 선택한 명명 방식의 텍스트."
+        },
+        "lines": {
+          "input": "텍스트 줄",
+          "output": "처리된 텍스트 줄",
+          "usage": "텍스트 줄에 선택한 작업 하나를 적용합니다."
+        },
+        "newline": {
+          "input": "줄바꿈이 포함된 텍스트",
+          "output": "선택한 LF / CRLF / CR을 사용하는 텍스트",
+          "usage": "변환: 줄바꿈이 포함된 텍스트 → 선택한 LF / CRLF / CR을 사용하는 텍스트."
+        },
+        "normalize": {
+          "input": "Unicode 텍스트",
+          "output": "선택한 정규화 형식의 텍스트",
+          "usage": "코드 포인트에 Unicode 정규화를 적용합니다."
+        }
+      },
+      "jsonCancelled": "취소되었습니다. 입력은 보존됩니다. 준비되면 다시 실행하세요.",
+      "convertHelp": "사용법 및 제한",
+      "fileReplace": "파일 바꾸기",
+      "md5CopyFile": "{{name}}의 체크섬 복사",
+      "copyIso": "ISO 복사",
+      "copyIsoDate": "실행 {{index}}을 ISO로 복사",
+      "regexNotRun": "실행 안 함",
+      "regexStale": "입력이 변경되었습니다. 실행하여 결과를 갱신하세요.",
+      "speedNetwork": "이 도구는 Cloudflare에 연결하며 네트워크 데이터를 사용합니다. 테스트 요청은 시작한 뒤에만 전송됩니다.",
+      "speedSettings": "테스트 설정",
+      "speedSummary": "{{profile}} · {{unit}} · 최대 {{budget}} MiB",
+      "customZone": "사용자 지정 IANA 시간대",
+      "regexNoMatches": "일치하는 항목이 없습니다."
+    },
+    "daily": {
+      "unitDetails": "다른 변환 및 정밀도",
+      "moneyEmpty": "금액을 입력하고 변환하면 결과를 볼 수 있습니다.",
+      "listHelp": "한 줄에 항목 하나를 입력하세요. 빈 줄은 무시되며 중복 항목은 제거하기 전까지 별도로 취급됩니다.",
+      "dedupe": "중복 항목 제거",
+      "drawEntries": "항목 추첨 · {{count}}",
+      "drawGroups": "그룹 만들기 · {{count}}",
+      "drawMembers": "항목 묶기 · 그룹당 {{count}}개",
+      "drawNumbers": "숫자 추첨 · {{count}}",
+      "discountHelp": "원래 가격 100, 할인율 20% → 할인 후 가격 80.",
+      "countdownHelp": "카운트다운은 오늘을 시작으로 하고 목표를 끝으로 정하세요. 과거 목표는 음수 일수를 반환합니다.",
+      "anniversaryHelp": "기념일은 윤년이 아닌 해의 경우 2월의 마지막 날을 2월 29일로 사용합니다.",
+      "unitPrecision": "≈는 유효 숫자 24자리로 반올림한 표시를 뜻하며, 복사 시 최대 80자리를 보존합니다. 계수는 mathjs 정의를 따릅니다. 갤런과 액량 온스는 미국 단위입니다.",
+      "discountReduction": "할인율(%)"
+    },
+    "files": {
+      "fileActions": "파일 작업",
+      "discardCrop": "저장하지 않은 자르기 조정을 버릴까요?",
+      "pastedImage": "붙여넣은 이미지",
+      "lineDedupeHelp": "공백과 대소문자를 포함해 각 줄 전체를 정확하게 비교합니다. 처음 나온 항목을 유지합니다.",
+      "lineSortHelp": "Unicode 코드 단위로 정렬합니다. 언어순이나 숫자순이 아닙니다.",
+      "imageInfo": "{{name}} · {{width}} × {{height}} px"
+    },
+    "shared": {
+      "viewResult": "결과 보기"
+    }
   }
 }

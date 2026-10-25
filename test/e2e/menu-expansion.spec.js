@@ -60,3 +60,24 @@ test('popup height shrinks to its content and expanded lists scroll within the l
  for(const id of ['network','developer','files','daily'])await group(page,id).locator('summary').click();
  await expect.poll(()=>page.locator('body').evaluate(node=>node.getBoundingClientRect().height)).toBe(collapsed);
 });
+
+test('a constrained popup keeps its footer visible and can grow again after collapsing',async({page})=>{
+ await page.setViewportSize({width:360,height:440});await page.goto('/popup.html');
+ const footer=page.locator('.tool-menu-footer'),list=page.locator('.tool-menu-list');
+ const footerFits=()=>footer.evaluate(node=>node.getBoundingClientRect().bottom<=innerHeight+1);
+ for(const id of ['daily','files','developer','network'])await group(page,id).locator('summary').click();
+ await expect.poll(footerFits).toBe(true);await expect(page.locator('#app-version')).toBeVisible();
+ await expect(footer.locator('.feedback-link')).toBeInViewport();
+ await list.evaluate(node=>{node.scrollTop=node.scrollHeight;});await expect(page.locator('[data-tool-id="password"]')).toBeInViewport();
+ await page.locator('#menu-edit').click();await expect.poll(footerFits).toBe(true);
+ await page.locator('#menu-cancel').click();await expect.poll(footerFits).toBe(true);
+ for(const id of ['network','developer','files','daily'])await group(page,id).locator('summary').click();
+ const collapsed=await page.locator('body').evaluate(node=>node.getBoundingClientRect().height);
+ await page.setViewportSize({width:360,height:900});
+ await group(page,'developer').locator('summary').click();
+ await expect.poll(()=>page.locator('body').evaluate(node=>node.getBoundingClientRect().height)).toBeGreaterThan(collapsed);
+ await expect.poll(footerFits).toBe(true);
+ await page.setViewportSize({width:360,height:400});await expect.poll(footerFits).toBe(true);
+ await page.setViewportSize({width:360,height:900});
+ await expect.poll(()=>page.locator('body').evaluate(node=>node.getBoundingClientRect().height)).toBe(560);
+});

@@ -1581,5 +1581,277 @@
     "passwordPolicy": "選択された文字タイプは、許可されたプールから構成されます。 「各タイプを必須」を有効にすると、選択したすべてのタイプが各パスワードに含められます。",
     "speedScope": "定格は転送速度を表します。レイテンシーとジッターは個別に測定されます。",
     "viewResult": "結果を見る"
+  },
+  "redesign": {
+    "calculatorOriginal": "元の値",
+    "calculatorNew": "新しい値",
+    "calculatorPrice": "元の価格",
+    "calculatorOff": "割引率 (%)",
+    "calculatorPart": "部分値",
+    "calculatorWhole": "全体値",
+    "calculatorPercent": "割合 (%)",
+    "expressionResult": "式の結果 · {{expression}}",
+    "businessResult": "{{mode}} · {{expression}}",
+    "workdayExceptions": "指定した休日: {{off}} · 指定した勤務日: {{work}}",
+    "copyDisplayedEquation": "表示中の式をコピー",
+    "drawShuffle": "リストをシャッフル",
+    "drawGroups": "グループを作成",
+    "timerOtherRunning": "{{mode}} が実行中です",
+    "timerSessionHelp": "このタブを再読み込みすると、両方のタイマーが復元されます。動作中のタイマーには実際の経過時間が反映されます。状態はこのタブのセッションストレージに保存されます。",
+    "pdfAddPdf": "このタスクに PDF ファイルを追加します。",
+    "pdfAddImages": "PNG、JPG、または WebP 画像を追加して PDF を作成します。",
+    "pdfChooseCurrent": "現在の PDF リストから処理する PDF を選択します。",
+    "qrRecognizeEmpty": "認識されたテキストがここに表示されます。入力領域で画像を選択、ドロップ、または貼り付けます。",
+    "textIdle": "操作を実行して、その結果をここで確認します。",
+    "textStale": "入力またはオプションが変更されました。操作を再度実行します。",
+    "textEmpty": "何も出力せずに完了しました。",
+    "textInputStats": "入力: {{summary}}",
+    "textOutputBytes": "出力: {{bytes}} バイト (UTF-8)",
+    "textNewlineSummary": "改行形式: {{format}} · {{bytes}} バイト (UTF-8)",
+    "cropNote": "保存は選択中の画像にのみ適用されます。エクスポート時はその画像の未保存のトリミングを先に保存し、キュー内の各画像を、保存済みのトリミングまたは元の画像で処理します。",
+    "cropSaveCurrent": "この画像のトリミングを保存",
+    "cropDirty": "{{name}} のトリミング変更は未保存です。エクスポート時に先に保存されます。",
+    "cropSaved": "{{name}} のトリミングを保存しました。一括エクスポートに使用されます。",
+    "cropOriginal": "{{name}} には保存済みのトリミングがありません。トリミングを変更しない場合、元の画像をエクスポートします。",
+    "cropExportBatch": "{{count}} 枚をエクスポート · 保存済みトリミング: {{cropped}} 枚",
+    "cropSaveExport": "現在のトリミングを保存して {{count}} 枚をエクスポート"
+  },
+  "direct": {
+    "developer": {
+      "convert": {
+        "base64": {
+          "input": "生テキスト / ファイルのバイト",
+          "output": "Base64 テキスト",
+          "usage": "変換: 生テキスト / ファイルのバイト → Base64 テキスト."
+        },
+        "base64url": {
+          "input": "生テキスト / ファイルのバイト",
+          "output": "Base64URL テキスト",
+          "usage": "変換: 生テキスト / ファイルのバイト → Base64URL テキスト."
+        },
+        "base32": {
+          "input": "生テキスト / ファイルのバイト",
+          "output": "Base32 テキスト",
+          "usage": "変換: 生テキスト / ファイルのバイト → Base32 テキスト."
+        },
+        "base32hex": {
+          "input": "生テキスト / ファイルのバイト",
+          "output": "Base32Hex テキスト",
+          "usage": "変換: 生テキスト / ファイルのバイト → Base32Hex テキスト."
+        },
+        "base58": {
+          "input": "生テキスト / ファイルのバイト",
+          "output": "Base58 テキスト",
+          "usage": "Bitcoin Base58の文字集合でバイトを表現します。"
+        },
+        "hex": {
+          "input": "生テキスト / ファイルのバイト",
+          "output": "16進数のバイト",
+          "usage": "変換: 生テキスト / ファイルのバイト ↔ 16進数のバイト."
+        },
+        "binary": {
+          "input": "生テキスト / ファイルのバイト",
+          "output": "バイナリのバイト列",
+          "usage": "各バイトを8桁の2進数で表現します。"
+        },
+        "url-component": {
+          "input": "エスケープされていないテキスト",
+          "output": "URL構成要素のテキスト",
+          "usage": "1つのURLパラメーターまたはパス構成要素をエンコードします。",
+          "help": "encodeURIComponent / decodeURIComponentを使用します。空白は%20、リテラルの+は%2Bになります。"
+        },
+        "uri": {
+          "input": "URI 全体",
+          "output": "エスケープ済みURI",
+          "usage": "URI区切り文字を保持して完全なURIをエスケープします。",
+          "help": "encodeURI / decodeURIを使用し、: / ? #などのURI区切り文字を保持します。単一のパラメーター値にはURL構成要素を使ってください。"
+        },
+        "form": {
+          "input": "エスケープされていないキー / 値",
+          "output": "フォーム構成要素のテキスト",
+          "usage": "フォームのキーまたは値を1つエンコードします。",
+          "help": "application/x-www-form-urlencodedの規則を使用します。空白は+、リテラルの+は%2Bになります。"
+        },
+        "html-entities": {
+          "input": "プレーンテキスト",
+          "output": "HTML エンティティ",
+          "usage": "変換: プレーンテキスト ↔ HTML エンティティ.",
+          "help": "HTMLエンティティのエスケープとデコードを行います。HTMLを解析・実行せずにテキストを変換します。"
+        },
+        "xml-entities": {
+          "input": "プレーンテキスト",
+          "output": "XML エンティティ",
+          "usage": "変換: プレーンテキスト ↔ XML エンティティ.",
+          "help": "XML文書の解析や入力の実行をせず、XMLエンティティのエスケープとデコードを行います。"
+        },
+        "json-string": {
+          "input": "プレーンテキスト",
+          "output": "引用符付きJSON文字列",
+          "usage": "変換: プレーンテキスト ↔ 引用符付きJSON文字列.",
+          "help": "エンコード結果には前後の引用符が含まれます。デコードには完全なJSON文字列リテラルが必要です。"
+        },
+        "unicode": {
+          "input": "プレーンテキスト",
+          "output": "Unicode エスケープ",
+          "usage": "変換: プレーンテキスト ↔ Unicode エスケープ.",
+          "help": "UTF-16を\\uXXXXエスケープとしてエンコードします。入力を実行せず、対応するエスケープ構文をデコードします。"
+        },
+        "codepoints": {
+          "input": "Unicode テキスト",
+          "output": "U+コードポイントの一覧",
+          "usage": "Unicodeコードポイントを調べるか、テキストを復元します。",
+          "help": "16進数のU+コードポイント一覧をエンコードします。デコード時は補助文字を含めてテキストを復元します。"
+        },
+        "charset": {
+          "input": "Unicodeテキスト / 元の文字コードで符号化されたファイル",
+          "output": "変換先の文字コードで符号化されたバイト",
+          "usage": "変換先の文字集合を使ってバイトをエンコードします。"
+        },
+        "json-yaml": {
+          "input": "JSON 文書",
+          "output": "YAML 文書",
+          "usage": "変換: JSON 文書 ↔ YAML 文書."
+        },
+        "xml-json": {
+          "input": "XML 文書",
+          "output": "順序を保持するJSON配列",
+          "usage": "変換: XML 文書 ↔ 順序を保持するJSON配列."
+        },
+        "csv-json": {
+          "input": "CSV 表",
+          "output": "JSONの行",
+          "usage": "変換: CSV 表 ↔ JSONの行."
+        },
+        "tsv-json": {
+          "input": "TSV 表",
+          "output": "JSONの行",
+          "usage": "変換: TSV 表 ↔ JSONの行."
+        },
+        "jsonl": {
+          "input": "JSON Lines",
+          "output": "JSON配列",
+          "usage": "変換: JSON Lines ↔ JSON配列."
+        },
+        "query-json": {
+          "input": "クエリ文字列",
+          "output": "文字列配列を持つJSONオブジェクト",
+          "usage": "重複するクエリパラメーターを文字列の配列に変換します。"
+        },
+        "md5": {
+          "input": "テキスト / ファイル / テキスト行",
+          "output": "ダイジェスト",
+          "usage": "MD5チェックサムを計算し、期待値と比較します。"
+        },
+        "hash": {
+          "input": "生テキスト / ファイルのバイト",
+          "output": "選択したアルゴリズムの16進ダイジェスト",
+          "usage": "テキストやファイルの元のバイトのハッシュを計算します。"
+        },
+        "hmac": {
+          "input": "メッセージのテキスト / ファイルのバイト + キー",
+          "output": "16進HMACダイジェスト",
+          "usage": "このタスクのキーを使ってHMACを計算します。"
+        },
+        "jwt": {
+          "input": "3つの部分からなるJWT",
+          "output": "デコード済みJSON",
+          "usage": "署名を検証せずにJWTのヘッダーとペイロードを読み取ります。"
+        },
+        "gzip": {
+          "input": "生テキスト / ファイルのバイト",
+          "output": "Gzipのバイト（選択した表現）",
+          "usage": "単一のGzipストリームを圧縮・展開します。"
+        },
+        "zlib": {
+          "input": "生テキスト / ファイルのバイト",
+          "output": "Zlibのバイト（選択した表現）",
+          "usage": "Zlibストリームを圧縮・展開します。"
+        },
+        "deflate": {
+          "input": "生テキスト / ファイルのバイト",
+          "output": "未加工のDeflateバイト（選択した表現）",
+          "usage": "未加工のDeflateデータを圧縮・展開します。"
+        },
+        "radix": {
+          "input": "変換元の基数の整数",
+          "output": "変換先の基数の整数",
+          "usage": "変換: 変換元の基数の整数 → 変換先の基数の整数."
+        },
+        "bytes-unit": {
+          "input": "変換元の単位の値",
+          "output": "変換先の単位の値",
+          "usage": "ビット、バイト、SI単位、IEC単位を変換します。"
+        },
+        "duration-unit": {
+          "input": "変換元の単位の期間",
+          "output": "変換先の単位の期間",
+          "usage": "暦の計算をせず、固定期間を換算します。"
+        },
+        "color": {
+          "input": "HEX / RGB / HSL / HSV JSON",
+          "output": "選択した色の形式",
+          "usage": "アルファ値を保持して色の表現を変換します。"
+        },
+        "case": {
+          "input": "テキスト / 名前",
+          "output": "選択した命名形式のテキスト",
+          "usage": "変換: テキスト / 名前 → 選択した命名形式のテキスト."
+        },
+        "lines": {
+          "input": "テキスト行",
+          "output": "処理済みのテキスト行",
+          "usage": "テキスト行に選択した操作を1つ適用します。"
+        },
+        "newline": {
+          "input": "改行コードを含むテキスト",
+          "output": "選択したLF / CRLF / CRを使うテキスト",
+          "usage": "変換: 改行コードを含むテキスト → 選択したLF / CRLF / CRを使うテキスト."
+        },
+        "normalize": {
+          "input": "Unicode テキスト",
+          "output": "選択した正規化形式のテキスト",
+          "usage": "コードポイントにUnicode正規化を適用します。"
+        }
+      },
+      "jsonCancelled": "キャンセルしました。入力は保持されています。準備ができたら再実行してください。",
+      "convertHelp": "使い方と制限",
+      "fileReplace": "ファイルを置き換え",
+      "md5CopyFile": "{{name}}のチェックサムをコピー",
+      "copyIso": "ISOをコピー",
+      "copyIsoDate": "実行{{index}}をISO形式でコピー",
+      "regexNotRun": "未実行",
+      "regexStale": "入力が変更されました。実行して結果を更新してください。",
+      "speedNetwork": "このツールはCloudflareに接続し、ネットワーク通信を使用します。テストのリクエストは開始操作後にのみ送信されます。",
+      "speedSettings": "テスト設定",
+      "speedSummary": "{{profile}} · {{unit}} · 最大{{budget}} MiB",
+      "customZone": "カスタムIANAタイムゾーン",
+      "regexNoMatches": "一致なし"
+    },
+    "daily": {
+      "unitDetails": "その他の変換と精度",
+      "moneyEmpty": "金額を入力して変換すると結果を確認できます。",
+      "listHelp": "1行に1件入力します。空行は無視され、重複する項目も削除するまでは別々の項目として扱われます。",
+      "dedupe": "重複する項目を削除",
+      "drawEntries": "項目を抽選 · {{count}}",
+      "drawGroups": "グループを作成 · {{count}}",
+      "drawMembers": "項目をグループ化 · 1組あたり{{count}}件",
+      "drawNumbers": "数値を抽選 · {{count}}",
+      "discountHelp": "元の価格100、値引き率20% → 値引き後の価格80。",
+      "countdownHelp": "カウントダウンの場合は、今日を開始として使用し、終了としてターゲットを選択します。 過去の目標は負の日数を返します。",
+      "anniversaryHelp": "記念日年齢は、うるう年以外の場合、2 月の最終日を 2 月 29 日として使用します。",
+      "unitPrecision": "≈ は有効数字24桁への表示の丸めを示します。コピーでは最大80桁を保持します。換算係数はmathjsの定義に従い、ガロンと液量オンスは米国単位です。",
+      "discountReduction": "割引率 (%)"
+    },
+    "files": {
+      "fileActions": "ファイル操作",
+      "discardCrop": "保存していない切り抜きの調整を破棄しますか？",
+      "pastedImage": "貼り付けた画像",
+      "lineDedupeHelp": "空白と大文字・小文字を含め、行全体の完全一致で比較します。最初の出現を残します。",
+      "lineSortHelp": "Unicodeコード単位で並べ替えます。言語順や数値順ではありません。",
+      "imageInfo": "{{name}} · {{width}} × {{height}} px"
+    },
+    "shared": {
+      "viewResult": "結果を見る"
+    }
   }
 }

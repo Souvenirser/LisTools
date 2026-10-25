@@ -48,6 +48,7 @@ export function createMd5View({source,output,setDocument,setEditable,controller,
   }
   const other=document.createElement('details');other.id='md5-other-formats';other.innerHTML='<summary data-i18n="md5.outputFormat"></summary>';
   $('md5-values').append(other);for(const row of [...$('md5-values').children])if(row!==other&&!row.classList.contains('md5-primary'))other.append(row);
+  other.append($('md5-truncated'));
   const resultActions=document.createElement('div');resultActions.className='md5-result-actions toolbar';document.querySelector('.convert-editors').after(resultActions);resultActions.append($('md5-copy-all'),$('md5-copy-item'),$('md5-csv'),$('md5-json'));
   async function copy(value) {if(!value)return;try{await navigator.clipboard.writeText(value);notify(t('common.copied'));}catch{notify(t('common.copyFailed'));}}
   function comparison(hex,expected,representation,target) {
@@ -79,7 +80,7 @@ export function createMd5View({source,output,setDocument,setEditable,controller,
       const size=document.createElement('td');size.textContent=String(row.size);size.dir='ltr';
       const status=document.createElement('td');status.innerHTML='<span data-file-status></span><progress max="1" value="0"></progress>';
       const digest=document.createElement('td');const value=document.createElement('textarea');value.rows=2;value.readOnly=true;value.dir='ltr';value.dataset.fileDigest='';value.setAttribute('aria-label',t('md5.digest'));
-      const button=document.createElement('button');button.dataset.i18n='common.copy';button.addEventListener('click',()=>copy(value.value));digest.append(value,button);
+      const button=document.createElement('button');button.dataset.i18n='common.copy';button.setAttribute('aria-label',t('direct.developer.md5CopyFile',{name:row.name}));button.addEventListener('click',()=>copy(value.value));digest.append(value,button);
       const expected=document.createElement('td');const input=document.createElement('input');input.dir='ltr';input.autocomplete='off';input.spellcheck=false;input.value=row.expected || '';input.setAttribute('aria-label',t('md5.expected'));
       const select=document.createElement('select');select.append(...['hex32lower','base64','hex16lower'].map(format=>makeOption(format,`md5.formats.${format}`)));select.value=row.expectedFormat || 'hex32lower';select.dataset.i18nAriaLabel='md5.expectedFormat';select.setAttribute('aria-label',t('md5.expectedFormat'));
       const match=document.createElement('span');match.dataset.fileMatch='';
@@ -120,6 +121,7 @@ export function createMd5View({source,output,setDocument,setEditable,controller,
     $('md5-file-picker').hidden=mode!=='files';table.hidden=mode!=='files';single.hidden=!['text','hmac'].includes(mode);
     $('md5-auto-field').hidden=mode!=='text';$('md5-copy-item').hidden=mode!=='lines';$('md5-csv').hidden=!['lines','files'].includes(mode);$('md5-json').hidden=$('md5-csv').hidden;
     $('md5-mode-hint').textContent=mode==='lines'?t('md5.linesHint'):mode==='files'?t('md5.fileHint'):mode==='hmac'?t('md5.clearKeyHint'):'';
+    $('md5-choose').textContent=t(files.length?'direct.developer.fileReplace':'md5.chooseFiles');
     $('md5-file-count').textContent=files.length?`${files.length} / ${md5Limits.files}`:'';
   }
   function onState(next) {
@@ -156,7 +158,7 @@ export function createMd5View({source,output,setDocument,setEditable,controller,
   }
   function translate() {
     translateDOM(controls);translateDOM(single);translateDOM(actions);translateDOM(resultActions);translateDOM(table);
-    for(const tr of table.querySelectorAll('tr'))for(const input of tr.querySelectorAll('input,[data-file-digest]'))input.setAttribute('aria-label',t(input.readOnly?'md5.digest':'md5.expected'));
+    for(const row of files){const tr=$(`md5-row-${row.id}`);if(!tr)continue;tr.querySelector('button').setAttribute('aria-label',t('direct.developer.md5CopyFile',{name:row.name}));for(const input of tr.querySelectorAll('input,[data-file-digest]'))input.setAttribute('aria-label',`${t(input.readOnly?'md5.digest':'md5.expected')} · ${row.name}`);}
     layout();renderResults(false);statusText();
     $('tool-title').textContent=t('md5.title');$('tool-hint').textContent=t('md5.description');
     document.querySelector('.page-heading h1').textContent=t('md5.title');document.querySelector('.page-heading p').textContent=t('md5.description');document.title=`${t('md5.title')} · LisTools`;

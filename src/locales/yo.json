@@ -1581,5 +1581,277 @@
     "passwordPolicy": "Ti a ti yan ohun kikọ orisi dagba awọn laaye pool. Muu ṣiṣẹ “Beere iru kọọkan” lati ṣafikun gbogbo iru ti a yan ninu ọrọ igbaniwọle kọọkan.",
     "speedScope": "Awọn iwontun-wonsi ṣe apejuwe iyara gbigbe. Lairi ati jitter jẹ wiwọn lọtọ.",
     "viewResult": "Wo abajade"
+  },
+  "redesign": {
+    "calculatorOriginal": "Atilẹba iye",
+    "calculatorNew": "Iye tuntun",
+    "calculatorPrice": "Owo atilẹba",
+    "calculatorOff": "Idibo ogorun (%)",
+    "calculatorPart": "Apakan",
+    "calculatorWhole": "Odidi",
+    "calculatorPercent": "Ogorun (%)",
+    "expressionResult": "Abajade ikosile · {{expression}}",
+    "businessResult": "{{mode}} · {{expression}}",
+    "workdayExceptions": "Ọjọ isinmi: {{off}} · Awọn ọjọ iṣẹ: {{work}}",
+    "copyDisplayedEquation": "Da isedogba han",
+    "drawShuffle": "Daarapọmọra akojọ",
+    "drawGroups": "Ṣẹda awọn ẹgbẹ",
+    "timerOtherRunning": "{{mode}} nṣiṣẹ",
+    "timerSessionHelp": "Ṣiṣatunkun taabu yii mu awọn aago mejeeji pada, pẹlu akoko aago ti o ti kọja fun awọn akoko ṣiṣiṣẹ. Ipinle ti wa ni fipamọ ni ibi ipamọ igba taabu yi.",
+    "pdfAddPdf": "Ṣafikun awọn faili PDF fun iṣẹ yii.",
+    "pdfAddImages": "Ṣafikun awọn aworan PNG, JPG tabi WebP lati ṣẹda PDF kan.",
+    "pdfChooseCurrent": "Yan PDF lati ṣe ilana lati atokọ PDF lọwọlọwọ.",
+    "qrRecognizeEmpty": "Ọrọ ti a mọ yoo han nibi. Yan, ju silẹ tabi lẹẹmọ aworan ni agbegbe titẹ sii.",
+    "textIdle": "Ṣiṣe iṣẹ kan lati wo abajade rẹ nibi.",
+    "textStale": "Iṣagbewọle tabi awọn aṣayan yipada. Ṣiṣe iṣẹ naa lẹẹkansi.",
+    "textEmpty": "Ti pari laisi abajade.",
+    "textInputStats": "Igbewọle: {{summary}}",
+    "textOutputBytes": "Abajade: {{bytes}} UTF-8 awọn baiti",
+    "textNewlineSummary": "Ipari ila: {{format}} · {{bytes}} UTF-8 baiti",
+    "cropNote": "Nfipamọ atunṣe gige kan kan si aworan ti o yan nikan. Si ilẹ okeere ni akọkọ ṣafipamọ atunṣe jigbin ti aworan ti ko ni fipamọ, lẹhinna ṣe ilana gbogbo aworan ti o wa ni ila ni lilo atunṣe irugbin ti o fipamọ tabi aworan atilẹba.",
+    "cropSaveCurrent": "Ṣafipamọ awọn irugbin fun aworan yii",
+    "cropDirty": "Awọn ayipada gbingbin aworan ti ko fipamọ fun {{name}}. Si ilẹ okeere yoo ṣafipamọ awọn ayipada wọnyi ni akọkọ.",
+    "cropSaved": "Pipa aworan ti a fipamọ fun {{name}}. Yoo ṣee lo ni okeere aworan ipele.",
+    "cropOriginal": "{{name}} ko ni fifipamọ aworan gbingbin. Si ilẹ okeere nlo aworan atilẹba rẹ ayafi ti o ba ṣatunṣe irugbin na.",
+    "cropExportBatch": "okeere {{count}} awọn aworan. Awọn aworan pẹlu fifipamọ irugbin irugbin: {{cropped}}.",
+    "cropSaveExport": "Ṣafipamọ dida aworan lọwọlọwọ ati okeere awọn aworan {{count}}"
+  },
+  "direct": {
+    "developer": {
+      "convert": {
+        "base64": {
+          "usage": "Ṣàfihàn báìtì bí Base64.",
+          "input": "Ọ̀rọ̀ / báìtì ìpilẹ̀ṣẹ̀ fáìlì",
+          "output": "Ọ̀rọ̀ Base64"
+        },
+        "base64url": {
+          "usage": "Ṣàfihàn báìtì bí Base64 tó dáa fún URL.",
+          "input": "Ọ̀rọ̀ / báìtì ìpilẹ̀ṣẹ̀ fáìlì",
+          "output": "Ọ̀rọ̀ Base64URL"
+        },
+        "base32": {
+          "usage": "Ṣàfihàn báìtì pẹ̀lú àkójọpọ̀ lẹ́tà Base32.",
+          "input": "Ọ̀rọ̀ / báìtì ìpilẹ̀ṣẹ̀ fáìlì",
+          "output": "Ọ̀rọ̀ Base32"
+        },
+        "base32hex": {
+          "usage": "Ṣàfihàn báìtì pẹ̀lú àkójọpọ̀ lẹ́tà Base32Hex.",
+          "input": "Ọ̀rọ̀ / báìtì ìpilẹ̀ṣẹ̀ fáìlì",
+          "output": "Ọ̀rọ̀ Base32Hex"
+        },
+        "base58": {
+          "usage": "Ṣàfihàn báìtì pẹ̀lú àkójọpọ̀ lẹ́tà Bitcoin Base58.",
+          "input": "Ọ̀rọ̀ / báìtì ìpilẹ̀ṣẹ̀ fáìlì",
+          "output": "Ọ̀rọ̀ Base58"
+        },
+        "hex": {
+          "usage": "Yí báìtì sí tàbí láti nọ́mbà ìpìlẹ̀ mẹ́rìndínlógún.",
+          "input": "Ọ̀rọ̀ / báìtì ìpilẹ̀ṣẹ̀ fáìlì",
+          "output": "Báìtì ìpìlẹ̀ mẹ́rìndínlógún"
+        },
+        "binary": {
+          "usage": "Ṣàfihàn báìtì kọ̀ọ̀kan pẹ̀lú nọ́mbà alákọ̀ọ́méjì mẹ́jọ.",
+          "input": "Ọ̀rọ̀ / báìtì ìpilẹ̀ṣẹ̀ fáìlì",
+          "output": "Ọ̀rọ̀ báìtì alákọ̀ọ́méjì"
+        },
+        "url-component": {
+          "usage": "Ṣe ìfipamọ́ kóòdù fún pàrámítà URL kan tàbí apá ọ̀nà.",
+          "input": "Ọ̀rọ̀ láìsí àmì àsálà",
+          "output": "Ọ̀rọ̀ apá URL",
+          "help": "Ó ń lo encodeURIComponent / decodeURIComponent. Àlàfo di %20; àmì + gangan di %2B."
+        },
+        "uri": {
+          "usage": "Fi àmì àsálà sí gbogbo URI láìyọ àwọn àmì ìpín URI.",
+          "input": "URI kíkún",
+          "output": "URI pẹ̀lú àmì àsálà",
+          "help": "Ó ń lo encodeURI / decodeURI ó sì pa àwọn àmì ìpín URI bí : / ? # mọ́. Lo apá URL fún iye pàrámítà kan."
+        },
+        "form": {
+          "usage": "Ṣe ìfipamọ́ kóòdù fún kọ́kọ́rọ́ tàbí iye fọ́ọ̀mù kan.",
+          "input": "Kọ́kọ́rọ́ / iye láìsí àmì àsálà",
+          "output": "Ọ̀rọ̀ apá fọ́ọ̀mù",
+          "help": "Ó ń tẹ̀lé òfin application/x-www-form-urlencoded. Àlàfo di +; àmì + gangan di %2B."
+        },
+        "html-entities": {
+          "usage": "Fi àmì àsálà sí àwọn lẹ́tà pàtàkì fún àkóónú HTML.",
+          "input": "Ọ̀rọ̀ lásán",
+          "output": "Àwọn ẹ̀yà HTML",
+          "help": "Ó ń fi àmì àsálà sí àwọn ẹ̀yà HTML ó sì ń tú wọn. Ó ń yí ọ̀rọ̀ padà láìṣe àyẹ̀wò ìṣètò tàbí ṣiṣe HTML."
+        },
+        "xml-entities": {
+          "usage": "Yí ọ̀rọ̀ sí tàbí láti àwọn ẹ̀yà XML.",
+          "input": "Ọ̀rọ̀ lásán",
+          "output": "Àwọn ẹ̀yà XML",
+          "help": "Ó ń fi àmì àsálà sí àwọn ẹ̀yà XML ó sì ń tú wọn láìṣe àyẹ̀wò ìṣètò ìwé XML tàbí ṣiṣe ohun tí a tẹ sílẹ̀."
+        },
+        "json-string": {
+          "usage": "Dá tàbí ka iye ọ̀rọ̀ JSON gangan tó pé.",
+          "input": "Ọ̀rọ̀ lásán",
+          "output": "Ọ̀rọ̀ JSON nínú àmì àyọlò",
+          "help": "Èsì ìfipamọ́ kóòdù ní àmì àyọlò yíká. Títú kóòdù nílò iye ọ̀rọ̀ JSON gangan tó pé."
+        },
+        "unicode": {
+          "usage": "Yí ọ̀rọ̀ sí tàbí láti àwọn àmì àsálà Unicode.",
+          "input": "Ọ̀rọ̀ lásán",
+          "output": "Ọ̀wọ́ àmì àsálà Unicode",
+          "help": "Ó ń fi UTF-16 pamọ́ bí àmì àsálà \\uXXXX. Ó ń tú kóòdù àsálà tí a ṣe àtìlẹ́yìn fún láìṣiṣẹ́ ohun tí a tẹ sílẹ̀."
+        },
+        "codepoints": {
+          "usage": "Ṣàyẹ̀wò tàbí tún àwọn ojúami kóòdù Unicode dá.",
+          "input": "Ọ̀rọ̀ Unicode",
+          "output": "Àkójọ ojúami kóòdù U+",
+          "help": "Ó ń fi àkójọ ojúami kóòdù U+ ìpìlẹ̀ mẹ́rìndínlógún pamọ́. Títú kóòdù tún ọ̀rọ̀ dá, pẹ̀lú àwọn lẹ́tà àfikún."
+        },
+        "charset": {
+          "usage": "Fi báìtì pamọ́ ní kóòdù pẹ̀lú àkójọpọ̀ lẹ́tà àfojúsùn.",
+          "input": "Ọ̀rọ̀ Unicode / fáìlì pẹ̀lú kóòdù orísun",
+          "output": "Báìtì pẹ̀lú kóòdù àfojúsùn"
+        },
+        "json-yaml": {
+          "usage": "Yí ìwé padà láàárín JSON àti YAML.",
+          "input": "Ìwé JSON",
+          "output": "Ìwé YAML"
+        },
+        "xml-json": {
+          "usage": "Yí XML àti ìṣètò JSON rẹ̀ tó ní ìtòlẹ́sẹẹsẹ padà.",
+          "input": "Ìwé XML",
+          "output": "Àkójọpọ̀ JSON tó ní ìtòlẹ́sẹẹsẹ"
+        },
+        "csv-json": {
+          "usage": "Yí tábìlì tí àmì kọ́mà pín àti JSON padà.",
+          "input": "Tábìlì CSV",
+          "output": "Àwọn ìlà JSON"
+        },
+        "tsv-json": {
+          "usage": "Yí tábìlì tí táàbù pín àti JSON padà.",
+          "input": "Tábìlì TSV",
+          "output": "Àwọn ìlà JSON"
+        },
+        "jsonl": {
+          "usage": "Yí JSON Lines àti àwọn àkójọpọ̀ JSON padà.",
+          "input": "JSON Lines",
+          "output": "Àkójọpọ̀ JSON"
+        },
+        "query-json": {
+          "usage": "Yí àwọn pàrámítà ìbéèrè tó tún ara wọn ṣe sí àkójọpọ̀ ọ̀rọ̀.",
+          "input": "Ọ̀rọ̀ ìbéèrè",
+          "output": "Ohun JSON tó ní àkójọpọ̀ ọ̀rọ̀"
+        },
+        "md5": {
+          "usage": "Ṣírò iye ìṣàyẹ̀wò MD5 kí o sì fi wé iye tí a retí.",
+          "input": "Ọ̀rọ̀ / fáìlì / ìlà ọ̀rọ̀",
+          "output": "Iye ìṣàyẹ̀wò MD5"
+        },
+        "hash": {
+          "usage": "Ṣírò hashi àwọn báìtì ìpilẹ̀ṣẹ̀ ọ̀rọ̀ tàbí fáìlì.",
+          "input": "Ọ̀rọ̀ / báìtì ìpilẹ̀ṣẹ̀ fáìlì",
+          "output": "Àkótán ìpìlẹ̀ mẹ́rìndínlógún fún ìlànà tí a yàn"
+        },
+        "hmac": {
+          "usage": "Ṣírò HMAC pẹ̀lú kọ́kọ́rọ́ fún iṣẹ́ yìí.",
+          "input": "Ọ̀rọ̀ ìfiránṣẹ́ / báìtì fáìlì + kọ́kọ́rọ́",
+          "output": "Àkótán HMAC ìpìlẹ̀ mẹ́rìndínlógún"
+        },
+        "jwt": {
+          "usage": "Ka orí àti àkóónú JWT láìjẹ́rìí sí àwọn ìbuwọ́lu.",
+          "input": "JWT alápá mẹ́ta",
+          "output": "JSON tí a tú kóòdù rẹ̀"
+        },
+        "gzip": {
+          "usage": "Fún tàbí tú ìṣàn Gzip kan.",
+          "input": "Ọ̀rọ̀ / báìtì ìpilẹ̀ṣẹ̀ fáìlì",
+          "output": "Báìtì Gzip (àṣojú tí a yàn)"
+        },
+        "zlib": {
+          "usage": "Fún tàbí tú ìṣàn Zlib kan.",
+          "input": "Ọ̀rọ̀ / báìtì ìpilẹ̀ṣẹ̀ fáìlì",
+          "output": "Báìtì Zlib (àṣojú tí a yàn)"
+        },
+        "deflate": {
+          "usage": "Fún tàbí tú dátà Deflate àìṣe.",
+          "input": "Ọ̀rọ̀ / báìtì ìpilẹ̀ṣẹ̀ fáìlì",
+          "output": "Báìtì Deflate àìṣe (àṣojú tí a yàn)"
+        },
+        "radix": {
+          "usage": "Yí odidi nọ́mbà sí ìpìlẹ̀ mìíràn.",
+          "input": "Odidi nọ́mbà ní ìpìlẹ̀ orísun",
+          "output": "Odidi nọ́mbà ní ìpìlẹ̀ àfojúsùn"
+        },
+        "bytes-unit": {
+          "usage": "Yí bítì, báìtì àti ẹyọ SI àti IEC padà.",
+          "input": "Iye ní ẹyọ orísun",
+          "output": "Iye ní ẹyọ àfojúsùn"
+        },
+        "duration-unit": {
+          "usage": "Yí àkókò tó dúró ṣinṣin padà láìṣe ìṣírò kálẹ́ńdà.",
+          "input": "Àkókò ní ẹyọ orísun",
+          "output": "Àkókò ní ẹyọ àfojúsùn"
+        },
+        "color": {
+          "usage": "Yí àṣojú àwọ̀ padà láìyọ alfa.",
+          "input": "HEX / RGB / HSL / HSV JSON",
+          "output": "Ìrísí àwọ̀ tí a yàn"
+        },
+        "case": {
+          "usage": "Lo irú lẹ́tà tàbí ìlànà ìsọrúkọ tí a yàn.",
+          "input": "Ọ̀rọ̀ / orúkọ",
+          "output": "Ọ̀rọ̀ ní ìlànà ìsọrúkọ tí a yàn"
+        },
+        "lines": {
+          "usage": "Lo iṣẹ́ kan tí a yàn lórí àwọn ìlà ọ̀rọ̀.",
+          "input": "Àwọn ìlà ọ̀rọ̀",
+          "output": "Àwọn ìlà ọ̀rọ̀ tí a ti ṣiṣẹ́"
+        },
+        "newline": {
+          "usage": "Yí àmì òpin ìlà ọ̀rọ̀ padà.",
+          "input": "Ọ̀rọ̀ pẹ̀lú àmì òpin ìlà",
+          "output": "Ọ̀rọ̀ pẹ̀lú LF / CRLF / CR tí a yàn"
+        },
+        "normalize": {
+          "usage": "Lo ìṣedéédé Unicode lórí àwọn ojúami kóòdù.",
+          "input": "Ọ̀rọ̀ Unicode",
+          "output": "Ọ̀rọ̀ ní ìrísí ìṣedéédé tí a yàn"
+        }
+      },
+      "jsonCancelled": "A ti fagilé. A pa ohun tí o tẹ sílẹ̀ mọ́; tún bẹ̀rẹ̀ nígbà tí o bá ṣetán.",
+      "convertHelp": "Ìlò àti ààlà",
+      "fileReplace": "Rọ́pò àwọn fáìlì",
+      "md5CopyFile": "Da iye ìṣàyẹ̀wò {{name}} kọ",
+      "copyIso": "Da ISO kọ",
+      "copyIsoDate": "Da ìṣiṣẹ́ {{index}} kọ ní ISO",
+      "regexNotRun": "Kò tíì ṣiṣẹ́",
+      "regexNoMatches": "Kò sí ohun tó bá mu",
+      "regexStale": "Ohun tí a tẹ sílẹ̀ ti yí padà. Ṣiṣẹ́ láti tún èsì ṣe.",
+      "speedNetwork": "Ohun èlò yìí ń sopọ̀ mọ́ Cloudflare ó sì ń lo dátà nẹ́tíwọ́ọ̀kì. Àwọn ìbéèrè ìdánwò bẹ̀rẹ̀ lẹ́yìn tí o bá tẹ bẹ̀rẹ̀.",
+      "speedSettings": "Ètò ìdánwò",
+      "speedSummary": "{{profile}} · {{unit}} · tó {{budget}} MiB",
+      "customZone": "Àgbègbè àkókò IANA àkànṣe"
+    },
+    "daily": {
+      "countdownHelp": "Fún ìṣírò ọjọ́ tó kù, yan òní gẹ́gẹ́ bí ìbẹ̀rẹ̀ àti ọjọ́ àfojúsùn gẹ́gẹ́ bí òpin. Ọjọ́ tó ti kọjá fúnni ní iye ọjọ́ odi.",
+      "anniversaryHelp": "Fún àjọyọ̀ ọjọ́ 29 Kínní, ọdún tí kì í ṣe ọdún àfikún máa ń lo ọjọ́ ìkẹyìn Kínní.",
+      "unitDetails": "Àwọn ìyípadà mìíràn àti ìpéye",
+      "moneyEmpty": "Tẹ iye owó sílẹ̀ kí o sì yí i padà láti rí èsì.",
+      "listHelp": "Ohun kan ní ìlà kọ̀ọ̀kan. A kọjá àwọn ìlà òfo; àwọn ohun tó tún ara wọn ṣe ṣì yàtọ̀ títí o fi yọ wọ́n kúrò.",
+      "dedupe": "Yọ àwọn ohun tó tún ara wọn ṣe",
+      "drawEntries": "Yan àwọn ohun · {{count}}",
+      "drawGroups": "Dá ẹgbẹ́ sílẹ̀ · {{count}}",
+      "drawMembers": "Pín àwọn ohun · {{count}} ní ẹgbẹ́ kọ̀ọ̀kan",
+      "drawNumbers": "Yan àwọn nọ́mbà · {{count}}",
+      "discountReduction": "Ìdínkù ní ọgọ́rùn-ún (%)",
+      "discountHelp": "Owó ìbẹ̀rẹ̀ 100, ìdínkù 20% → owó lẹ́yìn ìdínkù 80.",
+      "unitPrecision": "Àwọn àbájáde ń fi títí dé díjítì pàtàkì 24 hàn. ≈ ń sàmì ìsúnmọ́ tí a fi hàn; dídàkọ ń pa títí dé díjítì pàtàkì 80 mọ́. Àwọn olùsọdipúpọ̀ ẹyọ ìwọ̀n ń lo ìtumọ̀ mathjs; àwọn gálọ́ọ̀nù àti ẹyọ ìwọ̀n omi ounce jẹ́ ti US."
+    },
+    "files": {
+      "fileActions": "Àwọn iṣẹ́ fáìlì",
+      "discardCrop": "Pa àwọn àtúnṣe gígé tí a kò tíì fi pamọ́ tì?",
+      "imageInfo": "{{name}} · {{width}} × {{height}} piksẹli",
+      "pastedImage": "Àwòrán tí a lẹ̀ mọ́",
+      "lineDedupeHelp": "Ó fi gbogbo ìlà wé ara wọn ní pàtó, pẹ̀lú àlàfo àti lẹ́tà ńlá/kékeré. Ó pa àkọ́kọ́ mọ́.",
+      "lineSortHelp": "Ó tò nípasẹ̀ ẹyọ kóòdù Unicode, kì í ṣe nípasẹ̀ èdè tàbí iye nọ́mbà."
+    },
+    "shared": {
+      "viewResult": "Wo èsì"
+    }
   }
 }

@@ -1581,5 +1581,277 @@
     "passwordPolicy": "Tipurile de caractere selectate formează grupul permis. Activați „Solicitați fiecare tip” pentru a include fiecare tip selectat în fiecare parolă.",
     "speedScope": "Evaluările descriu viteza de transfer. Latența și jitterul sunt măsurate separat.",
     "viewResult": "Vedeți rezultatul"
+  },
+  "redesign": {
+    "calculatorOriginal": "Valoarea originală",
+    "calculatorNew": "Noua valoare",
+    "calculatorPrice": "Pret original",
+    "calculatorOff": "Reducere procentuală (%)",
+    "calculatorPart": "parte",
+    "calculatorWhole": "Întreg",
+    "calculatorPercent": "Procent (%)",
+    "expressionResult": "Rezultatul expresiei · {{expression}}",
+    "businessResult": "{{mode}} · {{expression}}",
+    "workdayExceptions": "Zile libere: {{off}} · Date de lucru: {{work}}",
+    "copyDisplayedEquation": "Copiați ecuația afișată",
+    "drawShuffle": "Amestecă lista",
+    "drawGroups": "Creați grupuri",
+    "timerOtherRunning": "{{mode}} rulează",
+    "timerSessionHelp": "Reîncărcarea acestei file restaurează ambele cronometre, inclusiv timpul scurs de ceas pentru cronometrele care rulează. Starea este salvată în spațiul de stocare al sesiunii din această filă.",
+    "pdfAddPdf": "Adăugați fișiere PDF pentru această sarcină.",
+    "pdfAddImages": "Adăugați imagini PNG, JPG sau WebP pentru a crea un PDF.",
+    "pdfChooseCurrent": "Alegeți PDF-ul de procesat din lista actuală de PDF.",
+    "qrRecognizeEmpty": "Textul recunoscut va apărea aici. Alegeți, plasați sau inserați o imagine în zona de introducere.",
+    "textIdle": "Rulați o operațiune pentru a vedea rezultatul ei aici.",
+    "textStale": "Intrarea sau opțiunile au fost modificate. Rulați operația din nou.",
+    "textEmpty": "Finalizat fără ieșire.",
+    "textInputStats": "Intrare: {{summary}}",
+    "textOutputBytes": "Ieșire: {{bytes}} UTF-8 octeți",
+    "textNewlineSummary": "Terminații de linie: {{format}} · {{bytes}} UTF-8 octeți",
+    "cropNote": "Salvarea unei ajustări de decupare se aplică numai imaginii selectate. Exportul salvează mai întâi ajustarea de decupare nesalvată a acelei imagini, apoi procesează fiecare imagine din coadă folosind reglarea de decupare salvată sau imaginea originală.",
+    "cropSaveCurrent": "Salvați decuparea pentru această imagine",
+    "cropDirty": "Modificări nesalvate de decupare a imaginii pentru {{name}}. Exportul va salva mai întâi aceste modificări.",
+    "cropSaved": "Decuparea imaginii a fost salvată pentru {{name}}. Va fi folosit în exportul de imagini în lot.",
+    "cropOriginal": "{{name}} nu are decuparea imaginii salvate. Exportul folosește imaginea sa originală, dacă nu ajustați decuparea.",
+    "cropExportBatch": "Exportați imagini {{count}} · imagini cu decupare salvată: {{cropped}}",
+    "cropSaveExport": "Salvați decuparea actuală a imaginii și exportați imaginile {{count}}"
+  },
+  "direct": {
+    "developer": {
+      "convert": {
+        "base64": {
+          "usage": "Reprezintă octeții în Base64.",
+          "input": "Text / octeți originali ai fișierului",
+          "output": "Text Base64"
+        },
+        "base64url": {
+          "usage": "Reprezintă octeții în Base64 sigur pentru URL.",
+          "input": "Text / octeți originali ai fișierului",
+          "output": "Text Base64URL"
+        },
+        "base32": {
+          "usage": "Reprezintă octeții folosind alfabetul Base32.",
+          "input": "Text / octeți originali ai fișierului",
+          "output": "Text Base32"
+        },
+        "base32hex": {
+          "usage": "Reprezintă octeții folosind alfabetul Base32Hex.",
+          "input": "Text / octeți originali ai fișierului",
+          "output": "Text Base32Hex"
+        },
+        "base58": {
+          "usage": "Reprezintă octeții folosind alfabetul Bitcoin Base58.",
+          "input": "Text / octeți originali ai fișierului",
+          "output": "Text Base58"
+        },
+        "hex": {
+          "usage": "Convertește octeți din sau în hexazecimal.",
+          "input": "Text / octeți originali ai fișierului",
+          "output": "Octeți hexazecimali"
+        },
+        "binary": {
+          "usage": "Reprezintă fiecare octet prin opt cifre binare.",
+          "input": "Text / octeți originali ai fișierului",
+          "output": "Șir de octeți binari"
+        },
+        "url-component": {
+          "usage": "Codifică un parametru URL sau o componentă de cale.",
+          "input": "Text fără escape",
+          "output": "Text de componentă URL",
+          "help": "Folosește encodeURIComponent / decodeURIComponent. Spațiile devin %20; semnul + literal devine %2B."
+        },
+        "uri": {
+          "usage": "Codifică o URI completă păstrând delimitatorii URI.",
+          "input": "URI completă",
+          "output": "URI cu escape",
+          "help": "Folosește encodeURI / decodeURI și păstrează delimitatori URI precum : / ? #. Pentru o singură valoare de parametru, folosiți componenta URL."
+        },
+        "form": {
+          "usage": "Codifică o cheie sau o valoare de formular.",
+          "input": "Cheie / valoare fără escape",
+          "output": "Text de componentă de formular",
+          "help": "Respectă regulile application/x-www-form-urlencoded. Spațiile devin +; semnul + literal devine %2B."
+        },
+        "html-entities": {
+          "usage": "Codifică caracterele speciale pentru conținut HTML.",
+          "input": "Text simplu",
+          "output": "Entități HTML",
+          "help": "Codifică și decodifică entități HTML. Convertește text fără a analiza sau executa HTML."
+        },
+        "xml-entities": {
+          "usage": "Convertește text în sau din entități XML.",
+          "input": "Text simplu",
+          "output": "Entități XML",
+          "help": "Codifică și decodifică entități XML fără a analiza un document XML sau a executa intrarea."
+        },
+        "json-string": {
+          "usage": "Creează sau citește un literal de șir JSON complet.",
+          "input": "Text simplu",
+          "output": "Șir JSON între ghilimele",
+          "help": "Ieșirea codificată include ghilimelele exterioare. Decodificarea cere un literal de șir JSON complet."
+        },
+        "unicode": {
+          "usage": "Convertește text în sau din secvențe de escape Unicode.",
+          "input": "Text simplu",
+          "output": "Secvențe de escape Unicode",
+          "help": "Codifică UTF-16 ca secvențe \\uXXXX. Decodifică sintaxa de escape acceptată fără a executa intrarea."
+        },
+        "codepoints": {
+          "usage": "Inspectează sau reconstruiește puncte de cod Unicode.",
+          "input": "Text Unicode",
+          "output": "Listă de puncte de cod U+",
+          "help": "Codifică o listă de puncte de cod U+ hexazecimale. Decodificarea reconstruiește textul, inclusiv caracterele suplimentare."
+        },
+        "charset": {
+          "usage": "Codifică octeți folosind setul de caractere țintă.",
+          "input": "Text Unicode / fișier în codificarea sursă",
+          "output": "Octeți în codificarea țintă"
+        },
+        "json-yaml": {
+          "usage": "Convertește documente între JSON și YAML.",
+          "input": "Document JSON",
+          "output": "Document YAML"
+        },
+        "xml-json": {
+          "usage": "Convertește XML și structura sa JSON ordonată.",
+          "input": "Document XML",
+          "output": "Tablou JSON ordonat"
+        },
+        "csv-json": {
+          "usage": "Convertește tabele separate prin virgule și JSON.",
+          "input": "Tabel CSV",
+          "output": "Rânduri JSON"
+        },
+        "tsv-json": {
+          "usage": "Convertește tabele separate prin tabulatori și JSON.",
+          "input": "Tabel TSV",
+          "output": "Rânduri JSON"
+        },
+        "jsonl": {
+          "usage": "Convertește JSON Lines și tablouri JSON.",
+          "input": "JSON Lines",
+          "output": "Tablou JSON"
+        },
+        "query-json": {
+          "usage": "Convertește parametrii de interogare repetați în tablouri de șiruri.",
+          "input": "Șir de interogare",
+          "output": "Obiect JSON cu tablouri de șiruri"
+        },
+        "md5": {
+          "usage": "Calculează suma MD5 și o compară cu valorile așteptate.",
+          "input": "Text / fișiere / linii de text",
+          "output": "Sumă de control MD5"
+        },
+        "hash": {
+          "usage": "Calculează hash-ul octeților originali ai textului sau fișierului.",
+          "input": "Text / octeți originali ai fișierului",
+          "output": "Rezumat hexazecimal al algoritmului ales"
+        },
+        "hmac": {
+          "usage": "Calculează HMAC cu o cheie pentru această sarcină.",
+          "input": "Textul mesajului / octeți ai fișierului + cheie",
+          "output": "Rezumat HMAC hexazecimal"
+        },
+        "jwt": {
+          "usage": "Citește antetele și conținutul JWT fără verificarea semnăturilor.",
+          "input": "JWT din trei părți",
+          "output": "JSON decodificat"
+        },
+        "gzip": {
+          "usage": "Comprimă sau decomprimă un flux Gzip.",
+          "input": "Text / octeți originali ai fișierului",
+          "output": "Octeți Gzip (reprezentarea aleasă)"
+        },
+        "zlib": {
+          "usage": "Comprimă sau decomprimă un flux Zlib.",
+          "input": "Text / octeți originali ai fișierului",
+          "output": "Octeți Zlib (reprezentarea aleasă)"
+        },
+        "deflate": {
+          "usage": "Comprimă sau decomprimă date Deflate brute.",
+          "input": "Text / octeți originali ai fișierului",
+          "output": "Octeți Deflate bruți (reprezentarea aleasă)"
+        },
+        "radix": {
+          "usage": "Convertește un întreg în altă bază.",
+          "input": "Întreg în baza sursă",
+          "output": "Întreg în baza țintă"
+        },
+        "bytes-unit": {
+          "usage": "Convertește biți, octeți și unități SI și IEC.",
+          "input": "Valoare în unitatea sursă",
+          "output": "Valoare în unitatea țintă"
+        },
+        "duration-unit": {
+          "usage": "Convertește durate fixe fără aritmetică de calendar.",
+          "input": "Durată în unitatea sursă",
+          "output": "Durată în unitatea țintă"
+        },
+        "color": {
+          "usage": "Convertește reprezentări de culoare păstrând alfa.",
+          "input": "HEX / RGB / HSL / HSV JSON",
+          "output": "Format de culoare ales"
+        },
+        "case": {
+          "usage": "Aplică forma literelor sau stilul de denumire ales.",
+          "input": "Text / nume",
+          "output": "Text în stilul de denumire ales"
+        },
+        "lines": {
+          "usage": "Aplică o singură operație aleasă liniilor de text.",
+          "input": "Linii de text",
+          "output": "Linii de text procesate"
+        },
+        "newline": {
+          "usage": "Convertește sfârșiturile de linie ale textului.",
+          "input": "Text cu sfârșituri de linie",
+          "output": "Text cu LF / CRLF / CR ales"
+        },
+        "normalize": {
+          "usage": "Aplică normalizarea Unicode punctelor de cod.",
+          "input": "Text Unicode",
+          "output": "Text în forma de normalizare aleasă"
+        }
+      },
+      "jsonCancelled": "Anulat. Datele introduse sunt păstrate; rulați din nou când sunteți gata.",
+      "convertHelp": "Utilizare și limite",
+      "fileReplace": "Înlocuiește fișierele",
+      "md5CopyFile": "Copiază suma de control pentru {{name}}",
+      "copyIso": "Copiază ISO",
+      "copyIsoDate": "Copiază execuția {{index}} în ISO",
+      "regexNotRun": "Nerulat",
+      "regexNoMatches": "Nicio potrivire",
+      "regexStale": "Datele s-au schimbat. Rulați pentru a actualiza rezultatele.",
+      "speedNetwork": "Acest instrument se conectează la Cloudflare și consumă date de rețea. Solicitările încep doar după pornirea testului.",
+      "speedSettings": "Setările testului",
+      "speedSummary": "{{profile}} · {{unit}} · până la {{budget}} MiB",
+      "customZone": "Fus orar IANA personalizat"
+    },
+    "daily": {
+      "countdownHelp": "Pentru numărătoare inversă, folosiți ziua de azi ca început și data țintă ca sfârșit. Datele trecute dau un număr negativ de zile.",
+      "anniversaryHelp": "Pentru aniversările din 29 februarie, în anii nebisecți se folosește ultima zi din februarie.",
+      "unitDetails": "Alte conversii și precizie",
+      "moneyEmpty": "Introduceți o sumă și convertiți-o pentru a vedea rezultatul.",
+      "listHelp": "O intrare pe linie. Liniile goale sunt ignorate; duplicatele rămân separate până le eliminați.",
+      "dedupe": "Elimină intrările duplicate",
+      "drawEntries": "Extrage intrări · {{count}}",
+      "drawGroups": "Creează grupuri · {{count}}",
+      "drawMembers": "Grupează intrări · {{count}} pe grup",
+      "drawNumbers": "Extrage numere · {{count}}",
+      "discountReduction": "Reducere procentuală (%)",
+      "discountHelp": "Preț inițial 100, reducere 20% → preț redus 80.",
+      "unitPrecision": "Rezultatele afișează până la 24 de cifre semnificative. ≈ semnele afișează rotunjirea; copierea păstrează până la 80 de cifre semnificative. Factorii de unitate folosesc definițiile mathjs; galoanele și uncii fluide sunt unități americane."
+    },
+    "files": {
+      "fileActions": "Acțiuni pentru fișier",
+      "discardCrop": "Renunțați la ajustările de decupare nesalvate?",
+      "imageInfo": "{{name}} · {{width}} × {{height}} px",
+      "pastedImage": "Imagine lipită",
+      "lineDedupeHelp": "Compară exact întreaga linie, inclusiv spațiile și literele mari/mici. Păstrează prima apariție.",
+      "lineSortHelp": "Sortează după unitățile de cod Unicode, nu după ordinea lingvistică sau numerică."
+    },
+    "shared": {
+      "viewResult": "Vezi rezultatul"
+    }
   }
 }

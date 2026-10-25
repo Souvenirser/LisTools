@@ -48,7 +48,7 @@ $('tool-root').innerHTML=`
   </div>`;
 const regexError=document.createElement('details');regexError.id='regex-error-detail';regexError.hidden=true;regexError.innerHTML='<summary data-i18n="cron.technicalDetails"></summary><pre id="regex-error-raw" dir="ltr"></pre>';$('regex-status').after(regexError);
 mountTool('regex');
-let result,lastState={status:'idle'},active=0,selectedRule,suppressChanges=false;
+let result,lastState={status:'idle'},hasRun=false,stale=false,active=0,selectedRule,suppressChanges=false;
 const setDoc=(editor,text)=>{if(editor.state.doc.toString()!==text)editor.dispatch({changes:{from:0,to:editor.state.doc.length,insert:text}});};
 const byteSize=text=>new TextEncoder().encode(text).length;
 const size=n=>n<1024?`${n} B`:n<1024**2?`${(n/1024).toFixed(1)} KiB`:`${(n/1024**2).toFixed(2)} MiB`;
@@ -95,17 +95,22 @@ function renderFlags() {
       $('regex-flags').value=value.join('');renderFlags();inputChanged();
     });return label;
   }));
-  const common=$('regex-common-flags');if(common)common.replaceChildren();if(common)for(const label of [...$('regex-flag-options').children])if(['g','i','m'].includes(label.querySelector('input').value))common.append(label);
+  const common=$('regex-common-flags');
+  if(common){
+    for(const label of common.querySelectorAll('label'))label.remove();
+    common.prepend(...[...$('regex-flag-options').children].filter(label=>['g','i','m'].includes(label.querySelector('input').value)));
+  }
 }
 function request() {return {pattern:$('regex-pattern').value,flags:$('regex-flags').value,input:source.state.doc.toString(),replacement:replacement.state.doc.toString(),operation:$('regex-operation').value,extractGroup:$('regex-group').value};}
 function execute(auto=false) {
   if(suppressChanges)return;
+  hasRun=true;stale=false;
   $('regex-input-info').textContent=`${size(byteSize(source.state.doc.toString()))} · UTF-8`;
   controller.process(request(),{auto,wait:350});
 }
 function inputChanged() {
   if(suppressChanges)return;
-  if($('regex-auto').checked)execute(true);else {controller.invalidate();$('regex-input-info').textContent=`${size(byteSize(source.state.doc.toString()))} · UTF-8`;}
+  if($('regex-auto').checked)execute(true);else {stale=hasRun;controller.invalidate();$('regex-input-info').textContent=`${size(byteSize(source.state.doc.toString()))} · UTF-8`;}
 }
 function updateHighlights() {
   let ranges=(result?.highlightRanges || []).map((range,index)=>({...range,selected:index===active}));
@@ -136,7 +141,7 @@ function showMatch(index,focus=true) {
 function renderMatches() {
   const count=result?.matches.length || 0;
   $('regex-previous').disabled=$('regex-next').disabled=count===0;
-  $('regex-current').textContent=count?t('uiText.sde3d8e4e',{p0:active+1,p1:count}):t('uiText.sd29421ef');
+  $('regex-current').textContent=count?t('uiText.sde3d8e4e',{p0:active+1,p1:count}):t(result?'direct.developer.regexNoMatches':'direct.developer.regexNotRun');
   $('regex-match-notice').textContent=result?.truncated?t('uiText.sad2bc38e'):result && count>limits.highlights?t('uiText.s698d5880'):'';
   const start=Math.floor(active/50)*50, visible=result?.matches.slice(start,start+50) || [];
   $('regex-match-rows').replaceChildren(...visible.map((match,offset)=> {
@@ -147,7 +152,8 @@ function renderMatches() {
   }));
   $('regex-page-info').textContent=count?t('uiText.sdc00f0bf',{p0:start+1,p1:Math.min(start+50,count),p2:count}):'';
   const match=result?.matches[active],groups=match?[...match.captures.map(group=>({name:`$${group.number}`,...group})),...Object.entries(match.namedGroups).map(([name,group])=>({name:`$<${name}>`,...group}))]:[];
-  if(!groups.length) {$('regex-captures').replaceChildren(el('p',t('uiText.s80fe35e5'),'tool-note'));return;}
+  document.querySelector('.regex-capture-title').hidden=!groups.length;$('regex-captures').hidden=!groups.length;
+  if(!groups.length) {$('regex-captures').replaceChildren();return;}
   const table=el('table',undefined,'tool-table'),head=document.createElement('thead'),header=document.createElement('tr');
   header.append(...[t('uiText.s2fbb5e61'),t('uiText.sb01bbc1a'),t('uiText.sa311e772')].map(title=>el('th',title)));head.append(header);const body=document.createElement('tbody');
   for(const group of groups) {
@@ -165,6 +171,7 @@ function render(state) {
   $('regex-preview-info').textContent=result?`${size(result.outputBytes)} · ${result.durationMs} ms · `+(result.previewTruncated?t('uiText.s1c6d1b0'):t('uiText.s1b52df0')):'';
   const inputBytes=byteSize(source.state.doc.toString());
   $('regex-status').textContent=state.status==='pending'?t('uiText.sa1ea6cd3'):state.status==='ready'?t('uiText.s471ea5e4',{p0:state.matches.length,p1:state.truncated?'+' :'',p2:state.durationMs}):state.status==='error'?`${t(state.code==='TaskTimeout'?'office.timeout':'common.error')}${state.position===undefined?'':t('uiText.s2bd66e',{p0:state.field,p1:state.position+1})}`:state.status==='cancelled'?t('uiText.s5d30e9f9'):inputBytes>256*1024?t('uiText.s4ad52344'):t('uiText.s9dc92a08');
+  if(state.status==='idle'&&stale)$('regex-status').textContent=t('direct.developer.regexStale');
   $('regex-error-detail').hidden=state.status!=='error';$('regex-error-raw').textContent=state.status==='error'?state.message||state.code||'':'';
   $('regex-status').classList.toggle('tool-error',state.status==='error');
   $('regex-locate').hidden=state.status!=='error' || state.position===undefined;

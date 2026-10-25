@@ -1581,5 +1581,277 @@
     "passwordPolicy": "選定的字元類型構成允許的池。啟用「需要每種類型」以在每個密碼中包含每種選定的類型。",
     "speedScope": "評級描述了傳輸速度。延遲和抖動是單獨測量的。",
     "viewResult": "查看結果"
+  },
+  "redesign": {
+    "pdfAddPdf": "請加入 PDF 檔案以執行此任務。",
+    "pdfAddImages": "請加入 PNG、JPG 或 WebP 圖片以建立 PDF。",
+    "pdfChooseCurrent": "請從目前 PDF 清單中選擇要處理的檔案。",
+    "qrRecognizeEmpty": "辨識後的文字會顯示在這裡。請在輸入區域選擇、拖入或貼上圖片。",
+    "textIdle": "執行操作後，結果會顯示在這裡。",
+    "textStale": "輸入或選項已變更，請重新執行操作。",
+    "textEmpty": "操作完成，輸出為空。",
+    "textInputStats": "輸入：{{summary}}",
+    "textOutputBytes": "輸出：{{bytes}} 位元組（UTF-8）",
+    "textNewlineSummary": "換行格式：{{format}} · {{bytes}} 位元組（UTF-8）",
+    "cropNote": "儲存僅套用至所選圖片。匯出會先儲存其未儲存的裁剪，再使用每張圖片已儲存的裁剪或原圖處理整個佇列。",
+    "cropSaveCurrent": "儲存目前圖片的裁剪",
+    "cropDirty": "{{name}} 的裁剪變更尚未儲存。匯出時會先儲存這些變更。",
+    "cropSaved": "{{name}} 的裁剪已儲存，將用於批次匯出。",
+    "cropOriginal": "{{name}} 尚無已儲存的裁剪。如果未修改裁剪，匯出會使用原圖。",
+    "cropExportBatch": "匯出 {{count}} 張圖片 · {{cropped}} 張已儲存裁剪",
+    "cropSaveExport": "儲存目前裁剪並匯出 {{count}} 張圖片",
+    "calculatorOriginal": "原值",
+    "calculatorNew": "新值",
+    "calculatorPrice": "原價",
+    "calculatorOff": "折扣百分比（%）",
+    "calculatorPart": "部分值",
+    "calculatorWhole": "整體值",
+    "calculatorPercent": "百分比（%）",
+    "expressionResult": "運算式結果 · {{expression}}",
+    "businessResult": "{{mode}} · {{expression}}",
+    "workdayExceptions": "自訂休息日：{{off}} · 自訂工作日：{{work}}",
+    "copyDisplayedEquation": "複製顯示的等式",
+    "drawShuffle": "打亂名單",
+    "drawGroups": "產生分組",
+    "timerOtherRunning": "{{mode}}正在執行",
+    "timerSessionHelp": "重新載入此分頁會還原兩個計時器；執行中的計時器會計入實際經過的時間。狀態儲存在此分頁的工作階段儲存空間中。"
+  },
+  "direct": {
+    "developer": {
+      "convert": {
+        "base64": {
+          "usage": "將位元組表示為 Base64。",
+          "input": "文字／檔案原始位元組",
+          "output": "Base64 文字"
+        },
+        "base64url": {
+          "usage": "將位元組表示為適用於 URL 的 Base64。",
+          "input": "文字／檔案原始位元組",
+          "output": "Base64URL 文字"
+        },
+        "base32": {
+          "usage": "使用 Base32 字母表表示位元組。",
+          "input": "文字／檔案原始位元組",
+          "output": "Base32 文字"
+        },
+        "base32hex": {
+          "usage": "使用 Base32Hex 字母表表示位元組。",
+          "input": "文字／檔案原始位元組",
+          "output": "Base32Hex 文字"
+        },
+        "base58": {
+          "usage": "使用 Bitcoin Base58 字母表表示位元組。",
+          "input": "文字／檔案原始位元組",
+          "output": "Base58 文字"
+        },
+        "hex": {
+          "usage": "在位元組與十六進位表示之間轉換。",
+          "input": "文字／檔案原始位元組",
+          "output": "十六進位位元組"
+        },
+        "binary": {
+          "usage": "將每個位元組表示為八位二進位數字。",
+          "input": "文字／檔案原始位元組",
+          "output": "二進位位元組字串"
+        },
+        "url-component": {
+          "usage": "編碼單一 URL 參數或路徑片段。",
+          "input": "未跳脫的文字",
+          "output": "URL 片段文字",
+          "help": "使用 encodeURIComponent / decodeURIComponent。空格轉為 %20，原樣的 + 轉為 %2B。"
+        },
+        "uri": {
+          "usage": "編碼完整 URI，同時保留 URI 分隔符。",
+          "input": "完整 URI",
+          "output": "已跳脫的 URI",
+          "help": "使用 encodeURI / decodeURI，保留 : / ? # 等 URI 分隔符。單一參數值請使用 URL 片段工具。"
+        },
+        "form": {
+          "usage": "編碼單一表單鍵或值。",
+          "input": "未跳脫的鍵／值",
+          "output": "表單欄位片段文字",
+          "help": "採用 application/x-www-form-urlencoded 規則。空格轉為 +，原樣的 + 轉為 %2B。"
+        },
+        "html-entities": {
+          "usage": "為 HTML 內容跳脫特殊字元。",
+          "input": "純文字",
+          "output": "HTML 實體",
+          "help": "跳脫與解碼 HTML 實體，只轉換文字，不解析或執行 HTML。"
+        },
+        "xml-entities": {
+          "usage": "在文字與 XML 實體之間轉換。",
+          "input": "純文字",
+          "output": "XML 實體",
+          "help": "跳脫與解碼 XML 實體，不解析 XML 文件，也不執行輸入。"
+        },
+        "json-string": {
+          "usage": "建立或讀取完整的 JSON 字串常值。",
+          "input": "純文字",
+          "output": "含引號的 JSON 字串",
+          "help": "編碼結果包含外層引號。解碼需要完整的 JSON 字串常值。"
+        },
+        "unicode": {
+          "usage": "在文字與 Unicode 跳脫序列之間轉換。",
+          "input": "純文字",
+          "output": "Unicode 跳脫序列",
+          "help": "將 UTF-16 編碼為 \\uXXXX 跳脫序列。解碼支援的跳脫語法，不執行輸入。"
+        },
+        "codepoints": {
+          "usage": "檢視或重建 Unicode 碼位。",
+          "input": "Unicode 文字",
+          "output": "U+ 碼位清單",
+          "help": "編碼十六進位 U+ 碼位清單。解碼會重建文字，包括補充平面字元。"
+        },
+        "charset": {
+          "usage": "使用目標字元集編碼位元組。",
+          "input": "Unicode 文字／來源編碼檔案",
+          "output": "目標編碼位元組"
+        },
+        "json-yaml": {
+          "usage": "在 JSON 與 YAML 文件之間轉換。",
+          "input": "JSON 文件",
+          "output": "YAML 文件"
+        },
+        "xml-json": {
+          "usage": "轉換 XML 及其保留順序的 JSON 結構。",
+          "input": "XML 文件",
+          "output": "保留順序的 JSON 陣列"
+        },
+        "csv-json": {
+          "usage": "轉換逗號分隔表格與 JSON。",
+          "input": "CSV 表格",
+          "output": "JSON 資料列"
+        },
+        "tsv-json": {
+          "usage": "轉換定位字元分隔表格與 JSON。",
+          "input": "TSV 表格",
+          "output": "JSON 資料列"
+        },
+        "jsonl": {
+          "usage": "轉換 JSON Lines 與 JSON 陣列。",
+          "input": "JSON Lines",
+          "output": "JSON 陣列"
+        },
+        "query-json": {
+          "usage": "將重複的查詢參數轉換為字串陣列。",
+          "input": "查詢字串",
+          "output": "包含字串陣列的 JSON 物件"
+        },
+        "md5": {
+          "usage": "計算 MD5 校驗值並與預期值比較。",
+          "input": "文字／檔案／文字行",
+          "output": "MD5 校驗值"
+        },
+        "hash": {
+          "usage": "計算文字或檔案原始位元組的雜湊值。",
+          "input": "文字／檔案原始位元組",
+          "output": "所選演算法的十六進位摘要"
+        },
+        "hmac": {
+          "usage": "使用本次工作提供的金鑰計算 HMAC。",
+          "input": "訊息文字／檔案位元組＋金鑰",
+          "output": "十六進位 HMAC 摘要"
+        },
+        "jwt": {
+          "usage": "讀取 JWT 標頭和酬載，不驗證簽章。",
+          "input": "三段式 JWT",
+          "output": "已解碼的 JSON"
+        },
+        "gzip": {
+          "usage": "壓縮或解壓縮單一 Gzip 資料流。",
+          "input": "文字／檔案原始位元組",
+          "output": "Gzip 位元組（所選表示方式）"
+        },
+        "zlib": {
+          "usage": "壓縮或解壓縮 Zlib 資料流。",
+          "input": "文字／檔案原始位元組",
+          "output": "Zlib 位元組（所選表示方式）"
+        },
+        "deflate": {
+          "usage": "壓縮或解壓縮原始 Deflate 資料。",
+          "input": "文字／檔案原始位元組",
+          "output": "原始 Deflate 位元組（所選表示方式）"
+        },
+        "radix": {
+          "usage": "將整數轉換為另一個進位。",
+          "input": "來源進位整數",
+          "output": "目標進位整數"
+        },
+        "bytes-unit": {
+          "usage": "換算位元、位元組及 SI、IEC 單位。",
+          "input": "來源單位的數值",
+          "output": "目標單位的數值"
+        },
+        "duration-unit": {
+          "usage": "換算固定時長，不進行日曆運算。",
+          "input": "來源單位的時長",
+          "output": "目標單位的時長"
+        },
+        "color": {
+          "usage": "轉換色彩表示並保留透明度。",
+          "input": "HEX / RGB / HSL / HSV JSON",
+          "output": "所選色彩格式"
+        },
+        "case": {
+          "usage": "套用選定的大小寫或命名樣式。",
+          "input": "文字／名稱",
+          "output": "所選命名樣式的文字"
+        },
+        "lines": {
+          "usage": "對文字行套用單一選定操作。",
+          "input": "文字行",
+          "output": "處理後的文字行"
+        },
+        "newline": {
+          "usage": "轉換文字的換行符。",
+          "input": "含換行符的文字",
+          "output": "含所選 LF / CRLF / CR 的文字"
+        },
+        "normalize": {
+          "usage": "對碼位套用 Unicode 正規化。",
+          "input": "Unicode 文字",
+          "output": "所選正規化形式的文字"
+        }
+      },
+      "jsonCancelled": "已取消。輸入內容已保留，可隨時再次執行。",
+      "convertHelp": "用法與限制",
+      "fileReplace": "替換檔案",
+      "md5CopyFile": "複製 {{name}} 的校驗值",
+      "copyIso": "複製 ISO",
+      "copyIsoDate": "以 ISO 複製第 {{index}} 次執行",
+      "regexNotRun": "尚未執行",
+      "regexNoMatches": "沒有符合項目",
+      "regexStale": "輸入已變更，請重新執行以更新結果。",
+      "speedNetwork": "此工具會連線至 Cloudflare 並消耗網路流量。只有按下開始後才會發送測試請求。",
+      "speedSettings": "測試設定",
+      "speedSummary": "{{profile}} · {{unit}} · 最多 {{budget}} MiB",
+      "customZone": "自訂 IANA 時區"
+    },
+    "daily": {
+      "countdownHelp": "倒數時，將今天設為開始日期、目標日期設為結束日期。已過的目標會得到負天數。",
+      "anniversaryHelp": "2 月 29 日的週年日期，在非閏年按 2 月最後一天計算。",
+      "unitDetails": "其他換算與精度",
+      "moneyEmpty": "輸入金額並轉換，即可查看結果。",
+      "listHelp": "每行一筆資料。空行會忽略；重複項目會分別保留，直到你主動移除。",
+      "dedupe": "移除重複項目",
+      "drawEntries": "抽取項目 · {{count}}",
+      "drawGroups": "建立群組 · {{count}}",
+      "drawMembers": "項目分組 · 每組 {{count}} 項",
+      "drawNumbers": "抽取數字 · {{count}}",
+      "discountReduction": "折減百分比 (%)",
+      "discountHelp": "原價 100，折減 20% → 折後價 80。",
+      "unitPrecision": "結果最多顯示 24 位有效數字；≈ 表示顯示值經過捨入。複製時最多保留 80 位有效數字。換算系數採用 mathjs 的定義；加侖和液量盎司均為美制單位。"
+    },
+    "files": {
+      "fileActions": "檔案操作",
+      "discardCrop": "放棄尚未儲存的裁切調整？",
+      "imageInfo": "{{name}} · {{width}} × {{height}} 像素",
+      "pastedImage": "貼上的圖片",
+      "lineDedupeHelp": "按整行精確比對，區分大小寫和空格，保留首次出現的行。",
+      "lineSortHelp": "按 Unicode 碼元順序排序，不按語言或數值大小排序。"
+    },
+    "shared": {
+      "viewResult": "查看結果"
+    }
   }
 }

@@ -1,3 +1,4 @@
+import {createMenuIcon} from './icons.js';
 import {version,bugs} from '../../../package.json';
 import {pages,toolGroups,searchNavigation,currentTarget} from './navigation.js';
 import {mountFeedbackLink} from './feedback.js';
@@ -8,7 +9,7 @@ import {menuOrderKey,normalizeMenuOrder,readMenuOrder,saveMenuOrder,menuExpanded
 
 const label=item=>item.key?t(item.key):(item.name || [item.zh,item.en])[language().startsWith('zh')?0:1];
 const iconText=(icon,text)=>{
-  const mark=document.createElement('span');mark.className='tool-menu-icon';mark.textContent=icon;mark.setAttribute('aria-hidden','true');
+  const mark=document.createElement('span');mark.className='tool-menu-icon';mark.append(createMenuIcon(icon));mark.setAttribute('aria-hidden','true');
   const name=document.createElement('span');name.className='tool-menu-name';name.textContent=text;
   return [mark,name];
 };
@@ -71,6 +72,7 @@ export function mountToolMenu(root,{popup=false,close=()=>{}}={}) {
     details.append(summary,body);return details;
   }
   function render() {
+    const active=document.activeElement,focusedTool=active?.closest('[data-tool-id]')?.dataset.toolId,focusedGroup=active?.closest('details[data-group-id]')?.dataset.groupId,wasHandle=active?.classList.contains('tool-menu-sort-handle'),hadListFocus=list.contains(active),scrollTop=list.scrollTop;
     if(!draft)expanded=new Set(readMenuExpanded());
     revision++;stopSorting();selected=undefined;root.classList.toggle('is-sorting',editing());button('edit').hidden=editing();root.querySelector('.tool-menu-order-actions').hidden=!editing();root.querySelector('.tool-menu-move-actions').hidden=!editing();button('up').disabled=button('down').disabled=true;
     const query=search.value.trim();
@@ -90,6 +92,12 @@ export function mountToolMenu(root,{popup=false,close=()=>{}}={}) {
     refreshCurrent();
     empty.hidden=list.children.length!==0;empty.textContent=t('menu.noResults');
     list.setAttribute('aria-label',t('common.navigation'));
+    if(hadListFocus){
+      const row=focusedTool?[...list.querySelectorAll('[data-tool-id]')].find(node=>node.dataset.toolId===focusedTool):[...list.querySelectorAll('details[data-group-id]')].find(node=>node.dataset.groupId===focusedGroup)?.querySelector('summary');
+      const candidate=wasHandle?row?.querySelector('.tool-menu-sort-handle'):row;
+      (candidate?.checkVisibility()?candidate:row?.closest('details')?.querySelector('summary'))?.focus({preventScroll:true});
+      list.scrollTop=scrollTop;
+    }
   }
   function translate() {
     refreshFeedback();
@@ -147,7 +155,7 @@ export function mountToolMenu(root,{popup=false,close=()=>{}}={}) {
 
 export function mountHeaderMenu() {
   const trigger=document.querySelector('button.brand');
-  if(!trigger)return;
+  if(!trigger)return;trigger.querySelector('.brand-mark')?.setAttribute('aria-hidden','true');
   const popover=document.createElement('div');popover.id='tool-menu';popover.setAttribute('popover','auto');
   document.body.append(popover);trigger.setAttribute('popovertarget',popover.id);trigger.setAttribute('aria-controls',popover.id);trigger.setAttribute('aria-expanded','false');
   const menu=mountToolMenu(popover,{close:()=>{popover.hidePopover();trigger.focus();}});
@@ -156,6 +164,7 @@ export function mountHeaderMenu() {
     const left=document.documentElement.dir==='rtl'?rect.right-popover.offsetWidth:rect.left;
     popover.style.left=`${Math.max(8,Math.min(left,innerWidth-popover.offsetWidth-8))}px`;
     popover.style.top=`${rect.bottom+8}px`;
+    popover.style.maxHeight=`${Math.max(0,Math.min(560,innerHeight-rect.bottom-16))}px`;
   }
   popover.addEventListener('beforetoggle',event=>{if(event.newState==='closed')menu.reset();});
   popover.addEventListener('toggle',event=>{

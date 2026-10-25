@@ -5,7 +5,7 @@ import { readdir, stat } from 'node:fs/promises';
 for(const scale of [1,2])test.describe(`speed samples at ${scale}x pixel density`,()=>{
   test.use({deviceScaleFactor:scale});
   test('canvas keeps native screen resolution when the viewport changes',async({page})=>{
-    await page.goto('/speedtest.html');
+    await page.goto('/speedtest.html');await page.locator('.speed-chart-card>summary').click();
     for(const width of [1360,640,1600]){
       await page.setViewportSize({width,height:960});
       await expect.poll(()=>page.locator('#speed-chart').evaluate(canvas=>{
@@ -30,8 +30,8 @@ for(const scale of [1,2])test.describe(`speed samples at ${scale}x pixel density
       CanvasRenderingContext2D.prototype.fillText=function(text,x,y,...args){if(this.canvas.id==='speed-chart')window.speedChartLabels.push({text,x,y});return originalText.call(this,text,x,y,...args);};
     });
     const external=[];page.on('request',request=>{if(request.url().startsWith('https://'))external.push(request.url());});
-    await page.goto('/speedtest.html');await selectLanguage(page,'zh-Hans');
-    const values=page.locator('#speed-metrics strong');
+    await page.goto('/speedtest.html');await page.locator('.speed-chart-card>summary').click();await selectLanguage(page,'zh-Hans');
+    const values=page.locator('#speed-metrics [data-metric] strong');
     await expect(page.locator('#speed-unit')).toHaveValue('MB/s');
     await expect(values).toHaveText(Array(8).fill('待测速'));
     await expect(page.locator('#speed-chart-empty')).toBeVisible();
@@ -43,7 +43,7 @@ for(const scale of [1,2])test.describe(`speed samples at ${scale}x pixel density
     expect(await page.locator('#speed-chart').evaluate(canvas=>window.speedChartLabels.filter(label=>label.x>40&&label.y>canvas.getBoundingClientRect().height-30).map(label=>label.text))).toEqual(['1','2','3','4','5']);
     await page.evaluate(()=>dispatchEvent(new Event('speedtest-fixture-finish')));
     await expect(values.nth(4)).toHaveText('未测得');await expect(page.locator('#speed-copy')).toBeEnabled();
-    await page.locator('#speed-unit').selectOption('Mbps');
+    await page.locator('#speed-settings-summary').click();await page.locator('#speed-unit').selectOption('Mbps');
     await expect(values.nth(0)).toHaveText('120.00 Mbps');await expect(values.nth(1)).toHaveText('55.00 Mbps');
     await expect(page.locator('#speed-chart-unit')).toHaveText('Mbps');
     await page.locator('#speed-clear').click();

@@ -9,7 +9,7 @@ test('four task groups start collapsed and task search still finds the primary t
 });
 
 test('task addresses select all seven workspaces and retain input on subsequent task changes',async({page})=>{
- for(const [file,task,visible]of [['qr','recognize','#qr-file'],['images','resize','#images-width'],['pdf','rotate','#pdf-rotation'],['dates','shift','#date-base'],['text','extract','#text-kind'],['draw','numbers','#draw-min'],['timer','stopwatch','#timer-lap']]){
+ for(const [file,task,visible]of [['qr','recognize','#qr-choose'],['images','resize','#images-width'],['pdf','rotate','#pdf-rotation'],['dates','shift','#date-base'],['text','extract','#text-kind'],['draw','numbers','#draw-min'],['timer','stopwatch','#timer-lap']]){
   await page.goto(`/${file}.html#${task}`);await expect(page.locator(visible),file).toBeVisible();
  }
  await page.goto('/qr.html#generate');await page.locator('#qr-input').fill('keep');await page.locator('#qr-task-recognize').click();await expect(page).toHaveURL(/#recognize$/);await page.goBack();await expect(page.locator('#qr-input')).toHaveValue('keep');
@@ -46,7 +46,7 @@ test('money prioritizes Chinese uppercase while secondary representations stay a
 });
 
 test('draw groups have readable headings and timer has an hours/minutes/seconds duration label',async({page})=>{
- await page.goto('/draw.html');await page.locator('#draw-input').fill('A\nB\nC');await page.locator('#draw-mode').selectOption('groups');await page.locator('#draw-count').fill('2');await page.locator('#draw-run').click();await expect(page.locator('#draw-result .draw-group')).toHaveCount(2);await expect(page.locator('#draw-result h3').first()).toContainText('2');await page.goto('/timer.html');await expect(page.locator('label[for="timer-duration"]')).toHaveText('Set duration');
+ await page.goto('/draw.html');await page.locator('#draw-input').fill('A\nB\nC');await page.locator('#draw-mode').selectOption('groups');await page.locator('#draw-count').fill('2');await page.locator('#draw-run').click();await expect(page.locator('#draw-result .draw-group')).toHaveCount(2);await expect(page.locator('#draw-result h3').first()).toContainText('2');await page.goto('/timer.html');await expect(page.locator('#timer-settings > summary')).toHaveText('Set duration');
 });
 
 test('comparison exposes only its input pair until a real comparison succeeds',async({page})=>{

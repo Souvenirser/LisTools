@@ -10,16 +10,17 @@ const root=document.getElementById('tool-root');
 root.innerHTML=`
   <section class="page-heading"><div><h1 data-i18n="uiText.saf21bd04"></h1><p data-i18n="uiText.sa3aafdbb"></p></div></section>
   <div class="speed-layout"><section class="tool-card" id="speed-controls">
-    <div class="tool-fields">
+    <details id="speed-settings" open><summary id="speed-settings-summary" data-i18n="direct.developer.speedSettings"></summary><div class="tool-fields">
       <div class="field"><label for="speed-profile" data-i18n="uiText.s53806f0"></label><select id="speed-profile"><option value="light" data-i18n="uiText.scd431532"></option><option value="standard" data-i18n="uiText.s4f9a1a4d"></option></select></div>
       <div class="field"><label for="speed-unit" data-i18n="uiText.s8695da4e"></label><select id="speed-unit"><option>MB/s</option><option>Mbps</option></select></div>
     </div>
-    <p class="tool-note" id="speed-budget"></p>
+    </details><p class="tool-note" id="speed-budget"></p>
+    <p class="tool-note" id="speed-network-notice" data-i18n="direct.developer.speedNetwork"></p>
     <p class="tool-note" data-i18n="uiText.saecdb926"></p>
     <div class="tool-actions"><button class="primary" id="speed-start" data-i18n="uiText.sa751a9cd"></button><button id="speed-cancel" disabled data-i18n="uiText.s35afca3b"></button><button id="speed-clear" data-i18n="uiText.s4a57fc2"></button><button id="speed-copy" disabled data-i18n="uiText.s3c8c0614"></button><button id="speed-download" disabled data-i18n="uiText.s41fa1c79"></button></div>
-    <p class="tool-status" id="speed-status" role="status" aria-live="polite"></p><progress id="speed-progress" value="0" max="100" aria-label="Test progress"></progress>
+    <p class="tool-status" id="speed-status" role="status" aria-live="polite"></p><progress id="speed-progress" value="0" max="100" data-i18n-aria-label="uiText.s535d93b"></progress>
   </section>
-  <section class="tool-card speed-rating" id="speed-rating" aria-labelledby="speed-rating-heading">
+  <section id="speed-metrics"><div id="speed-primary-metrics" class="speed-metrics"></div>  <section class="tool-card speed-rating" id="speed-rating" aria-labelledby="speed-rating-heading">
     <h2 id="speed-rating-heading" data-i18n="speedtestRating.heading"></h2>
     <p id="speed-rating-waiting" class="tool-note"></p><p id="speed-rating-partial" class="tool-note" data-i18n="speedtestRating.partial" hidden></p>
     <div id="speed-rating-results" aria-live="polite" hidden></div>
@@ -27,15 +28,15 @@ root.innerHTML=`
     <ol id="speed-level-scale">${speedLevels.map(level=>`<li data-level="${level.id}"><img src="./speed-levels/${level.id}.svg" width="34" height="34" alt=""><div><strong></strong><span dir="ltr"></span></div></li>`).join('')}</ol>
     <p class="tool-note" data-i18n="speedtestRating.scaleHint"></p></details>
   </section>
-  <section id="speed-metrics"><div id="speed-primary-metrics" class="speed-metrics"></div><div id="speed-idle-metrics" class="speed-metrics speed-secondary"></div><details id="speed-loaded-details"><summary data-i18n="uiText.loadedMetrics"></summary><div id="speed-loaded-metrics" class="speed-metrics speed-secondary"></div></details><div class="tool-actions" id="speed-result-actions"></div></section>
-  <section class="tool-card speed-chart-card">
-    <div class="speed-chart-heading"><h2 data-i18n="uiText.seb894ce3"></h2><div class="speed-chart-legend"><span class="speed-legend-download" data-i18n="uiText.s6964bb19"></span><span class="speed-legend-upload" data-i18n="uiText.s826f7f7c"></span></div></div>
+<div id="speed-idle-metrics" class="speed-metrics speed-secondary"></div><details id="speed-loaded-details"><summary data-i18n="uiText.loadedMetrics"></summary><div id="speed-loaded-metrics" class="speed-metrics speed-secondary"></div></details><div class="tool-actions" id="speed-result-actions"></div></section>
+  <details class="tool-card speed-chart-card">
+    <summary><div class="speed-chart-heading"><h2 data-i18n="uiText.seb894ce3"></h2><div class="speed-chart-legend"><span class="speed-legend-download" data-i18n="uiText.s6964bb19"></span><span class="speed-legend-upload" data-i18n="uiText.s826f7f7c"></span></div></div></summary>
     <div class="speed-chart-frame">
       <div id="speed-chart-unit" dir="ltr"></div><canvas id="speed-chart" role="img"></canvas>
       <p id="speed-chart-empty"><span></span></p><div id="speed-chart-axis" data-i18n="uiText.s616e7c80"></div>
     </div>
     <p class="tool-note" data-i18n="uiText.sc847ed18"></p>
-  </section></div>
+  </details></div>
   <p class="tool-note" data-i18n="uiText.s18bb5cac"></p>`;
 mountTool('speedtest');
 translateDOM(root);
@@ -49,18 +50,18 @@ function renderRatings() {
   $('speed-rating-waiting').hidden=finished;
   $('speed-rating-waiting').textContent=t(`speedtestRating.${state.status==='running'?'testing':'waiting'}`);
   $('speed-rating-partial').hidden=state.status!=='incomplete';
-  $('speed-rating-results').hidden=!finished;
+  $('speed-rating-results').hidden=!finished;$('speed-primary-metrics').hidden=finished;
   $('speed-rating-results').replaceChildren(...(finished?['download','upload'].map(direction=>{
     const bps=state.metrics?.[`${direction}Bps`],level=speedLevelFor(bps),card=document.createElement('div');
     card.className=`speed-rating-card speed-rating-${direction}`;card.dataset.direction=direction;
     if(level){
       card.dataset.level=level.id;const image=document.createElement('img');image.src=`./speed-levels/${level.id}.svg`;image.width=72;image.height=72;image.alt='';card.append(image);
     }else card.classList.add('is-unavailable');
-    const content=document.createElement('div'),label=document.createElement('span'),rating=document.createElement('strong'),value=document.createElement('span');
+    const content=document.createElement('div'),label=document.createElement('span'),rating=document.createElement('span'),value=document.createElement('strong');rating.className='speed-rating-name';
     label.className='speed-rating-label';label.textContent=t(`speedtestRating.${direction}`);
-    const speedWords={walking:'Walking',bicycle:'Bicycle',motorcycle:'Motorcycle',car:'Car',train:'Train',plane:'Airplane',rocket:'Rocket'};rating.textContent=t(`speedtestRating.${level?level.id:'unavailable'}`)+(level?' · '+t('ux.speed'+speedWords[level.id]):'');
+    rating.textContent=t(`speedtestRating.${level?level.id:'unavailable'}`);
     value.className='speed-rating-value';value.dir='ltr';value.textContent=level?`${convert(bps).toFixed(2)} ${speedUnit()}`:'';
-    content.append(label,rating,value);card.append(content);return card;
+    content.append(label,value,rating);card.append(content);return card;
   }):[]));
   const format=new Intl.NumberFormat(document.documentElement.lang,{maximumFractionDigits:3});
   speedLevels.forEach((level,index)=>{
@@ -111,12 +112,14 @@ function draw() {
   $('speed-chart-empty').firstElementChild.textContent=state.status==='running'?t('uiText.sd84f7fb7'):state.status==='idle'?t('uiText.s176420f6'):t('uiText.sb9fe0560');
 }
 function render(next=state) {
-  state=next;const running=state.status==='running',hasResult=['complete','incomplete'].includes(state.status);
+  const completed=next.status==='complete'&&state.status!=='complete';state=next;const running=state.status==='running',hasResult=['complete','incomplete'].includes(state.status);
+  if(completed)$('speed-settings').open=false;
   $('speed-start').disabled=running;$('speed-profile').disabled=running;$('speed-cancel').disabled=!running;
   $('speed-copy').disabled=!hasResult;$('speed-download').disabled=!hasResult;
   $('speed-start').textContent=hasResult?t('uiText.s2717a0fd'):t('uiText.sa751a9cd');
   const budget=plannedBytes($('speed-profile').value)/1024**2;
   $('speed-budget').textContent=t('uiText.scf6db0aa',{p0:budget.toFixed(1)});
+  $('speed-settings-summary').textContent=hasResult?t('direct.developer.speedSummary',{profile:$('speed-profile').selectedOptions[0].textContent,unit:speedUnit(),budget:budget.toFixed(1)}):t('direct.developer.speedSettings');
   const phases={latency:t('uiText.s99152d25'),download:t('uiText.s6964bb19'),upload:t('uiText.s826f7f7c')};
   const label=running?`${t('uiText.s535d93b')} · ${phases[state.phase]}`:state.status==='complete'?t('uiText.se54758cc'):state.status==='incomplete'?t('uiText.sef726d4b'):t('uiText.s3a32febf');
   const reason=state.reason==='timeout'?t('uiText.se345fc07'):state.reason==='cancelled'?t('uiText.s48e3ebbb'):state.message?` · ${state.message}`:'';

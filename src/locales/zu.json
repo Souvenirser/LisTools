@@ -1581,5 +1581,277 @@
     "passwordPolicy": "Izinhlobo zezinhlamvu ezikhethiwe zakha iphuli evunyelwe. Nika amandla okuthi \"Dinga uhlobo ngalunye\" ukuze ufake lonke uhlobo olukhethiwe kuphasiwedi ngayinye.",
     "speedScope": "Izilinganiso zichaza isivinini sokudlulisa. Ukubambezeleka kanye ne-jitter kukalwa ngokwehlukana.",
     "viewResult": "Buka umphumela"
+  },
+  "redesign": {
+    "calculatorOriginal": "Inani langempela",
+    "calculatorNew": "Inani elisha",
+    "calculatorPrice": "Intengo yoqobo",
+    "calculatorOff": "Iphesenti lesaphulelo (%)",
+    "calculatorPart": "Ingxenye",
+    "calculatorWhole": "Kuphelele",
+    "calculatorPercent": "Iphesenti (%)",
+    "expressionResult": "Umphumela wokuvezwa · {{expression}}",
+    "businessResult": "{{mode}} · {{expression}}",
+    "workdayExceptions": "Izinsuku zokuphumula: {{off}} · Izinsuku zokusebenza: {{work}}",
+    "copyDisplayedEquation": "Kopisha isibalo esibonisiwe",
+    "drawShuffle": "Shova uhlu",
+    "drawGroups": "Dala amaqembu",
+    "timerOtherRunning": "{{mode}} iyasebenza",
+    "timerSessionHelp": "Ukulayisha kabusha le thebhu kubuyisela zombili izibali sikhathi, okuhlanganisa isikhathi sewashi esidlulile sezibali-sikhathi ezisebenzayo. Isimo silondolozwe kusitoreji seseshini sale thebhu.",
+    "pdfAddPdf": "Engeza amafayela e-PDF kulo msebenzi.",
+    "pdfAddImages": "Engeza izithombe ze-PNG, ze-JPG noma ze-WebP ukuze udale i-PDF.",
+    "pdfChooseCurrent": "Khetha i-PDF ozoyicubungula ohlwini lwamanje lwe-PDF.",
+    "qrRecognizeEmpty": "Umbhalo owaziwayo uzovela lapha. Khetha, yehlisa noma unamathisele isithombe endaweni yokokufaka.",
+    "textIdle": "Yenza umsebenzi ukuze ubone umphumela wakho lapha.",
+    "textStale": "Okokufaka noma izinketho zishintshile. Qalisa umsebenzi futhi.",
+    "textEmpty": "Kuqedwe ngaphandle kokuphumayo.",
+    "textInputStats": "Okokufaka: {{summary}}",
+    "textOutputBytes": "Okukhiphayo: {{bytes}} UTF-8 bytes",
+    "textNewlineSummary": "Iziphetho zomugqa: {{format}} · {{bytes}} UTF-8 bytes",
+    "cropNote": "Ukulondoloza ukulungiswa kokunqampuna kusebenza kuphela esithombeni esikhethiwe. Ukukhipha kuqala kulondoloza ukulungiswa kokunqampuna okungalondoloziwe kwaleso sithombe, bese kucubungula zonke izithombe ezikulayini kusetshenziswa ukulungiswa kwaso kokunqampuna okulondoloziwe noma isithombe sangempela.",
+    "cropSaveCurrent": "Londoloza ukunqampuna kwalesi sithombe",
+    "cropDirty": "Izinguquko zokunqampuna kwesithombe ezingalondoloziwe ze-{{name}}. Ukukhipha kuzogcina lezi zinguquko kuqala.",
+    "cropSaved": "Ukunqampuna kwesithombe okulondoloziwe kwe-{{name}}. Izosetshenziswa ekuthekeni kwesithombe senqwaba.",
+    "cropOriginal": "{{name}} ayinakho ukunqampuna kwesithombe esilondoloziwe. Ukuthekelisa kusebenzisa isithombe saso soqobo ngaphandle uma ulungisa ukunqampuna.",
+    "cropExportBatch": "Thekelisa {{count}} izithombe · izithombe ezinokunqampuna okulondoloziwe: {{cropped}}",
+    "cropSaveExport": "Londoloza ukunqampuna kwesithombe samanje bese uthekelisa {{count}} izithombe"
+  },
+  "direct": {
+    "developer": {
+      "convert": {
+        "base64": {
+          "usage": "Mela amabhayithi nge-Base64.",
+          "input": "Umbhalo / amabhayithi okuqala efayela",
+          "output": "Umbhalo we-Base64"
+        },
+        "base64url": {
+          "usage": "Mela amabhayithi nge-Base64 ephephile kuma-URL.",
+          "input": "Umbhalo / amabhayithi okuqala efayela",
+          "output": "Umbhalo we-Base64URL"
+        },
+        "base32": {
+          "usage": "Mela amabhayithi ngezinhlamvu ze-Base32.",
+          "input": "Umbhalo / amabhayithi okuqala efayela",
+          "output": "Umbhalo we-Base32"
+        },
+        "base32hex": {
+          "usage": "Mela amabhayithi ngezinhlamvu ze-Base32Hex.",
+          "input": "Umbhalo / amabhayithi okuqala efayela",
+          "output": "Umbhalo we-Base32Hex"
+        },
+        "base58": {
+          "usage": "Mela amabhayithi ngezinhlamvu ze-Bitcoin Base58.",
+          "input": "Umbhalo / amabhayithi okuqala efayela",
+          "output": "Umbhalo we-Base58"
+        },
+        "hex": {
+          "usage": "Guqula amabhayithi aye noma asuke ku-hexadecimal.",
+          "input": "Umbhalo / amabhayithi okuqala efayela",
+          "output": "Amabhayithi e-hexadecimal"
+        },
+        "binary": {
+          "usage": "Mela ibhayithi ngalinye ngamadijithi ayisishiyagalombili kanambambili.",
+          "input": "Umbhalo / amabhayithi okuqala efayela",
+          "output": "Iyunithi yezinhlamvu yamabhayithi kanambambili"
+        },
+        "url-component": {
+          "usage": "Faka ikhodi kupharamitha eyodwa ye-URL noma engxenyeni yendlela.",
+          "input": "Umbhalo ongafakwanga ukuphunyuka",
+          "output": "Umbhalo wengxenye ye-URL",
+          "help": "Isebenzisa i-encodeURIComponent / decodeURIComponent. Izikhala ziba u-%20; uphawu + loqobo luba u-%2B."
+        },
+        "uri": {
+          "usage": "Faka ikhodi yokuphunyuka kuyo yonke i-URI ugcine izihlukanisi zayo.",
+          "input": "I-URI ephelele",
+          "output": "I-URI enekhodi yokuphunyuka",
+          "help": "Isebenzisa i-encodeURI / decodeURI futhi igcina izihlukanisi ze-URI ezinjengo-: / ? #. Ngenani elilodwa lepharamitha, sebenzisa ingxenye ye-URL."
+        },
+        "form": {
+          "usage": "Faka ikhodi kukhiye owodwa noma enanini lefomu.",
+          "input": "Ukhiye / inani elingafakwanga ukuphunyuka",
+          "output": "Umbhalo wengxenye yefomu",
+          "help": "Ilandela imithetho ye-application/x-www-form-urlencoded. Izikhala ziba u-+; uphawu + loqobo luba u-%2B."
+        },
+        "html-entities": {
+          "usage": "Faka ikhodi yokuphunyuka ezinhlamvini ezikhethekile zokuqukethwe kwe-HTML.",
+          "input": "Umbhalo ojwayelekile",
+          "output": "Izinto ze-HTML",
+          "help": "Ifaka futhi ikhiphe ikhodi yokuphunyuka ezintweni ze-HTML. Iguqula umbhalo ngaphandle kokuhlaziya noma ukusebenzisa i-HTML."
+        },
+        "xml-entities": {
+          "usage": "Guqula umbhalo uye noma usuke ezintweni ze-XML.",
+          "input": "Umbhalo ojwayelekile",
+          "output": "Izinto ze-XML",
+          "help": "Ifaka futhi ikhiphe ikhodi yokuphunyuka ezintweni ze-XML ngaphandle kokuhlaziya idokhumenti ye-XML noma ukusebenzisa okufakiwe."
+        },
+        "json-string": {
+          "usage": "Dala noma ufunde umbhalo oqondile ophelele weyunithi yezinhlamvu ye-JSON.",
+          "input": "Umbhalo ojwayelekile",
+          "output": "Iyunithi yezinhlamvu ye-JSON enezimpawu zokucaphuna",
+          "help": "Umphumela onekhodi uqukethe izimpawu zokucaphuna ezizungezile. Ukukhipha ikhodi kudinga umbhalo oqondile ophelele weyunithi yezinhlamvu ye-JSON."
+        },
+        "unicode": {
+          "usage": "Guqula umbhalo uye noma usuke ekuphunyukeni kwe-Unicode.",
+          "input": "Umbhalo ojwayelekile",
+          "output": "Ukulandelana kokuphunyuka kwe-Unicode",
+          "help": "Ifaka ikhodi ku-UTF-16 njengokuphunyuka kwe-\\uXXXX. Ikhipha ikhodi yolimi lokuphunyuka olusekelwayo ngaphandle kokusebenzisa okufakiwe."
+        },
+        "codepoints": {
+          "usage": "Hlola noma wakhe kabusha amaphuzu ekhodi e-Unicode.",
+          "input": "Umbhalo we-Unicode",
+          "output": "Uhlu lwamaphuzu ekhodi e-U+",
+          "help": "Ifaka ikhodi ohlwini lwamaphuzu ekhodi e-U+ e-hexadecimal. Ukukhipha ikhodi kwakha umbhalo kabusha, kuhlanganise nezinhlamvu ezengeziwe."
+        },
+        "charset": {
+          "usage": "Faka ikhodi kumabhayithi ngesethi yezinhlamvu eqondiwe.",
+          "input": "Umbhalo we-Unicode / ifayela elinekhodi yomthombo",
+          "output": "Amabhayithi anekhodi eqondiwe"
+        },
+        "json-yaml": {
+          "usage": "Guqula amadokhumenti phakathi kwe-JSON ne-YAML.",
+          "input": "Idokhumenti ye-JSON",
+          "output": "Idokhumenti ye-YAML"
+        },
+        "xml-json": {
+          "usage": "Guqula i-XML nesakhiwo sayo se-JSON esihlelekile.",
+          "input": "Idokhumenti ye-XML",
+          "output": "Uhlu lwe-JSON oluhlelekile"
+        },
+        "csv-json": {
+          "usage": "Guqula amathebula ahlukaniswe ngokhefana ne-JSON.",
+          "input": "Ithebula le-CSV",
+          "output": "Imigqa ye-JSON"
+        },
+        "tsv-json": {
+          "usage": "Guqula amathebula ahlukaniswe ngamathebhu ne-JSON.",
+          "input": "Ithebula le-TSV",
+          "output": "Imigqa ye-JSON"
+        },
+        "jsonl": {
+          "usage": "Guqula i-JSON Lines nezinhlu ze-JSON.",
+          "input": "JSON Lines",
+          "output": "Uhlu lwe-JSON"
+        },
+        "query-json": {
+          "usage": "Guqula amapharamitha ombuzo aphindaphindayo abe yizinhlu zeyunithi yezinhlamvu.",
+          "input": "Iyunithi yezinhlamvu yombuzo",
+          "output": "Into ye-JSON equkethe izinhlu zeyunithi yezinhlamvu"
+        },
+        "md5": {
+          "usage": "Bala isamba sokuhlola se-MD5 bese uqhathanisa amanani alindelekile.",
+          "input": "Umbhalo / amafayela / imigqa yombhalo",
+          "output": "Isamba sokuhlola se-MD5"
+        },
+        "hash": {
+          "usage": "Bala i-hash yamabhayithi okuqala ombhalo noma ifayela.",
+          "input": "Umbhalo / amabhayithi okuqala efayela",
+          "output": "Isifinyezo se-hexadecimal se-algorithm ekhethiwe"
+        },
+        "hmac": {
+          "usage": "Bala i-HMAC ngokhiye walo msebenzi.",
+          "input": "Umbhalo womlayezo / amabhayithi efayela + ukhiye",
+          "output": "Isifinyezo se-HMAC se-hexadecimal"
+        },
+        "jwt": {
+          "usage": "Funda izihloko nokuqukethwe kwe-JWT ngaphandle kokuqinisekisa amasiginesha.",
+          "input": "I-JWT enezingxenye ezintathu",
+          "output": "I-JSON ekhishwe ikhodi"
+        },
+        "gzip": {
+          "usage": "Cindezela noma uvule umfudlana owodwa we-Gzip.",
+          "input": "Umbhalo / amabhayithi okuqala efayela",
+          "output": "Amabhayithi e-Gzip (ukumelwa okukhethiwe)"
+        },
+        "zlib": {
+          "usage": "Cindezela noma uvule umfudlana we-Zlib.",
+          "input": "Umbhalo / amabhayithi okuqala efayela",
+          "output": "Amabhayithi e-Zlib (ukumelwa okukhethiwe)"
+        },
+        "deflate": {
+          "usage": "Cindezela noma uvule idatha eluhlaza ye-Deflate.",
+          "input": "Umbhalo / amabhayithi okuqala efayela",
+          "output": "Amabhayithi aluhlaza e-Deflate (ukumelwa okukhethiwe)"
+        },
+        "radix": {
+          "usage": "Guqula inombolo ephelele iye kwesinye isisekelo.",
+          "input": "Inombolo ephelele esisekelweni somthombo",
+          "output": "Inombolo ephelele esisekelweni esiqondiwe"
+        },
+        "bytes-unit": {
+          "usage": "Guqula amabhithi, amabhayithi namayunithi e-SI ne-IEC.",
+          "input": "Inani kuyunithi yomthombo",
+          "output": "Inani kuyunithi eqondiwe"
+        },
+        "duration-unit": {
+          "usage": "Guqula izikhathi ezimisiwe ngaphandle kokubala ikhalenda.",
+          "input": "Isikhathi kuyunithi yomthombo",
+          "output": "Isikhathi kuyunithi eqondiwe"
+        },
+        "color": {
+          "usage": "Guqula ukumelwa kombala ugcine i-alfa.",
+          "input": "HEX / RGB / HSL / HSV JSON",
+          "output": "Ifomethi yombala ekhethiwe"
+        },
+        "case": {
+          "usage": "Sebenzisa usayizi wezinhlamvu noma isitayela sokuqamba esikhethiwe.",
+          "input": "Umbhalo / igama",
+          "output": "Umbhalo wesitayela sokuqamba esikhethiwe"
+        },
+        "lines": {
+          "usage": "Sebenzisa isenzo esisodwa esikhethiwe emigqeni yombhalo.",
+          "input": "Imigqa yombhalo",
+          "output": "Imigqa yombhalo ecutshunguliwe"
+        },
+        "newline": {
+          "usage": "Guqula iziphetho zemigqa yombhalo.",
+          "input": "Umbhalo oneziphetho zemigqa",
+          "output": "Umbhalo one-LF / CRLF / CR ekhethiwe"
+        },
+        "normalize": {
+          "usage": "Sebenzisa ukujwayelekiswa kwe-Unicode emaphuzwini ekhodi.",
+          "input": "Umbhalo we-Unicode",
+          "output": "Umbhalo osesimweni sokujwayelekiswa esikhethiwe"
+        }
+      },
+      "jsonCancelled": "Kukhanseliwe. Okufakile kugciniwe; phinda usebenzise uma usulungile.",
+      "convertHelp": "Ukusetshenziswa nemikhawulo",
+      "fileReplace": "Shintsha amafayela",
+      "md5CopyFile": "Kopisha isamba sokuhlola se-{{name}}",
+      "copyIso": "Kopisha i-ISO",
+      "copyIsoDate": "Kopisha ukusetshenziswa {{index}} njenge-ISO",
+      "regexNotRun": "Akukasebenzi",
+      "regexNoMatches": "Akukho okufanayo",
+      "regexStale": "Okufakiwe kushintshile. Qalisa ukuze ubuyekeze imiphumela.",
+      "speedNetwork": "Leli thuluzi lixhuma ku-Cloudflare futhi lisebenzisa idatha yenethiwekhi. Izicelo zokuhlola ziqala kuphela uma usuqalile.",
+      "speedSettings": "Izilungiselelo zokuhlola",
+      "speedSummary": "{{profile}} · {{unit}} · kufika ku-{{budget}} MiB",
+      "customZone": "Indawo yesikhathi ye-IANA oyikhethayo"
+    },
+    "daily": {
+      "countdownHelp": "Ukubala izinsuku ezisele, khetha namuhla njengesiqalo nosuku oluhlosiwe njengesiphetho. Izinsuku esezidlulile zinikeza inani lezinsuku elingaphansi kuka-zero.",
+      "anniversaryHelp": "Ezikhumbuzweni zango-29 Februwari, iminyaka engeyona eye-leap isebenzisa usuku lokugcina lukaFebruwari.",
+      "unitDetails": "Okunye ukuguqulwa nokunemba",
+      "moneyEmpty": "Faka inani lemali bese uliguqula ukuze ubone umphumela.",
+      "listHelp": "Okufakiwe okukodwa emugqeni. Imigqa engenalutho ayibalwa; okuphindiwe kuhlala kuhlukene uze ukukhiphe.",
+      "dedupe": "Susa okufakiwe okuphindiwe",
+      "drawEntries": "Khetha okufakiwe · {{count}}",
+      "drawGroups": "Dala amaqembu · {{count}}",
+      "drawMembers": "Hlela okufakiwe · {{count}} eqenjini ngalinye",
+      "drawNumbers": "Khetha izinombolo · {{count}}",
+      "discountReduction": "Amaphesenti esaphulelo (%)",
+      "discountHelp": "Intengo yokuqala 100, isaphulelo 20% → intengo encishisiwe 80.",
+      "unitPrecision": "Imiphumela ibonisa amadijithi abalulekile afika kwangu-24. ≈ amamaki abonisa ukuzungezisa; ukukopisha kugcina amadijithi abalulekile angama-80. Izici zeyunithi zisebenzisa izincazelo mathjs; amalitha nama-ounces aketshezi amayunithi ase-US."
+    },
+    "files": {
+      "fileActions": "Izenzo zefayela",
+      "discardCrop": "Lahla izinguquko zokusika ezingalondoloziwe?",
+      "imageInfo": "{{name}} · {{width}} × {{height}} amaphikseli",
+      "pastedImage": "Isithombe esinamathiselwe",
+      "lineDedupeHelp": "Iqhathanisa umugqa wonke ngokunembile, kuhlanganise nezikhala nosayizi wezinhlamvu. Igcina ukuvela kokuqala.",
+      "lineSortHelp": "Ihlela ngamayunithi ekhodi e-Unicode, hhayi ngolimi noma ngenani lezinombolo."
+    },
+    "shared": {
+      "viewResult": "Buka umphumela"
+    }
   }
 }
