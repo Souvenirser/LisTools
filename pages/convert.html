@@ -15,8 +15,9 @@
   <div class="app-layout">
     <main>
       <section class="page-heading"><div><h1 data-i18n="common.convert">编码与转换</h1><p data-convert="description"></p></div><span class="keyboard-hint"><kbd>Ctrl / ⌘</kbd> + <kbd>Enter</kbd></span></section>
+      <button id="convert-catalog-toggle" type="button" data-i18n="office.chooseTask" aria-controls="convert-catalog" aria-expanded="false"></button>
       <div class="convert-layout">
-        <aside class="convert-catalog panel" data-i18n-aria-label="common.convert">
+        <aside id="convert-catalog" class="convert-catalog panel" data-i18n-aria-label="common.convert">
           <div class="convert-catalog-header"><h2 data-i18n="common.tools">工具</h2><label class="sr-only" for="convert-search" data-i18n="common.search">搜索</label><input id="convert-search" type="search" data-i18n-placeholder="common.search" autocomplete="off" spellcheck="false" /></div>
           <nav id="convert-tool-list" data-i18n-aria-label="common.convert"></nav>
           <p id="convert-no-tools" data-i18n="menu.noResults" hidden></p>
@@ -24,6 +25,11 @@
         <section class="convert-workbench">
           <div class="convert-tool-heading"><h2 id="tool-title"></h2><p id="tool-hint"></p></div>
           <form id="tool-options" class="convert-options" autocomplete="off"></form>
+          <div class="convert-actions toolbar">
+            <button id="convert-run" class="primary" data-convert="run"></button><button id="convert-cancel" data-convert="cancel" disabled></button>
+            <label class="check-label"><input id="convert-auto" type="checkbox" checked /><span data-convert="auto"></span></label>
+            <span class="toolbar-spacer"></span><button id="convert-clear" class="quiet" data-convert="clear"></button>
+          </div>
           <div class="convert-editors">
             <section class="panel" id="convert-input-panel">
               <div class="panel-heading"><h2 data-convert="input"></h2><select id="input-mode" aria-label="输入类型"><option value="text" data-convert="text"></option><option value="file" data-convert="file"></option></select><button id="choose-file" data-convert="chooseFile"></button><input id="convert-file" type="file" hidden /></div>
@@ -32,16 +38,15 @@
             </section>
             <section class="panel output-panel" id="convert-output-panel" data-status="idle">
               <div class="panel-heading"><h2 data-convert="output"></h2><button id="output-search" data-convert="searchText"></button></div>
+              <div id="convert-color" hidden></div>
               <div class="convert-editor" id="convert-result"></div>
               <div class="panel-footer"><span id="preview-info"></span><span id="convert-output-info"></span></div>
+              <div class="convert-result-actions toolbar"><button id="result-to-input" data-convert="reuse" disabled></button><button id="convert-copy" data-convert="copy" disabled></button><button id="convert-download" data-convert="download" disabled></button></div>
             </section>
           </div>
-          <div class="convert-actions toolbar">
-            <button id="convert-run" class="primary" data-convert="run"></button><button id="convert-cancel" data-convert="cancel" disabled></button>
-            <label class="check-label"><input id="convert-auto" type="checkbox" checked /><span data-convert="auto"></span></label>
-            <span class="toolbar-spacer"></span><button id="result-to-input" data-convert="reuse" disabled></button><button id="convert-copy" data-convert="copy" disabled></button><button id="convert-download" data-convert="download" disabled></button><button id="convert-clear" class="quiet" data-convert="clear"></button>
-          </div>
-          <p id="convert-status" role="status" aria-live="polite"></p><p id="convert-notice" role="note"></p>
+          <p id="convert-status" role="status" aria-live="polite"></p>
+          <details id="convert-error-detail" hidden><summary data-i18n="cron.technicalDetails"></summary><pre id="convert-error-raw" dir="ltr"></pre></details>
+          <p id="convert-notice" role="note"></p>
           <button id="convert-locate" hidden data-convert="locate"></button>
         </section>
       </div>
