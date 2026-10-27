@@ -1,6 +1,8 @@
 <!doctype html>
-<html lang="en">
+<html data-entry="main" lang="en">
   <head>
+  <link rel="stylesheet" href="/boot.css" />
+  <script src="./boot-labels.js"></script>
   <script src="/theme-init.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,7 +10,7 @@
     <title data-i18n="json.title">LisTools · JSON 解析与美化</title>
     <link rel="icon" href="/icons/icon-48.png" />
   </head>
-  <body data-layout="editor">
+  <body data-entry="main" data-layout="editor">
     <header class="app-header">
       <button type="button" class="brand" data-i18n-aria-label="common.navigation"><span class="brand-mark">Li</span>LisTools<span class="brand-caret" aria-hidden="true">▾</span></button>
       <span class="header-divider"></span><span class="header-description"><span data-i18n="common.toolbox">实用工具箱</span></span>
@@ -35,7 +37,7 @@
             <div class="panel-footer"><span id="file-name"><span data-i18n="json.supported">支持对象、数组及 JSON 原始值</span></span><span>UTF-8</span></div>
           </section>
           <section class="panel output-panel" aria-label="JSON 结果面板" data-i18n-aria-label="common.result">
-            <div class="panel-heading"><h2><span data-i18n="json.output">解析结果</span></h2><span class="output-actions"><button id="copy" data-result disabled><span data-i18n="json.copy">复制全文</span></button><button id="download" data-result disabled><span data-i18n="common.download">下载</span></button></span></div>
+            <div class="panel-heading"><h2><span data-i18n="json.output">解析结果</span></h2><span class="output-actions"><button id="copy" data-result disabled><span data-i18n="motion.copyResult">复制结果</span></button><button id="download" data-result disabled><span data-i18n="common.download">下载</span></button></span></div>
             <div class="result-body">
               <div id="placeholder" class="placeholder"><span class="empty-braces">{ }</span><strong id="placeholder-title"><span data-i18n="json.waiting">等待输入 JSON</span></strong><p id="placeholder-description"><span data-i18n="json.viewHint">美化后可切换文本或树形视图，展开或折叠节点。</span></p><pre id="error-detail" hidden></pre><button id="locate-error" hidden><span data-i18n="common.locate">定位输入错误</span></button></div>
               <div id="editor" hidden dir="ltr"></div>
@@ -48,6 +50,6 @@
     </div>
     <div id="file-drop-overlay" class="file-drop-overlay" role="status" aria-live="polite" hidden><strong><span data-i18n="json.drop">松开以导入 JSON 文件</span></strong><span><span data-i18n="json.dropHint">自动读取并美化，支持大文件</span></span></div>
     <div id="notification" role="status" aria-live="polite" hidden></div>
-    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/entry.js"></script>
   </body>
 </html>

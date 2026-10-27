@@ -1,6 +1,8 @@
 <!doctype html>
-<html lang="zh-CN">
+<html data-entry="regex" lang="zh-CN">
 <head>
+  <link rel="stylesheet" href="/boot.css" />
+  <script src="./boot-labels.js"></script>
   <script src="/theme-init.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,7 +10,7 @@
   <title>正则工具 · LisTools</title>
   <link rel="icon" href="/icons/icon-48.png" />
 </head>
-<body class="tool-page regex-page" data-layout="editor">
+<body data-entry="regex" class="tool-page regex-page" data-layout="editor">
   <header class="app-header">
     <button type="button" class="brand" data-i18n-aria-label="common.navigation"><span class="brand-mark">Li</span>LisTools<span class="brand-caret" aria-hidden="true">▾</span></button>
     <span class="header-divider"></span><span class="header-description" data-i18n="common.toolbox">实用工具箱</span>
@@ -17,6 +19,6 @@
     <main><div id="tool-root"></div><footer class="workbench-footer"><span data-i18n="common.privacy">数据仅在本地处理，不上传、不保存输入内容。</span></footer></main>
   </div>
   <div id="notification" role="status" aria-live="polite" hidden></div>
-  <script type="module" src="/src/regex.js"></script>
+  <script type="module" src="/src/entry.js"></script>
 </body>
 </html>
