@@ -29,10 +29,11 @@ export async function executeConversion(toolId, input, options = {}, overrides =
     if (!(bytes instanceof Uint8Array)) throw new Error('工具未返回有效结果');
     checkSize(bytes.length, maximum.output, '输出');
     const blob = new Blob([bytes], { type: kind === 'text' ? 'text/plain;charset=utf-8' : 'application/octet-stream' });
+    const notices = [...(result.notices || [])];
     let display = result.text, notice = result.notice || '';
     if (kind === 'bytes') {
       try { display = decodeText(bytes, result.displayEncoding || options.charset || 'utf-8'); }
-      catch { notice += `${notice ? '；' : ''}结果无法按所选字符集无损解码，显示 Hex，可下载原始字节`; }
+      catch { notices.push({code:'ByteHex',params:{charset:result.displayEncoding || options.charset || 'utf-8'}}); notice += `${notice ? '；' : ''}结果无法按所选字符集无损解码，显示 Hex，可下载原始字节`; }
     }
     let preview, copyBlob;
     if (display !== undefined) {
@@ -45,11 +46,11 @@ export async function executeConversion(toolId, input, options = {}, overrides =
       truncated: copyBlob ? copyBlob.size > maximum.preview : bytes.length * 3 > maximum.preview,
       previewKind: display === undefined ? 'hex' : 'text',
       inputBytes, outputBytes:bytes.length, durationMs:Math.round(performance.now() - started),
-      extension:result.extension || (kind === 'text' ? 'txt' : 'bin'), notice
+      extension:result.extension || (kind === 'text' ? 'txt' : 'bin'), notice, notices
     };
   } catch (error) {
     const position = error.position;
     const prefix = typeof input === 'string' && position !== undefined ? input.slice(0,position).split(/\r\n|\r|\n/) : [];
-    return { status:'error', code:error.code || 'ConversionError', message:error.message.slice(0,600), position, line:error.line ?? (prefix.length || undefined), column:error.column ?? (prefix.length ? prefix.at(-1).length + 1 : undefined) };
+    return { status:'error', code:error.code || 'ConversionError', ...(error.reasonCode ? {reasonCode:error.reasonCode, ...(error.params ? {params:error.params} : {})} : {}), message:error.message.slice(0,600), position, line:error.line ?? (prefix.length || undefined), column:error.column ?? (prefix.length ? prefix.at(-1).length + 1 : undefined) };
   }
 }

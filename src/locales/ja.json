@@ -562,7 +562,11 @@
     "batchDone": "{{success}} 画像を処理しました。 · 失敗: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "選択範囲にフォーカス：矢印キーで移動、Shift＋矢印キーで右端または下端のサイズを変更。"
+    "cropKeys": "選択範囲にフォーカス：矢印キーで移動、Shift＋矢印キーで右端または下端のサイズを変更。",
+    "qualityInvalid": "1 から 100 の品質を入力してください。",
+    "targetInvalid": "1 から 102400 KiB の目標サイズを入力してください。",
+    "dimensionInvalid": "0 から 16384 の整数ピクセルを入力してください。0 は自動サイズを維持します。",
+    "scaleInvalid": "1 から 400 パーセントの倍率を入力してください。"
   },
   "text": {
     "name": "テキストを削除して抽出する",
@@ -769,7 +773,7 @@
     "reset": "リセット",
     "lap": "ラップを記録",
     "sound": "このページで音声を再生できる場合、完了時に短いサウンドを再生します",
-    "backgroundHelp": "タイミングには、時計の期限と経過時間を使用します。状態はこのタブのセッション ストレージに保持されます。バックグラウンド タブとスリープ状態のデバイスは実行を一時停止することができます。これはバックグラウンドでのリマインダーやアラームではありません。",
+    "backgroundHelp": "計時には時計の期限と経過時間を使用します。このタブを再読み込みすると、実行中のタイマーで実際に経過した時間を含め、両方のタイマーが復元されます。状態はこのタブのセッションストレージに保存されます。バックグラウンドのタブやスリープ中の端末では実行が中断される場合があります。バックグラウンドのリマインダーやアラームとしては使用できません。",
     "laps": "ストップウォッチの周回",
     "export": "ラップを TXT としてエクスポート",
     "number": "ラップ",
@@ -872,7 +876,7 @@
       "count": "日付カウントは 1 ～ 100 の整数である必要があります。",
       "invalid": "計算できません。式、タイムゾーン、基準時刻を確認してください。"
     },
-    "copyExpression": "コピー · 式",
+    "copyExpression": "コピー 式",
     "utcOffset": "UTC ±HH:mm"
   },
   "speedtestRating": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "抽出する完全一致またはキャプチャ グループを選択します。空の一致は有効です。一致しないグループは個別に表示されます。",
     "passwordPolicy": "選択された文字タイプは、許可されたプールから構成されます。 「各タイプを必須」を有効にすると、選択したすべてのタイプが各パスワードに含められます。",
     "speedScope": "定格は転送速度を表します。レイテンシーとジッターは個別に測定されます。",
-    "viewResult": "結果を見る"
+    "viewResult": "結果を見る",
+    "speedNetworkError": "ネットワーク接続に失敗しました。もう一度お試しください。",
+    "speedStartError": "速度テストを開始できませんでした。もう一度お試しください。"
   },
   "redesign": {
     "calculatorOriginal": "元の値",
@@ -1825,7 +1831,8 @@
       "speedSettings": "テスト設定",
       "speedSummary": "{{profile}} · {{unit}} · 最大{{budget}} MiB",
       "customZone": "カスタムIANAタイムゾーン",
-      "regexNoMatches": "一致なし"
+      "regexNoMatches": "一致なし",
+      "md5ModeConfirm": "モードを変更すると、現在のファイルキュー、結果、検証値が消去されます。続行しますか？"
     },
     "daily": {
       "unitDetails": "その他の変換と精度",
@@ -1853,5 +1860,107 @@
     "shared": {
       "viewResult": "結果を見る"
     }
+  },
+  "v2": {
+    "settings": "設定",
+    "appearance": "外観",
+    "themeSystem": "システムに合わせる",
+    "themeLight": "ライト",
+    "themeDark": "ダーク",
+    "favorites": "お気に入り",
+    "recent": "最近開いたツール",
+    "pin": "お気に入りに追加",
+    "unpin": "お気に入りから削除",
+    "noFavorites": "ツールの星を押すとお気に入りに追加できます。",
+    "noRecent": "最近開いた5つのツールを表示します。",
+    "navigation": "ツールを探す",
+    "qrTextNotice": "一部のWeChatなどの読み取りアプリは、文字だけのQRコードを表示しない場合があります。このツールで元の文字を読み取れます。"
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "その他の換算（{{count}}）",
+    "numberSummary": "範囲 {{min}}–{{max}} · {{count}} 個の数値 · {{repeat}}",
+    "noRepeat": "数値の重複なし"
+  },
+  "usability": {
+    "images": {
+      "growth": "ファイルサイズが {{percent}}% 増加しました。サイズは縮小されていません",
+      "adjust": "パラメーターを調整",
+      "add": "画像を追加",
+      "preview": "{{name}} をプレビュー",
+      "unchanged": "ファイルサイズは変わりません。サイズは縮小されていません",
+      "savings": "ファイルサイズが {{percent}}% 縮小されました"
+    },
+    "password": {
+      "showRow": "結果 {{number}} を表示",
+      "hideRow": "結果 {{number}} を非表示"
+    },
+    "speedtest": {
+      "downloadBps": "ダウンロード",
+      "uploadBps": "アップロード",
+      "latencyMs": "アイドル時の HTTP 遅延",
+      "jitterMs": "アイドル時の遅延の揺らぎ",
+      "downloadLatencyMs": "ダウンロード負荷時の遅延",
+      "downloadJitterMs": "ダウンロード負荷時の遅延の揺らぎ",
+      "uploadLatencyMs": "アップロード負荷時の遅延",
+      "uploadJitterMs": "アップロード負荷時の遅延の揺らぎ"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "実行時間を表示",
+    "adjustParameters": "パラメーターを調整"
+  },
+  "polishData": {
+    "diffBlocks": "差分ブロック {{count}} 個",
+    "coarse": "粗い比較：ブロックには変更されていない内容が含まれる場合があります。",
+    "errors": {
+      "CsvColumns": "{{row}} 行目の列数は {{actual}} ですが、{{expected}} 列が必要です。区切り文字と引用符で囲まれたセルを確認してください。",
+      "CsvHeaders": "列名が重複しています。名前を変更するか、ヘッダー行を無効にしてください。",
+      "CsvJsonCell": "{{row}} 行目、{{column}} 列目は有効な JSON ではありません。JSON 値を使用するか、文字列セルモードを選択してください。",
+      "CsvArrayHeader": "配列の行には列名がありません。ヘッダー行を無効にしてください。",
+      "CsvNestedValue": "null と入れ子の値には、明示的 JSON シリアライズのセルモードが必要です。",
+      "CsvRowShape": "各 JSON 行は同じ列を持ち、欠けた値がない必要があります。",
+      "XmlOrdered": "XML → JSON で生成された順序付きノード配列を使用してください。サンプルを読み込むと、属性とテキストノードを確認できます。",
+      "QueryArrays": "値が空でない文字列配列になっているオブジェクトを使用してください。例：{\"tag\":[\"a\",\"b\"]}。"
+    },
+    "notices": {
+      "StructureOnly": "データ値と対応する構造は保持されますが、元のコメント、書式、引用符のスタイルは保持されません。",
+      "CsvStrings": "CSV セルは文字列のまま保持され、数値や真偽値は推論されません。",
+      "CsvTextExport": "CSV はテキストです。既定のエクスポートでは JSON スカラー型の情報は保持されません。",
+      "ByteHex": "結果を {{charset}} として損失なくデコードできません。Hex で表示しています。ダウンロードでは元のバイトが保持されます。"
+    },
+    "charsetSource": "テキストはすでに Unicode です。入力元のエンコードはファイルのバイトにのみ適用されます。"
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "この結果は入力上限の 10 MiB を超えています。コピーとダウンロードには引き続き結果全体が含まれます。",
+      "pdfRange": "利用可能なページ：1–{{count}}",
+      "pdfInspectHelp": "範囲を選択する前にページ数を確認してください。",
+      "qrRecovery": "誤り訂正を調整"
+    }
+  },
+  "polishShell": {
+    "flags": "フラグ：{{flags}}"
+  },
+  "experience": {
+    "extractPhone": "電話番号を抽出",
+    "extractEmail": "メールアドレスを抽出",
+    "extractUrl": "リンクを抽出",
+    "base64encode": "Base64 エンコード",
+    "base64decode": "Base64 デコード",
+    "base64urlencode": "Base64URL エンコード",
+    "base64urldecode": "Base64URL デコード",
+    "noemail": "メールアドレスが見つかりません。",
+    "nophone": "電話番号が見つかりません。",
+    "nourl": "リンクが見つかりません。",
+    "textAuto": "短いテキストは自動処理されます。長いテキストは手動で実行してください。",
+    "qrSettings": "出力サイズ {{size}}px · 誤り訂正 {{level}}",
+    "networkDetails": "通信とデータの詳細",
+    "endDate": "終了日",
+    "listInput": "項目",
+    "chooseConvert": "変換ツールを選択 · {{name}}",
+    "task": "操作",
+    "copySeconds": "秒単位のタイムスタンプをコピー",
+    "copyMilliseconds": "ミリ秒単位のタイムスタンプをコピー",
+    "unitPrecision": "精度と単位について"
   }
 }

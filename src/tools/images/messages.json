@@ -64,5 +64,9 @@
   "pngQuality": "Quality applies to JPEG/WebP only. PNG ignores quality; a target size may reduce colors.",
   "batchDone": "Processed {{success}} images. · Failed: {{failed}}",
   "growth": "+{{percent}}%",
-  "unchanged": "0%"
+  "unchanged": "0%",
+  "qualityInvalid": "Enter a quality from 1 to 100.",
+  "targetInvalid": "Enter a target size from 1 to 102400 KiB.",
+  "dimensionInvalid": "Use whole pixels from 0 to 16384; 0 keeps the automatic dimension.",
+  "scaleInvalid": "Enter a scale from 1 to 400 percent."
 }

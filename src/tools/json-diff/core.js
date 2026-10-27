@@ -166,12 +166,14 @@ function fieldChanges(changes, a, b, gaps) {
     endA = range.toA; endB = range.toB;
   }
   if (a.text.slice(endA) !== b.text.slice(endB)) merged.push(new Change(endA, a.text.length, endB, b.text.length));
+  let coarse = false;
   const refined = [], deadline = performance.now() + 100;
   for (const range of merged) {
     const local = inlineDiff(a.text.slice(range.fromA, range.toA), b.text.slice(range.fromB, range.toB), Math.min(20, deadline - performance.now()));
+    coarse ||= Boolean(local.coarse);
     for (const change of local) refined.push(change.offset(range.fromA, range.fromB));
   }
-  return refined;
+  return Object.defineProperty(refined, 'coarse', { value:coarse });
 }
 
 // 为新增/删除记录两侧共有的相邻字段，回退范围只包含插入/删除及其标点。
@@ -296,7 +298,7 @@ export function compareJson(leftSource, rightSource) {
     changes.sort((x, y) => x.fromB - y.fromB || x.fromA - y.fromA);
     mark('highlightMs');
     return {
-      status: 'ready', validation, phaseMs, total: changes.length, counts, changes,
+      status: 'ready', coarse:Boolean(textChanges.coarse), validation, phaseMs, total: changes.length, counts, changes,
       leftText: a.text, rightText: b.text, textChanges,
       durationMs: Math.round(performance.now() - start)
     };
@@ -329,5 +331,5 @@ export function compareText(leftSource, rightSource) {
       label: `原 第 ${lines(a, fromA, toA)} 行 → 新 第 ${lines(b, fromB, toB)} 行`
     };
   });
-  return { status: 'ready', total: changes.length, counts, changes, leftText, rightText, textChanges, durationMs: Math.round(performance.now() - start) };
+  return { status: 'ready', coarse:Boolean(textChanges.coarse), total: changes.length, counts, changes, leftText, rightText, textChanges, durationMs: Math.round(performance.now() - start) };
 }

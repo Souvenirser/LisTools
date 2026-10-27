@@ -1,3 +1,4 @@
+import {chooseConversionTool} from './menu-helpers.js';
 import {test,expect} from '@playwright/test';
 import {selectLanguage} from './language-helpers.js';
 
@@ -37,7 +38,7 @@ test('compact tool selection frees the entire conversion workspace',async({page}
  await page.setViewportSize({width:390,height:844});await page.goto('/convert.html#base64');
  await expect(page.locator('#convert-catalog-toggle')).toBeVisible();await expect(page.locator('.convert-catalog')).toBeHidden();
  await page.locator('#convert-catalog-toggle').click();await page.locator('#convert-search').fill('JSON');await expect(page.locator('#convert-tool-list a').first()).toBeVisible();
- await page.locator('#convert-tool-list a[href="#json-yaml"]').click();await expect(page.locator('.convert-catalog')).toBeHidden();
+ await chooseConversionTool(page,'#convert-tool-list a[href="#json-yaml"]');await expect(page.locator('.convert-catalog')).toBeHidden();
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
 });
 
@@ -94,7 +95,7 @@ test('header reflows at 200 percent text size on a 320px viewport',async({page})
   await page.goto(`/${file}.html`);await page.addStyleTag({content:'html{font-size:200% !important}'});
   const header=page.locator('.app-header');
   expect(await header.evaluate(el=>el.scrollWidth-el.clientWidth),file).toBeLessThanOrEqual(1);
-  await expect(page.locator('.language-control .choices')).toBeVisible();
+  await expect(page.locator('#settings-open')).toBeVisible();
  }
 });
 

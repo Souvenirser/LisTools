@@ -562,7 +562,11 @@
     "batchDone": "Verarbeitete {{success}}-Bilder. · Fehlgeschlagen: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "Auswahl fokussieren: Pfeiltasten verschieben sie; Umschalt + Pfeiltasten ändern den rechten oder unteren Rand."
+    "cropKeys": "Auswahl fokussieren: Pfeiltasten verschieben sie; Umschalt + Pfeiltasten ändern den rechten oder unteren Rand.",
+    "qualityInvalid": "Geben Sie eine Qualität von 1 bis 100 ein.",
+    "targetInvalid": "Geben Sie eine Zielgröße von 1 bis 102400 KiB ein.",
+    "dimensionInvalid": "Verwenden Sie ganze Pixelwerte von 0 bis 16384; 0 behält die automatische Abmessung bei.",
+    "scaleInvalid": "Geben Sie eine Skalierung von 1 bis 400 Prozent ein."
   },
   "text": {
     "name": "Text bereinigen und extrahieren",
@@ -769,7 +773,7 @@
     "reset": "Zurücksetzen",
     "lap": "Rekordrunde",
     "sound": "Spielen Sie nach Abschluss einen kurzen Ton ab, wenn auf dieser Seite Audio abgespielt werden kann",
-    "backgroundHelp": "Die Zeitmessung erfolgt anhand von Uhrzeit-Deadlines und verstrichener Zeit. Der Status wird im Sitzungsspeicher dieser Registerkarte gespeichert. Hintergrundregisterkarten und ruhende Geräte können die Ausführung unterbrechen; Dies ist keine Hintergrunderinnerung oder Alarm.",
+    "backgroundHelp": "Die Zeitmessung verwendet Endzeitpunkte nach der Uhr und verstrichene Zeit. Beim Neuladen dieser Registerkarte werden beide Timer wiederhergestellt, einschließlich der tatsächlich verstrichenen Zeit bei laufenden Timern. Der Status wird im Sitzungsspeicher dieser Registerkarte gespeichert. Hintergrundregisterkarten und Geräte im Ruhezustand können die Ausführung unterbrechen; dies ist keine Hintergrund-Erinnerung oder Weckfunktion.",
     "laps": "Stoppuhr-Runden",
     "export": "Runden exportieren als TXT",
     "number": "Runde",
@@ -893,7 +897,7 @@
       "count": "Die Datumsanzahl muss eine Ganzzahl zwischen 1 und 100 sein.",
       "invalid": "Kann nicht berechnet werden. Überprüfen Sie den Ausdruck, die Zeitzone und die Referenzzeit."
     },
-    "copyExpression": "Kopieren · Ausdruck",
+    "copyExpression": "Kopieren Ausdruck",
     "utcOffset": "UTC ±HH:mm"
   },
   "uiText": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "Wählen Sie die vollständige Übereinstimmung oder eine Erfassungsgruppe zum Extrahieren aus. Leere Übereinstimmungen sind gültig; Nicht übereinstimmende Gruppen werden separat angezeigt.",
     "passwordPolicy": "Ausgewählte Zeichentypen bilden den zulässigen Pool. Aktivieren Sie „Jeden Typ erforderlich“, um jeden ausgewählten Typ in jedes Passwort aufzunehmen.",
     "speedScope": "Bewertungen beschreiben die Übertragungsgeschwindigkeit. Latenz und Jitter werden separat gemessen.",
-    "viewResult": "Ergebnis ansehen"
+    "viewResult": "Ergebnis ansehen",
+    "speedNetworkError": "Netzwerkverbindung fehlgeschlagen. Bitte erneut versuchen.",
+    "speedStartError": "Der Geschwindigkeitstest konnte nicht gestartet werden. Bitte erneut versuchen."
   },
   "redesign": {
     "calculatorOriginal": "Ursprünglicher Wert",
@@ -1848,10 +1854,113 @@
       "speedNetwork": "Dieses Werkzeug verbindet sich mit Cloudflare und verbraucht Datenvolumen. Testanfragen beginnen erst nach Ihrem Start.",
       "speedSettings": "Testeinstellungen",
       "speedSummary": "{{profile}} · {{unit}} · bis zu {{budget}} MiB",
-      "customZone": "Benutzerdefinierte IANA-Zeitzone"
+      "customZone": "Benutzerdefinierte IANA-Zeitzone",
+      "md5ModeConfirm": "Beim Wechsel des Modus werden die aktuelle Dateiwarteschlange, Ergebnisse und Prüfwerte verworfen. Fortfahren?"
     },
     "shared": {
       "viewResult": "Ergebnis ansehen"
     }
+  },
+  "v2": {
+    "settings": "Einstellungen",
+    "appearance": "Darstellung",
+    "themeSystem": "Systemeinstellung",
+    "themeLight": "Hell",
+    "themeDark": "Dunkel",
+    "favorites": "Favoriten",
+    "recent": "Zuletzt geöffnet",
+    "pin": "Zu Favoriten hinzufügen",
+    "unpin": "Aus Favoriten entfernen",
+    "noFavorites": "Markiere den Stern eines Werkzeugs, um es zu speichern.",
+    "noRecent": "Hier erscheinen die fünf zuletzt geöffneten Werkzeuge.",
+    "navigation": "Werkzeuge durchsuchen",
+    "qrTextNotice": "Manche Scanner, darunter einige WeChat-Versionen, zeigen reine Text-QR-Codes möglicherweise nicht an. Dieser Leser kann den Originaltext auslesen."
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "Weitere Umrechnungen ({{count}})",
+    "numberSummary": "Bereich {{min}}–{{max}} · {{count}} Zahlen · {{repeat}}",
+    "noRepeat": "Keine wiederholten Zahlen"
+  },
+  "usability": {
+    "images": {
+      "growth": "Die Dateigröße ist um {{percent}} % gestiegen; keine Verkleinerung",
+      "adjust": "Parameter anpassen",
+      "add": "Bilder hinzufügen",
+      "preview": "Vorschau von {{name}}",
+      "unchanged": "Dateigröße unverändert; keine Verkleinerung",
+      "savings": "Die Dateigröße wurde um {{percent}} % reduziert"
+    },
+    "password": {
+      "showRow": "Ergebnis {{number}} anzeigen",
+      "hideRow": "Ergebnis {{number}} ausblenden"
+    },
+    "speedtest": {
+      "downloadBps": "Herunterladen",
+      "uploadBps": "Hochladen",
+      "latencyMs": "HTTP-Latenz im Leerlauf",
+      "jitterMs": "Latenzschwankung im Leerlauf",
+      "downloadLatencyMs": "Latenz unter Last beim Herunterladen",
+      "downloadJitterMs": "Latenzschwankung unter Last beim Herunterladen",
+      "uploadLatencyMs": "Latenz unter Last beim Hochladen",
+      "uploadJitterMs": "Latenzschwankung unter Last beim Hochladen"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "Ausführungszeiten anzeigen",
+    "adjustParameters": "Parameter anpassen"
+  },
+  "polishData": {
+    "diffBlocks": "{{count}} Unterschiedsblöcke",
+    "coarse": "Grober Vergleich: Blöcke können unveränderte Inhalte enthalten.",
+    "errors": {
+      "CsvColumns": "Zeile {{row}} hat {{actual}} Spalten; erwartet werden {{expected}}. Prüfen Sie Trennzeichen und Zellen in Anführungszeichen.",
+      "CsvHeaders": "Spaltennamen kommen mehrfach vor. Benennen Sie sie um oder deaktivieren Sie die Kopfzeile.",
+      "CsvJsonCell": "Zeile {{row}}, Spalte {{column}} enthält kein gültiges JSON. Verwenden Sie einen JSON-Wert oder wählen Sie den Zeichenfolgenmodus für Zellen.",
+      "CsvArrayHeader": "Array-Zeilen haben keine Spaltennamen. Deaktivieren Sie die Kopfzeile.",
+      "CsvNestedValue": "null und verschachtelte Werte erfordern den Zellenmodus mit expliziter JSON-Serialisierung.",
+      "CsvRowShape": "Jede JSON-Zeile muss dieselben Spalten ohne fehlende Werte enthalten.",
+      "XmlOrdered": "Verwenden Sie das geordnete Knoten-Array aus XML → JSON. Laden Sie das Beispiel, um Attribute und Textknoten zu sehen.",
+      "QueryArrays": "Verwenden Sie ein Objekt, dessen Werte nicht leere Arrays aus Zeichenfolgen sind, zum Beispiel {\"tag\":[\"a\",\"b\"]}."
+    },
+    "notices": {
+      "StructureOnly": "Datenwerte und unterstützte Struktur bleiben erhalten; Quellkommentare, Formatierung und Art der Anführungszeichen werden nicht beibehalten.",
+      "CsvStrings": "CSV-Zellen bleiben Zeichenfolgen; Zahlen und boolesche Werte werden nicht abgeleitet.",
+      "CsvTextExport": "CSV ist Text; der Standardexport behält keine Informationen zu skalaren JSON-Datentypen bei.",
+      "ByteHex": "Das Ergebnis kann nicht verlustfrei als {{charset}} dekodiert werden. Hex wird angezeigt; beim Herunterladen bleiben die ursprünglichen Bytes erhalten."
+    },
+    "charsetSource": "Text liegt bereits als Unicode vor. Die Quellkodierung gilt nur für Dateibytes."
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "Dieses Ergebnis überschreitet die Eingabegrenze von 10 MiB. Kopieren und Herunterladen enthalten weiterhin das vollständige Ergebnis.",
+      "pdfRange": "Verfügbare Seiten: 1–{{count}}",
+      "pdfInspectHelp": "Prüfen Sie die Seitenzahl, bevor Sie einen Bereich auswählen.",
+      "qrRecovery": "Fehlerkorrektur anpassen"
+    }
+  },
+  "polishShell": {
+    "flags": "Modifikatoren: {{flags}}"
+  },
+  "experience": {
+    "extractPhone": "Telefonnummern extrahieren",
+    "extractEmail": "E-Mail-Adressen extrahieren",
+    "extractUrl": "Links extrahieren",
+    "base64encode": "Base64 kodieren",
+    "base64decode": "Base64 dekodieren",
+    "base64urlencode": "Base64URL kodieren",
+    "base64urldecode": "Base64URL dekodieren",
+    "noemail": "Keine E-Mail-Adressen gefunden.",
+    "nophone": "Keine Telefonnummern gefunden.",
+    "nourl": "Keine Links gefunden.",
+    "textAuto": "Kurze Texte werden automatisch verarbeitet; starten Sie längere Texte manuell.",
+    "qrSettings": "Ausgabegröße {{size}}px · Fehlerkorrektur {{level}}",
+    "networkDetails": "Informationen zu Netzwerk und Daten",
+    "endDate": "Enddatum",
+    "listInput": "Einträge",
+    "chooseConvert": "Konverter auswählen · {{name}}",
+    "task": "Aktion",
+    "copySeconds": "Zeitstempel in Sekunden kopieren",
+    "copyMilliseconds": "Zeitstempel in Millisekunden kopieren",
+    "unitPrecision": "Hinweise zu Genauigkeit und Einheiten"
   }
 }

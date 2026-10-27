@@ -562,7 +562,11 @@
     "batchDone": "{{success}} 이미지를 처리했습니다. · 실패: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "선택 영역에 초점: 방향키로 이동하고 Shift + 방향키로 오른쪽 또는 아래쪽 가장자리 크기를 조절합니다."
+    "cropKeys": "선택 영역에 초점: 방향키로 이동하고 Shift + 방향키로 오른쪽 또는 아래쪽 가장자리 크기를 조절합니다.",
+    "qualityInvalid": "1에서 100 사이의 품질을 입력하세요.",
+    "targetInvalid": "1에서 102400 KiB 사이의 목표 크기를 입력하세요.",
+    "dimensionInvalid": "0에서 16384 사이의 정수 픽셀을 사용하세요. 0은 자동 크기를 유지합니다.",
+    "scaleInvalid": "1에서 400퍼센트 사이의 배율을 입력하세요."
   },
   "text": {
     "name": "텍스트 정리 및 추출",
@@ -769,7 +773,7 @@
     "reset": "재설정",
     "lap": "기록 랩",
     "sound": "이 페이지에서 오디오를 재생할 수 있으면 완료 시 짧은 소리를 재생합니다.",
-    "backgroundHelp": "타이밍은 시계 기한과 경과 시간을 사용합니다. 상태는 이 탭의 세션 저장소에 보관됩니다. 배경 탭과 잠자는 장치는 실행을 일시 중단할 수 있습니다. 이것은 배경 알림이나 알람이 아닙니다.",
+    "backgroundHelp": "시간은 시계의 마감 시각과 경과 시간을 기준으로 계산합니다. 이 탭을 새로고침하면 실행 중인 타이머의 실제 경과 시간을 포함하여 두 타이머가 모두 복원됩니다. 상태는 이 탭의 세션 저장소에 보관됩니다. 백그라운드 탭과 절전 상태의 기기에서는 실행이 일시 중단될 수 있으므로 백그라운드 알림이나 알람으로 사용할 수 없습니다.",
     "laps": "스톱워치 랩",
     "export": "랩을 TXT로 내보내기",
     "number": "랩",
@@ -872,7 +876,7 @@
       "count": "날짜 개수는 1에서 100 사이의 정수여야 합니다.",
       "invalid": "계산할 수 없습니다. 표현식, 시간대, 기준시간을 확인하세요."
     },
-    "copyExpression": "복사 · 표현",
+    "copyExpression": "복사 표현",
     "utcOffset": "UTC ±HH:mm"
   },
   "speedtestRating": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "추출할 전체 일치 또는 캡처 그룹을 선택합니다. 빈 일치 항목은 유효합니다. 일치하지 않는 그룹은 별도로 표시됩니다.",
     "passwordPolicy": "선택한 문자 유형이 허용되는 풀을 형성합니다. 각 비밀번호에 선택한 모든 유형을 포함하려면 \"각 유형 필요\"를 활성화하십시오.",
     "speedScope": "등급은 전송 속도를 나타냅니다. 지연 시간과 지터는 별도로 측정됩니다.",
-    "viewResult": "결과 보기"
+    "viewResult": "결과 보기",
+    "speedNetworkError": "네트워크 연결에 실패했습니다. 다시 시도해 주세요.",
+    "speedStartError": "속도 테스트를 시작하지 못했습니다. 다시 시도해 주세요."
   },
   "redesign": {
     "calculatorOriginal": "원래 값",
@@ -1825,7 +1831,8 @@
       "speedSettings": "테스트 설정",
       "speedSummary": "{{profile}} · {{unit}} · 최대 {{budget}} MiB",
       "customZone": "사용자 지정 IANA 시간대",
-      "regexNoMatches": "일치하는 항목이 없습니다."
+      "regexNoMatches": "일치하는 항목이 없습니다.",
+      "md5ModeConfirm": "모드를 변경하면 현재 파일 대기열, 결과 및 검증 값이 삭제됩니다. 계속하시겠습니까?"
     },
     "daily": {
       "unitDetails": "다른 변환 및 정밀도",
@@ -1853,5 +1860,107 @@
     "shared": {
       "viewResult": "결과 보기"
     }
+  },
+  "v2": {
+    "settings": "설정",
+    "appearance": "화면 모양",
+    "themeSystem": "시스템 설정 따르기",
+    "themeLight": "밝게",
+    "themeDark": "어둡게",
+    "favorites": "즐겨찾기",
+    "recent": "최근 연 도구",
+    "pin": "즐겨찾기에 추가",
+    "unpin": "즐겨찾기에서 삭제",
+    "noFavorites": "도구 옆의 별표를 눌러 즐겨찾기에 추가하세요.",
+    "noRecent": "최근 연 도구 다섯 개가 여기에 표시됩니다.",
+    "navigation": "도구 찾아보기",
+    "qrTextNotice": "일부 WeChat 버전을 비롯한 일부 스캐너는 일반 텍스트 QR 코드를 표시하지 않을 수 있습니다. 이 도구로 원문을 읽을 수 있습니다."
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "기타 변환 ({{count}})",
+    "numberSummary": "범위 {{min}}–{{max}} · 숫자 {{count}}개 · {{repeat}}",
+    "noRepeat": "숫자 중복 없음"
+  },
+  "usability": {
+    "images": {
+      "growth": "파일 크기가 {{percent}}% 증가했습니다. 크기가 줄어들지 않았습니다",
+      "adjust": "매개변수 조정",
+      "add": "이미지 추가",
+      "preview": "{{name}} 미리 보기",
+      "unchanged": "파일 크기가 변경되지 않았습니다. 크기가 줄어들지 않았습니다",
+      "savings": "파일 크기가 {{percent}}% 줄었습니다"
+    },
+    "password": {
+      "showRow": "결과 {{number}} 표시",
+      "hideRow": "결과 {{number}} 숨기기"
+    },
+    "speedtest": {
+      "downloadBps": "다운로드",
+      "uploadBps": "업로드",
+      "latencyMs": "유휴 상태의 HTTP 지연 시간",
+      "jitterMs": "유휴 상태의 지연 시간 변동",
+      "downloadLatencyMs": "다운로드 부하 시 지연 시간",
+      "downloadJitterMs": "다운로드 부하 시 지연 시간 변동",
+      "uploadLatencyMs": "업로드 부하 시 지연 시간",
+      "uploadJitterMs": "업로드 부하 시 지연 시간 변동"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "실행 시간 보기",
+    "adjustParameters": "매개변수 조정"
+  },
+  "polishData": {
+    "diffBlocks": "차이 블록 {{count}}개",
+    "coarse": "대략적인 비교: 블록에 변경되지 않은 내용이 포함될 수 있습니다.",
+    "errors": {
+      "CsvColumns": "{{row}}행의 열 수는 {{actual}}개이며 {{expected}}개여야 합니다. 구분 기호와 따옴표로 묶인 셀을 확인하세요.",
+      "CsvHeaders": "열 이름이 중복됩니다. 이름을 바꾸거나 머리글 행을 끄세요.",
+      "CsvJsonCell": "{{row}}행 {{column}}열은 유효한 JSON이 아닙니다. JSON 값을 사용하거나 문자열 셀 모드를 선택하세요.",
+      "CsvArrayHeader": "배열 행에는 열 이름이 없습니다. 머리글 행을 끄세요.",
+      "CsvNestedValue": "null 및 중첩 값에는 명시적 JSON 직렬화 셀 모드가 필요합니다.",
+      "CsvRowShape": "각 JSON 행은 누락된 값 없이 동일한 열을 가져야 합니다.",
+      "XmlOrdered": "XML → JSON에서 생성된 순서가 있는 노드 배열을 사용하세요. 예제를 불러와 속성과 텍스트 노드를 확인할 수 있습니다.",
+      "QueryArrays": "값이 비어 있지 않은 문자열 배열인 객체를 사용하세요. 예: {\"tag\":[\"a\",\"b\"]}."
+    },
+    "notices": {
+      "StructureOnly": "데이터 값과 지원되는 구조는 유지되며, 원본 주석, 서식, 따옴표 스타일은 유지되지 않습니다.",
+      "CsvStrings": "CSV 셀은 문자열로 유지되며 숫자와 불리언은 추론되지 않습니다.",
+      "CsvTextExport": "CSV는 텍스트입니다. 기본 내보내기는 JSON 스칼라 유형 정보를 유지하지 않습니다.",
+      "ByteHex": "결과를 {{charset}}로 손실 없이 디코딩할 수 없습니다. Hex로 표시하며 다운로드하면 원본 바이트가 유지됩니다."
+    },
+    "charsetSource": "텍스트는 이미 Unicode입니다. 원본 인코딩은 파일 바이트에만 적용됩니다."
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "이 결과는 10 MiB 입력 제한을 초과합니다. 복사와 다운로드에는 계속 전체 결과가 포함됩니다.",
+      "pdfRange": "사용 가능한 페이지: 1–{{count}}",
+      "pdfInspectHelp": "범위를 선택하기 전에 페이지 수를 확인하세요.",
+      "qrRecovery": "오류 정정 수준 조정"
+    }
+  },
+  "polishShell": {
+    "flags": "플래그: {{flags}}"
+  },
+  "experience": {
+    "extractPhone": "전화번호 추출",
+    "extractEmail": "이메일 주소 추출",
+    "extractUrl": "링크 추출",
+    "base64encode": "Base64 인코딩",
+    "base64decode": "Base64 디코딩",
+    "base64urlencode": "Base64URL 인코딩",
+    "base64urldecode": "Base64URL 디코딩",
+    "noemail": "이메일 주소를 찾을 수 없습니다.",
+    "nophone": "전화번호를 찾을 수 없습니다.",
+    "nourl": "링크를 찾을 수 없습니다.",
+    "textAuto": "짧은 텍스트는 자동 처리됩니다. 긴 텍스트는 수동으로 실행하세요.",
+    "qrSettings": "출력 크기 {{size}}px · 오류 정정 {{level}}",
+    "networkDetails": "네트워크 및 데이터 안내",
+    "endDate": "종료 날짜",
+    "listInput": "항목",
+    "chooseConvert": "변환 도구 선택 · {{name}}",
+    "task": "작업",
+    "copySeconds": "초 단위 타임스탬프 복사",
+    "copyMilliseconds": "밀리초 단위 타임스탬프 복사",
+    "unitPrecision": "정밀도 및 단위 안내"
   }
 }

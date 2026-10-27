@@ -1,10 +1,11 @@
+import {startMenuSorting} from './menu-helpers.js';
 import {test,expect} from '@playwright/test';
 import {selectLanguage} from './language-helpers.js';
 
 test('menu ordering strip has equal top and bottom clearance in page and popup',async({page})=>{
  for(const route of ['/diff.html','/popup.html']){
   await page.goto(route);if(route!=='/popup.html')await page.locator('.brand').click();
-  const gap=await page.locator('.tool-menu-order-controls').evaluate(node=>{const row=node.getBoundingClientRect(),button=node.querySelector('#menu-edit').getBoundingClientRect();return Math.abs(button.top-row.top-(row.bottom-1-button.bottom));});
+  await startMenuSorting(page);const gap=await page.locator('.tool-menu-order-actions').evaluate(node=>{const row=node.getBoundingClientRect();return Math.max(...[...node.querySelectorAll('button')].map(button=>{const box=button.getBoundingClientRect();return Math.abs(box.top+box.height/2-row.top-row.height/2);}));});
   expect(gap).toBeLessThanOrEqual(1);
  }
 });

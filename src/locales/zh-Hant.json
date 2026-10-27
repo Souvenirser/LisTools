@@ -562,7 +562,11 @@
     "batchDone": "已處理 {{success}} 張圖片。 · 失敗: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "選取區域獲焦後：方向鍵移動；Shift＋方向鍵調整右側或底邊。"
+    "cropKeys": "選取區域獲焦後：方向鍵移動；Shift＋方向鍵調整右側或底邊。",
+    "qualityInvalid": "請輸入 1 到 100 之間的品質。",
+    "targetInvalid": "請輸入 1 到 102400 KiB 之間的目標大小。",
+    "dimensionInvalid": "請輸入 0 到 16384 之間的整數像素；0 表示維持自動尺寸。",
+    "scaleInvalid": "請輸入 1 到 400 之間的縮放百分比。"
   },
   "text": {
     "name": "文字去重與擷取",
@@ -769,7 +773,7 @@
     "reset": "重置",
     "lap": "紀錄一圈",
     "sound": "頁面允許播放音訊時，結束後播放短提示音",
-    "backgroundHelp": "依時鐘截止時間和經過時間計算。狀態保存在目前分頁的工作階段儲存空間中。背景分頁或裝置休眠可能暫停執行，不能當作背景提醒或鬧鐘使用。",
+    "backgroundHelp": "依時鐘截止時間和經過時間計算。重新載入此分頁會恢復兩個計時器，執行中的計時器會計入實際經過的時間。狀態保存在此分頁的工作階段儲存空間中。背景分頁或裝置休眠可能暫停執行，不能當作背景提醒或鬧鐘使用。",
     "laps": "碼錶分圈紀錄",
     "export": "匯出分圈紀錄為 TXT",
     "number": "圈次",
@@ -893,7 +897,7 @@
       "count": "執行次數必須為 1–100 的整數。",
       "invalid": "無法計算，請檢查表達式、時區與參考時間。"
     },
-    "copyExpression": "複製 · 運算式",
+    "copyExpression": "複製運算式",
     "utcOffset": "UTC ±HH:mm"
   },
   "uiText": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "選擇要提取的完整匹配項或捕獲組。空匹配有效；不匹配的群組單獨顯示。",
     "passwordPolicy": "選定的字元類型構成允許的池。啟用「需要每種類型」以在每個密碼中包含每種選定的類型。",
     "speedScope": "評級描述了傳輸速度。延遲和抖動是單獨測量的。",
-    "viewResult": "查看結果"
+    "viewResult": "查看結果",
+    "speedNetworkError": "網路連線失敗，請重試。",
+    "speedStartError": "無法啟動測速，請重試。"
   },
   "redesign": {
     "pdfAddPdf": "請加入 PDF 檔案以執行此任務。",
@@ -1825,7 +1831,8 @@
       "speedNetwork": "此工具會連線至 Cloudflare 並消耗網路流量。只有按下開始後才會發送測試請求。",
       "speedSettings": "測試設定",
       "speedSummary": "{{profile}} · {{unit}} · 最多 {{budget}} MiB",
-      "customZone": "自訂 IANA 時區"
+      "customZone": "自訂 IANA 時區",
+      "md5ModeConfirm": "切換模式會清除目前的檔案佇列、結果和驗證值，是否繼續？"
     },
     "daily": {
       "countdownHelp": "倒數時，將今天設為開始日期、目標日期設為結束日期。已過的目標會得到負天數。",
@@ -1853,5 +1860,107 @@
     "shared": {
       "viewResult": "查看結果"
     }
+  },
+  "v2": {
+    "settings": "設定",
+    "appearance": "外觀",
+    "themeSystem": "跟隨系統",
+    "themeLight": "淺色",
+    "themeDark": "深色",
+    "favorites": "收藏",
+    "recent": "最近開啟",
+    "pin": "加入收藏",
+    "unpin": "取消收藏",
+    "noFavorites": "點擊工具旁的星號即可收藏。",
+    "noRecent": "這裡會顯示最近開啟的五個工具。",
+    "navigation": "瀏覽工具",
+    "qrTextNotice": "部分掃碼應用程式（包括部分微信版本）可能不顯示純文字二維碼內容，可使用本工具識別並讀取原文。"
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "其他換算（{{count}}）",
+    "numberSummary": "範圍 {{min}}–{{max}} · {{count}} 個數字 · {{repeat}}",
+    "noRepeat": "不允許重複數字"
+  },
+  "usability": {
+    "images": {
+      "growth": "檔案大小增加 {{percent}}%；未縮小檔案",
+      "adjust": "調整參數",
+      "add": "新增圖片",
+      "preview": "預覽 {{name}}",
+      "unchanged": "檔案大小不變；未縮小檔案",
+      "savings": "檔案大小減少 {{percent}}%"
+    },
+    "password": {
+      "showRow": "顯示第 {{number}} 筆結果",
+      "hideRow": "隱藏第 {{number}} 筆結果"
+    },
+    "speedtest": {
+      "latencyMs": "閒置 HTTP 延遲",
+      "jitterMs": "閒置抖動",
+      "downloadLatencyMs": "下載負載延遲",
+      "downloadJitterMs": "下載負載抖動",
+      "uploadLatencyMs": "上傳負載延遲",
+      "uploadJitterMs": "上傳負載抖動",
+      "downloadBps": "下載",
+      "uploadBps": "上傳"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "查看執行時間",
+    "adjustParameters": "調整參數"
+  },
+  "polishData": {
+    "diffBlocks": "{{count}} 個差異區塊",
+    "coarse": "粗略比較：差異區塊可能包含未變更的內容。",
+    "errors": {
+      "CsvColumns": "第 {{row}} 列有 {{actual}} 欄，應為 {{expected}} 欄。請檢查分隔符號和帶引號的儲存格。",
+      "CsvHeaders": "欄位名稱重複。請修改名稱，或關閉標題列。",
+      "CsvJsonCell": "第 {{row}} 列第 {{column}} 欄不是有效的 JSON。請輸入 JSON 值，或選擇字串儲存格模式。",
+      "CsvArrayHeader": "陣列資料列沒有欄位名稱。請關閉標題列。",
+      "CsvNestedValue": "null 和巢狀值需要使用顯式 JSON 序列化儲存格模式。",
+      "CsvRowShape": "每個 JSON 資料列必須具有相同欄位，且不能缺少值。",
+      "XmlOrdered": "請使用 XML → JSON 產生的保序節點陣列。可載入範例查看屬性和文字節點。",
+      "QueryArrays": "請使用值為非空字串陣列的物件，例如 {\"tag\":[\"a\",\"b\"]}。"
+    },
+    "notices": {
+      "StructureOnly": "保留資料值和支援的結構，不保留來源註解、格式或引號樣式。",
+      "CsvStrings": "CSV 儲存格保持字串，不自動推斷數字或布林值。",
+      "CsvTextExport": "CSV 是文字；預設匯出不保留 JSON 純量型別資訊。",
+      "ByteHex": "結果無法以 {{charset}} 無損解碼。目前顯示 Hex；下載會保留原始位元組。"
+    },
+    "charsetSource": "文字已經是 Unicode。來源編碼僅適用於檔案位元組。"
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "結果超過 10 MiB 輸入限制。複製和下載仍包含完整結果。",
+      "pdfRange": "可用頁碼：1–{{count}}",
+      "pdfInspectHelp": "先檢查頁數，再選擇頁碼範圍。",
+      "qrRecovery": "調整錯誤更正等級"
+    }
+  },
+  "polishShell": {
+    "flags": "旗標：{{flags}}"
+  },
+  "experience": {
+    "extractPhone": "擷取手機號碼",
+    "extractEmail": "擷取電子郵件地址",
+    "extractUrl": "擷取連結",
+    "base64encode": "Base64 編碼",
+    "base64decode": "Base64 解碼",
+    "base64urlencode": "Base64URL 編碼",
+    "base64urldecode": "Base64URL 解碼",
+    "noemail": "找不到電子郵件地址。",
+    "nophone": "找不到手機號碼。",
+    "nourl": "找不到連結。",
+    "textAuto": "小段文字會自動處理；較大文字請點擊執行。",
+    "qrSettings": "輸出尺寸 {{size}}px · 錯誤更正 {{level}}",
+    "networkDetails": "連網與資料說明",
+    "endDate": "結束日期",
+    "listInput": "名單",
+    "chooseConvert": "選擇轉換工具 · {{name}}",
+    "task": "操作",
+    "copySeconds": "複製秒時間戳記",
+    "copyMilliseconds": "複製毫秒時間戳記",
+    "unitPrecision": "精度與單位說明"
   }
 }

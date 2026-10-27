@@ -1,4 +1,5 @@
-import {t,language,languages} from './i18n-runtime.js';
+import {mountSettings} from './tools/shared/shell.js';
+import {t,language,languages,onLanguageChange} from './i18n-runtime.js';
 import {mountToolMenu} from './tools/shared/menu.js';
 import './popup.css';
 
@@ -7,6 +8,8 @@ document.documentElement.dir=languages.find(item=>item.code===language()).dir;
 document.getElementById('popup-caption').textContent=t('common.tools');
 const menu=document.getElementById('popup-menu');
 mountToolMenu(menu,{popup:true}).open();
+mountSettings(document.querySelector('.popup-header'),{sort:()=>document.getElementById('menu-edit').click()});
+onLanguageChange(()=>{document.documentElement.lang=language();document.documentElement.dir=languages.find(item=>item.code===language()).dir;document.getElementById('popup-caption').textContent=t('common.tools');});
 
 const maximumHeight=parseFloat(getComputedStyle(menu).maxHeight);
 let frame;

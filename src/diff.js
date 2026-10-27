@@ -23,7 +23,7 @@ const versions = { left: 0, right: 0 };
 const reading = { left: false, right: false };
 const fileFailures = { left:undefined, right:undefined };
 const filenames = { left: '', right: '' };
-let merge;
+let merge,autoTimer,automaticComparison=false;
 let renderedDocuments;
 let total = 0;
 let current = 0;
@@ -32,8 +32,10 @@ let currentChange;
 let latestImportStartedAt;
 let pendingDocuments;
 let restoration;
+let repeatedChange;
 const localeCompartments = { left:new Compartment(), right:new Compartment() };
 const mode = () => $('diff-mode').value;
+const coarseNote=document.createElement('p');coarseNote.id='diff-coarse';coarseNote.className='tool-note';coarseNote.setAttribute('role','note');coarseNote.hidden=true;$('diff-import-status').before(coarseNote);
 const contentName = () => mode() === 'json' ? 'JSON' : t('common.text');
 const inputLocales = { left:new Compartment(), right:new Compartment() };
 const inputViews = Object.fromEntries(['left', 'right'].map(side => [side, new EditorView({ parent:sources[side], extensions:inputExtensions(side) })]));
@@ -73,13 +75,13 @@ function inputChanged(side) {
     setSource(other, (other === 'left' ? merge.a : merge.b).state.doc);
   }
   versions[side] += 1; reading[side] = false; fileFailures[side] = undefined; filenames[side] = '';
-  fileLabels(); invalidate();
+  fileLabels(); invalidate();scheduleAutoCompare();
 }
 
 function navigation() {
-  $('previous').disabled = Boolean(restoration) || !total || current === 0;
-  $('next').disabled = Boolean(restoration) || !total || current === total - 1;
-  $('diff-index').disabled = Boolean(restoration) || !total;
+  $('previous').disabled = lastState.status==='pending' || Boolean(restoration) || !total || current === 0;
+  $('next').disabled = lastState.status==='pending' || Boolean(restoration) || !total || current === total - 1;
+  $('diff-index').disabled = lastState.status==='pending' || Boolean(restoration) || !total;
   $('diff-index').value = total ? current + 1 : 1;
   $('diff-index').max = total || 1;
   $('diff-length').textContent = total || ['idle', 'ready'].includes(lastState.status) ? total.toLocaleString(language()) : '—';
@@ -128,14 +130,17 @@ function extensions(side, previousState) {
 
 function render(state) {
   const receivedAt = performance.now();
+  const keepSummary=Boolean(merge)&&repeatedChange!==undefined&&['pending','ready'].includes(state.status);
   lastState = state;
-  currentChange = undefined;
+  if(!keepSummary)currentChange = undefined;
   document.body.dataset.status = state.status;document.body.classList.toggle('has-comparison',state.status==='ready'||Boolean(merge));
   inputLayout();
-  resetSummary();
+  if(keepSummary)navigation();else resetSummary();
+  const keepCoarse=state.status==='pending'&&merge&&!coarseNote.hidden;
+  coarseNote.hidden=!(state.status==='ready'&&state.coarse||keepCoarse);coarseNote.textContent=coarseNote.hidden?'':t('polishData.coarse');
   const inputSummary=document.querySelector('.diff-inputs>summary>span');if(inputSummary){inputSummary.dataset.i18n=state.status==='ready'||merge?'ux.diffModifyInput':'diff.inputs';inputSummary.textContent=t(inputSummary.dataset.i18n);}
   const pending = state.status === 'pending'||reading.left||reading.right;
-  $('compare').disabled = pending;
+  $('compare').disabled=Boolean(reading.left||reading.right);$('compare').setAttribute('aria-disabled',String(pending));
   $('cancel').hidden = !pending;
   $('compare').textContent = t(merge ? 'diff.recompare' : 'diff.compare');
   $('diff-view').hidden = !merge;
@@ -146,7 +151,7 @@ function render(state) {
       diagnostics.status(mode() === 'json' ? state.validation : { left:'readable', right:'readable' });
       const scrollTop = merge ? stackedResults.matches?merge.a.dom.parentElement.scrollTop:merge.dom.scrollTop : 0;
       total = state.total;
-      $('diff-total').textContent = total ? t('diff.total', { count:total }) : t('diff.equal');
+      $('diff-total').textContent = total ? t('polishData.diffBlocks', { count:total }) : t('diff.equal');
       $('diff-total').classList.toggle('equal', total === 0);
       for (const name of ['added', 'removed', 'modified']) $(`count-${name}`).textContent = state.counts[name].toLocaleString(language());
       $('diff-duration').textContent = t('diff.duration', { duration:state.durationMs });
@@ -174,10 +179,11 @@ function render(state) {
       mergeScrollTop=scrollTop;
       merge.a.dom.dataset.diffSide = 'left';
       merge.b.dom.dataset.diffSide = 'right';
-      $('inputs').open = false;
+      if(!automaticComparison)$('inputs').open = false;
       inputLayout();resultLayout(true);
       $('compare').textContent = t('diff.recompare');
       if(restoration){current=Math.min(restoration.index,total-1);if(total)controller.select(current);else restoration=undefined;}
+      else if(repeatedChange!==undefined&&total){current=Math.min(repeatedChange,total-1);if(current)controller.select(current);}
       navigation();
       const builtAt = performance.now();
       requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -200,14 +206,14 @@ function render(state) {
     return;
   }
   if (state.status === 'error') {
-    restoration=undefined;
+    restoration=undefined;repeatedChange=undefined;
     pendingDocuments = undefined;
     errorLabels(state);
     $('diff-placeholder').hidden = true;
     if (!merge) $('inputs').open = true;
   } else {
     if (pending && !state.reading) diagnostics.status({ left:'pending', right:'pending' });
-    statusLabels(state);
+    if(!keepSummary)statusLabels(state);
   }
 }
 
@@ -217,6 +223,7 @@ function showChange(change) {
   currentChange = change;
   navigation();
   changeLabels(change);
+  if((automaticComparison||repeatedChange!==undefined)&&!restoration)return;
   if(restoration){
     const saved=restoration;restoration=undefined;
     for(const [view,position] of [[merge.a,saved.a],[merge.b,saved.b]]){view.dispatch({selection:position.selection});view.scrollDOM.scrollTop=position.top;view.scrollDOM.scrollLeft=position.left;}
@@ -236,7 +243,8 @@ const controller = createDiffController({
 });
 
 function invalidate() {
-  restoration=undefined;
+  clearTimeout(autoTimer);automaticComparison=false;
+  restoration=undefined;repeatedChange=undefined;
   pendingDocuments = undefined;
   controller.cancel();
   destroyView();
@@ -247,8 +255,11 @@ function syncEditors() {
   setSource('left', merge.a.state.doc);
   setSource('right', merge.b.state.doc);
 }
-function compare(startedAt) {
+function compare(startedAt,automatic=false) {
+  if(!automatic&&lastState.status==='pending'&&!lastState.reading)return;
   if (reading.left || reading.right) return;
+  repeatedChange=lastState.status==='ready'&&merge?current:undefined;
+  clearTimeout(autoTimer);automaticComparison=automatic;
   if (typeof startedAt !== 'number') startedAt = performance.now();
   for(const side of ['left','right'])fileFailures[side]=undefined;
   const left = merge ? merge.a.state.doc : inputViews.left.state.doc;
@@ -267,7 +278,7 @@ function fileLabels() {
 function refreshImportState(){
   const active=reading.left||reading.right;
   $('diff-import-status').hidden=!active;$('diff-import-status').textContent=active?t('diff.reading'):'';
-  $('compare').disabled=active||lastState.status==='pending';$('cancel').hidden=!active&&lastState.status!=='pending';
+  $('compare').disabled=active;$('compare').setAttribute('aria-disabled',String(active||lastState.status==='pending'));$('cancel').hidden=!active&&lastState.status!=='pending';
   for(const side of ['left','right'])$(`${side}-import`).setAttribute('aria-busy',String(reading[side]));
 }
 async function loadFile(side, file) {
@@ -325,6 +336,7 @@ bindFileDrop(document, {
 });
 $('compare').addEventListener('click', compare);
 $('cancel').addEventListener('click', () => {
+  clearTimeout(autoTimer);
   const keepComparison=Boolean(merge)&&(reading.left||reading.right)&&lastState.status!=='pending';
   restoration=undefined;
   pendingDocuments = undefined;
@@ -351,6 +363,7 @@ $('swap').addEventListener('click', () => {
   else compareIfReady();
 });
 function select(index) {
+  automaticComparison=false;repeatedChange=undefined;
   if (!total || restoration) return;
   current = Math.max(0, Math.min(total - 1, Math.trunc(Number(index) || 0)));
   navigation();
@@ -377,7 +390,7 @@ $('diff-mode').addEventListener('change', () => {
   syncEditors();
   invalidate();
   refreshModeLabels();
-  compare();
+  if(sourceText('left').length || sourceText('right').length) compare();
 });
 document.addEventListener('keydown', event => {
   if (event.target.closest?.('.tool-menu')) return;
@@ -388,6 +401,7 @@ document.addEventListener('keydown', event => {
   }
 }, true);
 window.addEventListener('pagehide', event => {
+  clearTimeout(autoTimer);
   if(event.persisted&&lastState.status==='ready'&&merge&&total){
     const position=view=>({selection:view.state.selection,top:view.scrollDOM.scrollTop,left:view.scrollDOM.scrollLeft});
     restoration={index:current,a:position(merge.a),b:position(merge.b),x:scrollX,y:scrollY};
@@ -440,8 +454,9 @@ onLanguageChange(() => {
   resultLayout();
   $('compare').textContent = t(merge ? 'diff.recompare' : 'diff.compare');
   if (lastState.status === 'ready') {
-    $('diff-total').textContent = total ? t('diff.total', { count:total }) : t('diff.equal');
+    $('diff-total').textContent = total ? t('polishData.diffBlocks', { count:total }) : t('diff.equal');
     $('diff-duration').textContent = t('diff.duration', { duration:lastState.elapsedMs ?? lastState.durationMs });
+    coarseNote.textContent=coarseNote.hidden?'':t('polishData.coarse');
     for (const name of ['added','removed','modified']) $(`count-${name}`).textContent = lastState.counts[name].toLocaleString(language());
   } else if (lastState.status === 'error') errorLabels(lastState);
   else statusLabels(lastState);
@@ -467,3 +482,10 @@ onLanguageChange(() => {
 refreshModeLabels(); fileLabels(); statusLabels(lastState); diagnostics.clear();
 
 registerContentCheck(()=>Boolean(sourceText('left')||sourceText('right')||filenames.left||filenames.right));
+
+function scheduleAutoCompare(){
+ clearTimeout(autoTimer);if(reading.left||reading.right||inputViews.left.composing||inputViews.right.composing)return;
+ const left=sourceText('left'),right=sourceText('right');if(!(left||right)||new TextEncoder().encode(left+right).length>256*1024)return;
+ autoTimer=setTimeout(()=>{if(!reading.left&&!reading.right&&!inputViews.left.composing&&!inputViews.right.composing)compare(undefined,true);},350);
+}
+for(const source of Object.values(sources))source.addEventListener('compositionend',()=>queueMicrotask(scheduleAutoCompare));

@@ -562,7 +562,11 @@
     "batchDone": "Imej {{success}} yang diproses. · Gagal: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "Fokus pada pilihan: kekunci anak panah mengalihkannya; Shift + anak panah mengubah tepi kanan atau bawah."
+    "cropKeys": "Fokus pada pilihan: kekunci anak panah mengalihkannya; Shift + anak panah mengubah tepi kanan atau bawah.",
+    "qualityInvalid": "Masukkan kualiti dari 1 hingga 100.",
+    "targetInvalid": "Masukkan saiz sasaran dari 1 hingga 102400 KiB.",
+    "dimensionInvalid": "Gunakan piksel bulat dari 0 hingga 16384; 0 mengekalkan dimensi automatik.",
+    "scaleInvalid": "Masukkan skala dari 1 hingga 400 peratus."
   },
   "text": {
     "name": "Bersihkan dan ekstrak teks",
@@ -769,7 +773,7 @@
     "reset": "Tetapkan semula",
     "lap": "Rekod pusingan",
     "sound": "Mainkan bunyi pendek apabila selesai apabila halaman ini boleh memainkan audio",
-    "backgroundHelp": "Masa menggunakan tarikh akhir jam dan masa berlalu. Keadaan disimpan dalam storan sesi tab ini. Tab latar belakang dan peranti tidur boleh menangguhkan pelaksanaan; ini bukan peringatan latar belakang atau penggera.",
+    "backgroundHelp": "Pengiraan masa menggunakan waktu tamat mengikut jam dan masa berlalu. Memuat semula tab ini memulihkan kedua-dua pemasa, termasuk masa sebenar yang telah berlalu bagi pemasa yang berjalan. Keadaan disimpan dalam storan sesi tab ini. Tab latar belakang dan peranti dalam mod tidur boleh menggantung pelaksanaan; ini bukan peringatan latar belakang atau penggera.",
     "laps": "Pusingan jam randik",
     "export": "Eksport pusingan sebagai TXT",
     "number": "Pusingan",
@@ -872,7 +876,7 @@
       "count": "Kiraan tarikh mestilah integer antara 1 dan 100.",
       "invalid": "Tidak dapat mengira. Semak ungkapan, zon waktu dan masa rujukan."
     },
-    "copyExpression": "Salin · Ekspresi",
+    "copyExpression": "Salin Ekspresi",
     "utcOffset": "UTC ±HH:mm"
   },
   "speedtestRating": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "Pilih padanan penuh atau kumpulan tangkapan untuk diekstrak. Padanan kosong adalah sah; kumpulan yang tidak dapat ditandingi ditunjukkan secara berasingan.",
     "passwordPolicy": "Jenis aksara yang dipilih membentuk kumpulan yang dibenarkan. Dayakan \"Memerlukan setiap jenis\" untuk memasukkan setiap jenis yang dipilih dalam setiap kata laluan.",
     "speedScope": "Penilaian menggambarkan kelajuan pemindahan. Latensi dan jitter diukur secara berasingan.",
-    "viewResult": "Lihat hasil"
+    "viewResult": "Lihat hasil",
+    "speedNetworkError": "Sambungan rangkaian gagal. Sila cuba lagi.",
+    "speedStartError": "Ujian kelajuan tidak dapat dimulakan. Sila cuba lagi."
   },
   "redesign": {
     "calculatorOriginal": "Nilai asal",
@@ -1825,7 +1831,8 @@
       "speedSettings": "Tetapan ujian",
       "speedSummary": "{{profile}} · {{unit}} · sehingga {{budget}} MiB",
       "customZone": "Zon waktu IANA tersuai",
-      "regexNoMatches": "Tiada padanan"
+      "regexNoMatches": "Tiada padanan",
+      "md5ModeConfirm": "Menukar mod akan membuang baris gilir fail semasa, hasil dan nilai pengesahan. Teruskan?"
     },
     "daily": {
       "unitDetails": "Penukaran lain dan ketepatan",
@@ -1853,5 +1860,107 @@
     "shared": {
       "viewResult": "Lihat hasil"
     }
+  },
+  "v2": {
+    "settings": "Tetapan",
+    "appearance": "Penampilan",
+    "themeSystem": "Ikut sistem",
+    "themeLight": "Cerah",
+    "themeDark": "Gelap",
+    "favorites": "Kegemaran",
+    "recent": "Dibuka baru-baru ini",
+    "pin": "Tambah ke kegemaran",
+    "unpin": "Buang daripada kegemaran",
+    "noFavorites": "Klik bintang alat untuk menyimpannya.",
+    "noRecent": "Lima alat yang terakhir dibuka muncul di sini.",
+    "navigation": "Semak alat",
+    "qrTextNotice": "Sesetengah pengimbas, termasuk versi WeChat tertentu, mungkin tidak memaparkan QR teks biasa. Gunakan pembaca ini untuk mendapatkan teks asal."
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "Penukaran lain ({{count}})",
+    "numberSummary": "Julat {{min}}–{{max}} · {{count}} nombor · {{repeat}}",
+    "noRepeat": "Tiada nombor berulang"
+  },
+  "usability": {
+    "images": {
+      "growth": "Saiz fail meningkat sebanyak {{percent}}%; tiada pengurangan saiz",
+      "adjust": "Laraskan parameter",
+      "add": "Tambah imej",
+      "preview": "Pratonton {{name}}",
+      "unchanged": "Saiz fail tidak berubah; tiada pengurangan saiz",
+      "savings": "Saiz fail berkurang sebanyak {{percent}}%"
+    },
+    "password": {
+      "showRow": "Paparkan hasil {{number}}",
+      "hideRow": "Sembunyikan hasil {{number}}"
+    },
+    "speedtest": {
+      "latencyMs": "Kependaman HTTP semasa melahu",
+      "jitterMs": "Jitter semasa melahu",
+      "downloadLatencyMs": "Kependaman semasa muat turun berbeban",
+      "downloadJitterMs": "Jitter semasa muat turun berbeban",
+      "uploadLatencyMs": "Kependaman semasa muat naik berbeban",
+      "uploadJitterMs": "Jitter semasa muat naik berbeban",
+      "downloadBps": "Muat turun",
+      "uploadBps": "Muat naik"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "Lihat masa pelaksanaan",
+    "adjustParameters": "Laraskan parameter"
+  },
+  "polishData": {
+    "diffBlocks": "{{count}} blok perbezaan",
+    "coarse": "Perbandingan kasar: blok mungkin mengandungi kandungan yang tidak berubah.",
+    "errors": {
+      "CsvColumns": "Baris {{row}} mempunyai {{actual}} lajur; {{expected}} dijangka. Semak pembatas dan sel berpetik.",
+      "CsvHeaders": "Nama lajur berulang. Namakan semula atau matikan baris pengepala.",
+      "CsvJsonCell": "Baris {{row}}, lajur {{column}} bukan JSON yang sah. Gunakan nilai JSON atau pilih mod sel rentetan.",
+      "CsvArrayHeader": "Baris tatasusunan tiada nama lajur. Matikan baris pengepala.",
+      "CsvNestedValue": "Nilai null dan bersarang memerlukan mod sel pensirian JSON eksplisit.",
+      "CsvRowShape": "Setiap baris JSON mesti mempunyai lajur yang sama tanpa nilai yang hilang.",
+      "XmlOrdered": "Gunakan tatasusunan nod tersusun daripada XML → JSON. Muatkan contoh untuk melihat atribut dan nod teks.",
+      "QueryArrays": "Gunakan objek dengan nilai berupa tatasusunan rentetan yang tidak kosong, contohnya {\"tag\":[\"a\",\"b\"]}."
+    },
+    "notices": {
+      "StructureOnly": "Nilai data dan struktur yang disokong dikekalkan; komen sumber, pemformatan dan gaya petikan tidak dikekalkan.",
+      "CsvStrings": "Sel CSV kekal sebagai rentetan; nombor dan boolean tidak ditafsirkan secara automatik.",
+      "CsvTextExport": "CSV ialah teks; eksport lalai tidak mengekalkan maklumat jenis skalar JSON.",
+      "ByteHex": "Hasil tidak dapat dinyahkod tanpa kehilangan data sebagai {{charset}}. Hex dipaparkan; muat turun mengekalkan bait asal."
+    },
+    "charsetSource": "Teks sudah dalam Unicode. Pengekodan sumber hanya digunakan pada bait fail."
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "Hasil ini melebihi had input 10 MiB. Salinan dan muat turun masih mengandungi hasil lengkap.",
+      "pdfRange": "Halaman tersedia: 1–{{count}}",
+      "pdfInspectHelp": "Semak bilangan halaman sebelum memilih julat.",
+      "qrRecovery": "Laraskan pembetulan ralat"
+    }
+  },
+  "polishShell": {
+    "flags": "Bendera: {{flags}}"
+  },
+  "experience": {
+    "extractPhone": "Ekstrak nombor telefon",
+    "extractEmail": "Ekstrak alamat e-mel",
+    "extractUrl": "Ekstrak pautan",
+    "base64encode": "Pengekodan Base64",
+    "base64decode": "Penyahkodan Base64",
+    "base64urlencode": "Pengekodan Base64URL",
+    "base64urldecode": "Penyahkodan Base64URL",
+    "noemail": "Tiada alamat e-mel ditemukan.",
+    "nophone": "Tiada nombor telefon ditemukan.",
+    "nourl": "Tiada pautan ditemukan.",
+    "textAuto": "Teks pendek diproses secara automatik; jalankan teks yang lebih panjang secara manual.",
+    "qrSettings": "Saiz output {{size}}px · Pembetulan ralat {{level}}",
+    "networkDetails": "Butiran rangkaian dan data",
+    "endDate": "Tarikh tamat",
+    "listInput": "Entri",
+    "chooseConvert": "Pilih penukar · {{name}}",
+    "task": "Tindakan",
+    "copySeconds": "Salin cap masa dalam saat",
+    "copyMilliseconds": "Salin cap masa dalam milisaat",
+    "unitPrecision": "Nota ketepatan dan unit"
   }
 }

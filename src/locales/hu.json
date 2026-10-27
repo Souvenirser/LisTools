@@ -562,7 +562,11 @@
     "batchDone": "Feldolgozott {{success}} képek. · Sikertelen: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "Fókuszáljon a kijelölésre: a nyilak mozgatják; Shift + nyilak a jobb vagy alsó szélét méretezik."
+    "cropKeys": "Fókuszáljon a kijelölésre: a nyilak mozgatják; Shift + nyilak a jobb vagy alsó szélét méretezik.",
+    "qualityInvalid": "Adjon meg 1 és 100 közötti minőséget.",
+    "targetInvalid": "Adjon meg 1 és 102400 KiB közötti célméretet.",
+    "dimensionInvalid": "Használjon egész képpontértéket 0 és 16384 között; a 0 megtartja az automatikus méretet.",
+    "scaleInvalid": "Adjon meg 1 és 400 százalék közötti méretarányt."
   },
   "text": {
     "name": "Szövegtisztítás és kibontás",
@@ -769,7 +773,7 @@
     "reset": "Visszaállítás",
     "lap": "Kör rögzítése",
     "sound": "Ha ez az oldal hangot tud lejátszani, adjon le egy rövid hangot",
-    "backgroundHelp": "Az időzítés az óra határidejét és az eltelt időt használja. Az állapot a lap munkamenet-tárhelyén marad. A háttér fülek és alvó eszközök felfüggeszthetik a végrehajtást; ez nem háttér emlékeztető vagy riasztás.",
+    "backgroundHelp": "Az időmérés az óra szerinti határidőket és az eltelt időt használja. A lap újratöltése mindkét időzítőt visszaállítja, a futó időzítőknél a ténylegesen eltelt idővel együtt. Az állapot a lap munkamenet-tárhelyén marad. A háttérben lévő lapok és az alvó eszközök felfüggeszthetik a végrehajtást; ez nem háttérben működő emlékeztető vagy ébresztő.",
     "laps": "Stopper körök",
     "export": "Körök exportálása TXT formátumban",
     "number": "Kör",
@@ -893,7 +897,7 @@
       "count": "A dátumok számának 1 és 100 közötti egész számnak kell lennie.",
       "invalid": "Nem lehet kiszámolni. Ellenőrizze a kifejezést, az időzónát és a referenciaidőt."
     },
-    "copyExpression": "Másolás · Kifejezés",
+    "copyExpression": "Másolás Kifejezés",
     "utcOffset": "UTC ±HH:mm"
   },
   "uiText": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "Válassza ki a teljes egyezést vagy egy rögzítési csoportot a kibontáshoz. Az üres találatok érvényesek; a páratlan csoportok külön jelennek meg.",
     "passwordPolicy": "A kiválasztott karaktertípusok alkotják az engedélyezett készletet. Engedélyezze az „Minden típus megkövetelése” lehetőséget, hogy minden kiválasztott típust tartalmazzon minden jelszóban.",
     "speedScope": "A besorolások az átviteli sebességet írják le. A késleltetést és a jittert külön mérjük.",
-    "viewResult": "Eredmény megtekintése"
+    "viewResult": "Eredmény megtekintése",
+    "speedNetworkError": "A hálózati kapcsolat sikertelen. Próbálja újra.",
+    "speedStartError": "A sebességteszt nem indítható el. Próbálja újra."
   },
   "redesign": {
     "calculatorOriginal": "Eredeti érték",
@@ -1825,7 +1831,8 @@
       "speedSettings": "Tesztbeállítások",
       "speedSummary": "{{profile}} · {{unit}} · legfeljebb {{budget}} MiB",
       "customZone": "Egyéni IANA-időzóna",
-      "regexNoMatches": "Nincs találat"
+      "regexNoMatches": "Nincs találat",
+      "md5ModeConfirm": "A módváltás törli a jelenlegi fájlsort, eredményeket és ellenőrzési értékeket. Folytatja?"
     },
     "daily": {
       "unitDetails": "További átalakítások és pontosság",
@@ -1853,5 +1860,107 @@
     "shared": {
       "viewResult": "Eredmény megtekintése"
     }
+  },
+  "v2": {
+    "settings": "Beállítások",
+    "appearance": "Megjelenés",
+    "themeSystem": "Rendszer követése",
+    "themeLight": "Világos",
+    "themeDark": "Sötét",
+    "favorites": "Kedvencek",
+    "recent": "Legutóbb megnyitott",
+    "pin": "Hozzáadás a kedvencekhez",
+    "unpin": "Eltávolítás a kedvencek közül",
+    "noFavorites": "Az eszköz mentéséhez kattints a csillagára.",
+    "noRecent": "Itt jelenik meg az öt legutóbb megnyitott eszköz.",
+    "navigation": "Eszközök böngészése",
+    "qrTextNotice": "Egyes olvasók, köztük néhány WeChat-verzió, nem jelenítik meg a szöveges QR-kódot. Az eredeti szöveget ezzel az eszközzel olvashatod ki."
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "Egyéb átváltások ({{count}})",
+    "numberSummary": "Tartomány {{min}}–{{max}} · {{count}} szám · {{repeat}}",
+    "noRepeat": "Ismétlődő számok nélkül"
+  },
+  "usability": {
+    "images": {
+      "growth": "A fájlméret {{percent}}%-kal nőtt; nem csökkent",
+      "adjust": "Paraméterek módosítása",
+      "add": "Képek hozzáadása",
+      "preview": "{{name}} előnézete",
+      "unchanged": "A fájlméret változatlan; nem csökkent",
+      "savings": "A fájlméret {{percent}}%-kal csökkent"
+    },
+    "password": {
+      "showRow": "{{number}}. eredmény megjelenítése",
+      "hideRow": "{{number}}. eredmény elrejtése"
+    },
+    "speedtest": {
+      "downloadBps": "Letöltés",
+      "uploadBps": "Feltöltés",
+      "latencyMs": "HTTP-késleltetés terhelés nélkül",
+      "jitterMs": "Késleltetés ingadozása terhelés nélkül",
+      "downloadLatencyMs": "Késleltetés letöltési terhelés alatt",
+      "downloadJitterMs": "Késleltetés ingadozása letöltési terhelés alatt",
+      "uploadLatencyMs": "Késleltetés feltöltési terhelés alatt",
+      "uploadJitterMs": "Késleltetés ingadozása feltöltési terhelés alatt"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "Végrehajtási idők megtekintése",
+    "adjustParameters": "Paraméterek módosítása"
+  },
+  "polishData": {
+    "diffBlocks": "{{count}} eltérésblokk",
+    "coarse": "Durva összehasonlítás: a blokkok változatlan tartalmat is tartalmazhatnak.",
+    "errors": {
+      "CsvColumns": "A(z) {{row}}. sorban {{actual}} oszlop van; az elvárt szám {{expected}}. Ellenőrizze az elválasztókat és az idézőjelek közötti cellákat.",
+      "CsvHeaders": "Az oszlopnevek ismétlődnek. Nevezze át őket, vagy kapcsolja ki a fejlécsort.",
+      "CsvJsonCell": "A(z) {{row}}. sor {{column}}. oszlopa nem érvényes JSON. Használjon JSON-értéket, vagy válassza a karakterlánc cellamódot.",
+      "CsvArrayHeader": "A tömbsoroknak nincs oszlopnevük. Kapcsolja ki a fejlécsort.",
+      "CsvNestedValue": "A null és a beágyazott értékek az explicit JSON-szerializálási cellamódot igénylik.",
+      "CsvRowShape": "Minden JSON-sornak ugyanazokat az oszlopokat kell tartalmaznia, hiányzó értékek nélkül.",
+      "XmlOrdered": "Használja az XML → JSON átalakítás rendezett csomóponttömbjét. Töltse be a példát az attribútumok és szöveges csomópontok megtekintéséhez.",
+      "QueryArrays": "Olyan objektumot használjon, amelynek értékei nem üres karakterlánctömbök, például {\"tag\":[\"a\",\"b\"]}."
+    },
+    "notices": {
+      "StructureOnly": "Az adatértékek és a támogatott szerkezet megmaradnak; a forrás megjegyzései, formázása és idézőjelstílusa nem.",
+      "CsvStrings": "A CSV-cellák karakterláncok maradnak; a számok és logikai értékek felismerése nem automatikus.",
+      "CsvTextExport": "A CSV szöveg; az alapértelmezett export nem őrzi meg a JSON skaláris típusinformációit.",
+      "ByteHex": "Az eredmény nem dekódolható veszteségmentesen {{charset}} kódolással. Hex jelenik meg; a letöltés megőrzi az eredeti bájtokat."
+    },
+    "charsetSource": "A szöveg már Unicode. A forráskódolás csak a fájl bájtjaira vonatkozik."
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "Ez az eredmény meghaladja a 10 MiB-os bemeneti korlátot. A másolás és a letöltés továbbra is a teljes eredményt tartalmazza.",
+      "pdfRange": "Elérhető oldalak: 1–{{count}}",
+      "pdfInspectHelp": "A tartomány kiválasztása előtt ellenőrizze az oldalszámot.",
+      "qrRecovery": "Hibajavítás módosítása"
+    }
+  },
+  "polishShell": {
+    "flags": "Jelzők: {{flags}}"
+  },
+  "experience": {
+    "extractPhone": "Telefonszámok kinyerése",
+    "extractEmail": "E-mail-címek kinyerése",
+    "extractUrl": "Hivatkozások kinyerése",
+    "base64encode": "Base64-kódolás",
+    "base64decode": "Base64-dekódolás",
+    "base64urlencode": "Base64URL-kódolás",
+    "base64urldecode": "Base64URL-dekódolás",
+    "noemail": "Nem található e-mail-cím.",
+    "nophone": "Nem található telefonszám.",
+    "nourl": "Nem található hivatkozás.",
+    "textAuto": "A rövid szöveg feldolgozása automatikus; a hosszabbat indítsa el kézzel.",
+    "qrSettings": "Kimeneti méret {{size}}px · Hibajavítás {{level}}",
+    "networkDetails": "Hálózati és adatkezelési tudnivalók",
+    "endDate": "Záró dátum",
+    "listInput": "Bejegyzések",
+    "chooseConvert": "Átalakító kiválasztása · {{name}}",
+    "task": "Művelet",
+    "copySeconds": "Másodperces időbélyeg másolása",
+    "copyMilliseconds": "Ezredmásodperces időbélyeg másolása",
+    "unitPrecision": "Pontosság és mértékegységek"
   }
 }

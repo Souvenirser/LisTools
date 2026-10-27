@@ -18,12 +18,12 @@ test('business result stays beside its action and shares one calculation with An
 });
 
 test('same-value Today keeps the date result and age alone explains February 29',async({page})=>{
-  await page.goto('/dates.html');await page.locator('#difference-run').click();const value=await page.locator('#difference-output').textContent();
+  await page.goto('/dates.html');await page.locator('#date-today-end').click();await page.locator('#difference-run').click();const value=await page.locator('#difference-output').textContent();
   await page.locator('#date-today-start').click();await page.locator('#date-today-end').click();await expect(page.locator('#difference-output')).toHaveText(value);await expect(page.locator('#difference-copy')).toBeEnabled();
   await expect(page.locator('[data-i18n="direct.daily.countdownHelp"]')).not.toContainText('February 29');await expect(page.locator('[data-i18n="direct.daily.anniversaryHelp"]')).toBeHidden();await chooseTask(page,'dates','milestone');
   await expect(page.locator('[data-i18n="direct.daily.anniversaryHelp"]')).toBeVisible();await page.locator('#milestone-run').click();await expect(page.locator('#date-origin')).toHaveAttribute('aria-invalid','true');
   await chooseTask(page,'dates','difference');await expect(page.locator('#difference-output')).toHaveText(value);await expect(page.locator('#date-start')).not.toHaveAttribute('aria-invalid','true');
-  await chooseTask(page,'dates','workdays');await page.locator('details').filter({has:page.locator('#date-off')}).locator('summary').click();await page.locator('#date-off').fill('20261001');await page.locator('#workdays-run').click();await expect(page.locator('#date-off')).toHaveAttribute('aria-invalid','true');await expect(page.locator('#date-off')).toBeFocused();
+  await chooseTask(page,'dates','workdays');await page.locator('details').filter({has:page.locator('#date-off')}).locator('summary').click();await page.locator('#work-end').fill(await page.locator('#work-start').inputValue());await page.locator('#date-off').fill('20261001');await page.locator('#workdays-run').click();await expect(page.locator('#date-off')).toHaveAttribute('aria-invalid','true');await expect(page.locator('#date-off')).toBeFocused();
   await chooseTask(page,'dates','difference');await chooseTask(page,'dates','workdays');await expect(page.locator('#date-off')).toHaveAttribute('aria-invalid','true');await expect(page.locator('#date-off')).not.toBeFocused();
 });
 

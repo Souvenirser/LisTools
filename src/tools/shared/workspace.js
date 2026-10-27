@@ -1,12 +1,30 @@
 import {t,onLanguageChange} from '../../i18n.js';
 
+export function revealSection(section){
+ const target=section.querySelector('h2,h3')||section;
+ if(target.tabIndex<0)target.tabIndex=-1;target.focus({preventScroll:true});
+ target.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'});
+}
+
+export function mountResultShortcut(actions,target,hasResult,labelKey='direct.shared.viewResult'){
+ const button=document.createElement('button');button.id=target.id+'-shortcut';button.type='button';button.hidden=true;actions.append(button);
+ const media=matchMedia('(max-width:1099px), (max-height:800px)');let frame;
+ function refresh(){
+  button.textContent=t(labelKey);const hidden=!media.matches||!hasResult()||!target.checkVisibility();if(button.hidden!==hidden)button.hidden=hidden;
+ }
+ function schedule(){cancelAnimationFrame(frame);frame=requestAnimationFrame(refresh);}
+ button.onclick=()=>revealSection(target);
+ new MutationObserver(schedule).observe(target,{subtree:true,childList:true,attributes:true,attributeFilter:['data-status','hidden','aria-busy']});
+ media.addEventListener('change',schedule);onLanguageChange(schedule);refresh();return button;
+}
+
 export function actionArea(actions,status=document.getElementById('tool-status'),{resultTarget,hasResult=()=>false,choose}={}){
  actions.classList.add('workspace-actions');
  const area=document.createElement('div');area.className='workspace-action-area';actions.before(area);area.append(actions);if(status)area.append(status);
  const media=matchMedia('(max-width:1099px), (max-height:800px)'),target=typeof resultTarget==='string'?document.querySelector(resultTarget):resultTarget;
  let importButton,viewButton,frame;
  if(choose){importButton=document.createElement('button');importButton.type='button';importButton.className='primary workspace-import-action';importButton.hidden=true;importButton.onclick=()=>choose.click();area.prepend(importButton);}
- if(target){viewButton=document.createElement('button');viewButton.type='button';viewButton.className='primary workspace-view-result';viewButton.hidden=true;viewButton.onclick=()=>{const heading=target.querySelector('h2,h3')||target;heading.tabIndex=-1;heading.focus({preventScroll:true});heading.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'});};area.prepend(viewButton);}
+ if(target){viewButton=document.createElement('button');viewButton.type='button';viewButton.className='primary workspace-view-result';viewButton.hidden=true;viewButton.onclick=()=>revealSection(target);area.prepend(viewButton);}
  const hide=(node,value)=>{if(node&&node.hidden!==value)node.hidden=value;};
  function resize(){
    const keyboard=visualViewport&&visualViewport.height<innerHeight*.7;
@@ -52,7 +70,7 @@ export function mediaWorkspace(id,options={}){
  settings.classList.add('workspace-options');layout.append(settings);
  const count=document.createElement('span');count.className='queue-count';const heading=queue.querySelector('h2'),title=document.createElement('span');title.dataset.i18n=heading.dataset.i18n;title.textContent=heading.textContent;heading.removeAttribute('data-i18n');heading.replaceChildren(title,count);
  const refreshCount=()=>{const total=queue.querySelectorAll('.media-file-name').length;queue.hidden=!queue.querySelector('.media-file-name,.is-error');layout.classList.toggle('has-files',total>0);document.getElementById(id+'-choose')?.classList.toggle('primary',total===0);const reason=document.getElementById(id+'-run-reason');if(reason)reason.hidden=Number(reason.dataset.applicableCount??total)>0;count.textContent=` · ${document.querySelectorAll(`#${id}-queue li:not(.is-error) .media-file-name`).length}`;};new MutationObserver(refreshCount).observe(document.getElementById(`${id}-queue`),{childList:true});refreshCount();
- const fileInput=document.getElementById(id+'-files'),choose=document.createElement('button');choose.id=id+'-choose';choose.type='button';choose.dataset.i18n=id==='images'?'ux.chooseImages':'ux.choosePdf';fileInput.before(choose);fileInput.hidden=true;choose.onclick=()=>fileInput.click();
+ const fileInput=document.getElementById(id+'-files'),choose=document.createElement('button');choose.id=id+'-choose';choose.type='button';choose.dataset.i18n=id==='images'?'ux.chooseImages':'ux.choosePdf';const dropLabel=drop.querySelector('.media-drop');if(dropLabel)dropLabel.replaceWith(choose);else fileInput.before(choose);choose.className='media-drop';fileInput.hidden=true;choose.onclick=()=>fileInput.click();drop.querySelector('h2')?.classList.add('sr-only');
  const reason=document.createElement('p');reason.id=id+'-run-reason';reason.className='tool-note';reason.dataset.i18n='ux.addFiles';document.getElementById(id+'-run').closest('.tool-actions').before(reason);
  const actions=actionArea(document.getElementById(`${id}-run`).closest('.tool-actions'),document.getElementById('tool-status'),{...options,choose});
  for(const parent of [input,settings]){

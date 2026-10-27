@@ -562,7 +562,11 @@
     "batchDone": "Đã xử lý ảnh {{success}}. · Thất bại: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "Đưa tiêu điểm vào vùng chọn: phím mũi tên di chuyển; Shift + mũi tên chỉnh cạnh phải hoặc cạnh dưới."
+    "cropKeys": "Đưa tiêu điểm vào vùng chọn: phím mũi tên di chuyển; Shift + mũi tên chỉnh cạnh phải hoặc cạnh dưới.",
+    "qualityInvalid": "Nhập chất lượng từ 1 đến 100.",
+    "targetInvalid": "Nhập kích thước mục tiêu từ 1 đến 102400 KiB.",
+    "dimensionInvalid": "Dùng số pixel nguyên từ 0 đến 16384; 0 giữ kích thước tự động.",
+    "scaleInvalid": "Nhập tỷ lệ từ 1 đến 400 phần trăm."
   },
   "text": {
     "name": "Làm sạch và trích xuất văn bản",
@@ -769,7 +773,7 @@
     "reset": "Đặt lại",
     "lap": "Ghi vòng đua",
     "sound": "Phát một âm thanh ngắn khi trang này có thể phát âm thanh",
-    "backgroundHelp": "Thời gian sử dụng thời hạn đồng hồ và thời gian đã trôi qua. Trạng thái được lưu trong bộ lưu trữ phiên của tab này. Các tab nền và thiết bị ngủ có thể tạm dừng quá trình thực thi; đây không phải là lời nhắc hoặc cảnh báo nền.",
+    "backgroundHelp": "Việc tính giờ dùng thời điểm kết thúc theo đồng hồ và thời gian đã trôi qua. Tải lại tab này sẽ khôi phục cả hai bộ tính giờ, bao gồm thời gian thực đã trôi qua đối với các bộ tính giờ đang chạy. Trạng thái được lưu trong bộ lưu trữ phiên của tab này. Các tab nền và thiết bị ở chế độ ngủ có thể tạm ngừng thực thi; đây không phải lời nhắc chạy nền hay đồng hồ báo thức.",
     "laps": "Đồng hồ bấm giờ",
     "export": "Xuất vòng dưới dạng TXT",
     "number": "Lập",
@@ -872,7 +876,7 @@
       "count": "Số ngày phải là số nguyên từ 1 đến 100.",
       "invalid": "Không thể tính toán. Kiểm tra biểu thức, múi giờ và thời gian tham chiếu."
     },
-    "copyExpression": "Sao chép · Biểu thức",
+    "copyExpression": "Sao chép Biểu thức",
     "utcOffset": "UTC ±HH:mm"
   },
   "speedtestRating": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "Chọn kết quả khớp đầy đủ hoặc nhóm chụp để trích xuất. Các trận đấu trống là hợp lệ; các nhóm chưa từng có được hiển thị riêng biệt.",
     "passwordPolicy": "Các loại ký tự được chọn tạo thành nhóm được phép. Bật “Yêu cầu từng loại” để bao gồm mọi loại đã chọn trong mỗi mật khẩu.",
     "speedScope": "Xếp hạng mô tả tốc độ truyền tải. Độ trễ và jitter được đo riêng.",
-    "viewResult": "Xem kết quả"
+    "viewResult": "Xem kết quả",
+    "speedNetworkError": "Kết nối mạng thất bại. Vui lòng thử lại.",
+    "speedStartError": "Không thể bắt đầu kiểm tra tốc độ. Vui lòng thử lại."
   },
   "redesign": {
     "calculatorOriginal": "Giá trị ban đầu",
@@ -1825,7 +1831,8 @@
       "speedNetwork": "Công cụ kết nối Cloudflare và sử dụng dữ liệu mạng. Yêu cầu kiểm tra chỉ bắt đầu sau khi bạn nhấn bắt đầu.",
       "speedSettings": "Cài đặt kiểm tra",
       "speedSummary": "{{profile}} · {{unit}} · tối đa {{budget}} MiB",
-      "customZone": "Múi giờ IANA tùy chỉnh"
+      "customZone": "Múi giờ IANA tùy chỉnh",
+      "md5ModeConfirm": "Đổi chế độ sẽ xóa hàng đợi tệp, kết quả và giá trị xác minh hiện tại. Tiếp tục?"
     },
     "daily": {
       "countdownHelp": "Để đếm ngược, chọn hôm nay làm ngày bắt đầu và ngày đích làm ngày kết thúc. Ngày đích đã qua cho số ngày âm.",
@@ -1853,5 +1860,107 @@
     "shared": {
       "viewResult": "Xem kết quả"
     }
+  },
+  "v2": {
+    "settings": "Cài đặt",
+    "appearance": "Giao diện",
+    "themeSystem": "Theo hệ thống",
+    "themeLight": "Sáng",
+    "themeDark": "Tối",
+    "favorites": "Yêu thích",
+    "recent": "Đã mở gần đây",
+    "pin": "Thêm vào yêu thích",
+    "unpin": "Bỏ khỏi yêu thích",
+    "noFavorites": "Nhấn ngôi sao cạnh công cụ để lưu.",
+    "noRecent": "Năm công cụ mở gần nhất sẽ xuất hiện ở đây.",
+    "navigation": "Duyệt công cụ",
+    "qrTextNotice": "Một số trình quét, kể cả một số phiên bản WeChat, có thể không hiển thị mã QR văn bản thuần. Dùng công cụ này để đọc văn bản gốc."
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "Các phép chuyển đổi khác ({{count}})",
+    "numberSummary": "Phạm vi {{min}}–{{max}} · {{count}} số · {{repeat}}",
+    "noRepeat": "Không cho phép số trùng lặp"
+  },
+  "usability": {
+    "images": {
+      "growth": "Kích thước tệp tăng {{percent}}%; không giảm dung lượng",
+      "adjust": "Điều chỉnh tham số",
+      "add": "Thêm hình ảnh",
+      "preview": "Xem trước {{name}}",
+      "unchanged": "Kích thước tệp không đổi; không giảm dung lượng",
+      "savings": "Kích thước tệp giảm {{percent}}%"
+    },
+    "password": {
+      "showRow": "Hiện kết quả {{number}}",
+      "hideRow": "Ẩn kết quả {{number}}"
+    },
+    "speedtest": {
+      "latencyMs": "Độ trễ HTTP khi không tải",
+      "jitterMs": "Độ dao động khi không tải",
+      "downloadLatencyMs": "Độ trễ khi có tải xuống",
+      "downloadJitterMs": "Độ dao động khi có tải xuống",
+      "uploadLatencyMs": "Độ trễ khi có tải lên",
+      "uploadJitterMs": "Độ dao động khi có tải lên",
+      "downloadBps": "Tải xuống",
+      "uploadBps": "Tải lên"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "Xem thời gian thực thi",
+    "adjustParameters": "Điều chỉnh tham số"
+  },
+  "polishData": {
+    "diffBlocks": "{{count}} khối khác biệt",
+    "coarse": "So sánh sơ bộ: các khối có thể chứa nội dung không thay đổi.",
+    "errors": {
+      "CsvColumns": "Hàng {{row}} có {{actual}} cột; cần có {{expected}} cột. Kiểm tra dấu phân cách và các ô trong dấu ngoặc kép.",
+      "CsvHeaders": "Tên cột bị trùng. Đổi tên hoặc tắt hàng tiêu đề.",
+      "CsvJsonCell": "Hàng {{row}}, cột {{column}} không phải JSON hợp lệ. Dùng giá trị JSON hoặc chọn chế độ ô chuỗi.",
+      "CsvArrayHeader": "Các hàng dạng mảng không có tên cột. Tắt hàng tiêu đề.",
+      "CsvNestedValue": "null và các giá trị lồng nhau cần chế độ ô tuần tự hóa JSON rõ ràng.",
+      "CsvRowShape": "Mỗi hàng JSON phải có cùng các cột và không được thiếu giá trị.",
+      "XmlOrdered": "Dùng mảng nút có thứ tự từ XML → JSON. Tải ví dụ để xem thuộc tính và nút văn bản.",
+      "QueryArrays": "Dùng đối tượng có các giá trị là mảng chuỗi không rỗng, ví dụ {\"tag\":[\"a\",\"b\"]}."
+    },
+    "notices": {
+      "StructureOnly": "Giá trị dữ liệu và cấu trúc được hỗ trợ được giữ lại; chú thích nguồn, định dạng và kiểu dấu ngoặc kép không được giữ lại.",
+      "CsvStrings": "Các ô CSV vẫn là chuỗi; số và giá trị boolean không được suy luận tự động.",
+      "CsvTextExport": "CSV là văn bản; xuất mặc định không giữ thông tin về kiểu vô hướng JSON.",
+      "ByteHex": "Không thể giải mã kết quả theo {{charset}} mà không mất dữ liệu. Đang hiển thị Hex; tải xuống sẽ giữ nguyên các byte gốc."
+    },
+    "charsetSource": "Văn bản đã ở dạng Unicode. Mã hóa nguồn chỉ áp dụng cho các byte của tệp."
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "Kết quả này vượt giới hạn đầu vào 10 MiB. Sao chép và tải xuống vẫn bao gồm toàn bộ kết quả.",
+      "pdfRange": "Các trang khả dụng: 1–{{count}}",
+      "pdfInspectHelp": "Kiểm tra số trang trước khi chọn phạm vi.",
+      "qrRecovery": "Điều chỉnh mức sửa lỗi"
+    }
+  },
+  "polishShell": {
+    "flags": "Cờ: {{flags}}"
+  },
+  "experience": {
+    "extractPhone": "Trích xuất số điện thoại",
+    "extractEmail": "Trích xuất địa chỉ email",
+    "extractUrl": "Trích xuất liên kết",
+    "base64encode": "Mã hóa Base64",
+    "base64decode": "Giải mã Base64",
+    "base64urlencode": "Mã hóa Base64URL",
+    "base64urldecode": "Giải mã Base64URL",
+    "noemail": "Không tìm thấy địa chỉ email.",
+    "nophone": "Không tìm thấy số điện thoại.",
+    "nourl": "Không tìm thấy liên kết.",
+    "textAuto": "Văn bản ngắn được xử lý tự động; hãy chạy thủ công với văn bản dài hơn.",
+    "qrSettings": "Kích thước đầu ra {{size}}px · Sửa lỗi {{level}}",
+    "networkDetails": "Thông tin về mạng và dữ liệu",
+    "endDate": "Ngày kết thúc",
+    "listInput": "Mục nhập",
+    "chooseConvert": "Chọn công cụ chuyển đổi · {{name}}",
+    "task": "Thao tác",
+    "copySeconds": "Sao chép dấu thời gian theo giây",
+    "copyMilliseconds": "Sao chép dấu thời gian theo mili giây",
+    "unitPrecision": "Ghi chú về độ chính xác và đơn vị"
   }
 }

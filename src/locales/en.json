@@ -562,7 +562,11 @@
     "batchDone": "Processed {{success}} images. · Failed: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "Focus the selection: arrows move it; Shift + arrows resize its right or bottom edge."
+    "cropKeys": "Focus the selection: arrows move it; Shift + arrows resize its right or bottom edge.",
+    "qualityInvalid": "Enter a quality from 1 to 100.",
+    "targetInvalid": "Enter a target size from 1 to 102400 KiB.",
+    "dimensionInvalid": "Use whole pixels from 0 to 16384; 0 keeps the automatic dimension.",
+    "scaleInvalid": "Enter a scale from 1 to 400 percent."
   },
   "text": {
     "name": "Clean and extract text",
@@ -769,7 +773,7 @@
     "reset": "Reset",
     "lap": "Record lap",
     "sound": "Play a short sound on completion when this page can play audio",
-    "backgroundHelp": "Timing uses clock deadlines and elapsed time. State is kept in this tab’s session storage. Background tabs and sleeping devices can suspend execution; this is not a background reminder or alarm.",
+    "backgroundHelp": "Timing uses clock deadlines and elapsed time. Reloading this tab restores both timers, including elapsed clock time for running timers. State is kept in this tab’s session storage. Background tabs and sleeping devices can suspend execution; this is not a background reminder or alarm.",
     "laps": "Stopwatch laps",
     "export": "Export laps as TXT",
     "number": "Lap",
@@ -893,7 +897,7 @@
       "count": "The date count must be an integer between 1 and 100.",
       "invalid": "Unable to calculate. Check the expression, time zone and reference time."
     },
-    "copyExpression": "Copy · Expression",
+    "copyExpression": "Copy Expression",
     "utcOffset": "UTC ±HH:mm"
   },
   "uiText": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "Choose the full match or a capture group to extract. Empty matches are valid; unmatched groups are shown separately.",
     "passwordPolicy": "Selected character types form the allowed pool. Enable “Require each type” to include every selected type in each password.",
     "speedScope": "Ratings describe transfer speed. Latency and jitter are measured separately.",
-    "viewResult": "View result"
+    "viewResult": "View result",
+    "speedNetworkError": "Network connection failed. Please retry.",
+    "speedStartError": "Could not start the speed test. Please retry."
   },
   "redesign": {
     "pdfAddPdf": "Add PDF files for this task.",
@@ -1848,10 +1854,113 @@
       "speedNetwork": "This tool connects to Cloudflare and uses network data. Test requests begin only after you start.",
       "speedSettings": "Test settings",
       "speedSummary": "{{profile}} · {{unit}} · up to {{budget}} MiB",
-      "customZone": "Custom IANA time zone"
+      "customZone": "Custom IANA time zone",
+      "md5ModeConfirm": "Changing the mode will discard the current file queue, results and verification values. Continue?"
     },
     "shared": {
       "viewResult": "View result"
     }
+  },
+  "v2": {
+    "settings": "Settings",
+    "appearance": "Appearance",
+    "themeSystem": "Follow system",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "favorites": "Favorites",
+    "recent": "Recently opened",
+    "pin": "Add to favorites",
+    "unpin": "Remove from favorites",
+    "noFavorites": "Pin a tool using its star.",
+    "noRecent": "Your last five tools appear here.",
+    "navigation": "Browse tools",
+    "qrTextNotice": "Some scanners, including some WeChat versions, may not display plain text QR codes. Use this tool’s reader to retrieve the original text."
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "Other conversions ({{count}})",
+    "numberSummary": "Range {{min}}–{{max}} · {{count}} numbers · {{repeat}}",
+    "noRepeat": "No repeated numbers"
+  },
+  "usability": {
+    "images": {
+      "growth": "File size increased by {{percent}}%; no size reduction",
+      "adjust": "Adjust parameters",
+      "add": "Add images",
+      "preview": "Preview {{name}}",
+      "unchanged": "File size unchanged; no size reduction",
+      "savings": "File size reduced by {{percent}}%"
+    },
+    "password": {
+      "showRow": "Show result {{number}}",
+      "hideRow": "Hide result {{number}}"
+    },
+    "speedtest": {
+      "downloadBps": "Download",
+      "uploadBps": "Upload",
+      "latencyMs": "Idle HTTP latency",
+      "jitterMs": "Idle jitter",
+      "downloadLatencyMs": "Download loaded latency",
+      "downloadJitterMs": "Download loaded jitter",
+      "uploadLatencyMs": "Upload loaded latency",
+      "uploadJitterMs": "Upload loaded jitter"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "View execution times",
+    "adjustParameters": "Adjust parameters"
+  },
+  "polishData": {
+    "diffBlocks": "{{count}} difference blocks",
+    "coarse": "Coarse comparison: blocks may include unchanged content.",
+    "errors": {
+      "CsvColumns": "Row {{row}} has {{actual}} columns; expected {{expected}}. Check delimiters and quoted cells.",
+      "CsvHeaders": "Column names are repeated. Rename them or disable Header row.",
+      "CsvJsonCell": "Row {{row}}, column {{column}} is not valid JSON. Use a JSON value or choose Strings cell mode.",
+      "CsvArrayHeader": "Array rows have no column names. Disable Header row.",
+      "CsvNestedValue": "Null and nested values require Explicit JSON serialization cell mode.",
+      "CsvRowShape": "Each JSON row must have the same columns with no missing values.",
+      "XmlOrdered": "Use the ordered node array from XML → JSON. Load the example to see attributes and text nodes.",
+      "QueryArrays": "Use an object whose values are non-empty arrays of strings, for example {\"tag\":[\"a\",\"b\"]}."
+    },
+    "notices": {
+      "StructureOnly": "Data values and supported structure are retained; source comments, formatting and quote style are not.",
+      "CsvStrings": "CSV cells stay strings; numbers and booleans are not inferred.",
+      "CsvTextExport": "CSV is text; default export does not retain JSON scalar type information.",
+      "ByteHex": "The result cannot be decoded losslessly as {{charset}}. Showing Hex; download preserves the original bytes."
+    },
+    "charsetSource": "Text is already Unicode. Source encoding applies only to file bytes."
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "This result exceeds the 10 MiB input limit. Copy and download still include the complete result.",
+      "pdfRange": "Available pages: 1–{{count}}",
+      "pdfInspectHelp": "Check the page count before choosing a range.",
+      "qrRecovery": "Adjust error correction"
+    }
+  },
+  "polishShell": {
+    "flags": "Flags: {{flags}}"
+  },
+  "experience": {
+    "extractPhone": "Extract phone numbers",
+    "extractEmail": "Extract email addresses",
+    "extractUrl": "Extract links",
+    "base64encode": "Base64 encode",
+    "base64decode": "Base64 decode",
+    "base64urlencode": "Base64URL encode",
+    "base64urldecode": "Base64URL decode",
+    "noemail": "No email addresses found.",
+    "nophone": "No phone numbers found.",
+    "nourl": "No links found.",
+    "textAuto": "Small text runs automatically; run larger text manually.",
+    "qrSettings": "Output size {{size}}px · Error correction {{level}}",
+    "networkDetails": "Network and data details",
+    "endDate": "End date",
+    "listInput": "Entries",
+    "chooseConvert": "Choose converter · {{name}}",
+    "task": "Action",
+    "copySeconds": "Copy seconds timestamp",
+    "copyMilliseconds": "Copy milliseconds timestamp",
+    "unitPrecision": "Precision and unit notes"
   }
 }

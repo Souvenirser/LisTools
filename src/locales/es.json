@@ -562,7 +562,11 @@
     "batchDone": "Imágenes {{success}} procesadas. · Error: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "Enfoque la selección: las flechas la mueven; Mayús + flechas ajustan el borde derecho o inferior."
+    "cropKeys": "Enfoque la selección: las flechas la mueven; Mayús + flechas ajustan el borde derecho o inferior.",
+    "qualityInvalid": "Introduce una calidad de 1 a 100.",
+    "targetInvalid": "Introduce un tamaño objetivo de 1 a 102400 KiB.",
+    "dimensionInvalid": "Usa píxeles enteros de 0 a 16384; 0 mantiene la dimensión automática.",
+    "scaleInvalid": "Introduce una escala de 1 a 400 por ciento."
   },
   "text": {
     "name": "Limpiar y extraer texto",
@@ -769,7 +773,7 @@
     "reset": "Restablecer",
     "lap": "Vuelta récord",
     "sound": "Reproduce un sonido corto al finalizar cuando esta página pueda reproducir audio.",
-    "backgroundHelp": "El tiempo utiliza fechas límite de reloj y tiempo transcurrido. El estado se mantiene en el almacenamiento de sesión de esta pestaña. Las pestañas en segundo plano y los dispositivos para dormir pueden suspender la ejecución; Esto no es un recordatorio ni una alarma en segundo plano.",
+    "backgroundHelp": "La medición usa plazos del reloj y tiempo transcurrido. Al recargar esta pestaña se restauran ambos temporizadores, incluido el tiempo real transcurrido de los que estén en marcha. El estado se guarda en el almacenamiento de sesión de esta pestaña. Las pestañas en segundo plano y los dispositivos en reposo pueden suspender la ejecución; esto no es un recordatorio ni una alarma en segundo plano.",
     "laps": "Vueltas del cronómetro",
     "export": "Exportar vueltas como TXT",
     "number": "Vuelta",
@@ -893,7 +897,7 @@
       "count": "El recuento de fechas debe ser un número entero entre 1 y 100.",
       "invalid": "No se puede calcular. Consulta la expresión, zona horaria y hora de referencia."
     },
-    "copyExpression": "Copiar · Expresión",
+    "copyExpression": "Copiar Expresión",
     "utcOffset": "UTC ±HH:mm"
   },
   "uiText": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "Elija la coincidencia completa o un grupo de captura para extraer. Las coincidencias vacías son válidas; Los grupos no coincidentes se muestran por separado.",
     "passwordPolicy": "Los tipos de personajes seleccionados forman el grupo permitido. Habilite \"Requerir cada tipo\" para incluir cada tipo seleccionado en cada contraseña.",
     "speedScope": "Las calificaciones describen la velocidad de transferencia. La latencia y la fluctuación se miden por separado.",
-    "viewResult": "Ver resultado"
+    "viewResult": "Ver resultado",
+    "speedNetworkError": "Falló la conexión de red. Inténtalo de nuevo.",
+    "speedStartError": "No se pudo iniciar la prueba de velocidad. Inténtalo de nuevo."
   },
   "redesign": {
     "calculatorOriginal": "Valor original",
@@ -1848,10 +1854,113 @@
       "speedNetwork": "Esta herramienta se conecta a Cloudflare y consume datos de red. Las solicitudes de prueba empiezan solo cuando pulsas iniciar.",
       "speedSettings": "Ajustes de prueba",
       "speedSummary": "{{profile}} · {{unit}} · hasta {{budget}} MiB",
-      "customZone": "Zona horaria IANA personalizada"
+      "customZone": "Zona horaria IANA personalizada",
+      "md5ModeConfirm": "Al cambiar el modo se descartarán la cola de archivos actual, los resultados y los valores de verificación. ¿Continuar?"
     },
     "shared": {
       "viewResult": "Ver resultado"
     }
+  },
+  "v2": {
+    "settings": "Configuración",
+    "appearance": "Apariencia",
+    "themeSystem": "Seguir el sistema",
+    "themeLight": "Claro",
+    "themeDark": "Oscuro",
+    "favorites": "Favoritos",
+    "recent": "Abiertos recientemente",
+    "pin": "Añadir a favoritos",
+    "unpin": "Quitar de favoritos",
+    "noFavorites": "Marca la estrella de una herramienta para guardarla.",
+    "noRecent": "Aquí aparecen las últimas cinco herramientas abiertas.",
+    "navigation": "Explorar herramientas",
+    "qrTextNotice": "Algunos lectores, incluidas ciertas versiones de WeChat, pueden no mostrar códigos QR de texto. Usa este lector para recuperar el texto original."
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "Otras conversiones ({{count}})",
+    "numberSummary": "Rango {{min}}–{{max}} · {{count}} números · {{repeat}}",
+    "noRepeat": "Sin números repetidos"
+  },
+  "usability": {
+    "images": {
+      "growth": "El tamaño del archivo aumentó un {{percent}}%; no se redujo",
+      "adjust": "Ajustar parámetros",
+      "add": "Añadir imágenes",
+      "preview": "Vista previa de {{name}}",
+      "unchanged": "El tamaño del archivo no cambió; no se redujo",
+      "savings": "El tamaño del archivo se redujo un {{percent}}%"
+    },
+    "password": {
+      "showRow": "Mostrar resultado {{number}}",
+      "hideRow": "Ocultar resultado {{number}}"
+    },
+    "speedtest": {
+      "downloadBps": "Descarga",
+      "uploadBps": "Subida",
+      "latencyMs": "Latencia HTTP en reposo",
+      "jitterMs": "Variación de latencia en reposo",
+      "downloadLatencyMs": "Latencia bajo carga de descarga",
+      "downloadJitterMs": "Variación de latencia bajo carga de descarga",
+      "uploadLatencyMs": "Latencia bajo carga de subida",
+      "uploadJitterMs": "Variación de latencia bajo carga de subida"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "Ver tiempos de ejecución",
+    "adjustParameters": "Ajustar parámetros"
+  },
+  "polishData": {
+    "diffBlocks": "{{count}} bloques de diferencias",
+    "coarse": "Comparación aproximada: los bloques pueden incluir contenido sin cambios.",
+    "errors": {
+      "CsvColumns": "La fila {{row}} tiene {{actual}} columnas; se esperaban {{expected}}. Comprueba los delimitadores y las celdas entre comillas.",
+      "CsvHeaders": "Hay nombres de columna repetidos. Cámbialos o desactiva la fila de encabezado.",
+      "CsvJsonCell": "La fila {{row}}, columna {{column}} no contiene JSON válido. Usa un valor JSON o elige el modo de celdas de texto.",
+      "CsvArrayHeader": "Las filas de matrices no tienen nombres de columna. Desactiva la fila de encabezado.",
+      "CsvNestedValue": "Los valores null y los valores anidados requieren el modo de celdas con serialización JSON explícita.",
+      "CsvRowShape": "Cada fila JSON debe tener las mismas columnas sin valores ausentes.",
+      "XmlOrdered": "Usa la matriz ordenada de nodos de XML → JSON. Carga el ejemplo para ver atributos y nodos de texto.",
+      "QueryArrays": "Usa un objeto cuyos valores sean matrices de cadenas no vacías, por ejemplo {\"tag\":[\"a\",\"b\"]}."
+    },
+    "notices": {
+      "StructureOnly": "Se conservan los valores de los datos y la estructura admitida; no se conservan los comentarios, el formato ni el estilo de comillas del origen.",
+      "CsvStrings": "Las celdas CSV siguen siendo cadenas; no se deducen números ni valores booleanos.",
+      "CsvTextExport": "CSV es texto; la exportación predeterminada no conserva la información de tipos escalares JSON.",
+      "ByteHex": "El resultado no se puede decodificar sin pérdida como {{charset}}. Se muestra Hex; la descarga conserva los bytes originales."
+    },
+    "charsetSource": "El texto ya es Unicode. La codificación de origen solo se aplica a los bytes del archivo."
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "Este resultado supera el límite de entrada de 10 MiB. La copia y la descarga siguen incluyendo el resultado completo.",
+      "pdfRange": "Páginas disponibles: 1–{{count}}",
+      "pdfInspectHelp": "Comprueba el número de páginas antes de elegir un intervalo.",
+      "qrRecovery": "Ajustar la corrección de errores"
+    }
+  },
+  "polishShell": {
+    "flags": "Indicadores: {{flags}}"
+  },
+  "experience": {
+    "extractPhone": "Extraer números de teléfono",
+    "extractEmail": "Extraer direcciones de correo",
+    "extractUrl": "Extraer enlaces",
+    "base64encode": "Codificar en Base64",
+    "base64decode": "Decodificar Base64",
+    "base64urlencode": "Codificar en Base64URL",
+    "base64urldecode": "Decodificar Base64URL",
+    "noemail": "No se encontraron direcciones de correo.",
+    "nophone": "No se encontraron números de teléfono.",
+    "nourl": "No se encontraron enlaces.",
+    "textAuto": "Los textos cortos se procesan automáticamente; ejecuta los más largos manualmente.",
+    "qrSettings": "Tamaño de salida {{size}}px · Corrección de errores {{level}}",
+    "networkDetails": "Detalles de red y datos",
+    "endDate": "Fecha de fin",
+    "listInput": "Entradas",
+    "chooseConvert": "Elegir conversor · {{name}}",
+    "task": "Acción",
+    "copySeconds": "Copiar marca de tiempo en segundos",
+    "copyMilliseconds": "Copiar marca de tiempo en milisegundos",
+    "unitPrecision": "Notas sobre precisión y unidades"
   }
 }

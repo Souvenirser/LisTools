@@ -562,7 +562,11 @@
     "batchDone": "Behandlede {{success}}-bilder. · Mislyktes: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "Fokuser markeringen: piltaster flytter den; Shift + piltaster endrer høyre eller nedre kant."
+    "cropKeys": "Fokuser markeringen: piltaster flytter den; Shift + piltaster endrer høyre eller nedre kant.",
+    "qualityInvalid": "Angi en kvalitet fra 1 til 100.",
+    "targetInvalid": "Angi en målstørrelse fra 1 til 102400 KiB.",
+    "dimensionInvalid": "Bruk hele piksler fra 0 til 16384; 0 beholder automatisk dimensjon.",
+    "scaleInvalid": "Angi en skalering fra 1 til 400 prosent."
   },
   "text": {
     "name": "Rengjør og trekk ut tekst",
@@ -769,7 +773,7 @@
     "reset": "Tilbakestill",
     "lap": "Rekordrunde",
     "sound": "Spill av en kort lyd når denne siden kan spille av lyd",
-    "backgroundHelp": "Timing bruker tidsfrister og medgått tid. Status beholdes i denne fanens øktlagring. Bakgrunnsfaner og sovende enheter kan suspendere kjøringen; dette er ikke en bakgrunnspåminnelse eller alarm.",
+    "backgroundHelp": "Tidtakingen bruker sluttidspunkter og medgått tid. Hvis denne fanen lastes inn på nytt, gjenopprettes begge tidtakerne, inkludert faktisk medgått tid for tidtakere som kjører. Status lagres i denne fanens øktlagring. Bakgrunnsfaner og enheter i hvilemodus kan stanse kjøringen; dette er ingen bakgrunnspåminnelse eller alarm.",
     "laps": "Stoppeklokkerunder",
     "export": "Eksporter runder som TXT",
     "number": "Lap",
@@ -893,7 +897,7 @@
       "count": "Datotellingen må være et heltall mellom 1 og 100.",
       "invalid": "Kan ikke beregne. Sjekk uttrykket, tidssonen og referansetiden."
     },
-    "copyExpression": "Kopier · Uttrykk",
+    "copyExpression": "Kopier Uttrykk",
     "utcOffset": "UTC ±HH:mm"
   },
   "uiText": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "Velg hele treffet eller en fangstgruppe å trekke ut. Tomme treff er gyldige; umatchede grupper vises separat.",
     "passwordPolicy": "Utvalgte tegntyper danner den tillatte gruppen. Aktiver \"Krev hver type\" for å inkludere hver valgte type i hvert passord.",
     "speedScope": "Rangeringer beskriver overføringshastighet. Latens og jitter måles separat.",
-    "viewResult": "Se resultatet"
+    "viewResult": "Se resultatet",
+    "speedNetworkError": "Nettverkstilkoblingen mislyktes. Prøv igjen.",
+    "speedStartError": "Hastighetstesten kunne ikke startes. Prøv igjen."
   },
   "redesign": {
     "calculatorOriginal": "Opprinnelig verdi",
@@ -1825,7 +1831,8 @@
       "speedSettings": "Testinnstillinger",
       "speedSummary": "{{profile}} · {{unit}} · opptil {{budget}} MiB",
       "customZone": "Egendefinert IANA-tidssone",
-      "regexNoMatches": "Ingen treff"
+      "regexNoMatches": "Ingen treff",
+      "md5ModeConfirm": "Bytte av modus fjerner gjeldende filkø, resultater og verifiseringsverdier. Fortsette?"
     },
     "daily": {
       "unitDetails": "Andre konverteringer og presisjon",
@@ -1853,5 +1860,107 @@
     "shared": {
       "viewResult": "Se resultatet"
     }
+  },
+  "v2": {
+    "settings": "Innstillinger",
+    "appearance": "Utseende",
+    "themeSystem": "Følg systemet",
+    "themeLight": "Lyst",
+    "themeDark": "Mørkt",
+    "favorites": "Favoritter",
+    "recent": "Nylig åpnet",
+    "pin": "Legg til i favoritter",
+    "unpin": "Fjern fra favoritter",
+    "noFavorites": "Klikk på stjernen til et verktøy for å lagre det.",
+    "noRecent": "De fem sist åpnede verktøyene vises her.",
+    "navigation": "Bla gjennom verktøy",
+    "qrTextNotice": "Noen lesere, inkludert enkelte WeChat-versjoner, viser kanskje ikke QR-koder med ren tekst. Les originalteksten med dette verktøyet."
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "Andre konverteringer ({{count}})",
+    "numberSummary": "Område {{min}}–{{max}} · {{count}} tall · {{repeat}}",
+    "noRepeat": "Ingen gjentatte tall"
+  },
+  "usability": {
+    "images": {
+      "growth": "Filstørrelsen økte med {{percent}} %; ingen størrelsesreduksjon",
+      "adjust": "Juster parametere",
+      "add": "Legg til bilder",
+      "preview": "Forhåndsvis {{name}}",
+      "unchanged": "Filstørrelsen er uendret; ingen størrelsesreduksjon",
+      "savings": "Filstørrelsen ble redusert med {{percent}} %"
+    },
+    "password": {
+      "showRow": "Vis resultat {{number}}",
+      "hideRow": "Skjul resultat {{number}}"
+    },
+    "speedtest": {
+      "latencyMs": "HTTP-forsinkelse uten belastning",
+      "jitterMs": "Jitter uten belastning",
+      "downloadLatencyMs": "Forsinkelse under nedlastingsbelastning",
+      "downloadJitterMs": "Jitter under nedlastingsbelastning",
+      "uploadLatencyMs": "Forsinkelse under opplastingsbelastning",
+      "uploadJitterMs": "Jitter under opplastingsbelastning",
+      "downloadBps": "Nedlasting",
+      "uploadBps": "Opplasting"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "Vis kjøretider",
+    "adjustParameters": "Juster parametere"
+  },
+  "polishData": {
+    "diffBlocks": "{{count}} forskjellsblokker",
+    "coarse": "Grov sammenligning: blokkene kan inneholde uendret innhold.",
+    "errors": {
+      "CsvColumns": "Rad {{row}} har {{actual}} kolonner; forventet {{expected}}. Kontroller skilletegn og celler med anførselstegn.",
+      "CsvHeaders": "Kolonnenavn er gjentatt. Endre navnene eller slå av overskriftsrad.",
+      "CsvJsonCell": "Rad {{row}}, kolonne {{column}} er ikke gyldig JSON. Bruk en JSON-verdi eller velg cellemodus for strenger.",
+      "CsvArrayHeader": "Rader som er matriser, har ingen kolonnenavn. Slå av overskriftsrad.",
+      "CsvNestedValue": "null og nestede verdier krever cellemodus for eksplisitt JSON-serialisering.",
+      "CsvRowShape": "Hver JSON-rad må ha de samme kolonnene uten manglende verdier.",
+      "XmlOrdered": "Bruk den ordnede nodematrisen fra XML → JSON. Last inn eksemplet for å se attributter og tekstnoder.",
+      "QueryArrays": "Bruk et objekt der verdiene er ikke-tomme matriser med strenger, for eksempel {\"tag\":[\"a\",\"b\"]}."
+    },
+    "notices": {
+      "StructureOnly": "Dataverdier og støttet struktur beholdes; kildekommentarer, formatering og stil for anførselstegn beholdes ikke.",
+      "CsvStrings": "CSV-celler forblir strenger; tall og boolske verdier utledes ikke automatisk.",
+      "CsvTextExport": "CSV er tekst; standardeksporten beholder ikke informasjon om JSON-skalartyper.",
+      "ByteHex": "Resultatet kan ikke dekodes tapsfritt som {{charset}}. Viser Hex; nedlasting bevarer de opprinnelige bytene."
+    },
+    "charsetSource": "Teksten er allerede Unicode. Kildekodingen gjelder bare filbytes."
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "Dette resultatet overskrider inndatagrensen på 10 MiB. Kopiering og nedlasting inkluderer fortsatt hele resultatet.",
+      "pdfRange": "Tilgjengelige sider: 1–{{count}}",
+      "pdfInspectHelp": "Kontroller sideantallet før du velger et område.",
+      "qrRecovery": "Juster feilretting"
+    }
+  },
+  "polishShell": {
+    "flags": "Flagg: {{flags}}"
+  },
+  "experience": {
+    "extractPhone": "Hent ut telefonnumre",
+    "extractEmail": "Hent ut e-postadresser",
+    "extractUrl": "Hent ut lenker",
+    "base64encode": "Base64-koding",
+    "base64decode": "Base64-dekoding",
+    "base64urlencode": "Base64URL-koding",
+    "base64urldecode": "Base64URL-dekoding",
+    "noemail": "Ingen e-postadresser funnet.",
+    "nophone": "Ingen telefonnumre funnet.",
+    "nourl": "Ingen lenker funnet.",
+    "textAuto": "Kort tekst behandles automatisk; kjør større tekster manuelt.",
+    "qrSettings": "Utdatastørrelse {{size}}px · Feilkorrigering {{level}}",
+    "networkDetails": "Nettverks- og datainformasjon",
+    "endDate": "Sluttdato",
+    "listInput": "Oppføringer",
+    "chooseConvert": "Velg konverteringsverktøy · {{name}}",
+    "task": "Handling",
+    "copySeconds": "Kopier tidsstempel i sekunder",
+    "copyMilliseconds": "Kopier tidsstempel i millisekunder",
+    "unitPrecision": "Merknader om presisjon og enheter"
   }
 }

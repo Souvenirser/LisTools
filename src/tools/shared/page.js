@@ -38,12 +38,12 @@ export function mountTool(id) {
   document.getElementById('app-version').textContent=`v${version}`;
   onLanguageChange(refresh);refresh();
 }
-export function createEditor(parent,{doc='',onChange=()=>{},readOnly=false}={}) {
+export function createEditor(parent,{doc='',onChange=()=>{},readOnly=false,lineWrapping=true}={}) {
   const locale=new Compartment();
   const view=new EditorView({parent,state:createTextState({doc,extensions:[locale.of([]),
     lineNumbers(),search(),keymap.of([...defaultKeymap,...searchKeymap,...(readOnly?[]:historyKeymap)]),
     ...(!readOnly?[history()]:[]),EditorState.readOnly.of(readOnly),EditorView.editable.of(!readOnly),
-    EditorView.lineWrapping,EditorView.contentAttributes.of({spellcheck:'false',autocorrect:'off',autocapitalize:'off','aria-label':t(readOnly?'common.result':'common.input')}),
+    ...(lineWrapping?[EditorView.lineWrapping]:[]),EditorView.contentAttributes.of({spellcheck:'false',autocorrect:'off',autocapitalize:'off','aria-label':t(readOnly?'common.result':'common.input')}),
     EditorView.updateListener.of(update=>{if(update.docChanged)onChange(update.state.doc.toString(),update);})
   ]})});
   function refresh(){
@@ -52,3 +52,5 @@ export function createEditor(parent,{doc='',onChange=()=>{},readOnly=false}={}) 
   }
   onLanguageChange(refresh);refresh();return view;
 }
+
+export {revealSection} from './workspace.js';

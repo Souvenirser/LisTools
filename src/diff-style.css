@@ -1,4 +1,4 @@
-.diff-summary { display: flex; align-items: center; gap: 18px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 6px; margin-bottom: 13px; background: white; }
+.diff-summary { display: flex; align-items: center; gap: 18px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 6px; margin-bottom: 13px; background: var(--surface); }
 #diff-total { font-size: 1.375rem; font-weight: 650; letter-spacing: -.5px; color: var(--text); min-width: 145px; }
 #diff-total.equal { color: var(--success-text); }
 .diff-count { font-size: 1rem; padding: 4px 8px; border-radius: 4px; white-space: nowrap; }
@@ -25,7 +25,7 @@
 .diff-navigation { display: flex; align-items: center; gap: 8px; font-size: 1rem; color: var(--muted); margin-bottom: 10px; }
 .diff-navigation button { font-size: 1rem; min-height:44px; padding: 3px 9px; }
 .diff-navigation label { display: flex; align-items: center; gap: 5px; white-space: nowrap; }
-#diff-index { width:80px; min-height:44px; border: 1px solid var(--border); border-radius: 4px; background: white; padding: 3px 5px; color: var(--text); font-size: 1rem; }
+#diff-index { width:80px; min-height:44px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); padding: 3px 5px; color: var(--text); font-size: 1rem; }
 #change-kind { margin-inline-start: 6px; padding: 3px 6px; border-radius: 3px; font-size: .875rem; white-space: nowrap; }
 #change-path { color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 1rem; }
 .diff-result { flex: 1; min-height: 180px; }
@@ -71,7 +71,7 @@ body[data-status="error"] #diff-total { color: var(--error-text); }
 #diff-view { min-height: 260px; }
 #diff-view .cm-editor { font-size: 1rem; }
 #diff-error-panel { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-bottom: 12px; flex-shrink: 0; direction: ltr; }
-.diagnostic-card { border: 1px solid var(--border); border-radius: 6px; padding: 12px; background: white; min-width: 0; font-size: 1rem; }
+.diagnostic-card { border: 1px solid var(--border); border-radius: 6px; padding: 12px; background: var(--surface); min-width: 0; font-size: 1rem; }
 .diagnostic-card[data-validation="invalid"] { border-color: var(--error-border); background: var(--error-bg); }
 .diagnostic-card[data-validation="valid"] > strong { color: var(--success-text); }
 .diagnostic-card[data-diagnostic-side="tool"] { grid-column: 1 / -1; }
@@ -79,7 +79,7 @@ body[data-status="error"] #diff-total { color: var(--error-text); }
 .diagnostic-card p { margin: 7px 0; overflow-wrap: anywhere; }
 .diagnostic-location { color: var(--muted); margin-inline-start: 12px; font-size: .875rem; }
 .diagnostic-hint, .diagnostic-character { color: var(--muted); }
-.diagnostic-context { margin: 10px 0; padding: 8px; border: 1px solid var(--error-border); background: white; white-space: pre-wrap; overflow-wrap: anywhere; font: .875rem/1.7 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.diagnostic-context { margin: 10px 0; padding: 8px; border: 1px solid var(--error-border); background: var(--surface); white-space: pre-wrap; overflow-wrap: anywhere; font: .875rem/1.7 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 .diagnostic-context mark { background: var(--red-5); color: var(--error-text); outline: 1px solid var(--red-8); }
 .diagnostic-card button { min-height:44px; font-size: .875rem; }
 .validation-badge { display: inline-block; flex: 0 0 auto; font-size: .875rem; font-weight: 500; color: var(--muted); white-space: nowrap; padding: 2px 5px; border-radius: 3px; background: var(--slate-3); margin-inline-start: 6px; }
@@ -125,3 +125,11 @@ body[data-status="error"]:not(:has(.cm-mergeView)) .diff-result, body[data-statu
 
 /* Stacked panes size the document; desktop keeps one bounded merge viewport. */
 @media(max-width:999px){.diff-page .diff-result{flex:1 0 auto}}
+
+.diff-page #compare[aria-disabled=true]{opacity:.55;cursor:wait}
+
+@media(max-width:760px){
+ .diff-overview .diff-summary{flex-basis:100%}
+ .diff-overview #diff-total,.diff-overview #diff-duration{flex-basis:100%}
+}
+.diff-page #cancel[hidden]{display:inline-flex!important;visibility:hidden}

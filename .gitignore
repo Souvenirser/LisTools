@@ -15,3 +15,7 @@ docs/json-design.md
 docs/json-plan.md
 docs/json-diff-design.md
 docs/json-diff-verification.md
+
+# Shared local dependency/build links in isolated worktrees.
+/node_modules
+/dist

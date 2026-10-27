@@ -19,6 +19,7 @@ export function decodeText(bytes, encoding = 'utf-8') {
   return new TextDecoder(encoding, { fatal: true, ignoreBOM: true }).decode(bytes);
 }
 export async function encodeText(text, encoding = 'utf-8') {
+  try {
   validText(text);
   if (!charsets.includes(encoding)) throw new Error('不支持的字符集');
   if (encoding === 'utf-8') return new TextEncoder().encode(text);
@@ -27,6 +28,7 @@ export async function encodeText(text, encoding = 'utf-8') {
   const bytes = new Encoder(encoding).encode(text);
   if (decodeText(bytes, encoding) !== text) throw new Error(`所选字符集 ${encoding} 无法无损表示输入字符`);
   return bytes;
+  }catch(error){error.code='TextEncodingError';throw error;}
 }
 export function checkSize(size, maximum, label) {
   if (size > maximum) throw new Error(`${label}超过限制（${(maximum / 1024 ** 2).toLocaleString()} MiB）`);

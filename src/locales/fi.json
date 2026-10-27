@@ -562,7 +562,11 @@
     "batchDone": "Käsitellyt {{success}}-kuvat. · Epäonnistui: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "Kohdista valintaan: nuolinäppäimet siirtävät sitä; Vaihto + nuolet muuttavat oikeaa tai alareunaa."
+    "cropKeys": "Kohdista valintaan: nuolinäppäimet siirtävät sitä; Vaihto + nuolet muuttavat oikeaa tai alareunaa.",
+    "qualityInvalid": "Anna laatu väliltä 1–100.",
+    "targetInvalid": "Anna tavoitekoko väliltä 1–102400 KiB.",
+    "dimensionInvalid": "Käytä kokonaisia pikseleitä väliltä 0–16384; 0 säilyttää automaattisen mitan.",
+    "scaleInvalid": "Anna skaalaus väliltä 1–400 prosenttia."
   },
   "text": {
     "name": "Puhdista ja pura teksti",
@@ -769,7 +773,7 @@
     "reset": "Palauta",
     "lap": "Ennätyskierros",
     "sound": "Toista lyhyt ääni, kun tämä sivu voi toistaa ääntä",
-    "backgroundHelp": "Ajoitus käyttää kellon määräaikoja ja kulunutta aikaa. Tila säilytetään tämän välilehden istunnon tallennustilassa. Taustavälilehdet ja nukkumislaitteet voivat keskeyttää suorittamisen; tämä ei ole taustamuistutus tai hälytys.",
+    "backgroundHelp": "Ajanotto käyttää kellon määräaikoja ja kulunutta aikaa. Tämän välilehden uudelleenlataus palauttaa molemmat ajastimet, myös käynnissä olevien ajastimien todellisen kuluneen ajan. Tila säilytetään tämän välilehden istuntotallennustilassa. Taustavälilehdet ja lepotilassa olevat laitteet voivat keskeyttää suorituksen; tämä ei ole taustamuistutus tai herätyskello.",
     "laps": "Sekuntikellon kierrokset",
     "export": "Vie kierrokset muodossa TXT",
     "number": "Kierros",
@@ -893,7 +897,7 @@
       "count": "Päivämäärän on oltava kokonaisluku väliltä 1–100.",
       "invalid": "Ei voi laskea. Tarkista lauseke, aikavyöhyke ja viiteaika."
     },
-    "copyExpression": "Kopioi · Lauseke",
+    "copyExpression": "Kopioi Lauseke",
     "utcOffset": "UTC ±HH:mm"
   },
   "uiText": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "Valitse poimittava koko vastaavuus tai sieppausryhmä. Tyhjät ottelut ovat voimassa; vertaansa vailla olevat ryhmät näytetään erikseen.",
     "passwordPolicy": "Valitut merkkityypit muodostavat sallitun joukon. Ota käyttöön Vaadi jokainen tyyppi, jos haluat sisällyttää kaikki valitut tyypit kuhunkin salasanaan.",
     "speedScope": "Arvosanat kuvaavat siirtonopeutta. Latenssi ja värinä mitataan erikseen.",
-    "viewResult": "Näytä tulos"
+    "viewResult": "Näytä tulos",
+    "speedNetworkError": "Verkkoyhteys epäonnistui. Yritä uudelleen.",
+    "speedStartError": "Nopeustestiä ei voitu käynnistää. Yritä uudelleen."
   },
   "redesign": {
     "calculatorOriginal": "Alkuperäinen arvo",
@@ -1848,10 +1854,113 @@
       "speedNetwork": "Tämä työkalu muodostaa yhteyden Cloudflareen ja kuluttaa verkkodataa. Testipyynnöt alkavat vasta, kun käynnistät testin.",
       "speedSettings": "Testiasetukset",
       "speedSummary": "{{profile}} · {{unit}} · enintään {{budget}} MiB",
-      "customZone": "Mukautettu IANA-aikavyöhyke"
+      "customZone": "Mukautettu IANA-aikavyöhyke",
+      "md5ModeConfirm": "Tilan vaihtaminen poistaa nykyisen tiedostojonon, tulokset ja tarkistusarvot. Jatketaanko?"
     },
     "shared": {
       "viewResult": "Näytä tulos"
     }
+  },
+  "v2": {
+    "settings": "Asetukset",
+    "appearance": "Ulkoasu",
+    "themeSystem": "Järjestelmän mukaan",
+    "themeLight": "Vaalea",
+    "themeDark": "Tumma",
+    "favorites": "Suosikit",
+    "recent": "Viimeksi avatut",
+    "pin": "Lisää suosikkeihin",
+    "unpin": "Poista suosikeista",
+    "noFavorites": "Tallenna työkalu napsauttamalla sen tähteä.",
+    "noRecent": "Viisi viimeksi avattua työkalua näkyvät tässä.",
+    "navigation": "Selaa työkaluja",
+    "qrTextNotice": "Jotkin lukijat, mukaan lukien eräät WeChat-versiot, eivät välttämättä näytä tekstimuotoisia QR-koodeja. Lue alkuperäinen teksti tällä työkalulla."
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "Muut muunnokset ({{count}})",
+    "numberSummary": "Alue {{min}}–{{max}} · {{count}} lukua · {{repeat}}",
+    "noRepeat": "Ei toistuvia lukuja"
+  },
+  "usability": {
+    "images": {
+      "growth": "Tiedostokoko kasvoi {{percent}} %; koko ei pienentynyt",
+      "adjust": "Säädä parametreja",
+      "add": "Lisää kuvia",
+      "preview": "Esikatsele {{name}}",
+      "unchanged": "Tiedostokoko ei muuttunut; koko ei pienentynyt",
+      "savings": "Tiedostokoko pieneni {{percent}} %"
+    },
+    "password": {
+      "showRow": "Näytä tulos {{number}}",
+      "hideRow": "Piilota tulos {{number}}"
+    },
+    "speedtest": {
+      "downloadBps": "Lataus",
+      "uploadBps": "Lähetys",
+      "latencyMs": "HTTP-viive ilman kuormaa",
+      "jitterMs": "Viivevaihtelu ilman kuormaa",
+      "downloadLatencyMs": "Viive latauskuormassa",
+      "downloadJitterMs": "Viivevaihtelu latauskuormassa",
+      "uploadLatencyMs": "Viive lähetyskuormassa",
+      "uploadJitterMs": "Viivevaihtelu lähetyskuormassa"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "Näytä suoritusajat",
+    "adjustParameters": "Säädä parametreja"
+  },
+  "polishData": {
+    "diffBlocks": "{{count}} erolohkoa",
+    "coarse": "Karkea vertailu: lohkot voivat sisältää muuttumatonta sisältöä.",
+    "errors": {
+      "CsvColumns": "Rivillä {{row}} on {{actual}} saraketta; odotettu määrä on {{expected}}. Tarkista erottimet ja lainausmerkeissä olevat solut.",
+      "CsvHeaders": "Sarakkeiden nimet toistuvat. Nimeä ne uudelleen tai poista otsikkorivi käytöstä.",
+      "CsvJsonCell": "Rivin {{row}} sarake {{column}} ei ole kelvollista JSON-muotoa. Käytä JSON-arvoa tai valitse solujen merkkijonotila.",
+      "CsvArrayHeader": "Taulukkoriveillä ei ole sarakkeiden nimiä. Poista otsikkorivi käytöstä.",
+      "CsvNestedValue": "null ja sisäkkäiset arvot vaativat solutilan, jossa käytetään eksplisiittistä JSON-sarjallistamista.",
+      "CsvRowShape": "Jokaisella JSON-rivillä on oltava samat sarakkeet ilman puuttuvia arvoja.",
+      "XmlOrdered": "Käytä XML → JSON -muunnoksen järjestettyä solmutaulukkoa. Lataa esimerkki nähdäksesi attribuutit ja tekstisolmut.",
+      "QueryArrays": "Käytä oliota, jonka arvot ovat epätyhjiä merkkijonotaulukoita, esimerkiksi {\"tag\":[\"a\",\"b\"]}."
+    },
+    "notices": {
+      "StructureOnly": "Tietojen arvot ja tuettu rakenne säilyvät; lähteen kommentit, muotoilu ja lainausmerkkityyli eivät säily.",
+      "CsvStrings": "CSV-solut pysyvät merkkijonoina; numeroita ja totuusarvoja ei päätellä.",
+      "CsvTextExport": "CSV on tekstiä; oletusvienti ei säilytä JSON-skaalaarityyppien tietoja.",
+      "ByteHex": "Tulosta ei voi purkaa häviöttömästi merkistöllä {{charset}}. Näytetään Hex; lataus säilyttää alkuperäiset tavut."
+    },
+    "charsetSource": "Teksti on jo Unicode-muodossa. Lähdekoodaus koskee vain tiedoston tavuja."
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "Tämä tulos ylittää syötteen 10 MiB:n rajan. Kopiointi ja lataus sisältävät silti koko tuloksen.",
+      "pdfRange": "Käytettävissä olevat sivut: 1–{{count}}",
+      "pdfInspectHelp": "Tarkista sivumäärä ennen alueen valintaa.",
+      "qrRecovery": "Säädä virheenkorjausta"
+    }
+  },
+  "polishShell": {
+    "flags": "Liput: {{flags}}"
+  },
+  "experience": {
+    "extractPhone": "Poimi puhelinnumerot",
+    "extractEmail": "Poimi sähköpostiosoitteet",
+    "extractUrl": "Poimi linkit",
+    "base64encode": "Base64-koodaus",
+    "base64decode": "Pura Base64-koodaus",
+    "base64urlencode": "Base64URL-koodaus",
+    "base64urldecode": "Pura Base64URL-koodaus",
+    "noemail": "Sähköpostiosoitteita ei löytynyt.",
+    "nophone": "Puhelinnumeroita ei löytynyt.",
+    "nourl": "Linkkejä ei löytynyt.",
+    "textAuto": "Lyhyt teksti käsitellään automaattisesti; käynnistä pidemmän tekstin käsittely itse.",
+    "qrSettings": "Tulosteen koko {{size}}px · Virheenkorjaus {{level}}",
+    "networkDetails": "Verkko- ja datatiedot",
+    "endDate": "Päättymispäivä",
+    "listInput": "Merkinnät",
+    "chooseConvert": "Valitse muunnin · {{name}}",
+    "task": "Toiminto",
+    "copySeconds": "Kopioi aikaleima sekunteina",
+    "copyMilliseconds": "Kopioi aikaleima millisekunteina",
+    "unitPrecision": "Tarkkuus- ja yksikkötiedot"
   }
 }

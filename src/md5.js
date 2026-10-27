@@ -69,7 +69,7 @@ export function createMd5View({source,output,setDocument,setEditable,controller,
     tr.querySelector('[data-file-status]').textContent=row.status==='ready'?t('common.ready'):row.status==='error'?error(row):row.status==='cancelled'?t('md5.cancelled'):row.status==='pending'?t('common.processing'):t('md5.queued');
     tr.dataset.status=row.status;
     const digest=tr.querySelector('[data-file-digest]');digest.value=row.hex?md5Formats(row.hex)[format()]:'';
-    tr.querySelector('button').disabled=!row.hex;
+    tr.querySelector('button').disabled=row.status!=='ready'||!row.hex;
     const meter=tr.querySelector('progress');meter.value=row.status==='ready'?1:row.progress || 0;
     comparison(row.hex,row.expected || '',row.expectedFormat || 'hex32lower',tr.querySelector('[data-file-match]'));
   }
@@ -92,10 +92,11 @@ export function createMd5View({source,output,setDocument,setEditable,controller,
   }
   function renderResults(updateDocument=true) {
     const singleItem=items[0];const values=singleItem?.hex?md5Formats(singleItem.hex):{};
-    for(const [key,{input,button}] of valueFields) {input.value=values[key] || '';button.disabled=!values[key];button.setAttribute('aria-label',`${t('common.copy')} · ${t(`md5.formats.${key}`)}`);}
-    verifySingle();
-    const ready=items.some(item=>item.status==='ready');
-    for(const id of ['md5-copy-all','md5-csv','md5-json']) $(id).disabled=!ready;
+    for(const [key,{input,button}] of valueFields) {if(state.status!=='pending'||singleItem)input.value=values[key] || '';button.disabled=state.status==='pending'||!values[key];button.hidden=!values[key];button.setAttribute('aria-label',`${t('common.copy')} · ${t(`md5.formats.${key}`)}`);}
+    other.hidden=!singleItem?.hex;
+    if(state.status!=='pending'||singleItem)verifySingle();
+    const ready=state.status!=='pending'&&items.some(item=>item.status==='ready');
+    for(const id of ['md5-copy-all','md5-csv','md5-json']){$(id).disabled=!ready;$(id).hidden=!ready||id!=='md5-copy-all'&&!['files','lines'].includes(mode);}
     $('md5-copy-item').disabled=!ready;
     if(mode==='files') files.forEach(updateFile);
     if(mode==='lines'&&updateDocument) setDocument(output,items.map(item=>`${item.line}\t${item.hex?md5Formats(item.hex)[format()]:item.status==='cancelled'?t('md5.cancelled'):error(item)}`).join('\n'));
@@ -119,7 +120,8 @@ export function createMd5View({source,output,setDocument,setEditable,controller,
     $('md5-representation-field').hidden=mode==='files';$('md5-format-field').hidden=!['lines','files'].includes(mode);
     $('md5-skip-field').hidden=mode!=='lines';$('md5-key-field').hidden=mode!=='hmac';$('md5-key-format-field').hidden=mode!=='hmac';
     $('md5-file-picker').hidden=mode!=='files';table.hidden=mode!=='files';single.hidden=!['text','hmac'].includes(mode);
-    $('md5-auto-field').hidden=mode!=='text';$('md5-copy-item').hidden=mode!=='lines';$('md5-csv').hidden=!['lines','files'].includes(mode);$('md5-json').hidden=$('md5-csv').hidden;
+    const ready=state.status!=='pending'&&items.some(item=>item.status==='ready');
+    $('md5-auto-field').hidden=mode!=='text';$('md5-copy-item').hidden=mode!=='lines'||!ready;$('md5-csv').hidden=!['lines','files'].includes(mode)||!ready;$('md5-json').hidden=$('md5-csv').hidden;
     $('md5-mode-hint').textContent=mode==='lines'?t('md5.linesHint'):mode==='files'?t('md5.fileHint'):mode==='hmac'?t('md5.clearKeyHint'):'';
     $('md5-choose').textContent=t(files.length?'direct.developer.fileReplace':'md5.chooseFiles');
     $('md5-file-count').textContent=files.length?`${files.length} / ${md5Limits.files}`:'';
@@ -128,6 +130,7 @@ export function createMd5View({source,output,setDocument,setEditable,controller,
     if(!active)return;
     if(next.status==='idle'&&state.status==='pending'&&mode==='hmac')clearKey();
     state=next;
+    if(next.status==='pending'){items=[];progress=undefined;files.forEach(row=>{row.status='queued';row.progress=0;});}
     if(next.status==='idle')reset();
     if(next.status==='ready')items=next.items;
     if(next.status==='cancelled') {
@@ -137,13 +140,14 @@ export function createMd5View({source,output,setDocument,setEditable,controller,
         const done=new Set(items.map(item=>item.line));lines.forEach((line,index)=>{if(!done.has(index+1)&&(!$('md5-skip').checked||line.length))items.push({id:String(index),line:index+1,status:'cancelled',size:0});});
       }
     }
-    if(['ready','error','cancelled'].includes(next.status))clearKey();
+    if(['ready','error','cancelled'].includes(next.status)){if(mode==='files')files.forEach(row=>{if(next.status==='error'&&['queued','pending'].includes(row.status)){row.status='error';row.errorCode=next.errorCode||'unknown';}if(row.status!=='ready')delete row.hex;});clearKey();}
     renderResults(next.status!=='pending');statusText();
   }
   function onEvent(event) {
+    if(!active||state.status!=='pending')return;
     if(event.event==='item-complete') {
       const item={...event.item};items.push(item);
-      if(mode==='files')Object.assign(files.find(row=>row.id===item.id),item);
+      if(mode==='files'){const row=files.find(row=>row.id===item.id);Object.assign(row,item);if(item.status!=='ready')delete row.hex;}
       if(mode!=='lines')renderResults(false);
     } else if(event.event==='progress') {
       progress=event;const row=files.find(row=>row.id===event.itemId);if(row){if(row.status==='queued')row.status='pending';row.progress=event.fileBytes?event.bytesRead/event.fileBytes:1;updateFile(row);}statusText();
@@ -165,7 +169,11 @@ export function createMd5View({source,output,setDocument,setEditable,controller,
     for(const element of document.querySelectorAll('[data-convert]')) {const key={input:'common.input',output:'common.result',searchText:'common.search',limits:'md5.limits',drop:'md5.drop',dropHint:'md5.fileHint'}[element.dataset.convert];if(key)element.textContent=t(key);}
     $('md5-truncated').hidden=false;
   }
-  $('md5-mode').addEventListener('change',()=>{controller.invalidate();clearKey();mode=$('md5-mode').value;files=[];items=[];fileTable();reset();layout();statusText();});
+  $('md5-mode').addEventListener('change',()=>{
+    const next=$('md5-mode').value;if(next===mode)return;
+    if((files.length||items.length||$('md5-expected').value||$('md5-key').value)&&!confirm(t('direct.developer.md5ModeConfirm'))){$('md5-mode').value=mode;$('md5-mode').focus();return;}
+    controller.invalidate();clearKey();mode=next;$('md5-expected').value='';files=[];items=[];fileTable();reset();layout();statusText();
+  });
   for(const id of ['md5-representation','md5-skip','md5-key','md5-key-format','md5-auto']) $(id).addEventListener(id==='md5-key'?'input':'change',changed);
   $('md5-format').addEventListener('change',()=>renderResults());
   for(const id of ['md5-expected','md5-expected-format'])$(id).addEventListener(id==='md5-expected'?'input':'change',verifySingle);
@@ -174,12 +182,14 @@ export function createMd5View({source,output,setDocument,setEditable,controller,
   $('md5-clear').addEventListener('click',()=>{controller.invalidate();clearKey();$('md5-expected').value='';files=[];fileTable();reset();setDocument(source,'');layout();source.focus();});
   $('md5-copy-item').addEventListener('click',()=>{const index=output.state.doc.lineAt(output.state.selection.main.head).number-1;const item=items[index];if(item?.hex)copy(md5Formats(item.hex)[format()]);});
   $('md5-copy-all').addEventListener('click',()=>{
+    if(state.status==='pending')return;
     if(['text','hmac'].includes(mode)){const hex=items[0]?.hex;if(hex)copy(formats.map(key=>`${t(`md5.formats.${key}`)}: ${md5Formats(hex)[key]}`).join('\n'));}
     else copy(items.filter(item=>item.hex).map(item=>`${mode==='files'?item.name:item.line}\t${md5Formats(item.hex)[format()]}`).join('\n'));
   });
   for(const type of ['csv','json'])$(`md5-${type}`).addEventListener('click',()=>{
     const labels=Object.fromEntries(['line','name','size','status','digest'].map(key=>[key,t(key==='name'?'md5.filename':key==='status'?'common.result':`md5.${key}`)]));
-    const data=exportMd5(mode==='files'?files:items,format(),type,labels);const url=URL.createObjectURL(new Blob([data],{type:type==='json'?'application/json;charset=utf-8':'text/csv;charset=utf-8'}));
+    if(state.status==='pending'||!items.some(item=>item.status==='ready'))return;
+    const data=exportMd5(mode==='files'?files.map(row=>items.find(item=>item.id===row.id)||{id:row.id,name:row.name,size:row.size,status:row.status}):items,format(),type,labels);const url=URL.createObjectURL(new Blob([data],{type:type==='json'?'application/json;charset=utf-8':'text/csv;charset=utf-8'}));
     const link=document.createElement('a');link.href=url;link.download=`listools-md5.${type}`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   });
   return {hasContent:()=>Boolean(files.length||active&&(items.length||$('md5-key').value||$('md5-expected').value)),getInputFiles:()=>files.map(row=>row.file),get mode(){return mode;},onState,onEvent,execute,changed,importFiles,translate,

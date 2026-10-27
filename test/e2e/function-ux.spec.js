@@ -9,8 +9,8 @@ test('four task groups start collapsed and task search still finds the primary t
 });
 
 test('task addresses select all seven workspaces and retain input on subsequent task changes',async({page})=>{
- for(const [file,task,visible]of [['qr','recognize','#qr-choose'],['images','resize','#images-width'],['pdf','rotate','#pdf-rotation'],['dates','shift','#date-base'],['text','extract','#text-kind'],['draw','numbers','#draw-min'],['timer','stopwatch','#timer-lap']]){
-  await page.goto(`/${file}.html#${task}`);await expect(page.locator(visible),file).toBeVisible();
+ for(const [file,task,visible]of [['qr','recognize','#qr-drop'],['images','resize','#images-width'],['pdf','rotate','#pdf-rotation'],['dates','shift','#date-base'],['text','extract','#text-kind'],['draw','numbers','#draw-min'],['timer','stopwatch','#timer-lap']]){
+  await page.goto(`/${file}.html#${task}`);if(['images','pdf'].includes(file))await expect(page.locator(file==='images'?'#images-task-select':'#pdf-mode')).toHaveValue(task);else await expect(page.locator(visible),file).toBeVisible();
  }
  await page.goto('/qr.html#generate');await page.locator('#qr-input').fill('keep');await page.locator('#qr-task-recognize').click();await expect(page).toHaveURL(/#recognize$/);await page.goBack();await expect(page.locator('#qr-input')).toHaveValue('keep');
  await selectLanguage(page,'de');await expect(page.locator('#qr-input')).toHaveValue('keep');
@@ -18,7 +18,7 @@ test('task addresses select all seven workspaces and retain input on subsequent 
 
 test('file workspaces start without empty queues and expose translated file actions',async({page})=>{
  for(const tool of ['images','pdf']){
-  await page.goto(`/${tool}.html`);await expect(page.locator(`#${tool}-queue`).locator('..')).toBeHidden();await expect(page.locator(`#${tool}-choose`)).toBeVisible();await expect(page.locator(`#${tool}-files`)).toBeHidden();await expect(page.locator(`#${tool}-run-reason`)).toBeVisible();
+  await page.goto(`/${tool}.html`);await expect(page.locator(`#${tool}-queue`).locator('..')).toBeHidden();await expect(page.locator(`#${tool}-choose`)).toBeVisible();await expect(page.locator(`#${tool}-files`)).toBeHidden();await expect(page.locator(`#${tool}-run`)).toBeHidden();
  }
  await page.locator('#pdf-files').setInputFiles({name:'one.pdf',mimeType:'application/pdf',buffer:Buffer.from('%PDF-1.7')});await expect(page.locator('#pdf-queue')).toBeVisible();await expect(page.locator('#pdf-run')).toContainText('1');
 });
@@ -58,7 +58,7 @@ test('Cron switches parsing and visual building without discarding the expressio
 });
 
 test('timestamp prioritizes output while preserving secondary formats and current clock',async({page})=>{
- await page.goto('/timestamp.html');await expect(page.locator('#clock-details')).not.toHaveAttribute('open');await page.locator('#timestamp-source').fill('0');await expect(page.locator('#timestamp-local')).not.toHaveValue('');await expect(page.locator('#timestamp-more-formats')).not.toHaveAttribute('open');await page.locator('#timestamp-more-formats summary').click();await expect(page.locator('#timestamp-utc')).toBeVisible();
+ await page.goto('/timestamp.html');await expect(page.locator('#clock-details')).not.toHaveAttribute('open');await expect(page.locator('.clock-quick-actions [data-copy=clock-seconds]')).toBeVisible();await page.locator('#timestamp-source').fill('0');await expect(page.locator('#timestamp-local')).not.toHaveValue('');await expect(page.locator('#timestamp-more-formats')).not.toHaveAttribute('open');await page.locator('#timestamp-more-formats summary').click();await expect(page.locator('#timestamp-utc')).toBeVisible();
 });
 
 test('regular expression rules open from the pattern and advanced tools remain clear',async({page})=>{
@@ -67,11 +67,11 @@ test('regular expression rules open from the pattern and advanced tools remain c
 });
 
 test('edited text keeps its stale notice after automatic statistics and unit swapping updates both visible choices',async({page})=>{
- await page.goto('/text.html');await page.locator('#text-input').fill('A\nA');await page.locator('#text-run').click();await expect(page.locator('#text-copy')).toBeEnabled();await page.locator('#text-input').fill('B\nB');await page.waitForTimeout(700);await expect(page.locator('#tool-status')).toHaveText('Content changed. Run again to update the result.');await expect(page.locator('#text-copy')).toBeDisabled();
+ await page.goto('/text.html');await page.locator('#text-input').fill('A\nA');await page.locator('#text-run').click();await expect(page.locator('#text-copy')).toBeEnabled();await page.locator('#text-input').fill('B\nB');await page.waitForTimeout(700);await expect(page.locator('#text-result')).toHaveValue('B');await expect(page.locator('#text-copy')).toBeEnabled();
  await page.goto('/units.html');await page.locator('#unit-swap').click();await expect(page.locator('#unit-from').locator('..').locator('.choices__item--selectable').first()).toContainText('km');await expect(page.locator('#unit-to').locator('..').locator('.choices__item--selectable').first()).toContainText('(m)');
 });
 
 test('idle pages expose no cancel action and PDF adjustment task keeps its group open',async({page})=>{
  for(const route of ['diff','convert','cron','regex','calculator','text','images','pdf','qr','speedtest']){await page.goto('/'+route+'.html');await expect(page.locator('button[id$="-cancel"]:visible,button#cancel:visible'),route).toHaveCount(0);}
- await page.goto('/pdf.html#rotate');await expect(page.locator('#pdf-task-rotate').locator('xpath=ancestor::details')).toHaveAttribute('open','');
+ await page.goto('/pdf.html#rotate');await expect(page.locator('#pdf-task-adjustments')).toHaveAttribute('aria-pressed','true');await expect(page.locator('#pdf-task-rotate')).toBeVisible();
 });

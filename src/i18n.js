@@ -1,6 +1,5 @@
 import {languages,t,language,onLanguageChange,setLanguage} from './i18n-runtime.js';
 import {mountHeaderMenu} from './tools/shared/menu.js';
-import {mountLanguageSelector} from './language-selector.js';
 import {feedbackTool,mountFeedbackLink} from './tools/shared/feedback.js';
 import {bugs,version} from '../package.json';
 export {t,language,onLanguageChange,errorText} from './i18n-runtime.js';
@@ -27,11 +26,11 @@ const refreshFeedback=feedbackFooter?mountFeedbackLink(feedbackFooter,()=>({
   issuesUrl:bugs.url,tool:feedbackTool(location.pathname,location.hash),version,locale:language(),label:t('common.feedback'),hint:t('common.feedbackHint')
 })):()=>{};
 onLanguageChange(refreshFeedback);window.addEventListener('hashchange',refreshFeedback);
-const refreshLanguageSelector=mountLanguageSelector(document.querySelector('.app-header'),{languages,t,language,setLanguage});
+
 function applyLanguage(){
   document.documentElement.lang=language();
   document.documentElement.dir=languages.find(item=>item.code===language()).dir;
-  refreshLanguageSelector();translateDOM();
+  translateDOM();
 }
 onLanguageChange(applyLanguage);applyLanguage();
 export function createNotifier() {

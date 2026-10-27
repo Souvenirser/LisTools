@@ -1,0 +1,11 @@
+import{test,expect}from'@playwright/test';
+async function menu(page){await page.setViewportSize({width:1440,height:900});await page.addInitScript(()=>{localStorage.setItem('listools-language','en');localStorage.setItem('listools-preferences-v1',JSON.stringify({favorites:['json'],recent:['timer','draw','money','units','dates']}));localStorage.setItem('listools-menu-expanded-v1',JSON.stringify(['daily','files','developer','network']));});await page.goto('/money.html');}
+for(const[area,id]of[['favorites','json'],['category','timer']])test(`favorite changes keep a visible focus when the ${area} row disappears`,async({page})=>{
+ await menu(page);await page.locator(area==='category'?`#tool-menu nav [data-favorite="${id}"]`:`[data-saved-group="${area}"] [data-favorite="${id}"]`).click();await expect.poll(()=>page.evaluate(()=>document.activeElement.matches('.tool-menu-favorite,.tool-menu-link,summary'))).toBe(true);const focus=await page.evaluate(()=>{const r=document.activeElement.getBoundingClientRect(),s=document.querySelector('.tool-menu-scroll').getBoundingClientRect();return r.bottom>s.top&&r.top<s.bottom;});expect(focus).toBe(true);
+});
+for(const width of[1366,1440])for(const action of['save','cancel'])test(`finishing menu sorting with ${action} closes the search overlay at ${width}`,async({page})=>{
+ await page.setViewportSize({width,height:768});await page.goto('/timer.html');await page.locator('#settings-open').click();await page.locator('#settings-sort').click();await page.locator('#menu-'+action).click();await expect(page.locator('#tool-menu')).not.toHaveClass(/is-searching/);await expect(page.locator('#tool-menu-search')).toBeHidden();await expect(page.locator('#settings-open')).toBeFocused();
+});
+test('completed PDF import no longer claims that files are being read',async({page})=>{
+ await page.goto('/pdf.html');await page.locator('#pdf-files').setInputFiles({name:'one.pdf',mimeType:'application/pdf',buffer:Buffer.from('%PDF-1.4\n')});await expect(page.locator('#pdf-queue .media-file-name')).toHaveCount(1);await expect(page.locator('#pdf-choose')).toBeEnabled();await expect(page.locator('#tool-status')).not.toContainText(/Reading|正在读取/,{timeout:1000});
+});

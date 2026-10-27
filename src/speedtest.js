@@ -1,6 +1,5 @@
 import {registerContentCheck} from './tools/shared/content-state.js';
 import { mountTool, localize, copyText, downloadText } from './tools/shared/page.js';
-import { textLabel as tr } from './tools/shared/labels.js';
 import { t, translateDOM, onLanguageChange } from './i18n.js';
 import { plannedBytes, speedLevels, speedLevelFor } from './tools/speedtest/core.js';
 import { createSpeedTestController } from './tools/speedtest/controller.js';
@@ -41,16 +40,16 @@ root.innerHTML=`
 mountTool('speedtest');
 translateDOM(root);
 const $=id=>document.getElementById(id);
-const metricLabels=[['downloadBps','下载速度','Download'],['uploadBps','上传速度','Upload'],['latencyMs','空闲 HTTP 延迟','Idle HTTP latency'],['jitterMs','空闲抖动','Idle jitter'],['downloadLatencyMs','下载负载延迟','Download loaded latency'],['downloadJitterMs','下载负载抖动','Download loaded jitter'],['uploadLatencyMs','上传负载延迟','Upload loaded latency'],['uploadJitterMs','上传负载抖动','Upload loaded jitter']];
+const metricLabels=['downloadBps','uploadBps','latencyMs','jitterMs','downloadLatencyMs','downloadJitterMs','uploadLatencyMs','uploadJitterMs'];
 let state={status:'idle'};
 const speedUnit=()=> $('speed-unit').value;
 const convert=value=>value/(speedUnit()==='Mbps'?1e6:8e6);
 function renderRatings() {
   const finished=['complete','incomplete'].includes(state.status);
-  $('speed-rating-waiting').hidden=finished;
+  $('speed-rating-waiting').hidden=finished||state.status==='idle';$('speed-rating-heading').hidden=!finished;
   $('speed-rating-waiting').textContent=t(`speedtestRating.${state.status==='running'?'testing':'waiting'}`);
   $('speed-rating-partial').hidden=state.status!=='incomplete';
-  $('speed-rating-results').hidden=!finished;$('speed-primary-metrics').hidden=finished;
+  $('speed-rating-results').hidden=!finished;$('speed-primary-metrics').hidden=state.status!=='running';
   $('speed-rating-results').replaceChildren(...(finished?['download','upload'].map(direction=>{
     const bps=state.metrics?.[`${direction}Bps`],level=speedLevelFor(bps),card=document.createElement('div');
     card.className=`speed-rating-card speed-rating-${direction}`;card.dataset.direction=direction;
@@ -112,7 +111,7 @@ function draw() {
   $('speed-chart-empty').firstElementChild.textContent=state.status==='running'?t('uiText.sd84f7fb7'):state.status==='idle'?t('uiText.s176420f6'):t('uiText.sb9fe0560');
 }
 function render(next=state) {
-  const completed=next.status==='complete'&&state.status!=='complete';state=next;const running=state.status==='running',hasResult=['complete','incomplete'].includes(state.status);
+  const completed=['complete','incomplete'].includes(next.status)&&!['complete','incomplete'].includes(state.status);state=next;const running=state.status==='running',hasResult=['complete','incomplete'].includes(state.status);
   if(completed)$('speed-settings').open=false;
   $('speed-start').disabled=running;$('speed-profile').disabled=running;$('speed-cancel').disabled=!running;
   $('speed-copy').disabled=!hasResult;$('speed-download').disabled=!hasResult;
@@ -122,17 +121,20 @@ function render(next=state) {
   $('speed-settings-summary').textContent=hasResult?t('direct.developer.speedSummary',{profile:$('speed-profile').selectedOptions[0].textContent,unit:speedUnit(),budget:budget.toFixed(1)}):t('direct.developer.speedSettings');
   const phases={latency:t('uiText.s99152d25'),download:t('uiText.s6964bb19'),upload:t('uiText.s826f7f7c')};
   const label=running?`${t('uiText.s535d93b')} · ${phases[state.phase]}`:state.status==='complete'?t('uiText.se54758cc'):state.status==='incomplete'?t('uiText.sef726d4b'):t('uiText.s3a32febf');
-  const reason=state.reason==='timeout'?t('uiText.se345fc07'):state.reason==='cancelled'?t('uiText.s48e3ebbb'):state.message?` · ${state.message}`:'';
+  const reason=state.reason==='timeout'?t('uiText.se345fc07'):state.reason==='cancelled'?t('uiText.s48e3ebbb'):['network','error'].includes(state.reason)?' · '+t(state.reason==='network'?'refinement.speedNetworkError':'refinement.speedStartError'):state.message?` · ${state.message}`:'';
   $('speed-status').textContent=`${label}${reason}${state.elapsedMs!==undefined?` · ${(state.elapsedMs/1000).toFixed(1)} s · ${t('uiText.s6b1ddb3a')} ${(state.completedBytes/1024**2).toFixed(2)} MiB`:''}`;
   $('speed-progress').value=state.status==='complete'?100:Math.min(99,(state.completedBytes || 0)/(state.plannedBytes || 1)*100);
-  const metricCards=metricLabels.map(([key,zh,en])=>{
-    const card=document.createElement('div');card.className='tool-card';card.dataset.metric=key;const title=document.createElement('span');title.className='tool-note';title.textContent=tr(zh,en);
+  $('speed-progress').hidden=!running;
+  $('speed-idle-metrics').hidden=state.status==='idle';$('speed-loaded-details').hidden=state.status==='idle';
+  const metricCards=metricLabels.map(key=>{
+    const card=document.createElement('div');card.className='tool-card';card.dataset.metric=key;const title=document.createElement('span');title.className='tool-note';title.dataset.i18n=`usability.speedtest.${key}`;title.textContent=t(title.dataset.i18n);
     const value=document.createElement('strong'),number=state.metrics?.[key];
     if(number==null)value.className='speed-value-pending';
     value.textContent=number==null?(running?t('uiText.s535d93b'):hasResult?t('uiText.se372e182'):t('uiText.s40941bdb')):key.endsWith('Bps')?`${convert(number).toFixed(2)} ${speedUnit()}`:`${number.toFixed(2)} ms`;
     card.append(title,value);return card;
   });$('speed-primary-metrics').replaceChildren(...metricCards.slice(0,2));$('speed-idle-metrics').replaceChildren(...metricCards.slice(2,4));$('speed-loaded-metrics').replaceChildren(...metricCards.slice(4));renderRatings();draw();
 }
+const networkDetails=document.createElement('details');networkDetails.className='speed-network-details';networkDetails.innerHTML='<summary data-i18n="experience.networkDetails"></summary>';networkDetails.append(document.querySelector('[data-i18n="uiText.saecdb926"]'));$('speed-settings').append($('speed-budget'),$('speed-network-notice'),networkDetails);translateDOM(networkDetails);
 $ ('speed-result-actions').append($('speed-copy'),$('speed-download'));
 const controller=createSpeedTestController({onState:render});
 $('speed-start').addEventListener('click',()=>void controller.start($('speed-profile').value));

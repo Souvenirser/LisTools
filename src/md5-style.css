@@ -9,6 +9,7 @@
 .md5-page #convert-input-info { direction:ltr; }
 .md5-fields { display:flex; flex-wrap:wrap; gap:12px 16px; align-items:end; padding:0; }
 .md5-fields > label:not([hidden]) { display:flex; flex-direction:column; gap:6px; font-size:1rem; color:var(--text); }
+.md5-fields > label:has(#md5-mode):not([hidden]),.md5-fields > #md5-representation-field:not([hidden]) { flex-direction:row; flex-wrap:wrap; align-items:center; gap:8px; }
 .md5-fields .check-label:not([hidden]) { flex-direction:row; align-items:center; min-height:44px; }
 .md5-page input:not([type="checkbox"]), .md5-page select { min-width:0; max-width:100%; min-height:44px; border:1px solid var(--border); border-radius:5px; background:var(--surface); padding:7px 9px; }
 .md5-page .convert-editor input { min-height:initial; }
@@ -70,7 +71,9 @@
 .md5-page .md5-single{padding:16px}
 .md5-page .md5-primary{margin-bottom:12px}
 .md5-page .md5-primary textarea{min-height:64px;font-size:1rem}
-.md5-page #md5-other-formats>summary{display:flex;align-items:center;min-height:44px;cursor:pointer;font-size:.875rem}
+.md5-page #md5-other-formats>summary{display:list-item;align-content:center;min-height:44px;cursor:pointer;font-size:.875rem}
 .md5-page #md5-other-formats[open]>.md5-value:first-of-type{margin-top:8px}
 .md5-page #md5-truncated{margin:8px 0}
 .md5-page #md5-file-picker{padding:12px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+
+.md5-page #tool-title{display:none}.md5-page .md5-result-actions:has(>button:not([hidden])){padding:12px 0}.md5-page .md5-result-actions:not(:has(>button:not([hidden]))){display:none}

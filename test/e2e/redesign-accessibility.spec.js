@@ -23,8 +23,8 @@ for(const {id,file} of pages)test(`${id} initial state passes WCAG A and AA chec
 });
 
 const states=[
-  {name:'JSON parsed result',file:'index.html',async prepare(page){await page.locator('#source').fill('{"name":"LisTools","items":[1,2]}');await page.locator('#format').click();await expect(page.locator('#copy')).toBeEnabled();}},
-  {name:'JSON parse error',file:'index.html',async prepare(page){await page.locator('#source').fill('{"name":}');await page.locator('#format').click();await expect(page.locator('#error-detail')).toBeVisible();}},
+  {name:'JSON parsed result',file:'index.html',async prepare(page){await page.locator('#source .cm-content').fill('{"name":"LisTools","items":[1,2]}');await page.locator('#format').click();await expect(page.locator('#copy')).toBeEnabled();}},
+  {name:'JSON parse error',file:'index.html',async prepare(page){await page.locator('#source .cm-content').fill('{"name":}');await page.locator('#format').click();await expect(page.locator('#error-detail')).toBeVisible();}},
   {name:'diff comparison result',file:'diff.html',async prepare(page){await page.locator('#left-source .cm-content').fill('{"value":1}');await page.locator('#right-source .cm-content').fill('{"value":2}');await page.locator('#compare').click();await expect(page.locator('body')).toHaveAttribute('data-status','ready');}},
   {name:'diff validation error',file:'diff.html',async prepare(page){await page.locator('#left-source .cm-content').fill('{"value":}');await page.locator('#right-source .cm-content').fill('{"value":2}');await page.locator('#compare').click();await expect(page.locator('body')).toHaveAttribute('data-status','error');}},
   {name:'conversion result',file:'convert.html#base64',async prepare(page){await page.locator('#convert-source .cm-content').fill('Hello LisTools');await page.locator('#convert-run').click();await expect(page.locator('#convert-copy')).toBeEnabled();}},

@@ -79,3 +79,11 @@ export function findTools(query='',category='',translate=()=> '') {
   const terms=query.toLowerCase().trim().split(/\s+/);
   return tools.filter(tool=>(!category || tool.category===category) && terms.every(term=>[tool.id,...tool.name,tool.aliases,translate(textKey(tool.name[1])),translate(textKey(categories.find(c=>c.id===tool.category).name[1])),...categories.find(c=>c.id===tool.category).name].join(' ').toLowerCase().includes(term)));
 }
+
+// These samples use the same strict shapes accepted by the existing converters.
+export function conversionExample(id, options={}) {
+  const reverse=options.direction==='decode';
+  if(id==='xml-json')return {text:reverse?'[{"root":[{"#text":"before"},{"item":[{"#text":"中"}]},{"#text":"after"}],":@":{"@_id":"001"}}]':'<root id="001">before<item>中</item>after</root>'};
+  if(id==='query-json')return {text:reverse?'{"tag":["a","b"],"empty":[""],"space":["hello world"]}':'tag=a&tag=b&empty=&space=hello+world'};
+  if(id==='csv-json'||id==='tsv-json')return {text:reverse?'[{"id":1,"value":{"active":true}},{"id":2,"value":null}]':id==='tsv-json'?'id\tvalue\n1\t"{""active"":true}"\n2\tnull':'id,value\n1,"{""active"":true}"\n2,null',options:{header:'true',cells:'json'}};
+}

@@ -562,7 +562,11 @@
     "batchDone": "Immagini {{success}} elaborate. · Non riuscito: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "Porta il focus sulla selezione: le frecce la spostano; Maiusc + frecce regolano il bordo destro o inferiore."
+    "cropKeys": "Porta il focus sulla selezione: le frecce la spostano; Maiusc + frecce regolano il bordo destro o inferiore.",
+    "qualityInvalid": "Inserisci una qualità da 1 a 100.",
+    "targetInvalid": "Inserisci una dimensione obiettivo da 1 a 102400 KiB.",
+    "dimensionInvalid": "Usa pixel interi da 0 a 16384; 0 mantiene la dimensione automatica.",
+    "scaleInvalid": "Inserisci una scala da 1 a 400 per cento."
   },
   "text": {
     "name": "Pulisci ed estrai il testo",
@@ -769,7 +773,7 @@
     "reset": "Reimposta",
     "lap": "Giro record",
     "sound": "Riproduci un breve suono al completamento quando questa pagina può riprodurre l'audio",
-    "backgroundHelp": "La temporizzazione utilizza le scadenze dell'orologio e il tempo trascorso. Lo stato viene conservato nella memoria della sessione di questa scheda. Le schede in background e i dispositivi in ​​sospensione possono sospendere l'esecuzione; questo non è un promemoria o un allarme in background.",
+    "backgroundHelp": "La misurazione usa scadenze dell’orologio e tempo trascorso. Ricaricando questa scheda si ripristinano entrambi i timer, compreso il tempo effettivamente trascorso per quelli in esecuzione. Lo stato è conservato nella memoria di sessione di questa scheda. Le schede in background e i dispositivi in sospensione possono sospendere l’esecuzione; questa non è una funzione di promemoria o sveglia in background.",
     "laps": "Giri del cronometro",
     "export": "Esporta i giri come TXT",
     "number": "Giro",
@@ -893,7 +897,7 @@
       "count": "Il conteggio delle date deve essere un numero intero compreso tra 1 e 100.",
       "invalid": "Impossibile calcolare. Controlla l'espressione, il fuso orario e l'ora di riferimento."
     },
-    "copyExpression": "Copia · Espressione",
+    "copyExpression": "Copia Espressione",
     "utcOffset": "UTC ±HH:mm"
   },
   "uiText": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "Scegli la corrispondenza completa o un gruppo di acquisizione da estrarre. Le corrispondenze vuote sono valide; i gruppi non corrispondenti vengono visualizzati separatamente.",
     "passwordPolicy": "I tipi di carattere selezionati formano il pool consentito. Abilita \"Richiedi ogni tipo\" per includere ogni tipo selezionato in ciascuna password.",
     "speedScope": "Le valutazioni descrivono la velocità di trasferimento. Latenza e jitter vengono misurati separatamente.",
-    "viewResult": "Visualizza risultato"
+    "viewResult": "Visualizza risultato",
+    "speedNetworkError": "Connessione di rete non riuscita. Riprova.",
+    "speedStartError": "Impossibile avviare il test di velocità. Riprova."
   },
   "redesign": {
     "calculatorOriginal": "Valore originale",
@@ -1825,7 +1831,8 @@
       "speedSettings": "Impostazioni del test",
       "speedSummary": "{{profile}} · {{unit}} · fino a {{budget}} MiB",
       "customZone": "Fuso orario IANA personalizzato",
-      "regexNoMatches": "Nessuna corrispondenza"
+      "regexNoMatches": "Nessuna corrispondenza",
+      "md5ModeConfirm": "Il cambio di modalità eliminerà la coda di file attuale, i risultati e i valori di verifica. Continuare?"
     },
     "daily": {
       "unitDetails": "Altre conversioni e precisione",
@@ -1853,5 +1860,107 @@
     "shared": {
       "viewResult": "Visualizza risultato"
     }
+  },
+  "v2": {
+    "settings": "Impostazioni",
+    "appearance": "Aspetto",
+    "themeSystem": "Segui il sistema",
+    "themeLight": "Chiaro",
+    "themeDark": "Scuro",
+    "favorites": "Preferiti",
+    "recent": "Aperti di recente",
+    "pin": "Aggiungi ai preferiti",
+    "unpin": "Rimuovi dai preferiti",
+    "noFavorites": "Premi la stella di uno strumento per salvarlo.",
+    "noRecent": "Qui compaiono gli ultimi cinque strumenti aperti.",
+    "navigation": "Esplora strumenti",
+    "qrTextNotice": "Alcuni lettori, incluse certe versioni di WeChat, potrebbero non mostrare QR di testo semplice. Usa questo lettore per recuperare il testo originale."
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "Altre conversioni ({{count}})",
+    "numberSummary": "Intervallo {{min}}–{{max}} · {{count}} numeri · {{repeat}}",
+    "noRepeat": "Senza numeri ripetuti"
+  },
+  "usability": {
+    "images": {
+      "growth": "La dimensione del file è aumentata del {{percent}}%; nessuna riduzione",
+      "adjust": "Regola i parametri",
+      "add": "Aggiungi immagini",
+      "preview": "Anteprima di {{name}}",
+      "unchanged": "Dimensione del file invariata; nessuna riduzione",
+      "savings": "La dimensione del file è diminuita del {{percent}}%"
+    },
+    "password": {
+      "showRow": "Mostra risultato {{number}}",
+      "hideRow": "Nascondi risultato {{number}}"
+    },
+    "speedtest": {
+      "downloadBps": "Scaricamento",
+      "uploadBps": "Caricamento",
+      "latencyMs": "Latenza HTTP a riposo",
+      "jitterMs": "Variazione della latenza a riposo",
+      "downloadLatencyMs": "Latenza sotto carico di scaricamento",
+      "downloadJitterMs": "Variazione della latenza sotto carico di scaricamento",
+      "uploadLatencyMs": "Latenza sotto carico di caricamento",
+      "uploadJitterMs": "Variazione della latenza sotto carico di caricamento"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "Mostra i tempi di esecuzione",
+    "adjustParameters": "Regola i parametri"
+  },
+  "polishData": {
+    "diffBlocks": "{{count}} blocchi di differenze",
+    "coarse": "Confronto approssimativo: i blocchi possono includere contenuti invariati.",
+    "errors": {
+      "CsvColumns": "La riga {{row}} contiene {{actual}} colonne; ne erano previste {{expected}}. Controlla i delimitatori e le celle tra virgolette.",
+      "CsvHeaders": "I nomi delle colonne sono ripetuti. Rinominali o disattiva la riga di intestazione.",
+      "CsvJsonCell": "La riga {{row}}, colonna {{column}}, non contiene JSON valido. Usa un valore JSON o scegli la modalità celle come stringhe.",
+      "CsvArrayHeader": "Le righe di array non hanno nomi di colonna. Disattiva la riga di intestazione.",
+      "CsvNestedValue": "I valori null e quelli annidati richiedono la modalità celle con serializzazione JSON esplicita.",
+      "CsvRowShape": "Ogni riga JSON deve avere le stesse colonne senza valori mancanti.",
+      "XmlOrdered": "Usa l’array ordinato di nodi di XML → JSON. Carica l’esempio per vedere gli attributi e i nodi di testo.",
+      "QueryArrays": "Usa un oggetto i cui valori siano array non vuoti di stringhe, per esempio {\"tag\":[\"a\",\"b\"]}."
+    },
+    "notices": {
+      "StructureOnly": "I valori dei dati e la struttura supportata vengono conservati; i commenti, la formattazione e lo stile delle virgolette della sorgente no.",
+      "CsvStrings": "Le celle CSV rimangono stringhe; numeri e valori booleani non vengono dedotti.",
+      "CsvTextExport": "CSV è testo; l’esportazione predefinita non conserva le informazioni sui tipi scalari JSON.",
+      "ByteHex": "Il risultato non può essere decodificato senza perdite come {{charset}}. Viene mostrato Hex; il download conserva i byte originali."
+    },
+    "charsetSource": "Il testo è già Unicode. La codifica sorgente si applica solo ai byte del file."
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "Questo risultato supera il limite di input di 10 MiB. La copia e il download includono comunque il risultato completo.",
+      "pdfRange": "Pagine disponibili: 1–{{count}}",
+      "pdfInspectHelp": "Controlla il numero di pagine prima di scegliere un intervallo.",
+      "qrRecovery": "Regola la correzione degli errori"
+    }
+  },
+  "polishShell": {
+    "flags": "Flag: {{flags}}"
+  },
+  "experience": {
+    "extractPhone": "Estrai numeri di telefono",
+    "extractEmail": "Estrai indirizzi e-mail",
+    "extractUrl": "Estrai link",
+    "base64encode": "Codifica in Base64",
+    "base64decode": "Decodifica Base64",
+    "base64urlencode": "Codifica in Base64URL",
+    "base64urldecode": "Decodifica Base64URL",
+    "noemail": "Nessun indirizzo e-mail trovato.",
+    "nophone": "Nessun numero di telefono trovato.",
+    "nourl": "Nessun link trovato.",
+    "textAuto": "I testi brevi vengono elaborati automaticamente; avvia manualmente quelli più lunghi.",
+    "qrSettings": "Dimensione di output {{size}}px · Correzione degli errori {{level}}",
+    "networkDetails": "Dettagli su rete e dati",
+    "endDate": "Data di fine",
+    "listInput": "Voci",
+    "chooseConvert": "Scegli convertitore · {{name}}",
+    "task": "Azione",
+    "copySeconds": "Copia timestamp in secondi",
+    "copyMilliseconds": "Copia timestamp in millisecondi",
+    "unitPrecision": "Note su precisione e unità"
   }
 }

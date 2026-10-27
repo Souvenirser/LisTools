@@ -562,7 +562,11 @@
     "batchDone": "Picha za {{success}} zimechakatwa. · Imeshindwa: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "Lenga eneo lililochaguliwa: mishale hulihamisha; Shift + mishale hubadilisha ukingo wa kulia au wa chini."
+    "cropKeys": "Lenga eneo lililochaguliwa: mishale hulihamisha; Shift + mishale hubadilisha ukingo wa kulia au wa chini.",
+    "qualityInvalid": "Weka ubora kutoka 1 hadi 100.",
+    "targetInvalid": "Weka ukubwa lengwa kutoka 1 hadi 102400 KiB.",
+    "dimensionInvalid": "Tumia pikseli kamili kutoka 0 hadi 16384; 0 huhifadhi kipimo cha kiotomatiki.",
+    "scaleInvalid": "Weka kiwango kutoka asilimia 1 hadi 400."
   },
   "text": {
     "name": "Safisha na toa maandishi",
@@ -769,7 +773,7 @@
     "reset": "Weka upya",
     "lap": "Rekodi lap",
     "sound": "Cheza sauti fupi inapokamilika wakati ukurasa huu unaweza kucheza sauti",
-    "backgroundHelp": "Muda hutumia makataa ya saa na wakati uliopita. Hali huwekwa katika hifadhi ya kipindi cha kichupo hiki. Vichupo vya usuli na vifaa vya kulala vinaweza kusimamisha utekelezaji; hiki si kikumbusho cha usuli au kengele.",
+    "backgroundHelp": "Upimaji wa muda hutumia muda wa mwisho kulingana na saa na muda uliopita. Kupakia upya kichupo hiki hurejesha vipima muda vyote viwili, pamoja na muda halisi uliopita kwa vipima muda vinavyoendelea. Hali huhifadhiwa katika hifadhi ya kipindi ya kichupo hiki. Vichupo vya chinichini na vifaa vilivyolala vinaweza kusimamisha utekelezaji; hiki si kikumbusho cha chinichini wala kengele.",
     "laps": "Mizunguko ya saa ya kusimama",
     "export": "Hamisha mizunguko kama TXT",
     "number": "Lap",
@@ -872,7 +876,7 @@
       "count": "Idadi ya tarehe lazima iwe nambari kati ya 1 na 100.",
       "invalid": "Haiwezi kuhesabu. Angalia usemi, eneo la saa na wakati wa marejeleo."
     },
-    "copyExpression": "Nakili · Kujieleza",
+    "copyExpression": "Nakili Kujieleza",
     "utcOffset": "UTC ±HH:mm"
   },
   "speedtestRating": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "Chagua inayolingana kamili au kikundi cha kunasa ili kutoa. Mechi tupu ni halali; vikundi visivyolingana vinaonyeshwa tofauti.",
     "passwordPolicy": "Aina za wahusika zilizochaguliwa huunda kidimbwi kinachoruhusiwa. Washa \"Inahitaji kila aina\" ili kujumuisha kila aina iliyochaguliwa katika kila nenosiri.",
     "speedScope": "Ukadiriaji unaelezea kasi ya uhamishaji. Latency na jitter hupimwa tofauti.",
-    "viewResult": "Tazama matokeo"
+    "viewResult": "Tazama matokeo",
+    "speedNetworkError": "Muunganisho wa mtandao umeshindwa. Jaribu tena.",
+    "speedStartError": "Jaribio la kasi halikuweza kuanza. Jaribu tena."
   },
   "redesign": {
     "calculatorOriginal": "Thamani asili",
@@ -1825,7 +1831,8 @@
       "speedNetwork": "Zana hii huunganisha na Cloudflare na hutumia data ya mtandao. Maombi ya jaribio huanza tu baada ya kuanzisha.",
       "speedSettings": "Mipangilio ya jaribio",
       "speedSummary": "{{profile}} · {{unit}} · hadi {{budget}} MiB",
-      "customZone": "Ukanda maalumu wa saa wa IANA"
+      "customZone": "Ukanda maalumu wa saa wa IANA",
+      "md5ModeConfirm": "Kubadilisha hali kutaondoa foleni ya sasa ya faili, matokeo na thamani za uthibitishaji. Uendelee?"
     },
     "daily": {
       "countdownHelp": "Kwa kuhesabu siku zilizobaki, chagua leo kuwa mwanzo na tarehe lengwa kuwa mwisho. Tarehe zilizopita hutoa idadi hasi ya siku.",
@@ -1853,5 +1860,107 @@
     "shared": {
       "viewResult": "Ona matokeo"
     }
+  },
+  "v2": {
+    "settings": "Mipangilio",
+    "appearance": "Mwonekano",
+    "themeSystem": "Fuata mfumo",
+    "themeLight": "Mwanga",
+    "themeDark": "Giza",
+    "favorites": "Vipendwa",
+    "recent": "Vilivyofunguliwa karibuni",
+    "pin": "Ongeza kwenye vipendwa",
+    "unpin": "Ondoa kwenye vipendwa",
+    "noFavorites": "Bofya nyota ya zana ili kuihifadhi.",
+    "noRecent": "Zana tano ulizofungua mwisho zinaonekana hapa.",
+    "navigation": "Vinjari zana",
+    "qrTextNotice": "Baadhi ya visomaji, pamoja na baadhi ya matoleo ya WeChat, huenda visionyeshe QR za maandishi. Tumia zana hii kusoma maandishi asili."
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "Mabadilisho mengine ({{count}})",
+    "numberSummary": "Masafa {{min}}–{{max}} · nambari {{count}} · {{repeat}}",
+    "noRepeat": "Bila nambari zinazojirudia"
+  },
+  "usability": {
+    "images": {
+      "growth": "Ukubwa wa faili umeongezeka kwa {{percent}}%; haujapungua",
+      "adjust": "Rekebisha vigezo",
+      "add": "Ongeza picha",
+      "preview": "Hakiki {{name}}",
+      "unchanged": "Ukubwa wa faili haujabadilika; haujapungua",
+      "savings": "Ukubwa wa faili umepungua kwa {{percent}}%"
+    },
+    "password": {
+      "showRow": "Onyesha tokeo {{number}}",
+      "hideRow": "Ficha tokeo {{number}}"
+    },
+    "speedtest": {
+      "latencyMs": "Ucheleweshaji wa HTTP bila mzigo",
+      "jitterMs": "Mtikisiko bila mzigo",
+      "downloadLatencyMs": "Ucheleweshaji chini ya mzigo wa upakuaji",
+      "downloadJitterMs": "Mtikisiko chini ya mzigo wa upakuaji",
+      "uploadLatencyMs": "Ucheleweshaji chini ya mzigo wa upakiaji",
+      "uploadJitterMs": "Mtikisiko chini ya mzigo wa upakiaji",
+      "downloadBps": "Upakuaji",
+      "uploadBps": "Upakiaji"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "Angalia muda wa utekelezaji",
+    "adjustParameters": "Rekebisha vigezo"
+  },
+  "polishData": {
+    "diffBlocks": "Vitalu {{count}} vya tofauti",
+    "coarse": "Ulinganisho wa jumla: vitalu vinaweza kujumuisha maudhui yasiyobadilika.",
+    "errors": {
+      "CsvColumns": "Safu mlalo {{row}} ina safu wima {{actual}}; zilitarajiwa {{expected}}. Kagua vitenganishi na seli zilizo ndani ya alama za kunukuu.",
+      "CsvHeaders": "Majina ya safu wima yanajirudia. Badilisha majina au zima safu mlalo ya kichwa.",
+      "CsvJsonCell": "Safu mlalo {{row}}, safu wima {{column}} si JSON halali. Tumia thamani ya JSON au chagua hali ya seli za mifuatano ya maandishi.",
+      "CsvArrayHeader": "Safu mlalo za aina ya safu hazina majina ya safu wima. Zima safu mlalo ya kichwa.",
+      "CsvNestedValue": "null na thamani zilizopachikwa zinahitaji hali ya seli ya usirialishaji wa JSON ulio wazi.",
+      "CsvRowShape": "Kila safu mlalo ya JSON lazima iwe na safu wima zilezile bila thamani zinazokosekana.",
+      "XmlOrdered": "Tumia safu ya nodi zilizopangwa kutoka XML → JSON. Pakia mfano ili kuona sifa na nodi za maandishi.",
+      "QueryArrays": "Tumia kitu ambacho thamani zake ni safu zisizo tupu za mifuatano ya maandishi, kwa mfano {\"tag\":[\"a\",\"b\"]}."
+    },
+    "notices": {
+      "StructureOnly": "Thamani za data na muundo unaotumika huhifadhiwa; maoni ya chanzo, uumbizaji na mtindo wa alama za kunukuu havihifadhiwi.",
+      "CsvStrings": "Seli za CSV hubaki mifuatano ya maandishi; nambari na thamani za buleani hazitambuliwi kiotomatiki.",
+      "CsvTextExport": "CSV ni maandishi; uhamishaji chaguomsingi hauhifadhi taarifa za aina za thamani moja za JSON.",
+      "ByteHex": "Matokeo hayawezi kufumbuliwa bila kupoteza data kwa {{charset}}. Hex inaonyeshwa; upakuaji huhifadhi baiti asilia."
+    },
+    "charsetSource": "Maandishi tayari ni Unicode. Usimbaji wa chanzo unatumika kwa baiti za faili pekee."
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "Matokeo haya yanazidi kikomo cha ingizo cha 10 MiB. Kunakili na kupakua bado hujumuisha matokeo kamili.",
+      "pdfRange": "Kurasa zinazopatikana: 1–{{count}}",
+      "pdfInspectHelp": "Kagua idadi ya kurasa kabla ya kuchagua masafa.",
+      "qrRecovery": "Rekebisha usahihishaji wa hitilafu"
+    }
+  },
+  "polishShell": {
+    "flags": "Bendera: {{flags}}"
+  },
+  "experience": {
+    "extractPhone": "Toa namba za simu",
+    "extractEmail": "Toa anwani za barua pepe",
+    "extractUrl": "Toa viungo",
+    "base64encode": "Simba kwa Base64",
+    "base64decode": "Simbua Base64",
+    "base64urlencode": "Simba kwa Base64URL",
+    "base64urldecode": "Simbua Base64URL",
+    "noemail": "Hakuna anwani za barua pepe zilizopatikana.",
+    "nophone": "Hakuna namba za simu zilizopatikana.",
+    "nourl": "Hakuna viungo vilivyopatikana.",
+    "textAuto": "Maandishi mafupi huchakatwa kiotomatiki; endesha marefu mwenyewe.",
+    "qrSettings": "Ukubwa wa matokeo {{size}}px · Usahihishaji wa makosa {{level}}",
+    "networkDetails": "Maelezo ya mtandao na data",
+    "endDate": "Tarehe ya mwisho",
+    "listInput": "Maingizo",
+    "chooseConvert": "Chagua kibadilishaji · {{name}}",
+    "task": "Kitendo",
+    "copySeconds": "Nakili muhuri wa muda wa sekunde",
+    "copyMilliseconds": "Nakili muhuri wa muda wa milisekunde",
+    "unitPrecision": "Maelezo ya usahihi na vipimo"
   }
 }

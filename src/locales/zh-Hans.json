@@ -562,7 +562,11 @@
     "batchDone": "已处理 {{success}} 张图片。 · 失败: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "选区获焦后：方向键移动；Shift＋方向键调整右侧或底边。"
+    "cropKeys": "选区获焦后：方向键移动；Shift＋方向键调整右侧或底边。",
+    "qualityInvalid": "请输入 1 到 100 之间的质量。",
+    "targetInvalid": "请输入 1 到 102400 KiB 之间的目标大小。",
+    "dimensionInvalid": "请输入 0 到 16384 之间的整数像素；0 表示自动尺寸。",
+    "scaleInvalid": "请输入 1 到 400 之间的缩放百分比。"
   },
   "text": {
     "name": "文本去重与提取",
@@ -769,7 +773,7 @@
     "reset": "重置",
     "lap": "记录一圈",
     "sound": "页面允许播放音频时，结束后播放短提示音",
-    "backgroundHelp": "按时钟截止时间和已过时间计算。状态保存在当前标签页的会话存储中。后台标签页或设备休眠可能暂停执行，不能作为后台提醒或闹钟使用。",
+    "backgroundHelp": "按时钟截止时间和已过时间计算。重新加载此标签页会恢复两个计时器，运行中的计时器会计入实际经过的时间。状态保存在此标签页的会话存储中。后台标签页或设备休眠可能暂停执行，不能作为后台提醒或闹钟使用。",
     "laps": "秒表分圈记录",
     "export": "导出分圈记录为 TXT",
     "number": "圈次",
@@ -893,7 +897,7 @@
       "count": "执行次数必须为 1–100 的整数。",
       "invalid": "无法计算，请检查表达式、时区与参考时间。"
     },
-    "copyExpression": "复制 · 表达式",
+    "copyExpression": "复制表达式",
     "utcOffset": "UTC ±HH:mm"
   },
   "uiText": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "选择提取完整匹配或某个捕获组。空匹配可以是有效结果，未参与匹配的分组会单独标明。",
     "passwordPolicy": "选中的字符类型组成可用范围。启用“每种类型至少一个”后，每条密码都会包含各选中类型。",
     "speedScope": "评级描述传输速度，延迟和抖动单独展示。",
-    "viewResult": "查看结果"
+    "viewResult": "查看结果",
+    "speedNetworkError": "网络连接失败，请重试。",
+    "speedStartError": "无法启动测速，请重试。"
   },
   "redesign": {
     "pdfAddPdf": "请添加 PDF 文件以执行此任务。",
@@ -1848,10 +1854,113 @@
       "speedNetwork": "此工具会连接 Cloudflare 测速服务并消耗网络流量。点击开始后才会发起测速请求。",
       "speedSettings": "测速设置",
       "speedSummary": "{{profile}} · {{unit}} · 预计 {{budget}} MiB",
-      "customZone": "自定义 IANA 时区"
+      "customZone": "自定义 IANA 时区",
+      "md5ModeConfirm": "切换模式会清除当前文件队列、结果和校验值，是否继续？"
     },
     "shared": {
       "viewResult": "查看结果"
     }
+  },
+  "v2": {
+    "settings": "设置",
+    "appearance": "外观",
+    "themeSystem": "跟随系统",
+    "themeLight": "浅色",
+    "themeDark": "深色",
+    "favorites": "收藏",
+    "recent": "最近打开",
+    "pin": "加入收藏",
+    "unpin": "取消收藏",
+    "noFavorites": "点击工具旁的星标即可收藏。",
+    "noRecent": "这里会显示最近打开的五个工具。",
+    "navigation": "浏览工具",
+    "qrTextNotice": "部分扫码应用（包括部分微信版本）可能不展示纯文本二维码内容，可使用本工具识别并读取原文。"
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "其他换算（{{count}}）",
+    "numberSummary": "范围 {{min}}–{{max}} · {{count}} 个数字 · {{repeat}}",
+    "noRepeat": "不允许重复数字"
+  },
+  "usability": {
+    "images": {
+      "growth": "文件体积增加 {{percent}}%；未减小体积",
+      "adjust": "调整参数",
+      "add": "添加图片",
+      "preview": "预览 {{name}}",
+      "unchanged": "文件体积不变；未减小体积",
+      "savings": "文件体积减小 {{percent}}%"
+    },
+    "password": {
+      "showRow": "显示第 {{number}} 条结果",
+      "hideRow": "隐藏第 {{number}} 条结果"
+    },
+    "speedtest": {
+      "downloadBps": "下载速度",
+      "uploadBps": "上传速度",
+      "latencyMs": "空闲 HTTP 延迟",
+      "jitterMs": "空闲抖动",
+      "downloadLatencyMs": "下载负载延迟",
+      "downloadJitterMs": "下载负载抖动",
+      "uploadLatencyMs": "上传负载延迟",
+      "uploadJitterMs": "上传负载抖动"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "查看执行时间",
+    "adjustParameters": "调整参数"
+  },
+  "polishData": {
+    "diffBlocks": "{{count}} 个差异块",
+    "coarse": "粗略对比：差异块可能包含未变化的内容。",
+    "errors": {
+      "CsvColumns": "第 {{row}} 行有 {{actual}} 列，应为 {{expected}} 列。请检查分隔符和带引号的单元格。",
+      "CsvHeaders": "列名重复。请修改列名，或关闭首行表头。",
+      "CsvJsonCell": "第 {{row}} 行第 {{column}} 列不是有效 JSON。请输入 JSON 值，或选择字符串单元格模式。",
+      "CsvArrayHeader": "数组行没有列名。请关闭首行表头。",
+      "CsvNestedValue": "null 和嵌套值需要选择显式 JSON 序列化单元格模式。",
+      "CsvRowShape": "每个 JSON 行必须具有相同列，且不能缺少值。",
+      "XmlOrdered": "请使用 XML → JSON 产生的保序节点数组。可加载示例查看属性和文本节点。",
+      "QueryArrays": "请使用值为非空字符串数组的对象，例如 {\"tag\":[\"a\",\"b\"]}。"
+    },
+    "notices": {
+      "StructureOnly": "保留数据值和约定结构，不保留源文件注释、排版或引号写法。",
+      "CsvStrings": "CSV 单元格保持字符串，不自动推断数字或布尔类型。",
+      "CsvTextExport": "CSV 是文本表格，默认导出不携带 JSON 标量类型信息。",
+      "ByteHex": "结果无法按 {{charset}} 无损解码。当前显示 Hex；下载保留原始字节。"
+    },
+    "charsetSource": "文本已经是 Unicode。来源编码仅用于文件字节。"
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "结果超过 10 MiB 输入限制，无法用作输入。复制和下载仍保留完整结果。",
+      "pdfRange": "可用页码：1–{{count}}",
+      "pdfInspectHelp": "先检查页数，再填写页码范围。",
+      "qrRecovery": "调整纠错级别"
+    }
+  },
+  "polishShell": {
+    "flags": "标志：{{flags}}"
+  },
+  "experience": {
+    "extractPhone": "提取手机号",
+    "extractEmail": "提取邮箱",
+    "extractUrl": "提取链接",
+    "base64encode": "Base64 编码",
+    "base64decode": "Base64 解码",
+    "base64urlencode": "Base64URL 编码",
+    "base64urldecode": "Base64URL 解码",
+    "noemail": "未找到邮箱。",
+    "nophone": "未找到手机号。",
+    "nourl": "未找到链接。",
+    "textAuto": "小文本自动处理；较大文本请点击执行。",
+    "qrSettings": "输出尺寸 {{size}}px · 纠错 {{level}}",
+    "networkDetails": "联网与数据说明",
+    "endDate": "结束日期",
+    "listInput": "名单",
+    "chooseConvert": "选择转换工具 · {{name}}",
+    "task": "操作",
+    "copySeconds": "复制秒时间戳",
+    "copyMilliseconds": "复制毫秒时间戳",
+    "unitPrecision": "精度与单位说明"
   }
 }

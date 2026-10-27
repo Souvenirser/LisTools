@@ -562,7 +562,11 @@
     "batchDone": "Kucutshungulwe izithombe ze-{{success}}. · Kwehlulekile: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "Gxila endaweni ekhethiwe: imicibisholo iyayihambisa; Shift + imicibisholo ishintsha unqenqema lwesokudla noma lwaphansi."
+    "cropKeys": "Gxila endaweni ekhethiwe: imicibisholo iyayihambisa; Shift + imicibisholo ishintsha unqenqema lwesokudla noma lwaphansi.",
+    "qualityInvalid": "Faka ikhwalithi esuka ku-1 kuya ku-100.",
+    "targetInvalid": "Faka usayizi oqondiwe osuka ku-1 kuya ku-102400 KiB.",
+    "dimensionInvalid": "Sebenzisa amaphikseli aphelele asuka ku-0 kuya ku-16384; u-0 ugcina ubukhulu obuzenzakalelayo.",
+    "scaleInvalid": "Faka isikali esisuka kumaphesenti angu-1 kuya kwangu-400."
   },
   "text": {
     "name": "Hlanza futhi ukhiphe umbhalo",
@@ -769,7 +773,7 @@
     "reset": "Setha kabusha",
     "lap": "Qopha isiqephu",
     "sound": "Dlala umsindo omfushane lapho uqeda lapho leli khasi lingakwazi ukudlala umsindo",
-    "backgroundHelp": "Isikhathi sisebenzisa iminqamulajuqu yewashi nesikhathi esidlulile. Isimo sigcinwa kusitoreji seseshini sale thebhu. Amathebhu angemuva namadivayisi okulala angamisa ukusebenza; lesi akusona isikhumbuzi sangemuva noma i-alamu.",
+    "backgroundHelp": "Ukubala isikhathi kusebenzisa izikhathi zokuphela zewashi nesikhathi esidlulile. Ukulayisha kabusha le thebhu kubuyisela zombili izibali-sikhathi, kufaka nesikhathi sangempela esidlulile ezibalini ezisebenzayo. Isimo sigcinwa kusitoreji seseshini sale thebhu. Amathebhu angemuva namadivayisi akumodi yokulala angamisa ukusebenza; lesi akusona isikhumbuzi sangemuva noma i-alamu.",
     "laps": "Isitophuwashi eqa",
     "export": "Thumela ama-laps njengo-TXT",
     "number": "Ithanga",
@@ -872,7 +876,7 @@
       "count": "Isibalo sedethi kufanele sibe inombolo ephakathi kuka-1 no-100.",
       "invalid": "Ayikwazi ukubala. Hlola isisho, indawo yesikhathi kanye nesikhathi sereferensi."
     },
-    "copyExpression": "Kopisha · Expression",
+    "copyExpression": "Kopisha Expression",
     "utcOffset": "UTC ±HH:mm"
   },
   "speedtestRating": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "Khetha okufanayo okugcwele noma iqembu lokuthwebula ozolikhipha. Okufanayo okungenalutho kuvumelekile; amaqembu angenakuqhathaniswa aboniswa ngokwehlukana.",
     "passwordPolicy": "Izinhlobo zezinhlamvu ezikhethiwe zakha iphuli evunyelwe. Nika amandla okuthi \"Dinga uhlobo ngalunye\" ukuze ufake lonke uhlobo olukhethiwe kuphasiwedi ngayinye.",
     "speedScope": "Izilinganiso zichaza isivinini sokudlulisa. Ukubambezeleka kanye ne-jitter kukalwa ngokwehlukana.",
-    "viewResult": "Buka umphumela"
+    "viewResult": "Buka umphumela",
+    "speedNetworkError": "Ukuxhumeka kwenethiwekhi kwehlulekile. Zama futhi.",
+    "speedStartError": "Ukuhlolwa kwejubane akukwazanga ukuqala. Zama futhi."
   },
   "redesign": {
     "calculatorOriginal": "Inani langempela",
@@ -1825,7 +1831,8 @@
       "speedNetwork": "Leli thuluzi lixhuma ku-Cloudflare futhi lisebenzisa idatha yenethiwekhi. Izicelo zokuhlola ziqala kuphela uma usuqalile.",
       "speedSettings": "Izilungiselelo zokuhlola",
       "speedSummary": "{{profile}} · {{unit}} · kufika ku-{{budget}} MiB",
-      "customZone": "Indawo yesikhathi ye-IANA oyikhethayo"
+      "customZone": "Indawo yesikhathi ye-IANA oyikhethayo",
+      "md5ModeConfirm": "Ukushintsha imodi kuzosusa ulayini wamafayela wamanje, imiphumela namanani okuqinisekisa. Uyaqhubeka?"
     },
     "daily": {
       "countdownHelp": "Ukubala izinsuku ezisele, khetha namuhla njengesiqalo nosuku oluhlosiwe njengesiphetho. Izinsuku esezidlulile zinikeza inani lezinsuku elingaphansi kuka-zero.",
@@ -1853,5 +1860,107 @@
     "shared": {
       "viewResult": "Buka umphumela"
     }
+  },
+  "v2": {
+    "settings": "Izilungiselelo",
+    "appearance": "Ukubukeka",
+    "themeSystem": "Landela isistimu",
+    "themeLight": "Ukukhanya",
+    "themeDark": "Okumnyama",
+    "favorites": "Izintandokazi",
+    "recent": "Okuvulwe kamuva",
+    "pin": "Engeza ezintandokazini",
+    "unpin": "Susa ezintandokazini",
+    "noFavorites": "Chofoza inkanyezi yethuluzi ukuze uligcine.",
+    "noRecent": "Amathuluzi amahlanu agcine ukuvulwa azovela lapha.",
+    "navigation": "Bheka amathuluzi",
+    "qrTextNotice": "Abanye abafundi, kuhlanganise nezinye izinhlobo ze-WeChat, bangase bangabonisi ama-QR ombhalo kuphela. Sebenzisa leli thuluzi ukufunda umbhalo wokuqala."
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "Okunye ukuguqulwa ({{count}})",
+    "numberSummary": "Ibanga {{min}}–{{max}} · izinombolo ezingu-{{count}} · {{repeat}}",
+    "noRepeat": "Ungavumeli izinombolo eziphindaphindayo"
+  },
+  "usability": {
+    "images": {
+      "growth": "Usayizi wefayela ukhuphuke ngo-{{percent}}%; awunciphanga",
+      "adjust": "Lungisa amapharamitha",
+      "add": "Engeza izithombe",
+      "preview": "Buka kuqala {{name}}",
+      "unchanged": "Usayizi wefayela awushintshile; awunciphanga",
+      "savings": "Usayizi wefayela uncishiswe ngo-{{percent}}%"
+    },
+    "password": {
+      "showRow": "Bonisa umphumela {{number}}",
+      "hideRow": "Fihla umphumela {{number}}"
+    },
+    "speedtest": {
+      "latencyMs": "Ukubambezeleka kwe-HTTP ngaphandle komthwalo",
+      "jitterMs": "Ukuguquguquka ngaphandle komthwalo",
+      "downloadLatencyMs": "Ukubambezeleka ngaphansi komthwalo wokulanda",
+      "downloadJitterMs": "Ukuguquguquka ngaphansi komthwalo wokulanda",
+      "uploadLatencyMs": "Ukubambezeleka ngaphansi komthwalo wokuthumela",
+      "uploadJitterMs": "Ukuguquguquka ngaphansi komthwalo wokuthumela",
+      "downloadBps": "Ukulanda",
+      "uploadBps": "Ukuthumela"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "Buka izikhathi zokusebenza",
+    "adjustParameters": "Lungisa amapharamitha"
+  },
+  "polishData": {
+    "diffBlocks": "Amabhulokhi omehluko angu-{{count}}",
+    "coarse": "Ukuqhathanisa okulinganiselwe: amabhulokhi angafaka okuqukethwe okungashintshile.",
+    "errors": {
+      "CsvColumns": "Umugqa {{row}} unamakholomu angu-{{actual}}; kulindeleke angu-{{expected}}. Hlola izihlukanisi namaseli akuzimpawu zokucaphuna.",
+      "CsvHeaders": "Amagama amakholomu ayaphindaphindwa. Waqambe kabusha noma uvale umugqa wesihloko.",
+      "CsvJsonCell": "Umugqa {{row}}, ikholomu {{column}} ayinayo i-JSON evumelekile. Sebenzisa inani le-JSON noma ukhethe imodi yamaseli eyiyunithi yezinhlamvu.",
+      "CsvArrayHeader": "Imigqa engama-array ayinawo amagama amakholomu. Vala umugqa wesihloko.",
+      "CsvNestedValue": "null namanani angaphakathi kwamanye adinga imodi yamaseli yokwenziwa kwe-serial kwe-JSON okucacile.",
+      "CsvRowShape": "Umugqa ngamunye we-JSON kufanele ube namakholomu afanayo ngaphandle kwamanani angekho.",
+      "XmlOrdered": "Sebenzisa i-array yamanodi ahleliwe evela ku-XML → JSON. Layisha isibonelo ukuze ubone izibaluli namanodi ombhalo.",
+      "QueryArrays": "Sebenzisa into enamanani angama-array amayunithi ezinhlamvu angeyona into engenalutho, isibonelo {\"tag\":[\"a\",\"b\"]}."
+    },
+    "notices": {
+      "StructureOnly": "Amanani edatha nesakhiwo esisekelwayo kuyagcinwa; amazwana omthombo, ukufometha nesitayela sezimpawu zokucaphuna akugcinwa.",
+      "CsvStrings": "Amaseli e-CSV ahlala engamayunithi ezinhlamvu; izinombolo namanani e-boolean akuqagelwa ngokuzenzakalela.",
+      "CsvTextExport": "I-CSV ingumbhalo; ukuthumela okuzenzakalelayo akugcini imininingwane yohlobo lwamanani angawodwa e-JSON.",
+      "ByteHex": "Umphumela awukwazi ukuqaqwa njenge-{{charset}} ngaphandle kokulahlekelwa. Kuboniswa i-Hex; ukulanda kugcina amabhayithi okuqala."
+    },
+    "charsetSource": "Umbhalo usuvele uyi-Unicode. Ukubhala ngekhodi komthombo kusebenza kuphela kumabhayithi efayela."
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "Lo mphumela weqa umkhawulo wokufaka ongu-10 MiB. Ukukopisha nokulanda kusafaka umphumela ophelele.",
+      "pdfRange": "Amakhasi atholakalayo: 1–{{count}}",
+      "pdfInspectHelp": "Hlola inani lamakhasi ngaphambi kokukhetha ibanga.",
+      "qrRecovery": "Lungisa ukulungiswa kwamaphutha"
+    }
+  },
+  "polishShell": {
+    "flags": "Amafulegi: {{flags}}"
+  },
+  "experience": {
+    "extractPhone": "Khipha izinombolo zocingo",
+    "extractEmail": "Khipha amakheli e-imeyili",
+    "extractUrl": "Khipha izixhumanisi",
+    "base64encode": "Faka ikhodi ye-Base64",
+    "base64decode": "Qaqa ikhodi ye-Base64",
+    "base64urlencode": "Faka ikhodi ye-Base64URL",
+    "base64urldecode": "Qaqa ikhodi ye-Base64URL",
+    "noemail": "Awekho amakheli e-imeyili atholakele.",
+    "nophone": "Azikho izinombolo zocingo ezitholakele.",
+    "nourl": "Azikho izixhumanisi ezitholakele.",
+    "textAuto": "Umbhalo omfushane ucutshungulwa ngokuzenzakalelayo; qalisa owude mathupha.",
+    "qrSettings": "Usayizi wokukhipha {{size}}px · Ukulungisa amaphutha {{level}}",
+    "networkDetails": "Imininingwane yenethiwekhi nedatha",
+    "endDate": "Idethi yokuphela",
+    "listInput": "Okufakiwe",
+    "chooseConvert": "Khetha isiguquli · {{name}}",
+    "task": "Isenzo",
+    "copySeconds": "Kopisha isitembu sesikhathi ngemizuzwana",
+    "copyMilliseconds": "Kopisha isitembu sesikhathi ngamamilisekhondi",
+    "unitPrecision": "Amanothi ngokunemba namayunithi"
   }
 }

@@ -1,3 +1,4 @@
+import {mountRange} from './tools/shared/range.js';
 import {actionArea} from './tools/shared/workspace.js';
 import { addTaskGuide } from './tools/shared/task-guide.js';
 import {registerContentCheck} from './tools/shared/content-state.js';
@@ -52,7 +53,7 @@ root.innerHTML = `
   </section>
   <section class="tool-card" aria-labelledby="password-results-heading">
     <h2 id="password-results-heading" data-i18n="uiText.sd30066d4"></h2>
-    <div id="password-error" class="tool-error" role="alert" hidden></div>
+    <div id="password-error" class="tool-error" hidden></div>
     <p id="password-status" class="tool-status" aria-live="polite"></p>
     <div class="tool-actions"><button id="password-show" class="btn" type="button" disabled></button><button id="password-copy-all" class="btn" type="button" data-i18n="uiText.s6aef5c37" disabled></button><button id="password-download" class="btn" type="button" data-i18n="uiText.s2ace7d31" disabled></button></div>
     <p id="password-plaintext" class="tool-note" data-i18n="ux.plaintextExport"></p>
@@ -75,24 +76,35 @@ const errors = {
   wordlist:['本地词表校验失败，无法生成口令。','Local word list validation failed. Passphrase generation is unavailable.'],
   generation:['生成失败，请检查选项后重试。','Generation failed. Check the options and retry.']
 };
-let state = {values:[], visible:false};
+let state = {values:[], visible:false};const visibleRows=new Set();
 function render(next) {
-  state = next;
+  const changed=next.values.length!==state.values.length||next.values.some((value,index)=>value!==state.values[index]);if(changed)visibleRows.clear();state = next;
   const ready = next.values.length > 0;
   $('password-error').hidden = !next.error;
   $('password-error').textContent = next.error ? tr(...(errors[next.error] || errors.generation)) : '';
-  $('password-status').textContent = ready ? t('uiText.safc95ee5',{p0:next.values.length}) : t('uiText.s645065e7');
+  for(const field of root.querySelectorAll('[aria-describedby~="password-error"]')){field.removeAttribute('aria-invalid');const description=field.getAttribute('aria-describedby').split(/\s+/).filter(id=>id!=='password-error').join(' ');if(description)field.setAttribute('aria-describedby',description);else field.removeAttribute('aria-describedby');}
+  const errorField=next.error?$('password-'+({length:'length',batch:'batch',classes:'uppercase','empty-class':'exclusions',short:'length',alphabet:'custom',attempts:'exclusions',words:'words',separator:'separator'}[next.error]||'generate')):null;
+  if(errorField){(errorField.closest('.field')||errorField.closest('fieldset')||errorField.parentElement).append($('password-error'));errorField.setAttribute('aria-invalid','true');errorField.setAttribute('aria-describedby',[errorField.getAttribute('aria-describedby'),'password-error'].filter(Boolean).join(' '));}
+  $('password-status').textContent = next.error ? $('password-error').textContent : ready ? t('uiText.safc95ee5',{p0:next.values.length}) : t('uiText.s645065e7');
+  $('password-status').classList.toggle('is-error',Boolean(next.error));$('password-status').dataset.taskState=next.error?'error':ready?'ready':'idle';if(errorField)$('password-status').dataset.field=errorField.id;else delete $('password-status').dataset.field;
   for (const id of ['password-show', 'password-copy-all', 'password-download']) $(id).disabled = !ready;
+  $('password-copy-all').hidden=next.values.length<=1;$('password-show').hidden=next.values.length<=1;$('password-download').hidden=!ready;
   $('password-show').textContent = next.visible ? t('uiText.s3d28ab47') : t('uiText.s1a9d827a');
   $('password-show').setAttribute('aria-pressed', String(next.visible));
-  $('password-results').replaceChildren(...next.values.map((value, index) => {
+  if(changed)$('password-results').replaceChildren(...next.values.map((value, index) => {
     const row = document.createElement('div'); row.className = 'password-result';
-    const input = document.createElement('input'); input.type = next.visible ? 'text' : 'password'; input.value = value; input.readOnly = true;
+    const input = document.createElement('input'); input.type = next.visible||visibleRows.has(index) ? 'text' : 'password'; input.value = value; input.readOnly = true;
     input.autocomplete = 'off'; input.spellcheck = false; input.dir = 'ltr'; input.setAttribute('aria-label', t('uiText.scfdb1f48',{p0:index + 1}));
     const button = document.createElement('button'); button.type = 'button'; button.className = 'btn'; button.dataset.passwordCopy = String(index); button.textContent = t('uiText.s658f3664');
     button.setAttribute('aria-label', t('uiText.saad47c37',{p0:index + 1}));
-    row.append(input, button); return row;
+    const field=document.createElement('div');field.className='password-value-field';const eye=document.createElement('button');eye.type='button';eye.className='password-eye btn';eye.dataset.passwordVisible=String(index);eye.setAttribute('aria-pressed',String(input.type==='text'));eye.textContent=t(input.type==='text'?'uiText.s3d28ab47':'uiText.s1a9d827a');eye.setAttribute('aria-label',`${eye.textContent} · ${index+1}`);eye.title=t(input.type==='text'?'usability.password.hideRow':'usability.password.showRow',{number:index+1});eye.onclick=()=>{eye.focus({preventScroll:true});if(state.visible){visibleRows.clear();state.values.forEach((_,i)=>{if(i!==index)visibleRows.add(i);});controller.toggleVisibility();}else{visibleRows.has(index)?visibleRows.delete(index):visibleRows.add(index);render(state);}};field.append(input);const actions=document.createElement('div');actions.className='password-result-actions';actions.append(eye,button);row.append(actions,field);return row;
   }));
+  for(const [index,row]of [...$('password-results').children].entries()){
+    const input=row.querySelector('input'),eye=row.querySelector('[data-password-visible]'),copy=row.querySelector('[data-password-copy]'),visible=next.visible||visibleRows.has(index);
+    input.type=visible?'text':'password';input.setAttribute('aria-label',t('uiText.scfdb1f48',{p0:index+1}));
+    eye.setAttribute('aria-pressed',String(visible));eye.textContent=t(visible?'uiText.s3d28ab47':'uiText.s1a9d827a');eye.setAttribute('aria-label',`${eye.textContent} · ${index+1}`);eye.title=t(visible?'usability.password.hideRow':'usability.password.showRow',{number:index+1});
+    copy.textContent=t('uiText.s658f3664');copy.setAttribute('aria-label',t('uiText.saad47c37',{p0:index+1}));
+  }
 }
 let wordlist;
 try { wordlist = parseWordlist(wordlistText); } catch { /* A corrupt local list fails closed during generation. */ }
@@ -119,11 +131,12 @@ for (const field of root.querySelectorAll('input, select')) {
 $('password-generate').addEventListener('click', () => {
   if ($('password-mode').value === 'passphrase' && !wordlist) return render({values:[], visible:false, error:'wordlist'});
   controller.generate($('password-mode').value, options());
+  const field=$($('password-status').dataset.field);if(field){for(let parent=field.parentElement;parent;parent=parent.parentElement)if(parent.tagName==='DETAILS')parent.open=true;field.focus({preventScroll:true});field.scrollIntoView({block:'nearest'});}
 });
 root.addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.isComposing&&event.target.matches('input:not([readonly]),select')){event.preventDefault();$('password-generate').click();}});
 actionArea($('password-generate').closest('.tool-actions'),$('password-status'),{resultTarget:'#password-results',hasResult:()=>state.values.length>0});
 $('password-clear').addEventListener('click', () => controller.clear());
-$('password-show').addEventListener('click', () => controller.toggleVisibility());
+$('password-show').addEventListener('click', () => {visibleRows.clear();controller.toggleVisibility();});
 $('password-copy-all').addEventListener('click', () => { const text = controller.text(); if (text) void copyText(text); });
 $('password-download').addEventListener('click', () => { const text = controller.text(); if (text) downloadText(text, 'listools-passwords.txt'); });
 $('password-results').addEventListener('click', event => {
@@ -138,3 +151,7 @@ registerContentCheck(()=>state.values.length>0||Boolean($('password-custom').val
 
 const passwordGuide=addTaskGuide('password',[{id:'characters',key:'ux.passwordMode'},{id:'passphrase',key:'ux.passphraseMode'}],{choose:mode=>{$('password-mode').value=mode;updateOptions();}});
 $('password-mode').addEventListener('change',()=>passwordGuide.select($('password-mode').value));
+
+const passwordRange=mountRange($('password-length'));for(const event of ['input','change'])passwordRange.range.addEventListener(event,()=>passwordRange.sync());
+
+const classesGrid=document.createElement('div');classesGrid.className='password-classes-grid';classesGrid.append(...$('password-classes').querySelectorAll('label'));$('password-classes').append(classesGrid);

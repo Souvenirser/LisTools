@@ -562,7 +562,11 @@
     "batchDone": "{{success}}-afbeeldingen verwerkt. · Mislukt: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "Focus de selectie: pijltjes verplaatsen deze; Shift + pijltjes wijzigen de rechter- of onderrand."
+    "cropKeys": "Focus de selectie: pijltjes verplaatsen deze; Shift + pijltjes wijzigen de rechter- of onderrand.",
+    "qualityInvalid": "Voer een kwaliteit van 1 tot 100 in.",
+    "targetInvalid": "Voer een doelgrootte van 1 tot 102400 KiB in.",
+    "dimensionInvalid": "Gebruik hele pixels van 0 tot 16384; 0 behoudt de automatische afmeting.",
+    "scaleInvalid": "Voer een schaal van 1 tot 400 procent in."
   },
   "text": {
     "name": "Tekst opschonen en extraheren",
@@ -769,7 +773,7 @@
     "reset": "Opnieuw instellen",
     "lap": "Recordronde",
     "sound": "Speel een kort geluid af wanneer deze pagina audio kan afspelen",
-    "backgroundHelp": "Timing maakt gebruik van klokdeadlines en verstreken tijd. De status wordt bewaard in de sessieopslag van dit tabblad. Achtergrondtabbladen en slaapapparaten kunnen de uitvoering opschorten; dit is geen achtergrondherinnering of alarm.",
+    "backgroundHelp": "De tijdmeting gebruikt eindtijdstippen en verstreken tijd. Als je dit tabblad opnieuw laadt, worden beide timers hersteld, inclusief de daadwerkelijk verstreken tijd van lopende timers. De status wordt bewaard in de sessieopslag van dit tabblad. Achtergrondtabbladen en apparaten in slaapstand kunnen de uitvoering onderbreken; dit is geen herinnering op de achtergrond of wekker.",
     "laps": "Stopwatchronden",
     "export": "Ronden exporteren als TXT",
     "number": "Ronde",
@@ -893,7 +897,7 @@
       "count": "Het aantal datums moet een geheel getal tussen 1 en 100 zijn.",
       "invalid": "Kan niet berekenen. Controleer de uitdrukking, tijdzone en referentietijd."
     },
-    "copyExpression": "Kopiëren · Expressie",
+    "copyExpression": "Kopiëren Expressie",
     "utcOffset": "UTC ±HH:mm"
   },
   "uiText": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "Kies de volledige match of een capture-groep om uit te pakken. Lege overeenkomsten zijn geldig; ongeëvenaarde groepen worden afzonderlijk weergegeven.",
     "passwordPolicy": "Geselecteerde tekentypen vormen de toegestane pool. Schakel 'Elk type vereisen' in om elk geselecteerd type in elk wachtwoord op te nemen.",
     "speedScope": "Beoordelingen beschrijven de overdrachtssnelheid. Latentie en jitter worden afzonderlijk gemeten.",
-    "viewResult": "Bekijk resultaat"
+    "viewResult": "Bekijk resultaat",
+    "speedNetworkError": "Netwerkverbinding mislukt. Probeer het opnieuw.",
+    "speedStartError": "De snelheidstest kon niet worden gestart. Probeer het opnieuw."
   },
   "redesign": {
     "calculatorOriginal": "Oorspronkelijke waarde",
@@ -1825,7 +1831,8 @@
       "speedSettings": "Testinstellingen",
       "speedSummary": "{{profile}} · {{unit}} · maximaal {{budget}} MiB",
       "customZone": "Aangepaste IANA-tijdzone",
-      "regexNoMatches": "Geen overeenkomsten"
+      "regexNoMatches": "Geen overeenkomsten",
+      "md5ModeConfirm": "Bij het wijzigen van de modus worden de huidige bestandswachtrij, resultaten en verificatiewaarden verwijderd. Doorgaan?"
     },
     "daily": {
       "unitDetails": "Andere conversies en nauwkeurigheid",
@@ -1853,5 +1860,107 @@
     "shared": {
       "viewResult": "Bekijk resultaat"
     }
+  },
+  "v2": {
+    "settings": "Instellingen",
+    "appearance": "Weergave",
+    "themeSystem": "Systeem volgen",
+    "themeLight": "Licht",
+    "themeDark": "Donker",
+    "favorites": "Favorieten",
+    "recent": "Recent geopend",
+    "pin": "Aan favorieten toevoegen",
+    "unpin": "Uit favorieten verwijderen",
+    "noFavorites": "Klik op de ster van een hulpmiddel om het op te slaan.",
+    "noRecent": "Hier verschijnen de vijf laatst geopende hulpmiddelen.",
+    "navigation": "Hulpmiddelen bekijken",
+    "qrTextNotice": "Sommige scanners, waaronder bepaalde WeChat-versies, tonen mogelijk geen QR-codes met platte tekst. Lees de oorspronkelijke tekst met dit hulpmiddel."
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "Andere conversies ({{count}})",
+    "numberSummary": "Bereik {{min}}–{{max}} · {{count}} getallen · {{repeat}}",
+    "noRepeat": "Geen herhaalde getallen"
+  },
+  "usability": {
+    "images": {
+      "growth": "De bestandsgrootte is met {{percent}}% toegenomen; geen verkleining",
+      "adjust": "Parameters aanpassen",
+      "add": "Afbeeldingen toevoegen",
+      "preview": "Voorbeeld van {{name}} bekijken",
+      "unchanged": "Bestandsgrootte ongewijzigd; geen verkleining",
+      "savings": "Bestandsgrootte met {{percent}}% verkleind"
+    },
+    "password": {
+      "showRow": "Resultaat {{number}} tonen",
+      "hideRow": "Resultaat {{number}} verbergen"
+    },
+    "speedtest": {
+      "latencyMs": "HTTP-vertraging zonder belasting",
+      "jitterMs": "Jitter zonder belasting",
+      "downloadLatencyMs": "Vertraging onder downloadbelasting",
+      "downloadJitterMs": "Jitter onder downloadbelasting",
+      "uploadLatencyMs": "Vertraging onder uploadbelasting",
+      "uploadJitterMs": "Jitter onder uploadbelasting",
+      "downloadBps": "Downloaden",
+      "uploadBps": "Uploaden"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "Uitvoeringstijden bekijken",
+    "adjustParameters": "Parameters aanpassen"
+  },
+  "polishData": {
+    "diffBlocks": "{{count}} verschilblokken",
+    "coarse": "Grove vergelijking: blokken kunnen ongewijzigde inhoud bevatten.",
+    "errors": {
+      "CsvColumns": "Rij {{row}} heeft {{actual}} kolommen; verwacht: {{expected}}. Controleer scheidingstekens en cellen met aanhalingstekens.",
+      "CsvHeaders": "Kolomnamen komen meerdere keren voor. Wijzig de namen of schakel de koprij uit.",
+      "CsvJsonCell": "Rij {{row}}, kolom {{column}} bevat geen geldige JSON. Gebruik een JSON-waarde of kies de celmodus voor tekenreeksen.",
+      "CsvArrayHeader": "Arrayrijen hebben geen kolomnamen. Schakel de koprij uit.",
+      "CsvNestedValue": "null en geneste waarden vereisen de celmodus voor expliciete JSON-serialisatie.",
+      "CsvRowShape": "Elke JSON-rij moet dezelfde kolommen hebben, zonder ontbrekende waarden.",
+      "XmlOrdered": "Gebruik de geordende knooppuntenarray uit XML → JSON. Laad het voorbeeld om attributen en tekstknooppunten te bekijken.",
+      "QueryArrays": "Gebruik een object waarvan de waarden niet-lege arrays met tekenreeksen zijn, bijvoorbeeld {\"tag\":[\"a\",\"b\"]}."
+    },
+    "notices": {
+      "StructureOnly": "Gegevenswaarden en ondersteunde structuur blijven behouden; broncommentaar, opmaak en aanhalingstekenstijl niet.",
+      "CsvStrings": "CSV-cellen blijven tekenreeksen; getallen en booleaanse waarden worden niet automatisch afgeleid.",
+      "CsvTextExport": "CSV is tekst; de standaardexport behoudt geen informatie over scalaire JSON-typen.",
+      "ByteHex": "Het resultaat kan niet zonder verlies als {{charset}} worden gedecodeerd. Hex wordt getoond; downloaden behoudt de oorspronkelijke bytes."
+    },
+    "charsetSource": "De tekst is al Unicode. De broncodering geldt alleen voor bestandsbytes."
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "Dit resultaat overschrijdt de invoerlimiet van 10 MiB. Kopiëren en downloaden bevatten nog steeds het volledige resultaat.",
+      "pdfRange": "Beschikbare pagina's: 1–{{count}}",
+      "pdfInspectHelp": "Controleer het aantal pagina's voordat je een bereik kiest.",
+      "qrRecovery": "Foutcorrectie aanpassen"
+    }
+  },
+  "polishShell": {
+    "flags": "Vlaggen: {{flags}}"
+  },
+  "experience": {
+    "extractPhone": "Telefoonnummers extraheren",
+    "extractEmail": "E-mailadressen extraheren",
+    "extractUrl": "Links extraheren",
+    "base64encode": "Base64 coderen",
+    "base64decode": "Base64 decoderen",
+    "base64urlencode": "Base64URL coderen",
+    "base64urldecode": "Base64URL decoderen",
+    "noemail": "Geen e-mailadressen gevonden.",
+    "nophone": "Geen telefoonnummers gevonden.",
+    "nourl": "Geen links gevonden.",
+    "textAuto": "Korte teksten worden automatisch verwerkt; start langere teksten handmatig.",
+    "qrSettings": "Uitvoergrootte {{size}}px · Foutcorrectie {{level}}",
+    "networkDetails": "Netwerk- en gegevensinformatie",
+    "endDate": "Einddatum",
+    "listInput": "Items",
+    "chooseConvert": "Converter kiezen · {{name}}",
+    "task": "Actie",
+    "copySeconds": "Tijdstempel in seconden kopiëren",
+    "copyMilliseconds": "Tijdstempel in milliseconden kopiëren",
+    "unitPrecision": "Toelichting over nauwkeurigheid en eenheden"
   }
 }

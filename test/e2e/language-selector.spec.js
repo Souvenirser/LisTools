@@ -37,7 +37,7 @@ test('Cron language changes preserve dates, generator edits and worker task',asy
 
 test('fifty flag choices support search, keyboard selection and ordinary input focus',async({page})=>{
  await page.goto('/calculator.html');const control=page.locator('.language-control .choices');
- await control.click();await control.locator('input[type=search]').fill('en');await control.locator('[data-choice][data-value=en]').click();await expect(control).toHaveAttribute('aria-expanded','false');
+ await page.locator('#settings-open').click();await control.click();await control.locator('input[type=search]').fill('en');await control.locator('[data-choice][data-value=en]').click();await expect(control).toHaveAttribute('aria-expanded','false');
  await control.click();await expect(control.locator('[data-choice][data-value]')).toHaveCount(50);
  const flags=await control.locator('[data-choice][data-value] img').evaluateAll(images=>images.map(img=>({url:img.src,alt:img.alt,hidden:img.getAttribute('aria-hidden'),width:img.width,height:img.height})));
  expect(new Set(flags.map(item=>item.url)).size).toBe(41);
@@ -48,7 +48,7 @@ test('fifty flag choices support search, keyboard selection and ordinary input f
  await expect(page.locator('html')).toHaveAttribute('lang','ru');await expect(control).toBeFocused();
  await expect(control.locator('.choices__list--single img')).toHaveAttribute('src',/\/ru-/);
  await control.press('Enter');await control.locator('input[type=search]').press('Escape');await expect(control).toBeFocused();
- await control.click();await page.locator('#expression').click();await page.waitForTimeout(100);await expect(page.locator('#expression')).toBeFocused();
+ await control.click();await page.locator('#settings-title').click();await expect(control).toHaveAttribute('aria-expanded','false');await page.locator('#settings-close').click();await page.locator('#expression').click();await page.waitForTimeout(100);await expect(page.locator('#expression')).toBeFocused();
 });
 
 test('language preference applies to this page and future loads only',async({page,context})=>{
@@ -62,7 +62,7 @@ test('language preference applies to this page and future loads only',async({pag
 test('failed language loading restores the visible selection without clearing data',async({page})=>{
  await page.goto('/calculator.html');await page.locator('#expression').fill('123 + 456');
  await page.route('**/assets/ru-*.js',route=>route.abort());
- const control=page.locator('.language-control .choices');await control.click();await control.locator('input[type=search]').fill('ru');await control.locator('[data-choice][data-value=ru]').click();
+ const control=page.locator('.language-control .choices');await page.locator('#settings-open').click();await control.click();await control.locator('input[type=search]').fill('ru');await control.locator('[data-choice][data-value=ru]').click();
  await expect(control.locator('.choices__list--single')).toHaveText('English');await expect(page.locator('html')).toHaveAttribute('lang','en');
  await expect(page.locator('#expression')).toHaveValue('123 + 456');await selectLanguage(page,'ar');
  await expect(page.locator('#expression')).toHaveValue('123 + 456');
@@ -93,7 +93,7 @@ test('all fifty Cron languages preserve calculated dates, exports and structured
   const resource=JSON.parse(readFileSync(new URL(`../../src/locales/${code}.json`,import.meta.url)));
   await selectLanguage(page,code);await expect(page.locator('h1')).toHaveText(resource.cron.title);await expect(page.locator('#cron-run')).toHaveText(resource.cron.run);
   await expect(page.locator('#cron-fields tbody td').first()).toHaveText(resource.cron.fields.minute);
-  await expect(page.locator('.choices__list--single bdi')).toHaveText(languages.find(item=>item.code===code).name);
+  await expect(page.locator('#settings-language .choices__list--single bdi')).toHaveText(languages.find(item=>item.code===code).name);
   expect(await page.locator('#cron-dates tbody tr').evaluateAll(rows=>rows.map(row=>[...row.cells].slice(0,2).map(cell=>cell.textContent)))).toEqual(dates);
  }
  expect(await exported()).toBe(before);
@@ -113,13 +113,13 @@ for(const width of [640,900,1440])test(`shared language controls stay aligned on
   await page.goto('/calculator.html');await selectLanguage(page,code);
   for(const file of files){
    await page.goto(`/${file}`);await expect(page.locator('html')).toHaveAttribute('lang',code);
-   const control=page.locator('.language-control .choices');await expect(control).toBeVisible();
+   await page.locator('#settings-open').click();const control=page.locator('.language-control .choices');await expect(control).toBeVisible();
    await expect.poll(()=>control.locator('.choices__list--single img').evaluate(image=>image.complete&&image.naturalWidth>0),{message:file}).toBe(true);
    const metrics=await page.locator('.language-control').evaluate(element=>{
     const style=getComputedStyle(element),control=element.querySelector('.choices'),inner=element.querySelector('.choices__inner'),image=control.querySelector('img');
     const box=control.getBoundingClientRect();return {display:style.display,gap:style.gap,margin:style.marginBlock,top:box.top,bottom:box.bottom,left:box.left,right:box.right,height:box.height,font:getComputedStyle(inner).fontSize,imageLoaded:image.complete&&image.naturalWidth>0,overflow:document.documentElement.scrollWidth>innerWidth+2};
    });
-   expect(metrics.display,file).toBe('flex');expect(metrics.gap,file).toBe('8px');expect(metrics.margin,file).toBe('0px');expect(metrics.height,file).toBe(44);expect(metrics.font,file).toBe('16px');expect(metrics.imageLoaded,file).toBe(true);expect(metrics.left,file).toBeGreaterThanOrEqual(0);expect(metrics.right,file).toBeLessThanOrEqual(width);expect(metrics.bottom,file).toBeLessThanOrEqual(72);expect(metrics.overflow,file).toBe(false);
+   expect(metrics.display,file).toBe('flex');expect(metrics.gap,file).toBe('8px');expect(metrics.margin,file).toBe('0px');expect(metrics.height,file).toBe(44);expect(metrics.font,file).toBe('16px');expect(metrics.imageLoaded,file).toBe(true);expect(metrics.left,file).toBeGreaterThanOrEqual(0);expect(metrics.right,file).toBeLessThanOrEqual(width);expect(metrics.bottom,file).toBeLessThanOrEqual(960);expect(metrics.overflow,file).toBe(false);
   }
  }
 });
@@ -135,7 +135,7 @@ test('late Cron description imports cannot replace the latest choice',async({pag
   await page.goto('/cron.html');await expect(page.locator('#cron-dates tbody tr')).toHaveCount(10);
   await selectLanguage(page,'ru');await expect.poll(()=>held).toBe(true);
   await selectLanguage(page,'hi');const description=await page.locator('#cron-description').textContent();release();
-  await page.waitForLoadState('networkidle');await expect(page.locator('html')).toHaveAttribute('lang','hi');await expect(page.locator('#cron-description')).toHaveText(description);await expect(page.locator('.choices__list--single bdi')).toHaveText('हिन्दी');
+  await page.waitForLoadState('networkidle');await expect(page.locator('html')).toHaveAttribute('lang','hi');await expect(page.locator('#cron-description')).toHaveText(description);await expect(page.locator('#settings-language .choices__list--single bdi')).toHaveText('हिन्दी');
  }finally{release();}
 });
 
@@ -161,7 +161,7 @@ test('a slow language package cannot revert a later successful selection',async(
  await page.route('**/assets/ru-*.js',async route=>{held=true;await gate;await route.continue();});
  try{
   await page.goto('/calculator.html');await page.locator('#expression').fill('9007199254740993123');
-  const control=page.locator('.language-control .choices');await control.click();await control.locator('input[type=search]').fill('ru');await control.locator('[data-choice][data-value=ru]').click();await expect.poll(()=>held).toBe(true);
+  const control=page.locator('.language-control .choices');await page.locator('#settings-open').click();await control.click();await control.locator('input[type=search]').fill('ru');await control.locator('[data-choice][data-value=ru]').click();await expect.poll(()=>held).toBe(true);
   await selectLanguage(page,'ar');release();await page.waitForLoadState('networkidle');await expect(page.locator('html')).toHaveAttribute('lang','ar');await expect(control.locator('.choices__list--single bdi')).toHaveText('العربية');await expect(page.locator('#expression')).toHaveValue('9007199254740993123');
  }finally{release();}
 });

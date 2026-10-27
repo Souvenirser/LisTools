@@ -21,6 +21,6 @@ export default defineConfig({
     outDir: fileURLToPath(new URL('./dist', import.meta.url)),
     emptyOutDir: true,
     target: ['chrome120','firefox140','safari18'], license: { fileName: 'THIRD_PARTY_LICENSES.md' },
-    rolldownOptions: { input: { ...Object.fromEntries(pages.filter(page=>!page.file.includes('#')).map(page=>[page.id,fileURLToPath(new URL(`./pages/${page.file}`,import.meta.url))])), popup:fileURLToPath(new URL('./pages/popup.html',import.meta.url)) } }
+    rolldownOptions: { input: { ...Object.fromEntries(pages.filter(page=>!page.file.includes('#')).map(page=>[page.id,fileURLToPath(new URL(`./pages/${page.file}`,import.meta.url))])), popup:fileURLToPath(new URL('./pages/popup.html',import.meta.url)), } }
   }
 });

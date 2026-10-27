@@ -39,11 +39,11 @@ self.onmessage=async({data:{taskId,input,options}})=>{
       if(totalSize+resized.size>100*1024*1024)throw mediaError('images.limit');
       totalSize+=resized.size;
       const extension={'image/jpeg':'jpg','image/png':'png','image/webp':'webp'}[resized.type];
-      results.push({fileId:file.fileId,blob:resized,name:`${file.name.replace(/\.[^.]+$/,'')}.${extension}`,width,height,originalSize:file.originalSize,originalWidth:file.originalWidth,originalHeight:file.originalHeight,targetMet:!target||resized.size<=target});
-      }catch(error){failures.push({fileId:file.fileId,code:typeof error.code==='string'&&error.code.startsWith('images.')?error.code:'images.failed',params:error.params});}
+      const name=uniqueNames([...results.map(item=>item.name),`${file.name.replace(/\.[^.]+$/,'')}.${extension}`]).at(-1);
+      const item={fileId:file.fileId,blob:resized,name,width,height,originalSize:file.originalSize,originalWidth:file.originalWidth,originalHeight:file.originalHeight,targetMet:!target||resized.size<=target};results.push(item);self.postMessage({taskId,event:'item-complete',item});
+      }catch(error){const failure={fileId:file.fileId,code:typeof error.code==='string'&&error.code.startsWith('images.')?error.code:'images.failed',params:error.params};failures.push(failure);self.postMessage({taskId,event:'item-complete',failure});}
       self.postMessage({taskId,event:'progress',done:i+1,total:input.length});
     }
-    const names=uniqueNames(results.map(r=>r.name));results.forEach((r,i)=>r.name=names[i]);
     self.postMessage({taskId,status:'ready',result:{results,failures}});
   } catch(error){self.postMessage({taskId,status:'error',code:typeof error.code==='string'&&error.code.startsWith('images.')?error.code:'images.failed',params:error.params});}
 };

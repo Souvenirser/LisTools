@@ -3,10 +3,9 @@ import {tryExample} from './task-helpers.js';
 
 for(const tool of ['images','pdf'])test(`${tool} mobile primary action follows import and completed output`,async({page})=>{
  await page.setViewportSize({width:390,height:844});await page.goto(`/${tool}.html`);
- await expect(page.locator('.workspace-import-action')).toBeVisible();await expect(page.locator(`#${tool}-run`)).toBeHidden();
+ await expect(page.locator('#'+tool+'-choose')).toBeVisible();await expect(page.locator(`#${tool}-run`)).toBeHidden();
  await tryExample(page,tool);await expect(page.locator(tool==='pdf'?'#pdf-result':'#images-results')).toBeVisible();
- await page.evaluate(()=>document.querySelector('main').scrollTop=0);await expect(page.locator('.workspace-view-result')).toBeVisible();
- await page.locator('.workspace-view-result').click();await expect(page.locator('.workspace-action-area')).toHaveAttribute('data-action-state','result-visible');
+ await page.evaluate(()=>document.querySelector('main').scrollTop=0);if(tool==='images'){await expect(page.locator('.images-preview-pair')).toBeInViewport();await expect(page.locator('.workspace-view-result')).toBeHidden();}else{await expect(page.locator('.workspace-view-result')).toBeVisible();await page.locator('.workspace-view-result').click();}await expect(page.locator('.workspace-action-area')).toHaveAttribute('data-action-state','result-visible');
  const result=page.locator(tool==='pdf'?'#pdf-result':'#images-results');
  await expect.poll(()=>result.evaluate(node=>{const box=(node.querySelector('h2,h3')||node).getBoundingClientRect();return box.top>=0&&box.top<innerHeight-100;})).toBe(true);
  await expect(result.locator('button').first()).toBeEnabled();

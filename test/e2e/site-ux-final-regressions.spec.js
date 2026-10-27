@@ -1,3 +1,4 @@
+import {chooseConversionTool} from './menu-helpers.js';
 import {test,expect} from '@playwright/test';
 import {selectLanguage} from './language-helpers.js';
 
@@ -35,7 +36,7 @@ test('HSV conversion shows a canonical color swatch',async({page})=>{
 });
 
 test('choosing the current conversion closes its compact catalog',async({page})=>{
- await page.setViewportSize({width:390,height:844});await page.goto('/convert.html#base64');await page.locator('#convert-catalog-toggle').click();await page.locator('#convert-tool-list a[href="#base64"]').click();await expect(page.locator('.convert-catalog')).toBeHidden();
+ await page.setViewportSize({width:390,height:844});await page.goto('/convert.html#base64');await page.locator('#convert-catalog-toggle').click();await chooseConversionTool(page,'#convert-tool-list a[href="#base64"]');await expect(page.locator('.convert-catalog')).toBeHidden();
 });
 
 test('regex task buttons update the primary action through language changes',async({page})=>{
