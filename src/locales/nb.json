@@ -1962,5 +1962,14 @@
     "copySeconds": "Kopier tidsstempel i sekunder",
     "copyMilliseconds": "Kopier tidsstempel i millisekunder",
     "unitPrecision": "Merknader om presisjon og enheter"
+  },
+  "motion": {
+    "edit": "Rediger",
+    "copyInput": "Kopier inndata",
+    "copyResult": "Kopier resultatet",
+    "loading": "Laster inn siden …",
+    "stillLoading": "Laster fortsatt inn siden...",
+    "loadFailed": "Siden kunne ikke lastes.",
+    "reload": "Last inn på nytt"
   }
 }

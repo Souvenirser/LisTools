@@ -1,4 +1,5 @@
 export async function chooseTask(page,tool,task){
+ await page.waitForFunction(()=>document.documentElement.dataset.uiState!=='booting');
  const select=page.locator(`#${tool}-task-select`);
  if(await select.isVisible())await select.selectOption(task);else {const button=page.locator(`#${tool}-task-${task}`);if(tool==='pdf'&&!await button.isVisible())await page.locator('#pdf-task-adjustments').click();await button.click();}
 }

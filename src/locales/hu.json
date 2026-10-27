@@ -1962,5 +1962,14 @@
     "copySeconds": "Másodperces időbélyeg másolása",
     "copyMilliseconds": "Ezredmásodperces időbélyeg másolása",
     "unitPrecision": "Pontosság és mértékegységek"
+  },
+  "motion": {
+    "edit": "Szerkesztés",
+    "copyInput": "Bemenet másolása",
+    "copyResult": "Eredmény másolása",
+    "loading": "Oldal betöltése…",
+    "stillLoading": "Az oldal betöltése folyamatban van…",
+    "loadFailed": "Az oldalt nem sikerült betölteni.",
+    "reload": "Újratöltés"
   }
 }

@@ -1962,5 +1962,14 @@
     "copySeconds": "Kopyahin ang timestamp sa segundo",
     "copyMilliseconds": "Kopyahin ang timestamp sa millisecond",
     "unitPrecision": "Mga tala sa katumpakan at yunit"
+  },
+  "motion": {
+    "edit": "I-edit",
+    "copyInput": "Kopyahin ang input",
+    "copyResult": "Kopyahin ang resulta",
+    "loading": "Nilo-load ang page…",
+    "stillLoading": "Nilo-load pa rin ang page…",
+    "loadFailed": "Hindi ma-load ang page.",
+    "reload": "I-reload"
   }
 }

@@ -23,7 +23,7 @@ test('regex common rules remain available after flags and language changes',asyn
 test('timestamp keeps the live local clock visible while extra clock formats are collapsed',async({page})=>{
   await page.clock.install({time:new Date('2023-12-31T23:59:00Z')});
   await page.clock.pauseAt(new Date('2024-01-01T00:00:00Z'));
-  await page.goto('/timestamp.html');await selectLanguage(page,'en');
+  await page.goto('/timestamp.html');await page.clock.runFor(250);await selectLanguage(page,'en');
   const zones=page.locator('.timezone-controls .choices');await zones.click();
   await zones.locator('input[type="search"]').fill('UTC');await zones.locator('[data-choice][data-value="UTC"]').click();
   await expect(page.locator('#clock-details')).not.toHaveAttribute('open');await expect(page.locator('.clock-quick-actions [data-copy=clock-seconds]')).toBeVisible();

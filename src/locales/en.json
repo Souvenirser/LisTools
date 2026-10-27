@@ -1962,5 +1962,14 @@
     "copySeconds": "Copy seconds timestamp",
     "copyMilliseconds": "Copy milliseconds timestamp",
     "unitPrecision": "Precision and unit notes"
+  },
+  "motion": {
+    "edit": "Edit",
+    "copyInput": "Copy input",
+    "copyResult": "Copy result",
+    "loading": "Loading page…",
+    "stillLoading": "Still loading the page…",
+    "loadFailed": "The page could not be loaded.",
+    "reload": "Reload"
   }
 }

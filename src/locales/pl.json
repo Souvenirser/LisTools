@@ -1962,5 +1962,14 @@
     "copySeconds": "Kopiuj znacznik czasu w sekundach",
     "copyMilliseconds": "Kopiuj znacznik czasu w milisekundach",
     "unitPrecision": "Uwagi o precyzji i jednostkach"
+  },
+  "motion": {
+    "edit": "Edytuj",
+    "copyInput": "Skopiuj dane wejściowe",
+    "copyResult": "Skopiuj wynik",
+    "loading": "Ładowanie strony…",
+    "stillLoading": "Wciąż ładuję stronę…",
+    "loadFailed": "Nie udało się załadować strony.",
+    "reload": "Przeładować"
   }
 }

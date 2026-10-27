@@ -29,7 +29,7 @@ for(const width of [390,1440]){
 }
 
 test('mobile QR input and preview use consistent card insets',async({page})=>{
-  await page.setViewportSize({width:390,height:844});await page.goto('/qr.html');
+  await page.setViewportSize({width:390,height:844});await page.goto('/qr.html');await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');
   const insets=await page.locator('.tool-grid>div>.tool-card:visible,#qr-output-panel').evaluateAll(cards=>cards.map(card=>parseFloat(getComputedStyle(card).paddingInlineStart)));
   expect(insets).toHaveLength(2);expect(insets[0]).toBeGreaterThanOrEqual(16);expect(Math.abs(insets[0]-insets[1])).toBeLessThanOrEqual(1);
 });

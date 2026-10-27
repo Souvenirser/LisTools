@@ -1962,5 +1962,14 @@
     "copySeconds": "Kopiér tidsstempel i sekunder",
     "copyMilliseconds": "Kopiér tidsstempel i millisekunder",
     "unitPrecision": "Bemærkninger om præcision og enheder"
+  },
+  "motion": {
+    "edit": "Rediger",
+    "copyInput": "Kopiér input",
+    "copyResult": "Kopiér resultatet",
+    "loading": "Indlæser side...",
+    "stillLoading": "Indlæser stadig siden...",
+    "loadFailed": "Siden kunne ikke indlæses.",
+    "reload": "Genindlæs"
   }
 }

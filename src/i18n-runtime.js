@@ -26,5 +26,6 @@ export async function setLanguage(code,persist=false) {
 }
 let saved;
 try{saved=localStorage.getItem(preferenceKey);}catch{/* Preferences are optional. */}
-await setLanguage(preferredLanguage(saved,navigator.languages || [navigator.language]));
+try { await setLanguage(preferredLanguage(saved,navigator.languages || [navigator.language])); }
+catch { await setLanguage('en'); }
 export { languages };

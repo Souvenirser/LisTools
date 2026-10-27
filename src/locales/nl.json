@@ -1962,5 +1962,14 @@
     "copySeconds": "Tijdstempel in seconden kopiëren",
     "copyMilliseconds": "Tijdstempel in milliseconden kopiëren",
     "unitPrecision": "Toelichting over nauwkeurigheid en eenheden"
+  },
+  "motion": {
+    "edit": "Bewerken",
+    "copyInput": "Kopieer invoer",
+    "copyResult": "Kopieer resultaat",
+    "loading": "Pagina laden…",
+    "stillLoading": "De pagina wordt nog steeds geladen...",
+    "loadFailed": "De pagina kon niet worden geladen.",
+    "reload": "Herladen"
   }
 }

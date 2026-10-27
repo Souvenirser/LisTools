@@ -1962,5 +1962,14 @@
     "copySeconds": "Zeitstempel in Sekunden kopieren",
     "copyMilliseconds": "Zeitstempel in Millisekunden kopieren",
     "unitPrecision": "Hinweise zu Genauigkeit und Einheiten"
+  },
+  "motion": {
+    "edit": "Bearbeiten",
+    "copyInput": "Eingabe kopieren",
+    "copyResult": "Ergebnis kopieren",
+    "loading": "Seite wird geladen…",
+    "stillLoading": "Die Seite wird immer noch geladen ...",
+    "loadFailed": "Die Seite konnte nicht geladen werden.",
+    "reload": "Neu laden"
   }
 }

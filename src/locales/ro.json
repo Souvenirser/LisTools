@@ -1962,5 +1962,14 @@
     "copySeconds": "Copiază marcajul temporal în secunde",
     "copyMilliseconds": "Copiază marcajul temporal în milisecunde",
     "unitPrecision": "Note despre precizie și unități"
+  },
+  "motion": {
+    "edit": "Editați",
+    "copyInput": "Copiați intrarea",
+    "copyResult": "Copiați rezultatul",
+    "loading": "Se încarcă pagina...",
+    "stillLoading": "Încă se încarcă pagina...",
+    "loadFailed": "Pagina nu a putut fi încărcată.",
+    "reload": "Reîncărcați"
   }
 }

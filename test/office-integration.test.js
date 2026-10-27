@@ -15,7 +15,9 @@ test('all ten office tools are independent offline extension entries',()=>{
     assert.equal(page.file,`${id}.html`);
     assert.equal(pageConnectPolicy(page.file),"connect-src 'none'");
     const html=readFileSync(new URL(`../pages/${page.file}`,import.meta.url),'utf8');
-    assert.ok(html.includes(`/src/${id}.js`));
+    assert.ok(html.includes(`data-entry="${id}"`));
+    assert.ok(html.includes('/src/entry.js'));
+    assert.ok(readFileSync(new URL('../src/entry.js',import.meta.url),'utf8').includes(`'./${id}.js'`));
   }
   assert.equal(pages.filter(page=>!page.file.includes('#')).length,18);
   assert.equal(pages.length,19);

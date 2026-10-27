@@ -1962,5 +1962,14 @@
     "copySeconds": "Saniye cinsinden zaman damgasını kopyala",
     "copyMilliseconds": "Milisaniye cinsinden zaman damgasını kopyala",
     "unitPrecision": "Hassasiyet ve birim notları"
+  },
+  "motion": {
+    "edit": "Düzenle",
+    "copyInput": "Girişi kopyala",
+    "copyResult": "Sonucu kopyala",
+    "loading": "Sayfa yükleniyor…",
+    "stillLoading": "Sayfa hâlâ yükleniyor…",
+    "loadFailed": "Sayfa yüklenemedi.",
+    "reload": "Yeniden yükle"
   }
 }

@@ -1962,5 +1962,14 @@
     "copySeconds": "Salin cap masa dalam saat",
     "copyMilliseconds": "Salin cap masa dalam milisaat",
     "unitPrecision": "Nota ketepatan dan unit"
+  },
+  "motion": {
+    "edit": "Sunting",
+    "copyInput": "Salin input",
+    "copyResult": "Salin keputusan",
+    "loading": "Memuatkan halaman…",
+    "stillLoading": "Masih memuatkan halaman…",
+    "loadFailed": "Halaman tidak dapat dimuatkan.",
+    "reload": "Muat semula"
   }
 }

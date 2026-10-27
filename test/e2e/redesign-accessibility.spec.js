@@ -6,6 +6,8 @@ import {tryExample} from './task-helpers.js';
 
 const tags=['wcag2a','wcag2aa','wcag21a','wcag21aa'];
 async function scan(page,testInfo){
+  await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');
+  await expect(page.locator('html')).not.toHaveAttribute('data-entry-motion','fade');
   await page.evaluate(()=>document.fonts.ready);
   const results=await new AxeBuilder({page}).withTags(tags).analyze();
   const resultFile=testInfo.outputPath('axe-results.json');await writeFile(resultFile,JSON.stringify(results,null,2));

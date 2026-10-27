@@ -1,4 +1,9 @@
+import {pendingFeedback} from './tools/shared/pending-feedback.js';
 import {createSourceEditor} from './tools/shared/source-editor.js';
+import {undo,redo,undoDepth,redoDepth,selectAll} from '@codemirror/commands';
+import {StateEffect} from '@codemirror/state';
+import {EditorView} from '@codemirror/view';
+import {copyText} from './tools/shared/page.js';
 import {registerContentCheck} from './tools/shared/content-state.js';
 import { createJSONEditor, jsonQueryLanguage, Mode } from 'vanilla-jsoneditor';
 import { parse, stringify } from 'lossless-json';
@@ -12,6 +17,21 @@ const $ = (id) => document.getElementById(id);
 $('app-version').textContent = `v${version}`;
 const sourceEditor=createSourceEditor($('source'));
 const source=sourceEditor.element;
+const editButton=document.createElement('button'),copyInput=document.createElement('button'),editMenu=document.createElement('div');
+editButton.id='json-edit';editButton.type='button';editButton.dataset.i18n='motion.edit';editButton.setAttribute('popovertarget','json-edit-menu');editButton.setAttribute('aria-haspopup','menu');editButton.setAttribute('aria-expanded','false');
+copyInput.id='json-copy-input';copyInput.type='button';copyInput.dataset.i18n='motion.copyInput';copyInput.onclick=()=>copyText(sourceEditor.view.state.doc.toString());
+editMenu.id='json-edit-menu';editMenu.setAttribute('popover','auto');editMenu.setAttribute('role','menu');
+const editCommands=[['undo',undo,undoDepth],['redo',redo,redoDepth],['select-all',selectAll,state=>state.doc.length]];
+for(const [name,command]of editCommands){const button=document.createElement('button');button.id='json-edit-'+name;button.type='button';button.setAttribute('role','menuitem');button.dataset.i18n='common.'+(name==='select-all'?'selectAll':name);button.onclick=()=>{command(sourceEditor.view);editMenu.hidePopover();sourceEditor.view.focus();};editMenu.append(button);}
+document.querySelector('.input-actions').prepend(editButton,copyInput);document.body.append(editMenu);
+function refreshEditActions(){copyInput.disabled=!sourceEditor.view.state.doc.length;for(const[name,,available]of editCommands)document.getElementById('json-edit-'+name).disabled=!available(sourceEditor.view.state);}
+sourceEditor.view.dispatch({effects:StateEffect.appendConfig.of(EditorView.updateListener.of(refreshEditActions))});
+editMenu.addEventListener('toggle',()=>{const open=editMenu.matches(':popover-open');editButton.setAttribute('aria-expanded',String(open));if(open){refreshEditActions();const box=editButton.getBoundingClientRect();editMenu.style.top=`${Math.min(box.bottom+4,innerHeight-editMenu.offsetHeight-8)}px`;editMenu.style.left=`${Math.max(8,Math.min(box.left,innerWidth-editMenu.offsetWidth-8))}px`;}});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&editMenu.matches(':popover-open')){event.preventDefault();editMenu.hidePopover();editButton.focus({preventScroll:true});}});
+editMenu.addEventListener('keydown',event=>{if(['ArrowDown','ArrowUp','Home','End'].includes(event.key)){event.preventDefault();const items=[...editMenu.querySelectorAll('button:not(:disabled)')],index=items.indexOf(document.activeElement);const next=event.key==='Home'?0:event.key==='End'?items.length-1:index<0?0:(index+(event.key==='ArrowDown'?1:-1)+items.length)%items.length;items[next]?.focus();}});
+editButton.addEventListener('keydown',event=>{if(event.key==='ArrowDown'){event.preventDefault();editMenu.showPopover();refreshEditActions();editMenu.querySelector('button:not(:disabled)')?.focus();}});
+function translateEditActions(){for(const node of [editButton,copyInput,...editMenu.children])node.textContent=t(node.dataset.i18n);editMenu.setAttribute('aria-label',t('motion.edit'));}
+onLanguageChange(translateEditActions);translateEditActions();refreshEditActions();
 const resultButtons = document.querySelectorAll('[data-result]');
 const cancelButton=document.createElement('button');cancelButton.id='json-cancel';cancelButton.hidden=true;cancelButton.disabled=true;cancelButton.dataset.i18n='common.cancel';$('compact').after(cancelButton);
 const parser = { parse, stringify };
@@ -25,9 +45,12 @@ let importedName = '';
 let largeResult = false;
 let importError,importErrorParams,readVersion=0,readPending=false;
 const importStatus=document.createElement('p');importStatus.id='json-import-status';importStatus.className='tool-status';importStatus.setAttribute('role','status');importStatus.hidden=true;source.after(importStatus);
-function showImportStatus(key,params){importError=key;importErrorParams=params;importStatus.hidden=!key;importStatus.textContent=key?t(key,params):'';}
+const importFeedback=pendingFeedback('json-import-status');
+const resultFeedback=pendingFeedback('result-state','placeholder');
+function showImportStatus(key,params){importFeedback(key==='common.processing');importError=key;importErrorParams=params;importStatus.hidden=!key;importStatus.textContent=key?t(key,params):'';}
 function syncPending(){
   const pending=readPending||lastState.status==='pending',visible=pending||lastState.status==='ready';
+  for(const id of ['format','compress'])$(id)?.setAttribute('aria-busy',String(pending));
   cancelButton.disabled=!pending;cancelButton.hidden=!visible;cancelButton.style.visibility=pending?'':'hidden';cancelButton.style.setProperty('display',visible?'inline-flex':'','important');
   for(const button of resultButtons)button.disabled=pending||lastState.status!=='ready';
 }
@@ -66,6 +89,7 @@ function renderMenu(items, { mode }) {
 }
 
 function render(state) {
+  if(state.status!=='pending')resultFeedback(false);
   const retainResult=state.status==='pending'&&editor&&resultVersion===inputVersion;
   lastState = state;
   syncPending();
@@ -136,7 +160,7 @@ function render(state) {
 
 const controller = createJsonController({
   createWorker: () => new Worker(new URL('./tools/json/worker.js', import.meta.url), { type: 'module' }),
-  onState: render
+  onState: state=>{resultFeedback(state.status==='pending');render(state);}
 });
 
 function process(action = 'format', wait = 0) {

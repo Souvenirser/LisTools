@@ -1962,5 +1962,14 @@
     "copySeconds": "Da àmì àkókò ní ìṣẹ́jú-àáyá kọ",
     "copyMilliseconds": "Da àmì àkókò ní mílíṣẹ́jú-àáyá kọ",
     "unitPrecision": "Àlàyé nípa ìpéye àti àwọn ẹyọ ìwọ̀n"
+  },
+  "motion": {
+    "edit": "Ṣatunkọ",
+    "copyInput": "Daakọ igbewọle",
+    "copyResult": "Daakọ esi",
+    "loading": "Nkojọpọ oju-iwe…",
+    "stillLoading": "Ṣi kojọpọ oju-iwe naa…",
+    "loadFailed": "Oju-iwe naa ko le ṣe kojọpọ.",
+    "reload": "Tun gbee si"
   }
 }

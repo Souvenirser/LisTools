@@ -1962,5 +1962,14 @@
     "copySeconds": "Nakili muhuri wa muda wa sekunde",
     "copyMilliseconds": "Nakili muhuri wa muda wa milisekunde",
     "unitPrecision": "Maelezo ya usahihi na vipimo"
+  },
+  "motion": {
+    "edit": "Hariri",
+    "copyInput": "Nakili ingizo",
+    "copyResult": "Nakili matokeo",
+    "loading": "Inapakia ukurasa...",
+    "stillLoading": "Bado inapakia ukurasa...",
+    "loadFailed": "Ukurasa haukuweza kupakiwa.",
+    "reload": "Pakia upya"
   }
 }

@@ -1962,5 +1962,14 @@
     "copySeconds": "Kopioi aikaleima sekunteina",
     "copyMilliseconds": "Kopioi aikaleima millisekunteina",
     "unitPrecision": "Tarkkuus- ja yksikkötiedot"
+  },
+  "motion": {
+    "edit": "Muokkaa",
+    "copyInput": "Kopioi syöttö",
+    "copyResult": "Kopioi tulos",
+    "loading": "Ladataan sivua…",
+    "stillLoading": "Sivua ladataan edelleen…",
+    "loadFailed": "Sivua ei voitu ladata.",
+    "reload": "Lataa uudelleen"
   }
 }
