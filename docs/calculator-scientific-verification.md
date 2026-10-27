@@ -42,6 +42,7 @@ CFFIXED_USER_HOME=/private/tmp/listools-calculator-firefox npm run test:cross-br
 - **按用户选择，本轮先交付可加载目录 `dist/`，支持页资源齐全后再打包完整 v1.4.0 ZIP。** 并行新增的支持页要求 `public/support/alipay.png`，当前缺少该资源；`scripts/package.js` 因此拒绝打包。没有绕过完整性检查，也没有提供早于最终修复的候选包。
 - 构建仍提示现有较大的 JSON / 单位模块分块，未为此扩大本轮重构范围。
 
+机器可读记录见 [资源与测试](./calculator-scientific-verification.json)、[真实扩展离线验收](./calculator-extension-verification.json)。WebKit 页面测试不代替 Safari 原生扩展安装；本轮没有执行商店或签名分发。
 
 ## 界面
 
