@@ -2,6 +2,7 @@ import { PDFDocument, degrees } from 'pdf-lib';
 import { zipSync } from 'fflate';
 import { imageHeader, mediaError } from '../images/core.js';
 const fail=code=>{throw mediaError(`pdf.${code}`);};
+const outputName=(files,mode,extension='pdf')=>files.length===1?`${files[0].name.replace(/\.[^.]+$/u,'')}-${mode}.${extension}`:`${mode==='merge'?'merged':'images'}.${extension}`;
 async function fromFile(file,task){try{return await task();}catch(error){error.params={...error.params,name:file.name};throw error;}}
 export function parsePages(text,count) {
   if(!String(text).trim())fail('rangeError');const pages=[];
@@ -51,7 +52,7 @@ export async function processPdf({files,mode,pages='',rotation=90,pageSize='a4',
       if(docs.length!==1)fail('singleFile');const pdf=docs[0],all=pdf.getPageIndices();
       if(mode==='split') {
         const entries={};let totalBytes=0;for(let i=0;i<count;i++){const part=await PDFDocument.create();part.addPage((await part.copyPages(pdf,[i]))[0]);const bytes=await part.save();totalBytes+=bytes.length;if(totalBytes>100*1024*1024)fail('limit');entries[`page-${i+1}.pdf`]=bytes;progress({done:i+1,total:count});}
-        const bytes=zipSync(entries,{level:0});if(bytes.length>100*1024*1024)fail('limit');return {bytes,name:'pages.zip',type:'application/zip',pageCount:count,order:all.map(i=>i+1),sourceFiles};
+        const bytes=zipSync(entries,{level:0});if(bytes.length>100*1024*1024)fail('limit');return {bytes,name:outputName(files,mode,'zip'),type:'application/zip',pageCount:count,order:all.map(i=>i+1),sourceFiles};
       }
       const selected=parsePages(pages,count);let order;
       if(mode==='extract'||mode==='reorder') {order=selected;if(mode==='reorder'&&selected.length!==count)fail('completeOrder');}
@@ -64,5 +65,5 @@ export async function processPdf({files,mode,pages='',rotation=90,pageSize='a4',
     }
   }
   const bytes=await out.save();if(bytes.length>100*1024*1024)fail('limit');
-  return {bytes,name:`${mode}.pdf`,type:'application/pdf',pageCount:count,order:outputOrder,sourceFiles};
+  return {bytes,name:outputName(files,mode),type:'application/pdf',pageCount:count,order:outputOrder,sourceFiles};
 }
