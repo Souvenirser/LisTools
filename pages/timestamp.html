@@ -1,9 +1,10 @@
 <!doctype html>
 <html lang="en">
   <head>
+  <script src="/theme-init.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light" />
+    <meta name="color-scheme" content="light dark" />
     <title data-i18n="timestamp.name">LisTools · 时间戳转换</title>
     <link rel="icon" href="/icons/icon-48.png" />
   </head>
@@ -19,7 +20,7 @@
           <div class="timezone-controls"><label id="timezone-caption" for="time-zone"><span data-i18n="timestamp.zone">时区</span></label><select id="time-zone" aria-describedby="device-time-zone timezone-error"></select><button id="restore-time-zone"><span data-i18n="timestamp.restore">恢复设备时区</span></button></div>
           <span id="device-time-zone"></span><p id="timezone-error" class="is-error" role="status" hidden></p>
         </section>
-        <details id="clock-details">
+        <details id="clock-details" open>
           <summary><span data-i18n="ux.clockInfo"></span><output id="clock-summary" dir="ltr" aria-live="off"></output></summary>
         <section class="clock-panel panel" aria-labelledby="clock-title">
           <div class="panel-heading"><h2 id="clock-title"><span data-i18n="timestamp.now">当前时间</span></h2><span id="clock-context"></span><span class="clock-refresh"><span data-i18n="timestamp.refresh">每秒刷新</span></span></div>
@@ -72,7 +73,7 @@
             <div class="converter-footer"><span data-i18n="timestamp.rounding">整数秒向下取整，毫秒完整保留。</span><br /><span data-i18n="timestamp.dst">非法日期和夏令时跳过或重复的当地时间将被拒绝。</span></div>
           </section>
         </div>
-        <footer class="workbench-footer"><span><span data-i18n="common.privacy">数据仅在本地浏览器处理，不上传、不保存输入内容。</span></span><span><span data-i18n="timestamp.dateHelp">设备时区来自系统设置，可手动切换。</span></span></footer>
+        <footer class="workbench-footer"><span><span data-i18n="common.privacy">数据仅在本地浏览器处理，不上传、不保存输入内容。</span></span></footer>
       </main>
     </div>
     <div id="notification" role="status" aria-live="polite" hidden></div>
