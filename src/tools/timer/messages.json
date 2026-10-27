@@ -12,7 +12,7 @@
   "reset": "Reset",
   "lap": "Record lap",
   "sound": "Play a short sound on completion when this page can play audio",
-  "backgroundHelp": "Timing uses clock deadlines and elapsed time. State is kept in this tab’s session storage. Background tabs and sleeping devices can suspend execution; this is not a background reminder or alarm.",
+  "backgroundHelp": "Timing uses clock deadlines and elapsed time. Reloading this tab restores both timers, including elapsed clock time for running timers. State is kept in this tab’s session storage. Background tabs and sleeping devices can suspend execution; this is not a background reminder or alarm.",
   "laps": "Stopwatch laps",
   "export": "Export laps as TXT",
   "number": "Lap",

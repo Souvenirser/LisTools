@@ -1,0 +1,11 @@
+.timer-page #timer-state{min-block-size:3.2em;display:flex;align-items:center;justify-content:center}
+.timer-page #timer-other-running[hidden]{display:block!important;visibility:hidden}
+.timer-page .timer-duration-inputs{position:relative;padding-block-end:3rem}
+.timer-page .timer-duration-inputs .field-error{position:absolute;inset-inline:0;top:calc(100% - 3rem);margin:6px 0 0}
+.timer-page .workspace-actions:has(#timer-start){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));inline-size:100%;max-inline-size:440px;margin-inline:auto}
+.timer-page .workspace-actions:has(#timer-lap:not([hidden])){grid-template-columns:repeat(4,minmax(0,1fr))}
+.timer-page .workspace-actions:has(#timer-start)>button{min-inline-size:0;inline-size:100%}
+
+.timer-sound-warning{max-height:6em;overflow:auto;margin-block:4px 12px;color:var(--warning-text);line-height:1.5}.timer-sound-warning:empty{display:none}
+
+@media(max-width:759px){.timer-page .timer-ring{width:min(100%,220px);margin:8px auto}.timer-page #timer-display{--timer-size:2.5rem}.timer-page #timer-state{min-height:2em}.timer-page #timer-other-running{min-height:0;margin-block:4px}}
