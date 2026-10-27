@@ -1,0 +1,27 @@
+/* Available before the language and tool modules execute. */
+html{background:#f8f9fa;color:#1c2024;color-scheme:light}
+html.dark{background:#111113;color:#edeef0;color-scheme:dark}
+html[data-ui-state=booting] body,html[data-ui-state=failed] body{visibility:hidden}
+#page-boot{visibility:visible;position:fixed;inset:0;z-index:1000;display:grid;grid-template-rows:64px 1fr;background:inherit;color:inherit;font:16px/1.6 system-ui;pointer-events:none}
+#page-boot[hidden]{display:none}
+.boot-header{border-bottom:1px solid #8884;background:#8881}
+.boot-body{display:grid;grid-template-columns:0 minmax(0,1fr)}
+.boot-sidebar{border-inline-end:1px solid #8884;background:#8881}
+.boot-content{padding:24px}
+.boot-placeholder{max-width:1120px;height:160px;border:1px solid #8883;border-radius:12px;margin-block:24px;background:#8881}
+.boot-message{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.boot-message button{pointer-events:auto;min-height:44px;padding:8px 16px;border:1px solid #8888;border-radius:8px;background:transparent;color:inherit;font:inherit;cursor:pointer}
+@media(min-width:1200px){.boot-body{grid-template-columns:64px minmax(0,1fr)}}
+@media(min-width:1440px){.boot-body{grid-template-columns:256px minmax(0,1fr)}}
+html[data-entry=popup] .boot-header,html[data-entry=popup] .boot-sidebar{display:none}
+html[data-entry=popup] #page-boot{grid-template-rows:1fr}
+html[data-entry-motion=fade] main{animation:page-arrive .15s ease-out both}
+@keyframes page-arrive{from{opacity:0}to{opacity:1}}
+@view-transition{navigation:auto}
+::view-transition-old(root){display:none}
+::view-transition-new(root),::view-transition-group(root){animation:none}
+main{view-transition-name:page-content}
+::view-transition-group(page-content){animation:none}
+::view-transition-old(page-content){animation:page-arrive .06s ease-in reverse both}
+::view-transition-new(page-content){animation:page-arrive .09s .06s ease-out both}
+@media(prefers-reduced-motion:reduce){@view-transition{navigation:none}html[data-entry-motion] main{animation:none}::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
