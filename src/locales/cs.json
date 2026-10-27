@@ -562,7 +562,11 @@
     "batchDone": "Zpracované obrázky {{success}}. · Selhalo: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "Zaměřte výběr: šipky jej posouvají; Shift + šipky mění pravý nebo spodní okraj."
+    "cropKeys": "Zaměřte výběr: šipky jej posouvají; Shift + šipky mění pravý nebo spodní okraj.",
+    "qualityInvalid": "Zadejte kvalitu od 1 do 100.",
+    "targetInvalid": "Zadejte cílovou velikost od 1 do 102400 KiB.",
+    "dimensionInvalid": "Zadejte celé pixely od 0 do 16384; 0 zachová automatický rozměr.",
+    "scaleInvalid": "Zadejte měřítko od 1 do 400 procent."
   },
   "text": {
     "name": "Vyčistěte a extrahujte text",
@@ -769,7 +773,7 @@
     "reset": "Resetovat",
     "lap": "Záznam kola",
     "sound": "Přehrajte krátký zvuk po dokončení, když tato stránka může přehrávat zvuk",
-    "backgroundHelp": "Časování používá časové lhůty a uplynulý čas. Stav je uchováván v úložišti relace této karty. Karty na pozadí a spící zařízení mohou pozastavit provádění; toto není připomenutí nebo alarm na pozadí.",
+    "backgroundHelp": "Časování používá termíny podle hodin a uplynulý čas. Opětovné načtení této karty obnoví oba časovače, včetně skutečně uplynulého času u běžících časovačů. Stav je uchováván v úložišti relace této karty. Karty na pozadí a zařízení v režimu spánku mohou pozastavit provádění; nejde o připomenutí ani budík na pozadí.",
     "laps": "Stopky kol",
     "export": "Exportovat kola jako TXT",
     "number": "Lap",
@@ -893,7 +897,7 @@
       "count": "Počet dat musí být celé číslo mezi 1 a 100.",
       "invalid": "Nelze vypočítat. Zkontrolujte výraz, časové pásmo a referenční čas."
     },
-    "copyExpression": "Kopírovat · Výraz",
+    "copyExpression": "Kopírovat Výraz",
     "utcOffset": "UTC ±HH:mm"
   },
   "uiText": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "Vyberte úplnou shodu nebo skupinu zachycení, kterou chcete extrahovat. Prázdné zápasy jsou platné; nepřiřazené skupiny jsou zobrazeny samostatně.",
     "passwordPolicy": "Vybrané typy postav tvoří povolený fond. Chcete-li do každého hesla zahrnout každý vybraný typ, povolte možnost „Vyžadovat každý typ“.",
     "speedScope": "Hodnocení popisuje přenosovou rychlost. Latence a jitter se měří samostatně.",
-    "viewResult": "Zobrazit výsledek"
+    "viewResult": "Zobrazit výsledek",
+    "speedNetworkError": "Připojení k síti selhalo. Zkuste to znovu.",
+    "speedStartError": "Test rychlosti se nepodařilo spustit. Zkuste to znovu."
   },
   "redesign": {
     "calculatorOriginal": "Původní hodnota",
@@ -1848,10 +1854,113 @@
       "speedNetwork": "Tento nástroj se připojuje ke Cloudflare a spotřebovává síťová data. Testovací požadavky začnou až po spuštění.",
       "speedSettings": "Nastavení testu",
       "speedSummary": "{{profile}} · {{unit}} · až {{budget}} MiB",
-      "customZone": "Vlastní časové pásmo IANA"
+      "customZone": "Vlastní časové pásmo IANA",
+      "md5ModeConfirm": "Změna režimu odstraní aktuální frontu souborů, výsledky a ověřovací hodnoty. Pokračovat?"
     },
     "shared": {
       "viewResult": "Zobrazit výsledek"
     }
+  },
+  "v2": {
+    "settings": "Nastavení",
+    "appearance": "Vzhled",
+    "themeSystem": "Podle systému",
+    "themeLight": "Světlý",
+    "themeDark": "Tmavý",
+    "favorites": "Oblíbené",
+    "recent": "Nedávno otevřené",
+    "pin": "Přidat do oblíbených",
+    "unpin": "Odebrat z oblíbených",
+    "noFavorites": "Kliknutím na hvězdičku nástroj uložíte.",
+    "noRecent": "Zde se zobrazí pět naposledy otevřených nástrojů.",
+    "navigation": "Procházet nástroje",
+    "qrTextNotice": "Některé čtečky včetně některých verzí WeChat nemusí zobrazovat textové QR kódy. Původní text přečtěte tímto nástrojem."
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "Další převody ({{count}})",
+    "numberSummary": "Rozsah {{min}}–{{max}} · {{count}} čísel · {{repeat}}",
+    "noRepeat": "Bez opakování čísel"
+  },
+  "usability": {
+    "images": {
+      "growth": "Velikost souboru se zvýšila o {{percent}} %; nedošlo ke zmenšení",
+      "adjust": "Upravit parametry",
+      "add": "Přidat obrázky",
+      "preview": "Náhled {{name}}",
+      "unchanged": "Velikost souboru se nezměnila; nedošlo ke zmenšení",
+      "savings": "Velikost souboru se zmenšila o {{percent}} %"
+    },
+    "password": {
+      "showRow": "Zobrazit výsledek {{number}}",
+      "hideRow": "Skrýt výsledek {{number}}"
+    },
+    "speedtest": {
+      "downloadBps": "Stahování",
+      "uploadBps": "Odesílání",
+      "latencyMs": "Latence HTTP v klidu",
+      "jitterMs": "Kolísání latence v klidu",
+      "downloadLatencyMs": "Latence při zatížení stahováním",
+      "downloadJitterMs": "Kolísání latence při zatížení stahováním",
+      "uploadLatencyMs": "Latence při zatížení odesíláním",
+      "uploadJitterMs": "Kolísání latence při zatížení odesíláním"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "Zobrazit časy provedení",
+    "adjustParameters": "Upravit parametry"
+  },
+  "polishData": {
+    "diffBlocks": "{{count}} bloků rozdílů",
+    "coarse": "Hrubé porovnání: bloky mohou obsahovat nezměněný obsah.",
+    "errors": {
+      "CsvColumns": "Řádek {{row}} má {{actual}} sloupců; očekává se {{expected}}. Zkontrolujte oddělovače a buňky v uvozovkách.",
+      "CsvHeaders": "Názvy sloupců se opakují. Přejmenujte je nebo vypněte záhlaví.",
+      "CsvJsonCell": "Řádek {{row}}, sloupec {{column}} není platný JSON. Použijte hodnotu JSON nebo režim textových buněk.",
+      "CsvArrayHeader": "Řádky polí nemají názvy sloupců. Vypněte záhlaví.",
+      "CsvNestedValue": "Hodnoty null a vnořené hodnoty vyžadují režim buněk s explicitní serializací JSON.",
+      "CsvRowShape": "Každý řádek JSON musí mít stejné sloupce bez chybějících hodnot.",
+      "XmlOrdered": "Použijte uspořádané pole uzlů z převodu XML → JSON. Načtěte příklad s atributy a textovými uzly.",
+      "QueryArrays": "Použijte objekt, jehož hodnoty jsou neprázdná pole řetězců, například {\"tag\":[\"a\",\"b\"]}."
+    },
+    "notices": {
+      "StructureOnly": "Datové hodnoty a podporovaná struktura zůstanou zachovány; komentáře, formátování a styl uvozovek zdroje nikoli.",
+      "CsvStrings": "Buňky CSV zůstávají řetězci; čísla a logické hodnoty se neodvozují.",
+      "CsvTextExport": "CSV je text; výchozí export nezachovává informace o typech skalárních hodnot JSON.",
+      "ByteHex": "Výsledek nelze bezeztrátově dekódovat jako {{charset}}. Zobrazuje se Hex; stažení zachová původní bajty."
+    },
+    "charsetSource": "Text již používá Unicode. Zdrojové kódování se vztahuje pouze na bajty souboru."
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "Výsledek překračuje limit vstupu 10 MiB. Kopírování a stažení stále zahrnují celý výsledek.",
+      "pdfRange": "Dostupné stránky: 1–{{count}}",
+      "pdfInspectHelp": "Před výběrem rozsahu zkontrolujte počet stránek.",
+      "qrRecovery": "Upravit opravu chyb"
+    }
+  },
+  "polishShell": {
+    "flags": "Příznaky: {{flags}}"
+  },
+  "experience": {
+    "extractPhone": "Extrahovat telefonní čísla",
+    "extractEmail": "Extrahovat e-mailové adresy",
+    "extractUrl": "Extrahovat odkazy",
+    "base64encode": "Kódovat Base64",
+    "base64decode": "Dekódovat Base64",
+    "base64urlencode": "Kódovat Base64URL",
+    "base64urldecode": "Dekódovat Base64URL",
+    "noemail": "Nebyly nalezeny žádné e-mailové adresy.",
+    "nophone": "Nebyla nalezena žádná telefonní čísla.",
+    "nourl": "Nebyly nalezeny žádné odkazy.",
+    "textAuto": "Krátké texty se zpracují automaticky; delší texty spusťte ručně.",
+    "qrSettings": "Výstupní velikost {{size}}px · Oprava chyb {{level}}",
+    "networkDetails": "Informace o síti a datech",
+    "endDate": "Datum ukončení",
+    "listInput": "Položky",
+    "chooseConvert": "Vybrat převodník · {{name}}",
+    "task": "Akce",
+    "copySeconds": "Kopírovat časové razítko v sekundách",
+    "copyMilliseconds": "Kopírovat časové razítko v milisekundách",
+    "unitPrecision": "Poznámky k přesnosti a jednotkám"
   }
 }

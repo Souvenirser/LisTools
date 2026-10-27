@@ -562,7 +562,11 @@
     "batchDone": "Bearbetade {{success}}-bilder. · Misslyckades: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "Fokusera markeringen: piltangenter flyttar den; Skift + piltangenter ändrar höger eller nedre kant."
+    "cropKeys": "Fokusera markeringen: piltangenter flyttar den; Skift + piltangenter ändrar höger eller nedre kant.",
+    "qualityInvalid": "Ange en kvalitet från 1 till 100.",
+    "targetInvalid": "Ange en målstorlek från 1 till 102400 KiB.",
+    "dimensionInvalid": "Använd hela pixlar från 0 till 16384; 0 behåller det automatiska måttet.",
+    "scaleInvalid": "Ange en skala från 1 till 400 procent."
   },
   "text": {
     "name": "Rensa och extrahera text",
@@ -769,7 +773,7 @@
     "reset": "Återställ",
     "lap": "Rekordvarv",
     "sound": "Spela ett kort ljud när det är klart när den här sidan kan spela upp ljud",
-    "backgroundHelp": "Timing använder klockdeadlines och förfluten tid. Status hålls i denna fliks sessionslagring. Bakgrundsflikar och sovande enheter kan avbryta exekveringen; detta är inte en bakgrundspåminnelse eller alarm.",
+    "backgroundHelp": "Tidtagningen använder sluttidpunkter enligt klockan och förfluten tid. Om fliken läses in igen återställs båda tidtagarna, inklusive den faktiska tid som har förflutit för tidtagare som körs. Tillståndet sparas i den här flikens sessionslagring. Bakgrundsflikar och enheter i viloläge kan pausa körningen; detta är ingen bakgrundspåminnelse eller väckarklocka.",
     "laps": "Stoppur varv",
     "export": "Exportera varv som TXT",
     "number": "Varv",
@@ -893,7 +897,7 @@
       "count": "Datumräkningen måste vara ett heltal mellan 1 och 100.",
       "invalid": "Det går inte att beräkna. Kontrollera uttrycket, tidszonen och referenstiden."
     },
-    "copyExpression": "Kopiera · Uttryck",
+    "copyExpression": "Kopiera Uttryck",
     "utcOffset": "UTC ±HH:mm"
   },
   "uiText": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "Välj hela matchningen eller en fångstgrupp att extrahera. Tomma matchningar är giltiga; omatchade grupper visas separat.",
     "passwordPolicy": "Valda teckentyper bildar den tillåtna poolen. Aktivera \"Kräv varje typ\" för att inkludera varje vald typ i varje lösenord.",
     "speedScope": "Betygen beskriver överföringshastigheten. Latens och jitter mäts separat.",
-    "viewResult": "Visa resultat"
+    "viewResult": "Visa resultat",
+    "speedNetworkError": "Nätverksanslutningen misslyckades. Försök igen.",
+    "speedStartError": "Hastighetstestet kunde inte startas. Försök igen."
   },
   "redesign": {
     "calculatorOriginal": "Ursprungligt värde",
@@ -1825,7 +1831,8 @@
       "speedNetwork": "Verktyget ansluter till Cloudflare och använder nätverksdata. Förfrågningar börjar först när du startar testet.",
       "speedSettings": "Testinställningar",
       "speedSummary": "{{profile}} · {{unit}} · upp till {{budget}} MiB",
-      "customZone": "Egen IANA-tidszon"
+      "customZone": "Egen IANA-tidszon",
+      "md5ModeConfirm": "Om du byter läge rensas den aktuella filkön, resultaten och verifieringsvärdena. Fortsätta?"
     },
     "daily": {
       "countdownHelp": "För en nedräkning väljer du i dag som start och måldatumet som slut. Passerade datum ger ett negativt antal dagar.",
@@ -1853,5 +1860,107 @@
     "shared": {
       "viewResult": "Visa resultat"
     }
+  },
+  "v2": {
+    "settings": "Inställningar",
+    "appearance": "Utseende",
+    "themeSystem": "Följ systemet",
+    "themeLight": "Ljust",
+    "themeDark": "Mörkt",
+    "favorites": "Favoriter",
+    "recent": "Nyligen öppnade",
+    "pin": "Lägg till i favoriter",
+    "unpin": "Ta bort från favoriter",
+    "noFavorites": "Klicka på ett verktygs stjärna för att spara det.",
+    "noRecent": "De fem senast öppnade verktygen visas här.",
+    "navigation": "Bläddra bland verktyg",
+    "qrTextNotice": "Vissa läsare, inklusive vissa WeChat-versioner, kanske inte visar QR-koder med vanlig text. Läs originaltexten med detta verktyg."
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "Andra omvandlingar ({{count}})",
+    "numberSummary": "Intervall {{min}}–{{max}} · {{count}} tal · {{repeat}}",
+    "noRepeat": "Inga upprepade tal"
+  },
+  "usability": {
+    "images": {
+      "growth": "Filstorleken ökade med {{percent}} %; ingen storleksminskning",
+      "adjust": "Justera parametrar",
+      "add": "Lägg till bilder",
+      "preview": "Förhandsgranska {{name}}",
+      "unchanged": "Filstorleken är oförändrad; ingen storleksminskning",
+      "savings": "Filstorleken minskade med {{percent}} %"
+    },
+    "password": {
+      "showRow": "Visa resultat {{number}}",
+      "hideRow": "Dölj resultat {{number}}"
+    },
+    "speedtest": {
+      "latencyMs": "HTTP-latens utan belastning",
+      "jitterMs": "Jitter utan belastning",
+      "downloadLatencyMs": "Latens under nedladdningsbelastning",
+      "downloadJitterMs": "Jitter under nedladdningsbelastning",
+      "uploadLatencyMs": "Latens under uppladdningsbelastning",
+      "uploadJitterMs": "Jitter under uppladdningsbelastning",
+      "downloadBps": "Nedladdning",
+      "uploadBps": "Uppladdning"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "Visa körningstider",
+    "adjustParameters": "Justera parametrar"
+  },
+  "polishData": {
+    "diffBlocks": "{{count}} skillnadsblock",
+    "coarse": "Grov jämförelse: blocken kan innehålla oförändrat innehåll.",
+    "errors": {
+      "CsvColumns": "Rad {{row}} har {{actual}} kolumner; förväntat antal är {{expected}}. Kontrollera avgränsare och celler med citattecken.",
+      "CsvHeaders": "Kolumnnamnen upprepas. Byt namn på dem eller stäng av rubrikraden.",
+      "CsvJsonCell": "Rad {{row}}, kolumn {{column}} innehåller inte giltig JSON. Använd ett JSON-värde eller välj celläget för strängar.",
+      "CsvArrayHeader": "Rader i form av arrayer saknar kolumnnamn. Stäng av rubrikraden.",
+      "CsvNestedValue": "null och nästlade värden kräver celläget för uttrycklig JSON-serialisering.",
+      "CsvRowShape": "Varje JSON-rad måste ha samma kolumner utan saknade värden.",
+      "XmlOrdered": "Använd den ordnade nodarrayen från XML → JSON. Läs in exemplet för att se attribut och textnoder.",
+      "QueryArrays": "Använd ett objekt vars värden är icke-tomma arrayer med strängar, till exempel {\"tag\":[\"a\",\"b\"]}."
+    },
+    "notices": {
+      "StructureOnly": "Datavärden och den struktur som stöds bevaras; källkommentarer, formatering och citatteckenstil bevaras inte.",
+      "CsvStrings": "CSV-celler förblir strängar; tal och booleska värden tolkas inte automatiskt.",
+      "CsvTextExport": "CSV är text; standardexporten bevarar inte information om skalära JSON-typer.",
+      "ByteHex": "Resultatet kan inte avkodas förlustfritt som {{charset}}. Hex visas; nedladdningen bevarar de ursprungliga byten."
+    },
+    "charsetSource": "Texten är redan Unicode. Källkodningen gäller endast filbytes."
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "Resultatet överskrider indatagränsen på 10 MiB. Kopiering och nedladdning innehåller fortfarande hela resultatet.",
+      "pdfRange": "Tillgängliga sidor: 1–{{count}}",
+      "pdfInspectHelp": "Kontrollera sidantalet innan du väljer ett intervall.",
+      "qrRecovery": "Justera felkorrigering"
+    }
+  },
+  "polishShell": {
+    "flags": "Flaggor: {{flags}}"
+  },
+  "experience": {
+    "extractPhone": "Extrahera telefonnummer",
+    "extractEmail": "Extrahera e-postadresser",
+    "extractUrl": "Extrahera länkar",
+    "base64encode": "Koda med Base64",
+    "base64decode": "Avkoda Base64",
+    "base64urlencode": "Koda med Base64URL",
+    "base64urldecode": "Avkoda Base64URL",
+    "noemail": "Inga e-postadresser hittades.",
+    "nophone": "Inga telefonnummer hittades.",
+    "nourl": "Inga länkar hittades.",
+    "textAuto": "Kort text bearbetas automatiskt; kör större texter manuellt.",
+    "qrSettings": "Utdatastorlek {{size}}px · Felkorrigering {{level}}",
+    "networkDetails": "Nätverks- och datainformation",
+    "endDate": "Slutdatum",
+    "listInput": "Poster",
+    "chooseConvert": "Välj konverterare · {{name}}",
+    "task": "Åtgärd",
+    "copySeconds": "Kopiera tidsstämpel i sekunder",
+    "copyMilliseconds": "Kopiera tidsstämpel i millisekunder",
+    "unitPrecision": "Information om precision och enheter"
   }
 }

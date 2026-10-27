@@ -562,7 +562,11 @@
     "batchDone": "Images {{success}} traitées. · Échec: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "Placez le focus sur la sélection : les flèches la déplacent ; Maj + flèches ajustent le bord droit ou inférieur."
+    "cropKeys": "Placez le focus sur la sélection : les flèches la déplacent ; Maj + flèches ajustent le bord droit ou inférieur.",
+    "qualityInvalid": "Saisissez une qualité de 1 à 100.",
+    "targetInvalid": "Saisissez une taille cible de 1 à 102400 KiB.",
+    "dimensionInvalid": "Utilisez des pixels entiers de 0 à 16384 ; 0 conserve la dimension automatique.",
+    "scaleInvalid": "Saisissez une échelle de 1 à 400 pour cent."
   },
   "text": {
     "name": "Nettoyer et extraire le texte",
@@ -769,7 +773,7 @@
     "reset": "Réinitialiser",
     "lap": "Tour record",
     "sound": "Jouez un court son à la fin lorsque cette page peut lire de l'audio.",
-    "backgroundHelp": "Le timing utilise les délais d'horloge et le temps écoulé. L’état est conservé dans le stockage de session de cet onglet. Les onglets d'arrière-plan et les appareils en veille peuvent suspendre l'exécution ; il ne s'agit pas d'un rappel ou d'une alarme en arrière-plan.",
+    "backgroundHelp": "Le chronométrage utilise des échéances de l’horloge et le temps écoulé. Recharger cet onglet restaure les deux minuteries, y compris le temps réel écoulé pour celles en cours. L’état est conservé dans le stockage de session de cet onglet. Les onglets en arrière-plan et les appareils en veille peuvent suspendre l’exécution ; il ne s’agit pas d’un rappel ni d’une alarme en arrière-plan.",
     "laps": "Tours chronométrés",
     "export": "Exporter les tours sous TXT",
     "number": "Tour",
@@ -893,7 +897,7 @@
       "count": "Le nombre de dates doit être un nombre entier compris entre 1 et 100.",
       "invalid": "Impossible de calculer. Vérifiez l'expression, le fuseau horaire et l'heure de référence."
     },
-    "copyExpression": "Copier · Expression",
+    "copyExpression": "Copier Expression",
     "utcOffset": "UTC ±HH:mm"
   },
   "uiText": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "Choisissez la correspondance complète ou un groupe de capture à extraire. Les correspondances vides sont valides ; les groupes sans correspondance sont présentés séparément.",
     "passwordPolicy": "Les types de caractères sélectionnés forment le pool autorisé. Activez « Exiger chaque type » pour inclure chaque type sélectionné dans chaque mot de passe.",
     "speedScope": "Les notes décrivent la vitesse de transfert. La latence et la gigue sont mesurées séparément.",
-    "viewResult": "Afficher le résultat"
+    "viewResult": "Afficher le résultat",
+    "speedNetworkError": "La connexion réseau a échoué. Réessayez.",
+    "speedStartError": "Impossible de démarrer le test de débit. Réessayez."
   },
   "redesign": {
     "calculatorOriginal": "Valeur originale",
@@ -1848,10 +1854,113 @@
       "speedNetwork": "Cet outil se connecte à Cloudflare et consomme des données réseau. Les requêtes de test commencent uniquement après votre lancement.",
       "speedSettings": "Paramètres du test",
       "speedSummary": "{{profile}} · {{unit}} · jusqu’à {{budget}} MiB",
-      "customZone": "Fuseau horaire IANA personnalisé"
+      "customZone": "Fuseau horaire IANA personnalisé",
+      "md5ModeConfirm": "Changer de mode supprimera la file de fichiers actuelle, les résultats et les valeurs de vérification. Continuer ?"
     },
     "shared": {
       "viewResult": "Afficher le résultat"
     }
+  },
+  "v2": {
+    "settings": "Paramètres",
+    "appearance": "Apparence",
+    "themeSystem": "Suivre le système",
+    "themeLight": "Clair",
+    "themeDark": "Sombre",
+    "favorites": "Favoris",
+    "recent": "Ouverts récemment",
+    "pin": "Ajouter aux favoris",
+    "unpin": "Retirer des favoris",
+    "noFavorites": "Cliquez sur l’étoile d’un outil pour l’ajouter aux favoris.",
+    "noRecent": "Les cinq derniers outils ouverts apparaissent ici.",
+    "navigation": "Parcourir les outils",
+    "qrTextNotice": "Certains lecteurs, dont certaines versions de WeChat, peuvent ne pas afficher le texte d’un code QR. Utilisez ce lecteur pour retrouver le texte original."
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "Autres conversions ({{count}})",
+    "numberSummary": "Plage {{min}}–{{max}} · {{count}} nombres · {{repeat}}",
+    "noRepeat": "Sans répétition des nombres"
+  },
+  "usability": {
+    "images": {
+      "growth": "La taille du fichier a augmenté de {{percent}} % ; aucune réduction",
+      "adjust": "Ajuster les paramètres",
+      "add": "Ajouter des images",
+      "preview": "Aperçu de {{name}}",
+      "unchanged": "Taille du fichier inchangée ; aucune réduction",
+      "savings": "La taille du fichier a diminué de {{percent}} %"
+    },
+    "password": {
+      "showRow": "Afficher le résultat {{number}}",
+      "hideRow": "Masquer le résultat {{number}}"
+    },
+    "speedtest": {
+      "downloadBps": "Téléchargement",
+      "uploadBps": "Envoi",
+      "latencyMs": "Latence HTTP au repos",
+      "jitterMs": "Variation de latence au repos",
+      "downloadLatencyMs": "Latence sous charge de téléchargement",
+      "downloadJitterMs": "Variation de latence sous charge de téléchargement",
+      "uploadLatencyMs": "Latence sous charge d’envoi",
+      "uploadJitterMs": "Variation de latence sous charge d’envoi"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "Afficher les temps d’exécution",
+    "adjustParameters": "Ajuster les paramètres"
+  },
+  "polishData": {
+    "diffBlocks": "{{count}} blocs de différences",
+    "coarse": "Comparaison approximative : les blocs peuvent inclure du contenu inchangé.",
+    "errors": {
+      "CsvColumns": "La ligne {{row}} contient {{actual}} colonnes ; {{expected}} étaient attendues. Vérifiez les séparateurs et les cellules entre guillemets.",
+      "CsvHeaders": "Des noms de colonnes sont répétés. Renommez-les ou désactivez la ligne d’en-tête.",
+      "CsvJsonCell": "La ligne {{row}}, colonne {{column}}, ne contient pas de JSON valide. Utilisez une valeur JSON ou choisissez le mode de cellules en chaînes de caractères.",
+      "CsvArrayHeader": "Les lignes de tableaux n’ont pas de noms de colonnes. Désactivez la ligne d’en-tête.",
+      "CsvNestedValue": "Les valeurs null et les valeurs imbriquées nécessitent le mode de cellules avec sérialisation JSON explicite.",
+      "CsvRowShape": "Chaque ligne JSON doit avoir les mêmes colonnes sans valeurs manquantes.",
+      "XmlOrdered": "Utilisez le tableau ordonné de nœuds issu de XML → JSON. Chargez l’exemple pour voir les attributs et les nœuds de texte.",
+      "QueryArrays": "Utilisez un objet dont les valeurs sont des tableaux non vides de chaînes, par exemple {\"tag\":[\"a\",\"b\"]}."
+    },
+    "notices": {
+      "StructureOnly": "Les valeurs des données et la structure prise en charge sont conservées ; les commentaires, la mise en forme et le style de guillemets de la source ne le sont pas.",
+      "CsvStrings": "Les cellules CSV restent des chaînes ; les nombres et les booléens ne sont pas déduits.",
+      "CsvTextExport": "CSV est du texte ; l’exportation par défaut ne conserve pas les informations de types scalaires JSON.",
+      "ByteHex": "Le résultat ne peut pas être décodé sans perte en {{charset}}. Affichage Hex ; le téléchargement conserve les octets d’origine."
+    },
+    "charsetSource": "Le texte est déjà en Unicode. L’encodage source ne s’applique qu’aux octets des fichiers."
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "Ce résultat dépasse la limite d’entrée de 10 MiB. La copie et le téléchargement incluent toujours le résultat complet.",
+      "pdfRange": "Pages disponibles : 1–{{count}}",
+      "pdfInspectHelp": "Vérifiez le nombre de pages avant de choisir une plage.",
+      "qrRecovery": "Ajuster la correction d’erreurs"
+    }
+  },
+  "polishShell": {
+    "flags": "Indicateurs : {{flags}}"
+  },
+  "experience": {
+    "extractPhone": "Extraire les numéros de téléphone",
+    "extractEmail": "Extraire les adresses e-mail",
+    "extractUrl": "Extraire les liens",
+    "base64encode": "Encoder en Base64",
+    "base64decode": "Décoder Base64",
+    "base64urlencode": "Encoder en Base64URL",
+    "base64urldecode": "Décoder Base64URL",
+    "noemail": "Aucune adresse e-mail trouvée.",
+    "nophone": "Aucun numéro de téléphone trouvé.",
+    "nourl": "Aucun lien trouvé.",
+    "textAuto": "Les textes courts sont traités automatiquement ; lancez les textes plus longs manuellement.",
+    "qrSettings": "Taille de sortie {{size}}px · Correction des erreurs {{level}}",
+    "networkDetails": "Informations sur le réseau et les données",
+    "endDate": "Date de fin",
+    "listInput": "Entrées",
+    "chooseConvert": "Choisir un convertisseur · {{name}}",
+    "task": "Action",
+    "copySeconds": "Copier l’horodatage en secondes",
+    "copyMilliseconds": "Copier l’horodatage en millisecondes",
+    "unitPrecision": "Notes sur la précision et les unités"
   }
 }

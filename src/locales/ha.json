@@ -562,7 +562,11 @@
     "batchDone": "Hotunan {{success}} da aka sarrafa. · Ya gaza: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "Mayar da hankali kan zaɓin: kibiyoyi suna motsa shi; Shift da kibiyoyi suna canza gefen dama ko na ƙasa."
+    "cropKeys": "Mayar da hankali kan zaɓin: kibiyoyi suna motsa shi; Shift da kibiyoyi suna canza gefen dama ko na ƙasa.",
+    "qualityInvalid": "Shigar da inganci daga 1 zuwa 100.",
+    "targetInvalid": "Shigar da girman da ake nufi daga 1 zuwa 102400 KiB.",
+    "dimensionInvalid": "Yi amfani da pixels cikakku daga 0 zuwa 16384; 0 yana barin girman atomatik.",
+    "scaleInvalid": "Shigar da sikeli daga kashi 1 zuwa 400."
   },
   "text": {
     "name": "Tsabtace kuma cire rubutu",
@@ -769,7 +773,7 @@
     "reset": "Sake saiti",
     "lap": "Rikodin cinya",
     "sound": "Kunna ɗan gajeren sauti lokacin da wannan shafin zai iya kunna sauti",
-    "backgroundHelp": "Lokaci yana amfani da lokacin ƙarshe na agogo da lokacin da ya wuce. Ana ajiye jihar a cikin ma'ajiyar zaman wannan shafin. Shafukan bango da na'urorin barci na iya dakatar da aiwatarwa; wannan ba tunatarwa ba ce ko ƙararrawa.",
+    "backgroundHelp": "Ƙidayar lokaci tana amfani da lokacin ƙarshe na agogo da lokacin da ya wuce. Sake loda wannan shafin yana dawo da masu ƙidayar lokaci biyu, har da ainihin lokacin da ya wuce ga waɗanda ke gudana. Ana ajiye hali a ma'ajiyar zaman wannan shafin. Shafukan bango da na'urorin da ke yanayin barci na iya dakatar da aiwatarwa; wannan ba tunatarwa ko ƙararrawa ta bango ba ce.",
     "laps": "agogon gudu",
     "export": "Fitar da laps kamar TXT",
     "number": "cin gindi",
@@ -872,7 +876,7 @@
       "count": "Dole ne ƙidaya kwanan wata ya zama lamba tsakanin 1 zuwa 100.",
       "invalid": "An kasa ƙididdigewa. Bincika magana, yankin lokaci da lokacin tunani."
     },
-    "copyExpression": "Kwafa · Magana",
+    "copyExpression": "Kwafa Magana",
     "utcOffset": "UTC ±HH:mm"
   },
   "speedtestRating": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "Zaɓi cikakken wasa ko ƙungiyar kama don cirewa. Matches marasa amfani suna aiki; Ƙungiyoyin da ba su dace ba ana nuna su daban.",
     "passwordPolicy": "Nau'in halayen da aka zaɓa suna samar da tafkin da aka yarda. Kunna \"Bukatar kowane nau'i\" don haɗa kowane nau'in da aka zaɓa a cikin kowane kalmar sirri.",
     "speedScope": "Kimomi suna bayyana saurin canja wuri. Latency da jitter ana auna su daban.",
-    "viewResult": "Duba sakamakon"
+    "viewResult": "Duba sakamakon",
+    "speedNetworkError": "Haɗin cibiyar sadarwa ya gaza. Sake gwadawa.",
+    "speedStartError": "An kasa fara gwajin sauri. Sake gwadawa."
   },
   "redesign": {
     "calculatorOriginal": "Ƙimar asali",
@@ -1848,10 +1854,113 @@
       "speedNetwork": "Wannan kayan aiki yana haɗuwa da Cloudflare kuma yana amfani da bayanan hanyar sadarwa. Buƙatun gwaji suna farawa ne kawai bayan ka fara.",
       "speedSettings": "Saitunan gwaji",
       "speedSummary": "{{profile}} · {{unit}} · har {{budget}} MiB",
-      "customZone": "Yankin lokaci na IANA na musamman"
+      "customZone": "Yankin lokaci na IANA na musamman",
+      "md5ModeConfirm": "Canza yanayin zai share jerin fayiloli na yanzu, sakamako da ƙimomin tabbatarwa. A ci gaba?"
     },
     "shared": {
       "viewResult": "Duba sakamakon"
     }
+  },
+  "v2": {
+    "settings": "Saituna",
+    "appearance": "Bayyanar",
+    "themeSystem": "Bi tsarin na’ura",
+    "themeLight": "Haske",
+    "themeDark": "Duhu",
+    "favorites": "Abubuwan da aka fi so",
+    "recent": "An buɗe kwanan nan",
+    "pin": "Ƙara zuwa waɗanda aka fi so",
+    "unpin": "Cire daga waɗanda aka fi so",
+    "noFavorites": "Danna tauraron kayan aiki don adana shi.",
+    "noRecent": "Kayan aiki biyar na ƙarshe da aka buɗe za su bayyana a nan.",
+    "navigation": "Duba kayan aiki",
+    "qrTextNotice": "Wasu masu karanta QR, ciki har da wasu nau’ikan WeChat, ba sa nuna QR na rubutu kawai. Yi amfani da wannan kayan aiki don karanta ainihin rubutun."
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "Sauran sauye-sauye ({{count}})",
+    "numberSummary": "Zango {{min}}–{{max}} · lambobi {{count}} · {{repeat}}",
+    "noRepeat": "Babu maimaita lambobi"
+  },
+  "usability": {
+    "images": {
+      "growth": "Girman fayil ya ƙaru da {{percent}}%; bai ragu ba",
+      "adjust": "Daidaita sigogi",
+      "add": "Ƙara hotuna",
+      "preview": "Duba {{name}} kafin amfani",
+      "unchanged": "Girman fayil bai canza ba; bai ragu ba",
+      "savings": "Girman fayil ya ragu da {{percent}}%"
+    },
+    "password": {
+      "showRow": "Nuna sakamako {{number}}",
+      "hideRow": "Ɓoye sakamako {{number}}"
+    },
+    "speedtest": {
+      "downloadBps": "Saukewa",
+      "uploadBps": "Ɗorawa",
+      "latencyMs": "Jinkirin HTTP ba tare da aiki ba",
+      "jitterMs": "Sauyin jinkiri ba tare da aiki ba",
+      "downloadLatencyMs": "Jinkiri a ƙarƙashin nauyin saukewa",
+      "downloadJitterMs": "Sauyin jinkiri a ƙarƙashin nauyin saukewa",
+      "uploadLatencyMs": "Jinkiri a ƙarƙashin nauyin ɗorawa",
+      "uploadJitterMs": "Sauyin jinkiri a ƙarƙashin nauyin ɗorawa"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "Duba lokutan aiwatarwa",
+    "adjustParameters": "Daidaita sigogi"
+  },
+  "polishData": {
+    "diffBlocks": "Tubalan bambanci {{count}}",
+    "coarse": "Kwatantawa ta kusanci: tubalan na iya haɗa da abun da bai canza ba.",
+    "errors": {
+      "CsvColumns": "Layi {{row}} yana da ginshiƙai {{actual}}; ana sa ran {{expected}}. Duba masu raba bayanai da ƙwayoyin da ke cikin alamomin zance.",
+      "CsvHeaders": "Sunayen ginshiƙai sun maimaitu. Sake musu suna ko kashe layin kanun.",
+      "CsvJsonCell": "Layi {{row}}, ginshiƙi {{column}} ba JSON mai inganci ba ne. Yi amfani da ƙimar JSON ko zaɓi yanayin ƙwayoyin kirtani.",
+      "CsvArrayHeader": "Layukan jeri ba su da sunayen ginshiƙai. Kashe layin kanun.",
+      "CsvNestedValue": "Ƙimomin null da ƙimomin da ke cikin wasu suna buƙatar yanayin ƙwayoyi na juyawa zuwa JSON a sarari.",
+      "CsvRowShape": "Kowane layin JSON dole ne ya kasance da ginshiƙai iri ɗaya ba tare da ƙimomin da suka ɓace ba.",
+      "XmlOrdered": "Yi amfani da jerin nodes masu tsari daga XML → JSON. Loda misalin don ganin siffofi da nodes na rubutu.",
+      "QueryArrays": "Yi amfani da abu wanda ƙimominsa jerin kirtani marasa fanko ne, misali {\"tag\":[\"a\",\"b\"]}."
+    },
+    "notices": {
+      "StructureOnly": "Ana riƙe ƙimomin bayanai da tsarin da ake tallafawa; ba a riƙe sharhin tushe, tsara rubutu da salon alamomin zance ba.",
+      "CsvStrings": "Ƙwayoyin CSV suna kasancewa kirtani; ba a gane lambobi da ƙimomin gaskiya ko ƙarya kai tsaye ba.",
+      "CsvTextExport": "CSV rubutu ne; fitarwa ta asali ba ta riƙe bayanin nau'in ƙimomi guda na JSON ba.",
+      "ByteHex": "Ba za a iya warware sakamakon da {{charset}} ba tare da asarar bayanai ba. Ana nuna Hex; saukewa yana riƙe bytes na asali."
+    },
+    "charsetSource": "Rubutun tuni Unicode ne. Sigar lambar tushe tana shafar bytes na fayil kawai."
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "Wannan sakamakon ya wuce iyakar shigarwa ta 10 MiB. Kwafi da saukewa har yanzu suna ɗauke da cikakken sakamakon.",
+      "pdfRange": "Shafukan da ake da su: 1–{{count}}",
+      "pdfInspectHelp": "Duba adadin shafuka kafin zaɓar zangon.",
+      "qrRecovery": "Daidaita gyaran kurakurai"
+    }
+  },
+  "polishShell": {
+    "flags": "Tutoci: {{flags}}"
+  },
+  "experience": {
+    "extractPhone": "Ciro lambobin waya",
+    "extractEmail": "Ciro adiresoshin imel",
+    "extractUrl": "Ciro mahaɗa",
+    "base64encode": "Sauya zuwa Base64",
+    "base64decode": "Warware Base64",
+    "base64urlencode": "Sauya zuwa Base64URL",
+    "base64urldecode": "Warware Base64URL",
+    "noemail": "Ba a sami adiresoshin imel ba.",
+    "nophone": "Ba a sami lambobin waya ba.",
+    "nourl": "Ba a sami mahaɗa ba.",
+    "textAuto": "Ana sarrafa gajeren rubutu ta atomatik; fara sarrafa dogon rubutu da hannu.",
+    "qrSettings": "Girman fitarwa {{size}}px · Gyaran kuskure {{level}}",
+    "networkDetails": "Bayanin hanyar sadarwa da bayanai",
+    "endDate": "Ranar ƙarewa",
+    "listInput": "Abubuwan da aka shigar",
+    "chooseConvert": "Zaɓi mai sauyawa · {{name}}",
+    "task": "Aiki",
+    "copySeconds": "Kwafi tambarin lokaci na daƙiƙu",
+    "copyMilliseconds": "Kwafi tambarin lokaci na milisakan",
+    "unitPrecision": "Bayanin daidaito da raka'a"
   }
 }

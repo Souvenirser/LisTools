@@ -562,7 +562,11 @@
     "batchDone": "Naprosesong {{success}} na mga larawan. · Nabigo: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "Ituon ang pagpili: igalaw gamit ang mga arrow; Shift + mga arrow para baguhin ang kanan o ibabang gilid."
+    "cropKeys": "Ituon ang pagpili: igalaw gamit ang mga arrow; Shift + mga arrow para baguhin ang kanan o ibabang gilid.",
+    "qualityInvalid": "Maglagay ng kalidad mula 1 hanggang 100.",
+    "targetInvalid": "Maglagay ng target na laki mula 1 hanggang 102400 KiB.",
+    "dimensionInvalid": "Gumamit ng buong pixel mula 0 hanggang 16384; pinananatili ng 0 ang awtomatikong dimensyon.",
+    "scaleInvalid": "Maglagay ng sukat mula 1 hanggang 400 porsiyento."
   },
   "text": {
     "name": "Linisin at kunin ang text",
@@ -769,7 +773,7 @@
     "reset": "I-reset",
     "lap": "I-record ang lap",
     "sound": "Magpatugtog ng maikling tunog kapag natapos na ang page na ito",
-    "backgroundHelp": "Gumagamit ang timing ng mga deadline ng orasan at lumipas na oras. Ang estado ay pinananatili sa imbakan ng session ng tab na ito. Maaaring suspindihin ng mga tab sa background at sleeping device ang pagpapatupad; hindi ito paalala sa background o alarma.",
+    "backgroundHelp": "Gumagamit ang pagsukat ng oras ng mga takdang oras ayon sa orasan at lumipas na oras. Ibinabalik ng pag-reload ng tab na ito ang parehong timer, kasama ang aktuwal na lumipas na oras para sa mga tumatakbong timer. Pinananatili ang estado sa imbakan ng session ng tab na ito. Maaaring huminto ang pagpapatakbo sa mga tab sa background at device na naka-sleep; hindi ito paalala o alarma sa background.",
     "laps": "Stopwatch lap",
     "export": "I-export ang mga lap bilang TXT",
     "number": "Lap",
@@ -872,7 +876,7 @@
       "count": "Ang bilang ng petsa ay dapat na isang integer sa pagitan ng 1 at 100.",
       "invalid": "Hindi makalkula. Suriin ang expression, time zone at oras ng sanggunian."
     },
-    "copyExpression": "Kopyahin · Expression",
+    "copyExpression": "Kopyahin Expression",
     "utcOffset": "UTC ±HH:mm"
   },
   "speedtestRating": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "Piliin ang buong tugma o isang pangkat ng pagkuha na i-extract. Ang mga walang laman na tugma ay may bisa; ang mga hindi magkatugmang grupo ay ipinapakita nang hiwalay.",
     "passwordPolicy": "Ang mga napiling uri ng character ay bumubuo sa pinapayagang pool. Paganahin ang \"Kailangan ang bawat uri\" upang isama ang bawat napiling uri sa bawat password.",
     "speedScope": "Inilalarawan ng mga rating ang bilis ng paglipat. Ang latency at jitter ay hiwalay na sinusukat.",
-    "viewResult": "Tingnan ang resulta"
+    "viewResult": "Tingnan ang resulta",
+    "speedNetworkError": "Nabigo ang koneksyon sa network. Pakisubukang muli.",
+    "speedStartError": "Hindi masimulan ang pagsusuri ng bilis. Pakisubukang muli."
   },
   "redesign": {
     "calculatorOriginal": "Orihinal na halaga",
@@ -1848,10 +1854,113 @@
       "speedNetwork": "Kumokonekta ang tool na ito sa Cloudflare at gumagamit ng network data. Magsisimula lamang ang mga kahilingan sa pagsubok kapag sinimulan mo.",
       "speedSettings": "Mga setting ng pagsubok",
       "speedSummary": "{{profile}} · {{unit}} · hanggang {{budget}} MiB",
-      "customZone": "Pasadyang IANA time zone"
+      "customZone": "Pasadyang IANA time zone",
+      "md5ModeConfirm": "Buburahin ng pagpapalit ng mode ang kasalukuyang pila ng mga file, mga resulta at mga halaga ng pag-verify. Magpatuloy?"
     },
     "shared": {
       "viewResult": "Tingnan ang resulta"
     }
+  },
+  "v2": {
+    "settings": "Mga setting",
+    "appearance": "Hitsura",
+    "themeSystem": "Sundin ang system",
+    "themeLight": "Maliwanag",
+    "themeDark": "Madilim",
+    "favorites": "Mga paborito",
+    "recent": "Kamakailang binuksan",
+    "pin": "Idagdag sa mga paborito",
+    "unpin": "Alisin sa mga paborito",
+    "noFavorites": "Pindutin ang bituin ng tool para i-save ito.",
+    "noRecent": "Dito makikita ang huling limang tool na binuksan.",
+    "navigation": "Tingnan ang mga tool",
+    "qrTextNotice": "Maaaring hindi ipakita ng ilang scanner, kabilang ang ilang bersyon ng WeChat, ang mga QR na simpleng teksto. Gamitin ito upang basahin ang orihinal na teksto."
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "Iba pang mga conversion ({{count}})",
+    "numberSummary": "Saklaw {{min}}–{{max}} · {{count}} na numero · {{repeat}}",
+    "noRepeat": "Walang nauulit na numero"
+  },
+  "usability": {
+    "images": {
+      "growth": "Lumaki ang file nang {{percent}}%; hindi lumiit ang laki",
+      "adjust": "Ayusin ang mga parameter",
+      "add": "Magdagdag ng mga larawan",
+      "preview": "Silipin ang {{name}}",
+      "unchanged": "Hindi nagbago ang laki ng file; hindi ito lumiit",
+      "savings": "Lumiit ang file nang {{percent}}%"
+    },
+    "password": {
+      "showRow": "Ipakita ang resulta {{number}}",
+      "hideRow": "Itago ang resulta {{number}}"
+    },
+    "speedtest": {
+      "downloadBps": "Pag-download",
+      "uploadBps": "Pag-upload",
+      "latencyMs": "Pagkaantala ng HTTP kapag walang ginagawa",
+      "jitterMs": "Pagbabago ng pagkaantala kapag walang ginagawa",
+      "downloadLatencyMs": "Pagkaantala habang may pag-download",
+      "downloadJitterMs": "Pagbabago ng pagkaantala habang may pag-download",
+      "uploadLatencyMs": "Pagkaantala habang may pag-upload",
+      "uploadJitterMs": "Pagbabago ng pagkaantala habang may pag-upload"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "Tingnan ang mga oras ng pagpapatupad",
+    "adjustParameters": "Ayusin ang mga parameter"
+  },
+  "polishData": {
+    "diffBlocks": "{{count}} bloke ng pagkakaiba",
+    "coarse": "Magaspang na paghahambing: maaaring may hindi nabagong nilalaman ang mga bloke.",
+    "errors": {
+      "CsvColumns": "May {{actual}} column ang row {{row}}; inaasahan ang {{expected}}. Suriin ang mga delimiter at cell na nasa panipi.",
+      "CsvHeaders": "May nauulit na pangalan ng column. Palitan ang mga ito o i-off ang header row.",
+      "CsvJsonCell": "Hindi wastong JSON ang row {{row}}, column {{column}}. Gumamit ng JSON value o piliin ang cell mode na Mga string.",
+      "CsvArrayHeader": "Walang pangalan ng column ang mga array row. I-off ang header row.",
+      "CsvNestedValue": "Kailangan ng null at mga nested value ang cell mode na Tahasang JSON serialization.",
+      "CsvRowShape": "Dapat pare-pareho ang mga column ng bawat JSON row at walang nawawalang value.",
+      "XmlOrdered": "Gamitin ang nakaayos na array ng node mula sa XML → JSON. I-load ang halimbawa para makita ang mga attribute at text node.",
+      "QueryArrays": "Gumamit ng object na ang mga value ay hindi bakanteng array ng mga string, halimbawa {\"tag\":[\"a\",\"b\"]}."
+    },
+    "notices": {
+      "StructureOnly": "Pinananatili ang mga value ng data at suportadong istruktura; hindi ang mga komento, pag-format at estilo ng panipi ng pinagmulan.",
+      "CsvStrings": "Nananatiling string ang mga CSV cell; hindi awtomatikong tinutukoy ang mga numero at boolean.",
+      "CsvTextExport": "Teksto ang CSV; hindi pinananatili ng default na pag-export ang impormasyon ng JSON scalar type.",
+      "ByteHex": "Hindi ma-decode nang walang pagkawala ang resulta bilang {{charset}}. Ipinapakita ang Hex; pinananatili ng pag-download ang mga orihinal na byte."
+    },
+    "charsetSource": "Unicode na ang teksto. Para lang sa mga byte ng file ang source encoding."
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "Lumampas ang resultang ito sa limitasyon ng input na 10 MiB. Kasama pa rin ang buong resulta sa pagkopya at pag-download.",
+      "pdfRange": "Mga available na pahina: 1–{{count}}",
+      "pdfInspectHelp": "Suriin ang bilang ng pahina bago pumili ng saklaw.",
+      "qrRecovery": "Isaayos ang pagwawasto ng error"
+    }
+  },
+  "polishShell": {
+    "flags": "Mga flag: {{flags}}"
+  },
+  "experience": {
+    "extractPhone": "Kunin ang mga numero ng telepono",
+    "extractEmail": "Kunin ang mga email address",
+    "extractUrl": "Kunin ang mga link",
+    "base64encode": "I-encode sa Base64",
+    "base64decode": "I-decode ang Base64",
+    "base64urlencode": "I-encode sa Base64URL",
+    "base64urldecode": "I-decode ang Base64URL",
+    "noemail": "Walang nakitang email address.",
+    "nophone": "Walang nakitang numero ng telepono.",
+    "nourl": "Walang nakitang link.",
+    "textAuto": "Awtomatikong pinoproseso ang maikling teksto; patakbuhin nang manu-mano ang mas mahabang teksto.",
+    "qrSettings": "Laki ng output {{size}}px · Pagwawasto ng error {{level}}",
+    "networkDetails": "Mga detalye ng network at data",
+    "endDate": "Petsa ng pagtatapos",
+    "listInput": "Mga entry",
+    "chooseConvert": "Pumili ng converter · {{name}}",
+    "task": "Aksyon",
+    "copySeconds": "Kopyahin ang timestamp sa segundo",
+    "copyMilliseconds": "Kopyahin ang timestamp sa millisecond",
+    "unitPrecision": "Mga tala sa katumpakan at yunit"
   }
 }

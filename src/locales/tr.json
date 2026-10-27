@@ -562,7 +562,11 @@
     "batchDone": "İşlenen {{success}} görüntüler. · Başarısız: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "Seçime odaklanın: ok tuşları taşır; Shift + ok tuşları sağ veya alt kenarı boyutlandırır."
+    "cropKeys": "Seçime odaklanın: ok tuşları taşır; Shift + ok tuşları sağ veya alt kenarı boyutlandırır.",
+    "qualityInvalid": "1 ile 100 arasında bir kalite girin.",
+    "targetInvalid": "1 ile 102400 KiB arasında bir hedef boyut girin.",
+    "dimensionInvalid": "0 ile 16384 arasında tam piksel değerleri kullanın; 0 otomatik boyutu korur.",
+    "scaleInvalid": "Yüzde 1 ile 400 arasında bir ölçek girin."
   },
   "text": {
     "name": "Metni temizleyin ve çıkarın",
@@ -769,7 +773,7 @@
     "reset": "Sıfırla",
     "lap": "Turu kaydet",
     "sound": "Bu sayfa ses çalabildiğinde tamamlandığında kısa bir ses çal",
-    "backgroundHelp": "Zamanlama, son teslim tarihlerini ve geçen süreyi kullanır. Durum bu sekmenin oturum deposunda tutulur. Arka plan sekmeleri ve uyku cihazları yürütmeyi askıya alabilir; bu bir arka plan hatırlatıcısı veya alarmı değildir.",
+    "backgroundHelp": "Zaman ölçümü, saate göre bitiş zamanını ve geçen süreyi kullanır. Bu sekmeyi yeniden yüklemek her iki zamanlayıcıyı da geri getirir; çalışan zamanlayıcılar için gerçekte geçen süre de hesaba katılır. Durum, bu sekmenin oturum depolamasında tutulur. Arka plan sekmeleri ve uyku modundaki cihazlar yürütmeyi askıya alabilir; bu bir arka plan hatırlatıcısı veya alarm değildir.",
     "laps": "Kronometre turları",
     "export": "Turları TXT olarak dışa aktar",
     "number": "Tur",
@@ -893,7 +897,7 @@
       "count": "Tarih sayısı 1 ile 100 arasında bir tam sayı olmalıdır.",
       "invalid": "Hesaplanamıyor. İfadeyi, saat dilimini ve referans saatini kontrol edin."
     },
-    "copyExpression": "Kopyala · İfade",
+    "copyExpression": "Kopyala İfade",
     "utcOffset": "UTC ±HH:mm"
   },
   "uiText": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "Çıkarılacak tam eşleşmeyi veya yakalama grubunu seçin. Boş eşleşmeler geçerlidir; eşleşmeyen gruplar ayrı ayrı gösterilir.",
     "passwordPolicy": "Seçilen karakter türleri izin verilen havuzu oluşturur. Seçilen her türün her parolaya dahil edilmesi için \"Her türü gerektir\" seçeneğini etkinleştirin.",
     "speedScope": "Derecelendirmeler aktarım hızını tanımlar. Gecikme ve titreşim ayrı ayrı ölçülür.",
-    "viewResult": "Sonucu görüntüle"
+    "viewResult": "Sonucu görüntüle",
+    "speedNetworkError": "Ağ bağlantısı başarısız oldu. Lütfen yeniden deneyin.",
+    "speedStartError": "Hız testi başlatılamadı. Lütfen yeniden deneyin."
   },
   "redesign": {
     "calculatorOriginal": "Orijinal değer",
@@ -1825,7 +1831,8 @@
       "speedNetwork": "Bu araç Cloudflare'a bağlanır ve ağ verisi kullanır. Test istekleri yalnızca siz başlattıktan sonra gönderilir.",
       "speedSettings": "Test ayarları",
       "speedSummary": "{{profile}} · {{unit}} · en fazla {{budget}} MiB",
-      "customZone": "Özel IANA saat dilimi"
+      "customZone": "Özel IANA saat dilimi",
+      "md5ModeConfirm": "Modu değiştirmek geçerli dosya kuyruğunu, sonuçları ve doğrulama değerlerini silecektir. Devam edilsin mi?"
     },
     "daily": {
       "countdownHelp": "Geri sayım için başlangıç olarak bugünü, bitiş olarak hedef tarihi seçin. Geçmiş hedefler negatif gün sayısı verir.",
@@ -1853,5 +1860,107 @@
     "shared": {
       "viewResult": "Sonucu görüntüle"
     }
+  },
+  "v2": {
+    "settings": "Ayarlar",
+    "appearance": "Görünüm",
+    "themeSystem": "Sistemi izle",
+    "themeLight": "Açık",
+    "themeDark": "Koyu",
+    "favorites": "Favoriler",
+    "recent": "Son açılanlar",
+    "pin": "Favorilere ekle",
+    "unpin": "Favorilerden kaldır",
+    "noFavorites": "Bir aracı kaydetmek için yıldızına tıklayın.",
+    "noRecent": "Son açılan beş araç burada görünür.",
+    "navigation": "Araçlara göz at",
+    "qrTextNotice": "Bazı WeChat sürümleri dâhil bazı tarayıcılar düz metin QR kodlarını göstermeyebilir. Özgün metni okumak için bu aracı kullanın."
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "Diğer dönüşümler ({{count}})",
+    "numberSummary": "Aralık {{min}}–{{max}} · {{count}} sayı · {{repeat}}",
+    "noRepeat": "Tekrarlanan sayılara izin verme"
+  },
+  "usability": {
+    "images": {
+      "growth": "Dosya boyutu %{{percent}} arttı; boyut küçülmedi",
+      "adjust": "Parametreleri ayarla",
+      "add": "Görsel ekle",
+      "preview": "{{name}} önizlemesi",
+      "unchanged": "Dosya boyutu değişmedi; boyut küçülmedi",
+      "savings": "Dosya boyutu %{{percent}} küçüldü"
+    },
+    "password": {
+      "showRow": "{{number}} numaralı sonucu göster",
+      "hideRow": "{{number}} numaralı sonucu gizle"
+    },
+    "speedtest": {
+      "latencyMs": "Yük yokken HTTP gecikmesi",
+      "jitterMs": "Yük yokken jitter",
+      "downloadLatencyMs": "İndirme yükü altında gecikme",
+      "downloadJitterMs": "İndirme yükü altında jitter",
+      "uploadLatencyMs": "Yükleme yükü altında gecikme",
+      "uploadJitterMs": "Yükleme yükü altında jitter",
+      "downloadBps": "İndirme",
+      "uploadBps": "Yükleme"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "Çalıştırma sürelerini görüntüle",
+    "adjustParameters": "Parametreleri ayarla"
+  },
+  "polishData": {
+    "diffBlocks": "{{count}} fark bloğu",
+    "coarse": "Kaba karşılaştırma: bloklar değişmemiş içerik barındırabilir.",
+    "errors": {
+      "CsvColumns": "{{row}}. satırda {{actual}} sütun var; {{expected}} bekleniyor. Ayırıcıları ve tırnak içindeki hücreleri kontrol edin.",
+      "CsvHeaders": "Sütun adları yineleniyor. Adları değiştirin veya başlık satırını kapatın.",
+      "CsvJsonCell": "{{row}}. satır, {{column}}. sütun geçerli JSON içermiyor. Bir JSON değeri kullanın veya dize hücre modunu seçin.",
+      "CsvArrayHeader": "Dizi satırlarının sütun adları yoktur. Başlık satırını kapatın.",
+      "CsvNestedValue": "null ve iç içe değerler, açık JSON serileştirme hücre modunu gerektirir.",
+      "CsvRowShape": "Her JSON satırı aynı sütunlara sahip olmalı ve eksik değer içermemelidir.",
+      "XmlOrdered": "XML → JSON çıktısındaki sıralı düğüm dizisini kullanın. Öznitelikleri ve metin düğümlerini görmek için örneği yükleyin.",
+      "QueryArrays": "Değerleri boş olmayan dize dizilerinden oluşan bir nesne kullanın, örneğin {\"tag\":[\"a\",\"b\"]}."
+    },
+    "notices": {
+      "StructureOnly": "Veri değerleri ve desteklenen yapı korunur; kaynak yorumları, biçimlendirme ve tırnak stili korunmaz.",
+      "CsvStrings": "CSV hücreleri dize olarak kalır; sayılar ve mantıksal değerler otomatik olarak çıkarılmaz.",
+      "CsvTextExport": "CSV metindir; varsayılan dışa aktarma, JSON skaler tür bilgisini korumaz.",
+      "ByteHex": "Sonuç {{charset}} olarak kayıpsız çözülemiyor. Hex gösteriliyor; indirme, özgün baytları korur."
+    },
+    "charsetSource": "Metin zaten Unicode biçimindedir. Kaynak kodlama yalnızca dosya baytlarına uygulanır."
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "Bu sonuç 10 MiB giriş sınırını aşıyor. Kopyalama ve indirme hâlâ sonucun tamamını içerir.",
+      "pdfRange": "Kullanılabilir sayfalar: 1–{{count}}",
+      "pdfInspectHelp": "Bir aralık seçmeden önce sayfa sayısını kontrol edin.",
+      "qrRecovery": "Hata düzeltmeyi ayarlayın"
+    }
+  },
+  "polishShell": {
+    "flags": "Bayraklar: {{flags}}"
+  },
+  "experience": {
+    "extractPhone": "Telefon numaralarını çıkar",
+    "extractEmail": "E-posta adreslerini çıkar",
+    "extractUrl": "Bağlantıları çıkar",
+    "base64encode": "Base64 kodla",
+    "base64decode": "Base64 kodunu çöz",
+    "base64urlencode": "Base64URL kodla",
+    "base64urldecode": "Base64URL kodunu çöz",
+    "noemail": "E-posta adresi bulunamadı.",
+    "nophone": "Telefon numarası bulunamadı.",
+    "nourl": "Bağlantı bulunamadı.",
+    "textAuto": "Kısa metinler otomatik işlenir; uzun metinleri elle çalıştırın.",
+    "qrSettings": "Çıktı boyutu {{size}}px · Hata düzeltme {{level}}",
+    "networkDetails": "Ağ ve veri ayrıntıları",
+    "endDate": "Bitiş tarihi",
+    "listInput": "Girdiler",
+    "chooseConvert": "Dönüştürücü seç · {{name}}",
+    "task": "İşlem",
+    "copySeconds": "Saniye cinsinden zaman damgasını kopyala",
+    "copyMilliseconds": "Milisaniye cinsinden zaman damgasını kopyala",
+    "unitPrecision": "Hassasiyet ve birim notları"
   }
 }

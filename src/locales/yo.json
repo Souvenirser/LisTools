@@ -562,7 +562,11 @@
     "batchDone": "A ti ṣiṣẹ́ lórí àwòrán {{success}}. · Ó kùnà: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "Fi àfiyèsí sí àṣàyàn: bọ́tìnì ọfà ń gbé e; Shift + ọfà ń ṣàtúnṣe etí ọ̀tún tàbí ìsàlẹ̀."
+    "cropKeys": "Fi àfiyèsí sí àṣàyàn: bọ́tìnì ọfà ń gbé e; Shift + ọfà ń ṣàtúnṣe etí ọ̀tún tàbí ìsàlẹ̀.",
+    "qualityInvalid": "Tẹ ìwọ̀n dídára láti 1 sí 100 wọlé.",
+    "targetInvalid": "Tẹ ìwọ̀n àfojúsùn láti 1 sí 102400 KiB wọlé.",
+    "dimensionInvalid": "Lo odidi píksẹ́lì láti 0 sí 16384; 0 ń pa ìwọ̀n aládàáṣiṣẹ́ mọ́.",
+    "scaleInvalid": "Tẹ òṣùwọ̀n ìwọ̀n láti 1 sí 400 nínú ọgọ́rùn-ún wọlé."
   },
   "text": {
     "name": "Mọ ọ̀rọ̀ kí o sì yọ ohun tí o nílò",
@@ -769,7 +773,7 @@
     "reset": "Padà sí ìbẹ̀rẹ̀",
     "lap": "Kọ ìyípo sílẹ̀",
     "sound": "Dún ìró kúkúrú nígbà tí ó bá parí, bí ojú ìwé yìí bá lè mú ìró jáde",
-    "backgroundHelp": "Ìkà àkókò ń lo àkókò ìparí aago àti àkókò tó ti kọjá. A ń pa ipò mọ́ sínú ibi ìpamọ́ ìgbà iṣẹ́ taabu yìí. Taabu tó wà lẹ́yìn àti ẹ̀rọ tó ń sùn lè dá ìṣiṣẹ́ dúró; èyí kì í ṣe ìránnilétí tàbí aago ìkìlọ̀ tó ń ṣiṣẹ́ lẹ́yìn.",
+    "backgroundHelp": "Ìkà àkókò ń lo àkókò ìparí aago àti àkókò tó ti kọjá. Títún taabu yìí gbé wọlé ń mú àwọn aago méjèèjì padà, pẹ̀lú àkókò gidi tó ti kọjá fún àwọn aago tó ń ṣiṣẹ́. A ń pa ipò mọ́ nínú ibi ìpamọ́ ìgbà iṣẹ́ taabu yìí. Àwọn taabu tó wà lẹ́yìn àti ẹ̀rọ tó ń sùn lè dá ìṣiṣẹ́ dúró; èyí kì í ṣe ìránnilétí lẹ́yìn tàbí aago ìkìlọ̀.",
     "laps": "Àwọn ìyípo aago ìdíje",
     "export": "Ṣe ìgbàsílẹ̀ àwọn ìyípo bí TXT",
     "number": "Ìyípo",
@@ -872,7 +876,7 @@
       "count": "Nọmba ọjọ gbọdọ jẹ odidi laarin 1 ati 100.",
       "invalid": "Ko le ṣe iṣiro. Ṣayẹwo ikosile, agbegbe aago ati akoko itọkasi."
     },
-    "copyExpression": "Ṣẹ̀dà · Gbólóhùn ìṣírò",
+    "copyExpression": "Ṣẹ̀dà Gbólóhùn ìṣírò",
     "utcOffset": "UTC ±HH:mm"
   },
   "speedtestRating": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "Yan baramu ni kikun tabi ẹgbẹ gbigba lati jade. Awọn ere-kere ti o ṣofo wulo; Awọn ẹgbẹ ti ko ni ibamu ni a fihan lọtọ.",
     "passwordPolicy": "Ti a ti yan ohun kikọ orisi dagba awọn laaye pool. Muu ṣiṣẹ “Beere iru kọọkan” lati ṣafikun gbogbo iru ti a yan ninu ọrọ igbaniwọle kọọkan.",
     "speedScope": "Awọn iwontun-wonsi ṣe apejuwe iyara gbigbe. Lairi ati jitter jẹ wiwọn lọtọ.",
-    "viewResult": "Wo abajade"
+    "viewResult": "Wo abajade",
+    "speedNetworkError": "Ìsopọ̀ nẹ́tíwọ́ọ̀kì kùnà. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i.",
+    "speedStartError": "A kò lè bẹ̀rẹ̀ ìdánwò iyára. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i."
   },
   "redesign": {
     "calculatorOriginal": "Atilẹba iye",
@@ -1825,7 +1831,8 @@
       "speedNetwork": "Ohun èlò yìí ń sopọ̀ mọ́ Cloudflare ó sì ń lo dátà nẹ́tíwọ́ọ̀kì. Àwọn ìbéèrè ìdánwò bẹ̀rẹ̀ lẹ́yìn tí o bá tẹ bẹ̀rẹ̀.",
       "speedSettings": "Ètò ìdánwò",
       "speedSummary": "{{profile}} · {{unit}} · tó {{budget}} MiB",
-      "customZone": "Àgbègbè àkókò IANA àkànṣe"
+      "customZone": "Àgbègbè àkókò IANA àkànṣe",
+      "md5ModeConfirm": "Yíyí ipò padà yóò pa ìlà fáìlì lọ́wọ́lọ́wọ́, àwọn àbájáde àti iye ìmúdájú rẹ́. Ṣé kí a tẹ̀ síwájú?"
     },
     "daily": {
       "countdownHelp": "Fún ìṣírò ọjọ́ tó kù, yan òní gẹ́gẹ́ bí ìbẹ̀rẹ̀ àti ọjọ́ àfojúsùn gẹ́gẹ́ bí òpin. Ọjọ́ tó ti kọjá fúnni ní iye ọjọ́ odi.",
@@ -1853,5 +1860,107 @@
     "shared": {
       "viewResult": "Wo èsì"
     }
+  },
+  "v2": {
+    "settings": "Àwọn ètò",
+    "appearance": "Ìrísí",
+    "themeSystem": "Tẹ̀lé ètò ẹ̀rọ",
+    "themeLight": "Ìmọ́lẹ̀",
+    "themeDark": "Dúdú",
+    "favorites": "Àwọn àyànfẹ́",
+    "recent": "Ṣí láìpẹ́",
+    "pin": "Fi kún àwọn àyànfẹ́",
+    "unpin": "Yọ kúrò nínú àwọn àyànfẹ́",
+    "noFavorites": "Tẹ ìràwọ̀ irinṣẹ́ láti fi pamọ́.",
+    "noRecent": "Àwọn irinṣẹ́ márùn-ún tí o ṣí gbẹ̀yìn yóò hàn níbí.",
+    "navigation": "Wo àwọn irinṣẹ́",
+    "qrTextNotice": "Àwọn olùkà kan, pẹ̀lú díẹ̀ lára àwọn ẹ̀dà WeChat, lè má fi QR ọ̀rọ̀ lasan hàn. Lo irinṣẹ́ yìí láti ka ọ̀rọ̀ ìpilẹ̀ṣẹ̀."
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "Àwọn ìyípadà mìíràn ({{count}})",
+    "numberSummary": "Ààlà {{min}}–{{max}} · nọ́ńbà {{count}} · {{repeat}}",
+    "noRepeat": "Má ṣe gba nọ́ńbà tí ó tún ara rẹ̀ ṣe"
+  },
+  "usability": {
+    "images": {
+      "growth": "Ìwọ̀n fáìlì pọ̀ sí i ní {{percent}}%; kò dín kù",
+      "adjust": "Ṣàtúnṣe àwọn ààtò",
+      "add": "Fi àwọn àwòrán kún un",
+      "preview": "Ṣàwò tẹ́lẹ̀ sí {{name}}",
+      "unchanged": "Ìwọ̀n fáìlì kò yí padà; kò dín kù",
+      "savings": "Ìwọ̀n fáìlì dín kù ní {{percent}}%"
+    },
+    "password": {
+      "showRow": "Fi àbájáde {{number}} hàn",
+      "hideRow": "Fi àbájáde {{number}} pamọ́"
+    },
+    "speedtest": {
+      "latencyMs": "Ìdádúró HTTP láìsí ẹrù nẹ́tíwọ́ọ̀kì",
+      "jitterMs": "Ìyípadà ìdádúró láìsí ẹrù nẹ́tíwọ́ọ̀kì",
+      "downloadLatencyMs": "Ìdádúró nígbà ẹrù gbígbà sílẹ̀",
+      "downloadJitterMs": "Ìyípadà ìdádúró nígbà ẹrù gbígbà sílẹ̀",
+      "uploadLatencyMs": "Ìdádúró nígbà ẹrù gbígbé sókè",
+      "uploadJitterMs": "Ìyípadà ìdádúró nígbà ẹrù gbígbé sókè",
+      "downloadBps": "Gbígbà sílẹ̀",
+      "uploadBps": "Gbígbé sókè"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "Wo àwọn àkókò ìṣiṣẹ́",
+    "adjustParameters": "Ṣàtúnṣe àwọn ààtò"
+  },
+  "polishData": {
+    "diffBlocks": "Àwọn apá ìyàtọ̀ {{count}}",
+    "coarse": "Ìfiwéra àfojúsùn: àwọn apá lè ní àkóónú tí kò yí padà nínú.",
+    "errors": {
+      "CsvColumns": "Ìlà {{row}} ní àwọn òpó {{actual}}; {{expected}} ni a retí. Ṣàyẹ̀wò àwọn àmì ìyapa àti àwọn sẹ́ẹ̀lì inú àmì àyọlò.",
+      "CsvHeaders": "Orúkọ àwọn òpó ń tún ara wọn ṣe. Yí orúkọ wọn padà tàbí pa ìlà àkọlé.",
+      "CsvJsonCell": "Ìlà {{row}}, òpó {{column}} kì í ṣe JSON tó péye. Lo iye JSON tàbí yan ìpo sẹ́ẹ̀lì ọ̀wọ́ ohun kikọ.",
+      "CsvArrayHeader": "Àwọn ìlà àkójọ kò ní orúkọ òpó. Pa ìlà àkọlé.",
+      "CsvNestedValue": "null àti àwọn iye tí a fi sínú ara wọn nílò ìpo sẹ́ẹ̀lì ìṣètò JSON tó ṣe kedere.",
+      "CsvRowShape": "Ìlà JSON kọ̀ọ̀kan gbọ́dọ̀ ní àwọn òpó kan náà, láìsí iye tí ó sọnù.",
+      "XmlOrdered": "Lo àkójọ àwọn kókó tó wà ní ìtòlẹ́sẹẹsẹ láti XML → JSON. Gbé àpẹẹrẹ wọlé láti rí àwọn ànímọ́ àti kókó ọ̀rọ̀.",
+      "QueryArrays": "Lo ohun kan tí àwọn iye rẹ̀ jẹ́ àkójọ ọ̀wọ́ ohun kikọ tí kò ṣófo, fún àpẹẹrẹ {\"tag\":[\"a\",\"b\"]}."
+    },
+    "notices": {
+      "StructureOnly": "A ń pa àwọn iye dátà àti ìṣètò tí a ṣe àtìlẹ́yìn fún mọ́; a kì í pa àlàyé orísun, ìṣètò ìrísí àti ọ̀nà àmì àyọlò mọ́.",
+      "CsvStrings": "Àwọn sẹ́ẹ̀lì CSV ṣì jẹ́ ọ̀wọ́ ohun kikọ; a kì í dá nọ́ńbà tàbí iye búlíàn mọ̀ fúnra rẹ̀.",
+      "CsvTextExport": "CSV jẹ́ ọ̀rọ̀; ìgbàsílẹ̀ àiyipada kì í pa àlàyé irú iye ẹyọkan JSON mọ́.",
+      "ByteHex": "Kò ṣeé tú àbájáde ní {{charset}} láìsí ìpàdánù. A ń fi Hex hàn; gbígbà sílẹ̀ ń pa àwọn báìtì ìpilẹ̀ṣẹ̀ mọ́."
+    },
+    "charsetSource": "Ọ̀rọ̀ náà ti jẹ́ Unicode tẹ́lẹ̀. Ìfipamọ́ kóòdù orísun kan àwọn báìtì fáìlì nìkan."
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "Àbájáde yìí ti kọjá ààlà ìwọlé 10 MiB. Dídàkọ àti gbígbà sílẹ̀ ṣì ní gbogbo àbájáde nínú.",
+      "pdfRange": "Àwọn ojú ìwé tó wà: 1–{{count}}",
+      "pdfInspectHelp": "Ṣàyẹ̀wò iye ojú ìwé kí o tó yan ààlà.",
+      "qrRecovery": "Ṣàtúnṣe ìtọ́jú àṣìṣe"
+    }
+  },
+  "polishShell": {
+    "flags": "Àwọn àsíá: {{flags}}"
+  },
+  "experience": {
+    "extractPhone": "Yọ àwọn nọ́mbà fóònù jáde",
+    "extractEmail": "Yọ àwọn àdírẹ́sì ímeèlì jáde",
+    "extractUrl": "Yọ àwọn ìjápọ̀ jáde",
+    "base64encode": "Ṣàkóòdù Base64",
+    "base64decode": "Tú kóòdù Base64",
+    "base64urlencode": "Ṣàkóòdù Base64URL",
+    "base64urldecode": "Tú kóòdù Base64URL",
+    "noemail": "Kò sí àdírẹ́sì ímeèlì tí a rí.",
+    "nophone": "Kò sí nọ́mbà fóònù tí a rí.",
+    "nourl": "Kò sí ìjápọ̀ tí a rí.",
+    "textAuto": "Ọ̀rọ̀ kúkúrú ń ṣiṣẹ́ láìfọwọ́yí; bẹ̀rẹ̀ iṣẹ́ ọ̀rọ̀ gígùn pẹ̀lú ọwọ́.",
+    "qrSettings": "Ìwọ̀n àbájáde {{size}}px · Àtúnṣe àṣìṣe {{level}}",
+    "networkDetails": "Àlàyé nípa nẹ́tíwọ́ọ̀kì àti dátà",
+    "endDate": "Ọjọ́ ìparí",
+    "listInput": "Àwọn ohun tí a tẹ̀ sí",
+    "chooseConvert": "Yan olùyípadà · {{name}}",
+    "task": "Ìṣe",
+    "copySeconds": "Da àmì àkókò ní ìṣẹ́jú-àáyá kọ",
+    "copyMilliseconds": "Da àmì àkókò ní mílíṣẹ́jú-àáyá kọ",
+    "unitPrecision": "Àlàyé nípa ìpéye àti àwọn ẹyọ ìwọ̀n"
   }
 }

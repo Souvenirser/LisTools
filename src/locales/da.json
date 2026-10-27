@@ -562,7 +562,11 @@
     "batchDone": "Behandlede {{success}}-billeder. · Mislykkedes: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "Fokusér markeringen: piletaster flytter den; Shift + piletaster ændrer højre eller nederste kant."
+    "cropKeys": "Fokusér markeringen: piletaster flytter den; Shift + piletaster ændrer højre eller nederste kant.",
+    "qualityInvalid": "Angiv en kvalitet fra 1 til 100.",
+    "targetInvalid": "Angiv en målstørrelse fra 1 til 102400 KiB.",
+    "dimensionInvalid": "Brug hele pixels fra 0 til 16384; 0 bevarer den automatiske dimension.",
+    "scaleInvalid": "Angiv en skalering fra 1 til 400 procent."
   },
   "text": {
     "name": "Rens og udtræk tekst",
@@ -769,7 +773,7 @@
     "reset": "Nulstil",
     "lap": "Rekordomgang",
     "sound": "Afspil en kort lyd, når denne side er færdig, når denne side kan afspille lyd",
-    "backgroundHelp": "Timing bruger tidsfrister og forløbet tid. Status bevares i denne fanes sessionslager. Baggrundsfaner og sovende enheder kan suspendere udførelsen; dette er ikke en baggrundspåmindelse eller alarm.",
+    "backgroundHelp": "Tidsmålingen bruger tidsfrister ifølge uret og forløbet tid. Genindlæsning af denne fane gendanner begge timere, inklusive faktisk forløbet tid for kørende timere. Status bevares i denne fanes sessionslager. Baggrundsfaner og enheder i dvale kan sætte udførelsen på pause; dette er ikke en baggrundspåmindelse eller alarm.",
     "laps": "Stopurs omgange",
     "export": "Eksporter omgange som TXT",
     "number": "Skød",
@@ -893,7 +897,7 @@
       "count": "Datotallet skal være et heltal mellem 1 og 100.",
       "invalid": "Ude af stand til at beregne. Tjek udtryk, tidszone og referencetid."
     },
-    "copyExpression": "Kopiér · Udtryk",
+    "copyExpression": "Kopiér Udtryk",
     "utcOffset": "UTC ±HH:mm"
   },
   "uiText": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "Vælg det fulde match eller en optagelsesgruppe for at udtrække. Tomme kampe er gyldige; umatchede grupper vises separat.",
     "passwordPolicy": "Udvalgte tegntyper danner den tilladte pulje. Aktiver \"Kræv hver type\" for at inkludere hver valgte type i hver adgangskode.",
     "speedScope": "Bedømmelser beskriver overførselshastighed. Latens og jitter måles separat.",
-    "viewResult": "Se resultat"
+    "viewResult": "Se resultat",
+    "speedNetworkError": "Netværksforbindelsen mislykkedes. Prøv igen.",
+    "speedStartError": "Hastighedstesten kunne ikke startes. Prøv igen."
   },
   "redesign": {
     "calculatorOriginal": "Oprindelig værdi",
@@ -1848,10 +1854,113 @@
       "speedNetwork": "Dette værktøj forbinder til Cloudflare og bruger netværksdata. Testanmodninger begynder først, når du starter.",
       "speedSettings": "Testindstillinger",
       "speedSummary": "{{profile}} · {{unit}} · op til {{budget}} MiB",
-      "customZone": "Tilpasset IANA-tidszone"
+      "customZone": "Tilpasset IANA-tidszone",
+      "md5ModeConfirm": "Hvis du skifter tilstand, fjernes den aktuelle filkø, resultaterne og kontrolværdierne. Fortsæt?"
     },
     "shared": {
       "viewResult": "Se resultat"
     }
+  },
+  "v2": {
+    "settings": "Indstillinger",
+    "appearance": "Udseende",
+    "themeSystem": "Følg systemet",
+    "themeLight": "Lys",
+    "themeDark": "Mørk",
+    "favorites": "Favoritter",
+    "recent": "Senest åbnet",
+    "pin": "Føj til favoritter",
+    "unpin": "Fjern fra favoritter",
+    "noFavorites": "Klik på et værktøjs stjerne for at gemme det.",
+    "noRecent": "De fem senest åbnede værktøjer vises her.",
+    "navigation": "Gennemse værktøjer",
+    "qrTextNotice": "Nogle læsere, herunder visse WeChat-versioner, viser muligvis ikke QR-koder med almindelig tekst. Læs originalteksten med dette værktøj."
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "Andre omregninger ({{count}})",
+    "numberSummary": "Interval {{min}}–{{max}} · {{count}} tal · {{repeat}}",
+    "noRepeat": "Ingen gentagne tal"
+  },
+  "usability": {
+    "images": {
+      "growth": "Filstørrelsen er steget med {{percent}} %; ingen reduktion",
+      "adjust": "Juster parametre",
+      "add": "Tilføj billeder",
+      "preview": "Forhåndsvis {{name}}",
+      "unchanged": "Filstørrelsen er uændret; ingen reduktion",
+      "savings": "Filstørrelsen er reduceret med {{percent}} %"
+    },
+    "password": {
+      "showRow": "Vis resultat {{number}}",
+      "hideRow": "Skjul resultat {{number}}"
+    },
+    "speedtest": {
+      "downloadBps": "Modtagelse",
+      "uploadBps": "Afsendelse",
+      "latencyMs": "HTTP-latenstid uden belastning",
+      "jitterMs": "Variation i latenstid uden belastning",
+      "downloadLatencyMs": "Latenstid under modtagebelastning",
+      "downloadJitterMs": "Variation i latenstid under modtagebelastning",
+      "uploadLatencyMs": "Latenstid under afsendelsesbelastning",
+      "uploadJitterMs": "Variation i latenstid under afsendelsesbelastning"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "Vis udførelsestider",
+    "adjustParameters": "Juster parametre"
+  },
+  "polishData": {
+    "diffBlocks": "{{count}} forskelsblokke",
+    "coarse": "Grov sammenligning: Blokke kan indeholde uændret indhold.",
+    "errors": {
+      "CsvColumns": "Række {{row}} har {{actual}} kolonner; forventede {{expected}}. Kontroller afgrænsere og celler i anførselstegn.",
+      "CsvHeaders": "Kolonnenavne gentages. Omdøb dem, eller slå overskriftsrækken fra.",
+      "CsvJsonCell": "Række {{row}}, kolonne {{column}} er ikke gyldig JSON. Brug en JSON-værdi, eller vælg strengtilstand for celler.",
+      "CsvArrayHeader": "Rækker med arrays har ingen kolonnenavne. Slå overskriftsrækken fra.",
+      "CsvNestedValue": "null og indlejrede værdier kræver celletilstanden med eksplicit JSON-serialisering.",
+      "CsvRowShape": "Hver JSON-række skal have de samme kolonner uden manglende værdier.",
+      "XmlOrdered": "Brug det ordnede nodearray fra XML → JSON. Indlæs eksemplet for at se attributter og tekstnoder.",
+      "QueryArrays": "Brug et objekt, hvis værdier er ikke-tomme arrays af strenge, for eksempel {\"tag\":[\"a\",\"b\"]}."
+    },
+    "notices": {
+      "StructureOnly": "Dataværdier og understøttet struktur bevares; kildekommentarer, formatering og typen af anførselstegn bevares ikke.",
+      "CsvStrings": "CSV-celler forbliver strenge; tal og booleske værdier udledes ikke.",
+      "CsvTextExport": "CSV er tekst; standardeksporten bevarer ikke oplysninger om JSON-skalartyper.",
+      "ByteHex": "Resultatet kan ikke afkodes tabsfrit som {{charset}}. Viser Hex; download bevarer de oprindelige bytes."
+    },
+    "charsetSource": "Teksten er allerede Unicode. Kildekodning gælder kun for filbytes."
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "Dette resultat overskrider inputgrænsen på 10 MiB. Kopiering og download indeholder stadig hele resultatet.",
+      "pdfRange": "Tilgængelige sider: 1–{{count}}",
+      "pdfInspectHelp": "Kontroller sideantallet, før du vælger et interval.",
+      "qrRecovery": "Juster fejlkorrektion"
+    }
+  },
+  "polishShell": {
+    "flags": "Flag: {{flags}}"
+  },
+  "experience": {
+    "extractPhone": "Udtræk telefonnumre",
+    "extractEmail": "Udtræk e-mailadresser",
+    "extractUrl": "Udtræk links",
+    "base64encode": "Base64-kodning",
+    "base64decode": "Base64-afkodning",
+    "base64urlencode": "Base64URL-kodning",
+    "base64urldecode": "Base64URL-afkodning",
+    "noemail": "Ingen e-mailadresser fundet.",
+    "nophone": "Ingen telefonnumre fundet.",
+    "nourl": "Ingen links fundet.",
+    "textAuto": "Kort tekst behandles automatisk; kør større tekster manuelt.",
+    "qrSettings": "Outputstørrelse {{size}}px · Fejlkorrektion {{level}}",
+    "networkDetails": "Netværks- og dataoplysninger",
+    "endDate": "Slutdato",
+    "listInput": "Poster",
+    "chooseConvert": "Vælg konverteringsværktøj · {{name}}",
+    "task": "Handling",
+    "copySeconds": "Kopiér tidsstempel i sekunder",
+    "copyMilliseconds": "Kopiér tidsstempel i millisekunder",
+    "unitPrecision": "Bemærkninger om præcision og enheder"
   }
 }

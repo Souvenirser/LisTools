@@ -562,7 +562,11 @@
     "batchDone": "Przetworzone obrazy {{success}}. · Niepowodzenie: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "Ustaw fokus na zaznaczeniu: strzałki je przesuwają; Shift + strzałki zmieniają prawą lub dolną krawędź."
+    "cropKeys": "Ustaw fokus na zaznaczeniu: strzałki je przesuwają; Shift + strzałki zmieniają prawą lub dolną krawędź.",
+    "qualityInvalid": "Podaj jakość od 1 do 100.",
+    "targetInvalid": "Podaj rozmiar docelowy od 1 do 102400 KiB.",
+    "dimensionInvalid": "Użyj całkowitej liczby pikseli od 0 do 16384; 0 zachowuje automatyczny wymiar.",
+    "scaleInvalid": "Podaj skalę od 1 do 400 procent."
   },
   "text": {
     "name": "Wyczyść i wyodrębnij tekst",
@@ -769,7 +773,7 @@
     "reset": "Zresetuj",
     "lap": "Rekordowe okrążenie",
     "sound": "Odtwórz krótki dźwięk po zakończeniu, gdy ta strona będzie mogła odtwarzać dźwięk",
-    "backgroundHelp": "Pomiar czasu wykorzystuje terminy zegarowe i czas, który upłynął. Stan jest przechowywany w pamięci sesji tej karty. Karty w tle i urządzenia uśpione mogą zawiesić wykonanie; nie jest to przypomnienie ani alarm w tle.",
+    "backgroundHelp": "Pomiar czasu korzysta z czasu zakończenia według zegara i czasu, który upłynął. Ponowne wczytanie tej karty przywraca oba liczniki, uwzględniając rzeczywisty czas, który upłynął dla działających liczników. Stan jest przechowywany w pamięci sesji tej karty. Karty w tle i uśpione urządzenia mogą wstrzymać działanie; nie jest to przypomnienie w tle ani budzik.",
     "laps": "Stoper okrążeń",
     "export": "Eksportuj okrążenia jako TXT",
     "number": "Okrążenie",
@@ -893,7 +897,7 @@
       "count": "Liczba dat musi być liczbą całkowitą z zakresu od 1 do 100.",
       "invalid": "Nie można obliczyć. Sprawdź wyrażenie, strefę czasową i czas odniesienia."
     },
-    "copyExpression": "Kopiuj · Wyrażenie",
+    "copyExpression": "Kopiuj Wyrażenie",
     "utcOffset": "UTC ±HH:mm"
   },
   "uiText": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "Wybierz pełne dopasowanie lub grupę przechwytywania do wyodrębnienia. Puste dopasowania są ważne; niedopasowane grupy są wyświetlane osobno.",
     "passwordPolicy": "Wybrane typy postaci tworzą dozwoloną pulę. Włącz opcję „Wymagaj każdego typu”, aby uwzględnić każdy wybrany typ w każdym haśle.",
     "speedScope": "Oceny opisują prędkość transferu. Opóźnienie i jitter są mierzone oddzielnie.",
-    "viewResult": "Zobacz wynik"
+    "viewResult": "Zobacz wynik",
+    "speedNetworkError": "Połączenie sieciowe nie powiodło się. Spróbuj ponownie.",
+    "speedStartError": "Nie można rozpocząć testu prędkości. Spróbuj ponownie."
   },
   "redesign": {
     "calculatorOriginal": "Oryginalna wartość",
@@ -1825,7 +1831,8 @@
       "speedSettings": "Ustawienia testu",
       "speedSummary": "{{profile}} · {{unit}} · do {{budget}} MiB",
       "customZone": "Niestandardowa strefa czasowa IANA",
-      "regexNoMatches": "Brak dopasowań"
+      "regexNoMatches": "Brak dopasowań",
+      "md5ModeConfirm": "Zmiana trybu usunie bieżącą kolejkę plików, wyniki i wartości weryfikacyjne. Kontynuować?"
     },
     "daily": {
       "unitDetails": "Inne konwersje i precyzja",
@@ -1853,5 +1860,107 @@
     "shared": {
       "viewResult": "Zobacz wynik"
     }
+  },
+  "v2": {
+    "settings": "Ustawienia",
+    "appearance": "Wygląd",
+    "themeSystem": "Zgodnie z systemem",
+    "themeLight": "Jasny",
+    "themeDark": "Ciemny",
+    "favorites": "Ulubione",
+    "recent": "Ostatnio otwarte",
+    "pin": "Dodaj do ulubionych",
+    "unpin": "Usuń z ulubionych",
+    "noFavorites": "Kliknij gwiazdkę narzędzia, aby je zapisać.",
+    "noRecent": "Tutaj znajdziesz pięć ostatnio otwartych narzędzi.",
+    "navigation": "Przeglądaj narzędzia",
+    "qrTextNotice": "Niektóre skanery, w tym pewne wersje WeChat, mogą nie wyświetlać tekstowych kodów QR. Odczytaj oryginalny tekst tym narzędziem."
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "Inne przeliczenia ({{count}})",
+    "numberSummary": "Zakres {{min}}–{{max}} · {{count}} liczb · {{repeat}}",
+    "noRepeat": "Bez powtarzających się liczb"
+  },
+  "usability": {
+    "images": {
+      "growth": "Rozmiar pliku wzrósł o {{percent}}%; brak zmniejszenia rozmiaru",
+      "adjust": "Dostosuj parametry",
+      "add": "Dodaj obrazy",
+      "preview": "Podgląd {{name}}",
+      "unchanged": "Rozmiar pliku bez zmian; brak zmniejszenia rozmiaru",
+      "savings": "Rozmiar pliku zmniejszono o {{percent}}%"
+    },
+    "password": {
+      "showRow": "Pokaż wynik {{number}}",
+      "hideRow": "Ukryj wynik {{number}}"
+    },
+    "speedtest": {
+      "latencyMs": "Opóźnienie HTTP bez obciążenia",
+      "jitterMs": "Jitter bez obciążenia",
+      "downloadLatencyMs": "Opóźnienie pod obciążeniem pobierania",
+      "downloadJitterMs": "Jitter pod obciążeniem pobierania",
+      "uploadLatencyMs": "Opóźnienie pod obciążeniem wysyłania",
+      "uploadJitterMs": "Jitter pod obciążeniem wysyłania",
+      "downloadBps": "Pobieranie",
+      "uploadBps": "Wysyłanie"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "Pokaż czasy wykonania",
+    "adjustParameters": "Dostosuj parametry"
+  },
+  "polishData": {
+    "diffBlocks": "Bloki różnic: {{count}}",
+    "coarse": "Porównanie przybliżone: bloki mogą zawierać niezmienioną treść.",
+    "errors": {
+      "CsvColumns": "Wiersz {{row}} ma {{actual}} kolumn; oczekiwano {{expected}}. Sprawdź separatory i komórki w cudzysłowach.",
+      "CsvHeaders": "Nazwy kolumn się powtarzają. Zmień je lub wyłącz wiersz nagłówka.",
+      "CsvJsonCell": "Wiersz {{row}}, kolumna {{column}} nie zawiera poprawnego JSON. Użyj wartości JSON lub wybierz tryb komórek tekstowych.",
+      "CsvArrayHeader": "Wiersze będące tablicami nie mają nazw kolumn. Wyłącz wiersz nagłówka.",
+      "CsvNestedValue": "null i wartości zagnieżdżone wymagają trybu komórek z jawną serializacją JSON.",
+      "CsvRowShape": "Każdy wiersz JSON musi mieć te same kolumny bez brakujących wartości.",
+      "XmlOrdered": "Użyj uporządkowanej tablicy węzłów z XML → JSON. Wczytaj przykład, aby zobaczyć atrybuty i węzły tekstowe.",
+      "QueryArrays": "Użyj obiektu, którego wartości są niepustymi tablicami ciągów znaków, na przykład {\"tag\":[\"a\",\"b\"]}."
+    },
+    "notices": {
+      "StructureOnly": "Wartości danych i obsługiwana struktura są zachowywane; komentarze źródłowe, formatowanie i styl cudzysłowów nie są zachowywane.",
+      "CsvStrings": "Komórki CSV pozostają ciągami znaków; liczby i wartości logiczne nie są automatycznie rozpoznawane.",
+      "CsvTextExport": "CSV to tekst; domyślny eksport nie zachowuje informacji o typach skalarnych JSON.",
+      "ByteHex": "Wyniku nie można bezstratnie zdekodować jako {{charset}}. Wyświetlono Hex; pobieranie zachowuje oryginalne bajty."
+    },
+    "charsetSource": "Tekst jest już w Unicode. Kodowanie źródłowe dotyczy tylko bajtów pliku."
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "Ten wynik przekracza limit danych wejściowych 10 MiB. Kopiowanie i pobieranie nadal obejmują cały wynik.",
+      "pdfRange": "Dostępne strony: 1–{{count}}",
+      "pdfInspectHelp": "Sprawdź liczbę stron przed wybraniem zakresu.",
+      "qrRecovery": "Dostosuj korekcję błędów"
+    }
+  },
+  "polishShell": {
+    "flags": "Flagi: {{flags}}"
+  },
+  "experience": {
+    "extractPhone": "Wyodrębnij numery telefonów",
+    "extractEmail": "Wyodrębnij adresy e-mail",
+    "extractUrl": "Wyodrębnij linki",
+    "base64encode": "Koduj Base64",
+    "base64decode": "Dekoduj Base64",
+    "base64urlencode": "Koduj Base64URL",
+    "base64urldecode": "Dekoduj Base64URL",
+    "noemail": "Nie znaleziono adresów e-mail.",
+    "nophone": "Nie znaleziono numerów telefonów.",
+    "nourl": "Nie znaleziono linków.",
+    "textAuto": "Krótkie teksty są przetwarzane automatycznie; dłuższe uruchom ręcznie.",
+    "qrSettings": "Rozmiar wyjściowy {{size}}px · Korekcja błędów {{level}}",
+    "networkDetails": "Informacje o sieci i danych",
+    "endDate": "Data zakończenia",
+    "listInput": "Wpisy",
+    "chooseConvert": "Wybierz konwerter · {{name}}",
+    "task": "Działanie",
+    "copySeconds": "Kopiuj znacznik czasu w sekundach",
+    "copyMilliseconds": "Kopiuj znacznik czasu w milisekundach",
+    "unitPrecision": "Uwagi o precyzji i jednostkach"
   }
 }

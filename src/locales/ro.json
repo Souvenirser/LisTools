@@ -562,7 +562,11 @@
     "batchDone": "Imagini {{success}} procesate. · Eșuat: {{failed}}",
     "growth": "+{{percent}}%",
     "unchanged": "0%",
-    "cropKeys": "Focalizați selecția: săgețile o mută; Shift + săgeți ajustează marginea dreaptă sau de jos."
+    "cropKeys": "Focalizați selecția: săgețile o mută; Shift + săgeți ajustează marginea dreaptă sau de jos.",
+    "qualityInvalid": "Introduceți o calitate de la 1 la 100.",
+    "targetInvalid": "Introduceți o dimensiune țintă de la 1 la 102400 KiB.",
+    "dimensionInvalid": "Folosiți pixeli întregi de la 0 la 16384; 0 păstrează dimensiunea automată.",
+    "scaleInvalid": "Introduceți o scară de la 1 la 400 la sută."
   },
   "text": {
     "name": "Curăță și extrage text",
@@ -769,7 +773,7 @@
     "reset": "Resetează",
     "lap": "Înregistrare tură",
     "sound": "Redați un sunet scurt la finalizare când această pagină poate reda audio",
-    "backgroundHelp": "Cronometrarea folosește termenele limită ale ceasului și timpul scurs. Starea este păstrată în spațiul de stocare al sesiunii din această filă. Filele de fundal și dispozitivele de dormit pot suspenda execuția; acesta nu este un memento de fundal sau o alarmă.",
+    "backgroundHelp": "Cronometrarea folosește momentele de încheiere conform ceasului și timpul scurs. Reîncărcarea acestei file restabilește ambele cronometre, inclusiv timpul real scurs pentru cronometrele în funcțiune. Starea este păstrată în spațiul de stocare al sesiunii acestei file. Filele din fundal și dispozitivele în repaus pot suspenda execuția; acesta nu este un memento în fundal sau o alarmă.",
     "laps": "Cronometru ture",
     "export": "Exportați ture ca TXT",
     "number": "Tur",
@@ -893,7 +897,7 @@
       "count": "Numărul de date trebuie să fie un număr întreg între 1 și 100.",
       "invalid": "Imposibil de calculat. Verificați expresia, fusul orar și ora de referință."
     },
-    "copyExpression": "Copiază · Expresie",
+    "copyExpression": "Copiază Expresie",
     "utcOffset": "UTC ±HH:mm"
   },
   "uiText": {
@@ -1580,7 +1584,9 @@
     "regexExtractHelp": "Alegeți potrivirea completă sau un grup de captură de extras. Potrivirile goale sunt valide; grupurile nepotrivite sunt afișate separat.",
     "passwordPolicy": "Tipurile de caractere selectate formează grupul permis. Activați „Solicitați fiecare tip” pentru a include fiecare tip selectat în fiecare parolă.",
     "speedScope": "Evaluările descriu viteza de transfer. Latența și jitterul sunt măsurate separat.",
-    "viewResult": "Vedeți rezultatul"
+    "viewResult": "Vedeți rezultatul",
+    "speedNetworkError": "Conexiunea la rețea a eșuat. Încercați din nou.",
+    "speedStartError": "Testul de viteză nu a putut porni. Încercați din nou."
   },
   "redesign": {
     "calculatorOriginal": "Valoarea originală",
@@ -1825,7 +1831,8 @@
       "speedNetwork": "Acest instrument se conectează la Cloudflare și consumă date de rețea. Solicitările încep doar după pornirea testului.",
       "speedSettings": "Setările testului",
       "speedSummary": "{{profile}} · {{unit}} · până la {{budget}} MiB",
-      "customZone": "Fus orar IANA personalizat"
+      "customZone": "Fus orar IANA personalizat",
+      "md5ModeConfirm": "Schimbarea modului va elimina coada curentă de fișiere, rezultatele și valorile de verificare. Continuați?"
     },
     "daily": {
       "countdownHelp": "Pentru numărătoare inversă, folosiți ziua de azi ca început și data țintă ca sfârșit. Datele trecute dau un număr negativ de zile.",
@@ -1853,5 +1860,107 @@
     "shared": {
       "viewResult": "Vezi rezultatul"
     }
+  },
+  "v2": {
+    "settings": "Setări",
+    "appearance": "Aspect",
+    "themeSystem": "Urmărește sistemul",
+    "themeLight": "Luminos",
+    "themeDark": "Întunecat",
+    "favorites": "Favorite",
+    "recent": "Deschise recent",
+    "pin": "Adaugă la favorite",
+    "unpin": "Elimină din favorite",
+    "noFavorites": "Apasă steaua unui instrument pentru a-l salva.",
+    "noRecent": "Aici apar ultimele cinci instrumente deschise.",
+    "navigation": "Explorează instrumentele",
+    "qrTextNotice": "Unele cititoare, inclusiv anumite versiuni WeChat, pot să nu afișeze coduri QR cu text simplu. Folosește acest cititor pentru textul original."
+  },
+  "usabilityDaily": {
+    "unitOtherCount": "Alte conversii ({{count}})",
+    "numberSummary": "Interval {{min}}–{{max}} · {{count}} numere · {{repeat}}",
+    "noRepeat": "Fără numere repetate"
+  },
+  "usability": {
+    "images": {
+      "growth": "Dimensiunea fișierului a crescut cu {{percent}}%; nicio reducere a dimensiunii",
+      "adjust": "Ajustați parametrii",
+      "add": "Adăugați imagini",
+      "preview": "Previzualizați {{name}}",
+      "unchanged": "Dimensiunea fișierului nu s-a schimbat; nicio reducere a dimensiunii",
+      "savings": "Dimensiunea fișierului s-a redus cu {{percent}}%"
+    },
+    "password": {
+      "showRow": "Afișați rezultatul {{number}}",
+      "hideRow": "Ascundeți rezultatul {{number}}"
+    },
+    "speedtest": {
+      "latencyMs": "Latență HTTP fără sarcină",
+      "jitterMs": "Variație fără sarcină",
+      "downloadLatencyMs": "Latență sub sarcină de descărcare",
+      "downloadJitterMs": "Variație sub sarcină de descărcare",
+      "uploadLatencyMs": "Latență sub sarcină de încărcare",
+      "uploadJitterMs": "Variație sub sarcină de încărcare",
+      "downloadBps": "Descărcare",
+      "uploadBps": "Încărcare"
+    }
+  },
+  "usabilityShared": {
+    "viewTimes": "Vedeți duratele de execuție",
+    "adjustParameters": "Ajustați parametrii"
+  },
+  "polishData": {
+    "diffBlocks": "{{count}} blocuri de diferențe",
+    "coarse": "Comparație aproximativă: blocurile pot include conținut neschimbat.",
+    "errors": {
+      "CsvColumns": "Rândul {{row}} are {{actual}} coloane; se așteptau {{expected}}. Verificați delimitatorii și celulele între ghilimele.",
+      "CsvHeaders": "Numele coloanelor se repetă. Redenumiți-le sau dezactivați rândul de antet.",
+      "CsvJsonCell": "Rândul {{row}}, coloana {{column}} nu conține JSON valid. Folosiți o valoare JSON sau alegeți modul de celule cu șiruri de caractere.",
+      "CsvArrayHeader": "Rândurile de tip tablou nu au nume de coloane. Dezactivați rândul de antet.",
+      "CsvNestedValue": "null și valorile imbricate necesită modul de celule cu serializare JSON explicită.",
+      "CsvRowShape": "Fiecare rând JSON trebuie să aibă aceleași coloane, fără valori lipsă.",
+      "XmlOrdered": "Folosiți tabloul ordonat de noduri din XML → JSON. Încărcați exemplul pentru a vedea atributele și nodurile de text.",
+      "QueryArrays": "Folosiți un obiect ale cărui valori sunt tablouri nevide de șiruri de caractere, de exemplu {\"tag\":[\"a\",\"b\"]}."
+    },
+    "notices": {
+      "StructureOnly": "Valorile datelor și structura acceptată sunt păstrate; comentariile sursă, formatarea și stilul ghilimelelor nu sunt păstrate.",
+      "CsvStrings": "Celulele CSV rămân șiruri de caractere; numerele și valorile booleene nu sunt deduse automat.",
+      "CsvTextExport": "CSV este text; exportul implicit nu păstrează informațiile despre tipurile scalare JSON.",
+      "ByteHex": "Rezultatul nu poate fi decodat fără pierderi ca {{charset}}. Se afișează Hex; descărcarea păstrează octeții originali."
+    },
+    "charsetSource": "Textul este deja Unicode. Codificarea sursă se aplică doar octeților fișierului."
+  },
+  "polish": {
+    "files": {
+      "reuseLimit": "Acest rezultat depășește limita de intrare de 10 MiB. Copierea și descărcarea includ în continuare rezultatul complet.",
+      "pdfRange": "Pagini disponibile: 1–{{count}}",
+      "pdfInspectHelp": "Verificați numărul de pagini înainte de a alege un interval.",
+      "qrRecovery": "Ajustați corectarea erorilor"
+    }
+  },
+  "polishShell": {
+    "flags": "Indicatoare: {{flags}}"
+  },
+  "experience": {
+    "extractPhone": "Extrage numerele de telefon",
+    "extractEmail": "Extrage adresele de e-mail",
+    "extractUrl": "Extrage linkurile",
+    "base64encode": "Codifică în Base64",
+    "base64decode": "Decodifică Base64",
+    "base64urlencode": "Codifică în Base64URL",
+    "base64urldecode": "Decodifică Base64URL",
+    "noemail": "Nu s-au găsit adrese de e-mail.",
+    "nophone": "Nu s-au găsit numere de telefon.",
+    "nourl": "Nu s-au găsit linkuri.",
+    "textAuto": "Textele scurte sunt procesate automat; pornește manual procesarea textelor mai lungi.",
+    "qrSettings": "Dimensiune de ieșire {{size}}px · Corectarea erorilor {{level}}",
+    "networkDetails": "Detalii despre rețea și date",
+    "endDate": "Data de încheiere",
+    "listInput": "Intrări",
+    "chooseConvert": "Alege convertorul · {{name}}",
+    "task": "Acțiune",
+    "copySeconds": "Copiază marcajul temporal în secunde",
+    "copyMilliseconds": "Copiază marcajul temporal în milisecunde",
+    "unitPrecision": "Note despre precizie și unități"
   }
 }
