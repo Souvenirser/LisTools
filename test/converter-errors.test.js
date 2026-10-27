@@ -1,0 +1,3 @@
+import test from'node:test';import assert from'node:assert/strict';import{executeConversion}from'../src/tools/convert/runtime.js';
+test('invalid encoded input has a stable code without parsing upstream messages',async()=>{const result=await executeConversion('base64','not!base64',{direction:'decode'});assert.equal(result.status,'error');assert.equal(result.code,'InvalidEncodedInput');});
+test('lossless character encoding failure has a stable code',async()=>{const result=await executeConversion('base64','😀',{charset:'gbk'});assert.equal(result.status,'error');assert.equal(result.code,'TextEncodingError');});

@@ -70,3 +70,9 @@ test('MD5 empty input only runs manually; existing converters retain empty-input
   await new Promise(r=>setTimeout(r,10));assert.equal(workers.length,0);
   controller.process({toolId:'md5',input:'',options:{}});assert.equal(workers.length,1);
 });
+
+test('a valid replacement request enters pending without clearing presentation through an idle state',()=>{
+  const {controller,workers,states}=fixture();controller.process(request('first'));const first=workers[0];first.onmessage({data:{taskId:first.input.taskId,status:'ready',preview:'first result'}});
+  controller.process(request('second'));assert.deepEqual(states.map(state=>state.status),['pending','ready','pending']);assert.ok(first.terminated);
+  controller.cancel();assert.equal(states.at(-1).status,'cancelled');const late=workers[1];late.onmessage({data:{taskId:late.input.taskId,status:'ready',preview:'late'}});assert.equal(states.at(-1).status,'cancelled');
+});
