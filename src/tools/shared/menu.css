@@ -13,11 +13,11 @@
 [dir="rtl"] .tool-menu-link[aria-current="page"]{box-shadow:inset -3px 0 var(--blue-11)}
 .tool-menu-link[aria-current="page"] { background:var(--blue-3); color:var(--blue-12); font-weight:600; }
 .tool-menu-icon { display:inline-grid; place-items:center; width:24px; flex:0 0 24px; direction:ltr; }
-.tool-menu-name { min-width:0; overflow-wrap:anywhere; }
-.tool-menu-name small { display:block; color:var(--muted); font-size:.875rem; font-weight:400; }
+.tool-menu-name { min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.tool-menu-name small { display:block; white-space:normal; color:var(--muted); font-size:.875rem; font-weight:400; }
 .tool-menu-arrow { margin-inline-start:auto; font-size:1.25rem; line-height:1; transition:transform .1s; }
 .tool-menu details[open] > summary > .tool-menu-arrow { transform:rotate(90deg); }
-.tool-menu-group { margin-inline-start:18px; border-inline-start:1px solid var(--border); padding-inline-start:4px; }
+.tool-menu-group { margin-inline-start:8px; border-inline-start:1px solid var(--border); padding-inline-start:4px; }
 .tool-menu-empty { margin:16px; color:var(--muted); }
 .tool-menu-footer { display:flex; flex-shrink:0; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px 12px; padding:10px 12px; border-top:1px solid var(--border); font-size:.875rem; color:var(--muted); }
 .feedback-link { display:inline-flex; align-items:center; min-height:24px; color:var(--blue-12); text-decoration:none; white-space:nowrap; }
@@ -35,3 +35,11 @@
 .tool-menu-sort-row{display:flex;align-items:center;gap:10px;min-height:44px;padding:4px 8px;border-radius:6px;min-width:0}.tool-menu-sort-handle{flex:0 0 36px;min-height:44px;width:36px;border:0;border-radius:6px;background:transparent;color:var(--muted);font:1.25rem/1 system-ui;cursor:grab;touch-action:none}
 .tool-menu-sort-row .tool-menu-name{flex:1;overflow-wrap:anywhere}.is-sort-selected{outline:2px solid var(--blue-8);outline-offset:-2px}.tool-menu-sort-ghost{opacity:.35;background:var(--blue-3)}.tool-menu.is-sorting summary{padding-inline-start:4px}.tool-menu.is-sorting .tool-menu-list{overscroll-behavior:contain}.tool-menu.is-sorting .tool-menu-sort-handle:focus-visible{outline:2px solid var(--blue-11)}
 .tool-menu.is-sorting .tool-menu-search{display:none}.tool-menu.is-sorting summary{min-height:48px;padding-block:2px}.tool-menu-sort-row{padding-block:2px}
+
+/* Recent history updates independently of the stable category sidebar. */
+.header-recent{order:2;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;flex-shrink:0;font:inherit}
+.header-recent svg{flex-shrink:0}.workbench-shell .header-search{order:1}.header-settings{order:3}
+.recent-tools{position:fixed;inset:auto;margin:0;padding:8px;width:min(360px,calc(100vw - 24px));overflow:auto;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text);box-shadow:0 12px 40px #0002;font:1rem/1.5 system-ui}
+.recent-tools p{margin:8px;color:var(--muted);font-size:.875rem}.recent-tools .tool-menu-name{flex:1}
+@media(max-width:760px){.header-recent{width:44px;padding:8px}.header-recent .recent-caption{display:none}}
+@media(max-width:600px){body.workbench-shell .app-header{gap:8px;padding-inline:12px;flex-wrap:wrap}.workbench-shell .app-header .brand-caret{display:none}}
