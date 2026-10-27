@@ -4,7 +4,7 @@ import {chooseTask} from './task-helpers.js';
 
 // Slow the real worker handler so pending spans rendered frames; retain its real result.
 async function delayTextWorker(page){
- await page.route(/\/(?:src\/tools\/text\/worker\.js|assets\/worker-[^/?]+\.js)(?:\?.*)?$/,async route=>{const response=await route.fetch();await route.fulfill({response,body:await response.text()+"\nconst originalHandler=self.onmessage;self.onmessage=async event=>{await new Promise(resolve=>setTimeout(resolve,180));return originalHandler(event);};"});});
+ await page.route(/\/(?:src\/tools\/text\/worker\.js|assets\/worker-[^/?]+\.js)(?:\?.*)?$/,async route=>{const response=await route.fetch();await route.fulfill({response,body:await response.text()+"\nconst originalHandler=self.onmessage;self.onmessage=async event=>{await new Promise(resolve=>setTimeout(resolve,450));return originalHandler(event);};"});});
 }
 async function sampleGeometry(page){
  await page.evaluate(()=>{

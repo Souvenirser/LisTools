@@ -2,10 +2,12 @@ import {test,expect} from '@playwright/test';
 import {chooseTask} from './task-helpers.js';
 
 async function aligned(page,selectors){
+ await page.waitForFunction(()=>document.documentElement.dataset.uiState!=='booting');
  const boxes=await Promise.all(selectors.map(selector=>page.locator(selector).boundingBox()));
  for(const box of boxes){expect(box).not.toBeNull();expect(Math.abs(box.y-boxes[0].y)).toBeLessThanOrEqual(1);}
 }
 async function inlineLabel(page,label,control){
+ await page.waitForFunction(()=>document.documentElement.dataset.uiState!=='booting');
  const [name,field]=await Promise.all([page.locator(label).boundingBox(),page.locator(control).boundingBox()]);
  expect(name).not.toBeNull();expect(field).not.toBeNull();expect(name.x+name.width).toBeLessThanOrEqual(field.x+1);
  expect(Math.abs(name.y+name.height/2-field.y-field.height/2)).toBeLessThanOrEqual(1);

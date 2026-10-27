@@ -24,7 +24,7 @@ test('open menu follows task changes and browser history without stale selection
 for(const language of ['zh-Hans','en','de','ar','ru'])test(`${language} menu and page heading use the same complete tool name`,async({page})=>{
  await page.goto('/index.html');await selectLanguage(page,language);
  for(const tool of pages){
-  await page.goto('/'+tool.file);const heading=(await page.locator('h1').innerText()).trim();await page.locator('button.brand').click();await settled(page);
+  await page.goto('/'+tool.file);await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');const heading=(await page.locator('h1').innerText()).trim();await page.locator('button.brand').click();await settled(page);
   await expect(page.locator('#tool-menu a[aria-current="page"] .tool-menu-name')).toHaveText(heading);await page.keyboard.press('Escape');
  }
 });
