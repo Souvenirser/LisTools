@@ -1,3 +1,4 @@
+import {pendingFeedback} from './tools/shared/pending-feedback.js';
 import {mountResultShortcut} from './tools/shared/workspace.js';
 import {resolveTaskRoute} from './tools/shared/navigation.js';
 import {registerContentCheck} from './tools/shared/content-state.js';
@@ -92,7 +93,8 @@ function render(state) {
   $('convert-locate').hidden=state.status!=='error' || state.position===undefined || $('input-mode').value!=='text';
   if(['ready','error','cancelled'].includes(state.status)) clearKey();
 }
-const controller=createConversionController({createWorker:()=>new Worker(new URL('./tools/convert/worker.js',import.meta.url),{type:'module'}),onState:render,onEvent:event=>{if(tool.id==='md5')md5.onEvent(event);}});
+const resultFeedback=pendingFeedback('convert-status');
+const controller=createConversionController({createWorker:()=>new Worker(new URL('./tools/convert/worker.js',import.meta.url),{type:'module'}),onState:state=>{resultFeedback(state.status==='pending');render(state);},onEvent:event=>{if(tool.id==='md5')md5.onEvent(event);}});
 md5=createMd5View({source,output,setDocument,setEditable:value=>source.dispatch({effects:editable.reconfigure([EditorState.readOnly.of(!value),EditorView.editable.of(value)])}),controller,notify});
 md5.deactivate();
 function request() {

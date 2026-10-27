@@ -1,3 +1,4 @@
+import {pendingFeedback} from './tools/shared/pending-feedback.js';
 import {actionArea} from './tools/shared/workspace.js';
 import { addTaskGuide } from './tools/shared/task-guide.js';
 import { textLabel as tr } from './tools/shared/labels.js';
@@ -81,7 +82,8 @@ replacement.dispatch({effects:StateEffect.appendConfig.of(EditorState.transactio
   notify(t('uiText.s58b78d61'));return [];
 }))});
 const output=createEditor($('regex-output'),{readOnly:true});
-const controller=createConversionController({createWorker:()=>new Worker(new URL('./tools/regex/worker.js',import.meta.url),{type:'module'}),timeoutMs:2000,onState:render});
+const resultFeedback=pendingFeedback('regex-status');
+const controller=createConversionController({createWorker:()=>new Worker(new URL('./tools/regex/worker.js',import.meta.url),{type:'module'}),timeoutMs:2000,onState:state=>{resultFeedback(state.status==='pending');render(state);}});
 const flagNames={d:['分组位置','Capture indices'],g:['全局匹配','Global'],i:['忽略大小写','Ignore case'],m:['多行锚点','Multiline'],s:['点匹配换行','Dot all'],u:['Unicode','Unicode'],v:['Unicode 集合','Unicode sets'],y:['粘连匹配','Sticky']};
 function renderFlags() {
   const summary=$('regex-active-flags');if(summary)summary.textContent=t('polishShell.flags',{flags:$('regex-flags').value||'—'});
@@ -168,7 +170,7 @@ function renderMatches() {
 }
 function render(state) {
   const retainPreview=state.status==='pending'&&Boolean(result||lastState.status==='pending');
-  $('regex-status').dataset.taskState=state.status;
+  $('regex-status').dataset.taskState=state.status;$('regex-run').setAttribute('aria-busy',String(state.status==='pending'));
   lastState=state;result=state.status==='ready'?state:undefined;
   if(result)active=Math.min(active,Math.max(0,result.matches.length-1));
   $('regex-cancel').hidden=state.status!=='pending';$('regex-cancel').disabled=state.status!=='pending';

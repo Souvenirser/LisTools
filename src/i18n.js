@@ -47,9 +47,10 @@ export function createNotifier() {
 function syncCancelControls(){for(const button of document.querySelectorAll('button[id$="-cancel"],button#cancel[disabled]')){const update=()=>{button.hidden=button.disabled;};new MutationObserver(update).observe(button,{attributes:true,attributeFilter:['disabled']});update();}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',syncCancelControls,{once:true});else queueMicrotask(syncCancelControls);
 
-if(['','index.html','diff.html','convert.html','regex.html','text.html'].includes(location.pathname.split('/').pop())){
- const focus=()=>import('./tools/shared/focus.js').then(module=>module.mountWorkspaceFocus());
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',focus,{once:true});else queueMicrotask(focus);
+export async function prepareWorkspace(){
+ if(['','index.html','diff.html','convert.html','regex.html','text.html'].includes(location.pathname.split('/').pop())){
+  const module=await import('./tools/shared/focus.js');module.mountWorkspaceFocus();
+ }
 }
 
 // The header may wrap with long translations or browser text zoom.

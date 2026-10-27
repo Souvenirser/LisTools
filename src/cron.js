@@ -1,3 +1,4 @@
+import {pendingFeedback} from './tools/shared/pending-feedback.js';
 import {mountResultShortcut} from './tools/shared/workspace.js';
 import {readPreferences,savePreferences} from './tools/shared/preferences.js';
 import {addTaskGuide} from './tools/shared/task-guide.js';
@@ -62,9 +63,11 @@ function saveCronZone(){const prefs=readPreferences();savePreferences({...prefs,
 $('cron-zone-picker').addEventListener('change',()=>{$('cron-zone').value=$('cron-zone-picker').value;saveCronZone();inputChanged();});
 $('cron-zone').addEventListener('change',()=>{try{new Intl.DateTimeFormat('en',{timeZone:$('cron-zone').value});saveCronZone();zoneValues.add($('cron-zone').value);zonePicker.setZones(zoneValues,$('cron-zone').value);}catch{/* Core validation reports an invalid custom zone. */}});
 let result, presentation, presentationRequest, requestKey, renderedPresentation, renderedLanguage, builderError, descriptionRequest=0, state={status:'idle'};
+const resultFeedback=pendingFeedback('cron-status');
 const controller=createConversionController({
   timeoutMs:2000, createWorker:()=>new Worker(new URL('./tools/cron/worker.js',import.meta.url),{type:'module'}),
   onState(next) {
+    resultFeedback(next.status==='pending');
     state=next;result=next.status==='ready' ? next : undefined;
     if(result){presentation=result;presentationRequest=requestKey;}else if(next.status!=='pending')presentation=undefined;
     renderState();
@@ -115,6 +118,7 @@ function renderState() {
   $('cron-result-title').closest('section').setAttribute('aria-busy',String(state.status==='pending'));
   for(const button of $('cron-dates').querySelectorAll('tbody button'))button.disabled=!ready;
   $('cron-status').textContent=({idle:t('cron.idle'),pending:t('common.processing'),ready:t('cron.found',{count:state.dates?.length || 0}),error:t('common.error'),cancelled:t('office.cancelled')})[state.status] || '';
+  $('cron-run').setAttribute('aria-busy',String(state.status==='pending'));
   $('cron-cancel').disabled=state.status!=='pending';
   for(const id of ['cron-copy-dates','cron-download-csv','cron-download-json']) $(id).disabled=!ready || !state.dates.length;
   $('cron-error').hidden=state.status!=='error';

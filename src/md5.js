@@ -1,3 +1,4 @@
+import {pendingFeedback} from './tools/shared/pending-feedback.js';
 import { t, translateDOM } from './i18n.js';
 import { charsets } from './tools/convert/bytes.js';
 import { md5Formats, compareMd5, exportMd5, md5Limits } from './tools/convert/md5.js';
@@ -57,9 +58,11 @@ export function createMd5View({source,output,setDocument,setEditable,controller,
     target.textContent=t(`md5.compare.${key}`);target.dataset.match=match.status;
   }
   function verifySingle() {comparison(items[0]?.hex,$('md5-expected').value,$('md5-expected-format').value,$('md5-match'));}
+  const resultFeedback=pendingFeedback('md5-status','md5-progress');
   function statusText() {
     const status=$('md5-status');status.className=state.status==='error'?'md5-error':state.status==='cancelled'||state.status==='ready'&&items.some(item=>item.status!=='ready')?'md5-warning':'';
     status.textContent=state.status==='error'?error(state):state.status==='pending'?progress?t('md5.progress',{completed:progress.completed,total:progress.total,processed:bytes(progress.processedBytes),bytes:bytes(progress.totalBytes)}):t('common.processing'):state.status==='cancelled'?t('md5.cancelled'):state.status==='ready'?t('md5.finished',{completed:items.filter(item=>item.status==='ready').length,total:items.length}):t('md5.manual');
+    $('md5-run').setAttribute('aria-busy',String(state.status==='pending'));
     $('md5-cancel').disabled=state.status!=='pending';
     $('md5-progress').hidden=state.status!=='pending'||mode!=='files';
     $('md5-progress').value=progress?.totalBytes?progress.processedBytes/progress.totalBytes:0;
@@ -128,6 +131,7 @@ export function createMd5View({source,output,setDocument,setEditable,controller,
   }
   function onState(next) {
     if(!active)return;
+    resultFeedback(next.status==='pending');
     if(next.status==='idle'&&state.status==='pending'&&mode==='hmac')clearKey();
     state=next;
     if(next.status==='pending'){items=[];progress=undefined;files.forEach(row=>{row.status='queued';row.progress=0;});}

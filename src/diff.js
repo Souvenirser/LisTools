@@ -1,3 +1,4 @@
+import {pendingFeedback} from './tools/shared/pending-feedback.js';
 import {registerContentCheck} from './tools/shared/content-state.js';
 import { MergeView, Change } from '@codemirror/merge';
 import { EditorState, Compartment } from '@codemirror/state';
@@ -128,7 +129,9 @@ function extensions(side, previousState) {
   ];
 }
 
+const resultFeedback=pendingFeedback('diff-total','diff-placeholder');
 function render(state) {
+  resultFeedback(state.status==='pending');
   const receivedAt = performance.now();
   const keepSummary=Boolean(merge)&&repeatedChange!==undefined&&['pending','ready'].includes(state.status);
   lastState = state;
