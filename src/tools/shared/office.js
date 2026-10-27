@@ -1,3 +1,4 @@
+import {pendingFeedback} from './pending-feedback.js';
 import { t, translateDOM, onLanguageChange } from '../../i18n.js';
 import { mountTool } from './page.js';
 import { createConversionController } from '../convert/controller.js';
@@ -11,7 +12,10 @@ export function initTool(id,markup,{statusTarget}={}){
   const refresh=()=>translateDOM($('tool-root'));
   onLanguageChange(refresh);refresh();
 }
-let status,fieldError;
+const statusFeedback=pendingFeedback('tool-status');
+let status,fieldError,feedbackPending=false;
+const pendingNotices=new Set(['common.processing','text.importing','diff.reading','images.importing','pdf.progress','images.progress']);
+function updateFeedback(pending){if(pending!==feedbackPending)statusFeedback(pending);feedbackPending=pending;}
 function clearFieldError(){
  if(!fieldError)return;
  const {field,node,disclosures,update}=fieldError;for(const details of disclosures)details.removeEventListener('toggle',update);field.removeAttribute('aria-invalid');
@@ -20,12 +24,13 @@ function clearFieldError(){
  field.removeEventListener('input',clearFieldError);node.remove();fieldError=undefined;if($('tool-status')){delete $('tool-status').dataset.field;$('tool-status').classList.remove('sr-only');}
 }
 export function setStatus(key,params={},withName=false){
+  updateFeedback(pendingNotices.has(key));
   clearFieldError();
   status={key,params,withName};
   const element=$('tool-status');
-  if(element){element.dataset.taskState='notice';element.hidden=false;element.textContent=(withName&&params.name&&key!=='office.fileReadError'?`${params.name} · `:'')+t(key,params);element.classList.remove('is-error','sr-only');}
+  if(element){element.dataset.taskState=feedbackPending?'pending':'notice';element.hidden=false;element.textContent=(withName&&params.name&&key!=='office.fileReadError'?`${params.name} · `:'')+t(key,params);element.classList.remove('is-error','sr-only');}
 }
-export function clearStatus({keepStale=false}={}){if(keepStale&&status?.key==='ux.stale')return;clearFieldError();status=undefined;const element=$('tool-status');if(element){element.dataset.taskState='idle';element.hidden=true;element.textContent='';element.classList.remove('sr-only');}}
+export function clearStatus({keepStale=false}={}){if(keepStale&&status?.key==='ux.stale')return;updateFeedback(false);clearFieldError();status=undefined;const element=$('tool-status');if(element){element.dataset.taskState='idle';element.hidden=true;element.textContent='';element.classList.remove('sr-only');}}
 export function showError(error={},{field,focus=false}={}){
   const key=error.code && /^(?:office|calculator|dates|qr|images|text|units|money|pdf|draw|timer)\./.test(error.code)?error.code:error.code==='TaskTimeout'?'office.timeout':'office.error';
   setStatus(key,error.params,true);$('tool-status')?.classList.add('is-error');if($('tool-status'))$('tool-status').dataset.taskState='error';
@@ -45,6 +50,8 @@ export function taskRunner(createWorker,{onResult=()=>{},onState=()=>{},onEvent=
   let pending=false,hadResult=false;
   const controller=createConversionController({createWorker,timeoutMs,onEvent,onState:state=>{
     pending=state.status==='pending';
+    if(pending){statusFeedback(true);feedbackPending=true;}
+    $('tool-root')?.setAttribute('aria-busy',String(pending));
     if(state.status==='pending')setStatus('common.processing');
     else if(state.status==='error'){if(isEmpty(state))setStatus(state.code,state.params);else showError(state);}
     else if(state.status==='cancelled')setStatus('office.cancelled');
