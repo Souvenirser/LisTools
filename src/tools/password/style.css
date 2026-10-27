@@ -8,3 +8,7 @@
 
 .password-workspace{display:grid;grid-template-columns:minmax(320px,420px) minmax(0,1fr);gap:24px;align-items:start}.password-page .tool-fields{align-items:start}.password-page .password-result{align-items:stretch}.password-page .password-result input{font-size:1rem;min-height:44px}
 @media(max-width:900px){.password-workspace{grid-template-columns:minmax(0,1fr)}}
+
+.password-page .password-result{flex-direction:column}
+.password-page .password-result-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}
+.password-page .password-value-field input{padding-inline-end:12px}
