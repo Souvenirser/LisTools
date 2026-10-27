@@ -15,6 +15,19 @@ const patterns={
  url:String.raw`https?:\/\/[^\s<>"']+`,
  id:String.raw`(?<![\dA-Za-z])[1-9]\d{5}(?:18|19|20)\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])\d{3}[\dXx](?![\dA-Za-z])`
 };
+function extractedUrl(match,input){
+ let value=match.value;
+ if(input[match.index-1]==='<'&&input[match.end]==='>')return value;
+ if(input.slice(Math.max(0,match.index-2),match.index)===']('){
+  let balance=0;for(let index=0;index<value.length;index++){
+   if(value[index]==='(')balance++;
+   else if(value[index]===')'){if(balance===0)return value.slice(0,index);balance--;}
+  }
+ }
+ const punctuation=/[.,;:!?，。；：！？、]+$/u,question=value.indexOf('?');
+ if(value.includes('#')||question!==-1&&question<value.length-1)return value;
+ return value.replace(punctuation,'');
+}
 export async function processText(request={}) {
  const {input='',operation='count',locale='en'}=request;
  if(typeof input!=='string' || !input.isWellFormed()) return failure('invalidText');
@@ -34,7 +47,7 @@ export async function processText(request={}) {
    if(!['email','phone','url'].includes(request.kind)) return failure('invalidOperation');
    const result=await runRegex({input,pattern:patterns[request.kind],flags:'giu',operation:'extract'});
    if(result.status==='error') return failure('conversionError');
-   let extracted=result.matches.map(match=>match.value);
+   let extracted=result.matches.map(match=>request.kind==='url'?extractedUrl(match,input):match.value);
    if(request.dedupe) extracted=[...new Set(extracted)];
    output=extracted.join('\n');truncated=result.truncated;summary.matches=result.matches.length;summary.items=extracted.length;
   } else if(operation==='mask') {
