@@ -48,7 +48,7 @@ $('tool-root').innerHTML=`
   </div>`;
 const regexError=document.createElement('details');regexError.id='regex-error-detail';regexError.hidden=true;regexError.innerHTML='<summary data-i18n="cron.technicalDetails"></summary><pre id="regex-error-raw" dir="ltr"></pre>';$('regex-status').after(regexError);
 mountTool('regex');
-let result,lastState={status:'idle'},hasRun=false,stale=false,active=0,selectedRule,suppressChanges=false;
+let result,lastState={status:'idle'},hasRun=false,stale=false,active=0,requestKey,selectedRule,suppressChanges=false;
 const setDoc=(editor,text)=>{if(editor.state.doc.toString()!==text)editor.dispatch({changes:{from:0,to:editor.state.doc.length,insert:text}});};
 const byteSize=text=>new TextEncoder().encode(text).length;
 const size=n=>n<1024?`${n} B`:n<1024**2?`${(n/1024).toFixed(1)} KiB`:`${(n/1024**2).toFixed(2)} MiB`;
@@ -84,6 +84,7 @@ const output=createEditor($('regex-output'),{readOnly:true});
 const controller=createConversionController({createWorker:()=>new Worker(new URL('./tools/regex/worker.js',import.meta.url),{type:'module'}),timeoutMs:2000,onState:render});
 const flagNames={d:['分组位置','Capture indices'],g:['全局匹配','Global'],i:['忽略大小写','Ignore case'],m:['多行锚点','Multiline'],s:['点匹配换行','Dot all'],u:['Unicode','Unicode'],v:['Unicode 集合','Unicode sets'],y:['粘连匹配','Sticky']};
 function renderFlags() {
+  const summary=$('regex-active-flags');if(summary)summary.textContent=t('polishShell.flags',{flags:$('regex-flags').value||'—'});
   $('regex-flag-options').replaceChildren(...Object.entries(flagNames).map(([flag,name])=> {
     const label=el('label'), checkbox=document.createElement('input');checkbox.type='checkbox';checkbox.value=flag;checkbox.checked=$('regex-flags').value.includes(flag);
     let supported=true;try {new RegExp('',flag);}catch {supported=false;}
@@ -98,18 +99,22 @@ function renderFlags() {
   const common=$('regex-common-flags');
   if(common){
     for(const label of common.querySelectorAll('label'))label.remove();
-    common.prepend(...[...$('regex-flag-options').children].filter(label=>['g','i','m'].includes(label.querySelector('input').value)));
+    const labels=[...$('regex-flag-options').children].filter(label=>['g','i','m'].includes(label.querySelector('input').value));for(const label of labels){const flag=label.querySelector('input').value;label.lastChild.textContent=flag;label.querySelector('input').setAttribute('aria-label',flag+' · '+tr(...flagNames[flag]));}common.prepend(...labels);const help=$('regex-flag-help');if(help)help.textContent=['g','i','m'].map(flag=>flag+' · '+tr(...flagNames[flag])).join(' / ');
   }
 }
 function request() {return {pattern:$('regex-pattern').value,flags:$('regex-flags').value,input:source.state.doc.toString(),replacement:replacement.state.doc.toString(),operation:$('regex-operation').value,extractGroup:$('regex-group').value};}
 function execute(auto=false) {
   if(suppressChanges)return;
+  const next=request(),key=JSON.stringify(next);
+  if(key!==requestKey)active=0;requestKey=key;
   hasRun=true;stale=false;
   $('regex-input-info').textContent=`${size(byteSize(source.state.doc.toString()))} · UTF-8`;
-  controller.process(request(),{auto,wait:350});
+  if(auto)controller.invalidate();
+  controller.process(next,{auto,wait:350});
 }
 function inputChanged() {
   if(suppressChanges)return;
+  active=0;
   if($('regex-auto').checked)execute(true);else {stale=hasRun;controller.invalidate();$('regex-input-info').textContent=`${size(byteSize(source.state.doc.toString()))} · UTF-8`;}
 }
 function updateHighlights() {
@@ -162,20 +167,22 @@ function renderMatches() {
   table.append(head,body);$('regex-captures').replaceChildren(table);
 }
 function render(state) {
+  const retainPreview=state.status==='pending'&&Boolean(result||lastState.status==='pending');
   $('regex-status').dataset.taskState=state.status;
-  if(state!==lastState)active=0;lastState=state;result=state.status==='ready'?state:undefined;
-  $('regex-cancel').disabled=state.status!=='pending';
+  lastState=state;result=state.status==='ready'?state:undefined;
+  if(result)active=Math.min(active,Math.max(0,result.matches.length-1));
+  $('regex-cancel').hidden=state.status!=='pending';$('regex-cancel').disabled=state.status!=='pending';
   for(const id of ['regex-copy','regex-download','regex-json'])$(id).disabled=!result;
   $('regex-use-result').disabled=!result || result.outputBytes>limits.input;
-  setDoc(output,result?.preview || '');
-  $('regex-preview-info').textContent=result?`${size(result.outputBytes)} · ${result.durationMs} ms · `+(result.previewTruncated?t('uiText.s1c6d1b0'):t('uiText.s1b52df0')):'';
+  if(!retainPreview){setDoc(output,result?.preview || '');
+  $('regex-preview-info').textContent=result?`${size(result.outputBytes)} · ${result.durationMs} ms · `+(result.previewTruncated?t('uiText.s1c6d1b0'):t('uiText.s1b52df0')):'';}
   const inputBytes=byteSize(source.state.doc.toString());
   $('regex-status').textContent=state.status==='pending'?t('uiText.sa1ea6cd3'):state.status==='ready'?t('uiText.s471ea5e4',{p0:state.matches.length,p1:state.truncated?'+' :'',p2:state.durationMs}):state.status==='error'?`${t(state.code==='TaskTimeout'?'office.timeout':'common.error')}${state.position===undefined?'':t('uiText.s2bd66e',{p0:state.field,p1:state.position+1})}`:state.status==='cancelled'?t('uiText.s5d30e9f9'):inputBytes>256*1024?t('uiText.s4ad52344'):t('uiText.s9dc92a08');
   if(state.status==='idle'&&stale)$('regex-status').textContent=t('direct.developer.regexStale');
   $('regex-error-detail').hidden=state.status!=='error';$('regex-error-raw').textContent=state.status==='error'?state.message||state.code||'':'';
   $('regex-status').classList.toggle('tool-error',state.status==='error');
   $('regex-locate').hidden=state.status!=='error' || state.position===undefined;
-  groupOptions();renderMatches();updateHighlights();
+  if(retainPreview){for(const button of document.querySelectorAll('#regex-previous,#regex-next,#regex-match-rows button'))button.disabled=true;}else {groupOptions();renderMatches();updateHighlights();}
 }
 function showRule(rule) {
   if(!rule) {$('regex-rule-detail').replaceChildren();return;}
@@ -232,7 +239,7 @@ function regexOrderTask(useExample=false){
 }
 const regexGuide=addTaskGuide('regex',['match','extract','replace'].map(id=>({id,key:id==='match'?'office.match':id==='extract'?'office.extractMatches':'common.replace'})),{hasContent:()=>source.state.doc.length>0||replacement.state.doc.length>0||Boolean(result)||['regex-pattern','regex-flags'].some(id=>$(id).value!==$(id).defaultValue),choose:task=>{$('regex-operation').value=task;operationChanged();},example:()=>{regexOrderTask(true);regexGuide.select('extract');}});
 const flagField=$('regex-flags').closest('.field');const regexHelp=$('regex-task-match').closest('section').querySelector('.task-help');regexHelp.append(flagField,$('regex-auto').closest('label'),$('regex-run').closest('section').querySelector(':scope > p.tool-note'));
-const regexPurpose=regexHeading.querySelector('p');regexPurpose.textContent=t('ux.purpose_regex');regexHelp.prepend(regexPurpose);
+const regexPurpose=regexHeading.querySelector('p');regexPurpose.textContent=t('ux.purpose_regex');regexHeading.append(regexPurpose);
 $('regex-operation').closest('.field').hidden=true;$('regex-group-field').closest('.tool-fields').hidden=true;
 $('regex-pattern').after($('regex-locate'));
 for(const element of [regexHeading]){const translate=()=>{for(const node of element.querySelectorAll('[data-i18n]'))node.textContent=t(node.dataset.i18n);};onLanguageChange(translate);translate();}
@@ -241,7 +248,7 @@ $('regex-operation').addEventListener('change',()=>regexGuide.select($('regex-op
 
 actionArea($('regex-run').closest('.tool-actions'),$('regex-status'));
 
-const commonFlags=document.createElement('div');commonFlags.className='regex-flags';commonFlags.id='regex-common-flags';$('regex-pattern').closest('.field').append(commonFlags);renderFlags();
+const commonFlags=document.createElement('div');commonFlags.className='regex-flags';commonFlags.id='regex-common-flags';const patternTools=document.createElement('div');patternTools.className='regex-pattern-tools';const patternLabel=document.querySelector('label[for=regex-pattern]');patternLabel.before(patternTools);const activeFlags=el('span','','tool-note');activeFlags.id='regex-active-flags';activeFlags.dir='ltr';patternTools.append(patternLabel,activeFlags,commonFlags);const flagHelp=document.createElement('p');flagHelp.id='regex-flag-help';flagHelp.className='tool-note';regexHelp.append(flagHelp);renderFlags();
 for(const card of [...$('regex-rule-list').closest('.tool-grid').children]){const details=document.createElement('details'),summary=document.createElement('summary'),heading=card.querySelector('h2');summary.append(heading);details.append(summary);details.append(...card.childNodes);card.append(details);}
 function regexAction(){$('regex-run').textContent=t($('regex-operation').value==='match'?'office.match':$('regex-operation').value==='extract'?'office.extractMatches':'common.replace');}
 $('regex-run').removeAttribute('data-zh');$('regex-run').removeAttribute('data-en');$('regex-run').removeAttribute('data-i18n');onLanguageChange(regexAction);regexAction();

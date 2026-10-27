@@ -4,7 +4,7 @@
 .convert-tool-heading h2 { font-size:1.125rem; }
 #tool-hint { margin:4px 0 0; color:var(--muted); font-size:.875rem; }
 .convert-options { display:flex; flex-wrap:wrap; gap:12px; align-items:end; }
-.convert-options label { display:flex; flex-direction:column; gap:8px; font-size:1rem; min-width:100px; }
+.convert-options .convert-option{display:flex;flex-direction:column;gap:4px;min-width:0;max-width:100%}.convert-options .convert-option>label{font-size:1rem}.convert-options .convert-option.is-choice{flex-direction:row;align-items:center;gap:12px}.convert-options .convert-option.is-choice>label:not(.sr-only){flex:0 1 auto}.convert-options .convert-option.is-choice>select{min-width:0;max-width:180px}
 .convert-options input { max-width:220px; min-height:44px; border:1px solid var(--border); border-radius:8px; padding:8px 12px; background:var(--surface); font:inherit; }
 .convert-options input[type="number"] { width:105px; }
 .convert-editors { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; flex:1; align-items:stretch; min-height:calc(var(--workspace-reader-min) + 144px); }
@@ -31,35 +31,46 @@
 #convert-tool-list a[aria-current="page"] { color:var(--blue-12); background:var(--blue-3); font-weight:600; box-shadow:inset 3px 0 var(--blue-9); }
 #convert-no-tools { margin:12px; color:var(--muted); font-size:.875rem; }
 [dir="rtl"] #convert-tool-list a[aria-current="page"] { box-shadow:inset -3px 0 var(--blue-9); }
-#convert-catalog-toggle { display:none; align-self:start; margin-bottom:16px; }
-.convert-result-actions { padding:12px 16px; margin:0; }
+#convert-catalog-toggle { display:none; align-self:start; margin-bottom:0; }
+.convert-result-actions { padding:0; margin:0; }
 .md5-page .convert-result-actions { display:none; }
 #convert-color { height:72px; border-block:1px solid var(--border); margin:16px; border-radius:8px; }
-@media(max-width:1199px) {
-  .convert-layout { grid-template-columns:minmax(0,1fr); }
-  #convert-catalog-toggle { display:block; }
-  .convert-catalog { position:fixed; inset:0; width:min(480px,calc(100vw - 32px)); max-height:calc(100dvh - 64px); min-height:240px; margin:auto; z-index:30; }
-  .convert-catalog::backdrop { background:#0004; }
-  .convert-catalog:not(:popover-open) { display:none; }
-}
+main.catalog-overlay .convert-layout { grid-template-columns:minmax(0,1fr); }
+main.catalog-overlay #convert-catalog-toggle { display:block; }
+main.catalog-overlay .convert-catalog { position:fixed; inset:0; width:min(480px,calc(100vw - 32px)); max-height:calc(100dvh - 64px); min-height:240px; margin:auto; z-index:30; }
+main.catalog-overlay .convert-catalog::backdrop { background:#0004; }
+main.catalog-overlay .convert-catalog:not(:popover-open) { display:none; }
 @media(max-width:999px) {
   .convert-editors { grid-template-columns:minmax(0,1fr); flex:none; }
   .convert-editor { min-height:240px; }
 }
 
 .convert-page .convert-workbench{gap:12px}
-.convert-page .convert-tool-heading{display:grid;gap:4px}
+.convert-page .convert-tool-heading{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px}.convert-tool-heading h2{margin:0}.convert-tool-heading #convert-usage{grid-column:1/-1}.convert-tool-heading #convert-help{grid-column:2;grid-row:1}.convert-page .page-heading{flex-wrap:wrap;gap:8px 16px}
 .convert-page #convert-usage{margin:0;font-size:1rem;line-height:1.5}
-.convert-page #convert-help>summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-size:.875rem;color:var(--muted)}
+.convert-page #convert-help>summary{min-height:36px;display:flex;align-items:center;cursor:pointer;font-size:.875rem;color:var(--muted)}
 .convert-page #tool-hint{margin:0 0 8px;max-width:78ch}
 .convert-page .convert-editors{min-height:0;align-items:stretch}
-.convert-page .convert-editor{height:var(--reader-height,clamp(280px,45dvh,520px));min-height:0;flex:none;overflow:hidden}
+.convert-page .convert-editor{height:var(--reader-height,clamp(322px,45dvh,520px));min-height:0;flex:none;overflow:hidden}
 .convert-page .convert-editor .cm-editor{height:100%;min-height:0;max-height:100%}
 .convert-page .convert-editor .cm-scroller{max-height:100%;overflow:auto;overscroll-behavior:contain}
-.convert-page .convert-options{gap:8px 12px}
+.convert-page .convert-options{gap:12px 24px;align-items:center}
 .convert-page .convert-options label{gap:4px}
 .convert-page .panel-heading h2{font-size:1rem;overflow-wrap:anywhere}
 .convert-page .panel-heading{flex-wrap:wrap;gap:8px}
 
-@media(max-width:999px){.convert-page .convert-editors{grid-template-columns:minmax(0,1fr)}.convert-page .convert-editor{height:var(--reader-height,clamp(260px,44dvh,440px))}}
-@media(max-width:759px){.convert-page .convert-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.convert-page .convert-options label,.convert-page .convert-options input{min-width:0;max-width:100%;width:100%}.convert-page #input-mode{max-width:100%}}
+@media(max-width:999px){.convert-page .convert-editors{grid-template-columns:minmax(0,1fr)}.convert-page .convert-editor{height:var(--reader-height,clamp(242px,44dvh,440px))}}
+@media(max-width:759px){.convert-page .convert-options{display:flex;flex-wrap:wrap}.convert-page .convert-options input{min-width:0;max-width:100%}.convert-page .convert-options .is-choice>select{flex:0 1 auto;max-width:180px}.convert-page #input-mode{max-width:100%}}
+
+@media(min-width:1000px) and (max-height:800px){.convert-page[data-layout] .page-heading{margin-bottom:16px}.convert-page[data-layout] .convert-workbench{gap:8px}}
+
+/* Category boundaries stay visible while browsing the local catalog. */
+#convert-tool-list .convert-catalog-group{border:1px solid var(--border);border-radius:8px;margin-bottom:16px}
+#convert-tool-list .convert-catalog-group:last-child{margin-bottom:0}
+#convert-tool-list .convert-catalog-group>h3{position:sticky;top:0;z-index:1;display:flex;align-items:center;gap:12px;margin:0;padding:10px 12px;border-inline-start:3px solid var(--blue-9);border-bottom:1px solid var(--border);border-radius:7px 7px 0 0;background:var(--slate-3);color:var(--text);font-size:1rem;font-weight:600}
+#convert-tool-list .convert-category-count{margin-inline-start:auto;color:var(--muted);font-size:.875rem;font-weight:400}
+#convert-tool-list .convert-catalog-group>a{margin:4px;padding-inline:12px}
+
+.convert-page #convert-cancel{display:inline-flex!important;align-items:center}.convert-page #convert-cancel:disabled{visibility:hidden;pointer-events:none}
+
+.convert-page #convert-example{justify-self:start}

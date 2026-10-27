@@ -1,5 +1,5 @@
 import {registerContentCheck} from './tools/shared/content-state.js';
-import { initTool, $, clearStatus, setStatus, taskRunner } from './tools/shared/office.js';
+import { initTool, $, clearStatus, setStatus, showError, taskRunner } from './tools/shared/office.js';
 import { copyText } from './tools/shared/page.js';
 import { t, translateDOM, onLanguageChange } from './i18n.js';
 import './tools/calculator/style.css';
@@ -32,17 +32,17 @@ initTool('calculator',`
 </aside>
 </div>`);
 
-let result,businessResult,businessMode,ans,argumentHint,resultSource,requestSource,standardResult=false,standardRequest=false,history=[];
+let result,businessResult,businessMode,resultKey,businessKey,requestKey,pending=false,ans,argumentHint,resultSource,requestSource,standardResult=false,standardRequest=false,history=[];
 const runner=taskRunner(()=>new Worker(new URL('./tools/calculator/worker.js',import.meta.url),{type:'module'}),{
   timeoutMs:2500,
   onResult(state){
-    result=state.result;resultSource=requestSource;ans=result.exact;standardResult=standardRequest&&$('calc-mode-standard').getAttribute('aria-pressed')==='true';
+    result=state.result;resultKey=requestKey;resultSource=requestSource;ans=result.exact;standardResult=standardRequest&&$('calc-mode-standard').getAttribute('aria-pressed')==='true';
     $('result').textContent=(result.approximate?'≈ ':'')+result.display;
     $('approximate').hidden=!result.approximate;$('copy').disabled=false;
-    if(requestSource?.mode){businessResult=result;businessMode=requestSource.mode;}
+    if(requestSource?.mode){businessResult=result;businessKey=requestKey;businessMode=requestSource.mode;}
     history.unshift(result);history=history.slice(0,30);renderHistory();renderContext();renderBusinessResult();
   },
-  onState(state){$('cancel').disabled=state.status!=='pending';}
+  onState(state){pending=state.status==='pending';$('cancel').disabled=!pending;if(pending)$('copy').disabled=true;if(['error','cancelled'].includes(state.status)){result=undefined;resultKey=undefined;$('result').textContent='';$('approximate').hidden=true;$('copy').disabled=true;renderContext();if(requestSource?.mode){businessResult=undefined;businessKey=undefined;if(state.status==='error'){const invalid=['first','second'].find(id=>!/^[-+]?(?:\d+(?:\.\d*)?|\.\d+)$/.test($(id).value)),field=invalid||(requestSource.mode==='growth'?'first':'second');showError(state,{field,focus:true});}}}renderBusinessResult();}
 });
 function renderContext(){
   $('result-source').hidden=!result;
@@ -53,10 +53,10 @@ function renderContext(){
 function renderBusinessResult(){
   $('business-result-panel').hidden=!businessResult;$('business-result').textContent=businessResult?(businessResult.approximate?'≈ ':'')+businessResult.display:'';
   $('business-result-source').textContent=businessResult?t('redesign.businessResult',{mode:t('calculator.'+businessMode),expression:businessResult.expression}):'';
-  $('business-copy').disabled=!businessResult;$('business-approximate').hidden=!businessResult?.approximate;
+  $('business-copy').disabled=!businessResult||pending;$('business-approximate').hidden=!businessResult?.approximate;
 }
 function renderHistory(){
-  const toggle=$('calculator-history-toggle');if(toggle)toggle.disabled=!history.length;
+  const toggle=$('calculator-history-toggle');if(toggle)toggle.disabled=false;
   $('history-empty').hidden=history.length>0;
   $('history').replaceChildren(...history.map(item=>{
     const li=document.createElement('li'),button=document.createElement('button');
@@ -72,14 +72,16 @@ function renderHistory(){
   }));
 }
 function invalidate(clearBusiness=false){
-  if(clearBusiness){businessResult=undefined;renderBusinessResult();}
+  resultKey=undefined;
+  if(clearBusiness){businessKey=undefined;businessResult=undefined;renderBusinessResult();}
   const had=Boolean(result);standardResult=standardRequest=false;runner.invalidate();clearStatus({keepStale:true});if(had)setStatus('ux.stale');result=undefined;$('result').textContent=$('expression').value?'':'0';$('copy').disabled=true;$('approximate').hidden=true;renderContext();
 }
 function run(business=false){
   requestSource=business?{mode:$('mode').value}:undefined;
-  if(business){businessResult=undefined;renderBusinessResult();}
-  standardResult=false;standardRequest=!business&&$('calc-mode-standard').getAttribute('aria-pressed')==='true';clearStatus();result=undefined;$('copy').disabled=true;$('result').textContent='';$('approximate').hidden=true;renderContext();
-  runner.process(business?{mode:$('mode').value,first:$('first').value,second:$('second').value}:{input:$('expression').value,angleUnit:$('angle-unit').value,ans});
+  const request=business?{mode:$('mode').value,first:$('first').value,second:$('second').value}:{input:$('expression').value,angleUnit:$('angle-unit').value,...(/(?:\b|(?<=\d))Ans\b/.test($('expression').value)?{ans}:{})};requestKey=JSON.stringify(request);
+  if(business){if(businessKey!==requestKey)businessResult=undefined;renderBusinessResult();}
+  standardResult=false;standardRequest=!business&&$('calc-mode-standard').getAttribute('aria-pressed')==='true';clearStatus();if(resultKey!==requestKey){result=undefined;$('result').textContent='';$('approximate').hidden=true;}$('copy').disabled=true;renderContext();
+  runner.process(request);
 }
 function clear(){ $('expression').value='';argumentHint=undefined;renderArgumentHint();invalidate();clearStatus();$('expression').focus(); }
 function renderArgumentHint(){ $('argument-hint').hidden=!argumentHint;$('argument-hint').textContent=argumentHint?t('calculator.argumentHint',argumentHint):''; }
@@ -137,7 +139,7 @@ for(const calcMode of ['standard','scientific'])$(`calc-mode-${calcMode}`).addEv
   standardResult=standardRequest=false;
   for(const mode of ['standard','scientific'])$(`calc-mode-${mode}`).setAttribute('aria-pressed',String(mode===calcMode));
   document.querySelector('.calculator-layout').dataset.calcMode=calcMode;
-  $('scientific-keypad').hidden=calcMode!=='scientific';$('calculator-keyboards').classList.toggle('is-scientific',calcMode==='scientific');
+  $('angle-unit').closest('.calculator-angle').hidden=calcMode!=='scientific';$('scientific-keypad').hidden=calcMode!=='scientific';$('calculator-keyboards').classList.toggle('is-scientific',calcMode==='scientific');
 });
 $('business-run').addEventListener('click',()=>run(true));$('cancel').addEventListener('click',()=>runner.cancel());
 for(const id of ['expression','first','second','mode'])$(id).addEventListener('input',()=>{argumentHint=undefined;renderArgumentHint();invalidate(id!=='expression');});
@@ -171,11 +173,15 @@ document.querySelector('.calculator-layout').dataset.calcMode='standard';
 $('result').after($('copy'));
 const display=document.querySelector('.calculator-display'),displayValue=document.createElement('div'),displayStatus=document.createElement('div'),displayContext=document.createElement('div');
 displayValue.className='calculator-result-value';displayStatus.className='calculator-status-slot';displayContext.className='calculator-result-meta';
-$('result').removeAttribute('data-empty');displayValue.append(...display.childNodes);displayContext.append(displayValue.querySelector('#result-source'),displayValue.querySelector('#result-context'));$('calculator-keyboards').after(displayContext);displayStatus.append($('tool-status'),$('approximate'));display.append(displayValue,displayStatus);
+$('result').removeAttribute('data-empty');displayValue.append(...display.childNodes);displayContext.append(displayValue.querySelector('#result-source'),displayValue.querySelector('#result-context'));displayValue.append(displayContext);displayStatus.append($('tool-status'),$('approximate'));display.append(displayValue,displayStatus);
 
 $('result').textContent='0';const calcExample=document.createElement('button');calcExample.id='calculator-example';calcExample.type='button';calcExample.className='quiet';calcExample.dataset.i18n='ux.viewExample';calcExample.textContent=t('ux.viewExample');document.querySelector('.calculator-sidebar').prepend(calcExample);calcExample.onclick=()=>{if(($('expression').value||history.length)&&!confirm(t('office.exampleConfirm')))return;$('expression').value='200 + 10%';invalidate();$('expression').focus();};
 
-const historyCard=$('history').closest('section'),historyToggle=document.createElement('button');historyToggle.id='calculator-history-toggle';historyToggle.type='button';historyToggle.disabled=true;historyToggle.dataset.i18n='calculator.history';historyToggle.textContent=t('calculator.history');historyToggle.setAttribute('aria-expanded','false');
+const historyCard=$('history').closest('section'),historyToggle=document.createElement('button');historyToggle.id='calculator-history-toggle';historyToggle.type='button';historyToggle.disabled=false;historyToggle.dataset.i18n='calculator.history';historyToggle.textContent=t('calculator.history');historyToggle.setAttribute('aria-expanded','false');
 const calcLayout=document.querySelector('.calculator-layout'),sidebar=document.querySelector('.calculator-sidebar');document.querySelector('.tool-heading').append(historyToggle);historyCard.hidden=true;
 historyToggle.onclick=()=>{historyCard.hidden=!historyCard.hidden;historyToggle.setAttribute('aria-expanded',String(!historyCard.hidden));calcLayout.classList.toggle('history-open',!historyCard.hidden);};
 sidebar.classList.add('calculator-secondary');
+
+$('angle-unit').closest('.calculator-angle').hidden=true;
+
+const functionHelp=document.querySelector('.calculator-workbench details:has([data-i18n="calculator.functionHelp"])');functionHelp.append($('calculator-precision'));

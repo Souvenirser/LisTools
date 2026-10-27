@@ -1,3 +1,4 @@
+import {createSourceEditor} from './tools/shared/source-editor.js';
 import {registerContentCheck} from './tools/shared/content-state.js';
 import { createJSONEditor, jsonQueryLanguage, Mode } from 'vanilla-jsoneditor';
 import { parse, stringify } from 'lossless-json';
@@ -9,21 +10,28 @@ import { t, onLanguageChange, errorText, createNotifier } from './i18n.js';
 
 const $ = (id) => document.getElementById(id);
 $('app-version').textContent = `v${version}`;
-const source = $('source');
+const sourceEditor=createSourceEditor($('source'));
+const source=sourceEditor.element;
 const resultButtons = document.querySelectorAll('[data-result]');
-const cancelButton=document.createElement('button');cancelButton.id='json-cancel';cancelButton.hidden=true;cancelButton.dataset.i18n='common.cancel';$('compact').after(cancelButton);
+const cancelButton=document.createElement('button');cancelButton.id='json-cancel';cancelButton.hidden=true;cancelButton.disabled=true;cancelButton.dataset.i18n='common.cancel';$('compact').after(cancelButton);
 const parser = { parse, stringify };
 let editor;
-let resultText = '';
+let resultText = '', resultVersion=-1;
 let errorPosition;
-let inputVersion = 0;
+let inputVersion = 0, sourceComposing=false;
 let filename = 'formatted.json';
 let lastState = { status: 'empty' };
 let importedName = '';
 let largeResult = false;
-let importError;
+let importError,importErrorParams,readVersion=0,readPending=false;
 const importStatus=document.createElement('p');importStatus.id='json-import-status';importStatus.className='tool-status';importStatus.setAttribute('role','status');importStatus.hidden=true;source.after(importStatus);
-function showImportStatus(key){importError=key;importStatus.hidden=!key;importStatus.textContent=key?t(key):'';}
+function showImportStatus(key,params){importError=key;importErrorParams=params;importStatus.hidden=!key;importStatus.textContent=key?t(key,params):'';}
+function syncPending(){
+  const pending=readPending||lastState.status==='pending',visible=pending||lastState.status==='ready';
+  cancelButton.disabled=!pending;cancelButton.hidden=!visible;cancelButton.style.visibility=pending?'':'hidden';cancelButton.style.setProperty('display',visible?'inline-flex':'','important');
+  for(const button of resultButtons)button.disabled=pending||lastState.status!=='ready';
+}
+function invalidateRead(){readVersion++;readPending=false;showImportStatus();syncPending();}
 
 function size(bytes) {
   if (bytes < 1024) return `${bytes} B`;
@@ -58,17 +66,18 @@ function renderMenu(items, { mode }) {
 }
 
 function render(state) {
+  const retainResult=state.status==='pending'&&editor&&resultVersion===inputVersion;
   lastState = state;
-  cancelButton.hidden=state.status!=='pending';
+  syncPending();
   document.querySelector('.output-panel').dataset.status = state.status;
   resultText = '';
-  errorPosition = undefined;
-  for (const button of resultButtons) button.disabled = true;
-  $('editor').hidden = true;
-  $('placeholder').hidden = false;
+  errorPosition = undefined;sourceEditor.markError();
+  for (const button of resultButtons) {button.disabled = true;button.style.display=retainResult?'inline-flex':'';}
+  $('editor').hidden = !retainResult;
+  $('placeholder').hidden = Boolean(retainResult);
   $('error-detail').hidden = true;
   $('locate-error').hidden = true;
-  $('result-info').textContent = t('json.precision');
+  if(!retainResult)$('result-info').textContent = t('json.precision');
   $('result-state').textContent = state.status === 'pending' ? t('common.processing') : t('common.ready');
   $('placeholder').classList.toggle('is-error', state.status === 'error');
   $('placeholder').setAttribute('aria-busy', String(state.status === 'pending'));
@@ -93,10 +102,10 @@ function render(state) {
         });
       } else {
         editor.updateProps({ indentation: Number($('indent').value), tabSize: Number($('indent').value) });
-        editor.set({ text: state.text });
+        if(editor.get().text!==state.text)editor.set({ text: state.text });
       }
-      resultText = state.text;
-      for (const button of resultButtons) button.disabled = false;
+      resultText = state.text;resultVersion=inputVersion;
+      for (const button of resultButtons) button.disabled = readPending;
       $('input-info').textContent = size(state.inputBytes);
       $('result-info').textContent = `${size(state.outputBytes)} · ${t('common.characters', { count: state.text.length })}`;
       $('result-state').textContent = t('json.success');
@@ -112,7 +121,7 @@ function render(state) {
     $('error-detail').textContent = errorText(state);
     $('error-detail').hidden = false;
     $('result-state').textContent = t('common.error');
-    errorPosition = state.position;
+    errorPosition = state.position;sourceEditor.markError(errorPosition);
     $('locate-error').hidden = errorPosition === undefined;
   } else {
     $('placeholder-title').textContent = state.status === 'pending' ? t('json.parsing') : state.status === 'idle' ? t('json.updated') : t('json.waiting');
@@ -131,13 +140,15 @@ const controller = createJsonController({
 });
 
 function process(action = 'format', wait = 0) {
+  invalidateRead();
   controller.process(source.value, { action, indent: Number($('indent').value), wait });
 }
 
 function inputChanged() {
   inputVersion += 1;
-  showImportStatus();
+  invalidateRead();
   $('input-info').textContent = source.value ? t('common.characters', { count: source.value.length }) : t('json.raw');
+  if(sourceComposing){controller.cancel();render({status:'idle'});return;}
   if ($('auto-format').checked || !source.value.trim()) process('format', 350);
   else {
     controller.cancel();
@@ -146,9 +157,11 @@ function inputChanged() {
 }
 
 source.addEventListener('input', inputChanged);
+source.addEventListener('compositionstart',()=>{sourceComposing=true;invalidateRead();controller.cancel();});
+source.addEventListener('compositionend',()=>{sourceComposing=false;inputChanged();});
 $('format').addEventListener('click', () => process());
 $('compact').addEventListener('click', () => process('compact'));
-cancelButton.addEventListener('click',()=>{controller.cancel();render({status:'cancelled'});});
+cancelButton.addEventListener('click',()=>{const reading=readPending;invalidateRead();controller.cancel();if(reading)showImportStatus('direct.developer.jsonCancelled');if(!reading||lastState.status==='pending')render({status:'cancelled'});});
 $('indent').addEventListener('change', () => process());
 $('auto-format').addEventListener('change', () => {
   controller.cancel();
@@ -167,21 +180,25 @@ $('clear').addEventListener('click', () => {
 $('import').addEventListener('click', () => $('file').click());
 async function loadFile(file) {
   if (!file) return;
-  const current = ++inputVersion;
-  showImportStatus('common.processing');
+  const current = ++readVersion;
+  readPending=true;showImportStatus('common.processing');syncPending();
+  let bytes;
   try {
-    const text = new TextDecoder('utf-8',{fatal:true}).decode(await file.arrayBuffer());
-    if (current !== inputVersion) return;
-    showImportStatus();
+    try {bytes=await file.arrayBuffer();}
+    catch {if(current===readVersion)showImportStatus('office.fileReadError',{name:file.name});return;}
+    if(current!==readVersion)return;
+    let text;
+    try {text=new TextDecoder('utf-8',{fatal:true}).decode(bytes);}
+    catch(error){showImportStatus(error instanceof TypeError?'diagnostic.InvalidEncoding':'office.fileReadError',{name:file.name});return;}
+    readPending=false;inputVersion++;showImportStatus();
     source.value = text;
     filename = `${file.name.replace(/\.[^.]+$/, '')}.formatted.json`;
     importedName = file.name;
     $('file-name').textContent = importedName;
     $('input-info').textContent = t('common.characters', { count: text.length });
     process();
-  } catch (error) {
-    if (current === inputVersion) showImportStatus('diagnostic.InvalidEncoding');
   } finally {
+    if(current===readVersion){readPending=false;syncPending();}
     $('file').value = '';
   }
 }
@@ -198,6 +215,7 @@ $('locate-error').addEventListener('click', () => {
   source.scrollTop = Math.max(0, (line - 3) * parseFloat(getComputedStyle(source).lineHeight));
 });
 $('copy').addEventListener('click', async () => {
+  if(lastState.status!=='ready')return;
   try {
     await navigator.clipboard.writeText(resultText);
     notify('common.copiedAll');
@@ -207,6 +225,7 @@ $('copy').addEventListener('click', async () => {
   }
 });
 $('download').addEventListener('click', () => {
+  if(lastState.status!=='ready')return;
   const url = URL.createObjectURL(new Blob([resultText], { type: 'application/json;charset=utf-8' }));
   const link = document.createElement('a');
   link.href = url;
@@ -221,7 +240,7 @@ document.addEventListener('keydown', (event) => {
     process();
   }
 });
-window.addEventListener('pagehide', () => {inputVersion++;controller.cancel();showImportStatus();});
+window.addEventListener('pagehide', () => {const reading=readPending;inputVersion++;invalidateRead();controller.cancel();if(reading)showImportStatus('direct.developer.jsonCancelled');if(lastState.status==='pending')render({status:'cancelled'});});
 
 // The public menu hooks update labels without resetting editor content or its history.
 function translateMenuItem(item) {
@@ -243,7 +262,7 @@ function renderContextMenu(items) {
 }
 function refreshLabels() {
   cancelButton.textContent=t('common.cancel');
-  if(importError)showImportStatus(importError);
+  if(importError)showImportStatus(importError,importErrorParams);
   const state = lastState;
   $('input-info').textContent = source.value ? t('common.characters', { count:source.value.length }) : t('json.raw');
   $('file-name').textContent = importedName || t('json.supported');

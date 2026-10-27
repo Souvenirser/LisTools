@@ -13,7 +13,7 @@
 .tool-page main input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=file]),.tool-page main select{min-height:44px}
 .tool-page main label,.tool-page main button,.tool-page main select{font-size:1rem}
 .tool-note,.tool-status,.tool-table,.workspace-action-fixed .check-label{font-size:.875rem;line-height:1.5}
-.tool-grid{gap:24px;align-items:start}.tool-fields{gap:12px}.office-grid{gap:24px;align-items:start}
+.tool-grid{gap:24px;align-items:start}.tool-fields{gap:12px;align-items:start}.office-grid{gap:24px;align-items:start}
 .task-guide{padding:16px 24px}.task-select-label{display:none}
 @media(max-width:760px){.tool-card{padding:16px}.tool-page .tool-heading h1{font-size:1.5rem}.task-guide.has-task-select .task-choices{display:none}.task-guide.has-task-select .task-select-label{display:flex;flex:1 1 100%;flex-direction:column;gap:6px}.task-select-label select{width:100%}}
 
@@ -121,7 +121,7 @@
 
 /* Direct task workbenches: page-specific layouts share the existing controls. */
 /* Daily tools: keep each action beside its result, with secondary formats disclosed. */
-.money-page .money-workspace{grid-template-columns:minmax(0,1fr)}
+.money-page .money-workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:24px;align-items:start}.money-page .money-input{min-width:0}.money-page .money-results{min-width:0;border-inline-start:1px solid var(--border);padding-inline-start:24px}
 .money-page .money-results{width:100%;padding-top:0}
 .money-page .money-results .numeric-result-row{grid-template-columns:minmax(0,1fr) auto;column-gap:16px}
 .money-page .money-results .numeric-result-row>label{grid-column:1/-1}
@@ -133,7 +133,8 @@
 .units-page #unit-more-results .tool-note{margin-bottom:0}
 .draw-page .draw-list-meta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-block:8px}
 .draw-page .draw-list-meta #draw-total{margin:0}
-.draw-page .draw-workspace .tool-fields>.field{flex:1 1 120px;min-width:0}
+.draw-page .draw-workspace .tool-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));align-items:start}
+.draw-page .draw-workspace .tool-fields>.field{display:grid;grid-template-rows:subgrid;grid-row:span 3;row-gap:6px;min-width:0}
 .draw-page #draw-count{max-width:180px}
 .draw-page #draw-input{margin-block-start:12px}
 .timer-page #timer-duration-field{width:100%}
@@ -144,20 +145,19 @@
 /* Task-sized text parameters keep the run action beside the current controls. */
 .text-page .text-workspace-controls{align-items:end;gap:12px 24px}
 .text-page .text-workspace-controls .text-task-options{flex:0 1 auto;min-width:0;margin:0;max-width:760px}
-.text-page .text-task-options>.tool-fields{display:grid;grid-template-columns:minmax(180px,280px);align-items:start}
+.text-page .text-task-options>.tool-fields{display:flex;flex-wrap:wrap;align-items:center}
+.text-page .text-task-options>.tool-fields>.field:has(>select){flex:0 1 auto;min-width:0;flex-direction:row;flex-wrap:wrap;align-items:center;gap:8px}
 .text-page .text-task-options [data-options=replace] .tool-fields{display:grid;grid-template-columns:repeat(2,minmax(180px,280px));align-items:start}
 .text-page .text-task-options select{max-width:280px}
 .text-page #text-kind{width:240px;max-width:100%}
 .text-page #text-line-help{max-width:60ch;margin:0 0 16px}
 .text-page .text-workspace-controls>.workspace-action-area{margin-top:0}
-.text-page .text-workspace-controls:has(.text-task-options>[data-options=mask]:not([hidden]))>.workspace-action-area{align-self:center}
+.text-page .text-workspace-controls:has(.text-task-options>[data-options=mask]:not([hidden]))>.workspace-action-area{align-self:stretch}
 .text-page .text-task-options [data-options=mask]{display:flex;flex-wrap:wrap;gap:8px 20px;max-width:600px}
 .text-page .text-parameter-notes>.tool-note{margin:0 0 16px}
 .text-page .text-task-options [data-options=mask] .check-label{margin:0;min-height:44px;align-items:center}
-.text-page .text-task-options>[data-options=extract]{display:grid;grid-template-columns:240px max-content;align-items:end;gap:0 16px}
-.text-page .text-task-options [data-options=extract]>label[for=text-kind]{grid-column:1;grid-row:1}
-.text-page .text-task-options #text-kind{grid-column:1;grid-row:2}
-.text-page .text-task-options [data-options=extract]>.check-label{grid-column:2;grid-row:2;margin:0;min-height:44px;align-items:center}
+.text-page .text-task-options>[data-options=extract]{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}
+.text-page .text-task-options [data-options=extract]>.check-label{margin:0;min-height:44px;align-items:center}
 /* Keep name and source facts readable without stretching each queue row. */
 .images-page .media-file-name,.pdf-page .media-file-name{min-width:0;flex:1;line-height:1.45}
 .media-file-info{display:block;font-size:.875rem;color:var(--muted);font-weight:400}
@@ -171,11 +171,9 @@
 @media(max-width:760px){
  .text-page .text-task-options .tool-fields{grid-template-columns:minmax(0,1fr)}
  .text-page .text-workspace-controls .text-task-options{flex-basis:100%;max-width:none}
- .text-page .text-task-options>[data-options=extract]{grid-template-columns:minmax(0,1fr)}
- .text-page .text-task-options [data-options=extract]>.check-label{grid-column:1;grid-row:3}
  .text-page .text-task-options select{width:auto;min-width:180px;max-width:100%}
  .text-page .text-workspace-controls>.workspace-action-area{margin-top:0}
-.text-page .text-workspace-controls:has(.text-task-options>[data-options=mask]:not([hidden]))>.workspace-action-area{align-self:center}
+.text-page .text-workspace-controls:has(.text-task-options>[data-options=mask]:not([hidden]))>.workspace-action-area{align-self:stretch}
  .images-page .media-queue-row,.pdf-page .media-queue-row{flex-wrap:wrap;gap:8px}
  .media-file-actions{order:3;flex-basis:100%;padding-inline-start:0}
  .media-file-actions>summary{display:list-item;cursor:pointer;min-height:44px;font-size:.875rem;padding:7px 0}
@@ -190,5 +188,67 @@
 .tool-page[data-layout="form"] main input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]),.tool-page[data-layout="form"] main select,.tool-page[data-layout="form"] main .choices__inner,.tool-page[data-layout="form"] main .choices__list--single{font-size:1.125rem;line-height:1.6}
 .dates-page .date-result output{font-size:1.125rem;font-weight:400;line-height:1.6}.dates-page .date-conclusion,.units-page .unit-primary{font-size:2.25rem;line-height:1.4}
 .tool-page .tool-heading p{font-size:1rem;line-height:1.6}
-.workspace-action-fixed .workspace-actions.is-busy>button:not([id$="-cancel"]):not(#cancel){display:none}
+.workspace-action-fixed .workspace-actions.is-busy>button:not([id$="-cancel"]):not(#cancel):not(#text-run){display:none}
 .workspace-action-area[data-action-state="result-visible"]:has(.is-error:not([hidden]),.tool-error:not([hidden])){display:block}
+
+/* Keep controls compact while preserving the actual text reading area. */
+.regex-page[data-layout] .tool-heading{margin-bottom:16px}.regex-page .task-guide{padding-block:0 8px;margin-bottom:12px}.regex-page .regex-workspace-controls{padding:12px;margin-bottom:12px}.regex-page .regex-workspace-controls>.tool-fields{margin:0}.regex-page #regex-common-flags{margin-inline-start:auto;gap:8px;align-items:center}.regex-page #regex-common-flags label{font-size:.875rem;white-space:nowrap;margin:0}.regex-page .editor-workspace #regex-source,.regex-page .editor-workspace #regex-output{min-height:322px}
+@media(max-width:999px){.regex-page .editor-workspace #regex-source,.regex-page .editor-workspace #regex-output{min-height:242px}}
+@media(max-width:760px){.money-page .money-workspace{grid-template-columns:minmax(0,1fr);gap:16px}.money-page .money-results{border-inline-start:0;border-top:1px solid var(--border);padding-inline-start:0;padding-top:16px}.regex-page #regex-common-flags{margin-inline-start:0}}
+
+@media(min-width:1000px){.regex-page.workbench-shell .tool-heading.has-workspace-focus>p{flex:1 1 360px;order:0;margin:0;align-self:center}}
+
+.qr-page .qr-import-zone{width:100%;min-height:160px;padding:24px;display:flex;align-items:center;justify-content:center;border:2px dashed var(--border);background:var(--slate-2);color:var(--text);font:inherit;white-space:normal}
+#images-queue-details{margin-block:12px}#images-queue-details>summary{display:flex;align-items:center;min-height:44px;cursor:pointer}#images-queue-details>summary h2{font-size:1.125rem;margin:0}#images-queue-details>section{border:0;padding:12px 0 0;margin:0}.media-workspace.has-results #images-results{margin:0 0 16px;padding:0 0 16px;border:0;border-bottom:1px solid var(--border)}.media-workspace.has-results .images-preview-pair img{max-height:240px;object-fit:contain}.media-workspace.has-results #images-drop{margin:0}
+.cron-page .cron-time-context{font-size:.875rem}.cron-page #cron-dates details{margin:4px 0 0}.cron-page #cron-dates summary{color:var(--muted);font-size:.875rem;min-height:32px}
+
+.regex-page .regex-pattern-tools{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;min-height:44px}.regex-page .regex-pattern-tools>label{margin:0}.regex-page .regex-pattern-tools #regex-common-flags{margin:0;gap:8px}.regex-page .regex-pattern-field #regex-pattern{height:56px;min-height:56px}.regex-page #regex-common-flags label{min-height:44px;display:inline-flex;align-items:center;gap:4px}.regex-page #regex-common-flags input{margin:0}
+@media(max-width:600px){.regex-page .regex-pattern-tools>label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}.regex-page .regex-pattern-tools{justify-content:flex-end}.regex-page .task-guide{margin-bottom:8px}}
+
+.regex-page #regex-common-flags{font-family:system-ui,sans-serif}
+
+/* Keep field feedback below companion controls and announce it once visually. */
+.tool-status.sr-only{min-height:0;padding:0;margin:0}
+.dates-page .field>.field-error{order:1}
+.qr-page .field:has(>#qr-size),.qr-page .field:has(>#qr-level){flex:0 1 auto;min-width:0;flex-direction:row;flex-wrap:wrap;align-items:center;gap:8px}
+.qr-page #qr-size{width:7rem}
+
+/* Keep short feedback on the control row and align both editor headers. */
+.text-page .text-workspace-controls{display:flex;align-items:end;gap:12px 24px;margin-bottom:12px}
+.text-page .text-workspace-controls>.workspace-action-area:not(.workspace-action-fixed){display:flex;flex:1;align-items:center;flex-wrap:wrap;gap:8px 12px;align-self:end}
+.text-page .text-workspace-controls>.workspace-action-area>.workspace-actions{margin:0;align-self:center}
+.text-page .text-workspace-controls #tool-status{min-height:0;margin:0;padding:6px 10px;font-size:.875rem;flex:1;min-width:120px}
+.text-page .text-workspace-controls #tool-status.is-error{flex-basis:100%}
+.text-auto-note{font-size:.875rem;max-width:28ch;margin:0}
+.text-page .editor-workspace{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto auto auto;gap:0}
+.text-page .editor-workspace>.tool-card{display:grid;grid-row:1/span 3;grid-template-rows:subgrid;gap:0}
+.text-page .editor-workspace>.tool-card:nth-child(2){grid-column:2}
+.text-editor-heading{padding-bottom:12px;min-width:0}.text-editor-heading h2{margin:0 0 8px}.text-editor-heading>.tool-note,.text-editor-heading>.result-conclusion{margin:0!important;line-height:1.5}
+.text-editor-footer{padding-top:12px;min-width:0}.text-editor-footer>.tool-actions{margin-top:0}
+@media(max-width:999px){.text-page .editor-workspace{grid-template-columns:minmax(0,1fr);gap:16px}.text-page .editor-workspace>.tool-card{grid-column:1;grid-row:auto;grid-template-rows:auto auto auto}.text-page .editor-workspace>.tool-card:nth-child(2){grid-column:1}.text-auto-note{max-width:100%}}
+
+@media(max-width:760px){
+ .text-page.workbench-shell .tool-heading{margin-bottom:12px}
+ .text-page.workbench-shell .task-guide{padding:0;margin-bottom:12px;gap:8px}
+ .text-page.workbench-shell .task-guide .task-select-label{margin:0;gap:4px}
+ .text-page .text-parameter-notes>.tool-note{margin-bottom:8px}
+ .text-page .editor-workspace>.tool-card>h2{margin-bottom:8px}
+ .text-page .editor-workspace label.tool-note{margin-bottom:8px}
+}
+
+/* Compact form conclusions and keep folded controls discoverable. */
+.tool-page .date-result{padding-top:0}.dates-page .date-result>h2{margin-top:0}.dates-page .date-result output{margin-block:12px}
+.units-page .unit-inline-result{padding-top:12px}.units-page .unit-primary{margin-block:8px;padding-block:8px}.units-page .tool-card:last-child:has([data-i18n="units.otherLink"]){padding-block:16px}.units-page [data-i18n="units.otherLink"]{display:inline-flex;align-items:center;min-height:44px;color:var(--blue-11);font-size:1rem}
+.qr-page .tool-grid>div>.tool-card:first-child label[for="qr-input"]{font-size:1.125rem;font-weight:600;margin-top:0}.qr-page #qr-drop{margin-block:12px}.qr-page #qr-choose[hidden]{display:none!important}
+.media-workspace .media-drop{min-height:136px}.media-workspace .workspace-input>#pdf-drop,.media-workspace .workspace-input>#images-drop{padding-block:20px}
+.regex-page .regex-workspace-controls>.workspace-action-area:not(.workspace-action-fixed){display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px}.regex-page .regex-workspace-controls>.workspace-action-area #tool-status{margin:0;padding:6px 10px;flex:1;font-size:.875rem}.regex-page .regex-workspace-controls .tool-actions{margin-block:8px}.regex-page .regex-workspace-controls>.workspace-action-area #tool-status.is-error{flex-basis:100%}
+@media(min-width:1100px) and (min-height:801px){.workspace-action-area:not(.workspace-action-fixed) .workspace-actions>button[id$="-cancel"][hidden]{display:inline-flex!important;visibility:hidden;pointer-events:none}}
+
+.tool-page #unit-precision-details>summary{min-height:44px;align-content:center;font-size:.875rem}.dates-page .date-result>h2{margin-bottom:12px}.draw-page .tool-card>h2{margin-bottom:8px}
+@media(max-width:1099px),(max-height:800px){
+ .text-page .text-workspace-controls>.workspace-action-fixed{display:grid;grid-template-rows:auto 44px;gap:6px}
+ .text-page .text-workspace-controls>.workspace-action-fixed>.workspace-actions{grid-row:1;margin:0}
+ .text-page .text-workspace-controls>.workspace-action-fixed>#tool-status{grid-row:2;min-height:44px;max-height:44px;margin:0;overflow:auto;padding:2px 10px;line-height:20px}
+}
+
+.text-page .text-workspace-controls:has(.text-task-options>[data-options=mask]:not([hidden]))>.workspace-action-area{align-self:center}.text-page .text-auto-note{max-width:none}
