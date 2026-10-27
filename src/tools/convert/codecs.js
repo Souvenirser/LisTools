@@ -3,6 +3,7 @@ import { checkSize, decodeText, encodeText } from './bytes.js';
 
 const coders = { base64, base64url, base32, base32hex, base58, hex };
 export function decodeBase(source, id = 'base64') {
+  try {
   let text = source;
   if (['base64','base64url','base32','base32hex'].includes(id)) {
     const multiple = id.startsWith('base32') ? 8 : 4;
@@ -11,6 +12,7 @@ export function decodeBase(source, id = 'base64') {
     } else text += '='.repeat((multiple - text.length % multiple) % multiple);
   }
   return coders[id].decode(id === 'hex' ? text.toLowerCase() : text);
+  }catch(error){error.code='InvalidEncodedInput';throw error;}
 }
 
 export async function run(id, input, options, maximum) {

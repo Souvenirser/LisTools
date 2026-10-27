@@ -1,6 +1,8 @@
 import { parseJson, stringifyJson, LosslessNumber } from './json.js';
 import { validText } from './bytes.js';
 
+const failure = (message, reasonCode, params) => Object.assign(new Error(message), { reasonCode, ...(params ? {params} : {}) });
+const structureNotices = [{code:'StructureOnly'}];
 const formatNotice = '转换保留数据值与约定结构，不保留源文件注释、排版或引号写法';
 function yamlNumber(raw) {
   if (/^[+]?0[ox]/i.test(raw)) return new LosslessNumber(BigInt(raw.replace(/^\+/, '')).toString());
@@ -17,7 +19,7 @@ function yamlTags(tags) {
 async function yamlConvert(source, reverse) {
   const YAML = await import('yaml');
   const options = {version:'1.2',schema:'core',customTags:yamlTags,resolveKnownTags:false,uniqueKeys:true};
-  if (!reverse) return { text:new YAML.Document(parseJson(source),options).toString({lineWidth:0}), extension:'yaml', notice:formatNotice };
+  if (!reverse) return { text:new YAML.Document(parseJson(source),options).toString({lineWidth:0}), extension:'yaml', notice:formatNotice,notices:structureNotices };
   const doc = YAML.parseDocument(source,options);
   if (doc.errors.length || doc.warnings.length) {
     const error = doc.errors[0] || doc.warnings[0];
@@ -41,17 +43,17 @@ async function yamlConvert(source, reverse) {
     active.delete(value);
     return result;
   }
-  return {text:stringifyJson(compatible(doc.toJS({mapAsMap:true,maxAliasCount:100}))),extension:'json',notice:formatNotice};
+  return {text:stringifyJson(compatible(doc.toJS({mapAsMap:true,maxAliasCount:100}))),extension:'json',notice:formatNotice,notices:structureNotices};
 }
 function validateOrdered(value) {
-  if (!Array.isArray(value)) throw new Error('反向 XML 转换需要本工具产生的保序节点数组');
+  if (!Array.isArray(value)) throw failure('反向 XML 转换需要本工具产生的保序节点数组','XmlOrdered');
   for (const node of value) {
-    if (!node || typeof node !== 'object' || Array.isArray(node)) throw new Error('XML 节点必须为对象');
+    if (!node || typeof node !== 'object' || Array.isArray(node)) throw failure('XML 节点必须为对象','XmlOrdered');
     const names = Object.keys(node).filter(k => k !== ':@');
-    if (names.length !== 1) throw new Error('每个保序 XML 节点必须只有一个节点名');
+    if (names.length !== 1) throw failure('每个保序 XML 节点必须只有一个节点名','XmlOrdered');
     const key = names[0];
-    if (node[':@'] !== undefined && (!node[':@'] || Array.isArray(node[':@']) || Object.entries(node[':@']).some(([k,v]) => !k.startsWith('@_') || typeof v !== 'string'))) throw new Error('XML 属性必须是 @_ 前缀的字符串映射');
-    if (key === '#text') { if (typeof node[key] !== 'string') throw new Error('XML 文本节点必须为字符串'); }
+    if (node[':@'] !== undefined && (!node[':@'] || Array.isArray(node[':@']) || Object.entries(node[':@']).some(([k,v]) => !k.startsWith('@_') || typeof v !== 'string'))) throw failure('XML 属性必须是 @_ 前缀的字符串映射','XmlOrdered');
+    if (key === '#text') { if (typeof node[key] !== 'string') throw failure('XML 文本节点必须为字符串','XmlOrdered'); }
     else validateOrdered(node[key]);
   }
 }
@@ -85,10 +87,10 @@ async function xmlConvert(source, reverse) {
     const xml = new XMLBuilder(options).build(value);
     // Builder must not drop unsupported metadata or normalize malformed nodes silently.
     const parsed = parse(xml);
-    if (stringifyJson(parsed,0) !== stringifyJson(value,0)) throw new Error('该节点结构无法无损还原 XML');
-    return {text:xml,extension:'xml',notice:formatNotice};
+    if (stringifyJson(parsed,0) !== stringifyJson(value,0)) throw failure('该节点结构无法无损还原 XML','XmlOrdered');
+    return {text:xml,extension:'xml',notice:formatNotice,notices:structureNotices};
   }
-  return {text:stringifyJson(parse(source)),extension:'json',notice:formatNotice};
+  return {text:stringifyJson(parse(source)),extension:'json',notice:formatNotice,notices:structureNotices};
 }
 async function csvConvert(source, id, options, reverse) {
   const { default: Papa } = await import('papaparse');
@@ -102,39 +104,40 @@ async function csvConvert(source, id, options, reverse) {
     if (/[\r\n]$/.test(source) && rows.at(-1)?.length === 1 && rows.at(-1)[0] === '') rows.pop();
     if (!rows.length) return {text:'[]',extension:'json'};
     const columns = rows[0].length;
-    if (rows.some(row => row.length !== columns)) throw new Error('CSV 各行列数不一致');
+    const badRow = rows.findIndex(row => row.length !== columns);
+    if (badRow >= 0) throw failure('CSV 各行列数不一致','CsvColumns',{row:badRow+1,actual:rows[badRow].length,expected:columns});
     const names = header ? rows.shift() : null;
-    if (names && new Set(names).size !== names.length) throw new Error('CSV 表头存在重复列名');
+    if (names && new Set(names).size !== names.length) throw failure('CSV 表头存在重复列名','CsvHeaders');
     const values = rows.map((row,rowIndex) => {
       const values = cells ? row.map((cell,col) => {
-        try { return parseJson(cell); } catch (e) { throw new Error(`CSV 第 ${rowIndex+(header ? 2 : 1)} 行第 ${col+1} 列 JSON 单元格无效：${e.message}`); }
+        try { return parseJson(cell); } catch (e) { throw failure(`CSV 第 ${rowIndex+(header ? 2 : 1)} 行第 ${col+1} 列 JSON 单元格无效：${e.message}`,'CsvJsonCell',{row:rowIndex+(header ? 2 : 1),column:col+1}); }
       }) : row;
       if (!names) return values;
       const record = Object.create(null);
       names.forEach((name,i) => { record[name] = values[i]; });
       return record;
     });
-    return {text:stringifyJson(values),extension:'json',notice:cells ? formatNotice : 'CSV 单元格保持字符串，不自动推断数字或布尔类型'};
+    return {text:stringifyJson(values),extension:'json',notice:cells ? formatNotice : 'CSV 单元格保持字符串，不自动推断数字或布尔类型',notices:cells ? structureNotices : [{code:'CsvStrings'}]};
   }
   const rows = parseJson(source);
   if (!Array.isArray(rows)) throw new Error('JSON 根值必须为表格行数组');
   if (!rows.length) return {text:'',extension:delimiter === ',' ? 'csv' : 'tsv'};
   const arrays = Array.isArray(rows[0]);
-  if (arrays && header) throw new Error('数组行没有列名，请关闭首行表头选项');
+  if (arrays && header) throw failure('数组行没有列名，请关闭首行表头选项','CsvArrayHeader');
   if (!arrays && (!rows[0] || typeof rows[0] !== 'object' || rows[0] instanceof LosslessNumber)) throw new Error('每一行必须为对象或数组');
   const keys = Object.keys(rows[0]);
   if (!keys.length) throw new Error('CSV 不能无损表示非空的零列表格');
   const table = rows.map(row => {
-    if (!row || Array.isArray(row) !== arrays || typeof row !== 'object' || Object.keys(row).length !== keys.length || keys.some(k => !Object.hasOwn(row,k))) throw new Error('JSON 各行列结构不一致或存在缺失值');
+    if (!row || Array.isArray(row) !== arrays || typeof row !== 'object' || Object.keys(row).length !== keys.length || keys.some(k => !Object.hasOwn(row,k))) throw failure('JSON 各行列结构不一致或存在缺失值','CsvRowShape');
     return keys.map(key => {
       const value = row[key];
       if (cells) return stringifyJson(value,0);
       if (value instanceof LosslessNumber) return value.value;
       if (['string','boolean'].includes(typeof value)) return String(value);
-      throw new Error('默认 CSV 模式不支持 null 或嵌套值；请选择 JSON 单元格模式');
+      throw failure('默认 CSV 模式不支持 null 或嵌套值；请选择 JSON 单元格模式','CsvNestedValue');
     });
   });
-  return {text:Papa.unparse(header ? [keys,...table] : table,{delimiter,newline:'\r\n',quotes:value => value === ''}),extension:delimiter === ',' ? 'csv' : 'tsv',notice:cells ? formatNotice : 'CSV 是文本表格，默认导出不携带 JSON 标量类型信息'};
+  return {text:Papa.unparse(header ? [keys,...table] : table,{delimiter,newline:'\r\n',quotes:value => value === ''}),extension:delimiter === ',' ? 'csv' : 'tsv',notice:cells ? formatNotice : 'CSV 是文本表格，默认导出不携带 JSON 标量类型信息',notices:cells ? structureNotices : [{code:'CsvTextExport'}]};
 }
 export async function run(id, input, options) {
   const source = await input.text(), reverse = options.direction === 'decode';
@@ -166,9 +169,9 @@ export async function run(id, input, options) {
       return {text:stringifyJson(object),extension:'json'};
     }
     const value = parseJson(source), result = new URLSearchParams();
-    if (!value || Array.isArray(value) || typeof value !== 'object') throw new Error('Query String 反向映射需要字符串数组对象');
+    if (!value || Array.isArray(value) || typeof value !== 'object') throw failure('Query String 反向映射需要字符串数组对象','QueryArrays');
     for (const [key,values] of Object.entries(value)) {
-      if (!Array.isArray(values) || !values.length || values.some(v => typeof v !== 'string')) throw new Error('每个查询参数必须对应非空的字符串数组');
+      if (!Array.isArray(values) || !values.length || values.some(v => typeof v !== 'string')) throw failure('每个查询参数必须对应非空的字符串数组','QueryArrays');
       validText(key);
       for (const item of values) result.append(key,validText(item));
     }

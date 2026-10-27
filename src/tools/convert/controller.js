@@ -1,16 +1,15 @@
 export function createConversionController({createWorker,onState,onEvent=()=>{},timeoutMs=0}) {
   let generation=0, timer, deadline, worker;
-  function invalidate(status='idle') {
+  function stop() {
     generation++;
     clearTimeout(timer);
     clearTimeout(deadline);
     worker?.terminate(); worker=undefined;
-    onState({status});
   }
+  function invalidate(status='idle'){stop();onState({status});}
   function process(request,{auto=false,wait=350}={}) {
-    invalidate();
-    if (auto && (typeof request.input !== 'string' || new TextEncoder().encode(request.input).length > 256*1024)) return;
-    if (auto && request.toolId==='md5' && !request.input) return;
+    stop();
+    if (auto && (typeof request.input !== 'string' || new TextEncoder().encode(request.input).length > 256*1024 || request.toolId==='md5' && !request.input)){onState({status:'idle'});return;}
     const taskId=generation;
     onState({status:'pending'});
     function start() {
