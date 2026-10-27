@@ -34,9 +34,9 @@ export function createSpeedTestController({onState,loadEngine=async()=>(await im
       engine.onResultsChange=()=>{if(id===generation)onState(snapshot('running'));};
       engine.onPhaseChange=event=>{if(id===generation){phase=event.measurement.type;onState(snapshot('running'));}};
       engine.onFinish=()=>{if(id===generation)finish('complete');};
-      engine.onError=()=>{if(id===generation)finish('network','公共测速节点不可用 / The public speed test node is unavailable.');};
+      engine.onError=()=>{if(id===generation)finish('network');};
       engine.play();
-    } catch {if(id===generation)finish('error','无法启动测速 / Could not start the speed test.');}
+    } catch {if(id===generation)finish('error');}
   }
   return {start,cancel:()=>finish('cancelled'),clear:()=>{stop();onState({status:'idle'});},dispose:()=>{if(running)finish('cancelled');else stop();}};
 }
