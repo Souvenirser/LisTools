@@ -1962,5 +1962,14 @@
     "copySeconds": "Salin stempel waktu dalam detik",
     "copyMilliseconds": "Salin stempel waktu dalam milidetik",
     "unitPrecision": "Catatan presisi dan satuan"
+  },
+  "motion": {
+    "edit": "Sunting",
+    "copyInput": "Salin masukan",
+    "copyResult": "Salin hasilnya",
+    "loading": "Memuat halaman…",
+    "stillLoading": "Masih memuat halaman…",
+    "loadFailed": "Halaman tidak dapat dimuat.",
+    "reload": "Muat ulang"
   }
 }

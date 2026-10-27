@@ -1962,5 +1962,14 @@
     "copySeconds": "Kopiera tidsstämpel i sekunder",
     "copyMilliseconds": "Kopiera tidsstämpel i millisekunder",
     "unitPrecision": "Information om precision och enheter"
+  },
+  "motion": {
+    "edit": "Redigera",
+    "copyInput": "Kopiera inmatning",
+    "copyResult": "Kopiera resultatet",
+    "loading": "Laddar sida...",
+    "stillLoading": "Laddar fortfarande sidan...",
+    "loadFailed": "Sidan kunde inte laddas.",
+    "reload": "Ladda om"
   }
 }

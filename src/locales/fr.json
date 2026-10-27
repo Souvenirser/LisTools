@@ -1962,5 +1962,14 @@
     "copySeconds": "Copier l’horodatage en secondes",
     "copyMilliseconds": "Copier l’horodatage en millisecondes",
     "unitPrecision": "Notes sur la précision et les unités"
+  },
+  "motion": {
+    "edit": "Modifier",
+    "copyInput": "Copier l'entrée",
+    "copyResult": "Copier le résultat",
+    "loading": "Chargement de la page…",
+    "stillLoading": "Je charge toujours la page…",
+    "loadFailed": "La page n'a pas pu être chargée.",
+    "reload": "Recharger"
   }
 }

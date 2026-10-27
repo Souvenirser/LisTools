@@ -1962,5 +1962,14 @@
     "copySeconds": "Kwafi tambarin lokaci na daƙiƙu",
     "copyMilliseconds": "Kwafi tambarin lokaci na milisakan",
     "unitPrecision": "Bayanin daidaito da raka'a"
+  },
+  "motion": {
+    "edit": "Gyara",
+    "copyInput": "Kwafi shigarwar",
+    "copyResult": "Kwafi sakamakon",
+    "loading": "Ana loda shafi…",
+    "stillLoading": "Har yanzu ana loda shafin…",
+    "loadFailed": "Ba za a iya loda shafin ba.",
+    "reload": "Sake kaya"
   }
 }

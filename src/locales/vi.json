@@ -1962,5 +1962,14 @@
     "copySeconds": "Sao chép dấu thời gian theo giây",
     "copyMilliseconds": "Sao chép dấu thời gian theo mili giây",
     "unitPrecision": "Ghi chú về độ chính xác và đơn vị"
+  },
+  "motion": {
+    "edit": "Chỉnh sửa",
+    "copyInput": "Sao chép đầu vào",
+    "copyResult": "Sao chép kết quả",
+    "loading": "Đang tải trang…",
+    "stillLoading": "Vẫn đang tải trang…",
+    "loadFailed": "Không thể tải trang này.",
+    "reload": "Tải lại"
   }
 }

@@ -1962,5 +1962,14 @@
     "copySeconds": "የሰከንድ የጊዜ ማህተም ቅዳ",
     "copyMilliseconds": "የሚሊሰከንድ የጊዜ ማህተም ቅዳ",
     "unitPrecision": "ስለ ትክክለኛነት እና መለኪያዎች ማስታወሻዎች"
+  },
+  "motion": {
+    "edit": "አርትዕ",
+    "copyInput": "ግቤት ቅዳ",
+    "copyResult": "ውጤቱን ይቅዱ",
+    "loading": "ገጽን በመጫን ላይ…",
+    "stillLoading": "አሁንም ገጹን በመጫን ላይ…",
+    "loadFailed": "ገጹን መጫን አልተቻለም።",
+    "reload": "ዳግም ጫን"
   }
 }

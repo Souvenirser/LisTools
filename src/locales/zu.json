@@ -1962,5 +1962,14 @@
     "copySeconds": "Kopisha isitembu sesikhathi ngemizuzwana",
     "copyMilliseconds": "Kopisha isitembu sesikhathi ngamamilisekhondi",
     "unitPrecision": "Amanothi ngokunemba namayunithi"
+  },
+  "motion": {
+    "edit": "Hlela",
+    "copyInput": "Kopisha okokufaka",
+    "copyResult": "Kopisha umphumela",
+    "loading": "Ilayisha ikhasi...",
+    "stillLoading": "Isalayisha ikhasi...",
+    "loadFailed": "Ikhasi alikwazanga ukulayishwa.",
+    "reload": "Layisha kabusha"
   }
 }

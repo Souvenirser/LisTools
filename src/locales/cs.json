@@ -1962,5 +1962,14 @@
     "copySeconds": "Kopírovat časové razítko v sekundách",
     "copyMilliseconds": "Kopírovat časové razítko v milisekundách",
     "unitPrecision": "Poznámky k přesnosti a jednotkám"
+  },
+  "motion": {
+    "edit": "Upravit",
+    "copyInput": "Kopírovat vstup",
+    "copyResult": "Zkopírujte výsledek",
+    "loading": "Načítání stránky…",
+    "stillLoading": "Stále se načítá stránka…",
+    "loadFailed": "Stránku nelze načíst.",
+    "reload": "Znovu načíst"
   }
 }

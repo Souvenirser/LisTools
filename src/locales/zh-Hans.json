@@ -1962,5 +1962,14 @@
     "copySeconds": "复制秒时间戳",
     "copyMilliseconds": "复制毫秒时间戳",
     "unitPrecision": "精度与单位说明"
+  },
+  "motion": {
+    "edit": "编辑",
+    "copyInput": "复制输入",
+    "copyResult": "复制结果",
+    "loading": "正在加载页面…",
+    "stillLoading": "页面仍在加载…",
+    "loadFailed": "页面加载失败。",
+    "reload": "重新加载"
   }
 }

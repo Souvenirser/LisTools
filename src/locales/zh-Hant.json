@@ -1962,5 +1962,14 @@
     "copySeconds": "複製秒時間戳記",
     "copyMilliseconds": "複製毫秒時間戳記",
     "unitPrecision": "精度與單位說明"
+  },
+  "motion": {
+    "edit": "編輯",
+    "copyInput": "複製輸入",
+    "copyResult": "複製結果",
+    "loading": "正在載入頁面…",
+    "stillLoading": "頁面仍在載入…",
+    "loadFailed": "頁面載入失敗。",
+    "reload": "重新載入"
   }
 }

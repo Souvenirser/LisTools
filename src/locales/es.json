@@ -1962,5 +1962,14 @@
     "copySeconds": "Copiar marca de tiempo en segundos",
     "copyMilliseconds": "Copiar marca de tiempo en milisegundos",
     "unitPrecision": "Notas sobre precisión y unidades"
+  },
+  "motion": {
+    "edit": "Editar",
+    "copyInput": "Copiar entrada",
+    "copyResult": "Copiar resultado",
+    "loading": "Cargando página…",
+    "stillLoading": "Todavía cargando la página...",
+    "loadFailed": "No se pudo cargar la página.",
+    "reload": "Recargar"
   }
 }
