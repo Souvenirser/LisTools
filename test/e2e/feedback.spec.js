@@ -33,11 +33,11 @@ test('conversion context and language update without including input or leaking 
 });
 test('keyboard feedback opens a separate tab and preserves the original input',async({page,context})=>{
   await context.route('https://github.com/**',route=>route.fulfill({contentType:'text/html',body:'<title>Feedback destination</title>'}));
-  await page.goto('/index.html');await page.locator('#source').fill('{"synthetic":"FEEDBACK_SECRET_INPUT"}');
+  await page.goto('/index.html');await page.locator('#source .cm-content').fill('{"synthetic":"FEEDBACK_SECRET_INPUT"}');
   const link=page.locator('.workbench-footer a.feedback-link');await link.focus();
   const opened=context.waitForEvent('page');await page.keyboard.press('Enter');const tab=await opened;
   await tab.waitForLoadState();expect(tab.url()).toContain('https://github.com/Souvenirser/LisTools/issues/new?');
-  expect(tab.url()).not.toContain('FEEDBACK_SECRET');await expect(page.locator('#source')).toHaveValue('{"synthetic":"FEEDBACK_SECRET_INPUT"}');
+  expect(tab.url()).not.toContain('FEEDBACK_SECRET');await expect.poll(()=>page.locator('#source').evaluate(node=>node.value)).toEqual('{"synthetic":"FEEDBACK_SECRET_INPUT"}');
   await tab.close();
 });
 test('feedback stays available in narrow RTL pages and the toolbar popup',async({page})=>{

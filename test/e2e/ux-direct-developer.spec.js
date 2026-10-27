@@ -7,9 +7,9 @@ test('JSON exposes cancellation during work and ignores a late cancelled result'
   await page.addInitScript(()=>{const Native=window.Worker;window.Worker=class extends Native {postMessage(data){if(data.source!==undefined){const callback=this.onmessage;setTimeout(()=>callback?.({data:{status:'ready',text:'"late"',inputBytes:6,outputBytes:6,nodeCount:1}}),800);}else super.postMessage(data);}};});
   await page.goto('/index.html');await selectLanguage(page,'en');
   await page.locator('#auto-format').uncheck();await expect(page.locator('#json-cancel')).toBeHidden();
-  await page.locator('#source').fill('{"keep":true}');await page.locator('#format').click();
+  await page.locator('#source .cm-content').fill('{"keep":true}');await page.locator('#format').click();
   await expect(page.locator('#json-cancel')).toBeVisible();await page.locator('#json-cancel').click();
-  await expect(page.locator('#json-cancel')).toBeHidden();await expect(page.locator('#source')).toHaveValue('{"keep":true}');
+  await expect(page.locator('#json-cancel')).toBeHidden();await expect.poll(()=>page.locator('#source').evaluate(node=>node.value)).toEqual('{"keep":true}');
   await page.waitForTimeout(900);await expect(page.locator('#copy')).toBeDisabled();
 });
 

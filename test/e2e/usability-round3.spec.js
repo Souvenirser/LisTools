@@ -1,3 +1,4 @@
+import {chooseConversionTool} from './menu-helpers.js';
 import {chooseTask} from './task-helpers.js';
 import {test,expect} from '@playwright/test';
 import {createHash} from 'node:crypto';
@@ -6,7 +7,7 @@ import {selectLanguage} from './language-helpers.js';
 
 async function open(page,tool){await page.goto(`/${tool}.html`);await selectLanguage(page,'en');}
 const file=(name,text='keep')=>({name,mimeType:'application/octet-stream',buffer:Buffer.from(text)});
-async function md5Files(page,files){await open(page,'convert');await page.locator('#convert-tool-list a[href="#md5"]').click();await page.locator('#md5-mode').selectOption('files');await page.locator('#md5-files').setInputFiles(files);}
+async function md5Files(page,files){await open(page,'convert');await chooseConversionTool(page,'#convert-tool-list a[href="#md5"]');await page.locator('#md5-mode').selectOption('files');await page.locator('#md5-files').setInputFiles(files);}
 
 test('T1 rejected MD5 batch preserves completed digest and expected value',async({page})=>{
  await md5Files(page,[file('keep.bin')]);await page.locator('#md5-run').click();
@@ -22,15 +23,15 @@ test('T1 MD5 single raw file is carried to conversion and completed queue surviv
  const bytes=Buffer.from([0,255,128,13,10]);await md5Files(page,[{...file('raw.bin'),buffer:bytes}]);await page.locator('#md5-run').click();
  const digest=createHash('md5').update(bytes).digest('hex');await expect(page.locator('[data-file-digest]')).toHaveValue(digest);
  await page.locator('#md5-file-rows input:not([readonly])').fill(digest);
- await page.locator('#convert-tool-list a[href="#base64"]').click();await expect(page.locator('#input-mode')).toHaveValue('file');await expect(page.locator('#convert-input-info')).toContainText('raw.bin');
+ await chooseConversionTool(page,'#convert-tool-list a[href="#base64"]');await expect(page.locator('#input-mode')).toHaveValue('file');await expect(page.locator('#convert-input-info')).toContainText('raw.bin');
  await page.locator('#convert-run').click();await expect(page.locator('#convert-result .cm-content')).toHaveText('AP+ADQo=');
- await page.locator('#convert-tool-list a[href="#md5"]').click();await expect(page.locator('[data-file-digest]')).toHaveValue(digest);await expect(page.locator('[data-file-match]')).toHaveAttribute('data-match','match');
+ await chooseConversionTool(page,'#convert-tool-list a[href="#md5"]');await expect(page.locator('[data-file-digest]')).toHaveValue(digest);await expect(page.locator('[data-file-match]')).toHaveAttribute('data-match','match');
 });
 test('T1 multiple and oversized MD5 files block ordinary conversion without losing queue',async({page})=>{
- await md5Files(page,[file('one.bin'),file('two.bin')]);await page.locator('#convert-tool-list a[href="#base64"]').click();await expect(page.locator('#convert-run')).toBeDisabled();await expect(page.locator('#convert-source .cm-content')).toHaveText('');
- await page.locator('#convert-tool-list a[href="#md5"]').click();await expect(page.locator('#md5-file-rows tr')).toHaveCount(2);
+ await md5Files(page,[file('one.bin'),file('two.bin')]);await chooseConversionTool(page,'#convert-tool-list a[href="#base64"]');await expect(page.locator('#convert-run')).toBeDisabled();await expect(page.locator('#convert-source .cm-content')).toHaveText('');
+ await chooseConversionTool(page,'#convert-tool-list a[href="#md5"]');await expect(page.locator('#md5-file-rows tr')).toHaveCount(2);
  await page.locator('#md5-files').evaluate(input=>{const data=new DataTransfer();data.items.add(new File([new Uint8Array(50*1024*1024+1)],'large.bin'));input.files=data.files;input.dispatchEvent(new Event('change'));});
- await page.locator('#convert-tool-list a[href="#base64"]').click();await expect(page.locator('#convert-run')).toBeDisabled();await page.locator('#convert-tool-list a[href="#md5"]').click();await expect(page.locator('#md5-file-rows')).toContainText('large.bin');
+ await chooseConversionTool(page,'#convert-tool-list a[href="#base64"]');await expect(page.locator('#convert-run')).toBeDisabled();await chooseConversionTool(page,'#convert-tool-list a[href="#md5"]');await expect(page.locator('#md5-file-rows')).toContainText('large.bin');
 });
 
 async function downloadBytes(page,button){const pending=page.waitForEvent('download');await button.click();const stream=await(await pending).createReadStream(),chunks=[];for await(const chunk of stream)chunks.push(chunk);return Buffer.concat(chunks);}
@@ -88,10 +89,10 @@ for(const [width,lang] of [[320,'en'],[320,'de'],[390,'de']])test(`T11 regex kee
  await page.setViewportSize({width,height:844});await open(page,'regex');await selectLanguage(page,lang);const visible=await page.locator('#regex-source').evaluate(node=>{const box=node.getBoundingClientRect(),bar=document.querySelector('.workspace-action-fixed').getBoundingClientRect();return Math.min(box.bottom,bar.top)-Math.max(box.top,72);});expect(visible).toBeGreaterThanOrEqual(120);
 });
 test('Review MD5 text edits in another converter invalidate cached digest',async({page})=>{
- await open(page,'convert');await page.locator('#convert-tool-list a[href="#md5"]').click();await page.locator('#md5-auto').uncheck();await page.locator('#convert-source .cm-content').fill('abc');await page.locator('#md5-run').click();await expect(page.locator('#md5-value-hex32lower')).toHaveValue('900150983cd24fb0d6963f7d28e17f72');await page.locator('#convert-tool-list a[href="#base64"]').click();await expect(page.locator('#md5-controls')).toBeHidden();await page.locator('#convert-source .cm-content').fill('xyz');await page.locator('#convert-tool-list a[href="#md5"]').click();await expect(page.locator('#md5-value-hex32lower')).toHaveValue('');await expect(page.locator('#md5-copy-all')).toBeDisabled();await page.locator('#md5-run').click();await expect(page.locator('#md5-value-hex32lower')).toHaveValue('d16fb36f0911f878998c136191af705e');
+ await open(page,'convert');await chooseConversionTool(page,'#convert-tool-list a[href="#md5"]');await page.locator('#md5-auto').uncheck();await page.locator('#convert-source .cm-content').fill('abc');await page.locator('#md5-run').click();await expect(page.locator('#md5-value-hex32lower')).toHaveValue('900150983cd24fb0d6963f7d28e17f72');await chooseConversionTool(page,'#convert-tool-list a[href="#base64"]');await expect(page.locator('#md5-controls')).toBeHidden();await page.locator('#convert-source .cm-content').fill('xyz');await chooseConversionTool(page,'#convert-tool-list a[href="#md5"]');await expect(page.locator('#md5-value-hex32lower')).toHaveValue('');await expect(page.locator('#md5-copy-all')).toBeDisabled();await page.locator('#md5-run').click();await expect(page.locator('#md5-value-hex32lower')).toHaveValue('d16fb36f0911f878998c136191af705e');
 });
 test('Review MD5 lines restore their own result after another conversion used the editor',async({page})=>{
- await open(page,'convert');await page.locator('#convert-tool-list a[href="#md5"]').click();await page.locator('#md5-mode').selectOption('lines');await page.locator('#convert-source .cm-content').fill('abc\ndef');await page.locator('#md5-run').click();await expect(page.locator('#convert-result .cm-content')).toContainText('900150983cd24fb0d6963f7d28e17f72');const result=await page.locator('#convert-result .cm-content').textContent();await page.locator('#convert-tool-list a[href="#base64"]').click();await page.locator('#convert-run').click();await expect(page.locator('#convert-result .cm-content')).toHaveText('YWJjCmRlZg==');await page.locator('#convert-tool-list a[href="#md5"]').click();await expect(page.locator('#convert-result .cm-content')).toHaveText(result);await expect(page.locator('#md5-json')).toBeEnabled();
+ await open(page,'convert');await chooseConversionTool(page,'#convert-tool-list a[href="#md5"]');await page.locator('#md5-mode').selectOption('lines');await page.locator('#convert-source .cm-content').fill('abc\ndef');await page.locator('#md5-run').click();await expect(page.locator('#convert-result .cm-content')).toContainText('900150983cd24fb0d6963f7d28e17f72');const result=await page.locator('#convert-result .cm-content').textContent();await chooseConversionTool(page,'#convert-tool-list a[href="#base64"]');await page.locator('#convert-run').click();await expect(page.locator('#convert-result .cm-content')).toHaveText('YWJjCmRlZg==');await chooseConversionTool(page,'#convert-tool-list a[href="#md5"]');await expect(page.locator('#convert-result .cm-content')).toHaveText(result);await expect(page.locator('#md5-json')).toBeEnabled();
 });
 for(const action of ['cancel','replace'])test(`T3 late text read failure after ${action} cannot overwrite the current state`,async({page})=>{
  await page.addInitScript(()=>{const original=Blob.prototype.arrayBuffer;Blob.prototype.arrayBuffer=function(){if(this instanceof File&&this.name==='slow.txt')return new Promise((resolve,reject)=>window.failTextRead=()=>reject(new Error('late read failure')));return original.call(this);};});await open(page,'text');await page.locator('#text-input').fill('old\nold');await page.locator('#text-run').click();await expect(page.locator('#text-result')).toHaveValue('old');await page.locator('#text-file').setInputFiles(file('slow.txt'));await page.waitForFunction(()=>Boolean(window.failTextRead));

@@ -1,3 +1,4 @@
+import {chooseConversionTool} from './menu-helpers.js';
 import {tryExample} from './task-helpers.js';
 import {countdownDuration,chooseTask} from './task-helpers.js';
 import { test, expect } from '@playwright/test';
@@ -12,7 +13,7 @@ async function outputSize(page){return page.locator('.images-preview-pair figure
 const byteCases=[['empty',Buffer.alloc(0)],['binary',Buffer.from([0,255,128,0,13,10])],['bom',Buffer.from('\uFEFF你好')],['crlf',Buffer.from('a\r\nb\r\n')],['below-preview',Buffer.alloc(1024*1024-1,97)],['at-preview',Buffer.alloc(1024*1024,97)],['above-preview',Buffer.alloc(1024*1024+1,97)],['different-tail',Buffer.concat([Buffer.alloc(1024*1024,97),Buffer.from('b')])]];
 for(const [name,buffer]of byteCases)test(`B1 raw file bytes: ${name}`,async({page})=>{
   await open(page,'convert');await page.locator('#convert-file').setInputFiles({name:`${name}.bin`,mimeType:'application/octet-stream',buffer});
-  await page.locator('#convert-tool-list a[href="#md5"]').click();await page.locator('#md5-run').click();
+  await chooseConversionTool(page,'#convert-tool-list a[href="#md5"]');await page.locator('#md5-run').click();
   await expect(page.locator('#md5-file-rows [data-file-digest]')).toHaveValue(createHash('md5').update(buffer).digest('hex'));
   await expect(page.locator('#md5-file-rows td').nth(1)).toHaveText(String(buffer.length));
 });
@@ -22,14 +23,14 @@ test('B1 conversion file handoff hashes all bytes and preserves file mode on ret
   const buffer=Buffer.from('a'.repeat(1024*1024)+'tail changes the digest');
   await page.locator('#convert-file').setInputFiles({name:'whole.txt',mimeType:'text/plain',buffer});
   await expect(page.locator('#convert-input-info')).toContainText('whole.txt');
-  await page.locator('#convert-tool-list a[href="#md5"]').click();
+  await chooseConversionTool(page,'#convert-tool-list a[href="#md5"]');
   await page.locator('#md5-run').click();
   await expect(page.locator('#md5-file-rows [data-file-digest]')).toHaveValue(createHash('md5').update(buffer).digest('hex'));
   await expect(page.locator('#md5-file-rows')).toContainText('whole.txt');
-  await page.locator('#convert-tool-list a[href="#base64"]').click();
+  await chooseConversionTool(page,'#convert-tool-list a[href="#base64"]');
   await expect(page.locator('#input-mode')).toHaveValue('file');
   await expect(page.locator('#convert-input-info')).toContainText('whole.txt');
-  await page.locator('#convert-tool-list a[href="#md5"]').click();
+  await chooseConversionTool(page,'#convert-tool-list a[href="#md5"]');
   await expect(page.locator('#md5-mode')).toHaveValue('files');
   await page.locator('#md5-run').click();
   await expect(page.locator('#md5-file-rows [data-file-digest]')).toHaveValue(createHash('md5').update(buffer).digest('hex'));

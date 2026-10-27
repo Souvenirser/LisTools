@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 
 test('calculator reserves history space only when the user opens nonempty history',async({page})=>{
- await page.goto('/calculator.html');await expect(page.locator('#calculator-history-toggle')).toBeDisabled();await expect(page.locator('#history').locator('xpath=ancestor::section')).toBeHidden();
+ await page.goto('/calculator.html');await expect(page.locator('#calculator-history-toggle')).toBeEnabled();await expect(page.locator('#history').locator('xpath=ancestor::section')).toBeHidden();
  expect((await page.locator('.calculator-layout').boundingBox()).width).toBeLessThanOrEqual(480);
  await page.locator('#expression').fill('2+3');await page.locator('#expression').press('Enter');await expect(page.locator('#calculator-history-toggle')).toBeEnabled();await page.locator('#calculator-history-toggle').click();await expect(page.locator('#history')).toContainText('5');await expect(page.locator('#result')).toHaveText('5');
 });
@@ -17,6 +17,6 @@ test('draw mode precedes the list and its action stays beside the input',async({
  await page.locator('#draw-input').fill('A\nB\nC');await page.locator('#draw-run').click();await expect(page.locator('#draw-copy')).toBeEnabled();
 });
 
-test('timer settings collapse while running and return for a paused adjustment',async({page})=>{
- await page.goto('/timer.html');await expect(page.locator('#timer-settings')).toHaveAttribute('open','');await page.locator('#timer-start').click();await expect(page.locator('#timer-settings')).not.toHaveAttribute('open');await page.locator('#timer-pause').click();await expect(page.locator('#timer-settings')).toHaveAttribute('open','');await expect(page.locator('#timer-minutes')).toBeEnabled();
+test('timer settings keep the user-controlled disclosure while running and paused',async({page})=>{
+ await page.goto('/timer.html');await expect(page.locator('#timer-settings')).toHaveAttribute('open','');await page.locator('#timer-start').click();await expect(page.locator('#timer-settings')).toHaveAttribute('open','');await page.locator('#timer-pause').click();await expect(page.locator('#timer-settings')).toHaveAttribute('open','');await expect(page.locator('#timer-minutes')).toBeEnabled();
 });

@@ -24,7 +24,7 @@ for(const {file,selector,name,compare} of [
 test('JSON result tokens and line numbers retain readable contrast',async({page},testInfo)=>{
   await page.addInitScript(()=>localStorage.setItem('listools-language','en'));
   await page.goto('/index.html');
-  await page.locator('#source').fill('{"number":12,"truth":true,"falsehood":false,"empty":null,"name":"LisTools"}');
+  await page.locator('#source .cm-content').fill('{"number":12,"truth":true,"falsehood":false,"empty":null,"name":"LisTools"}');
   await page.locator('#format').click();await expect(page.locator('#copy')).toBeEnabled();
   const values=await page.locator('#editor .cm-content span, #editor .cm-gutters .cm-gutterElement').evaluateAll(nodes=>{
     const canvas=document.createElement('canvas');canvas.width=canvas.height=1;

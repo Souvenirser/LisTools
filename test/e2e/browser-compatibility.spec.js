@@ -5,14 +5,14 @@ test('all packaged pages load without external requests or JavaScript errors',as
   const errors=[],external=[];page.on('pageerror',error=>errors.push(error.message));
   page.on('request',request=>{if(/^https?:/.test(request.url())&&!request.url().startsWith('http://127.0.0.1:'))external.push(request.url());});
   for(const {file} of pages.filter(item=>!item.file.includes('#'))) {
-    await page.goto(`/${file}`);await expect(page.locator('.language-control [role=combobox]')).toBeVisible();
+    await page.goto(`/${file}`);await expect(page.locator('#settings-open')).toBeVisible();
     await page.locator('button.brand').click();await expect(page.locator('#tool-menu')).toBeVisible();await page.keyboard.press('Escape');
   }
   expect(errors).toEqual([]);expect(external).toEqual([]);
 });
 
 test('JSON precision and structural diff run in their local workers',async({page})=>{
-  await page.goto('/index.html');await page.locator('#source').fill('{"large":9007199254740993123}');await page.locator('#format').click();
+  await page.goto('/index.html');await page.locator('#source .cm-content').fill('{"large":9007199254740993123}');await page.locator('#format').click();
   await expect(page.locator('#copy')).toBeEnabled();await expect(page.locator('#editor')).toContainText('9007199254740993123');
   await page.goto('/diff.html');await page.locator('#left-source .cm-content').fill('{"large":9007199254740993123}');await page.locator('#right-source .cm-content').fill('{"large":9007199254740993124}');await page.locator('#compare').click();await expect(page.locator('#diff-length')).toHaveText('1');
 });

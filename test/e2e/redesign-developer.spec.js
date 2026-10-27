@@ -1,3 +1,4 @@
+import {chooseConversionTool} from './menu-helpers.js';
 import {test,expect} from '@playwright/test';
 import {selectLanguage} from './language-helpers.js';
 import {chooseTask} from './task-helpers.js';
@@ -25,12 +26,11 @@ test('timestamp keeps the live local clock visible while extra clock formats are
   await page.goto('/timestamp.html');await selectLanguage(page,'en');
   const zones=page.locator('.timezone-controls .choices');await zones.click();
   await zones.locator('input[type="search"]').fill('UTC');await zones.locator('[data-choice][data-value="UTC"]').click();
-  await expect(page.locator('#clock-details')).not.toHaveAttribute('open','');
+  await expect(page.locator('#clock-details')).not.toHaveAttribute('open');await expect(page.locator('.clock-quick-actions [data-copy=clock-seconds]')).toBeVisible();
   await expect(page.locator('#clock-summary')).toBeVisible();
   await expect(page.locator('#clock-summary')).toHaveText('2024-01-01 00:00:00');
   await page.clock.runFor(1000);await expect(page.locator('#clock-summary')).toHaveText('2024-01-01 00:00:01');
   await page.locator('#timestamp-source').fill('0');await expect(page.locator('#timestamp-local')).toHaveValue('1970-01-01 00:00:00.000');
-  await page.locator('#clock-details summary').click();
   await expect(page.locator('#clock-seconds')).toHaveValue('1704067201');
   await expect(page.locator('#timestamp-local')).toHaveValue('1970-01-01 00:00:00.000');
 });
@@ -58,6 +58,6 @@ test('MD5 HMAC clears its key after a result and when leaving the task',async({p
   await page.locator('#convert-source .cm-content').fill('message');await page.locator('#md5-key').fill('local-secret');
   await page.locator('#md5-run').click();await expect(page.locator('#md5-value-hex32lower')).toHaveValue(/^[a-f0-9]{32}$/);
   await expect(page.locator('#md5-key')).toHaveValue('');await page.locator('#md5-key').fill('another-secret');
-  await page.locator('#convert-tool-list a[href="#base64"]').click();await expect(page.locator('#md5-key')).toHaveValue('');
-  await page.locator('#convert-tool-list a[href="#md5"]').click();await expect(page.locator('#md5-key')).toHaveValue('');
+  await chooseConversionTool(page,'#convert-tool-list a[href="#base64"]');await expect(page.locator('#md5-key')).toHaveValue('');
+  await chooseConversionTool(page,'#convert-tool-list a[href="#md5"]');await expect(page.locator('#md5-key')).toHaveValue('');
 });

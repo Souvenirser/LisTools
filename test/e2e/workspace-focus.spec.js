@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 import {selectLanguage} from './language-helpers.js';
 
-for(const [route,editor,scroll]of [['index','#source','#source'],['diff','#left-source .cm-content','#left-source .cm-scroller'],['convert','#convert-source .cm-content','#convert-source .cm-scroller'],['regex','#regex-source .cm-content','#regex-source .cm-scroller'],['text','#text-input','#text-input']])test(`focus mode preserves the ${route} editor and increases its reading space`,async({page})=>{
+for(const [route,editor,scroll]of [['index','#source .cm-content','#source'],['diff','#left-source .cm-content','#left-source .cm-scroller'],['convert','#convert-source .cm-content','#convert-source .cm-scroller'],['regex','#regex-source .cm-content','#regex-source .cm-scroller'],['text','#text-input','#text-input']])test(`focus mode preserves the ${route} editor and increases its reading space`,async({page})=>{
  await page.setViewportSize({width:1440,height:900});await page.goto(`/${route}.html`);
  await page.locator(editor).fill('keep this content');await page.evaluate(selector=>{window.originalEditor=document.querySelector(selector);},editor);
  await page.locator('#workspace-focus').click();await expect(page.locator('body')).toHaveClass(/workspace-focused/);
@@ -10,7 +10,7 @@ for(const [route,editor,scroll]of [['index','#source','#source'],['diff','#left-
 
  await page.locator('#workspace-focus').focus();await page.keyboard.press('Escape');await expect(page.locator('body')).not.toHaveClass(/workspace-focused/);
  await selectLanguage(page,'de');
- if(['index','text'].includes(route))await expect(page.locator(editor)).toHaveValue('keep this content');else await expect(page.locator(editor)).toContainText('keep this content');
+ if(route==='text')await expect(page.locator(editor)).toHaveValue('keep this content');else await expect(page.locator(editor)).toContainText('keep this content');
 });
 
 test('editor search consumes Escape before focus mode exits, and file MD5 cannot enter focus',async({page})=>{

@@ -8,7 +8,7 @@ test.beforeEach(async({page,context,browserName})=>{
 
 test('calculator keeps precision guidance and identifies business operands and result source',async({page})=>{
   await page.setViewportSize({width:1366,height:768});await page.goto('/calculator.html');
-  await expect(page.locator('[data-i18n="calculator.precision"]')).toBeVisible();
+  const precision=page.locator('details').filter({has:page.locator('#calculator-precision')});await precision.locator('summary').click();await expect(page.locator('#calculator-precision')).toBeVisible();await precision.locator('summary').click();
   await page.locator('#expression').fill('2+3');await page.locator('#calculate').click();await expect(page.locator('#result')).toHaveText('5');
   await expect(page.locator('#result-source')).toContainText('2+3');
   await page.locator('#business-details summary').click();

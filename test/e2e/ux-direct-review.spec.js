@@ -1,3 +1,4 @@
+import {chooseConversionTool} from './menu-helpers.js';
 import {test,expect} from '@playwright/test';
 import {readFileSync} from 'node:fs';
 import {selectLanguage} from './language-helpers.js';
@@ -10,11 +11,11 @@ for(const action of ['converter edit','MD5 edit','MD5 clear'])test(`MD5 file han
  const source=page.locator('#convert-source .cm-content');await source.fill('old parked text');
  await page.locator('#convert-file').setInputFiles(file('first.txt','first file'));await expect(source).toHaveText('first file');
  await page.locator('#input-mode').selectOption('text');await expect(source).toHaveText('old parked text');await source.fill('latest converter text');
- await page.locator('#convert-tool-list a[href="#md5"]').click();await page.locator('#md5-auto').uncheck();
+ await chooseConversionTool(page,'#convert-tool-list a[href="#md5"]');await page.locator('#md5-auto').uncheck();
  if(action==='MD5 edit')await source.fill('latest MD5 text');
  await page.locator('#md5-mode').selectOption('files');await page.locator('#md5-files').setInputFiles(file('second.txt','second file'));
  if(action==='MD5 clear')await page.locator('#md5-clear').click();
- await page.locator('#convert-tool-list a[href="#base64"]').click();await expect(page.locator('#input-mode')).toHaveValue('file');
+ await chooseConversionTool(page,'#convert-tool-list a[href="#base64"]');await expect(page.locator('#input-mode')).toHaveValue('file');
  await page.locator('#input-mode').selectOption('text');await expect(source).toHaveText(action==='MD5 clear'?'':action==='MD5 edit'?'latest MD5 text':'latest converter text');
 });
 

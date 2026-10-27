@@ -6,6 +6,7 @@ for(const width of [390,1440])test(`date results distinguish their main conclusi
  for(const task of ['difference','shift','milestone','workdays']){
   await chooseTask(page,'dates',task);
   if(task==='difference'){await page.locator('#date-start').fill('2026-10-01');await page.locator('#date-end').fill('2026-10-08');}
+  if(task==='workdays')await page.locator('#work-end').fill('2026-10-08');
   if(task==='milestone')await page.locator('#date-origin').fill('2000-02-29');
   await page.locator(`#${task}-run`).click();
   const output=page.locator(`#${task}-output`);await expect(output.locator('.date-conclusion')).not.toBeEmpty();
