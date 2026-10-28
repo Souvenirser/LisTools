@@ -24,7 +24,7 @@ test('time zones have country flags and searchable country city and IANA names',
 });
 
 test('time zone selection and device restore preserve inputs and exact DST behavior',async({page})=>{
- await page.goto('/timestamp.html');const device=await page.locator('#time-zone').inputValue();
+ await page.goto('/timestamp.html');await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');const device=await page.locator('#time-zone').inputValue();
  await page.locator('#timestamp-source').fill('0');await page.locator('#datetime-source').fill('2024-03-10 02:30:00');
  await chooseZone(page,'America/New_York');await expect(page.locator('#datetime-panel')).toHaveAttribute('data-status','error');
  await page.locator('#datetime-source').fill('2024-01-01 00:00:00');await expect(page.locator('#datetime-seconds')).toHaveValue('1704085200');

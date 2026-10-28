@@ -5,8 +5,8 @@ import {selectLanguage} from './language-helpers.js';
 test('menu ordering strip has equal top and bottom clearance in page and popup',async({page})=>{
  for(const route of ['/diff.html','/popup.html']){
   await page.goto(route);if(route!=='/popup.html')await page.locator('.brand').click();
-  await startMenuSorting(page);const gap=await page.locator('.tool-menu-order-actions').evaluate(node=>{const row=node.getBoundingClientRect();return Math.max(...[...node.querySelectorAll('button')].map(button=>{const box=button.getBoundingClientRect();return Math.abs(box.top+box.height/2-row.top-row.height/2);}));});
-  expect(gap).toBeLessThanOrEqual(1);
+  await startMenuSorting(page);const geometry=await page.locator('.tool-menu-order-actions').evaluate(node=>{const outer=node.parentElement.getBoundingClientRect(),boxes=[...node.querySelectorAll('button')].map(el=>el.getBoundingClientRect()),rows=new Map();for(const box of boxes){const key=Math.round(box.top);if(!rows.has(key))rows.set(key,[]);rows.get(key).push(box);}return {contained:boxes.every(box=>box.left>=outer.left&&box.right<=outer.right),rowDifferences:[...rows.values()].map(row=>Math.max(...row.map(box=>box.top+box.height/2))-Math.min(...row.map(box=>box.top+box.height/2))),padding:getComputedStyle(node.parentElement).paddingBlock};});
+  expect(geometry.contained).toBe(true);expect(geometry.rowDifferences.every(gap=>gap<=1)).toBe(true);expect(geometry.padding).toBe('8px');
  }
 });
 

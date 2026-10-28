@@ -1,9 +1,10 @@
 import {test,expect} from '@playwright/test';
 
-test('calculator reserves history space only when the user opens nonempty history',async({page})=>{
+test('calculator opens history inside its existing information rail',async({page})=>{
  await page.goto('/calculator.html');await expect(page.locator('#calculator-history-toggle')).toBeEnabled();await expect(page.locator('#history').locator('xpath=ancestor::section')).toBeHidden();
- expect((await page.locator('.calculator-layout').boundingBox()).width).toBeLessThanOrEqual(480);
- await page.locator('#expression').fill('2+3');await page.locator('#expression').press('Enter');await expect(page.locator('#calculator-history-toggle')).toBeEnabled();await page.locator('#calculator-history-toggle').click();await expect(page.locator('#history')).toContainText('5');await expect(page.locator('#result')).toHaveText('5');
+ expect((await page.locator('.calculator-workbench').boundingBox()).width).toBeLessThanOrEqual(480);
+ const before=await page.locator('.calculator-layout').boundingBox();
+ await page.locator('#expression').fill('2+3');await page.locator('#expression').press('Enter');await expect(page.locator('#calculator-history-toggle')).toBeEnabled();await page.locator('#calculator-history-toggle').click();await expect(page.locator('#history')).toContainText('5');await expect(page.locator('#result')).toHaveText('5');expect((await page.locator('.calculator-layout').boundingBox()).width).toBe(before.width);await expect(page.locator('.calculator-info #history')).toBeVisible();
 });
 
 test('QR generation action directly follows its input before advanced settings',async({page})=>{
