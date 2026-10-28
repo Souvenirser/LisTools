@@ -11,8 +11,7 @@ html[data-ui-state=booting] body,html[data-ui-state=failed] body{visibility:hidd
 .boot-placeholder{max-width:1120px;height:160px;border:1px solid #8883;border-radius:12px;margin-block:24px;background:#8881}
 .boot-message{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .boot-message button{pointer-events:auto;min-height:44px;padding:8px 16px;border:1px solid #8888;border-radius:8px;background:transparent;color:inherit;font:inherit;cursor:pointer}
-@media(min-width:1200px){.boot-body{grid-template-columns:64px minmax(0,1fr)}}
-@media(min-width:1440px){.boot-body{grid-template-columns:256px minmax(0,1fr)}}
+@media(min-width:1200px){.boot-body{grid-template-columns:256px minmax(0,1fr)}}
 html[data-entry=popup] .boot-header,html[data-entry=popup] .boot-sidebar{display:none}
 html[data-entry=popup] #page-boot{grid-template-rows:1fr}
 html[data-entry-motion=fade] main{animation:page-arrive .15s ease-out both}
