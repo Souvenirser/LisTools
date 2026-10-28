@@ -84,4 +84,7 @@ button[data-copy="timestamp-local"], button[data-copy="datetime-seconds"], butto
 
 #clock-details>summary{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px;min-height:44px}#clock-details>summary #clock-summary{margin-inline-end:auto}#clock-details>summary button{flex-shrink:0}#clock-details .clock-values{grid-template-columns:minmax(0,1fr)}#clock-details .clock-value:has(#clock-seconds),#clock-details .clock-value:has(#clock-milliseconds){display:none}
 
-.timestamp-page .clock-overview{display:flex;flex-direction:row;flex-wrap:wrap;align-items:start;gap:8px 12px;padding:12px 16px;margin-bottom:16px;overflow:visible}.timestamp-page .clock-overview #clock-details{flex:1 1 280px;margin:0}.timestamp-page .clock-overview #clock-details>summary{padding:0;border:0;border-radius:0}.clock-quick-actions{display:flex;flex-wrap:wrap;gap:8px;min-height:44px}
+.timestamp-page .clock-overview{flex:none;display:grid;grid-template-columns:minmax(0,1fr) auto;flex-direction:row;flex-wrap:wrap;align-items:start;gap:8px 12px;padding:12px 16px;margin-bottom:16px;overflow:visible}.timestamp-page .clock-overview #clock-details{grid-column:1/-1;margin:0}.timestamp-page .clock-overview #clock-details>summary{padding:0;border:0;border-radius:0}.clock-quick-actions{display:flex;flex-wrap:wrap;gap:8px;min-height:44px}
+
+.clock-overview>#clock-summary{align-self:center;margin:0;overflow-wrap:anywhere}
+@media(max-width:760px){.timestamp-page .clock-overview{grid-template-columns:minmax(0,1fr)}.clock-overview .clock-quick-actions{flex-wrap:wrap}}

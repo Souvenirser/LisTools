@@ -180,8 +180,12 @@ $('result').textContent='0';const calcExample=document.createElement('button');c
 const historyCard=$('history').closest('section'),historyToggle=document.createElement('button');historyToggle.id='calculator-history-toggle';historyToggle.type='button';historyToggle.disabled=false;historyToggle.dataset.i18n='calculator.history';historyToggle.textContent=t('calculator.history');historyToggle.setAttribute('aria-expanded','false');
 const calcLayout=document.querySelector('.calculator-layout'),sidebar=document.querySelector('.calculator-sidebar');document.querySelector('.tool-heading').append(historyToggle);historyCard.hidden=true;
 historyToggle.onclick=()=>{historyCard.hidden=!historyCard.hidden;historyToggle.setAttribute('aria-expanded',String(!historyCard.hidden));calcLayout.classList.toggle('history-open',!historyCard.hidden);};
-sidebar.classList.add('calculator-secondary');
+const info=document.createElement('aside'),infoDetails=document.createElement('div'),description=document.querySelector('.tool-heading>p');
+info.className='calculator-info';infoDetails.className='calculator-info-details';
+infoDetails.append(description,calcExample,historyCard);info.append(document.querySelector('.tool-heading'),infoDetails);calcLayout.insertBefore(info,sidebar);
 
 $('angle-unit').closest('.calculator-angle').hidden=true;
 
-const functionHelp=document.querySelector('.calculator-workbench details:has([data-i18n="calculator.functionHelp"])');functionHelp.append($('calculator-precision'));
+const functionHelp=document.querySelector('.calculator-workbench details:has([data-i18n="calculator.functionHelp"])');functionHelp.append($('calculator-precision'));infoDetails.append(functionHelp);
+infoDetails.append($('expression-hint'));
+

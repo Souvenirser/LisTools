@@ -67,10 +67,15 @@ main.catalog-overlay .convert-catalog:not(:popover-open) { display:none; }
 /* Category boundaries stay visible while browsing the local catalog. */
 #convert-tool-list .convert-catalog-group{border:1px solid var(--border);border-radius:8px;margin-bottom:16px}
 #convert-tool-list .convert-catalog-group:last-child{margin-bottom:0}
-#convert-tool-list .convert-catalog-group>h3{position:sticky;top:0;z-index:1;display:flex;align-items:center;gap:12px;margin:0;padding:10px 12px;border-inline-start:3px solid var(--blue-9);border-bottom:1px solid var(--border);border-radius:7px 7px 0 0;background:var(--slate-3);color:var(--text);font-size:1rem;font-weight:600}
+#convert-tool-list .convert-catalog-group>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:12px;margin:0;padding:10px 12px;border-inline-start:3px solid transparent;border-bottom:1px solid var(--border);border-radius:7px 7px 0 0;background:var(--slate-3);color:var(--text);font-size:1rem;font-weight:600}
 #convert-tool-list .convert-category-count{margin-inline-start:auto;color:var(--muted);font-size:.875rem;font-weight:400}
 #convert-tool-list .convert-catalog-group>a{margin:4px;padding-inline:12px}
 
 .convert-page #convert-cancel{display:inline-flex!important;align-items:center}.convert-page #convert-cancel:disabled{visibility:hidden;pointer-events:none}
 
 .convert-page #convert-example{justify-self:start}
+
+#convert-tool-list .convert-catalog-group>summary::before{content:"▸";flex:none}
+#convert-tool-list .convert-catalog-group[open]>summary::before{content:"▾"}
+#convert-tool-list .convert-catalog-group.has-current>summary{border-inline-start-color:var(--blue-9)}
+#convert-tool-list .convert-catalog-group>summary::-webkit-details-marker{display:none}

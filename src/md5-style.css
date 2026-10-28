@@ -21,7 +21,7 @@
 .md5-value { display:grid; grid-template-columns:minmax(0,1fr) auto; column-gap:8px; row-gap:5px; margin-bottom:10px; }
 .md5-value label { grid-column:1 / -1; color:var(--muted); font-size:.875rem; }
 .md5-value input { width:100%; font:1rem var(--mono); background:var(--slate-2) !important; }
-.md5-value button { align-self:stretch; }
+.md5-value button { align-self:start; }
 .md5-primary { margin-bottom:24px; }
 .md5-primary input { color:var(--teal-12); font-size:clamp(14px,1.5vw,21px); font-weight:650; background:var(--teal-2) !important; border-color:var(--teal-7) !important; }
 .md5-primary label { color:var(--teal-12); font-weight:600; }
@@ -77,3 +77,8 @@
 .md5-page #md5-file-picker{padding:12px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 
 .md5-page #tool-title{display:none}.md5-page .md5-result-actions:has(>button:not([hidden])){padding:12px 0}.md5-page .md5-result-actions:not(:has(>button:not([hidden]))){display:none}
+
+.md5-page .convert-editors{align-items:start}
+.md5-page #convert-output-panel{height:calc(var(--md5-reader-height,320px) + 104px);min-height:0}
+.md5-page #md5-single{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain}
+.md5-page #convert-input-panel .panel-footer{flex:none}

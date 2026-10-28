@@ -33,7 +33,8 @@ button.quiet { background: transparent; border-color: transparent; color: var(--
 :focus-visible { outline: 2px solid var(--blue-9); outline-offset: 2px; }
 html .cm-editor .cm-content[contenteditable=true]{caret-color:var(--text);cursor:text}
 html .cm-editor .cm-cursor{border-left-color:var(--text)}
-.json-source-editor:focus-within{box-shadow:inset 0 0 0 2px var(--blue-9)}
+.cm-editor:focus-within{outline:2px solid var(--blue-9);outline-offset:-2px}
+html body .cm-editor .cm-content:focus-visible{outline:none}
 #source .cm-content{min-height:100%}
 .input-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 #json-edit::after{content:' ▾';font-size:.8em}

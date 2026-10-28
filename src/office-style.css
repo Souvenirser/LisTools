@@ -71,7 +71,7 @@
 
 /* Shared workbench: tasks, a continuous editing surface, and quiet guidance. */
 .tool-card{border-radius:12px}
-.task-guide{margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border);gap:12px}
+.task-guide{margin-bottom:24px;padding-block:8px;border-bottom:1px solid var(--border);gap:12px}
 .task-guide .task-choices{gap:8px}
 .task-guide .task-choices button{border-radius:8px;padding:10px 16px;font-weight:550}
 .task-guide .task-choices button[aria-pressed=true]{background:var(--blue-3);border-color:var(--blue-7);color:var(--blue-12);box-shadow:inset 0 -2px var(--blue-11)}
@@ -103,7 +103,7 @@
 @media(min-width:1000px){.editor-workspace>.tool-card+.tool-card{border-inline-start:1px solid var(--border)}}
 @media(max-width:1199px){.media-workspace{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:999px){.editor-workspace>.tool-card+.tool-card{border-top:1px solid var(--border)}.date-task>.date-result{border:0;border-top:1px solid var(--border);padding:20px 0 0}.unit-primary{font-size:1.75rem}}
-@media(max-width:760px){.pdf-page-adjustments{display:none}.task-guide{padding-bottom:12px;margin-bottom:16px}.media-workspace .workspace-input,.media-workspace .workspace-options,.editor-workspace>.tool-card{padding:16px}.task-guide .task-select-label{font-weight:550}.date-result output{font-size:2rem}}
+@media(max-width:760px){.pdf-page-adjustments{display:none}.task-guide{padding-block:8px;margin-bottom:16px}.media-workspace .workspace-input,.media-workspace .workspace-options,.editor-workspace>.tool-card{padding:16px}.task-guide .task-select-label{font-weight:550}.date-result output{font-size:2rem}}
 
 .task-guide{border-radius:0}
 @media(max-width:1199px){.qr-page .tool-grid{grid-template-columns:minmax(0,1fr)}}
@@ -112,7 +112,7 @@
 .text-page #tool-root,.regex-page #tool-root{flex-shrink:0}
 @media(max-width:760px){
  .regex-page[data-layout] .tool-heading{margin-bottom:16px}
- .regex-page .task-guide{padding:0 0 8px;margin-bottom:8px;gap:8px}
+ .regex-page .task-guide{padding:8px 0;margin-bottom:8px;gap:8px}
  .regex-page .task-guide .task-choices{gap:4px}
  .regex-page .task-guide .task-choices button{padding:8px 2px;overflow-wrap:normal;hyphens:auto}
  .regex-page .regex-workspace-controls{padding:12px;margin-bottom:8px}
@@ -135,6 +135,8 @@
 .draw-page .draw-list-meta #draw-total{margin:0}
 .draw-page .draw-workspace .tool-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));align-items:start}
 .draw-page .draw-workspace .tool-fields>.field{display:grid;grid-template-rows:subgrid;grid-row:span 3;row-gap:6px;min-width:0}
+@media(min-width:1000px){.draw-page .draw-workspace #draw-range{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.draw-page #draw-range>.field-error{grid-column:1/-1}
 .draw-page #draw-count{max-width:180px}
 .draw-page #draw-input{margin-block-start:12px}
 .timer-page #timer-duration-field{width:100%}
@@ -192,7 +194,7 @@
 .workspace-action-area[data-action-state="result-visible"]:has(.is-error:not([hidden]),.tool-error:not([hidden])){display:block}
 
 /* Keep controls compact while preserving the actual text reading area. */
-.regex-page[data-layout] .tool-heading{margin-bottom:16px}.regex-page .task-guide{padding-block:0 8px;margin-bottom:12px}.regex-page .regex-workspace-controls{padding:12px;margin-bottom:12px}.regex-page .regex-workspace-controls>.tool-fields{margin:0}.regex-page #regex-common-flags{margin-inline-start:auto;gap:8px;align-items:center}.regex-page #regex-common-flags label{font-size:.875rem;white-space:nowrap;margin:0}.regex-page .editor-workspace #regex-source,.regex-page .editor-workspace #regex-output{min-height:322px}
+.regex-page[data-layout] .tool-heading{margin-bottom:16px}.regex-page .task-guide{padding-block:8px;margin-bottom:12px}.regex-page .regex-workspace-controls{padding:12px;margin-bottom:12px}.regex-page .regex-workspace-controls>.tool-fields{margin:0}.regex-page #regex-common-flags{margin-inline-start:auto;gap:8px;align-items:center}.regex-page #regex-common-flags label{font-size:.875rem;white-space:nowrap;margin:0}.regex-page .editor-workspace #regex-source,.regex-page .editor-workspace #regex-output{min-height:322px}
 @media(max-width:999px){.regex-page .editor-workspace #regex-source,.regex-page .editor-workspace #regex-output{min-height:242px}}
 @media(max-width:760px){.money-page .money-workspace{grid-template-columns:minmax(0,1fr);gap:16px}.money-page .money-results{border-inline-start:0;border-top:1px solid var(--border);padding-inline-start:0;padding-top:16px}.regex-page #regex-common-flags{margin-inline-start:0}}
 
@@ -229,7 +231,7 @@
 
 @media(max-width:760px){
  .text-page.workbench-shell .tool-heading{margin-bottom:12px}
- .text-page.workbench-shell .task-guide{padding:0;margin-bottom:12px;gap:8px}
+ .text-page.workbench-shell .task-guide{padding:8px 0;margin-bottom:12px;gap:8px}
  .text-page.workbench-shell .task-guide .task-select-label{margin:0;gap:4px}
  .text-page .text-parameter-notes>.tool-note{margin-bottom:8px}
  .text-page .editor-workspace>.tool-card>h2{margin-bottom:8px}
