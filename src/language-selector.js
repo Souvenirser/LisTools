@@ -30,6 +30,21 @@ export function mountLanguageSelector(header,{languages,t,language,setLanguage})
     }
   });
   const control=container.querySelector('.choices'),search=container.querySelector('input[type="search"]');
+  const dropdown=container.querySelector('.choices__list--dropdown');
+  function fitDropdown(){
+    if(!control.classList.contains('is-open'))return;
+    const rect=control.getBoundingClientRect(),viewport=window.visualViewport;
+    const top=viewport?.offsetTop||0,bottom=top+(viewport?.height||innerHeight),below=bottom-rect.bottom-8,above=rect.top-top-8;
+    const upward=below<132&&above>below,available=Math.max(0,upward?above:below);
+    dropdown.style.position='fixed';dropdown.style.width=`${rect.width}px`;dropdown.style.left=`${rect.left}px`;dropdown.style.bottom='auto';
+    dropdown.style.maxHeight=`${available}px`;
+    dropdown.querySelector('.choices__list').style.maxHeight=`${Math.max(0,available-search.getBoundingClientRect().height-2)}px`;
+    dropdown.style.top=`${upward?rect.top-Math.min(available,dropdown.getBoundingClientRect().height):rect.bottom}px`;
+  }
+  select.addEventListener('showDropdown',fitDropdown);
+  window.addEventListener('resize',fitDropdown);
+  window.visualViewport?.addEventListener('resize',fitDropdown);
+  document.addEventListener('scroll',event=>{if(event.target.contains?.(container))fitDropdown();},true);
   let request=0;
   function refresh() {
     caption.textContent=t('common.language');

@@ -18,6 +18,7 @@ export function mountWorkspaceFocus(){
    for(let sibling=reader.nextElementSibling;sibling;sibling=sibling.nextElementSibling)if(sibling.checkVisibility()){const style=getComputedStyle(sibling);reserve+=sibling.getBoundingClientRect().height+parseFloat(style.marginTop)+parseFloat(style.marginBottom);}
    const top=reader.getBoundingClientRect().top+main.scrollTop,height=Math.max(minimum,Math.floor(main.getBoundingClientRect().bottom-top-reserve));
    if(reader.style.getPropertyValue('--reader-height')!==`${height}px`)reader.style.setProperty('--reader-height',`${height}px`);
+   if(reader.id==='convert-source'&&document.body.classList.contains('md5-page'))reader.closest('.convert-editors').style.setProperty('--md5-reader-height',`${height}px`);
   }
  });}
  const sizing=new ResizeObserver(fitReaders);

@@ -102,9 +102,9 @@ export function mountToolMenu(root,{popup=false,close=()=>{}}={}) {
     saved.replaceChildren();saved.hidden=Boolean(query)||editing();if(saved.hidden)return;
     const value=readPreferences();for(const [key,ids]of [['favorites',value.favorites]]){if(!ids.length)continue;const section=document.createElement('section'),heading=document.createElement('h3');section.dataset.savedGroup=key;heading.textContent=t('v2.'+key);section.append(heading);if(ids.length){for(const id of ids){const item=pages.find(page=>page.id===id);if(item)section.append(itemRow(item));}}else if(key==='favorites'){const hint=document.createElement('p');hint.textContent=t('v2.noFavorites');section.append(hint);}else continue;saved.append(section);}saved.hidden=!saved.children.length;
   }
-  function group(text,icon,children) {
+  function group(text,children) {
     const details=document.createElement('details'),summary=document.createElement('summary');
-    summary.append(...iconText(icon,text));summary.title=text;summary.setAttribute('aria-label',text);
+    const name=document.createElement('span');name.className='tool-menu-name';name.textContent=text;summary.append(name);summary.title=text;summary.setAttribute('aria-label',text);
     const arrow=document.createElement('span');arrow.className='tool-menu-arrow';arrow.textContent='›';arrow.setAttribute('aria-hidden','true');summary.append(arrow);
     const body=document.createElement('div');body.className='tool-menu-group';body.append(...children);
     details.append(summary,body);return details;
@@ -119,8 +119,8 @@ export function mountToolMenu(root,{popup=false,close=()=>{}}={}) {
     else {
       const order=draft||readMenuOrder();
       const groups=order.groups.map(id=>{
-        const {key,icon}=toolGroups.find(item=>item.id===id),items=order.items[id].map(id=>pages.find(page=>page.id===id));
-        const node=group(t(key),icon,items.map(page=>{if(!draft)return itemRow(page);const row=document.createElement('div');row.className='tool-menu-sort-row';row.dataset.toolId=page.id;row.append(handle(label(page)),...iconText(page.icon,label(page)));return row;}));node.dataset.groupId=id;
+        const {key}=toolGroups.find(item=>item.id===id),items=order.items[id].map(id=>pages.find(page=>page.id===id));
+        const node=group(t(key),items.map(page=>{if(!draft)return itemRow(page);const row=document.createElement('div');row.className='tool-menu-sort-row';row.dataset.toolId=page.id;row.append(handle(label(page)),...iconText(page.icon,label(page)));return row;}));node.dataset.groupId=id;
         if(draft)node.querySelector('summary').prepend(handle(t(key)));
         node.open=draft?editOpen.has(id):expanded.has(id);
         return node;

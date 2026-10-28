@@ -114,7 +114,7 @@ for(const details of document.querySelectorAll('details'))details.addEventListen
 addEventListener('resize',fitResults);
 onLanguageChange(fitResults);
 
-const clockOverview=document.createElement('div'),clockQuick=document.createElement('div');clockOverview.className='clock-overview panel';clockQuick.className='clock-quick-actions';$('clock-details').before(clockOverview);clockOverview.append($('clock-details'),clockQuick);$('clock-details').open=false;
+const clockOverview=document.createElement('div'),clockQuick=document.createElement('div');clockOverview.className='clock-overview panel';clockQuick.className='clock-quick-actions';$('clock-details').before(clockOverview);clockOverview.append($('clock-summary'),clockQuick,$('clock-details'));$('clock-details').open=false;
 for(const id of ['clock-seconds','clock-milliseconds']){const button=document.querySelector(`[data-copy="${id}"]`);button.querySelector('[data-i18n]').dataset.i18n=id==='clock-seconds'?'timestamp.seconds':'timestamp.milliseconds';clockQuick.append(button);}
 function clockCopyLabels(){for(const button of clockQuick.querySelectorAll('[data-copy]')){const key=button.dataset.copy==='clock-seconds'?'timestamp.seconds':'timestamp.milliseconds';button.querySelector('span').textContent=t(button.dataset.copy==='clock-seconds'?'experience.copySeconds':'experience.copyMilliseconds');button.setAttribute('aria-label',`${button.querySelector('span').textContent} · ${t('timestamp.now')}`);button.title=button.getAttribute('aria-label');}for(const prefix of ['timestamp','datetime'])fillResults($(prefix+'-panel'),results[prefix]);}onLanguageChange(clockCopyLabels);clockCopyLabels();
 

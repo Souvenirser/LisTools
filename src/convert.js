@@ -8,6 +8,7 @@ import { EditorView, lineNumbers, highlightActiveLine, keymap } from '@codemirro
 import { defaultKeymap, history as editorHistory, historyKeymap } from '@codemirror/commands';
 import { search, searchKeymap, openSearchPanel } from '@codemirror/search';
 import { tools, categories, findTools, defaults, conversionExample } from './tools/convert/registry.js';
+import {createCatalogDisclosure} from './tools/convert/catalog-disclosure.js';
 import { limits, decodeText, validText } from './tools/convert/bytes.js';
 import { createConversionController } from './tools/convert/controller.js';
 import { createTextState } from './tools/convert/editor.js';
@@ -121,13 +122,16 @@ function renderOptions() {
   }));
   charsetSource();
 }
+const catalogDisclosure=createCatalogDisclosure(categories.map(category=>category.id));
 function renderCatalog(reveal=false) {
   const list=$('convert-tool-list'),scroll=list.scrollTop,matches=findTools($('convert-search').value,t);
+  const searching=Boolean($('convert-search').value.trim()),focused=document.activeElement,focusedCategory=focused?.closest('.convert-catalog-group')?.dataset.category,focusedLink=focused?.getAttribute('href');
   const elements=[];
   for(const category of categories) {
     const items=matches.filter(item=>item.category===category.id);if(!items.length)continue;
-    const section=document.createElement('section');section.className='convert-catalog-group';section.dataset.category=category.id;
-    const heading=document.createElement('h3');heading.id=`convert-category-${category.id}`;const name=document.createElement('span');name.textContent=label(category.name);const count=document.createElement('span');count.className='convert-category-count';count.textContent=String(items.length);count.setAttribute('aria-hidden','true');heading.append(name,count);section.setAttribute('aria-labelledby',heading.id);section.append(heading);
+    const section=document.createElement('details');section.className='convert-catalog-group';section.dataset.category=category.id;section.open=searching||catalogDisclosure.isOpen(category.id);section.classList.toggle('has-current',category.id===tool.category);
+    const heading=document.createElement('summary');heading.id=`convert-category-${category.id}`;const name=document.createElement('span');name.textContent=label(category.name);const count=document.createElement('span');count.className='convert-category-count';count.textContent=String(items.length);count.setAttribute('aria-hidden','true');heading.append(name,count);section.setAttribute('aria-labelledby',heading.id);section.append(heading);
+    heading.addEventListener('click',event=>{event.preventDefault();const top=heading.getBoundingClientRect().top;section.open=!section.open;if(!searching)catalogDisclosure.setOpen(category.id,section.open);list.scrollTop+=heading.getBoundingClientRect().top-top;});
     for(const item of items) {
       const link=document.createElement('a');link.href=`#${item.id}`;link.textContent=item.id==='md5'?t('md5.name'):label(item.name);
       if(item.id===tool.id)link.setAttribute('aria-current','page');section.append(link);
@@ -135,8 +139,9 @@ function renderCatalog(reveal=false) {
     elements.push(section);
   }
   list.replaceChildren(...elements);list.scrollTop=scroll;
+  if(focusedCategory){const group=elements.find(element=>element.dataset.category===focusedCategory);const target=focusedLink?[...(group?.querySelectorAll('a')||[])].find(link=>link.getAttribute('href')===focusedLink):group?.querySelector('summary');if(target?.checkVisibility())target.focus({preventScroll:true});}
   $('convert-no-tools').hidden=matches.length!==0;
-  if(reveal)list.querySelector('[aria-current="page"]')?.scrollIntoView({block:'nearest'});
+  if(reveal){const active=list.querySelector('[aria-current="page"]');(active?.checkVisibility()?active:active?.closest('details')?.querySelector('summary'))?.scrollIntoView({block:'nearest'});}
 }
 $('convert-search').addEventListener('input',()=>renderCatalog());
 function chooseTool(next,{preset,fromRoute=false}={}) {
