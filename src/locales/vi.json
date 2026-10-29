@@ -467,7 +467,8 @@
     "todayStart": "Hãy bắt đầu ngay hôm nay",
     "countdownHint": "Để đếm ngược, hãy lấy hôm nay làm điểm bắt đầu và chọn mục tiêu làm điểm kết thúc. Các mục tiêu trong quá khứ trả về số ngày âm. Các tuổi kỷ niệm sử dụng ngày cuối cùng của tháng 2 là ngày 29 tháng 2 trong những năm không nhuận.",
     "name": "Máy tính ngày tháng",
-    "todayEnd": "Dùng hôm nay làm ngày kết thúc"
+    "todayEnd": "Dùng hôm nay làm ngày kết thúc",
+    "invalidTime": "Nhập giờ hợp lệ từ 00:00:00 đến 23:59:59.999."
   },
   "qr": {
     "name": "Tạo và đọc mã QR",
@@ -1971,5 +1972,21 @@
     "stillLoading": "Vẫn đang tải trang…",
     "loadFailed": "Không thể tải trang này.",
     "reload": "Tải lại"
+  },
+  "reading": {
+    "left": "Cuộn sang trái",
+    "right": "Cuộn sang phải",
+    "moreLeft": "Còn nội dung bên trái",
+    "moreRight": "Còn nội dung bên phải",
+    "moreBoth": "Còn nội dung ở cả hai bên",
+    "timeForTimestamps": "Giờ dùng cho dấu thời gian",
+    "timeBasisHelp": "Phép tính ngày không phụ thuộc vào giờ và múi giờ này.",
+    "rangeTimes": "Ngày và dấu thời gian của khoảng",
+    "intervalTimeHelp": "Hai đầu dùng cùng giờ và múi giờ.",
+    "transitionError": "Giờ này không tồn tại hoặc bị lặp. Hãy đổi giờ hoặc múi giờ.",
+    "calculatedDate": "Ngày kết quả",
+    "nextDate": "Ngày kỷ niệm tiếp theo",
+    "otherFormats": "Định dạng khác",
+    "unavailable": "Dấu thời gian · Lỗi đầu vào"
   }
 }

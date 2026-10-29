@@ -467,7 +467,8 @@
     "todayStart": "Gunakan hari ini sebagai permulaan",
     "countdownHint": "Untuk kira detik, gunakan hari ini sebagai permulaan dan pilih sasaran sebagai penamat. Sasaran yang lalu mengembalikan kiraan hari negatif. Umur ulang tahun menggunakan hari terakhir Februari untuk 29 Februari dalam tahun bukan lompat.",
     "name": "Kalkulator tarikh",
-    "todayEnd": "Gunakan hari ini sebagai tarikh tamat"
+    "todayEnd": "Gunakan hari ini sebagai tarikh tamat",
+    "invalidTime": "Masukkan masa sah dari 00:00:00 hingga 23:59:59.999."
   },
   "qr": {
     "name": "Jana dan baca kod QR",
@@ -1971,5 +1972,21 @@
     "stillLoading": "Masih memuatkan halaman…",
     "loadFailed": "Halaman tidak dapat dimuatkan.",
     "reload": "Muat semula"
+  },
+  "reading": {
+    "left": "Tatal ke kiri",
+    "right": "Tatal ke kanan",
+    "moreLeft": "Ada lagi kandungan di kiri",
+    "moreRight": "Ada lagi kandungan di kanan",
+    "moreBoth": "Ada lagi kandungan di kedua-dua sisi",
+    "timeForTimestamps": "Masa untuk cap masa",
+    "timeBasisHelp": "Pengiraan tarikh tidak bergantung pada masa dan zon waktu ini.",
+    "rangeTimes": "Tarikh dan cap masa selang",
+    "intervalTimeHelp": "Kedua-dua hujung menggunakan masa dan zon waktu yang sama.",
+    "transitionError": "Masa ini tiada atau berulang. Tukar masa atau zon waktu.",
+    "calculatedDate": "Tarikh keputusan",
+    "nextDate": "Ulang tahun seterusnya",
+    "otherFormats": "Format lain",
+    "unavailable": "Cap masa · Ralat input"
   }
 }

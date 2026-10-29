@@ -467,7 +467,8 @@
     "todayStart": "Käytä tänään aloituksena",
     "countdownHint": "Käytä lähtölaskentaa aloituspäivänä ja valitse kohde lopuksi. Aiemmat tavoitteet palauttavat negatiivisen päivämäärän. Vuosipäivät käyttävät helmikuun viimeistä päivää helmikuun 29. päivänä muina kuin karkausvuosina.",
     "name": "Päivämäärälaskin",
-    "todayEnd": "Käytä tätä päivää päättymispäivänä"
+    "todayEnd": "Käytä tätä päivää päättymispäivänä",
+    "invalidTime": "Anna kelvollinen kellonaika väliltä 00:00:00–23:59:59.999."
   },
   "qr": {
     "name": "Luo ja lue QR-koodeja",
@@ -1971,5 +1972,21 @@
     "stillLoading": "Sivua ladataan edelleen…",
     "loadFailed": "Sivua ei voitu ladata.",
     "reload": "Lataa uudelleen"
+  },
+  "reading": {
+    "left": "Vieritä vasemmalle",
+    "right": "Vieritä oikealle",
+    "moreLeft": "Lisää sisältöä vasemmalla",
+    "moreRight": "Lisää sisältöä oikealla",
+    "moreBoth": "Lisää sisältöä molemmilla puolilla",
+    "timeForTimestamps": "Aikaleimojen kellonaika",
+    "timeBasisHelp": "Päivämäärälaskenta ei riipu tästä kellonajasta tai aikavyöhykkeestä.",
+    "rangeTimes": "Aikavälin päivämäärät ja aikaleimat",
+    "intervalTimeHelp": "Molemmat rajat käyttävät samaa kellonaikaa ja aikavyöhykettä.",
+    "transitionError": "Tämä kellonaika puuttuu tai toistuu. Vaihda kellonaikaa tai aikavyöhykettä.",
+    "calculatedDate": "Päätöspäivämäärä",
+    "nextDate": "Seuraava vuosipäivä",
+    "otherFormats": "Muut muodot",
+    "unavailable": "Aikaleima · Syötevirhe"
   }
 }

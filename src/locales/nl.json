@@ -467,7 +467,8 @@
     "todayStart": "Gebruik vandaag als start",
     "countdownHint": "Voor het aftellen gebruikt u vandaag als begin en kiest u het doel als eind. Doelstellingen uit het verleden leveren een negatief aantal dagen op. Jubileumleeftijden gebruiken de laatste dag van februari voor 29 februari in niet-schrikkeljaren.",
     "name": "Datumcalculator",
-    "todayEnd": "Gebruik vandaag als einddatum"
+    "todayEnd": "Gebruik vandaag als einddatum",
+    "invalidTime": "Voer een geldige tijd in van 00:00:00 tot 23:59:59.999."
   },
   "qr": {
     "name": "QR-codes genereren en lezen",
@@ -1971,5 +1972,21 @@
     "stillLoading": "De pagina wordt nog steeds geladen...",
     "loadFailed": "De pagina kon niet worden geladen.",
     "reload": "Herladen"
+  },
+  "reading": {
+    "left": "Naar links scrollen",
+    "right": "Naar rechts scrollen",
+    "moreLeft": "Meer inhoud links",
+    "moreRight": "Meer inhoud rechts",
+    "moreBoth": "Meer inhoud aan beide kanten",
+    "timeForTimestamps": "Tijd voor tijdstempels",
+    "timeBasisHelp": "Datumberekeningen zijn onafhankelijk van deze tijd en tijdzone.",
+    "rangeTimes": "Datums en tijdstempels van het interval",
+    "intervalTimeHelp": "Beide grenzen gebruiken dezelfde tijd en tijdzone.",
+    "transitionError": "Deze tijd ontbreekt of komt dubbel voor. Wijzig de tijd of tijdzone.",
+    "calculatedDate": "Resulterende datum",
+    "nextDate": "Volgend jubileum",
+    "otherFormats": "Andere indelingen",
+    "unavailable": "Tijdstempel · Invoerfout"
   }
 }

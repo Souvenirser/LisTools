@@ -467,7 +467,8 @@
     "todayStart": "Kezdésként használja még ma",
     "countdownHint": "Visszaszámláláshoz használja a mai napot kezdésként, és válassza ki a célpontot a végén. A múltbeli célok negatív napszámot adnak vissza. Az évfordulós korosztályok február utolsó napját használják február 29-re a nem szökőévekben.",
     "name": "Dátumkalkulátor",
-    "todayEnd": "Mai nap használata záródátumként"
+    "todayEnd": "Mai nap használata záródátumként",
+    "invalidTime": "Adjon meg érvényes időpontot 00:00:00 és 23:59:59.999 között."
   },
   "qr": {
     "name": "QR-kódok generálása és olvasása",
@@ -1971,5 +1972,21 @@
     "stillLoading": "Az oldal betöltése folyamatban van…",
     "loadFailed": "Az oldalt nem sikerült betölteni.",
     "reload": "Újratöltés"
+  },
+  "reading": {
+    "left": "Görgetés balra",
+    "right": "Görgetés jobbra",
+    "moreLeft": "További tartalom balra",
+    "moreRight": "További tartalom jobbra",
+    "moreBoth": "További tartalom mindkét oldalon",
+    "timeForTimestamps": "Az időbélyegek időpontja",
+    "timeBasisHelp": "A dátumszámítás nem függ ettől az időponttól és időzónától.",
+    "rangeTimes": "Az időszak dátumai és időbélyegei",
+    "intervalTimeHelp": "Mindkét végpont ugyanazt az időpontot és időzónát használja.",
+    "transitionError": "Ez az időpont hiányzik vagy ismétlődik. Módosítsa az időpontot vagy az időzónát.",
+    "calculatedDate": "Eredmény dátuma",
+    "nextDate": "Következő évforduló",
+    "otherFormats": "Egyéb formátumok",
+    "unavailable": "Időbélyeg · Bemeneti hiba"
   }
 }

@@ -467,7 +467,8 @@
     "todayStart": "Použijte dnes jako začátek",
     "countdownHint": "Pro odpočítávání použijte dnešek jako začátek a jako konec zvolte cíl. Minulé cíle vrátí záporný počet dnů. Věky výročí používají poslední únorový den pro 29. únor v nepřestupných letech.",
     "name": "Kalkulačka data",
-    "todayEnd": "Použít dnešek jako datum konce"
+    "todayEnd": "Použít dnešek jako datum konce",
+    "invalidTime": "Zadejte platný čas od 00:00:00 do 23:59:59.999."
   },
   "qr": {
     "name": "Generujte a čtěte QR kódy",
@@ -1971,5 +1972,21 @@
     "stillLoading": "Stále se načítá stránka…",
     "loadFailed": "Stránku nelze načíst.",
     "reload": "Znovu načíst"
+  },
+  "reading": {
+    "left": "Posunout doleva",
+    "right": "Posunout doprava",
+    "moreLeft": "Další obsah vlevo",
+    "moreRight": "Další obsah vpravo",
+    "moreBoth": "Další obsah na obou stranách",
+    "timeForTimestamps": "Čas pro časová razítka",
+    "timeBasisHelp": "Výpočet dat nezávisí na tomto čase ani časovém pásmu.",
+    "rangeTimes": "Data a časová razítka intervalu",
+    "intervalTimeHelp": "Oba konce používají stejný čas a časové pásmo.",
+    "transitionError": "Tento čas neexistuje nebo se opakuje. Změňte čas nebo časové pásmo.",
+    "calculatedDate": "Výsledné datum",
+    "nextDate": "Další výročí",
+    "otherFormats": "Další formáty",
+    "unavailable": "Časové razítko · Chyba vstupu"
   }
 }

@@ -467,7 +467,8 @@
     "todayStart": "Sebenzisa namuhla njengesiqalo",
     "countdownHint": "Ukuze ubale wehle, sebenzisa namuhla njengesiqalo bese ukhetha okuhlosiwe njengokuphela. Okuhlosiwe okudlule kubuyisela isibalo sezinsuku ezingezinhle. Iminyaka yokugubha unyaka isebenzisa usuku lokugcina lukaFebhuwari ngoFebhuwari 29 eminyakeni engeyona eyeqayo.",
     "name": "Isibali sosuku",
-    "todayEnd": "Sebenzisa namuhla njengosuku lokugcina"
+    "todayEnd": "Sebenzisa namuhla njengosuku lokugcina",
+    "invalidTime": "Faka isikhathi esivumelekile kusukela ku-00:00:00 kuya ku-23:59:59.999."
   },
   "qr": {
     "name": "Khiqiza futhi ufunde amakhodi e-QR",
@@ -1971,5 +1972,21 @@
     "stillLoading": "Isalayisha ikhasi...",
     "loadFailed": "Ikhasi alikwazanga ukulayishwa.",
     "reload": "Layisha kabusha"
+  },
+  "reading": {
+    "left": "Skrolela kwesokunxele",
+    "right": "Skrolela kwesokudla",
+    "moreLeft": "Kunokunye okuqukethwe kwesokunxele",
+    "moreRight": "Kunokunye okuqukethwe kwesokudla",
+    "moreBoth": "Kunokunye okuqukethwe ezinhlangothini zombili",
+    "timeForTimestamps": "Isikhathi sezitembu zesikhathi",
+    "timeBasisHelp": "Ukubalwa kwezinsuku akuncikile kulesi sikhathi nendawo yesikhathi.",
+    "rangeTimes": "Izinsuku nezitembu zesikhathi zesikhawu",
+    "intervalTimeHelp": "Zombili iziphetho zisebenzisa isikhathi nendawo yesikhathi efanayo.",
+    "transitionError": "Lesi sikhathi asikho noma siyaphindwa. Shintsha isikhathi noma indawo yesikhathi.",
+    "calculatedDate": "Usuku lomphumela",
+    "nextDate": "Umgubho olandelayo",
+    "otherFormats": "Amanye amafomethi",
+    "unavailable": "Isitembu sesikhathi · Iphutha kokufakiwe"
   }
 }

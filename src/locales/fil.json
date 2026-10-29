@@ -467,7 +467,8 @@
     "todayStart": "Gamitin ngayon bilang simula",
     "countdownHint": "Para sa isang countdown, gamitin ngayon bilang simula at piliin ang target bilang wakas. Ang mga nakaraang target ay nagbabalik ng negatibong bilang ng araw. Ginagamit ng mga edad ng anibersaryo ang huling araw ng Pebrero para sa Pebrero 29 sa mga hindi leap na taon.",
     "name": "Calculator ng petsa",
-    "todayEnd": "Gamitin ang ngayon bilang petsa ng pagtatapos"
+    "todayEnd": "Gamitin ang ngayon bilang petsa ng pagtatapos",
+    "invalidTime": "Maglagay ng wastong oras mula 00:00:00 hanggang 23:59:59.999."
   },
   "qr": {
     "name": "Bumuo at magbasa ng mga QR code",
@@ -1971,5 +1972,21 @@
     "stillLoading": "Nilo-load pa rin ang page…",
     "loadFailed": "Hindi ma-load ang page.",
     "reload": "I-reload"
+  },
+  "reading": {
+    "left": "Mag-scroll pakaliwa",
+    "right": "Mag-scroll pakanan",
+    "moreLeft": "May laman pa sa kaliwa",
+    "moreRight": "May laman pa sa kanan",
+    "moreBoth": "May laman pa sa magkabilang panig",
+    "timeForTimestamps": "Oras para sa mga timestamp",
+    "timeBasisHelp": "Hindi nakadepende ang pagkalkula ng petsa sa oras at time zone na ito.",
+    "rangeTimes": "Mga petsa at timestamp ng saklaw",
+    "intervalTimeHelp": "Parehong oras at time zone ang gamit sa dalawang dulo.",
+    "transitionError": "Wala o nauulit ang oras na ito. Baguhin ang oras o time zone.",
+    "calculatedDate": "Petsa ng resulta",
+    "nextDate": "Susunod na anibersaryo",
+    "otherFormats": "Iba pang format",
+    "unavailable": "Timestamp · Mali sa input"
   }
 }

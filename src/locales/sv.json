@@ -467,7 +467,8 @@
     "todayStart": "Använd idag som start",
     "countdownHint": "För en nedräkning, använd idag som början och välj målet som slutet. Tidigare mål ger ett negativt antal dagar. Årsdagsåldrar använder den sista februari för den 29 februari under icke-skottår.",
     "name": "Datumkalkylator",
-    "todayEnd": "Använd idag som slutdatum"
+    "todayEnd": "Använd idag som slutdatum",
+    "invalidTime": "Ange en giltig tid mellan 00:00:00 och 23:59:59.999."
   },
   "qr": {
     "name": "Generera och läs QR-koder",
@@ -1971,5 +1972,21 @@
     "stillLoading": "Laddar fortfarande sidan...",
     "loadFailed": "Sidan kunde inte laddas.",
     "reload": "Ladda om"
+  },
+  "reading": {
+    "left": "Rulla åt vänster",
+    "right": "Rulla åt höger",
+    "moreLeft": "Mer innehåll till vänster",
+    "moreRight": "Mer innehåll till höger",
+    "moreBoth": "Mer innehåll på båda sidor",
+    "timeForTimestamps": "Tid för tidsstämplar",
+    "timeBasisHelp": "Datumberäkningar påverkas inte av denna tid eller tidszon.",
+    "rangeTimes": "Intervallets datum och tidsstämplar",
+    "intervalTimeHelp": "Båda gränserna använder samma tid och tidszon.",
+    "transitionError": "Denna tid saknas eller upprepas. Ändra tiden eller tidszonen.",
+    "calculatedDate": "Resultatdatum",
+    "nextDate": "Nästa årsdag",
+    "otherFormats": "Andra format",
+    "unavailable": "Tidsstämpel · Inmatningsfel"
   }
 }

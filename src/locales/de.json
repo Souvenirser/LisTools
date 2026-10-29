@@ -467,7 +467,8 @@
     "todayStart": "Heute als Start verwenden",
     "countdownHint": "Für einen Countdown verwenden Sie heute als Start und wählen das Ziel als Ende. Vergangene Ziele geben eine negative Tageszahl zurück. Jubiläumsalter verwenden in Nicht-Schaltjahren den letzten Tag des Monats Februar für den 29. Februar.",
     "name": "Datumsrechner",
-    "todayEnd": "Heute als Enddatum verwenden"
+    "todayEnd": "Heute als Enddatum verwenden",
+    "invalidTime": "Eine gültige Uhrzeit von 00:00:00 bis 23:59:59.999 eingeben."
   },
   "qr": {
     "name": "QR-Codes generieren und lesen",
@@ -1971,5 +1972,21 @@
     "stillLoading": "Die Seite wird immer noch geladen ...",
     "loadFailed": "Die Seite konnte nicht geladen werden.",
     "reload": "Neu laden"
+  },
+  "reading": {
+    "left": "Nach links scrollen",
+    "right": "Nach rechts scrollen",
+    "moreLeft": "Links gibt es weiteren Inhalt",
+    "moreRight": "Rechts gibt es weiteren Inhalt",
+    "moreBoth": "Auf beiden Seiten gibt es weiteren Inhalt",
+    "timeForTimestamps": "Uhrzeit für Zeitstempel",
+    "timeBasisHelp": "Kalenderberechnungen sind unabhängig von dieser Uhrzeit und Zeitzone.",
+    "rangeTimes": "Zeitraum: Daten und Zeitstempel",
+    "intervalTimeHelp": "Beide Grenzen verwenden dieselbe Uhrzeit und Zeitzone.",
+    "transitionError": "Diese Uhrzeit fehlt oder kommt doppelt vor. Uhrzeit oder Zeitzone ändern.",
+    "calculatedDate": "Ergebnisdatum",
+    "nextDate": "Nächster Jahrestag",
+    "otherFormats": "Weitere Formate",
+    "unavailable": "Zeitstempel · Eingabefehler"
   }
 }

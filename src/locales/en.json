@@ -467,7 +467,8 @@
     "todayStart": "Use today as start",
     "countdownHint": "For a countdown, use today as the start and choose the target as the end. Past targets return a negative day count. Anniversary ages use the final day of February for February 29 in non-leap years.",
     "name": "Date calculator",
-    "todayEnd": "Use today as end"
+    "todayEnd": "Use today as end",
+    "invalidTime": "Enter a valid time from 00:00:00 to 23:59:59.999."
   },
   "qr": {
     "name": "Generate and read QR codes",
@@ -1971,5 +1972,21 @@
     "stillLoading": "Still loading the page…",
     "loadFailed": "The page could not be loaded.",
     "reload": "Reload"
+  },
+  "reading": {
+    "left": "Scroll left",
+    "right": "Scroll right",
+    "moreLeft": "More on the left",
+    "moreRight": "More on the right",
+    "moreBoth": "More on both sides",
+    "timeForTimestamps": "Time for timestamps",
+    "timeBasisHelp": "Calendar calculations are independent of this time and time zone.",
+    "rangeTimes": "Interval dates and timestamps",
+    "intervalTimeHelp": "Both endpoints use the same time and time zone.",
+    "transitionError": "This time is skipped or repeated. Change the time or time zone.",
+    "calculatedDate": "Resulting date",
+    "nextDate": "Next anniversary",
+    "otherFormats": "Other formats",
+    "unavailable": "Timestamp · Input error"
   }
 }

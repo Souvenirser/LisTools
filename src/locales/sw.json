@@ -467,7 +467,8 @@
     "todayStart": "Tumia leo kama mwanzo",
     "countdownHint": "Kwa siku iliyosalia, tumia leo kama mwanzo na uchague lengo kama mwisho. Malengo ya awali yanaleta hesabu ya siku hasi. Umri wa maadhimisho hutumia siku ya mwisho ya Februari kwa Februari 29 katika miaka isiyo ya mikurupuko.",
     "name": "Kikokotoo cha tarehe",
-    "todayEnd": "Tumia leo kama tarehe ya mwisho"
+    "todayEnd": "Tumia leo kama tarehe ya mwisho",
+    "invalidTime": "Weka saa halali kuanzia 00:00:00 hadi 23:59:59.999."
   },
   "qr": {
     "name": "Tengeneza na usome misimbo ya QR",
@@ -1971,5 +1972,21 @@
     "stillLoading": "Bado inapakia ukurasa...",
     "loadFailed": "Ukurasa haukuweza kupakiwa.",
     "reload": "Pakia upya"
+  },
+  "reading": {
+    "left": "Sogeza kushoto",
+    "right": "Sogeza kulia",
+    "moreLeft": "Kuna maudhui zaidi kushoto",
+    "moreRight": "Kuna maudhui zaidi kulia",
+    "moreBoth": "Kuna maudhui zaidi pande zote mbili",
+    "timeForTimestamps": "Saa ya mihuri ya muda",
+    "timeBasisHelp": "Hesabu ya tarehe haitegemei saa na ukanda huu wa saa.",
+    "rangeTimes": "Tarehe na mihuri ya muda ya kipindi",
+    "intervalTimeHelp": "Ncha zote mbili hutumia saa na ukanda uleule wa saa.",
+    "transitionError": "Saa hii haipo au inajirudia. Badilisha saa au ukanda wa saa.",
+    "calculatedDate": "Tarehe ya matokeo",
+    "nextDate": "Maadhimisho ya miaka ijayo",
+    "otherFormats": "Miundo mingine",
+    "unavailable": "Muhuri wa muda · Hitilafu ya ingizo"
   }
 }

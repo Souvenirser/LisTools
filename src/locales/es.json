@@ -467,7 +467,8 @@
     "todayStart": "Usar hoy como inicio",
     "countdownHint": "Para una cuenta atrás, utilice el día de hoy como inicio y elija el objetivo como final. Los objetivos anteriores arrojan un recuento de días negativo. Las edades de aniversario utilizan el último día de febrero para el 29 de febrero en años no bisiestos.",
     "name": "Calculadora de fecha",
-    "todayEnd": "Usar hoy como fecha de fin"
+    "todayEnd": "Usar hoy como fecha de fin",
+    "invalidTime": "Introduzca una hora válida entre 00:00:00 y 23:59:59.999."
   },
   "qr": {
     "name": "Generar y leer códigos QR",
@@ -1971,5 +1972,21 @@
     "stillLoading": "Todavía cargando la página...",
     "loadFailed": "No se pudo cargar la página.",
     "reload": "Recargar"
+  },
+  "reading": {
+    "left": "Desplazar a la izquierda",
+    "right": "Desplazar a la derecha",
+    "moreLeft": "Más contenido a la izquierda",
+    "moreRight": "Más contenido a la derecha",
+    "moreBoth": "Más contenido en ambos lados",
+    "timeForTimestamps": "Hora para las marcas de tiempo",
+    "timeBasisHelp": "El cálculo de fechas no depende de esta hora ni de esta zona horaria.",
+    "rangeTimes": "Fechas y marcas de tiempo del intervalo",
+    "intervalTimeHelp": "Ambos extremos usan la misma hora y zona horaria.",
+    "transitionError": "Esta hora no existe o se repite. Cambie la hora o la zona horaria.",
+    "calculatedDate": "Fecha resultante",
+    "nextDate": "Próximo aniversario",
+    "otherFormats": "Otros formatos",
+    "unavailable": "Marca de tiempo · Error de entrada"
   }
 }

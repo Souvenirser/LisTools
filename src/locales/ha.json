@@ -467,7 +467,8 @@
     "todayStart": "Yi amfani yau azaman farawa",
     "countdownHint": "Don ƙidaya, yi amfani da yau azaman farawa kuma zaɓi manufa azaman ƙarshe. Makasudin da suka gabata suna dawo da ƙidayar rana mara kyau. Shekarun bikin suna amfani da ranar ƙarshe ta Fabrairu don 29 ga Fabrairu a cikin shekarun da ba tsalle ba.",
     "name": "Kalkuleta na kwanan wata",
-    "todayEnd": "Yi amfani da yau a matsayin ranar ƙarshe"
+    "todayEnd": "Yi amfani da yau a matsayin ranar ƙarshe",
+    "invalidTime": "Shigar da ingantaccen lokaci daga 00:00:00 zuwa 23:59:59.999."
   },
   "qr": {
     "name": "Ƙirƙiri kuma karanta lambobin QR",
@@ -1971,5 +1972,21 @@
     "stillLoading": "Har yanzu ana loda shafin…",
     "loadFailed": "Ba za a iya loda shafin ba.",
     "reload": "Sake kaya"
+  },
+  "reading": {
+    "left": "Gungura zuwa hagu",
+    "right": "Gungura zuwa dama",
+    "moreLeft": "Akwai ƙarin abun ciki a hagu",
+    "moreRight": "Akwai ƙarin abun ciki a dama",
+    "moreBoth": "Akwai ƙarin abun ciki a bangarorin biyu",
+    "timeForTimestamps": "Lokacin tambarin lokaci",
+    "timeBasisHelp": "Lissafin kwanan wata bai dogara da wannan lokaci da yankin lokaci ba.",
+    "rangeTimes": "Kwanakin tazara da tambarin lokaci",
+    "intervalTimeHelp": "Duk iyakokin suna amfani da lokaci da yankin lokaci iri ɗaya.",
+    "transitionError": "Wannan lokaci babu shi ko yana maimaituwa. Canza lokaci ko yankin lokaci.",
+    "calculatedDate": "Ranar sakamako",
+    "nextDate": "Shekaru na gaba",
+    "otherFormats": "Sauran tsare-tsare",
+    "unavailable": "Tambarin lokaci · Kuskuren shigarwa"
   }
 }

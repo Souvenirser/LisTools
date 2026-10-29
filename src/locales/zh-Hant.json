@@ -467,7 +467,8 @@
     "todayStart": "以今天為開始日期",
     "countdownHint": "計算倒數計時：以今天為開始日期，以目標日為結束日期。目標日已過時，天數為負數。2 月 29 日的週年日期在非閏年按 2 月最後一天計算。",
     "name": "日期計算",
-    "todayEnd": "以今天為結束日期"
+    "todayEnd": "以今天為結束日期",
+    "invalidTime": "請輸入 00:00:00 至 23:59:59.999 範圍內的有效時間。"
   },
   "qr": {
     "name": "QR Code 產生與辨識",
@@ -1971,5 +1972,21 @@
     "stillLoading": "頁面仍在載入…",
     "loadFailed": "頁面載入失敗。",
     "reload": "重新載入"
+  },
+  "reading": {
+    "left": "向左查看",
+    "right": "向右查看",
+    "moreLeft": "左側還有內容",
+    "moreRight": "右側還有內容",
+    "moreBoth": "左右兩側還有內容",
+    "timeForTimestamps": "產生時間戳記的時刻",
+    "timeBasisHelp": "日期運算不受這裡的時間與時區影響。",
+    "rangeTimes": "區間日期與時間戳記",
+    "intervalTimeHelp": "起訖兩端使用相同時刻與時區。",
+    "transitionError": "此時刻不存在或重複，請調整時間或時區。",
+    "calculatedDate": "計算後的日期",
+    "nextDate": "下次紀念日",
+    "otherFormats": "其他格式",
+    "unavailable": "時間戳記 · 輸入錯誤"
   }
 }
