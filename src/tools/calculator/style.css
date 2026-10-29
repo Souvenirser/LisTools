@@ -99,3 +99,11 @@
  .calculator-workbench .calculator-key{min-height:44px}
  .calculator-controls .calculator-modes button{min-height:44px}
 }
+/* A fixed reading-control row keeps both context and the keypad stable. */
+.calculator-page .calculator-result-value{grid-template-rows:44px 32px 42px}
+.calculator-page .calculator-result-meta{grid-row:3}
+.calculator-page #calculator-result-scroll{grid-column:1/-1;grid-row:2;min-height:32px;gap:4px}
+.calculator-page main #calculator-result-scroll button{min-height:32px;min-width:36px;padding:2px 6px}
+.calculator-page #calculator-result-scroll .horizontal-reader-hint{font-size:.875rem}
+.calculator-page #result.horizontal-reader-value{line-height:32px;padding-bottom:10px;box-sizing:border-box}
+@media(pointer:coarse){.calculator-page main #calculator-result-scroll button{min-height:44px;min-width:44px}.calculator-page .calculator-result-value{grid-template-rows:44px 44px 42px}}

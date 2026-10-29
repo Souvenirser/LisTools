@@ -467,7 +467,8 @@
     "todayStart": "Utiliser aujourd'hui comme début",
     "countdownHint": "Pour un compte à rebours, utilisez aujourd'hui comme début et choisissez la cible comme fin. Les cibles passées renvoient un nombre de jours négatif. Les âges anniversaires utilisent le dernier jour de février pour le 29 février dans les années non bissextiles.",
     "name": "Calculateur de dates",
-    "todayEnd": "Utiliser aujourd’hui comme date de fin"
+    "todayEnd": "Utiliser aujourd’hui comme date de fin",
+    "invalidTime": "Saisissez une heure valide entre 00:00:00 et 23:59:59.999."
   },
   "qr": {
     "name": "Générer et lire des codes QR",
@@ -1971,5 +1972,21 @@
     "stillLoading": "Je charge toujours la page…",
     "loadFailed": "La page n'a pas pu être chargée.",
     "reload": "Recharger"
+  },
+  "reading": {
+    "left": "Défiler vers la gauche",
+    "right": "Défiler vers la droite",
+    "moreLeft": "Suite à gauche",
+    "moreRight": "Suite à droite",
+    "moreBoth": "Suite des deux côtés",
+    "timeForTimestamps": "Heure des horodatages",
+    "timeBasisHelp": "Les calculs de dates sont indépendants de cette heure et de ce fuseau.",
+    "rangeTimes": "Dates et horodatages de la période",
+    "intervalTimeHelp": "Les deux bornes utilisent les mêmes heure et fuseau.",
+    "transitionError": "Cette heure est inexistante ou répétée. Modifiez l’heure ou le fuseau.",
+    "calculatedDate": "Date résultante",
+    "nextDate": "Prochain anniversaire",
+    "otherFormats": "Autres formats",
+    "unavailable": "Horodatage · Erreur de saisie"
   }
 }

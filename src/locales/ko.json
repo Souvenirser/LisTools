@@ -467,7 +467,8 @@
     "todayStart": "오늘부터 시작하세요",
     "countdownHint": "카운트다운은 오늘을 시작으로 하고 목표를 끝으로 정하세요. 과거 목표는 음수 일수를 반환합니다. 기념일은 윤년이 아닌 해의 경우 2월의 마지막 날을 2월 29일로 사용합니다.",
     "name": "날짜 계산기",
-    "todayEnd": "오늘을 종료일로 설정"
+    "todayEnd": "오늘을 종료일로 설정",
+    "invalidTime": "00:00:00부터 23:59:59.999까지의 유효한 시각을 입력하세요."
   },
   "qr": {
     "name": "QR 코드 생성 및 읽기",
@@ -1971,5 +1972,21 @@
     "stillLoading": "아직 페이지를 로드하는 중입니다…",
     "loadFailed": "페이지를 로드할 수 없습니다.",
     "reload": "새로고침"
+  },
+  "reading": {
+    "left": "왼쪽으로 스크롤",
+    "right": "오른쪽으로 스크롤",
+    "moreLeft": "왼쪽에 내용이 더 있습니다",
+    "moreRight": "오른쪽에 내용이 더 있습니다",
+    "moreBoth": "양쪽에 내용이 더 있습니다",
+    "timeForTimestamps": "타임스탬프 기준 시각",
+    "timeBasisHelp": "날짜 계산은 이 시각과 시간대의 영향을 받지 않습니다.",
+    "rangeTimes": "기간의 날짜와 타임스탬프",
+    "intervalTimeHelp": "시작과 끝에 같은 시각과 시간대를 사용합니다.",
+    "transitionError": "이 시각은 존재하지 않거나 중복됩니다. 시각 또는 시간대를 변경하세요.",
+    "calculatedDate": "결과 날짜",
+    "nextDate": "다음 기념일",
+    "otherFormats": "다른 형식",
+    "unavailable": "타임스탬프 · 입력 오류"
   }
 }

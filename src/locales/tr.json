@@ -467,7 +467,8 @@
     "todayStart": "Bugünü başlangıç olarak kullanın",
     "countdownHint": "Geri sayım için bugünü başlangıç olarak kullanın ve bitiş olarak hedefi seçin. Geçmiş hedefler negatif gün sayısı döndürür. Yıldönümü yaşları, artık olmayan yıllarda Şubat ayının son gününü 29 Şubat için kullanır.",
     "name": "Tarih hesaplayıcı",
-    "todayEnd": "Bugünü bitiş tarihi olarak kullan"
+    "todayEnd": "Bugünü bitiş tarihi olarak kullan",
+    "invalidTime": "00:00:00 ile 23:59:59.999 arasında geçerli bir saat girin."
   },
   "qr": {
     "name": "QR kodları oluşturun ve okuyun",
@@ -1971,5 +1972,21 @@
     "stillLoading": "Sayfa hâlâ yükleniyor…",
     "loadFailed": "Sayfa yüklenemedi.",
     "reload": "Yeniden yükle"
+  },
+  "reading": {
+    "left": "Sola kaydır",
+    "right": "Sağa kaydır",
+    "moreLeft": "Solda daha fazla içerik var",
+    "moreRight": "Sağda daha fazla içerik var",
+    "moreBoth": "Her iki tarafta da içerik var",
+    "timeForTimestamps": "Zaman damgaları için saat",
+    "timeBasisHelp": "Tarih hesaplaması bu saat ve saat diliminden bağımsızdır.",
+    "rangeTimes": "Aralığın tarihleri ve zaman damgaları",
+    "intervalTimeHelp": "İki uç da aynı saati ve saat dilimini kullanır.",
+    "transitionError": "Bu saat mevcut değil veya tekrarlanıyor. Saati ya da saat dilimini değiştirin.",
+    "calculatedDate": "Sonuç tarihi",
+    "nextDate": "Sonraki yıldönümü",
+    "otherFormats": "Diğer biçimler",
+    "unavailable": "Zaman damgası · Girdi hatası"
   }
 }

@@ -467,7 +467,8 @@
     "todayStart": "Bruk i dag som start",
     "countdownHint": "For en nedtelling, bruk i dag som start og velg målet som slutten. Tidligere mål gir et negativt antall dager. Jubileumsaldre bruker siste dag i februar til 29. februar i ikke-skuddår.",
     "name": "Datokalkulator",
-    "todayEnd": "Bruk i dag som sluttdato"
+    "todayEnd": "Bruk i dag som sluttdato",
+    "invalidTime": "Angi et gyldig klokkeslett mellom 00:00:00 og 23:59:59.999."
   },
   "qr": {
     "name": "Generer og les QR-koder",
@@ -1971,5 +1972,21 @@
     "stillLoading": "Laster fortsatt inn siden...",
     "loadFailed": "Siden kunne ikke lastes.",
     "reload": "Last inn på nytt"
+  },
+  "reading": {
+    "left": "Rull mot venstre",
+    "right": "Rull mot høyre",
+    "moreLeft": "Mer innhold til venstre",
+    "moreRight": "Mer innhold til høyre",
+    "moreBoth": "Mer innhold på begge sider",
+    "timeForTimestamps": "Tid for tidsstempler",
+    "timeBasisHelp": "Datoberegninger påvirkes ikke av dette klokkeslettet eller denne tidssonen.",
+    "rangeTimes": "Datoer og tidsstempler for intervallet",
+    "intervalTimeHelp": "Begge grensene bruker samme klokkeslett og tidssone.",
+    "transitionError": "Dette klokkeslettet mangler eller gjentas. Endre klokkeslettet eller tidssonen.",
+    "calculatedDate": "Resultatdato",
+    "nextDate": "Neste jubileum",
+    "otherFormats": "Andre formater",
+    "unavailable": "Tidsstempel · Feil i inndata"
   }
 }

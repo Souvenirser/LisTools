@@ -467,7 +467,8 @@
     "todayStart": "Lo òní gẹ́gẹ́ bí ìbẹ̀rẹ̀",
     "countdownHint": "Fún kíkà àkókò tó kù, lo òní gẹ́gẹ́ bí ìbẹ̀rẹ̀, kí o sì yan ọjọ́ àfojúsùn gẹ́gẹ́ bí ìparí. Àfojúsùn tó ti kọjá ń fúnni ní iye ọjọ́ òdì. Nínú ọdún tí kò ní ọjọ́ àfikún, ìṣírò ọjọ́ orí àjọ̀dún ń lo ọjọ́ tó gbẹ̀yìn February fún February 29.",
     "name": "Ẹ̀rọ ìṣírò ọjọ́",
-    "todayEnd": "Lo ọjọ́ òní gẹ́gẹ́ bí ọjọ́ ìparí"
+    "todayEnd": "Lo ọjọ́ òní gẹ́gẹ́ bí ọjọ́ ìparí",
+    "invalidTime": "Tẹ àkókò tó pé láti 00:00:00 sí 23:59:59.999 sí i."
   },
   "qr": {
     "name": "Ṣẹ̀dá kí o sì ka kóòdù QR",
@@ -1971,5 +1972,21 @@
     "stillLoading": "Ṣi kojọpọ oju-iwe naa…",
     "loadFailed": "Oju-iwe naa ko le ṣe kojọpọ.",
     "reload": "Tun gbee si"
+  },
+  "reading": {
+    "left": "Yí lọ sí òsì",
+    "right": "Yí lọ sí ọ̀tún",
+    "moreLeft": "Àkóónú síwájú wà ní òsì",
+    "moreRight": "Àkóónú síwájú wà ní ọ̀tún",
+    "moreBoth": "Àkóónú síwájú wà ní ẹ̀gbẹ́ méjèèjì",
+    "timeForTimestamps": "Àkókò fún àmì àkókò",
+    "timeBasisHelp": "Ìṣírò ọjọ́ kò sinmi lórí àkókò àti agbègbè àkókò yìí.",
+    "rangeTimes": "Àwọn ọjọ́ àti àmì àkókò àárín",
+    "intervalTimeHelp": "Ìbẹ̀rẹ̀ àti òpin lo àkókò àti agbègbè àkókò kan náà.",
+    "transitionError": "Àkókò yìí kò sí tàbí ó tún wá. Yí àkókò tàbí agbègbè àkókò padà.",
+    "calculatedDate": "Ọjọ́ àbájáde",
+    "nextDate": "Àjọ̀dún tó ń bọ̀",
+    "otherFormats": "Àwọn ọ̀nà mìíràn",
+    "unavailable": "Àmì àkókò · Àṣìṣe ìwọlé"
   }
 }

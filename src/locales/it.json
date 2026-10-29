@@ -467,7 +467,8 @@
     "todayStart": "Usa oggi come inizio",
     "countdownHint": "Per un conto alla rovescia, utilizza oggi come inizio e scegli l'obiettivo come fine. Gli obiettivi passati restituiscono un conteggio dei giorni negativo. Le età dell'anniversario utilizzano l'ultimo giorno di febbraio per il 29 febbraio negli anni non bisestili.",
     "name": "Calcolatrice della data",
-    "todayEnd": "Usa oggi come data di fine"
+    "todayEnd": "Usa oggi come data di fine",
+    "invalidTime": "Inserisci un’ora valida tra 00:00:00 e 23:59:59.999."
   },
   "qr": {
     "name": "Genera e leggi i codici QR",
@@ -1971,5 +1972,21 @@
     "stillLoading": "Sto ancora caricando la pagina...",
     "loadFailed": "Impossibile caricare la pagina.",
     "reload": "Ricaricare"
+  },
+  "reading": {
+    "left": "Scorri a sinistra",
+    "right": "Scorri a destra",
+    "moreLeft": "Altro contenuto a sinistra",
+    "moreRight": "Altro contenuto a destra",
+    "moreBoth": "Altro contenuto su entrambi i lati",
+    "timeForTimestamps": "Ora per i timestamp",
+    "timeBasisHelp": "Il calcolo delle date non dipende da questa ora o da questo fuso orario.",
+    "rangeTimes": "Date e timestamp dell’intervallo",
+    "intervalTimeHelp": "Entrambi gli estremi usano la stessa ora e lo stesso fuso orario.",
+    "transitionError": "Questa ora non esiste o si ripete. Cambia l’ora o il fuso orario.",
+    "calculatedDate": "Data risultante",
+    "nextDate": "Prossimo anniversario",
+    "otherFormats": "Altri formati",
+    "unavailable": "Timestamp · Errore di input"
   }
 }

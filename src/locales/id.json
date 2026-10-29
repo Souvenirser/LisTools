@@ -467,7 +467,8 @@
     "todayStart": "Gunakan hari ini sebagai permulaan",
     "countdownHint": "Untuk menghitung mundur, gunakan hari ini sebagai awal dan pilih target sebagai akhir. Target sebelumnya menghasilkan jumlah hari negatif. Usia peringatan menggunakan hari terakhir bulan Februari untuk tanggal 29 Februari di tahun non-kabisat.",
     "name": "Kalkulator tanggal",
-    "todayEnd": "Gunakan hari ini sebagai tanggal akhir"
+    "todayEnd": "Gunakan hari ini sebagai tanggal akhir",
+    "invalidTime": "Masukkan waktu yang valid dari 00:00:00 hingga 23:59:59.999."
   },
   "qr": {
     "name": "Hasilkan dan baca kode QR",
@@ -1971,5 +1972,21 @@
     "stillLoading": "Masih memuat halaman…",
     "loadFailed": "Halaman tidak dapat dimuat.",
     "reload": "Muat ulang"
+  },
+  "reading": {
+    "left": "Gulir ke kiri",
+    "right": "Gulir ke kanan",
+    "moreLeft": "Ada konten lain di kiri",
+    "moreRight": "Ada konten lain di kanan",
+    "moreBoth": "Ada konten lain di kedua sisi",
+    "timeForTimestamps": "Waktu untuk stempel waktu",
+    "timeBasisHelp": "Perhitungan tanggal tidak bergantung pada waktu dan zona waktu ini.",
+    "rangeTimes": "Tanggal dan stempel waktu interval",
+    "intervalTimeHelp": "Kedua ujung memakai waktu dan zona waktu yang sama.",
+    "transitionError": "Waktu ini tidak ada atau berulang. Ubah waktu atau zona waktu.",
+    "calculatedDate": "Tanggal hasil",
+    "nextDate": "Peringatan berikutnya",
+    "otherFormats": "Format lainnya",
+    "unavailable": "Stempel waktu · Kesalahan masukan"
   }
 }

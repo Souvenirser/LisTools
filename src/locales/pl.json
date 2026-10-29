@@ -467,7 +467,8 @@
     "todayStart": "Użyj dzisiejszego dnia jako początku",
     "countdownHint": "Aby rozpocząć odliczanie, użyj dnia dzisiejszego jako początku i wybierz cel jako koniec. Wcześniejsze cele zwracają ujemną liczbę dni. W latach nieprzestępnych za wiek rocznicowy przyjmuje się ostatni dzień lutego jako 29 lutego.",
     "name": "Kalkulator daty",
-    "todayEnd": "Użyj dzisiaj jako daty końcowej"
+    "todayEnd": "Użyj dzisiaj jako daty końcowej",
+    "invalidTime": "Wpisz poprawną godzinę od 00:00:00 do 23:59:59.999."
   },
   "qr": {
     "name": "Generuj i czytaj kody QR",
@@ -1971,5 +1972,21 @@
     "stillLoading": "Wciąż ładuję stronę…",
     "loadFailed": "Nie udało się załadować strony.",
     "reload": "Przeładować"
+  },
+  "reading": {
+    "left": "Przewiń w lewo",
+    "right": "Przewiń w prawo",
+    "moreLeft": "Więcej treści po lewej",
+    "moreRight": "Więcej treści po prawej",
+    "moreBoth": "Więcej treści po obu stronach",
+    "timeForTimestamps": "Godzina dla znaczników czasu",
+    "timeBasisHelp": "Obliczenia dat nie zależą od tej godziny ani strefy czasowej.",
+    "rangeTimes": "Daty i znaczniki czasu przedziału",
+    "intervalTimeHelp": "Oba końce używają tej samej godziny i strefy czasowej.",
+    "transitionError": "Ta godzina nie istnieje lub się powtarza. Zmień godzinę lub strefę czasową.",
+    "calculatedDate": "Data wyniku",
+    "nextDate": "Następna rocznica",
+    "otherFormats": "Inne formaty",
+    "unavailable": "Znacznik czasu · Błąd danych wejściowych"
   }
 }

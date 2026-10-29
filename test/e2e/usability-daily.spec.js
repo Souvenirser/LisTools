@@ -16,7 +16,7 @@ test('date difference states interval and endpoint policy',async({page,context,b
  await context.grantPermissions(browserName==='webkit'?['clipboard-read']:['clipboard-read','clipboard-write']);
  await page.goto('/dates.html');await page.locator('#date-start').fill('2026-01-01');await page.locator('#date-end').fill('2026-01-31');await page.locator('#difference-run').click();
  await expect(page.locator('#difference-output')).toContainText('2026-01-01 → 2026-01-31');await expect(page.locator('#difference-output')).toContainText('End date excluded');
- await page.locator('#date-inclusive').check();await expect(page.locator('#difference-output')).toContainText('Include');await page.locator('#difference-copy').click();expect(await page.evaluate(()=>navigator.clipboard.readText())).toBe(await page.locator('#difference-output').textContent());
+ await page.locator('#date-inclusive').check();await expect(page.locator('#difference-output')).toContainText('Include');await page.locator('#difference-copy').click();const copied=await page.evaluate(()=>navigator.clipboard.readText());expect(copied).toContain('2026-01-01 → 2026-01-31');expect(copied).toContain('Include');expect(copied).toContain('Timestamp');
 });
 for(const [name,input,copy]of [['money','money-input','copy-rounded'],['units','unit-value','unit-copy']])test(`${name} defers incomplete number errors until blur without retaining exports`,async({page})=>{
  await page.goto('/'+name+'.html');await page.locator('#'+input).fill('100');await expect(page.locator('#'+copy)).toBeEnabled();

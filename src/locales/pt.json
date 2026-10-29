@@ -467,7 +467,8 @@
     "todayStart": "Use hoje como início",
     "countdownHint": "Para uma contagem regressiva, use hoje como início e escolha o alvo como fim. As metas anteriores retornam uma contagem de dias negativa. As idades de aniversário usam o último dia de fevereiro como 29 de fevereiro em anos não bissextos.",
     "name": "Calculadora de data",
-    "todayEnd": "Usar hoje como data final"
+    "todayEnd": "Usar hoje como data final",
+    "invalidTime": "Insira uma hora válida entre 00:00:00 e 23:59:59.999."
   },
   "qr": {
     "name": "Gere e leia códigos QR",
@@ -1971,5 +1972,21 @@
     "stillLoading": "Ainda carregando a página…",
     "loadFailed": "A página não pôde ser carregada.",
     "reload": "Recarregar"
+  },
+  "reading": {
+    "left": "Rolar para a esquerda",
+    "right": "Rolar para a direita",
+    "moreLeft": "Mais conteúdo à esquerda",
+    "moreRight": "Mais conteúdo à direita",
+    "moreBoth": "Mais conteúdo dos dois lados",
+    "timeForTimestamps": "Hora dos carimbos de tempo",
+    "timeBasisHelp": "O cálculo de datas independe desta hora e deste fuso horário.",
+    "rangeTimes": "Datas e carimbos de tempo do intervalo",
+    "intervalTimeHelp": "Os dois extremos usam a mesma hora e o mesmo fuso horário.",
+    "transitionError": "Esta hora não existe ou se repete. Altere a hora ou o fuso horário.",
+    "calculatedDate": "Data resultante",
+    "nextDate": "Próximo aniversário",
+    "otherFormats": "Outros formatos",
+    "unavailable": "Timestamp · Erro de entrada"
   }
 }

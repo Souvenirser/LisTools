@@ -467,7 +467,8 @@
     "todayStart": "以今天为开始日期",
     "countdownHint": "计算倒计时：以今天为开始日期，以目标日为结束日期。目标日已过时，天数为负数。2 月 29 日的周年日期在非闰年按 2 月最后一天计算。",
     "name": "日期计算",
-    "todayEnd": "以今天为结束日期"
+    "todayEnd": "以今天为结束日期",
+    "invalidTime": "请输入 00:00:00 至 23:59:59.999 范围内的有效时间。"
   },
   "qr": {
     "name": "二维码生成与识别",
@@ -1971,5 +1972,21 @@
     "stillLoading": "页面仍在加载…",
     "loadFailed": "页面加载失败。",
     "reload": "重新加载"
+  },
+  "reading": {
+    "left": "向左查看",
+    "right": "向右查看",
+    "moreLeft": "左侧还有内容",
+    "moreRight": "右侧还有内容",
+    "moreBoth": "左右两侧还有内容",
+    "timeForTimestamps": "生成时间戳的时刻",
+    "timeBasisHelp": "日期运算不受这里的时间和时区影响。",
+    "rangeTimes": "区间日期与时间戳",
+    "intervalTimeHelp": "起止两端使用同一时刻与时区。",
+    "transitionError": "该时刻不存在或重复，请调整时间或时区。",
+    "calculatedDate": "计算后的日期",
+    "nextDate": "下次纪念日",
+    "otherFormats": "其他格式",
+    "unavailable": "时间戳 · 输入错误"
   }
 }

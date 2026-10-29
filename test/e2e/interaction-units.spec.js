@@ -54,7 +54,7 @@ async function toggleWithoutJump(page,checked,testInfo){
   window.unitFrames=[];window.unitFrameStart=performance.now();
   const sample=()=>{
    const checkbox=document.querySelector('#unit-all').getBoundingClientRect(),primary=document.querySelector('#unit-primary'),rect=primary.getBoundingClientRect();
-   window.unitFrames.push({time:performance.now()-window.unitFrameStart,checkboxX:checkbox.x,checkboxY:checkbox.y,primaryX:rect.x,primaryY:rect.y,text:primary.textContent,copyDisabled:document.querySelector('#unit-copy').disabled});
+   window.unitFrames.push({time:performance.now()-window.unitFrameStart,checkboxX:checkbox.x,checkboxY:checkbox.y,primaryX:rect.x,primaryY:rect.y,text:primary.querySelector('.unit-equation-status').textContent,copyDisabled:document.querySelector('#unit-copy').disabled});
    if(performance.now()-window.unitFrameStart<650)requestAnimationFrame(sample);
   };sample();
  });
@@ -68,7 +68,7 @@ async function toggleWithoutJump(page,checked,testInfo){
 for(const viewport of [{width:1360,height:960},{width:390,height:844}]){
  test(`all-unit checkbox preserves primary result and control positions throughout expansion at ${viewport.width}px`,async({page,context,browserName},testInfo)=>{
   await context.grantPermissions(browserName==='webkit'?['clipboard-read']:['clipboard-read','clipboard-write']);await page.setViewportSize(viewport);await open(page,'units');
-  await expect(page.locator('#unit-primary')).toHaveText('1 meters (m) = 0.001 kilometers (km)');
+  await expect(page.locator('#unit-primary .unit-equation-status')).toHaveText('1 meters (m) = 0.001 kilometers (km)');
   await toggleWithoutJump(page,true,testInfo);
   await expect(page.locator('#unit-results .numeric-result-row')).toHaveCount(9);
   await page.locator('#unit-more-results summary').click();
@@ -79,10 +79,10 @@ for(const viewport of [{width:1360,height:960},{width:390,height:844}]){
   await toggleWithoutJump(page,false,testInfo);
   await expect(page.locator('#unit-results .numeric-result-row')).toHaveCount(0);
   await expect(page.locator('#unit-copy-all')).toBeHidden();
-  await page.locator('#unit-value').fill('2');await expect(page.locator('#unit-primary')).toHaveText('2 meters (m) = 0.002 kilometers (km)');
-  await page.locator('#unit-swap').click();await expect(page.locator('#unit-primary')).toHaveText('2 kilometers (km) = 2000 meters (m)');
+  await page.locator('#unit-value').fill('2');await expect(page.locator('#unit-primary .unit-equation-status')).toHaveText('2 meters (m) = 0.002 kilometers (km)');
+  await page.locator('#unit-swap').click();await expect(page.locator('#unit-primary .unit-equation-status')).toHaveText('2 kilometers (km) = 2000 meters (m)');
   await page.locator('#unit-category').selectOption('temperature');await page.locator('#unit-value').fill('0');
-  await expect(page.locator('#unit-primary')).toHaveText('0 degrees Celsius (°C) = 32 degrees Fahrenheit (°F)');
+  await expect(page.locator('#unit-primary .unit-equation-status')).toHaveText('0 degrees Celsius (°C) = 32 degrees Fahrenheit (°F)');
   await page.locator('#unit-copy').click();expect(await page.evaluate(()=>navigator.clipboard.readText())).toBe('32');
  });
 }

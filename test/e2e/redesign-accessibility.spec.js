@@ -33,7 +33,7 @@ const states=[
   {name:'timestamp validation error',file:'timestamp.html',async prepare(page){await page.locator('#timestamp-source').fill('invalid');await expect(page.locator('#timestamp-panel')).toHaveAttribute('data-status','error');}},
   {name:'Cron validation error',file:'cron.html',async prepare(page){await page.locator('#cron-expression').fill('invalid');await page.locator('#cron-run').click();await expect(page.locator('#cron-error')).toBeVisible();}},
   {name:'regex validation error',file:'regex.html',async prepare(page){await page.locator('#regex-pattern').fill('(');await page.locator('#regex-run').click();await expect(page.locator('#regex-status')).toHaveAttribute('data-task-state','error');}},
-  {name:'password generated result',file:'password.html',async prepare(page){await page.locator('#password-generate').click();await expect(page.locator('#password-results input[type="password"]')).toHaveCount(1);}},
+  {name:'password generated result',file:'password.html',async prepare(page){await page.locator('#password-generate').click();await expect(page.locator('#password-results textarea[data-visible="false"]')).toHaveCount(1);}},
   {name:'PDF merged result',file:'pdf.html',async prepare(page){await tryExample(page,'pdf');await expect(page.locator('#pdf-result')).toBeVisible();}},
   {name:'image processed result',file:'images.html',async prepare(page){await tryExample(page,'images');await expect(page.locator('#images-results')).toBeVisible();}},
   {name:'QR generated result',file:'qr.html',async prepare(page){await page.locator('#qr-input').fill('LisTools offline QR');await page.locator('#qr-generate').click();await expect(page.locator('#qr-canvas')).toBeVisible();}},

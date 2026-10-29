@@ -467,7 +467,8 @@
     "todayStart": "Utilizați astăzi ca început",
     "countdownHint": "Pentru o numărătoare inversă, folosiți astăzi ca început și alegeți ținta ca sfârșit. Țintele anterioare returnează un număr negativ de zile. Vârstele aniversare folosesc ultima zi a lunii februarie pentru 29 februarie în anii non bisecți.",
     "name": "Calculator de dată",
-    "todayEnd": "Folosește ziua de azi ca dată de sfârșit"
+    "todayEnd": "Folosește ziua de azi ca dată de sfârșit",
+    "invalidTime": "Introduceți o oră validă între 00:00:00 și 23:59:59.999."
   },
   "qr": {
     "name": "Generați și citiți coduri QR",
@@ -1971,5 +1972,21 @@
     "stillLoading": "Încă se încarcă pagina...",
     "loadFailed": "Pagina nu a putut fi încărcată.",
     "reload": "Reîncărcați"
+  },
+  "reading": {
+    "left": "Derulează la stânga",
+    "right": "Derulează la dreapta",
+    "moreLeft": "Mai mult conținut la stânga",
+    "moreRight": "Mai mult conținut la dreapta",
+    "moreBoth": "Mai mult conținut în ambele părți",
+    "timeForTimestamps": "Ora pentru marcajele temporale",
+    "timeBasisHelp": "Calculul datelor nu depinde de această oră sau de acest fus orar.",
+    "rangeTimes": "Datele și marcajele temporale ale intervalului",
+    "intervalTimeHelp": "Ambele capete folosesc aceeași oră și același fus orar.",
+    "transitionError": "Această oră nu există sau se repetă. Schimbați ora sau fusul orar.",
+    "calculatedDate": "Data rezultată",
+    "nextDate": "Următoarea aniversare",
+    "otherFormats": "Alte formate",
+    "unavailable": "Marcaj temporal · Eroare de introducere"
   }
 }
