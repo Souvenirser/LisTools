@@ -56,7 +56,8 @@ xcrun safari-web-extension-packager dist --app-name LisTools --bundle-identifier
 
 GitHub 的 **Source code** 压缩包是源码，需要按下文构建后加载 `dist/`。手动安装的版本需要自行下载更新并在扩展管理页重新加载。
 
-当前发布版本为 **v1.2.2**，下载见 [GitHub Release](https://github.com/Souvenirser/LisTools/releases/tag/v1.2.2)。`LisTools-1.2.2.zip` 可上传 Chrome 开发者后台，或解压后加载。本版修复缩放下的侧栏、编辑器焦点、时间戳遮挡与任务栏对齐，增加转换分类折叠记忆，并优化计算器和 MD5 工作区。按用户要求，发布阶段不重跑测试；此前候选的验收范围及未验证项见 [发布说明](./docs/release-1.2.2.md)。支持页继续排除发布源码与安装包；未代为提交商店审核。
+当前发布版本为 **v1.2.3**，下载见 [GitHub Release](https://github.com/Souvenirser/LisTools/releases/tag/v1.2.3)。`LisTools-1.2.3.zip` 可上传 Chrome 开发者后台，或解压后加载。本版将日期结果与时间戳结构化展示，增加时间及国旗时区设置；改善长密码、单位数值和计算器结果的横向阅读，并统一日期范围。按用户要求，**本次发布未重新测试**，仅更新版本、构建并核对发布文件；详见 [发布说明](./docs/release-1.2.3.md)。支持页继续排除发布源码与安装包；未代为提交商店审核。
+
 
 ## 文件处理与结果
 
@@ -231,7 +232,7 @@ npm run build
 构建输出：
 
 - `dist/`：共用的 Manifest V3 扩展资源，按上文各浏览器方式加载或转换。
-- `releases/LisTools-1.2.1.zip`：根目录包含 manifest.json 的完整资源包。
+- `releases/LisTools-1.2.3.zip`：根目录包含 manifest.json 的完整资源包。
 
 Chrome / Edge 等 Chromium 浏览器开启开发者模式，点击 **加载已解压的扩展程序**，选择本项目的 `dist`；Firefox 按上文临时加载，Safari 使用官方转换工具。固定 LisTools 图标，点击图标打开工具菜单；JSON 工作台仍使用 `index.html`。无需为 Edge 另写或另打包一套工具代码。
 
