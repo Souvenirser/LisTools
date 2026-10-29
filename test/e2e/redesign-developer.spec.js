@@ -39,14 +39,14 @@ test('timestamp keeps the live local clock visible while extra clock formats are
 test('password task changes keep required settings visible and exports masked by default',async({page})=>{
   await page.goto('/password.html');await selectLanguage(page,'en');
   await page.locator('#password-batch').fill('2');await page.locator('#password-generate').click();
-  await expect(page.locator('#password-results input[type="password"]')).toHaveCount(2);
-  await page.locator('#password-show').click();await expect(page.locator('#password-results input[type="text"]')).toHaveCount(2);
+  await expect(page.locator('#password-results textarea[data-visible="false"]')).toHaveCount(2);
+  await page.locator('#password-show').click();await expect(page.locator('#password-results textarea[data-visible="true"]')).toHaveCount(2);
   await chooseTask(page,'password','passphrase');
-  await expect(page.locator('#password-results input')).toHaveCount(0);
+  await expect(page.locator('#password-results textarea')).toHaveCount(0);
   await expect(page.locator('#password-batch')).toHaveValue('2');await expect(page.locator('#password-words')).toBeVisible();
   await expect(page.locator('#password-length')).toBeHidden();await page.locator('#password-generate').click();
-  await expect(page.locator('#password-results input[type="password"]')).toHaveCount(2);
-  const values=await page.locator('#password-results input').evaluateAll(inputs=>inputs.map(input=>input.value));
+  await expect(page.locator('#password-results textarea[data-visible="false"]')).toHaveCount(2);
+  await page.locator('#password-show').click();const values=await page.locator('#password-results textarea').evaluateAll(inputs=>inputs.map(input=>input.value));
   await expect(page.locator('#password-plaintext')).toBeVisible();
   const pending=page.waitForEvent('download');await page.locator('#password-download').click();
   const stream=await(await pending).createReadStream(),chunks=[];for await(const chunk of stream)chunks.push(chunk);

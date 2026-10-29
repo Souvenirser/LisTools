@@ -39,7 +39,7 @@ test('regex request identity includes pattern, flags, task, replacement and extr
 
 test('regex popup and match states use legible dark theme tokens including zero-width markers',async({page})=>{
   await page.addInitScript(()=>localStorage.setItem('listools-preferences-v1',JSON.stringify({theme:'dark'})));await page.goto('/regex.html');await page.locator('#regex-rules-open').click();
-  const palette=await page.locator('#regex-rules-panel').evaluate(node=>{const cs=getComputedStyle(node),input=getComputedStyle(node.querySelector('input'));return {bg:cs.backgroundColor,surface:cs.getPropertyValue('--surface').trim(),inputBg:input.backgroundColor,inputColor:input.color};});
+  const palette=await page.locator('#regex-rules-panel').evaluate(node=>{const cs=getComputedStyle(node),input=getComputedStyle(node.querySelector('textarea'));return {bg:cs.backgroundColor,surface:cs.getPropertyValue('--surface').trim(),inputBg:input.backgroundColor,inputColor:input.color};});
   expect(palette.bg).not.toBe('rgb(255, 255, 255)');expect(palette.inputBg).not.toBe('rgb(255, 255, 255)');expect(palette.inputBg).not.toBe(palette.inputColor);await page.keyboard.press('Escape');
   await page.locator('#regex-pattern').fill('item|(?=x)');await source(page,'item item x x');await runRegex(page);
   const styles=await page.locator('#regex-source').evaluate(node=>{
@@ -78,8 +78,8 @@ test('cancelled image batches retain completed duplicate names, file identity an
 });
 
 test('password row toggle names include their row and preserve independent visibility',async({page})=>{
-  await page.goto('/password.html');await page.locator('#password-batch').fill('3');await page.locator('#password-length').fill('256');await page.locator('#password-generate').click();const toggles=page.locator('[data-password-visible]');for(let i=0;i<3;i++)await expect(toggles.nth(i)).toHaveAccessibleName(`Show results · ${i+1}`);await toggles.nth(1).click();await expect(toggles.nth(1)).toHaveAccessibleName('Hide results · 2');expect(await page.locator('.password-result input').evaluateAll(nodes=>nodes.map(node=>node.type))).toEqual(['password','text','password']);
-  for(const row of await page.locator('.password-result').all())expect(await row.evaluate(node=>node.querySelector('.password-result-actions').getBoundingClientRect().bottom<=node.querySelector('input').getBoundingClientRect().top)).toBe(true);
+  await page.goto('/password.html');await page.locator('#password-batch').fill('3');await page.locator('#password-length').fill('256');await page.locator('#password-generate').click();const toggles=page.locator('[data-password-visible]');for(let i=0;i<3;i++)await expect(toggles.nth(i)).toHaveAccessibleName(`Show results · ${i+1}`);await toggles.nth(1).click();await expect(toggles.nth(1)).toHaveAccessibleName('Hide results · 2');expect(await page.locator('.password-result textarea').evaluateAll(nodes=>nodes.map(node=>node.dataset.visible==='true'?'text':'password'))).toEqual(['password','text','password']);
+  for(const row of await page.locator('.password-result').all())expect(await row.evaluate(node=>node.querySelector('.password-result-actions').getBoundingClientRect().bottom<=node.querySelector('textarea').getBoundingClientRect().top)).toBe(true);
 });
 
 test('all eight speed metrics use explicit translation keys and update when language changes',async({page})=>{

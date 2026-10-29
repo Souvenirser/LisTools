@@ -10,10 +10,10 @@ async function downloaded(page,button){const pending=page.waitForEvent('download
 test('password row visibility is independent and keeps the activated button focused',async({page})=>{
  await page.goto('/password.html');await page.locator('#password-batch').fill('3');await page.locator('#password-generate').click();
  const eye=page.locator('[data-password-visible="0"]');await eye.click();await expect(eye).toBeFocused();
- await page.locator('#password-show').click();await expect(page.locator('.password-result input[type=text]')).toHaveCount(3);
+ await page.locator('#password-show').click();await expect(page.locator('.password-result textarea[data-visible=true]')).toHaveCount(3);
  const second=page.locator('[data-password-visible="1"]');await second.click();await expect(second).toBeFocused();
- expect(await page.locator('.password-result input').evaluateAll(nodes=>nodes.map(n=>n.type))).toEqual(['text','password','text']);
- await page.keyboard.press('Enter');expect(await page.locator('.password-result input').evaluateAll(nodes=>nodes.map(n=>n.type))).toEqual(['text','text','text']);
+ expect(await page.locator('.password-result textarea').evaluateAll(nodes=>nodes.map(n=>n.dataset.visible==='true'?'text':'password'))).toEqual(['text','password','text']);
+ await page.keyboard.press('Enter');expect(await page.locator('.password-result textarea').evaluateAll(nodes=>nodes.map(n=>n.dataset.visible==='true'?'text':'password'))).toEqual(['text','text','text']);
 });
 
 test('PDF importing refuses a second batch explicitly and preserves the first batch',async({page})=>{

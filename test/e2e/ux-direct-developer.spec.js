@@ -63,7 +63,7 @@ test('regex distinguishes no execution, zero matches and changed manual inputs',
 
 test('password Enter generates masked values and speed test discloses network use before start',async({page})=>{
   await page.goto('/password.html');await selectLanguage(page,'en');await page.locator('#password-length').fill('24');await page.locator('#password-length').press('Enter');
-  await expect(page.locator('#password-results input[type="password"]')).toHaveCount(1);
+  await expect(page.locator('#password-results textarea[data-visible="false"]')).toHaveCount(1);
   const external=[];page.on('request',request=>{if(/^https?:/.test(request.url())&&!request.url().startsWith('http://127.0.0.1:'))external.push(request.url());});
   await page.goto('/speedtest.html');await selectLanguage(page,'en');expect(external).toEqual([]);await expect(page.locator('#speed-network-notice')).toBeVisible();await expect(page.locator('#speed-budget')).toBeVisible();
   const positions=await page.locator('#speed-network-notice,#speed-start').evaluateAll(nodes=>nodes.map(node=>node.getBoundingClientRect().top));expect(positions[0]).toBeLessThan(positions[1]);
