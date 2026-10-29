@@ -2,8 +2,9 @@ import { Temporal } from 'temporal-polyfill/implementation';
 const fail=code=>{throw Object.assign(new RangeError(code),{code:`dates.${code}`,params:{}});};
 function date(value) {
   if(!/^\d{4}-\d{2}-\d{2}$/.test(String(value))) fail('invalidDate');
-  try { return Temporal.PlainDate.from(value,{overflow:'reject'}); } catch { fail('invalidDate'); }
+  try { const result=Temporal.PlainDate.from(value,{overflow:'reject'});if(result.year<1)fail('invalidDate');return result; } catch { fail('invalidDate'); }
 }
+function supported(result){if(result.year<1||result.year>9999)fail('outOfRange');return result;}
 export function difference(start,end,inclusive=false) {
   const a=date(start),b=date(end),direction=Temporal.PlainDate.compare(a,b)>0?-1:1;
   const adjusted=inclusive?b.add({days:direction}):b;
@@ -12,7 +13,7 @@ export function difference(start,end,inclusive=false) {
 }
 export function shiftDate(start,amount,unit) {
   if(String(amount).trim()===''||!['days','weeks','months','years'].includes(unit)||!Number.isSafeInteger(Number(amount))||Math.abs(Number(amount))>1000000) fail('invalidAmount');
-  try {return date(start).add({[unit]:Number(amount)},{overflow:'constrain'}).toString();} catch(error) {if(error.code)throw error;fail('outOfRange');}
+  try {return supported(date(start).add({[unit]:Number(amount)},{overflow:'constrain'})).toString();} catch(error) {if(error.code)throw error;fail('outOfRange');}
 }
 export function parseDateList(value) {return String(value).split(/[\s,;]+/).filter(Boolean).map(value=>date(value).toString());}
 export function businessDays(start,end,{off=[],work=[],inclusive=false}={}) {
@@ -39,5 +40,5 @@ export function dateMilestone(origin,reference) {
   const years=b.year-a.year-(Temporal.PlainDate.compare(anniversary,b)>0?1:0);
   let next=anniversary;
   if(Temporal.PlainDate.compare(next,b)<0) next=a.with({year:b.year+1},{overflow:'constrain'});
-  return {years,next:next.toString(),days:b.until(next,{largestUnit:'days'}).days};
+  return {years,next:supported(next).toString(),days:b.until(next,{largestUnit:'days'}).days};
 }
