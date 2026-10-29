@@ -1,3 +1,4 @@
+import {mountHorizontalReader} from './tools/shared/horizontal-reader.js';
 import {registerContentCheck} from './tools/shared/content-state.js';
 import { initTool, $, clearStatus, setStatus, showError, taskRunner } from './tools/shared/office.js';
 import { copyText } from './tools/shared/page.js';
@@ -189,3 +190,5 @@ $('angle-unit').closest('.calculator-angle').hidden=true;
 const functionHelp=document.querySelector('.calculator-workbench details:has([data-i18n="calculator.functionHelp"])');functionHelp.append($('calculator-precision'));infoDetails.append(functionHelp);
 infoDetails.append($('expression-hint'));
 
+
+const resultScroll=mountHorizontalReader($('result'),{label:()=>t('calculator.result'),host:document.querySelector('.calculator-result-value'),compact:true});resultScroll.controls.id='calculator-result-scroll';

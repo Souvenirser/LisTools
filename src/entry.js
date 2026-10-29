@@ -1,5 +1,5 @@
 // Keep the first visible document in its final language, route and layout.
-const entries=import.meta.glob(['./main.js','./diff.js','./convert.js','./timestamp.js','./cron.js','./regex.js','./password.js','./calculator.js','./dates.js','./units.js','./money.js','./draw.js','./timer.js','./text.js','./qr.js','./images.js','./pdf.js','./speedtest.js','./popup.js','./support.js']);
+const entries=import.meta.glob(['./main.js','./diff.js','./convert.js','./timestamp.js','./cron.js','./regex.js','./password.js','./calculator.js','./dates.js','./units.js','./money.js','./draw.js','./timer.js','./text.js','./qr.js','./images.js','./pdf.js','./speedtest.js','./popup.js']);
 try {
   if(document.body.dataset.entry!=='popup')await import('./style.css');
   await entries[`./${document.body.dataset.entry}.js`]();
