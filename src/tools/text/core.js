@@ -18,10 +18,11 @@ const patterns={
 function extractedUrl(match,input){
  let value=match.value;
  if(input[match.index-1]==='<'&&input[match.end]==='>')return value;
- if(input.slice(Math.max(0,match.index-2),match.index)===']('){
+ const opening=input[match.index-1],closing={'(':')','（':'）','[':']','【':'】'}[opening];
+ if(closing){
   let balance=0;for(let index=0;index<value.length;index++){
-   if(value[index]==='(')balance++;
-   else if(value[index]===')'){if(balance===0)return value.slice(0,index);balance--;}
+   if(value[index]===opening)balance++;
+   else if(value[index]===closing){if(balance===0)return value.slice(0,index);balance--;}
   }
  }
  const punctuation=/[.,;:!?，。；：！？、]+$/u,question=value.indexOf('?');
