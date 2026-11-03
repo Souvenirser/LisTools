@@ -257,7 +257,7 @@ $('regex-run').removeAttribute('data-zh');$('regex-run').removeAttribute('data-e
 
 regexHelp.append($('regex-example'));
 
-const rulesPanel=$('regex-rule-list').closest('section');rulesPanel.id='regex-rules-panel';rulesPanel.setAttribute('popover','auto');document.body.append(rulesPanel);const rulesOpen=document.createElement('button');rulesOpen.id='regex-rules-open';rulesOpen.type='button';rulesOpen.setAttribute('popovertarget',rulesPanel.id);rulesOpen.dataset.i18n='ux.commonRules';rulesOpen.textContent=t('ux.commonRules');commonFlags.append(rulesOpen);rulesPanel.addEventListener('toggle',event=>{if(event.newState==='open'){rulesPanel.querySelector('details').open=true;$('regex-rule-search').focus();}});
+const rulesPanel=$('regex-rule-list').closest('section');rulesPanel.id='regex-rules-panel';rulesPanel.setAttribute('popover','auto');document.body.append(rulesPanel);const rulesOpen=document.createElement('button');rulesOpen.id='regex-rules-open';rulesOpen.type='button';rulesOpen.setAttribute('popovertarget',rulesPanel.id);rulesOpen.dataset.i18n='ux.commonRules';rulesOpen.textContent=t('ux.commonRules');commonFlags.append(rulesOpen);rulesPanel.addEventListener('beforetoggle',event=>{if(event.newState==='open')rulesPanel.querySelector('details').open=true;});rulesPanel.addEventListener('toggle',event=>{if(event.newState==='open')$('regex-rule-search').focus({preventScroll:true});});
 const textLink=document.createElement('a');textLink.href='./text.html#extract';textLink.dataset.i18n='ux.openTextTool';textLink.textContent=t('ux.openTextTool');textLink.className='tool-note';rulesPanel.prepend(textLink);
 
 const regexGrid=$('regex-source').closest('.tool-grid');regexGrid.classList.add('editor-workspace');

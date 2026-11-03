@@ -38,7 +38,7 @@ html body .cm-editor .cm-content:focus-visible{outline:none}
 #source .cm-content{min-height:100%}
 .input-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 #json-edit::after{content:' ▾';font-size:.8em}
-#json-edit-menu{position:fixed;inset:auto;margin:0;min-width:160px;padding:6px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);box-shadow:0 6px 20px #0003}
+#json-edit-menu{position:fixed;inset:auto;margin:0;min-width:160px;max-width:calc(100vw - 16px);max-height:calc(100dvh - 16px);overflow:auto;padding:6px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);box-shadow:0 6px 20px #0003}
 #json-edit-menu button{display:block;width:100%;text-align:start;border:0;min-height:44px;background:transparent}
 #json-edit-menu button:hover:enabled{background:var(--subtle)}
 #json-edit-menu:popover-open,#tool-menu:popover-open,#recent-tools:popover-open,#workbench-settings[open]{animation:panel-arrive .12s ease-out}
