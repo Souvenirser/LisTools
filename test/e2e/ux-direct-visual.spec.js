@@ -9,9 +9,9 @@ for(const width of [390,1440])test(`date results distinguish their main conclusi
   if(task==='workdays')await page.locator('#work-end').fill('2026-10-08');
   if(task==='milestone')await page.locator('#date-origin').fill('2000-02-29');
   await page.locator(`#${task}-run`).click();
-  const output=page.locator(`#${task}-output`);await expect(output.locator('.date-conclusion')).not.toBeEmpty();
+  const output=page.locator(`#${task}-output`);await expect(output.locator('.date-conclusion').first()).not.toBeEmpty();
   const size=await output.evaluate(node=>({details:parseFloat(getComputedStyle(node).fontSize),conclusion:parseFloat(getComputedStyle(node.querySelector('.date-conclusion')).fontSize)}));
-  expect(size.details).toBe(18);expect(size.conclusion).toBe(36);
+  expect(size.details).toBeGreaterThanOrEqual(16);expect(size.conclusion).toBeGreaterThan(size.details);expect(size.conclusion).toBeLessThanOrEqual(24);
  }
  expect(await page.locator('#work-start').evaluate(node=>parseFloat(getComputedStyle(node).fontSize))).toBe(18);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);

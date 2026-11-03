@@ -13,7 +13,7 @@ import './tools/calculator/style.css';
 import './timestamp-style.css';
 import {addTaskGuide} from './tools/shared/task-guide.js';
 
-const field=(id,key,type='date')=>`<div class="field"><label for="${id}" data-i18n="dates.${key}"></label><input id="${id}" type="${type}" dir="ltr" ${type==='date'?'min="0001-01-01" max="9999-12-31"':''}></div>`;
+const field=(id,key,type='date')=>`<div class="field"><label for="${id}" data-i18n="${key==='end'?'experience.endDate':'dates.'+key}"></label><input id="${id}" type="${type}" dir="ltr" ${type==='date'?'min="0001-01-01" max="9999-12-31"':''}></div>`;
 const actions=id=>`<div class="tool-actions"><button id="${id}-run" class="primary" data-i18n="dates.calculate"></button><button id="${id}-copy" data-i18n="common.copyAll" hidden disabled></button></div><output id="${id}-output" class="tool-output" aria-live="polite"></output>`;
 initTool('dates',`<div class="tool-grid">
 <section class="tool-card"><h2 data-i18n="dates.difference"></h2><div class="tool-fields">${field('date-start','start')}${field('date-end','end')}</div><label class="check-label"><input id="date-inclusive" type="checkbox"><span data-i18n="dates.inclusive"></span></label><div class="tool-actions"><button id="date-today-start" data-i18n="dates.todayStart"></button><button id="date-today-end" data-i18n="dates.todayEnd"></button></div><p class="tool-note" data-i18n="direct.daily.countdownHelp"></p>${actions('difference')}</section>
@@ -53,7 +53,7 @@ function timeRows(date,label){
  if(label)block.append(node('h3','date-time-heading',label));
  if(result.status!=='ready'){const message=node('p','date-time-error',result.code==='timestamp.ambiguous'?t('reading.transitionError'):errorText(result));message.dataset.timeError='';block.append(message);return block;}
  const list=node('dl');
- function row(field,key){const label=t(key),value=result[field],element=node('div','date-value-row'),output=node('dd','',value);output.dir='ltr';output.dataset.timeField=field;element.append(node('dt','',label),output,copyButton(label,value));list.append(element);}
+ function row(field,key){const label=t(key),value=node('bdi','date-time-value',result[field]),element=node('div','date-value-row'),output=node('dd');value.dir='ltr';value.dataset.timeField=field;output.append(value,copyButton(label,result[field]));element.append(node('dt','',label),output);list.append(element);}
  row('localTime','timestamp.date');const context=node('p','date-detail',`${result.timeZone} · UTC${result.offset}`);context.dir='ltr';block.append(context,list);
  row('seconds','timestamp.seconds');row('milliseconds','timestamp.milliseconds');
  const details=node('details'),summary=node('summary','',t('reading.otherFormats')),extra=node('dl');details.append(summary,extra);block.append(details);
@@ -62,7 +62,7 @@ function timeRows(date,label){
 function renderTimes(id){
  const host=$(id+'-times');if(!host)return;const open=[...host.querySelectorAll('details')].map(element=>element.open);host.replaceChildren();const result=results[id];if(!result)return;
  if(['difference','workdays'].includes(id))host.append(node('p','tool-note',t('reading.intervalTimeHelp')));
- for(const item of result.dates)host.append(timeRows(item.date,['result','next'].includes(item.key)?'':t('dates.'+item.key)));
+ for(const item of result.dates)host.append(timeRows(item.date,['result','next'].includes(item.key)?'':t(item.key==='end'?'experience.endDate':'dates.'+item.key)));
  [...host.querySelectorAll('details')].forEach((element,index)=>{element.open=Boolean(open[index]);});
 }
 function render(id){
@@ -94,9 +94,10 @@ for(const [index,card]of dateCards.entries()){
  output.append(node('h2','',t('common.result')),$(id+'-output'),$(id+'-copy'));mountResultShortcut(actions,output,()=>Boolean(results[id]));
  if(id==='workdays'){const details=node('details');details.append(node('summary','',`${t('dates.off')} / ${t('dates.work')}`),$('date-off').closest('.field'),$('date-work').closest('.field'));actions.before(details);}
  const form=submitForm(input,$(id+'-run'));
- const calculate=(focus=false)=>{statuses[id]=undefined;try{results[id]=calculateDateResult(id,readInput(id));}catch(error){results[id]=undefined;statuses[id]={error,field:errorField(id,error)};}render(id);renderStatus(focus);};
+ const unchanged=()=>results[id]&&JSON.stringify(results[id].input)===JSON.stringify(readInput(id));
+ const calculate=(focus=false)=>{if(unchanged()){renderStatus(focus);return;}statuses[id]=undefined;try{results[id]=calculateDateResult(id,readInput(id));}catch(error){results[id]=undefined;statuses[id]={error,field:errorField(id,error)};}render(id);renderStatus(focus);};
  $(id+'-run').addEventListener('click',()=>{dateEngaged=true;calculate(true);});$(id+'-copy').onclick=()=>copyText(summary(id));
- form.addEventListener('input',()=>{dateEngaged=true;const stale=Boolean(results[id]||statuses[id]?.stale);results[id]=undefined;statuses[id]=stale?{stale:true}:undefined;render(id);renderStatus();});
+ form.addEventListener('input',()=>{dateEngaged=true;if(unchanged())return;const stale=Boolean(results[id]||statuses[id]?.stale);results[id]=undefined;statuses[id]=stale?{stale:true}:undefined;render(id);renderStatus();});
  const required={difference:['date-start','date-end'],shift:['date-base','date-amount'],milestone:['date-origin','date-reference'],workdays:['work-start','work-end']}[id];
  dateAutos.set(id,bindAutoRun(form,()=>calculate(false),{button:$(id+'-run'),canRun:()=>dateTask===id&&required.every(name=>$(name).value&&$(name).validity.valid)&&(id!=='workdays'||new TextEncoder().encode($('date-off').value+$('date-work').value).length<=256*1024)}));
 }

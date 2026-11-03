@@ -26,11 +26,27 @@ for(const [name,command]of editCommands){const button=document.createElement('bu
 document.querySelector('.input-actions').prepend(editButton,copyInput);document.body.append(editMenu);
 function refreshEditActions(){copyInput.disabled=!sourceEditor.view.state.doc.length;for(const[name,,available]of editCommands)document.getElementById('json-edit-'+name).disabled=!available(sourceEditor.view.state);}
 sourceEditor.view.dispatch({effects:StateEffect.appendConfig.of(EditorView.updateListener.of(refreshEditActions))});
-editMenu.addEventListener('toggle',()=>{const open=editMenu.matches(':popover-open');editButton.setAttribute('aria-expanded',String(open));if(open){refreshEditActions();const box=editButton.getBoundingClientRect();editMenu.style.top=`${Math.min(box.bottom+4,innerHeight-editMenu.offsetHeight-8)}px`;editMenu.style.left=`${Math.max(8,Math.min(box.left,innerWidth-editMenu.offsetWidth-8))}px`;}});
+let editFrame,focusEditItem=false;
+function positionEditMenu(){
+ const box=editButton.getBoundingClientRect(),height=editMenu.offsetHeight;
+ const top=box.bottom+4+height<=innerHeight-8?box.bottom+4:box.top-height-4;
+ editMenu.style.top=`${Math.max(8,Math.min(top,innerHeight-height-8))}px`;
+ editMenu.style.left=`${Math.max(8,Math.min(box.left,innerWidth-editMenu.offsetWidth-8))}px`;
+}
+editMenu.addEventListener('beforetoggle',event=>{
+ cancelAnimationFrame(editFrame);
+ if(event.newState==='open'){
+  refreshEditActions();editMenu.style.visibility='hidden';
+  editFrame=requestAnimationFrame(()=>{if(!editMenu.matches(':popover-open'))return;positionEditMenu();editMenu.style.visibility='';if(focusEditItem)editMenu.querySelector('button:not(:disabled)')?.focus();focusEditItem=false;});
+ }else{editMenu.style.visibility='';focusEditItem=false;}
+});
+editMenu.addEventListener('toggle',()=>editButton.setAttribute('aria-expanded',String(editMenu.matches(':popover-open'))));
+const repositionEditMenu=()=>{if(editMenu.matches(':popover-open'))positionEditMenu();};
+addEventListener('resize',repositionEditMenu);document.addEventListener('scroll',repositionEditMenu,true);
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&editMenu.matches(':popover-open')){event.preventDefault();editMenu.hidePopover();editButton.focus({preventScroll:true});}});
 editMenu.addEventListener('keydown',event=>{if(['ArrowDown','ArrowUp','Home','End'].includes(event.key)){event.preventDefault();const items=[...editMenu.querySelectorAll('button:not(:disabled)')],index=items.indexOf(document.activeElement);const next=event.key==='Home'?0:event.key==='End'?items.length-1:index<0?0:(index+(event.key==='ArrowDown'?1:-1)+items.length)%items.length;items[next]?.focus();}});
-editButton.addEventListener('keydown',event=>{if(event.key==='ArrowDown'){event.preventDefault();editMenu.showPopover();refreshEditActions();editMenu.querySelector('button:not(:disabled)')?.focus();}});
-function translateEditActions(){for(const node of [editButton,copyInput,...editMenu.children])node.textContent=t(node.dataset.i18n);editMenu.setAttribute('aria-label',t('motion.edit'));}
+editButton.addEventListener('keydown',event=>{if(event.key==='ArrowDown'){event.preventDefault();if(editMenu.matches(':popover-open'))editMenu.querySelector('button:not(:disabled)')?.focus();else{focusEditItem=true;editMenu.showPopover();}}});
+function translateEditActions(){for(const node of [editButton,copyInput,...editMenu.children])node.textContent=t(node.dataset.i18n);editMenu.setAttribute('aria-label',t('motion.edit'));repositionEditMenu();}
 onLanguageChange(translateEditActions);translateEditActions();refreshEditActions();
 const resultButtons = document.querySelectorAll('[data-result]');
 const cancelButton=document.createElement('button');cancelButton.id='json-cancel';cancelButton.hidden=true;cancelButton.disabled=true;cancelButton.dataset.i18n='common.cancel';$('compact').after(cancelButton);

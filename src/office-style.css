@@ -149,7 +149,7 @@
 .text-page .text-workspace-controls .text-task-options{flex:0 1 auto;min-width:0;margin:0;max-width:760px}
 .text-page .text-task-options>.tool-fields{display:flex;flex-wrap:wrap;align-items:center}
 .text-page .text-task-options>.tool-fields>.field:has(>select){flex:0 1 auto;min-width:0;flex-direction:row;flex-wrap:wrap;align-items:center;gap:8px}
-.text-page .text-task-options [data-options=replace] .tool-fields{display:grid;grid-template-columns:repeat(2,minmax(180px,280px));align-items:start}
+.text-page .text-task-options [data-options=replace] .tool-fields{display:grid;grid-template-columns:repeat(2,minmax(0,280px));align-items:start}
 .text-page .text-task-options select{max-width:280px}
 .text-page #text-kind{width:240px;max-width:100%}
 .text-page #text-line-help{max-width:60ch;margin:0 0 16px}
@@ -211,7 +211,14 @@
 
 /* Keep field feedback below companion controls and announce it once visually. */
 .tool-status.sr-only{min-height:0;padding:0;margin:0}
-.dates-page .field>.field-error{order:1}
+.dates-page .date-task .task-form>.tool-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));align-items:start}
+.dates-page .date-task .task-form>.tool-fields>.field,.text-page .text-task-options [data-options=replace] .tool-fields>.field{display:grid;grid-template-rows:subgrid;grid-row:span 2;row-gap:6px;min-width:0}
+.dates-page .date-task .task-form>.tool-fields:has(.field-error)>.field,.dates-page .date-task .task-form>.tool-fields:has(#date-today-start)>.field,.text-page .text-task-options [data-options=replace] .tool-fields:has(.field-error)>.field{grid-row:span 3}
+.dates-page .date-task .task-form>.tool-fields:has(#date-today-start):has(.field-error)>.field{grid-row:span 4}
+.dates-page .date-task .task-form>.tool-fields>.field>label,.text-page .text-task-options [data-options=replace] .tool-fields>.field>label{grid-row:1}
+.dates-page .date-task .task-form>.tool-fields>.field>:is(input,select),.text-page .text-task-options [data-options=replace] .tool-fields>.field>input{grid-row:2}
+.dates-page .date-task .task-form>.tool-fields>.field>button{grid-row:3}
+.dates-page .date-task .task-form>.tool-fields>.field>.field-error,.text-page .text-task-options [data-options=replace] .tool-fields>.field>.field-error{grid-row:-2/-1}
 .qr-page .field:has(>#qr-size),.qr-page .field:has(>#qr-level){flex:0 1 auto;min-width:0;flex-direction:row;flex-wrap:wrap;align-items:center;gap:8px}
 .qr-page #qr-size{width:7rem}
 
@@ -251,13 +258,14 @@
  .text-page .text-workspace-controls>.workspace-action-fixed{display:grid;grid-template-rows:auto 44px;gap:6px}
  .text-page .text-workspace-controls>.workspace-action-fixed>.workspace-actions{grid-row:1;margin:0}
  .text-page .text-workspace-controls>.workspace-action-fixed>#tool-status{grid-row:2;min-height:44px;max-height:44px;margin:0;overflow:auto;padding:2px 10px;line-height:20px}
+ .text-page .text-workspace-controls>.workspace-action-fixed>#tool-status.sr-only{overflow:hidden}
 }
 
 .text-page .text-workspace-controls:has(.text-task-options>[data-options=mask]:not([hidden]))>.workspace-action-area{align-self:center}.text-page .text-auto-note{max-width:none}
 
-.dates-page .date-conclusion{font-size:1.5rem;font-weight:600;line-height:1.5;overflow-wrap:normal;margin:4px 0 12px}.dates-page .date-primary-value{display:inline-block;white-space:nowrap;font-size:1.5rem;line-height:1.5;font-variant-numeric:tabular-nums}.date-primary-label{display:block;color:var(--muted);font:400 .875rem/1.5 system-ui}.date-weekday{display:inline-block;margin-inline-start:8px;font:400 1rem/1.5 system-ui;color:var(--muted)}.date-condition,.date-detail{margin:8px 0;white-space:pre-line;font:400 1rem/1.6 system-ui;overflow-wrap:anywhere}.dates-page .date-result output{white-space:normal;font-family:inherit}.date-time-settings{padding:16px 0;margin-top:16px;border-top:1px solid var(--border)}.date-time-settings>.tool-fields{align-items:start;grid-template-columns:minmax(120px,1fr) minmax(0,2fr)}.date-time-settings .timezone-controls,.date-time-settings .choices{width:100%;max-width:100%;margin:0}.date-time-settings .timezone-controls .choices__inner{height:auto;min-height:44px}.date-time-settings .field{min-width:0}.date-time-settings .tool-note{margin-bottom:0}
-.date-time-values{margin:12px 0;min-width:0}.date-time-heading{font:600 1rem/1.6 system-ui;margin:12px 0 4px}.date-value-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)}.date-value-row dt{grid-column:1/-1;color:var(--muted);font-size:.875rem}.date-value-row dd{margin:0;font:400 1rem/1.6 var(--mono);overflow-wrap:anywhere;min-width:0}.date-value-row button{grid-column:2;grid-row:2;justify-self:end;width:auto}.date-time-values details{margin-top:8px}.date-interval-times{margin-top:16px}.date-time-error{color:var(--error-text);font-size:.875rem;line-height:1.6;white-space:normal}.date-secondary-value{font:400 1rem/1.6 var(--mono)}
+.dates-page .date-conclusion{font-size:1.5rem;font-weight:600;line-height:1.5;overflow-wrap:normal;margin:4px 0 12px}.dates-page .date-primary-value{display:inline-block;white-space:nowrap;font-size:1.5rem;line-height:1.5;font-variant-numeric:tabular-nums}.date-primary-label{display:block;color:var(--muted);font:400 .875rem/1.5 system-ui}.date-weekday{display:inline-block;margin-inline-start:8px;font:400 1rem/1.5 system-ui;color:var(--muted)}.date-condition,.date-detail{margin:8px 0;white-space:pre-line;font:400 1rem/1.6 system-ui;overflow-wrap:anywhere}.dates-page .date-result output{white-space:normal;font-family:inherit}.date-time-settings{padding:16px 0;margin-top:16px;border-top:1px solid var(--border)}.date-time-settings>.tool-fields{display:grid;align-items:start;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}.date-time-settings .timezone-controls,.date-time-settings .choices{width:100%;max-width:100%;margin:0}.date-time-settings .timezone-controls .choices__inner{height:auto;min-height:44px}.date-time-settings .field{min-width:0}.date-time-settings .tool-note{margin-bottom:0}
+.date-time-values{margin:12px 0;min-width:0}.date-time-heading{font:600 1rem/1.6 system-ui;margin:12px 0 4px}.date-value-row{display:block;padding:8px 0;border-bottom:1px solid var(--border)}.date-value-row dt{grid-column:1/-1;color:var(--muted);font-size:.875rem}.date-value-row dd{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:4px 0 0;font:400 1rem/1.6 var(--mono);overflow-wrap:anywhere;min-width:0}.date-time-value{flex:1 1 160px;min-width:0;overflow-wrap:anywhere}.date-value-row button{flex:0 0 auto;width:auto}.date-time-values details{margin-top:8px}.date-interval-times{margin-top:16px}.date-time-error{color:var(--error-text);font-size:.875rem;line-height:1.6;white-space:normal}.date-secondary-value{font:400 1rem/1.6 var(--mono)}
 .units-page #unit-primary{font:400 1rem/1.6 system-ui;margin:0;padding:0}.unit-primary-row{margin:12px 0;min-width:0}.unit-primary-row>label{font-size:.875rem;color:var(--muted)}.unit-source-value,.unit-target-value{display:block;font:400 1rem/1.6 var(--mono);min-width:0;padding:8px 0}.unit-target-value{font-size:1.5rem;font-weight:600}.unit-equation-status{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
-@media(max-width:760px){.dates-page .date-primary-value,.dates-page .date-conclusion{font-size:1.375rem}.date-time-settings>.tool-fields{grid-template-columns:minmax(0,1fr)}.date-value-row{grid-template-columns:minmax(0,1fr)}.date-value-row button{grid-column:1;grid-row:auto;justify-self:start}.unit-target-value{font-size:1.375rem}}
+@media(max-width:760px){.dates-page .date-primary-value,.dates-page .date-conclusion{font-size:1.375rem}.date-time-settings>.tool-fields{grid-template-columns:minmax(0,1fr)}.unit-target-value{font-size:1.375rem}}
 .date-conclusion>button{margin-inline-start:8px;vertical-align:middle}.date-time-values dl{margin:0}.date-value-row{padding-block:6px}.date-time-settings{margin-top:20px}.date-time-settings .timezone-controls .choices{width:100%}
 .unit-primary-row>.unit-value-label{display:block;font-size:.875rem;color:var(--muted)}

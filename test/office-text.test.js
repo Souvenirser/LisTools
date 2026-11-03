@@ -31,3 +31,16 @@ test('operation summaries use full processed content without changing exports',a
  const replace=await processText({input:'a.a.a',operation:'replace',find:'.',replacement:'-'});assert.equal(replace.summary.replacements,2);
  const mask=await processText({input:'13812345678',operation:'mask',phone:true});assert.equal(mask.summary.masked,1);
 });
+test('URL extraction removes contextual wrappers but preserves URL punctuation and balanced paths',async()=>{
+ for(const [input,expected]of [
+  ['请参考 (https://e.test/help)。','https://e.test/help'],
+  ['请参考（https://e.test/help）。','https://e.test/help'],
+  ['(https://e.test/a_(b))','https://e.test/a_(b)'],
+  ['[手册](https://e.test/a_(b))','https://e.test/a_(b)'],
+  ['https://e.test/a(b).','https://e.test/a(b)'],
+  ['https://e.test/?q=a,b.','https://e.test/?q=a,b.'],
+  ['https://e.test/#part).','https://e.test/#part).'],
+  ['https://e.test/a%29','https://e.test/a%29'],
+  ['<https://e.test/a).>','https://e.test/a).']
+ ]){const result=await processText({input,operation:'extract',kind:'url'});assert.equal(result.preview,expected,input);assert.equal(await result.blob.text(),expected,input);}
+});

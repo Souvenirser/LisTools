@@ -16,6 +16,7 @@ async function sampleGeometry(page){
 }
 for(const theme of ['light','dark'])for(const viewport of [{width:1440,height:900},{width:390,height:844}])test(`repeated text runs keep every rendered control position stable in ${theme} at ${viewport.width}px`,async({page},testInfo)=>{
  await page.setViewportSize(viewport);await page.addInitScript(theme=>{localStorage.setItem('listools-language','en');localStorage.setItem('listools-preferences-v1',JSON.stringify({version:1,theme}));},theme);await delayTextWorker(page);await page.goto('/text.html');
+ await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');
  // Preload source without scheduling auto-run; this case measures explicit repeated clicks.
  await page.locator('#text-run').scrollIntoViewIfNeeded();await page.locator('#text-input').evaluate(node=>{node.value='Alice\nBob\nAlice';});await sampleGeometry(page);
  const reader=await page.locator('#text-input').boundingBox();expect(reader.height).toBeGreaterThanOrEqual(240);if(viewport.width===390){const area=await page.locator('.workspace-action-area').boundingBox();expect(Math.min(viewport.height,area.y)-Math.max(0,reader.y),'visible input height').toBeGreaterThanOrEqual(120);}

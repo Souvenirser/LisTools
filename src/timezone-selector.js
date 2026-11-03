@@ -40,7 +40,8 @@ export function mountTimeZoneSelector(select,{t,language,labelId='timezone-capti
     metadata=new Map(entries.map(entry=>[entry.value,entry.meta]));
     choices.setChoices(entries,'value','label',true,true,true);
     control.dir=document.documentElement.dir;
-    control.setAttribute('aria-describedby',select.getAttribute('aria-describedby'));
+    const description=select.getAttribute('aria-describedby');
+    if(description)control.setAttribute('aria-describedby',description);else control.removeAttribute('aria-describedby');
     select.setAttribute('aria-label',t('timestamp.zone'));
     search.placeholder=t('timestamp.zoneSearch');search.setAttribute('aria-label',t('timestamp.zoneSearch'));
   }

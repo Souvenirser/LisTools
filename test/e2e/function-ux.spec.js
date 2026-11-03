@@ -34,7 +34,7 @@ test('calculator starts at display zero without assigning Ans or history',async(
 
 test('date forms submit once with Enter and copy their calculation context',async({page})=>{
  await page.addInitScript(()=>{Object.defineProperty(navigator,'clipboard',{value:{writeText:async text=>{window.copiedText=text;}}});});
- await page.goto('/dates.html');await expect(page.locator('#date-origin')).toHaveValue('');await page.locator('#date-start').fill('2024-02-28');await page.locator('#date-end').fill('2024-03-01');await page.locator('#date-end').press('Enter');await expect(page.locator('#difference-output strong')).toContainText('2');await page.locator('#difference-copy').click();expect(await page.evaluate(()=>window.copiedText)).toContain('2024-02-28');expect(await page.evaluate(()=>window.copiedText)).toContain('2024-03-01');
+ await page.goto('/dates.html');await expect(page.locator('#date-origin')).toHaveValue('');await page.locator('#date-start').fill('2024-02-28');await page.locator('#date-end').fill('2024-03-01');await page.locator('#date-end').press('Enter');await expect(page.locator('#difference-output')).toContainText('Total days: 2');await page.locator('#difference-copy').click();expect(await page.evaluate(()=>window.copiedText)).toContain('2024-02-28');expect(await page.evaluate(()=>window.copiedText)).toContain('2024-03-01');
 });
 
 test('both unit directions offer searchable choices and retain precision on language changes',async({page})=>{
