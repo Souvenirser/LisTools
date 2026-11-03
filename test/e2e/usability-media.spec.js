@@ -39,7 +39,8 @@ test('regex request identity includes pattern, flags, task, replacement and extr
 
 test('regex popup and match states use legible dark theme tokens including zero-width markers',async({page})=>{
   await page.addInitScript(()=>localStorage.setItem('listools-preferences-v1',JSON.stringify({theme:'dark'})));await page.goto('/regex.html');await page.locator('#regex-rules-open').click();
-  const palette=await page.locator('#regex-rules-panel').evaluate(node=>{const cs=getComputedStyle(node),input=getComputedStyle(node.querySelector('textarea'));return {bg:cs.backgroundColor,surface:cs.getPropertyValue('--surface').trim(),inputBg:input.backgroundColor,inputColor:input.color};});
+  await expect(page.locator('#regex-rule-search')).toBeVisible();
+  const palette=await page.locator('#regex-rules-panel').evaluate(node=>{const cs=getComputedStyle(node),input=getComputedStyle(node.querySelector('#regex-rule-search'));return {bg:cs.backgroundColor,surface:cs.getPropertyValue('--surface').trim(),inputBg:input.backgroundColor,inputColor:input.color};});
   expect(palette.bg).not.toBe('rgb(255, 255, 255)');expect(palette.inputBg).not.toBe('rgb(255, 255, 255)');expect(palette.inputBg).not.toBe(palette.inputColor);await page.keyboard.press('Escape');
   await page.locator('#regex-pattern').fill('item|(?=x)');await source(page,'item item x x');await runRegex(page);
   const styles=await page.locator('#regex-source').evaluate(node=>{
