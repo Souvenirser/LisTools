@@ -5,13 +5,13 @@ import {normalizeMenuOrder,readMenuOrder,saveMenuOrder,readMenuExpanded,saveMenu
 test('menu preferences preserve valid order and append missing current tools',()=>{
  const order=normalizeMenuOrder({version:1,groups:['network','daily','network','removed'],items:{daily:['timer','calculator','timer','json','removed']}});
  assert.deepEqual(order.groups,['network','daily','files','developer']);
- assert.deepEqual(order.items.daily,['timer','calculator','dates','units','money','draw']);
+ assert.deepEqual(order.items.daily,['timer','calculator','dates','units','money','draw','insurance','tax']);
  assert.deepEqual(order.items.network,['speedtest','password']);
- assert.equal(Object.values(order.items).flat().length,19);
+ assert.equal(Object.values(order.items).flat().length,21);
 });
 test('invalid or incompatible preferences fall back without losing tools',()=>{
  for(const raw of [null,[],{version:9,groups:['network']},{version:1,groups:'bad',items:{daily:'bad'}}]){
-  const order=normalizeMenuOrder(raw);assert.deepEqual(order.groups,['daily','files','developer','network']);assert.equal(new Set(Object.values(order.items).flat()).size,19);
+  const order=normalizeMenuOrder(raw);assert.deepEqual(order.groups,['daily','files','developer','network']);assert.equal(new Set(Object.values(order.items).flat()).size,21);
  }
 });
 test('saving stores IDs only and denied storage keeps a usable in-memory preference',()=>{

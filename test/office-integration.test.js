@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { pages } from '../src/tools/shared/navigation.js';
 import { pageConnectPolicy } from '../src/tools/shared/policy.js';
 
-const added=['calculator','dates','qr','images','text','units','money','pdf','draw','timer'];
+const added=['calculator','dates','qr','images','text','units','money','pdf','draw','timer','insurance','tax'];
 test('retired recruiting tools are removed from the shared catalog',()=>{
   assert.ok(!pages.some(page=>['interview','experience','salary'].includes(page.id)));
 });
@@ -19,8 +19,8 @@ test('all ten office tools are independent offline extension entries',()=>{
     assert.ok(html.includes('/src/entry.js'));
     assert.ok(readFileSync(new URL('../src/entry.js',import.meta.url),'utf8').includes(`'./${id}.js'`));
   }
-  assert.equal(pages.filter(page=>!page.file.includes('#')).length,18);
-  assert.equal(pages.length,19);
+  assert.equal(pages.filter(page=>!page.file.includes('#')).length,20);
+  assert.equal(pages.length,21);
 });
 test('new tool metadata remains algorithm-free so legacy pages do not eagerly load new libraries',()=>{
   const navigation=readFileSync(new URL('../src/tools/shared/navigation.js',import.meta.url),'utf8');
