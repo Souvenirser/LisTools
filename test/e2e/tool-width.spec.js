@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 import {pages} from '../../src/tools/shared/navigation.js';
 import {selectLanguage} from './language-helpers.js';
-const maxima={timestamp:1600,speedtest:1920,cron:1600,password:1120,calculator:804,dates:1120,qr:1600,images:1600,units:1120,money:1120,pdf:1600,draw:1440,timer:960};
+const maxima={insurance:1120,tax:1120,timestamp:1600,speedtest:1920,cron:1600,password:1120,calculator:804,dates:1120,qr:1600,images:1600,units:1120,money:1120,pdf:1600,draw:1440,timer:960};
 test('workspaces use task-sized columns and readable controls on wide screens',async({page})=>{
  await page.setViewportSize({width:2560,height:1440});
  for(const tool of pages.filter(tool=>!tool.file.includes('#'))){

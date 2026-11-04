@@ -55,6 +55,7 @@ test('popup height shrinks to its content and expanded lists scroll within the l
  const collapsed=await page.locator('body').evaluate(node=>node.getBoundingClientRect().height);expect(collapsed).toBeLessThan(550);
  const bottom=await page.locator('#popup-menu').evaluate(node=>node.getBoundingClientRect().bottom);expect(Math.abs(bottom-collapsed)).toBeLessThanOrEqual(1);
  for(const id of ['daily','files','developer','network'])await group(page,id).locator('summary').click();
+ await page.locator('#popup-menu').evaluate(async menu=>{await Promise.allSettled(menu.getAnimations({subtree:true}).map(animation=>animation.finished));});
  const expanded=await page.locator('body').evaluate(node=>node.getBoundingClientRect().height);expect(expanded).toBeGreaterThan(collapsed);expect(expanded).toBeLessThanOrEqual(560);
  await expect.poll(()=>page.locator('.tool-menu-scroll').evaluate(node=>node.scrollHeight-node.clientHeight)).toBeGreaterThan(0);
  await page.locator('.tool-menu-scroll').evaluate(node=>{node.scrollTop=node.scrollHeight;});await expect(page.locator('[data-tool-id="password"]')).toBeVisible();
@@ -67,12 +68,14 @@ test('a constrained popup keeps its footer visible and can grow again after coll
  const footer=page.locator('.tool-menu-footer'),list=page.locator('.tool-menu-scroll');
  const footerFits=()=>footer.evaluate(node=>node.getBoundingClientRect().bottom<=innerHeight+1);
  for(const id of ['daily','files','developer','network'])await group(page,id).locator('summary').click();
+ await page.locator('#popup-menu').evaluate(async menu=>{await Promise.allSettled(menu.getAnimations({subtree:true}).map(animation=>animation.finished));});
  await expect.poll(footerFits).toBe(true);await expect(page.locator('#app-version')).toBeVisible();
  await expect(footer.locator('.feedback-link')).toBeInViewport();
  await list.evaluate(node=>{node.scrollTop=node.scrollHeight;});await expect(page.locator('[data-tool-id="password"]')).toBeInViewport();
  await startMenuSorting(page);await expect.poll(footerFits).toBe(true);
  await page.locator('#menu-cancel').click();await expect.poll(footerFits).toBe(true);
  for(const id of ['network','developer','files','daily'])await group(page,id).locator('summary').click();
+ await page.locator('#popup-menu').evaluate(async menu=>{await Promise.allSettled(menu.getAnimations({subtree:true}).map(animation=>animation.finished));});
  const collapsed=await page.locator('body').evaluate(node=>node.getBoundingClientRect().height);
  await page.setViewportSize({width:360,height:900});
  await group(page,'developer').locator('summary').click();
