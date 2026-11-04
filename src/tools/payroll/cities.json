@@ -1,0 +1,3976 @@
+{
+  "version": "2026-11-03",
+  "cities": [
+    {
+      "id": "beijing",
+      "name": "北京",
+      "province": "北京",
+      "search": "北京 北京 Beijing Peking",
+      "upstream": {
+        "repository": "weante/city-salary",
+        "version": "1.1.0",
+        "commit": "8abd9cdd797aab008d410feb5690d4ee072d33cc",
+        "path": "skills/city-salary/assets/calculator.html",
+        "license": "MIT"
+      },
+      "periods": [
+        {
+          "items": [
+            {
+              "id": "pension",
+              "min": "7270",
+              "max": "36348",
+              "employee": "0.08",
+              "employer": "0.16",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "verified",
+              "sources": [
+                {
+                  "url": "https://banshi.beijing.gov.cn/zcjd/202608/t20260831_428682.html",
+                  "title": "京人社发〔2026〕7号：2026社保缴费基数"
+                },
+                {
+                  "url": "https://sw.beijing.gov.cn/zwxx/swxx/202605/P020260512520283489932.pdf",
+                  "title": "北京市商务局2026投资服务：社会保险费率"
+                },
+                {
+                  "url": "https://www.beijing.gov.cn/fwcj/jiage/zxfb/69c68d72e6316310852dceac.html",
+                  "title": "北京市2026住房公积金缴存标准"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": "2026-11-03",
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "medical",
+              "min": "7270",
+              "max": "36348",
+              "employee": "0.02",
+              "employer": "0.098",
+              "employeeFixed": "3",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "verified",
+              "sources": [
+                {
+                  "url": "https://banshi.beijing.gov.cn/zcjd/202608/t20260831_428682.html",
+                  "title": "京人社发〔2026〕7号：2026社保缴费基数"
+                },
+                {
+                  "url": "https://sw.beijing.gov.cn/zwxx/swxx/202605/P020260512520283489932.pdf",
+                  "title": "北京市商务局2026投资服务：社会保险费率"
+                },
+                {
+                  "url": "https://www.beijing.gov.cn/fwcj/jiage/zxfb/69c68d72e6316310852dceac.html",
+                  "title": "北京市2026住房公积金缴存标准"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": "2026-11-03",
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "unemployment",
+              "min": "7270",
+              "max": "36348",
+              "employee": "0.005",
+              "employer": "0.005",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "verified",
+              "sources": [
+                {
+                  "url": "https://banshi.beijing.gov.cn/zcjd/202608/t20260831_428682.html",
+                  "title": "京人社发〔2026〕7号：2026社保缴费基数"
+                },
+                {
+                  "url": "https://sw.beijing.gov.cn/zwxx/swxx/202605/P020260512520283489932.pdf",
+                  "title": "北京市商务局2026投资服务：社会保险费率"
+                },
+                {
+                  "url": "https://www.beijing.gov.cn/fwcj/jiage/zxfb/69c68d72e6316310852dceac.html",
+                  "title": "北京市2026住房公积金缴存标准"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": "2026-11-03",
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "maternity",
+              "min": "7270",
+              "max": "36348",
+              "employee": "0",
+              "employer": "0",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "verified",
+              "sources": [
+                {
+                  "url": "https://banshi.beijing.gov.cn/zcjd/202608/t20260831_428682.html",
+                  "title": "京人社发〔2026〕7号：2026社保缴费基数"
+                },
+                {
+                  "url": "https://sw.beijing.gov.cn/zwxx/swxx/202605/P020260512520283489932.pdf",
+                  "title": "北京市商务局2026投资服务：社会保险费率"
+                },
+                {
+                  "url": "https://www.beijing.gov.cn/fwcj/jiage/zxfb/69c68d72e6316310852dceac.html",
+                  "title": "北京市2026住房公积金缴存标准"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": "2026-11-03",
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "mergedInto": "medical"
+            },
+            {
+              "id": "injury",
+              "min": "7270",
+              "max": "36348",
+              "employee": "0",
+              "employer": "0.002",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "verified",
+              "sources": [
+                {
+                  "url": "https://banshi.beijing.gov.cn/zcjd/202608/t20260831_428682.html",
+                  "title": "京人社发〔2026〕7号：2026社保缴费基数"
+                },
+                {
+                  "url": "https://sw.beijing.gov.cn/zwxx/swxx/202605/P020260512520283489932.pdf",
+                  "title": "北京市商务局2026投资服务：社会保险费率"
+                },
+                {
+                  "url": "https://www.beijing.gov.cn/fwcj/jiage/zxfb/69c68d72e6316310852dceac.html",
+                  "title": "北京市2026住房公积金缴存标准"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": "2026-11-03",
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "estimated": true
+            },
+            {
+              "id": "housing",
+              "min": "2540",
+              "max": "36348",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "verified",
+              "sources": [
+                {
+                  "url": "https://banshi.beijing.gov.cn/zcjd/202608/t20260831_428682.html",
+                  "title": "京人社发〔2026〕7号：2026社保缴费基数"
+                },
+                {
+                  "url": "https://sw.beijing.gov.cn/zwxx/swxx/202605/P020260512520283489932.pdf",
+                  "title": "北京市商务局2026投资服务：社会保险费率"
+                },
+                {
+                  "url": "https://www.beijing.gov.cn/fwcj/jiage/zxfb/69c68d72e6316310852dceac.html",
+                  "title": "北京市2026住房公积金缴存标准"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": "2026-11-03",
+              "from": "2026-07",
+              "to": "2027-06",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12"
+            }
+          ]
+        },
+        {
+          "items": [
+            {
+              "id": "pension",
+              "min": "7162",
+              "max": "35811",
+              "employee": "0.08",
+              "employer": "0.16",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "verified",
+              "sources": [
+                {
+                  "url": "https://rsj.beijing.gov.cn/xxgk/2024zcwj/202509/t20250918_4204880.html",
+                  "title": "京人社发〔2025〕11号：2026上半年沿用基数"
+                },
+                {
+                  "url": "https://sw.beijing.gov.cn/zwxx/swxx/202605/P020260512520283489932.pdf",
+                  "title": "北京市商务局2026投资服务：社会保险费率"
+                }
+              ],
+              "verifiedAt": "2026-11-03",
+              "from": "2026-01",
+              "to": "2026-06",
+              "deductible": true
+            },
+            {
+              "id": "medical",
+              "min": "7162",
+              "max": "35811",
+              "employee": "0.02",
+              "employer": "0.098",
+              "employeeFixed": "3",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "verified",
+              "sources": [
+                {
+                  "url": "https://rsj.beijing.gov.cn/xxgk/2024zcwj/202509/t20250918_4204880.html",
+                  "title": "京人社发〔2025〕11号：2026上半年沿用基数"
+                },
+                {
+                  "url": "https://sw.beijing.gov.cn/zwxx/swxx/202605/P020260512520283489932.pdf",
+                  "title": "北京市商务局2026投资服务：社会保险费率"
+                }
+              ],
+              "verifiedAt": "2026-11-03",
+              "from": "2026-01",
+              "to": "2026-06",
+              "deductible": true
+            },
+            {
+              "id": "unemployment",
+              "min": "7162",
+              "max": "35811",
+              "employee": "0.005",
+              "employer": "0.005",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "verified",
+              "sources": [
+                {
+                  "url": "https://rsj.beijing.gov.cn/xxgk/2024zcwj/202509/t20250918_4204880.html",
+                  "title": "京人社发〔2025〕11号：2026上半年沿用基数"
+                },
+                {
+                  "url": "https://sw.beijing.gov.cn/zwxx/swxx/202605/P020260512520283489932.pdf",
+                  "title": "北京市商务局2026投资服务：社会保险费率"
+                }
+              ],
+              "verifiedAt": "2026-11-03",
+              "from": "2026-01",
+              "to": "2026-06",
+              "deductible": true
+            },
+            {
+              "id": "maternity",
+              "min": "7162",
+              "max": "35811",
+              "employee": "0",
+              "employer": "0",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "verified",
+              "sources": [
+                {
+                  "url": "https://rsj.beijing.gov.cn/xxgk/2024zcwj/202509/t20250918_4204880.html",
+                  "title": "京人社发〔2025〕11号：2026上半年沿用基数"
+                },
+                {
+                  "url": "https://sw.beijing.gov.cn/zwxx/swxx/202605/P020260512520283489932.pdf",
+                  "title": "北京市商务局2026投资服务：社会保险费率"
+                }
+              ],
+              "verifiedAt": "2026-11-03",
+              "from": "2026-01",
+              "to": "2026-06",
+              "deductible": true,
+              "mergedInto": "medical"
+            },
+            {
+              "id": "injury",
+              "min": "7162",
+              "max": "35811",
+              "employee": "0",
+              "employer": "0.002",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "verified",
+              "sources": [
+                {
+                  "url": "https://rsj.beijing.gov.cn/xxgk/2024zcwj/202509/t20250918_4204880.html",
+                  "title": "京人社发〔2025〕11号：2026上半年沿用基数"
+                },
+                {
+                  "url": "https://sw.beijing.gov.cn/zwxx/swxx/202605/P020260512520283489932.pdf",
+                  "title": "北京市商务局2026投资服务：社会保险费率"
+                }
+              ],
+              "verifiedAt": "2026-11-03",
+              "from": "2026-01",
+              "to": "2026-06",
+              "deductible": true,
+              "estimated": true
+            },
+            {
+              "id": "housing",
+              "min": "2540",
+              "max": "35811",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "verified",
+              "sources": [
+                {
+                  "url": "https://banshi.beijing.gov.cn/zcjd/202509/t20250925_428450_qjd.html",
+                  "title": "2025公积金年度（至2026-06-30）"
+                },
+                {
+                  "url": "https://sw.beijing.gov.cn/zwxx/swxx/202605/P020260512520283489932.pdf",
+                  "title": "北京市商务局2026投资服务：社会保险费率"
+                }
+              ],
+              "verifiedAt": "2026-11-03",
+              "from": "2026-01",
+              "to": "2026-06",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12"
+            }
+          ]
+        }
+      ],
+      "scope": "city-centre-employees",
+      "needsHukou": false,
+      "tiers": 0
+    },
+    {
+      "id": "shanghai",
+      "name": "上海",
+      "province": "上海",
+      "search": "上海 上海 Shanghai",
+      "upstream": {
+        "repository": "weante/city-salary",
+        "version": "1.1.0",
+        "commit": "8abd9cdd797aab008d410feb5690d4ee072d33cc",
+        "path": "skills/city-salary/assets/calculator.html",
+        "license": "MIT"
+      },
+      "periods": [
+        {
+          "items": [
+            {
+              "id": "pension",
+              "min": "7546",
+              "max": "37731",
+              "employee": "0.08",
+              "employer": "0.16",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "verified",
+              "sources": [
+                {
+                  "url": "https://rsj.sh.gov.cn/tgsgg_17341/20260818/t0035_1443203.html",
+                  "title": "上海市2026社保缴费基数"
+                },
+                {
+                  "url": "https://www.shanghai.gov.cn/gwk/search/content/921e047144694b61b6df8ca0c5ef2cfc",
+                  "title": "2026年继续阶段性降低职工医保费率"
+                },
+                {
+                  "url": "https://www.shanghai.gov.cn/gwk/affairs/content/0064@f3d788ec72e9404ebcbf3d27fda98435",
+                  "title": "沪公积金管委会〔2026〕3号"
+                },
+                {
+                  "url": "https://www.shanghai.gov.cn/nw17239/20260913/37398bbb63ad4fffa64e0b9deb0f6afc.html",
+                  "title": "上海市2026新就业形态服务指南：个人8%、2%、0.5%"
+                },
+                {
+                  "url": "https://rsj.sh.gov.cn/tjfbz_17568/20260127/t0035_1438278.html",
+                  "title": "2026工伤基准费率"
+                },
+                {
+                  "url": "https://rsj.sh.gov.cn/tdjjf_17554/20250120/t0035_1430072.html",
+                  "title": "单位养老16%，其他费率须结合后续有效期复核"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": "2026-11-03",
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "medical",
+              "min": "7546",
+              "max": "37731",
+              "employee": "0.02",
+              "employer": "0.09",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "verified",
+              "sources": [
+                {
+                  "url": "https://rsj.sh.gov.cn/tgsgg_17341/20260818/t0035_1443203.html",
+                  "title": "上海市2026社保缴费基数"
+                },
+                {
+                  "url": "https://www.shanghai.gov.cn/gwk/search/content/921e047144694b61b6df8ca0c5ef2cfc",
+                  "title": "2026年继续阶段性降低职工医保费率"
+                },
+                {
+                  "url": "https://www.shanghai.gov.cn/gwk/affairs/content/0064@f3d788ec72e9404ebcbf3d27fda98435",
+                  "title": "沪公积金管委会〔2026〕3号"
+                },
+                {
+                  "url": "https://www.shanghai.gov.cn/nw17239/20260913/37398bbb63ad4fffa64e0b9deb0f6afc.html",
+                  "title": "上海市2026新就业形态服务指南：个人8%、2%、0.5%"
+                },
+                {
+                  "url": "https://rsj.sh.gov.cn/tjfbz_17568/20260127/t0035_1438278.html",
+                  "title": "2026工伤基准费率"
+                },
+                {
+                  "url": "https://rsj.sh.gov.cn/tdjjf_17554/20250120/t0035_1430072.html",
+                  "title": "单位养老16%，其他费率须结合后续有效期复核"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": "2026-11-03",
+              "from": "2026-07",
+              "to": "2027-02",
+              "deductible": true
+            },
+            {
+              "id": "unemployment",
+              "min": "7546",
+              "max": "37731",
+              "employee": "0.005",
+              "employer": null,
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "verified",
+              "sources": [
+                {
+                  "url": "https://rsj.sh.gov.cn/tgsgg_17341/20260818/t0035_1443203.html",
+                  "title": "上海市2026社保缴费基数"
+                },
+                {
+                  "url": "https://www.shanghai.gov.cn/gwk/search/content/921e047144694b61b6df8ca0c5ef2cfc",
+                  "title": "2026年继续阶段性降低职工医保费率"
+                },
+                {
+                  "url": "https://www.shanghai.gov.cn/gwk/affairs/content/0064@f3d788ec72e9404ebcbf3d27fda98435",
+                  "title": "沪公积金管委会〔2026〕3号"
+                },
+                {
+                  "url": "https://www.shanghai.gov.cn/nw17239/20260913/37398bbb63ad4fffa64e0b9deb0f6afc.html",
+                  "title": "上海市2026新就业形态服务指南：个人8%、2%、0.5%"
+                },
+                {
+                  "url": "https://rsj.sh.gov.cn/tjfbz_17568/20260127/t0035_1438278.html",
+                  "title": "2026工伤基准费率"
+                },
+                {
+                  "url": "https://rsj.sh.gov.cn/tdjjf_17554/20250120/t0035_1430072.html",
+                  "title": "单位养老16%，其他费率须结合后续有效期复核"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": "2026-11-03",
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "maternity",
+              "min": "7546",
+              "max": "37731",
+              "employee": "0",
+              "employer": "0",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "verified",
+              "sources": [
+                {
+                  "url": "https://rsj.sh.gov.cn/tgsgg_17341/20260818/t0035_1443203.html",
+                  "title": "上海市2026社保缴费基数"
+                },
+                {
+                  "url": "https://www.shanghai.gov.cn/gwk/search/content/921e047144694b61b6df8ca0c5ef2cfc",
+                  "title": "2026年继续阶段性降低职工医保费率"
+                },
+                {
+                  "url": "https://www.shanghai.gov.cn/gwk/affairs/content/0064@f3d788ec72e9404ebcbf3d27fda98435",
+                  "title": "沪公积金管委会〔2026〕3号"
+                },
+                {
+                  "url": "https://www.shanghai.gov.cn/nw17239/20260913/37398bbb63ad4fffa64e0b9deb0f6afc.html",
+                  "title": "上海市2026新就业形态服务指南：个人8%、2%、0.5%"
+                },
+                {
+                  "url": "https://rsj.sh.gov.cn/tjfbz_17568/20260127/t0035_1438278.html",
+                  "title": "2026工伤基准费率"
+                },
+                {
+                  "url": "https://rsj.sh.gov.cn/tdjjf_17554/20250120/t0035_1430072.html",
+                  "title": "单位养老16%，其他费率须结合后续有效期复核"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": "2026-11-03",
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "mergedInto": "medical"
+            },
+            {
+              "id": "injury",
+              "min": "7546",
+              "max": "37731",
+              "employee": "0",
+              "employer": "0.002",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "verified",
+              "sources": [
+                {
+                  "url": "https://rsj.sh.gov.cn/tgsgg_17341/20260818/t0035_1443203.html",
+                  "title": "上海市2026社保缴费基数"
+                },
+                {
+                  "url": "https://www.shanghai.gov.cn/gwk/search/content/921e047144694b61b6df8ca0c5ef2cfc",
+                  "title": "2026年继续阶段性降低职工医保费率"
+                },
+                {
+                  "url": "https://www.shanghai.gov.cn/gwk/affairs/content/0064@f3d788ec72e9404ebcbf3d27fda98435",
+                  "title": "沪公积金管委会〔2026〕3号"
+                },
+                {
+                  "url": "https://www.shanghai.gov.cn/nw17239/20260913/37398bbb63ad4fffa64e0b9deb0f6afc.html",
+                  "title": "上海市2026新就业形态服务指南：个人8%、2%、0.5%"
+                },
+                {
+                  "url": "https://rsj.sh.gov.cn/tjfbz_17568/20260127/t0035_1438278.html",
+                  "title": "2026工伤基准费率"
+                },
+                {
+                  "url": "https://rsj.sh.gov.cn/tdjjf_17554/20250120/t0035_1430072.html",
+                  "title": "单位养老16%，其他费率须结合后续有效期复核"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": "2026-11-03",
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "estimated": true
+            },
+            {
+              "id": "housing",
+              "min": "2740",
+              "max": "37731",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "verified",
+              "sources": [
+                {
+                  "url": "https://rsj.sh.gov.cn/tgsgg_17341/20260818/t0035_1443203.html",
+                  "title": "上海市2026社保缴费基数"
+                },
+                {
+                  "url": "https://www.shanghai.gov.cn/gwk/search/content/921e047144694b61b6df8ca0c5ef2cfc",
+                  "title": "2026年继续阶段性降低职工医保费率"
+                },
+                {
+                  "url": "https://www.shanghai.gov.cn/gwk/affairs/content/0064@f3d788ec72e9404ebcbf3d27fda98435",
+                  "title": "沪公积金管委会〔2026〕3号"
+                },
+                {
+                  "url": "https://www.shanghai.gov.cn/nw17239/20260913/37398bbb63ad4fffa64e0b9deb0f6afc.html",
+                  "title": "上海市2026新就业形态服务指南：个人8%、2%、0.5%"
+                },
+                {
+                  "url": "https://rsj.sh.gov.cn/tjfbz_17568/20260127/t0035_1438278.html",
+                  "title": "2026工伤基准费率"
+                },
+                {
+                  "url": "https://rsj.sh.gov.cn/tdjjf_17554/20250120/t0035_1430072.html",
+                  "title": "单位养老16%，其他费率须结合后续有效期复核"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": "2026-11-03",
+              "from": "2026-07",
+              "to": "2027-06",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.07"
+            }
+          ]
+        }
+      ],
+      "scope": "city-centre-employees",
+      "needsHukou": false,
+      "tiers": 0
+    },
+    {
+      "id": "guangzhou",
+      "name": "广州",
+      "province": "广东",
+      "search": "广州 广东 Guangzhou Canton",
+      "upstream": {
+        "repository": "weante/city-salary",
+        "version": "1.1.0",
+        "commit": "8abd9cdd797aab008d410feb5690d4ee072d33cc",
+        "path": "skills/city-salary/assets/calculator.html",
+        "license": "MIT"
+      },
+      "periods": [
+        {
+          "items": [
+            {
+              "id": "pension",
+              "min": "5521",
+              "max": "27603",
+              "employee": "0.08",
+              "employer": "0.16",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "medical",
+              "min": "6234",
+              "max": "31170",
+              "employee": "0.02",
+              "employer": "0.06",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "unemployment",
+              "min": "2680",
+              "max": "42933",
+              "employee": "0.002",
+              "employer": "0.008",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "maternity",
+              "min": "6234",
+              "max": "31170",
+              "employee": "0",
+              "employer": "0",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "mergedInto": "medical"
+            },
+            {
+              "id": "injury",
+              "min": null,
+              "max": null,
+              "employee": "0",
+              "employer": "0.002",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "estimated": true
+            },
+            {
+              "id": "housing",
+              "min": "2680",
+              "max": "41697",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12"
+            }
+          ]
+        }
+      ],
+      "scope": "city-centre-employees",
+      "needsHukou": false,
+      "tiers": 0
+    },
+    {
+      "id": "shenzhen",
+      "name": "深圳",
+      "province": "广东",
+      "search": "深圳 广东 Shenzhen",
+      "upstream": {
+        "repository": "weante/city-salary",
+        "version": "1.1.0",
+        "commit": "8abd9cdd797aab008d410feb5690d4ee072d33cc",
+        "path": "skills/city-salary/assets/calculator.html",
+        "license": "MIT"
+      },
+      "periods": [
+        {
+          "items": [
+            {
+              "id": "pension",
+              "min": "5521",
+              "max": "27603",
+              "employee": "0.08",
+              "employer": "0.16",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://hsa.sz.gov.cn/fzlm/znts/cnyc/content/post_12568243.html",
+                  "title": "深圳医保局2026年度医保基数和费率"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "medical",
+              "min": "6727",
+              "max": "33633",
+              "employee": "0.02",
+              "employer": "0.06",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://hsa.sz.gov.cn/fzlm/znts/cnyc/content/post_12568243.html",
+                  "title": "深圳医保局2026年度医保基数和费率"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-01",
+              "to": "2026-12",
+              "deductible": true,
+              "tiers": [
+                {
+                  "employee": ".02",
+                  "employer": ".06"
+                },
+                {
+                  "employee": ".005",
+                  "employer": ".015"
+                }
+              ]
+            },
+            {
+              "id": "unemployment",
+              "min": "2700",
+              "max": "48471",
+              "employee": "0.002",
+              "employer": "0.008",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://hsa.sz.gov.cn/fzlm/znts/cnyc/content/post_12568243.html",
+                  "title": "深圳医保局2026年度医保基数和费率"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "maternity",
+              "min": "6727",
+              "max": "33633",
+              "employee": "0",
+              "employer": "0.005",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://hsa.sz.gov.cn/fzlm/znts/cnyc/content/post_12568243.html",
+                  "title": "深圳医保局2026年度医保基数和费率"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "injury",
+              "min": null,
+              "max": null,
+              "employee": "0",
+              "employer": "0.002",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://hsa.sz.gov.cn/fzlm/znts/cnyc/content/post_12568243.html",
+                  "title": "深圳医保局2026年度医保基数和费率"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "estimated": true
+            },
+            {
+              "id": "housing",
+              "min": "2520",
+              "max": "48471",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://hsa.sz.gov.cn/fzlm/znts/cnyc/content/post_12568243.html",
+                  "title": "深圳医保局2026年度医保基数和费率"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12"
+            }
+          ]
+        }
+      ],
+      "scope": "city-centre-employees",
+      "needsHukou": true,
+      "tiers": 2
+    },
+    {
+      "id": "hangzhou",
+      "name": "杭州",
+      "province": "浙江",
+      "search": "杭州 浙江 Hangzhou",
+      "upstream": {
+        "repository": "weante/city-salary",
+        "version": "1.1.0",
+        "commit": "8abd9cdd797aab008d410feb5690d4ee072d33cc",
+        "path": "skills/city-salary/assets/calculator.html",
+        "license": "MIT"
+      },
+      "periods": [
+        {
+          "items": [
+            {
+              "id": "pension",
+              "min": "5122",
+              "max": "25611",
+              "employee": "0.08",
+              "employer": "0.16",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "medical",
+              "min": "5122",
+              "max": "25611",
+              "employee": "0.02",
+              "employer": "0.095",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "unemployment",
+              "min": "5122",
+              "max": "25611",
+              "employee": "0.005",
+              "employer": "0.005",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "maternity",
+              "min": "5122",
+              "max": "25611",
+              "employee": "0",
+              "employer": "0",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "mergedInto": "medical"
+            },
+            {
+              "id": "injury",
+              "min": "5122",
+              "max": "25611",
+              "employee": "0",
+              "employer": "0.002",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "estimated": true
+            },
+            {
+              "id": "housing",
+              "min": "2660",
+              "max": "42151",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12"
+            }
+          ]
+        }
+      ],
+      "scope": "city-centre-employees",
+      "needsHukou": false,
+      "tiers": 0
+    },
+    {
+      "id": "nanjing",
+      "name": "南京",
+      "province": "江苏",
+      "search": "南京 江苏 Nanjing Nanking",
+      "upstream": {
+        "repository": "weante/city-salary",
+        "version": "1.1.0",
+        "commit": "8abd9cdd797aab008d410feb5690d4ee072d33cc",
+        "path": "skills/city-salary/assets/calculator.html",
+        "license": "MIT"
+      },
+      "periods": [
+        {
+          "items": [
+            {
+              "id": "pension",
+              "min": "5025",
+              "max": "25127",
+              "employee": "0.08",
+              "employer": "0.16",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.js.gov.cn/art/2026/10/9/art_60095_11839273.html",
+                  "title": "苏人社发〔2026〕30号：全省2026社保基数"
+                },
+                {
+                  "url": "https://gjj.nanjing.gov.cn/zwgk/tzgg/202607/t20260717_5878580.html",
+                  "title": "宁金管规〔2026〕2号：公积金基数"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "medical",
+              "min": "5025",
+              "max": "25127",
+              "employee": "0.02",
+              "employer": "0.078",
+              "employeeFixed": "10",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.js.gov.cn/art/2026/10/9/art_60095_11839273.html",
+                  "title": "苏人社发〔2026〕30号：全省2026社保基数"
+                },
+                {
+                  "url": "https://gjj.nanjing.gov.cn/zwgk/tzgg/202607/t20260717_5878580.html",
+                  "title": "宁金管规〔2026〕2号：公积金基数"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "unemployment",
+              "min": "5025",
+              "max": "25127",
+              "employee": "0.005",
+              "employer": "0.005",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.js.gov.cn/art/2026/10/9/art_60095_11839273.html",
+                  "title": "苏人社发〔2026〕30号：全省2026社保基数"
+                },
+                {
+                  "url": "https://gjj.nanjing.gov.cn/zwgk/tzgg/202607/t20260717_5878580.html",
+                  "title": "宁金管规〔2026〕2号：公积金基数"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "maternity",
+              "min": "5025",
+              "max": "25127",
+              "employee": "0",
+              "employer": "0",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.js.gov.cn/art/2026/10/9/art_60095_11839273.html",
+                  "title": "苏人社发〔2026〕30号：全省2026社保基数"
+                },
+                {
+                  "url": "https://gjj.nanjing.gov.cn/zwgk/tzgg/202607/t20260717_5878580.html",
+                  "title": "宁金管规〔2026〕2号：公积金基数"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "mergedInto": "medical"
+            },
+            {
+              "id": "injury",
+              "min": "5025",
+              "max": "25127",
+              "employee": "0",
+              "employer": "0.002",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.js.gov.cn/art/2026/10/9/art_60095_11839273.html",
+                  "title": "苏人社发〔2026〕30号：全省2026社保基数"
+                },
+                {
+                  "url": "https://gjj.nanjing.gov.cn/zwgk/tzgg/202607/t20260717_5878580.html",
+                  "title": "宁金管规〔2026〕2号：公积金基数"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "estimated": true
+            },
+            {
+              "id": "housing",
+              "min": "2660",
+              "max": "42400",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.js.gov.cn/art/2026/10/9/art_60095_11839273.html",
+                  "title": "苏人社发〔2026〕30号：全省2026社保基数"
+                },
+                {
+                  "url": "https://gjj.nanjing.gov.cn/zwgk/tzgg/202607/t20260717_5878580.html",
+                  "title": "宁金管规〔2026〕2号：公积金基数"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12"
+            }
+          ]
+        }
+      ],
+      "scope": "city-centre-employees",
+      "needsHukou": false,
+      "tiers": 0
+    },
+    {
+      "id": "suzhou",
+      "name": "苏州",
+      "province": "江苏",
+      "search": "苏州 江苏 Suzhou",
+      "upstream": {
+        "repository": "weante/city-salary",
+        "version": "1.1.0",
+        "commit": "8abd9cdd797aab008d410feb5690d4ee072d33cc",
+        "path": "skills/city-salary/assets/calculator.html",
+        "license": "MIT"
+      },
+      "periods": [
+        {
+          "items": [
+            {
+              "id": "pension",
+              "min": "5025",
+              "max": "25127",
+              "employee": "0.08",
+              "employer": "0.16",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.js.gov.cn/art/2026/10/9/art_60095_11839273.html",
+                  "title": "苏人社发〔2026〕30号：全省2026社保基数"
+                },
+                {
+                  "url": "https://www.suzhou.gov.cn/szsrmzf/zwgg/202607/501539493f89439aa33768e34a069914.shtml",
+                  "title": "苏州市2026公积金基数及比例（市区，不含特殊园区）"
+                },
+                {
+                  "url": "https://ybj.suzhou.gov.cn/szybj/zgylbx/202401/9c566a5376914921b85ed2ac9a5eb8eb.shtml",
+                  "title": "苏州市区职工医保、生育费率及5元共济基金"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "medical",
+              "min": "5025",
+              "max": "25127",
+              "employee": "0.02",
+              "employer": "0.078",
+              "employeeFixed": "5",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.js.gov.cn/art/2026/10/9/art_60095_11839273.html",
+                  "title": "苏人社发〔2026〕30号：全省2026社保基数"
+                },
+                {
+                  "url": "https://www.suzhou.gov.cn/szsrmzf/zwgg/202607/501539493f89439aa33768e34a069914.shtml",
+                  "title": "苏州市2026公积金基数及比例（市区，不含特殊园区）"
+                },
+                {
+                  "url": "https://ybj.suzhou.gov.cn/szybj/zgylbx/202401/9c566a5376914921b85ed2ac9a5eb8eb.shtml",
+                  "title": "苏州市区职工医保、生育费率及5元共济基金"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "unemployment",
+              "min": "5025",
+              "max": "25127",
+              "employee": "0.005",
+              "employer": "0.005",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.js.gov.cn/art/2026/10/9/art_60095_11839273.html",
+                  "title": "苏人社发〔2026〕30号：全省2026社保基数"
+                },
+                {
+                  "url": "https://www.suzhou.gov.cn/szsrmzf/zwgg/202607/501539493f89439aa33768e34a069914.shtml",
+                  "title": "苏州市2026公积金基数及比例（市区，不含特殊园区）"
+                },
+                {
+                  "url": "https://ybj.suzhou.gov.cn/szybj/zgylbx/202401/9c566a5376914921b85ed2ac9a5eb8eb.shtml",
+                  "title": "苏州市区职工医保、生育费率及5元共济基金"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "maternity",
+              "min": "5025",
+              "max": "25127",
+              "employee": "0",
+              "employer": "0",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.js.gov.cn/art/2026/10/9/art_60095_11839273.html",
+                  "title": "苏人社发〔2026〕30号：全省2026社保基数"
+                },
+                {
+                  "url": "https://www.suzhou.gov.cn/szsrmzf/zwgg/202607/501539493f89439aa33768e34a069914.shtml",
+                  "title": "苏州市2026公积金基数及比例（市区，不含特殊园区）"
+                },
+                {
+                  "url": "https://ybj.suzhou.gov.cn/szybj/zgylbx/202401/9c566a5376914921b85ed2ac9a5eb8eb.shtml",
+                  "title": "苏州市区职工医保、生育费率及5元共济基金"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "mergedInto": "medical"
+            },
+            {
+              "id": "injury",
+              "min": "5025",
+              "max": "25127",
+              "employee": "0",
+              "employer": "0.002",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.js.gov.cn/art/2026/10/9/art_60095_11839273.html",
+                  "title": "苏人社发〔2026〕30号：全省2026社保基数"
+                },
+                {
+                  "url": "https://www.suzhou.gov.cn/szsrmzf/zwgg/202607/501539493f89439aa33768e34a069914.shtml",
+                  "title": "苏州市2026公积金基数及比例（市区，不含特殊园区）"
+                },
+                {
+                  "url": "https://ybj.suzhou.gov.cn/szybj/zgylbx/202401/9c566a5376914921b85ed2ac9a5eb8eb.shtml",
+                  "title": "苏州市区职工医保、生育费率及5元共济基金"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "estimated": true
+            },
+            {
+              "id": "housing",
+              "min": "5025",
+              "max": "40600",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.js.gov.cn/art/2026/10/9/art_60095_11839273.html",
+                  "title": "苏人社发〔2026〕30号：全省2026社保基数"
+                },
+                {
+                  "url": "https://www.suzhou.gov.cn/szsrmzf/zwgg/202607/501539493f89439aa33768e34a069914.shtml",
+                  "title": "苏州市2026公积金基数及比例（市区，不含特殊园区）"
+                },
+                {
+                  "url": "https://ybj.suzhou.gov.cn/szybj/zgylbx/202401/9c566a5376914921b85ed2ac9a5eb8eb.shtml",
+                  "title": "苏州市区职工医保、生育费率及5元共济基金"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12"
+            }
+          ]
+        }
+      ],
+      "scope": "city-centre-employees",
+      "needsHukou": false,
+      "tiers": 0
+    },
+    {
+      "id": "ningbo",
+      "name": "宁波",
+      "province": "浙江",
+      "search": "宁波 浙江 Ningbo",
+      "upstream": {
+        "repository": "weante/city-salary",
+        "version": "1.1.0",
+        "commit": "8abd9cdd797aab008d410feb5690d4ee072d33cc",
+        "path": "skills/city-salary/assets/calculator.html",
+        "license": "MIT"
+      },
+      "periods": [
+        {
+          "items": [
+            {
+              "id": "pension",
+              "min": "5122",
+              "max": "25611",
+              "employee": "0.08",
+              "employer": "0.16",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "medical",
+              "min": "5122",
+              "max": "25611",
+              "employee": "0.02",
+              "employer": "0.085",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "unemployment",
+              "min": "5122",
+              "max": "25611",
+              "employee": "0.005",
+              "employer": "0.005",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "maternity",
+              "min": "5122",
+              "max": "25611",
+              "employee": "0",
+              "employer": "0",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "mergedInto": "medical"
+            },
+            {
+              "id": "injury",
+              "min": "5122",
+              "max": "25611",
+              "employee": "0",
+              "employer": "0.002",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "estimated": true
+            },
+            {
+              "id": "housing",
+              "min": "2660",
+              "max": "38947",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12"
+            }
+          ]
+        }
+      ],
+      "scope": "city-centre-employees",
+      "needsHukou": false,
+      "tiers": 0
+    },
+    {
+      "id": "chengdu",
+      "name": "成都",
+      "province": "四川",
+      "search": "成都 四川 Chengdu",
+      "upstream": {
+        "repository": "weante/city-salary",
+        "version": "1.1.0",
+        "commit": "8abd9cdd797aab008d410feb5690d4ee072d33cc",
+        "path": "skills/city-salary/assets/calculator.html",
+        "license": "MIT"
+      },
+      "periods": [
+        {
+          "items": [
+            {
+              "id": "pension",
+              "min": "4699",
+              "max": "23493",
+              "employee": "0.08",
+              "employer": "0.16",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://chinajob.mohrss.gov.cn/c/2026-09-11/602828.shtml",
+                  "title": "四川省2026三项社会保险缴费基数"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "medical",
+              "min": "4699",
+              "max": "23493",
+              "employee": "0.02",
+              "employer": "0.083",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://chinajob.mohrss.gov.cn/c/2026-09-11/602828.shtml",
+                  "title": "四川省2026三项社会保险缴费基数"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "unemployment",
+              "min": "4699",
+              "max": "23493",
+              "employee": "0.004",
+              "employer": "0.006",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://chinajob.mohrss.gov.cn/c/2026-09-11/602828.shtml",
+                  "title": "四川省2026三项社会保险缴费基数"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "maternity",
+              "min": "4699",
+              "max": "23493",
+              "employee": "0",
+              "employer": "0",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://chinajob.mohrss.gov.cn/c/2026-09-11/602828.shtml",
+                  "title": "四川省2026三项社会保险缴费基数"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "mergedInto": "medical"
+            },
+            {
+              "id": "injury",
+              "min": "4699",
+              "max": "23493",
+              "employee": "0",
+              "employer": "0.0024",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://chinajob.mohrss.gov.cn/c/2026-09-11/602828.shtml",
+                  "title": "四川省2026三项社会保险缴费基数"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "estimated": true
+            },
+            {
+              "id": "housing",
+              "min": "2330",
+              "max": "32969",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://chinajob.mohrss.gov.cn/c/2026-09-11/602828.shtml",
+                  "title": "四川省2026三项社会保险缴费基数"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12"
+            }
+          ]
+        }
+      ],
+      "scope": "city-centre-employees",
+      "needsHukou": false,
+      "tiers": 0
+    },
+    {
+      "id": "chongqing",
+      "name": "重庆",
+      "province": "重庆",
+      "search": "重庆 重庆 Chongqing",
+      "upstream": {
+        "repository": "weante/city-salary",
+        "version": "1.1.0",
+        "commit": "8abd9cdd797aab008d410feb5690d4ee072d33cc",
+        "path": "skills/city-salary/assets/calculator.html",
+        "license": "MIT"
+      },
+      "periods": [
+        {
+          "items": [
+            {
+              "id": "pension",
+              "min": "4553",
+              "max": "22765",
+              "employee": "0.08",
+              "employer": "0.16",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "medical",
+              "min": "4553",
+              "max": "22765",
+              "employee": "0.02",
+              "employer": "0.085",
+              "employeeFixed": "5",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "unemployment",
+              "min": "4553",
+              "max": "22765",
+              "employee": "0.005",
+              "employer": "0.005",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "maternity",
+              "min": "4553",
+              "max": "22765",
+              "employee": "0",
+              "employer": "0",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "mergedInto": "medical"
+            },
+            {
+              "id": "injury",
+              "min": "4553",
+              "max": "22765",
+              "employee": "0",
+              "employer": "0.003",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "estimated": true
+            },
+            {
+              "id": "housing",
+              "min": "2330",
+              "max": "31393",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12"
+            }
+          ]
+        }
+      ],
+      "scope": "city-centre-employees",
+      "needsHukou": false,
+      "tiers": 0
+    },
+    {
+      "id": "tianjin",
+      "name": "天津",
+      "province": "天津",
+      "search": "天津 天津 Tianjin",
+      "upstream": {
+        "repository": "weante/city-salary",
+        "version": "1.1.0",
+        "commit": "8abd9cdd797aab008d410feb5690d4ee072d33cc",
+        "path": "skills/city-salary/assets/calculator.html",
+        "license": "MIT"
+      },
+      "periods": [
+        {
+          "items": [
+            {
+              "id": "pension",
+              "min": "5180",
+              "max": "25902",
+              "employee": "0.08",
+              "employer": "0.16",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.tj.gov.cn/sy/tjxw/202608/t20260823_7356881.html",
+                  "title": "天津2026社保基数：9月起"
+                },
+                {
+                  "url": "https://www.teda.gov.cn/contents/220/29200.html",
+                  "title": "天津职工大额医疗按季度首月21元、其余月22元（2023答复，2026待复核）"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-09",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "medical",
+              "min": "5180",
+              "max": "25902",
+              "employee": "0.02",
+              "employer": "0.105",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.tj.gov.cn/sy/tjxw/202608/t20260823_7356881.html",
+                  "title": "天津2026社保基数：9月起"
+                },
+                {
+                  "url": "https://www.teda.gov.cn/contents/220/29200.html",
+                  "title": "天津职工大额医疗按季度首月21元、其余月22元（2023答复，2026待复核）"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-09",
+              "to": "2026-12",
+              "deductible": true,
+              "fixedByMonth": {
+                "1": "21",
+                "2": "22",
+                "3": "22",
+                "4": "21",
+                "5": "22",
+                "6": "22",
+                "7": "21",
+                "8": "22",
+                "9": "22",
+                "10": "21",
+                "11": "22",
+                "12": "22"
+              }
+            },
+            {
+              "id": "unemployment",
+              "min": "5180",
+              "max": "25902",
+              "employee": "0.005",
+              "employer": "0.005",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.tj.gov.cn/sy/tjxw/202608/t20260823_7356881.html",
+                  "title": "天津2026社保基数：9月起"
+                },
+                {
+                  "url": "https://www.teda.gov.cn/contents/220/29200.html",
+                  "title": "天津职工大额医疗按季度首月21元、其余月22元（2023答复，2026待复核）"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-09",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "maternity",
+              "min": "5180",
+              "max": "25902",
+              "employee": "0",
+              "employer": "0",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.tj.gov.cn/sy/tjxw/202608/t20260823_7356881.html",
+                  "title": "天津2026社保基数：9月起"
+                },
+                {
+                  "url": "https://www.teda.gov.cn/contents/220/29200.html",
+                  "title": "天津职工大额医疗按季度首月21元、其余月22元（2023答复，2026待复核）"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-09",
+              "to": "2026-12",
+              "deductible": true,
+              "mergedInto": "medical"
+            },
+            {
+              "id": "injury",
+              "min": "5180",
+              "max": "25902",
+              "employee": "0",
+              "employer": "0.002",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.tj.gov.cn/sy/tjxw/202608/t20260823_7356881.html",
+                  "title": "天津2026社保基数：9月起"
+                },
+                {
+                  "url": "https://www.teda.gov.cn/contents/220/29200.html",
+                  "title": "天津职工大额医疗按季度首月21元、其余月22元（2023答复，2026待复核）"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-09",
+              "to": "2026-12",
+              "deductible": true,
+              "estimated": true
+            },
+            {
+              "id": "housing",
+              "min": "2510",
+              "max": "28917",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.tj.gov.cn/sy/tjxw/202608/t20260823_7356881.html",
+                  "title": "天津2026社保基数：9月起"
+                },
+                {
+                  "url": "https://www.teda.gov.cn/contents/220/29200.html",
+                  "title": "天津职工大额医疗按季度首月21元、其余月22元（2023答复，2026待复核）"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-09",
+              "to": "2026-12",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12"
+            }
+          ]
+        }
+      ],
+      "scope": "city-centre-employees",
+      "needsHukou": false,
+      "tiers": 0
+    },
+    {
+      "id": "wuhan",
+      "name": "武汉",
+      "province": "湖北",
+      "search": "武汉 湖北 Wuhan",
+      "upstream": {
+        "repository": "weante/city-salary",
+        "version": "1.1.0",
+        "commit": "8abd9cdd797aab008d410feb5690d4ee072d33cc",
+        "path": "skills/city-salary/assets/calculator.html",
+        "license": "MIT"
+      },
+      "periods": [
+        {
+          "items": [
+            {
+              "id": "pension",
+              "min": "4498",
+              "max": "22488",
+              "employee": "0.08",
+              "employer": "0.16",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://ybj.wuhan.gov.cn/zwgk_52/ybdt/mtdt/202202/t20220214_1922074.shtml",
+                  "title": "武汉职工医保及生育合并费率"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "medical",
+              "min": "4498",
+              "max": "22488",
+              "employee": "0.02",
+              "employer": "0.087",
+              "employeeFixed": "7",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://ybj.wuhan.gov.cn/zwgk_52/ybdt/mtdt/202202/t20220214_1922074.shtml",
+                  "title": "武汉职工医保及生育合并费率"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "unemployment",
+              "min": "4498",
+              "max": "22488",
+              "employee": "0.003",
+              "employer": "0.007",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://ybj.wuhan.gov.cn/zwgk_52/ybdt/mtdt/202202/t20220214_1922074.shtml",
+                  "title": "武汉职工医保及生育合并费率"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "maternity",
+              "min": "4498",
+              "max": "22488",
+              "employee": "0",
+              "employer": "0",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://ybj.wuhan.gov.cn/zwgk_52/ybdt/mtdt/202202/t20220214_1922074.shtml",
+                  "title": "武汉职工医保及生育合并费率"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "mergedInto": "medical"
+            },
+            {
+              "id": "injury",
+              "min": "4498",
+              "max": "22488",
+              "employee": "0",
+              "employer": "0.002",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://ybj.wuhan.gov.cn/zwgk_52/ybdt/mtdt/202202/t20220214_1922074.shtml",
+                  "title": "武汉职工医保及生育合并费率"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "estimated": true
+            },
+            {
+              "id": "housing",
+              "min": "2400",
+              "max": "36072.25",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://ybj.wuhan.gov.cn/zwgk_52/ybdt/mtdt/202202/t20220214_1922074.shtml",
+                  "title": "武汉职工医保及生育合并费率"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12"
+            }
+          ]
+        }
+      ],
+      "scope": "city-centre-employees",
+      "needsHukou": false,
+      "tiers": 0
+    },
+    {
+      "id": "changsha",
+      "name": "长沙",
+      "province": "湖南",
+      "search": "长沙 湖南 Changsha",
+      "upstream": {
+        "repository": "weante/city-salary",
+        "version": "1.1.0",
+        "commit": "8abd9cdd797aab008d410feb5690d4ee072d33cc",
+        "path": "skills/city-salary/assets/calculator.html",
+        "license": "MIT"
+      },
+      "periods": [
+        {
+          "items": [
+            {
+              "id": "pension",
+              "min": "4106",
+              "max": "20529",
+              "employee": "0.08",
+              "employer": "0.16",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "medical",
+              "min": "4106",
+              "max": "20529",
+              "employee": "0.02",
+              "employer": "0.087",
+              "employeeFixed": "15",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "unemployment",
+              "min": "4106",
+              "max": "20529",
+              "employee": "0.003",
+              "employer": "0.007",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "maternity",
+              "min": "4106",
+              "max": "20529",
+              "employee": "0",
+              "employer": "0",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "mergedInto": "medical"
+            },
+            {
+              "id": "injury",
+              "min": "4106",
+              "max": "20529",
+              "employee": "0",
+              "employer": "0.006",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "estimated": true
+            },
+            {
+              "id": "housing",
+              "min": "2200",
+              "max": "32744",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12"
+            }
+          ]
+        }
+      ],
+      "scope": "city-centre-employees",
+      "needsHukou": false,
+      "tiers": 0
+    },
+    {
+      "id": "hefei",
+      "name": "合肥",
+      "province": "安徽",
+      "search": "合肥 安徽 Hefei",
+      "upstream": {
+        "repository": "weante/city-salary",
+        "version": "1.1.0",
+        "commit": "8abd9cdd797aab008d410feb5690d4ee072d33cc",
+        "path": "skills/city-salary/assets/calculator.html",
+        "license": "MIT"
+      },
+      "periods": [
+        {
+          "items": [
+            {
+              "id": "pension",
+              "min": "4354",
+              "max": "21772",
+              "employee": "0.08",
+              "employer": "0.16",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://rsj.huaibei.gov.cn/gzdt/gfxwj/58052711.html",
+                  "title": "安徽省2026社会保险基数上下限"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "medical",
+              "min": "4354",
+              "max": "21772",
+              "employee": "0.02",
+              "employer": "0.064",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://rsj.huaibei.gov.cn/gzdt/gfxwj/58052711.html",
+                  "title": "安徽省2026社会保险基数上下限"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "unemployment",
+              "min": "4354",
+              "max": "21772",
+              "employee": "0.005",
+              "employer": "0.005",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://rsj.huaibei.gov.cn/gzdt/gfxwj/58052711.html",
+                  "title": "安徽省2026社会保险基数上下限"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "maternity",
+              "min": "4354",
+              "max": "21772",
+              "employee": "0",
+              "employer": "0",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://rsj.huaibei.gov.cn/gzdt/gfxwj/58052711.html",
+                  "title": "安徽省2026社会保险基数上下限"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "mergedInto": "medical"
+            },
+            {
+              "id": "injury",
+              "min": "4354",
+              "max": "21772",
+              "employee": "0",
+              "employer": "0.002",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://rsj.huaibei.gov.cn/gzdt/gfxwj/58052711.html",
+                  "title": "安徽省2026社会保险基数上下限"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "estimated": true
+            },
+            {
+              "id": "housing",
+              "min": "2320",
+              "max": "30540",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://rsj.huaibei.gov.cn/gzdt/gfxwj/58052711.html",
+                  "title": "安徽省2026社会保险基数上下限"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12"
+            }
+          ]
+        }
+      ],
+      "scope": "city-centre-employees",
+      "needsHukou": false,
+      "tiers": 0
+    },
+    {
+      "id": "zhengzhou",
+      "name": "郑州",
+      "province": "河南",
+      "search": "郑州 河南 Zhengzhou",
+      "upstream": {
+        "repository": "weante/city-salary",
+        "version": "1.1.0",
+        "commit": "8abd9cdd797aab008d410feb5690d4ee072d33cc",
+        "path": "skills/city-salary/assets/calculator.html",
+        "license": "MIT"
+      },
+      "periods": [
+        {
+          "items": [
+            {
+              "id": "pension",
+              "min": "3912",
+              "max": "19560",
+              "employee": "0.08",
+              "employer": "0.16",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.zgwg.gov.cn/contents/65386/472924.html",
+                  "title": "2026河南社保缴费基数（7月起）"
+                },
+                {
+                  "url": "https://zzgjj.zhengzhou.gov.cn/zxindt/10197372.jhtml",
+                  "title": "郑公积金〔2026〕18号"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "medical",
+              "min": "3912",
+              "max": "19560",
+              "employee": "0.02",
+              "employer": "0.08",
+              "employeeFixed": "10.83",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.zgwg.gov.cn/contents/65386/472924.html",
+                  "title": "2026河南社保缴费基数（7月起）"
+                },
+                {
+                  "url": "https://zzgjj.zhengzhou.gov.cn/zxindt/10197372.jhtml",
+                  "title": "郑公积金〔2026〕18号"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "unemployment",
+              "min": "3912",
+              "max": "19560",
+              "employee": "0.003",
+              "employer": "0.007",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.zgwg.gov.cn/contents/65386/472924.html",
+                  "title": "2026河南社保缴费基数（7月起）"
+                },
+                {
+                  "url": "https://zzgjj.zhengzhou.gov.cn/zxindt/10197372.jhtml",
+                  "title": "郑公积金〔2026〕18号"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "maternity",
+              "min": "3912",
+              "max": "19560",
+              "employee": "0",
+              "employer": "0",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.zgwg.gov.cn/contents/65386/472924.html",
+                  "title": "2026河南社保缴费基数（7月起）"
+                },
+                {
+                  "url": "https://zzgjj.zhengzhou.gov.cn/zxindt/10197372.jhtml",
+                  "title": "郑公积金〔2026〕18号"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "mergedInto": "medical"
+            },
+            {
+              "id": "injury",
+              "min": "3912",
+              "max": "19560",
+              "employee": "0",
+              "employer": "0.002",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.zgwg.gov.cn/contents/65386/472924.html",
+                  "title": "2026河南社保缴费基数（7月起）"
+                },
+                {
+                  "url": "https://zzgjj.zhengzhou.gov.cn/zxindt/10197372.jhtml",
+                  "title": "郑公积金〔2026〕18号"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "estimated": true
+            },
+            {
+              "id": "housing",
+              "min": "2350",
+              "max": "28849",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.zgwg.gov.cn/contents/65386/472924.html",
+                  "title": "2026河南社保缴费基数（7月起）"
+                },
+                {
+                  "url": "https://zzgjj.zhengzhou.gov.cn/zxindt/10197372.jhtml",
+                  "title": "郑公积金〔2026〕18号"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12"
+            }
+          ]
+        }
+      ],
+      "scope": "city-centre-employees",
+      "needsHukou": false,
+      "tiers": 0
+    },
+    {
+      "id": "xian",
+      "name": "西安",
+      "province": "陕西",
+      "search": "西安 陕西 Xian Xi'an",
+      "upstream": {
+        "repository": "weante/city-salary",
+        "version": "1.1.0",
+        "commit": "8abd9cdd797aab008d410feb5690d4ee072d33cc",
+        "path": "skills/city-salary/assets/calculator.html",
+        "license": "MIT"
+      },
+      "periods": [
+        {
+          "items": [
+            {
+              "id": "pension",
+              "min": "4737",
+              "max": "23685",
+              "employee": "0.08",
+              "employer": "0.16",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.xa.gov.cn/gk/zcfg/zcjd/zcwd/shbx/636a1abef8fd1c4c212759a3.html",
+                  "title": "西安市2026职工医保费率及大额医疗8元分担"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "medical",
+              "min": "4737",
+              "max": "23685",
+              "employee": "0.02",
+              "employer": "0.08",
+              "employeeFixed": "1.6",
+              "employerFixed": "6.4",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.xa.gov.cn/gk/zcfg/zcjd/zcwd/shbx/636a1abef8fd1c4c212759a3.html",
+                  "title": "西安市2026职工医保费率及大额医疗8元分担"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "unemployment",
+              "min": "4737",
+              "max": "23685",
+              "employee": "0.003",
+              "employer": "0.007",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.xa.gov.cn/gk/zcfg/zcjd/zcwd/shbx/636a1abef8fd1c4c212759a3.html",
+                  "title": "西安市2026职工医保费率及大额医疗8元分担"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "maternity",
+              "min": "4737",
+              "max": "23685",
+              "employee": "0",
+              "employer": "0",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.xa.gov.cn/gk/zcfg/zcjd/zcwd/shbx/636a1abef8fd1c4c212759a3.html",
+                  "title": "西安市2026职工医保费率及大额医疗8元分担"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "mergedInto": "medical"
+            },
+            {
+              "id": "injury",
+              "min": "4737",
+              "max": "23685",
+              "employee": "0",
+              "employer": "0.002",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.xa.gov.cn/gk/zcfg/zcjd/zcwd/shbx/636a1abef8fd1c4c212759a3.html",
+                  "title": "西安市2026职工医保费率及大额医疗8元分担"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "estimated": true
+            },
+            {
+              "id": "housing",
+              "min": "2376",
+              "max": "32726",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.xa.gov.cn/gk/zcfg/zcjd/zcwd/shbx/636a1abef8fd1c4c212759a3.html",
+                  "title": "西安市2026职工医保费率及大额医疗8元分担"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12"
+            }
+          ]
+        }
+      ],
+      "scope": "city-centre-employees",
+      "needsHukou": false,
+      "tiers": 0
+    },
+    {
+      "id": "jinan",
+      "name": "济南",
+      "province": "山东",
+      "search": "济南 山东 Jinan",
+      "upstream": {
+        "repository": "weante/city-salary",
+        "version": "1.1.0",
+        "commit": "8abd9cdd797aab008d410feb5690d4ee072d33cc",
+        "path": "skills/city-salary/assets/calculator.html",
+        "license": "MIT"
+      },
+      "periods": [
+        {
+          "items": [
+            {
+              "id": "pension",
+              "min": "4573",
+              "max": "22863",
+              "employee": "0.08",
+              "employer": "0.16",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "medical",
+              "min": "4573",
+              "max": "22863",
+              "employee": "0.02",
+              "employer": "0.08",
+              "employeeFixed": "10",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "unemployment",
+              "min": "4573",
+              "max": "22863",
+              "employee": "0.003",
+              "employer": "0.007",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "maternity",
+              "min": "4573",
+              "max": "22863",
+              "employee": "0",
+              "employer": "0",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "mergedInto": "medical"
+            },
+            {
+              "id": "injury",
+              "min": "4573",
+              "max": "22863",
+              "employee": "0",
+              "employer": "0.0016",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "estimated": true
+            },
+            {
+              "id": "housing",
+              "min": "2400",
+              "max": "33902",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12"
+            }
+          ]
+        }
+      ],
+      "scope": "city-centre-employees",
+      "needsHukou": false,
+      "tiers": 0
+    },
+    {
+      "id": "qingdao",
+      "name": "青岛",
+      "province": "山东",
+      "search": "青岛 山东 Qingdao Tsingtao",
+      "upstream": {
+        "repository": "weante/city-salary",
+        "version": "1.1.0",
+        "commit": "8abd9cdd797aab008d410feb5690d4ee072d33cc",
+        "path": "skills/city-salary/assets/calculator.html",
+        "license": "MIT"
+      },
+      "periods": [
+        {
+          "items": [
+            {
+              "id": "pension",
+              "min": "4573",
+              "max": "22863",
+              "employee": "0.08",
+              "employer": "0.16",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "medical",
+              "min": "4573",
+              "max": "22863",
+              "employee": "0.02",
+              "employer": "0.08",
+              "employeeFixed": "5",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "unemployment",
+              "min": "4573",
+              "max": "22863",
+              "employee": "0.003",
+              "employer": "0.007",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "maternity",
+              "min": "4573",
+              "max": "22863",
+              "employee": "0",
+              "employer": "0",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "mergedInto": "medical"
+            },
+            {
+              "id": "injury",
+              "min": "4573",
+              "max": "22863",
+              "employee": "0",
+              "employer": "0.0016",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "estimated": true
+            },
+            {
+              "id": "housing",
+              "min": "2400",
+              "max": "34342.75",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12"
+            }
+          ]
+        }
+      ],
+      "scope": "city-centre-employees",
+      "needsHukou": false,
+      "tiers": 0
+    },
+    {
+      "id": "xiamen",
+      "name": "厦门",
+      "province": "福建",
+      "search": "厦门 福建 Xiamen Amoy",
+      "upstream": {
+        "repository": "weante/city-salary",
+        "version": "1.1.0",
+        "commit": "8abd9cdd797aab008d410feb5690d4ee072d33cc",
+        "path": "skills/city-salary/assets/calculator.html",
+        "license": "MIT"
+      },
+      "periods": [
+        {
+          "items": [
+            {
+              "id": "pension",
+              "min": "4579",
+              "max": "22893",
+              "employee": "0.08",
+              "employer": "0.16",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://rst.fj.gov.cn/zw/ztzl/zxzt/sbhm/zxsl/zcfg/202610/t20261008_7221778.htm",
+                  "title": "闽人社文〔2026〕13号：养老及失业基数"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-01",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "medical",
+              "min": "4579",
+              "max": "22893",
+              "employee": "0.02",
+              "employer": "0.075",
+              "employeeFixed": "7",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://rst.fj.gov.cn/zw/ztzl/zxzt/sbhm/zxsl/zcfg/202610/t20261008_7221778.htm",
+                  "title": "闽人社文〔2026〕13号：养老及失业基数"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "unemployment",
+              "min": "4579",
+              "max": "22893",
+              "employee": "0.005",
+              "employer": "0.005",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://rst.fj.gov.cn/zw/ztzl/zxzt/sbhm/zxsl/zcfg/202610/t20261008_7221778.htm",
+                  "title": "闽人社文〔2026〕13号：养老及失业基数"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-10",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "maternity",
+              "min": "4043",
+              "max": "22607",
+              "employee": "0",
+              "employer": "0",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://rst.fj.gov.cn/zw/ztzl/zxzt/sbhm/zxsl/zcfg/202610/t20261008_7221778.htm",
+                  "title": "闽人社文〔2026〕13号：养老及失业基数"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "mergedInto": "medical"
+            },
+            {
+              "id": "injury",
+              "min": "4579",
+              "max": "22893",
+              "employee": "0",
+              "employer": "0.002",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://rst.fj.gov.cn/zw/ztzl/zxzt/sbhm/zxsl/zcfg/202610/t20261008_7221778.htm",
+                  "title": "闽人社文〔2026〕13号：养老及失业基数"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "estimated": true
+            },
+            {
+              "id": "housing",
+              "min": "2265",
+              "max": "32937",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://rst.fj.gov.cn/zw/ztzl/zxzt/sbhm/zxsl/zcfg/202610/t20261008_7221778.htm",
+                  "title": "闽人社文〔2026〕13号：养老及失业基数"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12"
+            }
+          ]
+        }
+      ],
+      "scope": "city-centre-employees",
+      "needsHukou": false,
+      "tiers": 0
+    },
+    {
+      "id": "fuzhou",
+      "name": "福州",
+      "province": "福建",
+      "search": "福州 福建 Fuzhou",
+      "upstream": {
+        "repository": "weante/city-salary",
+        "version": "1.1.0",
+        "commit": "8abd9cdd797aab008d410feb5690d4ee072d33cc",
+        "path": "skills/city-salary/assets/calculator.html",
+        "license": "MIT"
+      },
+      "periods": [
+        {
+          "items": [
+            {
+              "id": "pension",
+              "min": "4579",
+              "max": "22893",
+              "employee": "0.08",
+              "employer": "0.16",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://rst.fj.gov.cn/zw/ztzl/zxzt/sbhm/zxsl/zcfg/202610/t20261008_7221778.htm",
+                  "title": "闽人社文〔2026〕13号：养老及失业基数"
+                },
+                {
+                  "url": "https://ybj.fuzhou.gov.cn/zwgk/tzgg/202607/t20260701_5341143.htm",
+                  "title": "福州市2026医保基数（7月起）"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-01",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "medical",
+              "min": "4579",
+              "max": "22893",
+              "employee": "0.02",
+              "employer": "0.08",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://rst.fj.gov.cn/zw/ztzl/zxzt/sbhm/zxsl/zcfg/202610/t20261008_7221778.htm",
+                  "title": "闽人社文〔2026〕13号：养老及失业基数"
+                },
+                {
+                  "url": "https://ybj.fuzhou.gov.cn/zwgk/tzgg/202607/t20260701_5341143.htm",
+                  "title": "福州市2026医保基数（7月起）"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "unemployment",
+              "min": "4579",
+              "max": "22893",
+              "employee": "0.005",
+              "employer": "0.005",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://rst.fj.gov.cn/zw/ztzl/zxzt/sbhm/zxsl/zcfg/202610/t20261008_7221778.htm",
+                  "title": "闽人社文〔2026〕13号：养老及失业基数"
+                },
+                {
+                  "url": "https://ybj.fuzhou.gov.cn/zwgk/tzgg/202607/t20260701_5341143.htm",
+                  "title": "福州市2026医保基数（7月起）"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-10",
+              "to": "2026-12",
+              "deductible": true
+            },
+            {
+              "id": "maternity",
+              "min": "4043",
+              "max": "22607",
+              "employee": "0",
+              "employer": "0",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://rst.fj.gov.cn/zw/ztzl/zxzt/sbhm/zxsl/zcfg/202610/t20261008_7221778.htm",
+                  "title": "闽人社文〔2026〕13号：养老及失业基数"
+                },
+                {
+                  "url": "https://ybj.fuzhou.gov.cn/zwgk/tzgg/202607/t20260701_5341143.htm",
+                  "title": "福州市2026医保基数（7月起）"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "mergedInto": "medical"
+            },
+            {
+              "id": "injury",
+              "min": "4579",
+              "max": "22893",
+              "employee": "0",
+              "employer": "0.002",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://rst.fj.gov.cn/zw/ztzl/zxzt/sbhm/zxsl/zcfg/202610/t20261008_7221778.htm",
+                  "title": "闽人社文〔2026〕13号：养老及失业基数"
+                },
+                {
+                  "url": "https://ybj.fuzhou.gov.cn/zwgk/tzgg/202607/t20260701_5341143.htm",
+                  "title": "福州市2026医保基数（7月起）"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "estimated": true
+            },
+            {
+              "id": "housing",
+              "min": "2195",
+              "max": "32430",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://rst.fj.gov.cn/zw/ztzl/zxzt/sbhm/zxsl/zcfg/202610/t20261008_7221778.htm",
+                  "title": "闽人社文〔2026〕13号：养老及失业基数"
+                },
+                {
+                  "url": "https://ybj.fuzhou.gov.cn/zwgk/tzgg/202607/t20260701_5341143.htm",
+                  "title": "福州市2026医保基数（7月起）"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-12",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12"
+            }
+          ]
+        }
+      ],
+      "scope": "city-centre-employees",
+      "needsHukou": false,
+      "tiers": 0
+    }
+  ]
+}
