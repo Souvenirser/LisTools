@@ -114,3 +114,10 @@ SortableJS 1.15.7 (MIT), https://github.com/SortableJS/Sortable/tree/1.15.7, pro
 ## Lucide local menu icons
 
 Static SVG node subset from [lucide-static 1.61.0](https://www.npmjs.com/package/lucide-static/v/1.61.0), bundled locally without a runtime library or network requests. ISC license and the Feather-derived icons MIT license are retained in `licenses/lucide-1.61.0.LICENSE`.
+
+## Payroll tools: policy and calculation references
+
+- weante/city-salary 1.1.0, commit `8abd9cdd797aab008d410feb5690d4ee072d33cc`, MIT. Selected candidate city parameters originate from `skills/city-salary/assets/calculator.html`; transformed to `src/tools/payroll/cities.json`, independently reviewed where marked, with corrected Fujian/Suzhou/Xi’an values. Unverified records remain explicitly gated. Source: https://github.com/weante/city-salary/tree/8abd9cdd797aab008d410feb5690d4ee072d33cc . License: `licenses/city-salary-8abd9cd.LICENSE`.
+- ikiwihome/income-calc 1.0.0, commit `71e1a1076ece72b8451a770d84653df5acacd57b`, MIT. `app/utils/taxCalculator.ts` informed cumulative/annual calculation cases; LisTools implements isolated Decimal arithmetic and does not bundle Vue/Nuxt. Source: https://github.com/ikiwihome/income-calc/tree/71e1a1076ece72b8451a770d84653df5acacd57b . License: `licenses/income-calc-71e1a10.LICENSE`.
+
+Government policy sources, dates and verification status accompany each local record. Candidate data is not a substitute for official verification. No upstream executable HTML is bundled.

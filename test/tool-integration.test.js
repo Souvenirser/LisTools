@@ -4,9 +4,9 @@ import { pages } from '../src/tools/shared/navigation.js';
 import { pageConnectPolicy, extensionPolicy } from '../src/tools/shared/policy.js';
 import { createConversionController } from '../src/tools/convert/controller.js';
 
-test('all eighteen pages have unique stable entries and retain any existing shortcuts', () => {
+test('all twenty pages have unique stable entries and retain any existing shortcuts', () => {
   const entries=pages.filter(page=>!page.file.includes('#'));
-  assert.equal(entries.length, 18);
+  assert.equal(entries.length, 20);
   assert.equal(new Set(pages.map(page => page.id)).size, pages.length);
   assert.deepEqual(entries.slice(0,4).map(page => page.file), ['index.html','diff.html','timestamp.html','convert.html']);
 });

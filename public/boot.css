@@ -14,13 +14,21 @@ html[data-ui-state=booting] body,html[data-ui-state=failed] body{visibility:hidd
 @media(min-width:1200px){.boot-body{grid-template-columns:256px minmax(0,1fr)}}
 html[data-entry=popup] .boot-header,html[data-entry=popup] .boot-sidebar{display:none}
 html[data-entry=popup] #page-boot{grid-template-rows:1fr}
-html[data-entry-motion=fade] main{animation:page-arrive .15s ease-out both}
+/* A fresh tab has no previous document snapshot: reveal its entire ready shell
+   together, rather than flashing the header/sidebar before the work area. */
+html[data-entry-motion=fade] body{animation:page-arrive .22s cubic-bezier(.2,.6,.2,1) both}
 @keyframes page-arrive{from{opacity:0}to{opacity:1}}
 @view-transition{navigation:auto}
-::view-transition-old(root){display:none}
-::view-transition-new(root),::view-transition-group(root){animation:none}
-main{view-transition-name:page-content}
-::view-transition-group(page-content){animation:none}
-::view-transition-old(page-content){animation:page-arrive .06s ease-in reverse both}
-::view-transition-new(page-content){animation:page-arrive .09s .06s ease-out both}
-@media(prefers-reduced-motion:reduce){@view-transition{navigation:none}html[data-entry-motion] main{animation:none}::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
+::view-transition-group(root){animation:none}
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+::view-transition-old(root){opacity:1}
+::view-transition-new(root){opacity:0}
+@keyframes navigate-arrive{from{opacity:0}to{opacity:1}}
+html[data-ui-state=ready] .app-header{view-transition-name:workspace-header}
+html[data-ui-state=ready] #workbench-navigation:not([hidden]){view-transition-name:workspace-navigation}
+::view-transition-group(workspace-header),::view-transition-group(workspace-navigation){animation:none}
+::view-transition-old(workspace-header),::view-transition-new(workspace-header),::view-transition-old(workspace-navigation),::view-transition-new(workspace-navigation){animation:none;opacity:1;mix-blend-mode:normal}
+html[data-native-phase=arrive]::view-transition-old(root){animation:navigate-leave .07s ease-in both}
+html[data-native-phase=arrive]::view-transition-new(root){animation:navigate-arrive .15s .07s ease-out both}
+@keyframes navigate-leave{to{opacity:0}}
+@media(prefers-reduced-motion:reduce){@view-transition{navigation:none}html[data-entry-motion] body{animation:none}::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}

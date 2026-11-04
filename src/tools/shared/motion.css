@@ -1,0 +1,51 @@
+/* Keep native disclosure semantics; older engines retain immediate, usable folding. */
+@media (prefers-reduced-motion: no-preference) {
+  :is(#workbench-settings[open],#recent-tools:popover-open,#tool-menu[popover]:popover-open,#json-edit-menu:popover-open,#regex-rules-panel:popover-open,#convert-catalog[popover]:popover-open) {
+    animation: panel-arrive 180ms ease-out;
+  }
+  @supports (transition-behavior: allow-discrete) and (interactivity: inert) {
+    :is(#workbench-settings,#recent-tools,#tool-menu[popover],#json-edit-menu,#regex-rules-panel,#convert-catalog[popover]) {
+      animation: none;
+      opacity: 0;
+      transition: opacity 180ms ease-out, display 180ms allow-discrete, overlay 180ms allow-discrete;
+    }
+    :is(#workbench-settings[open],#recent-tools:popover-open,#tool-menu[popover]:popover-open,#json-edit-menu:popover-open,#regex-rules-panel:popover-open,#convert-catalog[popover]:popover-open) {
+      animation: none;
+      opacity: 1;
+    }
+    :is(#workbench-settings:not([open]),#recent-tools:not(:popover-open),#tool-menu[popover]:not(:popover-open),#json-edit-menu:not(:popover-open),#regex-rules-panel:not(:popover-open),#convert-catalog[popover]:not(:popover-open)) {
+      interactivity: inert;
+      pointer-events: none;
+    }
+    #workbench-settings::backdrop {
+      opacity: 0;
+      transition: opacity 180ms ease-out, display 180ms allow-discrete, overlay 180ms allow-discrete;
+    }
+    #workbench-settings[open]::backdrop { opacity: 1; }
+    #workbench-settings:not([open])::backdrop { pointer-events: none; }
+    @starting-style {
+      :is(#workbench-settings[open],#recent-tools:popover-open,#tool-menu[popover]:popover-open,#json-edit-menu:popover-open,#regex-rules-panel:popover-open,#convert-catalog[popover]:popover-open) { opacity: 0; }
+      #workbench-settings[open]::backdrop { opacity: 0; }
+    }
+  }
+  @supports (interpolate-size: allow-keywords) and (interactivity: inert) and selector(::details-content) {
+    :where(main details, .tool-menu details) { interpolate-size: allow-keywords; }
+    :where(main details, .tool-menu details)::details-content {
+      block-size: 0;
+      overflow: clip;
+      opacity: 0;
+      transition: block-size 180ms ease-out, content-visibility 180ms allow-discrete, opacity 120ms ease-out;
+      /* Expose newly opened fields at time zero so existing synchronous focus() still works. */
+      transition-delay: 0s, -1ms, 0s;
+    }
+    :where(main details, .tool-menu details)[open]::details-content { block-size: auto; opacity: 1; }
+    :where(main details, .tool-menu details):not([open])::details-content { interactivity: inert; }
+    /* Let the native popup reach its height limit gradually, before its list scrolls. */
+    #popup-menu details::details-content {
+      transition-duration: 240ms, 240ms, 160ms;
+      transition-timing-function: ease-in-out, linear, ease-out;
+    }
+    .tool-menu.is-sorting details::details-content { transition: none; }
+  }
+}
+@keyframes panel-arrive { from { opacity: 0; } to { opacity: 1; } }

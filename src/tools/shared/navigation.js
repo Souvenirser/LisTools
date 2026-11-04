@@ -22,9 +22,11 @@ export const pages = [
   {id:'pdf',file:'pdf.html',key:'pdf.name',icon:'files',zh:'PDF 合并与拆分',en:'Merge and split PDFs',group:'files',summaryKey:'ux.purpose_pdf'},
   {id:'draw',file:'draw.html',key:'draw.name',icon:'shuffle',zh:'抽签与分组',en:'Random draw',group:'daily',summaryKey:'ux.purpose_draw'},
   {id:'timer',file:'timer.html',key:'timer.name',icon:'timer',zh:'倒计时与秒表',en:'Timer & stopwatch',group:'daily',summaryKey:'ux.purpose_timer'},
+  {id:'insurance',file:'insurance.html',key:'insurance.name',icon:'shield-check',zh:'五险一金计算器',en:'Social insurance and housing fund',group:'daily',summaryKey:'insurance.description'},
+  {id:'tax',file:'tax.html',key:'tax.name',icon:'banknote',zh:'个税计算器',en:'Individual income tax calculator',group:'daily',summaryKey:'tax.description'},
 ];
 
-const aliases = {json:'format beautify 美化',diff:'compare 对比',timestamp:'date time 日期',speedtest:'speed network 网速',cron:'crontab schedule 定时',password:'passphrase random 随机 口令',regex:'regexp regular expression 正则 匹配 正则测试（开发用） Regex testing (developers)'};
+const aliases = {insurance:'五险一金 社保 公积金 住房公积金 social insurance housing fund',tax:'个税 个人所得税 税后工资 工资 到手工资 income tax take home pay',json:'format beautify 美化',diff:'compare 对比',timestamp:'date time 日期',speedtest:'speed network 网速',cron:'crontab schedule 定时',password:'passphrase random 随机 口令',regex:'regexp regular expression 正则 匹配 正则测试（开发用） Regex testing (developers)'};
 export const conversionGroups = categories.map(category=>({
   ...category,
   tools:tools.filter(tool=>tool.category===category.id).map(tool=>({
@@ -37,7 +39,7 @@ const leaves = [...new Map([
   ...conversionGroups.flatMap(group=>group.tools)
 ].map(item=>[item.file,item])).values()];
 
-export const taskRoutes={text:['dedupe','extract','replace','mask','case','newline'],qr:['generate','recognize'],images:['compress','resize','crop','format'],pdf:['merge','split','extract','reorder','delete','rotate','images'],dates:['difference','shift','milestone','workdays'],draw:['list','numbers'],timer:['countdown','stopwatch']};
+export const taskRoutes={tax:['wage','bonus','annual'],text:['dedupe','extract','replace','mask','case','newline'],qr:['generate','recognize'],images:['compress','resize','crop','format'],pdf:['merge','split','extract','reorder','delete','rotate','images'],dates:['difference','shift','milestone','workdays'],draw:['list','numbers'],timer:['countdown','stopwatch']};
 export const taskPresets=[
   ...[['phone','Phone','手机号提取|提取手机号|extract phone|phone extraction'],['email','Email','提取邮箱|邮箱提取|extract email|email extraction'],['url','Url','提取链接|链接提取|提取网址|extract links|extract urls']].map(([value,name,aliases])=>({page:'text',id:`extract-${value}`,task:'extract',control:'text-kind',value,key:`experience.extract${name}`,aliases})),
   ...[['dedupe','text.dedupe','删除重复行|remove duplicate lines|deduplicate lines'],['remove-empty','text.removeBlank','删除空行|删除空白行|remove empty lines|remove blank lines'],['trim','text.trim','逐行去空白|去除每行首尾空白|trim lines'],['sort','text.sort','排序|按行排序|sort lines']].map(([value,key,aliases])=>({page:'text',id:`lines-${value}`,task:'dedupe',control:'text-lines',value,key,aliases})),
@@ -48,8 +50,8 @@ export function resolveTaskRoute(id,hash=''){
   const value=hash.replace(/^#/,''),preset=taskPresets.find(item=>item.page===id&&item.id===value);
   return {task:preset?.task||(id==='convert'?tools.some(tool=>tool.id===value):taskRoutes[id]?.includes(value))&&value,preset};
 }
-const taskNames={text:['ux.textLines','ux.textExtract','ux.textReplace','ux.textMask','ux.textCase','ux.textNewline'],qr:['ux.qrGenerate','ux.qrRecognize'],images:['images.compressTask','images.resizeTask','images.crop','images.formatTask']};
-const taskAliases={dedupe:'deduplicate unique remove duplicate lines 删除重复行 去重 整理',extract:'extract 提取',replace:'replace 替换',mask:'mask 脱敏',case:'case naming 大小写 命名',newline:'newline line endings 换行',generate:'generate 生成',recognize:'scan read 识别',compress:'compress 压缩',resize:'resize 缩放 尺寸',crop:'crop 裁剪',format:'format 格式',merge:'merge 合并',split:'split 拆分',reorder:'reorder 重排 页序',delete:'delete 删除',rotate:'rotate 旋转',images:'images 图片',difference:'difference 日期差',shift:'shift 日期加减',milestone:'age anniversary 年龄 周年',workdays:'workdays 工作日',list:'list 名单 分组',numbers:'numbers 随机 数字',countdown:'countdown 倒计时',stopwatch:'stopwatch 秒表'};
+const taskNames={tax:['payroll.wage','payroll.bonus','payroll.annual'],text:['ux.textLines','ux.textExtract','ux.textReplace','ux.textMask','ux.textCase','ux.textNewline'],qr:['ux.qrGenerate','ux.qrRecognize'],images:['images.compressTask','images.resizeTask','images.crop','images.formatTask']};
+const taskAliases={wage:'工资 薪金 税后工资 salary wage',bonus:'年终奖 奖金 annual bonus',annual:'年度 工资 退税 汇算 annual salary',dedupe:'deduplicate unique remove duplicate lines 删除重复行 去重 整理',extract:'extract 提取',replace:'replace 替换',mask:'mask 脱敏',case:'case naming 大小写 命名',newline:'newline line endings 换行',generate:'generate 生成',recognize:'scan read 识别',compress:'compress 压缩',resize:'resize 缩放 尺寸',crop:'crop 裁剪',format:'format 格式',merge:'merge 合并',split:'split 拆分',reorder:'reorder 重排 页序',delete:'delete 删除',rotate:'rotate 旋转',images:'images 图片',difference:'difference 日期差',shift:'shift 日期加减',milestone:'age anniversary 年龄 周年',workdays:'workdays 工作日',list:'list 名单 分组',numbers:'numbers 随机 数字',countdown:'countdown 倒计时',stopwatch:'stopwatch 秒表'};
 const scopedTaskAliases={text:{extract:'email phone 邮箱 手机号 提取邮箱 邮箱提取 手机号提取 提取手机号'},pdf:{extract:'PDF page pages 页码 页面 PDF提取 PDF提取页面 提取PDF页面'},images:{compress:'图片压缩'}};
 const conversionTaskAliases={base64:['base64解码','base64编码','base64 decode','base64 encode'],base64url:['base64url解码','base64url编码','base64url decode','base64url encode']};
 const taskLeaves=Object.entries(taskRoutes).flatMap(([id,tasks])=>tasks.map((task,index)=>{const page=pages.find(p=>p.id===id);return {...page,id:id+'-'+task,file:page.file+'#'+task,key:taskNames[id]?.[index]||id+'.'+task,parentKey:page.key,aliases:[taskAliases[task],scopedTaskAliases[id]?.[task]].filter(Boolean).join(' ')};}));

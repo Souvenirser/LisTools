@@ -22,7 +22,7 @@ test('clock and both conversions remain in normal flow',async({page})=>{
  for(const open of[true,false,true]){
   await page.locator('#clock-details').evaluate((el,value)=>el.open=value,open);
   await expect.poll(async()=>page.evaluate(()=>{const clock=document.querySelector('.clock-overview').getBoundingClientRect(),next=document.querySelector('.timestamp-workspace').getBoundingClientRect();return next.top-clock.bottom;})).toBeGreaterThanOrEqual(0);
-  const overflow=await page.locator('.clock-overview').evaluate(el=>[...el.querySelectorAll('button,summary,.clock-panel')].filter(n=>n.checkVisibility()).some(n=>n.getBoundingClientRect().bottom>el.getBoundingClientRect().bottom+1));expect(overflow).toBe(false);
+  await expect.poll(()=>page.locator('.clock-overview').evaluate(el=>[...el.querySelectorAll('button,summary,.clock-panel')].filter(n=>n.checkVisibility()).some(n=>n.getBoundingClientRect().bottom>el.getBoundingClientRect().bottom+1))).toBe(false);
  }
 });
 for(const id of['dates','cron'])test(`${id} task buttons are vertically centered`,async({page})=>{
@@ -32,7 +32,7 @@ test('MD5 expanded formats do not stretch the input or its footer',async({page})
  await ready(page,'/convert.html#md5');await page.locator('#md5-run').click();await expect(page.locator('#md5-other-formats')).toBeVisible();
  const panel=page.locator('#convert-source').locator('..'),before=await panel.boundingBox();await page.locator('#md5-other-formats>summary').click();
  expect(Math.abs((await panel.boundingBox()).height-before.height)).toBeLessThanOrEqual(1);
- const result=page.locator('#md5-single');expect(await result.evaluate(el=>el.scrollHeight>el.clientHeight)).toBe(true);
+ const result=page.locator('#md5-single');await expect.poll(()=>result.evaluate(el=>el.scrollHeight>el.clientHeight)).toBe(true);
 });
 test('standard calculator uses a side information rail and fits short desktop',async({page})=>{
  await page.setViewportSize({width:1366,height:768});await ready(page,'/calculator.html');await expect(page.locator('#calculate')).toBeInViewport({ratio:1});

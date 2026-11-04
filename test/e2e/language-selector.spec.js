@@ -108,7 +108,7 @@ test('all fifty Cron languages preserve calculated dates, exports and structured
 
 for(const width of [640,900,1440])test(`shared language controls stay aligned on all tool pages at ${width}px in LTR and RTL`,async({page})=>{
  test.setTimeout(120000);await page.setViewportSize({width,height:960});
- const {pages}=await import('../../src/tools/shared/navigation.js');const files=[...new Set(pages.filter(item=>!item.file.includes('#')).map(item=>item.file))];expect(files).toHaveLength(18);
+ const {pages}=await import('../../src/tools/shared/navigation.js');const files=[...new Set(pages.filter(item=>!item.file.includes('#')).map(item=>item.file))];expect(files).toHaveLength(20);
  for(const code of ['zh-Hans','ar']){
   await page.goto('/calculator.html');await selectLanguage(page,code);
   for(const file of files){

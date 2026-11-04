@@ -10,7 +10,9 @@
  const code=catalog?.preferred(saved,navigator.languages||[navigator.language])||'en';
  const labels=catalog?.labels[code]||{loading:'Loading page…',stillLoading:'Still loading the page…',loadFailed:'The page could not be loaded.',reload:'Reload'};
  root.lang=code;root.dir=['ar','fa','he','ur'].includes(code)?'rtl':'ltr';root.dataset.uiState='booting';
- let panel,timer,slowTimer,done=false,native=false;
+ let panel,timer,slowTimer,done=false,native,restored=false,transitionTimer,finishNative;
+ const nativeDone=new Promise(resolve=>{finishNative=resolve;});
+ function arrive(){clearTimeout(transitionTimer);delete root.dataset.entryMotion;root.dataset.nativePhase='arrive';transitionTimer=setTimeout(finishNative,240);}
  function show(slow=false,failed=false){
   if(done&&!failed)return;
   if(!document.body){addEventListener('DOMContentLoaded',()=>show(slow,failed),{once:true});return;}
@@ -18,11 +20,18 @@
   panel.querySelector('span').textContent=labels[failed?'loadFailed':slow?'stillLoading':'loading'];const button=panel.querySelector('button');button.textContent=labels.reload;button.hidden=!slow&&!failed;
  }
  function clear(){clearTimeout(timer);clearTimeout(slowTimer);panel?.remove();panel=undefined;}
- function ready(){if(done)return;done=true;clear();root.dataset.uiState='ready';if(!native&&!document.hidden&&!matchMedia('(prefers-reduced-motion:reduce)').matches){root.dataset.entryMotion='fade';setTimeout(()=>delete root.dataset.entryMotion,170);}}
- function fail(){if(done)return;done=true;clear();root.dataset.uiState='failed';show(false,true);}
+ function ready(){if(done)return;done=true;clear();root.dataset.uiState='ready';if(native)arrive();else if(!document.hidden&&!matchMedia('(prefers-reduced-motion:reduce)').matches){root.dataset.entryMotion='fade';setTimeout(()=>delete root.dataset.entryMotion,240);}}
+ function fail(){if(done)return;done=true;clear();native?.skipTransition();finishNative();root.dataset.uiState='failed';show(false,true);}
  window.LisToolsBoot={ready,fail};timer=setTimeout(show,200);slowTimer=setTimeout(()=>show(true),3000);
  addEventListener('error',event=>{if(root.dataset.uiState==='booting'&&(event.target?.tagName==='SCRIPT'||event.error))fail();},true);
- addEventListener('pagereveal',event=>{if(!event.viewTransition)return;if(root.dataset.uiState!=='ready'||matchMedia('(prefers-reduced-motion:reduce)').matches)event.viewTransition.skipTransition();else{native=true;delete root.dataset.entryMotion;}});
- addEventListener('pageshow',event=>{if(event.persisted){clear();root.dataset.uiState='ready';delete root.dataset.entryMotion;}});
- addEventListener('pagehide',()=>{clear();delete root.dataset.entryMotion;});
+ addEventListener('pagereveal',event=>{
+  const transition=event.viewTransition;if(!transition)return;
+  if(restored||document.hidden||matchMedia('(prefers-reduced-motion:reduce)').matches||typeof transition.waitUntil!=='function'){transition.skipTransition();return;}
+  native=transition;root.dataset.nativePhase='waiting';delete root.dataset.entryMotion;transition.waitUntil(nativeDone);
+  transition.finished.finally(()=>{clearTimeout(transitionTimer);native=undefined;delete root.dataset.nativePhase;});
+  if(root.dataset.uiState==='ready')arrive();
+  else transitionTimer=setTimeout(()=>{if(!done){transition.skipTransition();finishNative();}},350);
+ });
+ addEventListener('pageshow',event=>{if(event.persisted){restored=true;clear();root.dataset.uiState='ready';delete root.dataset.entryMotion;}});
+ addEventListener('pagehide',()=>{clear();clearTimeout(transitionTimer);finishNative();delete root.dataset.nativePhase;delete root.dataset.entryMotion;});
 })();

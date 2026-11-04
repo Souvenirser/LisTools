@@ -32,7 +32,7 @@ export function setStatus(key,params={},withName=false){
 }
 export function clearStatus({keepStale=false}={}){if(keepStale&&status?.key==='ux.stale')return;updateFeedback(false);clearFieldError();status=undefined;const element=$('tool-status');if(element){element.dataset.taskState='idle';element.hidden=true;element.textContent='';element.classList.remove('sr-only');}}
 export function showError(error={},{field,focus=false}={}){
-  const key=error.code && /^(?:office|calculator|dates|qr|images|text|units|money|pdf|draw|timer)\./.test(error.code)?error.code:error.code==='TaskTimeout'?'office.timeout':'office.error';
+  const key=error.code && /^(?:office|calculator|dates|qr|images|text|units|money|pdf|draw|timer|insurance|tax|payroll)\./.test(error.code)?error.code:error.code==='TaskTimeout'?'office.timeout':'office.error';
   setStatus(key,error.params,true);$('tool-status')?.classList.add('is-error');if($('tool-status'))$('tool-status').dataset.taskState='error';
   field=typeof field==='string'?$(field):field;
   if(field){
