@@ -12,17 +12,31 @@ mountSettings(document.querySelector('.popup-header'),{sort:()=>document.getElem
 onLanguageChange(()=>{document.documentElement.lang=language();document.documentElement.dir=languages.find(item=>item.code===language()).dir;document.getElementById('popup-caption').textContent=t('common.tools');});
 
 const maximumHeight=parseFloat(getComputedStyle(menu).maxHeight);
-let frame;
-function fitPopup(grow=false){
-  cancelAnimationFrame(frame);
-  // Allow native content sizing to grow the popup before checking its available height.
-  if(grow)menu.style.removeProperty('max-height');
+const maximumPopupHeight=maximumHeight+document.querySelector('.popup-header').offsetHeight;
+const nativePopup=Boolean(globalThis.chrome?.runtime?.id);
+let frame,previousScale;
+function fitPopup(){
+  if(frame!==undefined)return;
   frame=requestAnimationFrame(()=>{frame=requestAnimationFrame(()=>{
-    const bounds=menu.getBoundingClientRect(),available=Math.max(0,innerHeight-bounds.top);
-    menu.style.maxHeight=`${Math.min(maximumHeight,available)}px`;
+    frame=undefined;
+    const bounds=menu.getBoundingClientRect(),scale=bounds.width/menu.offsetWidth||1;
+    const preferred=Math.min(maximumHeight,Math.max(0,maximumPopupHeight-bounds.top)/scale);
+    const current=parseFloat(menu.style.maxHeight);
+    // Release a previous limit when the content scale or available viewport grows.
+    if(nativePopup&&current!==preferred&&((previousScale!==undefined&&scale!==previousScale)||bounds.bottom<innerHeight-1)){
+      menu.style.maxHeight=`${preferred}px`;previousScale=scale;fitPopup();return;
+    }
+    previousScale=scale;
+    // Wait for Chrome's auto-size, then constrain only genuine overflow. Keeping
+    // an intermediate fitting height as a limit would stop the opening animation.
+    if(!nativePopup||bounds.bottom>innerHeight+1){
+      const available=Math.max(0,innerHeight-bounds.top)/scale;
+      menu.style.maxHeight=`${Math.min(preferred,available)}px`;
+    }else if(!Number.isFinite(current)||current>preferred)menu.style.maxHeight=`${preferred}px`;
   });});
 }
-new MutationObserver(()=>fitPopup(true)).observe(menu,{childList:true,subtree:true});
-menu.addEventListener('toggle',()=>fitPopup(true),true);
+new MutationObserver(fitPopup).observe(menu,{childList:true,subtree:true});
+new ResizeObserver(fitPopup).observe(menu);
+menu.addEventListener('toggle',fitPopup,true);
 window.addEventListener('resize',()=>fitPopup());
-fitPopup(true);
+fitPopup();
