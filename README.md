@@ -56,7 +56,7 @@ xcrun safari-web-extension-packager dist --app-name LisTools --bundle-identifier
 
 GitHub 的 **Source code** 压缩包是源码，需要按下文构建后加载 `dist/`。手动安装的版本需要自行下载更新并在扩展管理页重新加载。
 
-当前发布版本为 **v1.2.4**，下载见 [GitHub Release](https://github.com/Souvenirser/LisTools/releases/tag/v1.2.4)。`LisTools-1.2.4.zip` 可上传 Chrome 开发者后台，或解压后加载。本版修复弹层首次打开跳变、链接提取边界、日期重复计算选区丢失及长标签对齐，改善窄屏查找替换和错误反馈。发布前重新运行单元测试并构建、核对版本与附件；此前完成的 808 项 Chromium、43 项 WebKit 及真实 Chrome 缩放验证与本次版本更新分别记录，详见 [发布说明](./docs/release-1.2.4.md)。支持页继续排除发布源码与安装包；未代为提交商店审核。
+当前发布版本为 **v1.2.5**，下载见 [GitHub Release](https://github.com/Souvenirser/LisTools/releases/tag/v1.2.5)。`LisTools-1.2.5.zip` 可上传 Chrome 开发者后台，或解压后加载。本版增加五险一金与个税工具，优化分类展开和页面打开衔接，修复放大后弹窗底部裁切；完整更新见 [发布说明](./docs/release-1.2.5.md)。本次按用户要求不重跑测试，更新版本并构建发布。支持页继续排除发布源码与安装包，未代为提交商店审核。
 
 
 ## 文件处理与结果
@@ -232,7 +232,7 @@ npm run build
 构建输出：
 
 - `dist/`：共用的 Manifest V3 扩展资源，按上文各浏览器方式加载或转换。
-- `releases/LisTools-1.2.4.zip`：根目录包含 manifest.json 的完整资源包。
+- `releases/LisTools-1.2.5.zip`：根目录包含 manifest.json 的完整资源包。
 
 Chrome / Edge 等 Chromium 浏览器开启开发者模式，点击 **加载已解压的扩展程序**，选择本项目的 `dist`；Firefox 按上文临时加载，Safari 使用官方转换工具。固定 LisTools 图标，点击图标打开工具菜单；JSON 工作台仍使用 `index.html`。无需为 Edge 另写或另打包一套工具代码。
 
@@ -342,3 +342,11 @@ JSON 输入复用 CodeMirror；小文本、日期、单位、人民币大写和�
 PDF 导入时暂不接收第二批并显示读取状态，结束后可以继续追加。图片逐项完成后即可下载，取消保留已完成项；同名文件自动区分。抽签大结果最多预览前100组、1 MiB，复制和导出仍包含完整数据。
 
 本轮候选放在独立的 `releases/refinement-1.2.0-20261026/`，保留历史包；没有提交、发布或上架。测试与兼容性边界见[本轮精修验收记录](./docs/refinement-verification.md)。
+
+## 五险一金与个税（本地候选功能）
+
+新增 `insurance.html` 与 `tax.html`，归入日常计算。工资、扣除与结果只保留在当前页面。缴费明细区分现金扣款、税前可扣除金额、公积金入账和单位成本；个税包含累计预扣、奖金对比与年度工资估算。
+
+城市目录包含20城和自定义，但目录覆盖不代表政策全部核验。完整状态见 [20城政策覆盖表](docs/payroll-policy-coverage.md)。缺失或待核验政策必须填写并确认自定义参数；年度自动估算按每月匹配，不能用当前规则乘12。未知单位费率不显示成0。
+
+政策维护：将候选数据转换为同结构本地JSON后，执行 `node scripts/compare-payroll-policy.js candidate.json`，仅输出差异，不更新参数。先官方复核有效期、基数、比例、固定费用及舍入，再更新算例和随版本发布。开源来源与MIT许可见 THIRD_PARTY_NOTICES.md。
