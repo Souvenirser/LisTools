@@ -16,6 +16,7 @@
 .tool-menu-name { min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .tool-menu-name small { display:block; white-space:normal; color:var(--muted); font-size:.875rem; font-weight:400; }
 .tool-menu-arrow { margin-inline-start:auto; font-size:1.25rem; line-height:1; transition:transform .1s; }
+@media(prefers-reduced-motion:reduce){.tool-menu-arrow{transition:none}}
 .tool-menu details[open] > summary > .tool-menu-arrow { transform:rotate(90deg); }
 .tool-menu-group { margin-inline-start:8px; border-inline-start:1px solid var(--border); padding-inline-start:4px; }
 .tool-menu-empty { margin:16px; color:var(--muted); }

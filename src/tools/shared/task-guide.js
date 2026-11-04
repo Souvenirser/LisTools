@@ -16,7 +16,13 @@ export function addTaskGuide(id,tasks,{choose,example,hasContent,initialTask,bef
     guide.prepend(label);picker=label.querySelector('select');picker.onchange=()=>activate(picker.value,true);
   }
   document.querySelector('.tool-heading,.page-heading').after(guide);
-  let selected=tasks[0].id;const routed=Boolean(taskRoutes[id]),requestedHash=location.hash.slice(1);let initialized=false;
+  let selected=tasks[0].id;const routed=Boolean(taskRoutes[id]),requestedHash=location.hash.slice(1);let initialized=false,arrival;
+  function revealTask(){
+    arrival?.cancel();
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    const workspace=[...guide.parentElement.children].find(node=>node!==guide&&node.matches('.tool-grid,.workspace,.media-workspace,.password-workspace,.payroll-workspace,.cron-workspace,.tool-card:not(.task-guide)'));
+    if(workspace)arrival=workspace.animate([{opacity:.65},{opacity:1}],{duration:100,easing:'ease-out'});
+  }
   function select(value,write=true){if(!tasks.some(task=>task.id===value))return;const changed=selected!==value;selected=value;if(initialized&&write&&changed&&routed)history.replaceState(null,'','#'+value);if(picker)picker.value=value;for(const button of guide.querySelectorAll('[data-task]'))button.setAttribute('aria-pressed',String(button.dataset.task===value));}
   function activate(value,push=false,initial=false){
     const route=resolveTaskRoute(id,value),preset=route.preset;
@@ -25,6 +31,7 @@ export function addTaskGuide(id,tasks,{choose,example,hasContent,initialTask,bef
     if(!initial&&!changed&&!presetChanged)return;
     if(next!==selected&&beforeChoose?.(next,selected)===false){if(picker)picker.value=selected;if(routed&&location.hash!=='#'+selected)history.replaceState(null,'','#'+selected);return;}
     if(push&&routed&&location.hash!=='#'+next)history.pushState(null,'','#'+next);select(next,false);if(changed||initial)choose(next,{fromRoute:!push});if(presetChanged)applyPreset?.(preset);for(let node=guide.querySelector('[data-task="'+next+'"]')?.parentElement;node&&node!==guide;node=node.parentElement)if(node.tagName==='DETAILS')node.open=true;
+    if(changed&&!initial)revealTask();
   }
   for(const button of guide.querySelectorAll('[data-task]'))button.onclick=()=>activate(button.dataset.task,true);
   if(routed)addEventListener('hashchange',()=>activate(location.hash.slice(1)));

@@ -183,7 +183,7 @@ export function mountToolMenu(root,{popup=false,close=()=>{}}={}) {
       if(popup)window.close();else close();
       return;
     }
-    const rows=[...(editing()?list:scroll).querySelectorAll(editing()?'.tool-menu-sort-handle':'a,summary')].filter(element=>element.checkVisibility());
+    const rows=[...(editing()?list:scroll).querySelectorAll(editing()?'.tool-menu-sort-handle':'a,summary')].filter(element=>element.checkVisibility()&&!element.closest('.tool-menu-group')?.closest('details:not([open])'));
     const index=rows.indexOf(document.activeElement);
     if(event.key==='ArrowDown' || event.key==='ArrowUp') {
       event.preventDefault();
@@ -217,12 +217,13 @@ export function mountHeaderMenu() {
   const record=()=>{const target=currentTarget(location.pathname,location.hash),entry=pages.find(page=>page.file===target)||pages.find(page=>page.file===location.pathname.split('/').pop());if(entry)recordRecent(entry.id);};record();requestAnimationFrame(()=>menu.restoreView());addEventListener('hashchange',record);
   function position() {
     const rect=trigger.getBoundingClientRect();
-    const left=document.documentElement.dir==='rtl'?rect.right-popover.offsetWidth:rect.left;
-    popover.style.left=`${Math.max(8,Math.min(left,innerWidth-popover.offsetWidth-8))}px`;
+    const width=parseFloat(getComputedStyle(popover).width);
+    const left=document.documentElement.dir==='rtl'?rect.right-width:rect.left;
+    popover.style.left=`${Math.max(8,Math.min(left,innerWidth-width-8))}px`;
     popover.style.top=`${rect.bottom+8}px`;
     popover.style.maxHeight=`${Math.max(0,Math.min(560,innerHeight-rect.bottom-16))}px`;
   }
-  popover.addEventListener('beforetoggle',event=>{if(event.newState==='closed')menu.reset();});
+  popover.addEventListener('beforetoggle',event=>{if(event.newState==='closed')menu.reset();else position();});
   popover.addEventListener('toggle',event=>{
     const open=event.newState==='open';trigger.setAttribute('aria-expanded',String(open));
     if(open){position();menu.open();}
