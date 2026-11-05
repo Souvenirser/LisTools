@@ -20,7 +20,8 @@ export function translateDOM(root = document) {
   }
 }
 
-mountHeaderMenu();
+const headerMenu=mountHeaderMenu();
+export function restoreWorkspaceNavigation(){headerMenu?.restoreView();}
 const feedbackFooter=document.querySelector('.workbench-footer');
 const refreshFeedback=feedbackFooter?mountFeedbackLink(feedbackFooter,()=>({
   issuesUrl:bugs.url,tool:feedbackTool(location.pathname,location.hash),version,locale:language(),label:t('common.feedback'),hint:t('common.feedbackHint')

@@ -22,8 +22,8 @@
 .tool-page .cm-editor { min-height: 220px; height: 100%; border: 1px solid var(--border); border-radius: 5px; overflow: hidden; font-size: 1rem; line-height:1.625; direction: ltr; }
 .tool-page .cm-scroller { overflow: auto; max-height: 520px; font-family: var(--mono); }
 .tool-page .cm-content { min-height: 220px; }
-.tool-page details { margin-block: 12px; }
-.tool-page summary { cursor: pointer; }
+.tool-page :where(main) details { margin-block: 12px; }
+.tool-page :where(main) summary { cursor: pointer; }
 @media (max-width:1000px) { .tool-grid { grid-template-columns: 1fr; } }
 
 /* CodeMirror placeholders inherit the same readable helper contrast. */

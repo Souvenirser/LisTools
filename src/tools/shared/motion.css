@@ -45,6 +45,8 @@
       transition-duration: 240ms, 240ms, 160ms;
       transition-timing-function: ease-in-out, linear, ease-out;
     }
+    /* Reverse category height smoothly without fading every label on each click. */
+    .tool-menu details::details-content { opacity: 1; transition-property: block-size, content-visibility; }
     .tool-menu.is-sorting details::details-content { transition: none; }
   }
 }

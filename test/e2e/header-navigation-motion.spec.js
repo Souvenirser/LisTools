@@ -27,17 +27,18 @@ for(const [button,panel,close] of [['settings-open','workbench-settings','close'
 
 test('tool navigation keeps the old screen until the initialized destination can arrive',async({page,browserName})=>{
  test.skip(browserName!=='chromium','Cross-document transition readiness is checked in Chromium.');
- await page.addInitScript(()=>{window.navigationFrames=[];addEventListener('pagereveal',event=>{navigationFrames.push({state:document.documentElement.dataset.uiState,native:!!event.viewTransition});event.viewTransition?.ready.then(()=>navigationFrames.push('ready'),error=>navigationFrames.push(error.name));});});
+ await page.addInitScript(()=>{window.navigationFrames=[];addEventListener('pagereveal',event=>{navigationFrames.push({state:document.documentElement.dataset.uiState,native:!!event.viewTransition});event.viewTransition?.ready.then(()=>navigationFrames.push('ready'),error=>navigationFrames.push(error.name));event.viewTransition?.finished.then(()=>navigationFrames.push('finished'));});});
  await ready(page);await page.locator('details[data-group-id="daily"]>summary').click();await page.locator('[data-tool-id="money"]').click();
  await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');await page.waitForTimeout(300);
- const frames=await page.evaluate(()=>navigationFrames);expect(frames.some(frame=>frame?.native)).toBe(true);expect(frames).toContain('ready');expect(frames).not.toContain('AbortError');
+ const frames=await page.evaluate(()=>navigationFrames);expect(frames.some(frame=>frame?.native)).toBe(true);expect(frames).toContain('finished');await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');expect(await page.locator('html').getAttribute('data-native-phase')).toBeNull();
 });
 
-test('new tab entrance has a perceptible content transition and respects reduced motion',async({page})=>{
- await page.addInitScript(()=>{window.arrivals=[];const until=performance.now()+2000;function frame(){const body=document.body;if(body&&document.documentElement.dataset.uiState==='ready')for(const animation of body.getAnimations())arrivals.push(animation.effect.getTiming().duration);if(performance.now()<until)requestAnimationFrame(frame);}requestAnimationFrame(frame);});
+test('new tab entrance keeps the shell visible and respects reduced motion',async({page})=>{
+ await page.addInitScript(()=>{window.arrivals=[];const until=performance.now()+2000;function frame(){const main=document.querySelector('main');if(main&&document.documentElement.dataset.uiState==='ready')for(const animation of main.getAnimations())arrivals.push({duration:animation.effect.getTiming().duration,body:Number(getComputedStyle(document.body).opacity),main:Number(getComputedStyle(main).opacity)});if(performance.now()<until)requestAnimationFrame(frame);}requestAnimationFrame(frame);});
  await page.goto('/index.html');await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');
- await expect.poll(()=>page.evaluate(()=>arrivals.some(duration=>duration>=200))).toBe(true);
- await page.emulateMedia({reducedMotion:'reduce'});await ready(page);expect(await page.locator('body').evaluate(n=>getComputedStyle(n).animationName)).toBe('none');
+ await expect.poll(()=>page.evaluate(()=>arrivals.some(frame=>frame.duration===150))).toBe(true);
+ for(const frame of await page.evaluate(()=>arrivals)){expect(frame.body).toBe(1);expect(frame.main).toBeGreaterThanOrEqual(.95);}
+ await page.emulateMedia({reducedMotion:'reduce'});await ready(page);expect(await page.locator('main').evaluate(n=>getComputedStyle(n).animationName)).toBe('none');
  await page.locator('#settings-open').click();await page.locator('#settings-close').click();await expect(page.locator('#workbench-settings')).not.toBeVisible();
 });
 

@@ -3,8 +3,11 @@ const entries=import.meta.glob(['./main.js','./diff.js','./convert.js','./timest
 try {
   if(document.body.dataset.entry!=='popup')await import('./style.css');
   await entries[`./${document.body.dataset.entry}.js`]();
-  if(document.body.dataset.entry!=='popup')await (await import('./i18n.js')).prepareWorkspace();
+  const workspace=document.body.dataset.entry!=='popup'?await import('./i18n.js'):undefined;
+  await workspace?.prepareWorkspace();
   await new Promise(resolve=>document.hidden?setTimeout(resolve,0):requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+  // The header observer must establish the final scroll range before restoration.
+  workspace?.restoreWorkspaceNavigation();
   window.LisToolsBoot?.ready();
 } catch(error) {
   window.LisToolsBoot?.fail();

@@ -12,7 +12,7 @@
  root.lang=code;root.dir=['ar','fa','he','ur'].includes(code)?'rtl':'ltr';root.dataset.uiState='booting';
  let panel,timer,slowTimer,done=false,native,restored=false,transitionTimer,finishNative;
  const nativeDone=new Promise(resolve=>{finishNative=resolve;});
- function arrive(){clearTimeout(transitionTimer);delete root.dataset.entryMotion;root.dataset.nativePhase='arrive';transitionTimer=setTimeout(finishNative,240);}
+ function arrive(){clearTimeout(transitionTimer);native?.skipTransition();finishNative();root.dataset.entryMotion='content';setTimeout(()=>delete root.dataset.entryMotion,240);}
  function show(slow=false,failed=false){
   if(done&&!failed)return;
   if(!document.body){addEventListener('DOMContentLoaded',()=>show(slow,failed),{once:true});return;}

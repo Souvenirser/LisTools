@@ -56,7 +56,7 @@ xcrun safari-web-extension-packager dist --app-name LisTools --bundle-identifier
 
 GitHub 的 **Source code** 压缩包是源码，需要按下文构建后加载 `dist/`。手动安装的版本需要自行下载更新并在扩展管理页重新加载。
 
-当前发布版本为 **v1.2.5**，下载见 [GitHub Release](https://github.com/Souvenirser/LisTools/releases/tag/v1.2.5)。`LisTools-1.2.5.zip` 可上传 Chrome 开发者后台，或解压后加载。本版增加五险一金与个税工具，优化分类展开和页面打开衔接，修复放大后弹窗底部裁切；完整更新见 [发布说明](./docs/release-1.2.5.md)。本次按用户要求不重跑测试，更新版本并构建发布。支持页继续排除发布源码与安装包，未代为提交商店审核。
+本次版本为 **v1.2.6**，发布下载见 [GitHub Releases](https://github.com/Souvenirser/LisTools/releases)。`LisTools-1.2.6.zip` 可上传 Chrome 开发者后台，或解压后加载。本版修复工具切换闪屏、快速连续点击失效和侧栏滚动位置偏移；完整更新见 [发布说明](./docs/release-1.2.6.md)。本次按用户要求不重跑测试，仅更新版本、构建和打包。支持页继续排除发布源码与安装包，未代为提交商店审核。
 
 
 ## 文件处理与结果
@@ -232,7 +232,7 @@ npm run build
 构建输出：
 
 - `dist/`：共用的 Manifest V3 扩展资源，按上文各浏览器方式加载或转换。
-- `releases/LisTools-1.2.5.zip`：根目录包含 manifest.json 的完整资源包。
+- `releases/LisTools-1.2.6.zip`：根目录包含 manifest.json 的完整资源包。
 
 Chrome / Edge 等 Chromium 浏览器开启开发者模式，点击 **加载已解压的扩展程序**，选择本项目的 `dist`；Firefox 按上文临时加载，Safari 使用官方转换工具。固定 LisTools 图标，点击图标打开工具菜单；JSON 工作台仍使用 `index.html`。无需为 Edge 另写或另打包一套工具代码。
 

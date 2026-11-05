@@ -35,9 +35,9 @@ for(const {height,scale} of [{height:440,scale:1},{height:600,scale:1.25}])test(
  await expect(page.locator('details[data-group-id="network"]>summary')).toBeInViewport();await expect(page.locator('.tool-menu-footer .feedback-link')).toBeInViewport();
 });
 
-test('a fresh tool tab reveals its header and sidebar gently with the work area',async({page})=>{
+test('a fresh tool tab keeps its shell opaque while the work area arrives',async({page})=>{
  await page.addInitScript(()=>{window.entryFrames=[];function frame(){if(document.documentElement.dataset.uiState==='ready')entryFrames.push({body:Number(getComputedStyle(document.body).opacity),main:Number(getComputedStyle(document.querySelector('main')).opacity)});if(entryFrames.length<24)requestAnimationFrame(frame);}requestAnimationFrame(frame);});
  await page.goto('/tax.html');await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');await page.waitForTimeout(400);
- const frames=await page.evaluate(()=>entryFrames);expect(frames.filter(f=>f.body>0&&f.body<.99).length).toBeGreaterThan(2);expect(frames.at(-1).body).toBe(1);
- await page.emulateMedia({reducedMotion:'reduce'});await page.reload();await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');expect(await page.locator('body').evaluate(n=>getComputedStyle(n).animationName)).toBe('none');
+ const frames=await page.evaluate(()=>entryFrames);expect(frames.some(f=>f.main<1)).toBe(true);for(const frame of frames){expect(frame.body).toBe(1);expect(frame.main).toBeGreaterThanOrEqual(.95);}expect(frames.at(-1).main).toBe(1);
+ await page.emulateMedia({reducedMotion:'reduce'});await page.reload();await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');expect(await page.locator('main').evaluate(n=>getComputedStyle(n).animationName)).toBe('none');
 });

@@ -164,7 +164,10 @@ export function mountToolMenu(root,{popup=false,close=()=>{}}={}) {
     if(!popup){
       rememberView();
       const url=new URL(anchor.href),page=pages.find(page=>page.file===url.pathname.split('/').pop()),preset=page&&resolveTaskRoute(page.id,url.hash).preset;
-      if(preset?url.pathname===location.pathname&&url.hash===location.hash:currentTarget(url.pathname,url.hash)===currentTarget(location.pathname,location.hash))event.preventDefault();
+      if(preset?url.pathname===location.pathname&&url.hash===location.hash:currentTarget(url.pathname,url.hash)===currentTarget(location.pathname,location.hash)){
+        event.preventDefault();
+        if(root.classList.contains('is-sidebar')&&!root.classList.contains('is-searching'))return;
+      }
       else if(new URL(anchor.href).pathname!==location.pathname&&hasUserContent()){anchor.target='_blank';anchor.rel='noopener';}
     }
     if(popup){
@@ -204,7 +207,7 @@ export function mountToolMenu(root,{popup=false,close=()=>{}}={}) {
   addEventListener('listools:preferences',updatePreferences);
   addEventListener('hashchange',refreshCurrent);
   onLanguageChange(translate);translate();
-  return {restoreView(){restoreView(savedView);},open(){render();search.focus({preventScroll:true});},reset(){if(editing())finish(false,false);const filtered=Boolean(search.value);composing=false;search.value='';if(filtered)render();}};
+  return {restoreView(){if(Number.isFinite(savedView?.top))scroll.scrollTop=savedView.top;},open(){render();search.focus({preventScroll:true});},reset(){if(editing())finish(false,false);const filtered=Boolean(search.value);composing=false;search.value='';if(filtered)render();}};
 }
 
 export function mountHeaderMenu() {
@@ -214,7 +217,7 @@ export function mountHeaderMenu() {
   document.body.append(popover);trigger.setAttribute('popovertarget',popover.id);trigger.setAttribute('aria-controls',popover.id);trigger.setAttribute('aria-expanded','false');
   let shell;const menu=mountToolMenu(popover,{close:()=>{if(shell)shell.close();else{popover.hidePopover();trigger.focus();}}});
   shell=mountWorkbenchShell({root:popover,trigger,menu});
-  const record=()=>{const target=currentTarget(location.pathname,location.hash),entry=pages.find(page=>page.file===target)||pages.find(page=>page.file===location.pathname.split('/').pop());if(entry)recordRecent(entry.id);};record();requestAnimationFrame(()=>menu.restoreView());addEventListener('hashchange',record);
+  const record=()=>{const target=currentTarget(location.pathname,location.hash),entry=pages.find(page=>page.file===target)||pages.find(page=>page.file===location.pathname.split('/').pop());if(entry)recordRecent(entry.id);};record();addEventListener('hashchange',record);
   function position() {
     const rect=trigger.getBoundingClientRect();
     const width=parseFloat(getComputedStyle(popover).width);
@@ -229,4 +232,5 @@ export function mountHeaderMenu() {
     if(open){position();menu.open();}
   });
   window.addEventListener('resize',()=>{if(popover.hasAttribute('popover')&&popover.matches(':popover-open'))position();});
+  return menu;
 }

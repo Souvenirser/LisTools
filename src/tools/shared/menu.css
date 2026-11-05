@@ -12,6 +12,12 @@
 .tool-menu-link[aria-current="page"]{box-shadow:inset 3px 0 var(--blue-11)}
 [dir="rtl"] .tool-menu-link[aria-current="page"]{box-shadow:inset -3px 0 var(--blue-11)}
 .tool-menu-link[aria-current="page"] { background:var(--blue-3); color:var(--blue-12); font-weight:600; }
+.tool-menu-item{border-radius:8px}
+.tool-menu-item:hover{background:var(--slate-3)}
+.tool-menu-item:has(>a[aria-current="page"]){background:var(--blue-3);box-shadow:inset 3px 0 var(--blue-11)}
+[dir="rtl"] .tool-menu-item:has(>a[aria-current="page"]){box-shadow:inset -3px 0 var(--blue-11)}
+.tool-menu-item>.tool-menu-link,.tool-menu-item>.tool-menu-link:hover,.tool-menu-item>.tool-menu-link[aria-current="page"]{background:transparent;box-shadow:none}
+@media(prefers-reduced-motion:no-preference){.tool-menu-item,.tool-menu summary,.tool-menu-link{transition:background-color 100ms ease-out,color 100ms ease-out}}
 .tool-menu-icon { display:inline-grid; place-items:center; width:24px; flex:0 0 24px; direction:ltr; }
 .tool-menu-name { min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .tool-menu-name small { display:block; white-space:normal; color:var(--muted); font-size:.875rem; font-weight:400; }
