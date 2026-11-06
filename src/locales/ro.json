@@ -2141,7 +2141,16 @@
     "annualSpecial": "Deduceri suplimentare speciale anuale confirmate (CNY)",
     "annualOther": "Alte deduceri anuale confirmate (CNY)",
     "employeeRate": "Rata angajaților (%)",
-    "employerRate": "Rata angajatorului (%)"
+    "employerRate": "Rata angajatorului (%)",
+    "basicDeductionMode": "Metoda de bază a deducerii cheltuielilor",
+    "predictionMode": "Metoda de reținere anticipată",
+    "basicStandard": "Reținere cumulativă standard",
+    "basicFirst": "Primul venit salarial anul acesta",
+    "basicAnnual": "Reținere simplificată anuală eligibilă de 60.000 CNY",
+    "standardHint": "Deduceți 5.000 CNY pentru fiecare lună de salarizare la acest angajator.",
+    "reliefEligibility": "Confirm că îndeplinesc toate condițiile de eligibilitate de mai jos.",
+    "reliefHint": "Anul trecut, acest angajator a raportat salariul meu în fiecare lună, iar salariul meu total, inclusiv bonusurile, nu a depășit 60.000 CNY. Anul acesta am continuat să primesc salariu aici din ianuarie.",
+    "partialTax": "Contribuții calculate cu succes; impozitul pe venit nu a fost generat. Exporturile de contribuții rămân disponibile."
   },
   "insurance": {
     "name": "Fondul de asigurări sociale și locuințe",
@@ -2159,11 +2168,19 @@
     "description": "Calculați reținerea la sursă pe salariul rezidenților, impozitul pe bonus și impozitul pe salariu anual cu ipoteze explicite și detalii de calcul.",
     "monthRange": "Salarizarea și lunile de început trebuie să fie 1–12, luna de început nu mai târziu de luna de salarizare.",
     "previousRequired": "Introduceți sumele cumulate anterioare la acest angajator; nu presupune că sunt zero.",
+    "firstMonthHistory": "Totalurile anterioare trebuie să fie zero în prima lună fiscală la acest angajator. Verificați luna de început și sumele istorice.",
     "bonusExpired": "Impozitarea separată a bonusului este verificată pentru 2026–2027. Această metodă nu este disponibilă pentru alți ani.",
     "year": "Introduceți un an fiscal valabil între 2026 și 9999.",
     "duplicateMonth": "Datele lunare trebuie să utilizeze luni valide unice (1–12).",
     "housingConflict": "Nu pot fi introduse ambele deduceri pentru chiria locuinței și dobânzile ipotecare.",
     "policyMissing": "Unele luni nu au nicio politică verificată. Introduceți contribuțiile reale sau parametri personalizați expliciți pentru lunile respective.",
-    "cityQuick": "Estimările orașului necesită verificarea politicii pentru fiecare lună. Utilizați modul efectiv cumulat sau anual sau introduceți contribuțiile confirmate ale angajaților."
+    "cityQuick": "Estimările orașului necesită verificarea politicii pentru fiecare lună. Utilizați modul efectiv cumulat sau anual sau introduceți contribuțiile confirmate ale angajaților.",
+    "firstMonthZero": "În prima lună de salarizare la acest angajator, totalurile anterioare sunt zero. Schița dvs. de luna anterioară este păstrată pentru lunile ulterioare.",
+    "deductionMode": "Selectați o metodă acceptată de deducere a cheltuielilor de bază.",
+    "deductionConflict": "Indicatorul moștenit pentru prima angajare intră în conflict cu metoda de deducere selectată.",
+    "reliefConfirmation": "Confirmați toate condițiile de eligibilitate înainte de a utiliza o reținere simplificată anuală de 60.000 CNY.",
+    "reliefStart": "Reținerea simplificată anuală de 60.000 CNY necesită angajare aici din ianuarie.",
+    "previousBasicRange": "Deducerile anterioare ale cheltuielilor de bază sunt în conflict cu această metodă. Suma anterioară permisă este de cel mult {{max}}; reținerea simplificată necesită exact 60.000 CNY după ianuarie.",
+    "reliefMonths": "Pentru reținerea simplificată, furnizați în fiecare lună din ianuarie până în ultima lună selectată, fără lacune."
   }
 }

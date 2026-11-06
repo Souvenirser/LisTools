@@ -2141,7 +2141,16 @@
     "annualSpecial": "Makato maalum ya ziada ya kila mwaka yaliyothibitishwa (CNY)",
     "annualOther": "Makato mengine ya kila mwaka yaliyothibitishwa (CNY)",
     "employeeRate": "Kiwango cha mfanyakazi (%)",
-    "employerRate": "Kiwango cha mwajiri (%)"
+    "employerRate": "Kiwango cha mwajiri (%)",
+    "basicDeductionMode": "Njia ya msingi ya kupunguza gharama",
+    "predictionMode": "Mbinu iliyotabiriwa ya kukata kodi",
+    "basicStandard": "Jumla ya kiasi cha kawaida cha kukata kodi",
+    "basicFirst": "Mapato ya kwanza ya mshahara mwaka huu",
+    "basicAnnual": "Ulipaji kodi uliorahisishwa wa CNY 60,000 wa kila mwaka",
+    "standardHint": "Kata CNY 5,000 kwa kila mwezi wa malipo kwa mwajiri huyu.",
+    "reliefEligibility": "Ninathibitisha kuwa ninatimiza masharti yote ya kujiunga hapa chini.",
+    "reliefHint": "Mwaka jana, mwajiri huyu aliripoti mshahara wangu kila mwezi na jumla ya mshahara wangu ikijumuisha bonasi haukuzidi CNY 60,000. Mwaka huu nimeendelea kupokea mshahara hapa tangu Januari.",
+    "partialTax": "Michango imekokotolewa kwa mafanikio; kodi ya mapato haikutolewa. Usafirishaji wa michango bado unapatikana."
   },
   "insurance": {
     "name": "Bima ya kijamii na mfuko wa makazi",
@@ -2159,11 +2168,19 @@
     "description": "Kukokotoa zuio la mishahara ya mkazi, ushuru wa bonasi na ushuru wa mshahara wa kila mwaka na mawazo ya wazi na maelezo ya hesabu.",
     "monthRange": "Malipo na miezi ya kuanzia lazima iwe 1-12, na mwezi wa kuanzia sio zaidi ya mwezi wa malipo.",
     "previousRequired": "Weka kiasi cha awali cha limbikizo kwa mwajiri huyu; usidhani ni sifuri.",
+    "firstMonthHistory": "Jumla ya awali lazima iwe sufuri katika mwezi wa kwanza wa kodi na mwajiri huyu. Angalia mwezi wa kuanza na kiasi cha kihistoria.",
     "bonusExpired": "Ushuru tofauti wa bonasi umethibitishwa kwa 2026–2027. Njia hii haipatikani kwa miaka mingine.",
     "year": "Weka mwaka halali wa kodi kati ya 2026 na 9999.",
     "duplicateMonth": "Data ya kila mwezi lazima itumie miezi halali ya kipekee (1–12).",
     "housingConflict": "Kodi ya nyumba na makato ya riba ya rehani hayawezi kuingizwa.",
     "policyMissing": "Baadhi ya miezi haina sera iliyothibitishwa. Weka michango halisi au vigezo maalum vya miezi hiyo.",
-    "cityQuick": "Makadirio ya jiji yanahitaji uthibitishaji wa sera kwa kila mwezi. Tumia hali halisi ya limbikizo au kila mwaka, au uweke michango iliyothibitishwa ya wafanyikazi."
+    "cityQuick": "Makadirio ya jiji yanahitaji uthibitishaji wa sera kwa kila mwezi. Tumia hali halisi ya limbikizo au kila mwaka, au uweke michango iliyothibitishwa ya wafanyikazi.",
+    "firstMonthZero": "Katika mwezi wa kwanza wa malipo kwa mwajiri huyu, jumla ya awali ni sifuri. Rasimu yako ya mwezi uliopita huhifadhiwa kwa miezi ya baadaye.",
+    "deductionMode": "Chagua mbinu ya msingi ya kukatwa kwa gharama inayotumika.",
+    "deductionConflict": "Alama ya urithi wa ajira ya kwanza inakinzana na mbinu iliyochaguliwa ya kukatwa.",
+    "reliefConfirmation": "Thibitisha masharti yote ya kujiunga kabla ya kutumia katazo la kila mwaka la CNY 60,000 lililorahisishwa.",
+    "reliefStart": "Ulipaji kodi wa kila mwaka wa CNY 60,000 uliorahisishwa unahitaji ajira hapa kuanzia Januari.",
+    "previousBasicRange": "Makato ya awali ya gharama ya msingi yanakinzana na njia hii. Kiasi cha awali kilichoruhusiwa ni zaidi ya {{max}}; Ukata kodi uliorahisishwa unahitaji CNY 60,000 haswa baada ya Januari.",
+    "reliefMonths": "Kwa ukata uliorahisishwa, toa kila mwezi kuanzia Januari hadi mwezi uliopita uliochaguliwa, bila mapungufu."
   }
 }

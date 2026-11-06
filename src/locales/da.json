@@ -2141,7 +2141,16 @@
     "annualSpecial": "Bekræftede årlige særlige yderligere fradrag (CNY)",
     "annualOther": "Bekræftede årlige andre fradrag (CNY)",
     "employeeRate": "Medarbejderrate (%)",
-    "employerRate": "Arbejdsgiversats (%)"
+    "employerRate": "Arbejdsgiversats (%)",
+    "basicDeductionMode": "Grundlæggende udgiftsfradragsmetode",
+    "predictionMode": "Forudsagt tilbageholdelsesmetode",
+    "basicStandard": "Standard kumulativ tilbageholdelse",
+    "basicFirst": "Første lønindtægt i år",
+    "basicAnnual": "Kvalificeret årlig CNY 60.000 forenklet tilbageholdelse",
+    "standardHint": "Træk 5.000 CNY for hver lønmåned hos denne arbejdsgiver.",
+    "reliefEligibility": "Jeg bekræfter, at jeg opfylder alle berettigelsesbetingelser nedenfor.",
+    "reliefHint": "Sidste år rapporterede denne arbejdsgiver min løn hver måned, og min samlede løn inklusive bonusser oversteg ikke 60.000 CNY. I år har jeg fortsat modtaget løn her siden januar.",
+    "partialTax": "Bidrag beregnet med succes; indkomstskat blev ikke genereret. Bidragseksport forbliver tilgængelig."
   },
   "insurance": {
     "name": "Socialforsikring og boligfond",
@@ -2159,11 +2168,19 @@
     "description": "Beregn tilbageholdelse af beboerløn, bonusskat og årlig lønskat med eksplicitte forudsætninger og beregningsdetaljer.",
     "monthRange": "Løn- og startmåneder skal være 1–12, med startmåned senest i lønmåned.",
     "previousRequired": "Indtast de tidligere akkumulerede beløb hos denne arbejdsgiver; antag ikke, at de er nul.",
+    "firstMonthHistory": "Tidligere totaler skal være nul i den første skattemåned hos denne arbejdsgiver. Tjek startmåneden og historiske beløb.",
     "bonusExpired": "Separat bonusbeskatning er verificeret for 2026-2027. Denne metode er ikke tilgængelig i andre år.",
     "year": "Indtast et gyldigt skatteår mellem 2026 og 9999.",
     "duplicateMonth": "Månedlige data skal bruge unikke gyldige måneder (1-12).",
     "housingConflict": "Boligleje og realkreditrentefradrag kan ikke begge opføres.",
     "policyMissing": "Nogle måneder har ingen bekræftet politik. Indtast faktiske bidrag eller eksplicitte tilpassede parametre for disse måneder.",
-    "cityQuick": "Byvurderinger kræver politikverifikation for hver måned. Brug faktisk kumulativ eller årlig tilstand, eller indtast bekræftede medarbejderbidrag."
+    "cityQuick": "Byvurderinger kræver politikverifikation for hver måned. Brug faktisk kumulativ eller årlig tilstand, eller indtast bekræftede medarbejderbidrag.",
+    "firstMonthZero": "I den første lønmåned hos denne arbejdsgiver er tidligere totaler nul. Din tidligere måneds kladde gemmes til senere måneder.",
+    "deductionMode": "Vælg en understøttet grundlæggende udgiftsfradragsmetode.",
+    "deductionConflict": "Det gamle førstegangsflag er i konflikt med den valgte fradragsmetode.",
+    "reliefConfirmation": "Bekræft alle berettigelsesbetingelser, før du bruger årlig CNY 60.000 forenklet tilbageholdelse.",
+    "reliefStart": "Årlig CNY 60.000 forenklet tilbageholdelse kræver ansættelse her fra januar.",
+    "previousBasicRange": "Tidligere basisudgiftsfradrag er i modstrid med denne metode. Det tilladte tidligere beløb er højst {{max}}; forenklet tilbageholdelse kræver præcis 60.000 CNY efter januar.",
+    "reliefMonths": "For forenklet tilbageholdelse skal du angive hver måned fra januar til den sidst valgte måned, uden huller."
   }
 }

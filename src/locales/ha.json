@@ -2141,7 +2141,16 @@
     "annualSpecial": "Tabbatar da ƙarin cirewa na musamman na shekara-shekara (CNY)",
     "annualOther": "Tabbatar da sauran abubuwan cirewa na shekara-shekara (CNY)",
     "employeeRate": "Adadin ma'aikata (%)",
-    "employerRate": "Adadin ma'aikata (%)"
+    "employerRate": "Adadin ma'aikata (%)",
+    "basicDeductionMode": "Hanyar cire kuɗi na asali",
+    "predictionMode": "Hanyar riƙewa da aka annabta",
+    "basicStandard": "Daidaitaccen tarawa mai riƙewa",
+    "basicFirst": "Samun albashi na farko a wannan shekara",
+    "basicAnnual": "Cancanci na shekara-shekara CNY 60,000 Sauƙaƙe riƙewa",
+    "standardHint": "Cire CNY 5,000 na kowane wata na biyan albashi a wannan ma'aikaci.",
+    "reliefEligibility": "Na tabbatar da cewa na cika duk sharuddan cancanta a ƙasa.",
+    "reliefHint": "A bara, wannan ma’aikacin ya ba da rahoton albashi na kowane wata kuma jimillar albashi na har da kari bai wuce CNY 60,000 ba. A bana na ci gaba da karbar albashi a nan tun watan Janairu.",
+    "partialTax": "An ƙididdige gudunmawar cikin nasara; harajin shiga ba a samar da shi ba. Ana ci gaba da fitar da gudummawar."
   },
   "insurance": {
     "name": "Inshorar zamantakewa da asusun gidaje",
@@ -2159,11 +2168,19 @@
     "description": "Ƙididdige riƙe albashin mazaunin, harajin kari da harajin albashi na shekara tare da zato da cikakkun bayanai na lissafi.",
     "monthRange": "Matsakaicin albashi da watannin farawa dole ne su kasance 1-12, tare da farkon watan ba zai wuce watan biyan kuɗi ba.",
     "previousRequired": "Shigar da adadin adadin da suka gabata a wannan ma'aikaci; kar a dauka ba su da sifili.",
+    "firstMonthHistory": "Adadin da ya gabata dole ne ya zama sifili a cikin watan haraji na farko tare da wannan ma'aikaci. Duba watan farawa da adadin tarihi.",
     "bonusExpired": "An tabbatar da harajin kari na daban don 2026-2027. Babu wannan hanyar zuwa wasu shekaru.",
     "year": "Shigar da ingantaccen shekarar haraji tsakanin 2026 da 9999.",
     "duplicateMonth": "Bayanan wata-wata dole ne su yi amfani da watanni masu aiki na musamman (1-12).",
     "housingConflict": "Hayan gidaje da ragi na ribar jinginar gida ba za a iya shigar da su ba.",
     "policyMissing": "Wasu watanni ba su da ingantacciyar manufa. Shigar da ainihin gudunmawar ko fayyace sigogi na al'ada na waɗannan watanni.",
-    "cityQuick": "Ƙididdiga na birni na buƙatar tabbatar da manufofin kowane wata. Yi amfani da ainihin tsarin tarawa ko na shekara-shekara, ko shigar da ingantaccen gudummawar ma'aikata."
+    "cityQuick": "Ƙididdiga na birni na buƙatar tabbatar da manufofin kowane wata. Yi amfani da ainihin tsarin tarawa ko na shekara-shekara, ko shigar da ingantaccen gudummawar ma'aikata.",
+    "firstMonthZero": "A cikin watan farko na biyan albashi a wannan ma'aikaci, jimlar da ta gabata ba ta zama sifili ba. Ana adana daftarin ku na watan da ya gabata na watanni masu zuwa.",
+    "deductionMode": "Zaɓi hanyar cire kuɗi na asali mai goyan bayan.",
+    "deductionConflict": "Tutar aikin farko na gado ya ci karo da zaɓin hanyar cirewa.",
+    "reliefConfirmation": "Tabbatar da duk sharuddan cancanta kafin amfani da CNY 60,000 mai sauƙaƙan riƙewa.",
+    "reliefStart": "CNY 60,000 mai sauƙi na shekara-shekara yana buƙatar aiki a nan daga Janairu.",
+    "previousBasicRange": "Rage kashe kuɗi na asali na baya ya ci karo da wannan hanyar. Adadin da aka halatta a baya shine mafi girman {{max}}; Sauƙaƙe riƙe yana buƙatar daidai CNY 60,000 bayan Janairu.",
+    "reliefMonths": "Don sauƙin riƙewa, samar da kowane wata daga Janairu zuwa watan da aka zaɓa na ƙarshe, ba tare da gibi ba."
   }
 }

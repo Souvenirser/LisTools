@@ -2141,7 +2141,16 @@
     "annualSpecial": "Megerősített éves speciális további levonások (CNY)",
     "annualOther": "Megerősített éves egyéb levonások (CNY)",
     "employeeRate": "Alkalmazottak aránya (%)",
-    "employerRate": "Munkaadói arány (%)"
+    "employerRate": "Munkaadói arány (%)",
+    "basicDeductionMode": "Alapvető költséglevonási módszer",
+    "predictionMode": "Előre jelzett visszatartási módszer",
+    "basicStandard": "Szabványos kumulatív forráslevonás",
+    "basicFirst": "Az idei első fizetési bevétel",
+    "basicAnnual": "Jogosult éves 60 000 CNY egyszerűsített visszatartás",
+    "standardHint": "Vonjon le 5000 CNY-t minden bérszámfejtési hónap után ennél a munkáltatónál.",
+    "reliefEligibility": "Kijelentem, hogy az alábbi feltételeknek megfelelek.",
+    "reliefHint": "Tavaly ez a munkáltató minden hónapban jelentette a fizetésemet, és a teljes fizetésem a bónuszokkal együtt nem haladta meg a 60 000 CNY-t. Idén január óta továbbra is itt kapok fizetést.",
+    "partialTax": "A hozzájárulások kiszámítása sikeres volt; jövedelemadó nem keletkezett. A hozzájárulások exportálása továbbra is elérhető."
   },
   "insurance": {
     "name": "Társadalombiztosítás és lakáspénztár",
@@ -2159,11 +2168,19 @@
     "description": "Számítsa ki a rezidens fizetési forrásadót, a bónuszadót és az éves béradót kifejezett feltételezések és számítási adatok alapján.",
     "monthRange": "A bérszámfejtési és kezdő hónapok 1-12 közöttiek legyenek, a kezdő hónap legkésőbb a bérszámfejtés hónapja.",
     "previousRequired": "Adja meg a korábbi összesített összegeket ennél a munkáltatónál; ne feltételezd, hogy nullák.",
+    "firstMonthHistory": "A korábbi összegeknek nullának kell lenniük az első adóhónapban ennél a munkáltatónál. Ellenőrizze a kezdő hónapot és a korábbi összegeket.",
     "bonusExpired": "A 2026–2027 közötti időszakra külön bónuszadózás van igazolva. Ez a módszer más években nem elérhető.",
     "year": "Adjon meg egy érvényes adóévet 2026 és 9999 között.",
     "duplicateMonth": "A havi adatoknak egyedi érvényes hónapokat (1–12) kell használniuk.",
     "housingConflict": "A lakásbérleti díj és a jelzáloghitel-kamat levonása nem írható be.",
     "policyMissing": "Néhány hónapnak nincs ellenőrzött szabályzata. Adja meg a tényleges hozzájárulásokat vagy kifejezett egyéni paramétereket azokra a hónapokra.",
-    "cityQuick": "A városi becslések minden hónapra megkövetelik a szabályzat ellenőrzését. Használja a tényleges kumulatív vagy éves módot, vagy adja meg a megerősített munkavállalói hozzájárulásokat."
+    "cityQuick": "A városi becslések minden hónapra megkövetelik a szabályzat ellenőrzését. Használja a tényleges kumulatív vagy éves módot, vagy adja meg a megerősített munkavállalói hozzájárulásokat.",
+    "firstMonthZero": "Az első bérszámfejtési hónapban ennél a munkáltatónál a korábbi összegek nulla. Az előző havi piszkozat a későbbi hónapokra is megmarad.",
+    "deductionMode": "Válasszon egy támogatott alapvető költséglevonási módot.",
+    "deductionConflict": "Az örökölt első foglalkoztatás jelző ütközik a kiválasztott levonási módszerrel.",
+    "reliefConfirmation": "Az éves 60 000 CNY egyszerűsített levonása előtt erősítsen meg minden jogosultsági feltételt.",
+    "reliefStart": "Az éves 60 000 CNY egyszerűsített forráslevonás januártól itt munkaviszonyt igényel.",
+    "previousBasicRange": "A korábbi alapköltség-levonások ütköznek ezzel a módszerrel. A megengedett korábbi összeg legfeljebb {{max}}; az egyszerűsített visszatartáshoz január után pontosan 60 000 CNY szükséges.",
+    "reliefMonths": "Az egyszerűsített visszatartás érdekében minden hónapban biztosítsa januártól az utolsó kiválasztott hónapig, hiányosságok nélkül."
   }
 }

@@ -1,5 +1,5 @@
 import { executeConversion } from '../convert/runtime.js';
-import { runRegex } from '../regex/core.js';
+import { runRegex, limits as regexLimits } from '../regex/core.js';
 export const limits={input:10*1024**2,output:100*1024**2,preview:1024**2};
 const encoder=new TextEncoder();
 const failure=code=>({status:'error',code:`text.${code}`});
@@ -18,15 +18,21 @@ const patterns={
 function extractedUrl(match,input){
  let value=match.value;
  if(input[match.index-1]==='<'&&input[match.end]==='>')return value;
- const opening=input[match.index-1],closing={'(':')','（':'）','[':']','【':'】'}[opening];
+ const wrapper=/([（(\[【])\s*(?:(?:网址|链接|url)\s*[：:]\s*)?$/iu.exec(input.slice(0,match.index));
+ const opening=wrapper?.[1],closing={'(':')','（':'）','[':']','【':'】'}[opening];
  if(closing){
   let balance=0;for(let index=0;index<value.length;index++){
    if(value[index]===opening)balance++;
    else if(value[index]===closing){if(balance===0)return value.slice(0,index);balance--;}
   }
  }
- const punctuation=/[.,;:!?，。；：！？、]+$/u,question=value.indexOf('?');
- if(value.includes('#')||question!==-1&&question<value.length-1)return value;
+ // Markdown wrappers and direct parentheses were resolved above.
+ const punctuation=/[.,;:!?，。；：！？、]+$/u,question=value.indexOf('?'),fragment=value.indexOf('#'),end=value.search(/[，。；：！？、]/u);
+ const suffix=[question!==value.length-1?question:-1,fragment].filter(index=>index>=0);
+ if(suffix.length&&(end<0||Math.min(...suffix)<end))return value;
+ if(end>=0)value=value.slice(0,end);
+ const pairs={')':'(', '）':'（',']':'[','】':'【'};const counts={};
+ for(let i=0;i<value.length;i++){const ch=value[i];if(Object.values(pairs).includes(ch))counts[ch]=(counts[ch]||0)+1;else if(pairs[ch]){if(!counts[pairs[ch]])return value.slice(0,i).replace(punctuation,'');counts[pairs[ch]]--;}}
  return value.replace(punctuation,'');
 }
 export async function processText(request={}) {
@@ -48,9 +54,20 @@ export async function processText(request={}) {
    if(!['email','phone','url'].includes(request.kind)) return failure('invalidOperation');
    const result=await runRegex({input,pattern:patterns[request.kind],flags:'giu',operation:'extract'});
    if(result.status==='error') return failure('conversionError');
-   let extracted=result.matches.map(match=>request.kind==='url'?extractedUrl(match,input):match.value);
+   let extracted=[];truncated=result.truncated;
+   candidates:for(const candidate of result.matches){
+    let match=candidate;
+    while(match){
+     if(extracted.length===regexLimits.matches){truncated=true;break candidates;}
+     const value=request.kind==='url'?extractedUrl(match,input):match.value;extracted.push(value);
+     if(value.length===match.value.length)break;
+     const next=/https?:\/\//giu;next.lastIndex=match.index+value.length;const found=next.exec(input);
+     match=found&&found.index<candidate.end?{index:found.index,end:candidate.end,value:input.slice(found.index,candidate.end)}:null;
+    }
+   }
+   summary.matches=extracted.length;
    if(request.dedupe) extracted=[...new Set(extracted)];
-   output=extracted.join('\n');truncated=result.truncated;summary.matches=result.matches.length;summary.items=extracted.length;
+   output=extracted.join('\n');summary.items=extracted.length;
   } else if(operation==='mask') {
    for(const kind of ['id','phone','email']) if(request[kind]) {
     output=output.replace(new RegExp(patterns[kind],'gu'),value=>{summary.masked=(summary.masked||0)+1;return kind==='phone'?`${value.slice(0,3)}****${value.slice(-4)}`:kind==='id'?`${value.slice(0,6)}********${value.slice(-4)}`:`${value[0]}***${value.slice(value.indexOf('@'))}`;});

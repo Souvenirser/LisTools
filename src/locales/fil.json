@@ -2141,7 +2141,16 @@
     "annualSpecial": "Nakumpirma na taunang espesyal na karagdagang bawas (CNY)",
     "annualOther": "Nakumpirma na taunang iba pang mga pagbabawas (CNY)",
     "employeeRate": "Rate ng empleyado (%)",
-    "employerRate": "Rate ng employer (%)"
+    "employerRate": "Rate ng employer (%)",
+    "basicDeductionMode": "Pangunahing paraan ng pagbabawas ng gastos",
+    "predictionMode": "Hinulaang paraan ng pagpigil",
+    "basicStandard": "Karaniwang pinagsama-samang pagpigil",
+    "basicFirst": "Unang kita sa suweldo ngayong taon",
+    "basicAnnual": "Kwalipikadong taunang CNY 60,000 pinasimpleng pagpigil",
+    "standardHint": "Ibawas ang CNY 5,000 para sa bawat buwan ng payroll sa employer na ito.",
+    "reliefEligibility": "Kinukumpirma ko na natutugunan ko ang lahat ng kundisyon sa pagiging kwalipikado sa ibaba.",
+    "reliefHint": "Noong nakaraang taon, iniulat ng employer na ito ang aking suweldo bawat buwan at ang aking kabuuang suweldo kasama ang mga bonus ay hindi lalampas sa CNY 60,000. Ngayong taon ay nagpatuloy ako sa pagtanggap ng suweldo dito mula noong Enero.",
+    "partialTax": "Matagumpay na nakalkula ang mga kontribusyon; hindi nabuo ang buwis sa kita. Nananatiling available ang mga pag-export ng kontribusyon."
   },
   "insurance": {
     "name": "Social insurance at pondo sa pabahay",
@@ -2159,11 +2168,19 @@
     "description": "Kalkulahin ang pagpigil sa suweldo ng residente, buwis sa bonus at taunang buwis sa suweldo na may tahasang mga pagpapalagay at mga detalye ng pagkalkula.",
     "monthRange": "Ang mga buwan ng suweldo at pagsisimula ay dapat na 1–12, na ang panimulang buwan ay hindi lalampas sa buwan ng suweldo.",
     "previousRequired": "Ilagay ang mga nakaraang pinagsama-samang halaga sa employer na ito; huwag ipagpalagay na sila ay zero.",
+    "firstMonthHistory": "Ang mga nakaraang kabuuan ay dapat na zero sa unang buwan ng buwis sa employer na ito. Suriin ang simula ng buwan at mga makasaysayang halaga.",
     "bonusExpired": "Ang hiwalay na pagbubuwis ng bonus ay na-verify para sa 2026–2027. Ang pamamaraang ito ay hindi magagamit para sa iba pang mga taon.",
     "year": "Maglagay ng wastong taon ng buwis sa pagitan ng 2026 at 9999.",
     "duplicateMonth": "Ang buwanang data ay dapat gumamit ng mga natatanging wastong buwan (1–12).",
     "housingConflict": "Ang upa sa pabahay at mga pagbabawas ng interes sa mortgage ay hindi maaaring ipasok pareho.",
     "policyMissing": "Ilang buwan ay walang na-verify na patakaran. Maglagay ng mga aktwal na kontribusyon o tahasang custom na parameter para sa mga buwang iyon.",
-    "cityQuick": "Ang mga pagtatantya ng lungsod ay nangangailangan ng pag-verify ng patakaran para sa bawat buwan. Gumamit ng aktwal na pinagsama-samang o taunang mode, o ilagay ang mga nakumpirmang kontribusyon ng empleyado."
+    "cityQuick": "Ang mga pagtatantya ng lungsod ay nangangailangan ng pag-verify ng patakaran para sa bawat buwan. Gumamit ng aktwal na pinagsama-samang o taunang mode, o ilagay ang mga nakumpirmang kontribusyon ng empleyado.",
+    "firstMonthZero": "Sa unang buwan ng suweldo sa employer na ito, ang mga nakaraang kabuuan ay zero. Ang iyong draft sa nakaraang buwan ay pinananatili sa mga susunod na buwan.",
+    "deductionMode": "Pumili ng sinusuportahang paraan ng pagbabawas ng pangunahing gastos.",
+    "deductionConflict": "Ang legacy na flag ng first-employment ay sumasalungat sa napiling paraan ng pagbabawas.",
+    "reliefConfirmation": "Kumpirmahin ang lahat ng kundisyon sa pagiging kwalipikado bago gamitin ang taunang CNY 60,000 na pinasimpleng pagpigil.",
+    "reliefStart": "Ang taunang CNY 60,000 na pinasimpleng withholding ay nangangailangan ng trabaho dito mula Enero.",
+    "previousBasicRange": "Ang mga nakaraang pangunahing pagbabawas sa gastos ay sumasalungat sa pamamaraang ito. Ang pinahihintulutang dating halaga ay hindi hihigit sa {{max}}; ang pinasimpleng pagpigil ay nangangailangan ng eksaktong CNY 60,000 pagkatapos ng Enero.",
+    "reliefMonths": "Para sa pinasimpleng pagpigil, magbigay bawat buwan mula Enero hanggang sa huling napiling buwan, nang walang mga gaps."
   }
 }

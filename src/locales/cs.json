@@ -2141,7 +2141,16 @@
     "annualSpecial": "Potvrzené roční zvláštní dodatečné odpočty (CNY)",
     "annualOther": "Potvrzené roční ostatní odpočty (CNY)",
     "employeeRate": "Míra zaměstnanců (%)",
-    "employerRate": "Sazba zaměstnavatele (%)"
+    "employerRate": "Sazba zaměstnavatele (%)",
+    "basicDeductionMode": "Základní metoda odpočtu výdajů",
+    "predictionMode": "Předpokládaná srážková metoda",
+    "basicStandard": "Standardní kumulativní srážka",
+    "basicFirst": "První letošní plat",
+    "basicAnnual": "Způsobilá roční zjednodušená srážka 60 000 CNY",
+    "standardHint": "Odečtěte 5 000 CNY za každý výplatní měsíc u tohoto zaměstnavatele.",
+    "reliefEligibility": "Potvrzuji, že splňuji všechny níže uvedené podmínky způsobilosti.",
+    "reliefHint": "Minulý rok mi tento zaměstnavatel hlásil plat každý měsíc a můj celkový plat včetně bonusů nepřesáhl 60 000 CNY. Letos zde pobírám mzdu od ledna.",
+    "partialTax": "Úspěšně vypočítané příspěvky; daň z příjmu nebyla vytvořena. Export příspěvků zůstává k dispozici."
   },
   "insurance": {
     "name": "Sociální pojištění a bytový fond",
@@ -2159,11 +2168,19 @@
     "description": "Vypočítejte srážkovou mzdu rezidenta, daň z bonusů a roční daň z platu s explicitními předpoklady a podrobnostmi výpočtu.",
     "monthRange": "Mzdové a počáteční měsíce musí být 1–12, přičemž počáteční měsíc musí být nejpozději mzdový měsíc.",
     "previousRequired": "Zadejte předchozí kumulativní částky u tohoto zaměstnavatele; nepředpokládejte, že jsou nulové.",
+    "firstMonthHistory": "Předchozí součty musí být v prvním daňovém měsíci u tohoto zaměstnavatele nulové. Zkontrolujte počáteční měsíc a historické částky.",
     "bonusExpired": "Pro roky 2026–2027 je ověřeno samostatné zdanění bonusů. Po další roky je tato metoda nedostupná.",
     "year": "Zadejte platný daňový rok mezi 2026 a 9999.",
     "duplicateMonth": "Měsíční data musí používat jedinečné platné měsíce (1–12).",
     "housingConflict": "Nájemné za bydlení a odpočty úroků z hypotéky nelze zadat současně.",
     "policyMissing": "Některé měsíce nemají ověřené zásady. Zadejte skutečné příspěvky nebo explicitní vlastní parametry pro tyto měsíce.",
-    "cityQuick": "Odhady města vyžadují ověření zásad pro každý měsíc. Použijte skutečný kumulativní nebo roční režim nebo zadejte potvrzené příspěvky zaměstnanců."
+    "cityQuick": "Odhady města vyžadují ověření zásad pro každý měsíc. Použijte skutečný kumulativní nebo roční režim nebo zadejte potvrzené příspěvky zaměstnanců.",
+    "firstMonthZero": "V prvním výplatním měsíci u tohoto zaměstnavatele jsou předchozí součty nulové. Váš koncept z předchozího měsíce je uchován pro pozdější měsíce.",
+    "deductionMode": "Vyberte podporovanou metodu odpočtu základních výdajů.",
+    "deductionConflict": "Starší příznak prvního zaměstnání je v konfliktu s vybranou metodou odpočtu.",
+    "reliefConfirmation": "Před použitím zjednodušené srážky ve výši 60 000 CNY ročně potvrďte všechny podmínky způsobilosti.",
+    "reliefStart": "Roční zjednodušená srážka 60 000 CNY zde vyžaduje zaměstnání od ledna.",
+    "previousBasicRange": "Předchozí základní odpočty výdajů jsou v rozporu s touto metodou. Povolená předchozí částka je nejvýše {{max}}; zjednodušená srážka vyžaduje po lednu přesně 60 000 CNY.",
+    "reliefMonths": "Pro zjednodušené zadržování poskytujte každý měsíc od ledna do posledního vybraného měsíce bez mezer."
   }
 }

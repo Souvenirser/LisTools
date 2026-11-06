@@ -2141,7 +2141,16 @@
     "annualSpecial": "Awọn iyokuro pataki pataki lododun ti jẹrisi (CNY)",
     "annualOther": "Awọn iyokuro lododun miiran ti jẹrisi (CNY)",
     "employeeRate": "Oṣuwọn oṣiṣẹ (%)",
-    "employerRate": "Oṣuwọn agbanisiṣẹ (%)"
+    "employerRate": "Oṣuwọn agbanisiṣẹ (%)",
+    "basicDeductionMode": "Ipilẹ inawo ayọkuro ọna",
+    "predictionMode": "Ọna idaduro asọtẹlẹ",
+    "basicStandard": "Standard akojo idaduro",
+    "basicFirst": "Owo oya akọkọ ni ọdun yii",
+    "basicAnnual": "Ti o yẹ ni idaduro lododun CNY 60,000 irọrun",
+    "standardHint": "Yọ 5,000 CNY kuro fun oṣu isanwo kọọkan ni agbanisiṣẹ yii.",
+    "reliefEligibility": "Mo jẹrisi pe Mo pade gbogbo awọn ipo yiyan ni isalẹ.",
+    "reliefHint": "Ni ọdun to kọja, agbanisiṣẹ yii ṣe ijabọ owo-oṣu mi ni gbogbo oṣu ati apapọ owo-oṣu mi pẹlu awọn ẹbun ko kọja CNY 60,000. Ni ọdun yii Mo ti tẹsiwaju gbigba owo osu nibi lati Oṣu Kini.",
+    "partialTax": "Awọn ifunni ṣe iṣiro ni aṣeyọri; owo oya-ori ti a ko ti ipilẹṣẹ. Awọn okeere igbeowosile wa."
   },
   "insurance": {
     "name": "Social insurance ati ile inawo",
@@ -2159,11 +2168,19 @@
     "description": "Ṣe iṣiro idaduro owo osu olugbe, owo-ori ajeseku ati owo-ori owo-ori lododun pẹlu awọn arosinu ti o han gbangba ati awọn alaye iṣiro.",
     "monthRange": "Owo isanwo ati awọn oṣu ibẹrẹ gbọdọ jẹ 1-12, pẹlu oṣu ti o bẹrẹ ko pẹ ju oṣu isanwo lọ.",
     "previousRequired": "Tẹ awọn iye akojo ti tẹlẹ wọle si agbanisiṣẹ yii; maṣe ro pe wọn jẹ odo.",
+    "firstMonthHistory": "Apapọ iṣaju gbọdọ jẹ odo ni oṣu owo-ori akọkọ pẹlu agbanisiṣẹ yii. Ṣayẹwo oṣu ibẹrẹ ati awọn iye itan.",
     "bonusExpired": "Owo-ori ajeseku lọtọ jẹ iṣeduro fun 2026–2027. Ọna yii ko si fun awọn ọdun miiran.",
     "year": "Tẹ ọdun owo-ori to wulo laarin 2026 ati 9999.",
     "duplicateMonth": "Data oṣooṣu gbọdọ lo awọn oṣu to wulo alailẹgbẹ (1-12).",
     "housingConflict": "Iyalo ile ati awọn iyokuro iwulo owo ile ko le wọ awọn mejeeji wọle.",
     "policyMissing": "Diẹ ninu awọn oṣu ko ni eto imulo idaniloju. Tẹ awọn ifunni gangan tabi awọn ayeraye aṣa ti o fojuhan fun awọn oṣu yẹn.",
-    "cityQuick": "Awọn iṣiro ilu nilo ijẹrisi eto imulo fun oṣu kọọkan. Lo akojọpọ gangan tabi ipo ọdọọdun, tabi tẹ awọn ifunni oṣiṣẹ ti a fọwọsi."
+    "cityQuick": "Awọn iṣiro ilu nilo ijẹrisi eto imulo fun oṣu kọọkan. Lo akojọpọ gangan tabi ipo ọdọọdun, tabi tẹ awọn ifunni oṣiṣẹ ti a fọwọsi.",
+    "firstMonthZero": "Ni oṣu isanwo akọkọ ni agbanisiṣẹ yii, iye owo iṣaaju jẹ odo. Akọsilẹ oṣu iṣaaju rẹ wa ni ipamọ fun awọn oṣu to nbọ.",
+    "deductionMode": "Yan ọna iyokuro inawo ipilẹ ti o ni atilẹyin.",
+    "deductionConflict": "Asia iṣẹ-akọkọ ti ogún jẹ ikọlura pẹlu ọna ayọkuro ti o yan.",
+    "reliefConfirmation": "Jẹrisi gbogbo awọn ipo yiyan ṣaaju lilo CNY 60,000 ni idaduro irọrun.",
+    "reliefStart": "Ọdọọdun CNY 60,000 ni irọrun idaduro nilo iṣẹ nibi lati Oṣu Kini.",
+    "previousBasicRange": "Awọn iyokuro inawo ipilẹ iṣaaju ni ilodisi pẹlu ọna yii. Iye iyọọda ti tẹlẹ jẹ ni julọ {{max}}; Idaduro irọrun nilo deede CNY 60,000 lẹhin Oṣu Kini.",
+    "reliefMonths": "Fun idaduro irọrun, pese ni gbogbo oṣu lati Oṣu Kini titi di oṣu ti a yan ti o kẹhin, laisi awọn ela."
   }
 }

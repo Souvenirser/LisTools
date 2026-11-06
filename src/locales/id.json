@@ -2141,7 +2141,16 @@
     "annualSpecial": "Pengurangan tambahan khusus tahunan (CNY) yang dikonfirmasi",
     "annualOther": "Konfirmasi potongan tahunan lainnya (CNY)",
     "employeeRate": "Tingkat karyawan (%)",
-    "employerRate": "Tingkat pemberi kerja (%)"
+    "employerRate": "Tingkat pemberi kerja (%)",
+    "basicDeductionMode": "Metode pengurangan biaya dasar",
+    "predictionMode": "Metode pemotongan yang diprediksi",
+    "basicStandard": "Pemotongan kumulatif standar",
+    "basicFirst": "Pendapatan gaji pertama tahun ini",
+    "basicAnnual": "Pemotongan pajak tahunan yang disederhanakan sebesar CNY 60.000 yang memenuhi syarat",
+    "standardHint": "Potong CNY 5.000 untuk setiap bulan penggajian di perusahaan ini.",
+    "reliefEligibility": "Saya mengonfirmasi bahwa saya memenuhi semua persyaratan kelayakan di bawah ini.",
+    "reliefHint": "Tahun lalu, majikan ini melaporkan gaji saya setiap bulan dan total gaji saya termasuk bonus tidak melebihi CNY 60.000. Tahun ini saya terus menerima gaji di sini sejak Januari.",
+    "partialTax": "Kontribusi berhasil dihitung; pajak penghasilan tidak dihasilkan. Ekspor kontribusi tetap tersedia."
   },
   "insurance": {
     "name": "Asuransi sosial dan dana perumahan",
@@ -2159,11 +2168,19 @@
     "description": "Hitung pemotongan gaji penduduk, pajak bonus dan pajak gaji tahunan dengan asumsi dan rincian perhitungan yang jelas.",
     "monthRange": "Penggajian dan bulan mulai harus 1–12, dengan bulan awal paling lambat pada bulan penggajian.",
     "previousRequired": "Masukkan jumlah kumulatif sebelumnya pada perusahaan ini; jangan berasumsi bahwa nilainya nol.",
+    "firstMonthHistory": "Total sebelumnya harus nol pada bulan pajak pertama dengan perusahaan ini. Periksa bulan awal dan jumlah historis.",
     "bonusExpired": "Perpajakan bonus terpisah diverifikasi untuk tahun 2026–2027. Metode ini tidak tersedia untuk tahun-tahun lainnya.",
     "year": "Masukkan tahun pajak yang valid antara 2026 dan 9999.",
     "duplicateMonth": "Data bulanan harus menggunakan bulan unik yang valid (1–12).",
     "housingConflict": "Sewa rumah dan potongan bunga hipotek tidak dapat dimasukkan keduanya.",
     "policyMissing": "Beberapa bulan tidak memiliki kebijakan yang terverifikasi. Masukkan kontribusi aktual atau parameter khusus eksplisit untuk bulan-bulan tersebut.",
-    "cityQuick": "Perkiraan kota memerlukan verifikasi kebijakan untuk setiap bulan. Gunakan mode kumulatif atau tahunan aktual, atau masukkan kontribusi karyawan yang dikonfirmasi."
+    "cityQuick": "Perkiraan kota memerlukan verifikasi kebijakan untuk setiap bulan. Gunakan mode kumulatif atau tahunan aktual, atau masukkan kontribusi karyawan yang dikonfirmasi.",
+    "firstMonthZero": "Pada bulan pertama penggajian di perusahaan ini, total sebelumnya adalah nol. Draf bulan sebelumnya disimpan untuk bulan-bulan berikutnya.",
+    "deductionMode": "Pilih metode pengurangan biaya dasar yang didukung.",
+    "deductionConflict": "Tanda ketenagakerjaan pertama yang lama bertentangan dengan metode pemotongan yang dipilih.",
+    "reliefConfirmation": "Konfirmasikan semua ketentuan kelayakan sebelum menggunakan pemotongan pajak tahunan sebesar CNY 60.000 yang disederhanakan.",
+    "reliefStart": "Pemotongan tahunan yang disederhanakan sebesar CNY 60.000 memerlukan pekerjaan di sini mulai bulan Januari.",
+    "previousBasicRange": "Pengurangan biaya dasar sebelumnya bertentangan dengan metode ini. Jumlah sebelumnya yang diperbolehkan paling banyak {{max}}; pemotongan yang disederhanakan memerlukan tepat CNY 60.000 setelah bulan Januari.",
+    "reliefMonths": "Untuk penyederhanaan pemotongan, berikan setiap bulan dari bulan Januari hingga bulan terakhir yang dipilih, tanpa jeda."
   }
 }

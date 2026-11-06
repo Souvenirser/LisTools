@@ -2141,7 +2141,16 @@
     "annualSpecial": "Bestätigte jährliche Sonderabzüge (CNY)",
     "annualOther": "Bestätigte jährliche sonstige Abzüge (CNY)",
     "employeeRate": "Mitarbeiterquote (%)",
-    "employerRate": "Arbeitgeberquote (%)"
+    "employerRate": "Arbeitgeberquote (%)",
+    "basicDeductionMode": "Grundlegende Kostenabzugsmethode",
+    "predictionMode": "Voraussichtliche Einbehaltungsmethode",
+    "basicStandard": "Standardmäßige kumulative Quellensteuer",
+    "basicFirst": "Erstes Gehaltseinkommen in diesem Jahr",
+    "basicAnnual": "Anrechenbare jährliche vereinfachte Quellensteuer von 60.000 CNY",
+    "standardHint": "Ziehen Sie 5.000 CNY für jeden Abrechnungsmonat bei diesem Arbeitgeber ab.",
+    "reliefEligibility": "Ich bestätige, dass ich alle unten aufgeführten Teilnahmebedingungen erfülle.",
+    "reliefHint": "Letztes Jahr meldete dieser Arbeitgeber jeden Monat mein Gehalt und mein Gesamtgehalt einschließlich Boni überstieg 60.000 CNY nicht. Dieses Jahr beziehe ich hier seit Januar weiterhin mein Gehalt.",
+    "partialTax": "Beiträge erfolgreich berechnet; Es wurde keine Einkommensteuer erhoben. Beitragsexporte bleiben weiterhin verfügbar."
   },
   "insurance": {
     "name": "Sozialversicherung und Wohnungsfonds",
@@ -2159,11 +2168,19 @@
     "description": "Berechnen Sie die Quellensteuer für ansässige Gehälter, die Bonussteuer und die jährliche Lohnsteuer mit expliziten Annahmen und Berechnungsdetails.",
     "monthRange": "Die Abrechnungs- und Anfangsmonate müssen zwischen 1 und 12 liegen, wobei der Startmonat nicht nach dem Abrechnungsmonat liegen darf.",
     "previousRequired": "Geben Sie die bisherigen kumulierten Beträge bei diesem Arbeitgeber ein; Gehen Sie nicht davon aus, dass sie Null sind.",
+    "firstMonthHistory": "Die bisherigen Summen müssen im ersten Steuermonat bei diesem Arbeitgeber Null sein. Überprüfen Sie den Startmonat und die historischen Beträge.",
     "bonusExpired": "Für die Jahre 2026–2027 wird eine gesonderte Bonusbesteuerung nachgewiesen. Für andere Jahre ist diese Methode nicht verfügbar.",
     "year": "Geben Sie ein gültiges Steuerjahr zwischen 2026 und 9999 ein.",
     "duplicateMonth": "Monatliche Daten müssen eindeutige gültige Monate (1–12) verwenden.",
     "housingConflict": "Wohnmiete und Hypothekenzinsabzüge können nicht gleichzeitig erfasst werden.",
     "policyMissing": "Für einige Monate gibt es keine bestätigte Richtlinie. Geben Sie tatsächliche Beiträge oder explizite benutzerdefinierte Parameter für diese Monate ein.",
-    "cityQuick": "Stadtschätzungen erfordern eine Richtlinienüberprüfung für jeden Monat. Verwenden Sie den tatsächlichen kumulierten oder jährlichen Modus oder geben Sie bestätigte Mitarbeiterbeiträge ein."
+    "cityQuick": "Stadtschätzungen erfordern eine Richtlinienüberprüfung für jeden Monat. Verwenden Sie den tatsächlichen kumulierten oder jährlichen Modus oder geben Sie bestätigte Mitarbeiterbeiträge ein.",
+    "firstMonthZero": "Im ersten Abrechnungsmonat bei diesem Arbeitgeber liegen die bisherigen Summen bei Null. Ihr Entwurf des Vormonats wird für spätere Monate aufbewahrt.",
+    "deductionMode": "Wählen Sie eine unterstützte Basismethode für den Kostenabzug aus.",
+    "deductionConflict": "Die alte Ersteinstellungskennzeichnung steht in Konflikt mit der ausgewählten Abzugsmethode.",
+    "reliefConfirmation": "Bestätigen Sie alle Berechtigungsbedingungen, bevor Sie die jährliche vereinfachte Quellensteuer in Höhe von 60.000 CNY in Anspruch nehmen.",
+    "reliefStart": "Für die jährliche vereinfachte Quellensteuer von 60.000 CNY ist eine Beschäftigung hier ab Januar erforderlich.",
+    "previousBasicRange": "Bisherige Grundausgabenabzüge stehen im Widerspruch zu dieser Methode. Der zulässige bisherige Betrag beträgt höchstens {{max}}; Für die vereinfachte Quellensteuer sind nach Januar genau 60.000 CNY erforderlich.",
+    "reliefMonths": "Für eine vereinfachte Quellensteuer geben Sie jeden Monat von Januar bis zum letzten ausgewählten Monat lückenlos an."
   }
 }

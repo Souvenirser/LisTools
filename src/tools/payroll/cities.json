@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-03",
+  "version": "2026-11-06",
   "cities": [
     {
       "id": "beijing",
@@ -28,6 +28,10 @@
               "rounding": "half-up",
               "verification": "verified",
               "sources": [
+                {
+                  "url": "https://www.bjfsh.gov.cn/zsk/zcwd/202608/t20260818_40116625.shtml",
+                  "title": "房山政府2026-08问答：养老16%/8%、失业0.5%/0.5%、工伤浮动"
+                },
                 {
                   "url": "https://banshi.beijing.gov.cn/zcjd/202608/t20260831_428682.html",
                   "title": "京人社发〔2026〕7号：2026社保缴费基数"
@@ -97,6 +101,10 @@
               "verification": "verified",
               "sources": [
                 {
+                  "url": "https://www.bjfsh.gov.cn/zsk/zcwd/202608/t20260818_40116625.shtml",
+                  "title": "房山政府2026-08问答：养老16%/8%、失业0.5%/0.5%、工伤浮动"
+                },
+                {
                   "url": "https://banshi.beijing.gov.cn/zcjd/202608/t20260831_428682.html",
                   "title": "京人社发〔2026〕7号：2026社保缴费基数"
                 },
@@ -165,6 +173,10 @@
               "rounding": "half-up",
               "verification": "verified",
               "sources": [
+                {
+                  "url": "https://www.bjfsh.gov.cn/zsk/zcwd/202608/t20260818_40116625.shtml",
+                  "title": "房山政府2026-08问答：养老16%/8%、失业0.5%/0.5%、工伤浮动"
+                },
                 {
                   "url": "https://banshi.beijing.gov.cn/zcjd/202608/t20260831_428682.html",
                   "title": "京人社发〔2026〕7号：2026社保缴费基数"
@@ -725,27 +737,9 @@
               "verification": "reference",
               "sources": [
                 {
-                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
-                  "title": "MIT开源候选值，未完成官方复核"
-                }
-              ],
-              "verifiedAt": null,
-              "from": "2026-07",
-              "to": "2026-12",
-              "deductible": true
-            },
-            {
-              "id": "medical",
-              "min": "6234",
-              "max": "31170",
-              "employee": "0.02",
-              "employer": "0.06",
-              "employeeFixed": "0",
-              "employerFixed": "0",
-              "digits": 2,
-              "rounding": "half-up",
-              "verification": "reference",
-              "sources": [
+                  "url": "https://wx12345.gzonline.gov.cn/km/showMsg?id=BEAFDBCFD",
+                  "title": "广州12345：养老5521—27603，2026-07至2027-06"
+                },
                 {
                   "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
                   "title": "MIT开源候选值，未完成官方复核"
@@ -753,6 +747,32 @@
               ],
               "verifiedAt": null,
               "from": "2026-07",
+              "to": "2027-06",
+              "deductible": true
+            },
+            {
+              "id": "medical",
+              "min": "6234",
+              "max": "31170",
+              "employee": "0.02",
+              "employer": "0.0685",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://wx12345.gzonline.gov.cn/km/showMsg?id=BEAFDBCFD",
+                  "title": "广州12345：2026医保含生育6.85%，基数6234—31170"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-01",
               "to": "2026-12",
               "deductible": true
             },
@@ -791,12 +811,16 @@
               "verification": "reference",
               "sources": [
                 {
+                  "url": "https://wx12345.gzonline.gov.cn/km/showMsg?id=BEAFDBCFD",
+                  "title": "广州12345：生育0.85%已计入医疗单位6.85%"
+                },
+                {
                   "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
                   "title": "MIT开源候选值，未完成官方复核"
                 }
               ],
               "verifiedAt": null,
-              "from": "2026-07",
+              "from": "2026-01",
               "to": "2026-12",
               "deductible": true,
               "mergedInto": "medical"
@@ -1606,9 +1630,13 @@
               "employeeFixed": "0",
               "employerFixed": "0",
               "digits": 0,
-              "rounding": "half-up",
+              "rounding": "up",
               "verification": "reference",
               "sources": [
+                {
+                  "url": "https://www.wujiang.gov.cn/zgwj/c112414/202501/c4d1e493970648c6803e33248d59045d.shtml",
+                  "title": "苏房金规〔2024〕2号第八条：双边分别见角分进元"
+                },
                 {
                   "url": "https://www.js.gov.cn/art/2026/10/9/art_60095_11839273.html",
                   "title": "苏人社发〔2026〕30号：全省2026社保基数"
@@ -2590,12 +2618,16 @@
               "verification": "reference",
               "sources": [
                 {
+                  "url": "https://www.huaihua.gov.cn/ylbzj/c133246/202608/015c274e46e74ad383d3ccced347220c.shtml",
+                  "title": "湘医保发〔2026〕36号：2026-10起医保4106—20529；费率与附加仍待完整复核"
+                },
+                {
                   "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
                   "title": "MIT开源候选值，未完成官方复核"
                 }
               ],
               "verifiedAt": null,
-              "from": "2026-07",
+              "from": "2026-10",
               "to": "2026-12",
               "deductible": true
             },
@@ -2634,12 +2666,16 @@
               "verification": "reference",
               "sources": [
                 {
+                  "url": "https://www.huaihua.gov.cn/ylbzj/c133246/202608/015c274e46e74ad383d3ccced347220c.shtml",
+                  "title": "湘医保发〔2026〕36号：2026-10起医保4106—20529；费率与附加仍待完整复核"
+                },
+                {
                   "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
                   "title": "MIT开源候选值，未完成官方复核"
                 }
               ],
               "verifiedAt": null,
-              "from": "2026-07",
+              "from": "2026-10",
               "to": "2026-12",
               "deductible": true,
               "mergedInto": "medical"
@@ -3318,12 +3354,16 @@
               "verification": "reference",
               "sources": [
                 {
+                  "url": "https://ybj.jinan.gov.cn/col/col116777/art/2026/art_c62f94aa08704012b88c462f754c8d48.html",
+                  "title": "济南医保局2026-09：医保4573—22863、单位8%含生育、个人2%；附加仍待完整复核"
+                },
+                {
                   "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
                   "title": "MIT开源候选值，未完成官方复核"
                 }
               ],
               "verifiedAt": null,
-              "from": "2026-07",
+              "from": "2026-09",
               "to": "2026-12",
               "deductible": true
             },
@@ -3362,12 +3402,16 @@
               "verification": "reference",
               "sources": [
                 {
+                  "url": "https://ybj.jinan.gov.cn/col/col116777/art/2026/art_c62f94aa08704012b88c462f754c8d48.html",
+                  "title": "济南医保局2026-09：医保4573—22863、单位8%含生育、个人2%；附加仍待完整复核"
+                },
+                {
                   "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
                   "title": "MIT开源候选值，未完成官方复核"
                 }
               ],
               "verifiedAt": null,
-              "from": "2026-07",
+              "from": "2026-09",
               "to": "2026-12",
               "deductible": true,
               "mergedInto": "medical"

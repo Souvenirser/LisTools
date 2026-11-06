@@ -2141,7 +2141,16 @@
     "annualSpecial": "Ukudonswa kwemali okungeziwe okukhethekile konyaka okuqinisekisiwe (CNY)",
     "annualOther": "Okunye okubanjwayo konyaka okuqinisekisiwe (CNY)",
     "employeeRate": "Izinga labasebenzi (%)",
-    "employerRate": "Izinga lomqashi (%)"
+    "employerRate": "Izinga lomqashi (%)",
+    "basicDeductionMode": "Indlela eyisisekelo yokudonswa kwezindleko",
+    "predictionMode": "Indlela yokubamba ebikezelwe",
+    "basicStandard": "Ukubamba okuqongelelwe okujwayelekile",
+    "basicFirst": "Iholo lokuqala kulo nyaka",
+    "basicAnnual": "Ukubamba okwenziwe lula kwaminyaka yonke kwe-CNY 60,000",
+    "standardHint": "Donsa i-CNY 5,000 ngenyanga ngayinye yokuhola kulo mqashi.",
+    "reliefEligibility": "Ngiyaqinisekisa ukuthi ngihlangabezana nazo zonke izimo zokufaneleka ezingezansi.",
+    "reliefHint": "Ngonyaka odlule, lo mqashi wabika iholo lami nyanga zonke futhi iholo lami eliphelele kuhlanganise namabhonasi alizange lidlule i-CNY 60,000. Kulo nyaka ngiqhubekile nokuhola lapha kusukela ngoJanuwari.",
+    "partialTax": "Iminikelo ibalwe ngempumelelo; intela engenayo ayizange yenziwe. Ukuthunyelwa komnikelo kuhlala kutholakala."
   },
   "insurance": {
     "name": "Umshwalense wezenhlalakahle kanye nesikhwama sezindlu",
@@ -2159,11 +2168,19 @@
     "description": "Bala ukubanjwa kweholo labahlali, intela yebhonasi kanye nentela yomholo yonyaka ngokuqagela okusobala kanye nemininingwane yokubala.",
     "monthRange": "Inkokhelo nezinyanga zokuqala kufanele zibe ngu-1-12, inyanga yokuqala ingakapheli inyanga yokuhola.",
     "previousRequired": "Faka amanani adlule aqongelelwe kulo mqashi; ungacabangi ukuthi ziro.",
+    "firstMonthHistory": "Isamba sangaphambilini kufanele sibe nguziro enyangeni yokuqala yentela ngalo mqashi. Hlola inyanga yokuqala namanani angokomlando.",
     "bonusExpired": "Intela yebhonasi ehlukene iqinisekiswa ngo-2026–2027. Le ndlela ayitholakali eminye iminyaka.",
     "year": "Faka unyaka wentela ovumelekile phakathi kuka-2026 no-9999.",
     "duplicateMonth": "Idatha yanyanga zonke kufanele isebenzise izinyanga ezivumelekile ezihlukile (1–12).",
     "housingConflict": "Imali yerenti yezindlu kanye nenzalo yemali yendlu akukwazi ukufakwa kokubili.",
     "policyMissing": "Ezinye izinyanga azinayo inqubomgomo eqinisekisiwe. Faka iminikelo yangempela noma amapharamitha angokwezifiso asobala alezo zinyanga.",
-    "cityQuick": "Izilinganiso zedolobha zidinga ukuqinisekiswa kwenqubomgomo yenyanga ngayinye. Sebenzisa imodi yangempela yokuqongelela noma yonyaka, noma faka iminikelo eqinisekisiwe yesisebenzi."
+    "cityQuick": "Izilinganiso zedolobha zidinga ukuqinisekiswa kwenqubomgomo yenyanga ngayinye. Sebenzisa imodi yangempela yokuqongelela noma yonyaka, noma faka iminikelo eqinisekisiwe yesisebenzi.",
+    "firstMonthZero": "Enyangeni yokuqala yokuhola kulo mqashi, isamba sangaphambilini singuziro. Okusalungiswa kwakho kwenyanga edlule kugcinwa izinyanga ezizayo.",
+    "deductionMode": "Khetha indlela yokudonswa kwezindleko eziyisisekelo.",
+    "deductionConflict": "Ifulegi lefa lokuqashwa kokuqala lingqubuzana nendlela ekhethiwe yokudonsa.",
+    "reliefConfirmation": "Qinisekisa zonke izimo zokufaneleka ngaphambi kokusebenzisa ukubamba okulula konyaka kwe-CNY 60,000.",
+    "reliefStart": "Ukubamba okwenziwe lula kwe-CNY 60,000 kudinga ukuqashwa lapha kusukela ngoJanuwari.",
+    "previousBasicRange": "Izindleko ezibanjwayo zangaphambilini ziyangqubuzana nale ndlela. Inani langaphambilini elivunyelwe lingaphezu kuka-{{max}}; Ukubamba okwenziwe lula kudinga i-CNY 60,000 ngqo ngemva kukaJanuwari.",
+    "reliefMonths": "Ukuze uthole ukubanjwa okwenziwe lula, hlinzeka njalo ngenyanga kusukela ngoJanuwari kuya enyangeni yokugcina ekhethiwe, ngaphandle kwezikhala."
   }
 }

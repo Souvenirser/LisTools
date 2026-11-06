@@ -2141,7 +2141,16 @@
     "annualSpecial": "Detrazioni aggiuntive speciali annuali confermate (CNY)",
     "annualOther": "Altre detrazioni annuali confermate (CNY)",
     "employeeRate": "Tasso di dipendenti (%)",
-    "employerRate": "Tasso datore di lavoro (%)"
+    "employerRate": "Tasso datore di lavoro (%)",
+    "basicDeductionMode": "Metodo base di detrazione delle spese",
+    "predictionMode": "Metodo della ritenuta d'acconto prevista",
+    "basicStandard": "Ritenuta cumulativa standard",
+    "basicFirst": "Primo reddito da stipendio quest'anno",
+    "basicAnnual": "Ritenuta semplificata annuale ammissibile di CNY 60.000",
+    "standardHint": "Detrarre CNY 5.000 per ogni mese di busta paga presso questo datore di lavoro.",
+    "reliefEligibility": "Confermo di soddisfare tutte le condizioni di idoneità riportate di seguito.",
+    "reliefHint": "L'anno scorso, questo datore di lavoro ha comunicato il mio stipendio ogni mese e il mio stipendio totale, compresi i bonus, non superava i 60.000 CNY. Quest'anno continuo a ricevere lo stipendio qui da gennaio.",
+    "partialTax": "Contributi calcolati con successo; l'imposta sul reddito non è stata generata. Le esportazioni di contributi rimangono disponibili."
   },
   "insurance": {
     "name": "Assicurazione sociale e fondo per l'edilizia abitativa",
@@ -2159,11 +2168,19 @@
     "description": "Calcola la ritenuta d'acconto sullo stipendio dei residenti, l'imposta sui bonus e l'imposta sullo stipendio annuale con presupposti espliciti e dettagli di calcolo.",
     "monthRange": "I mesi della busta paga e di inizio devono essere compresi tra 1 e 12, con il mese di inizio non successivo al mese della busta paga.",
     "previousRequired": "Inserisci gli importi cumulativi precedenti presso questo datore di lavoro; non dare per scontato che siano zero.",
+    "firstMonthHistory": "I totali precedenti devono essere pari a zero nel primo mese fiscale con questo datore di lavoro. Controlla il mese di inizio e gli importi storici.",
     "bonusExpired": "La tassazione separata dei bonus è verificata per il periodo 2026-2027. Questo metodo non è disponibile per gli altri anni.",
     "year": "Inserisci un anno fiscale valido compreso tra 2026 e 9999.",
     "duplicateMonth": "I dati mensili devono utilizzare mesi validi univoci (1-12).",
     "housingConflict": "Non è possibile inserire contemporaneamente l'affitto dell'abitazione e le detrazioni degli interessi ipotecari.",
     "policyMissing": "Alcuni mesi non hanno una politica verificata. Inserisci i contributi effettivi o i parametri personalizzati espliciti per quei mesi.",
-    "cityQuick": "Le stime delle città richiedono la verifica delle polizze per ogni mese. Utilizzare la modalità cumulativa effettiva o annuale oppure inserire i contributi confermati dei dipendenti."
+    "cityQuick": "Le stime delle città richiedono la verifica delle polizze per ogni mese. Utilizzare la modalità cumulativa effettiva o annuale oppure inserire i contributi confermati dei dipendenti.",
+    "firstMonthZero": "Nel primo mese del libro paga presso questo datore di lavoro, i totali precedenti sono pari a zero. La bozza del mese precedente viene conservata per i mesi successivi.",
+    "deductionMode": "Seleziona un metodo di detrazione delle spese di base supportato.",
+    "deductionConflict": "L'indicatore precedente del primo impiego è in conflitto con il metodo di detrazione selezionato.",
+    "reliefConfirmation": "Confermare tutte le condizioni di idoneità prima di utilizzare la ritenuta semplificata annuale di 60.000 CNY.",
+    "reliefStart": "La ritenuta annuale semplificata di CNY 60.000 richiede un impiego qui da gennaio.",
+    "previousBasicRange": "Le precedenti detrazioni delle spese di base sono in conflitto con questo metodo. L'importo precedente consentito è al massimo {{max}}; la ritenuta semplificata richiede esattamente CNY 60.000 dopo gennaio.",
+    "reliefMonths": "Per la ritenuta semplificata fornire ogni mese da gennaio fino all'ultimo mese selezionato, senza lacune."
   }
 }

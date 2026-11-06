@@ -2141,7 +2141,16 @@
     "annualSpecial": "Deducciones adicionales especiales anuales confirmadas (CNY)",
     "annualOther": "Otras deducciones anuales confirmadas (CNY)",
     "employeeRate": "Tasa de empleados (%)",
-    "employerRate": "Tasa de empleadores (%)"
+    "employerRate": "Tasa de empleadores (%)",
+    "basicDeductionMode": "Método básico de deducción de gastos",
+    "predictionMode": "Método de retención previsto",
+    "basicStandard": "Retención acumulativa estándar",
+    "basicFirst": "Primer ingreso salarial este año",
+    "basicAnnual": "Retención simplificada anual elegible de 60 000 CNY",
+    "standardHint": "Deduzca 5.000 CNY por cada mes de nómina de este empleador.",
+    "reliefEligibility": "Confirmo que cumplo con todas las condiciones de elegibilidad a continuación.",
+    "reliefHint": "El año pasado, este empleador informó mi salario todos los meses y mi salario total, incluidas las bonificaciones, no superó los 60.000 CNY. Este año sigo cobrando salario aquí desde enero.",
+    "partialTax": "Contribuciones calculadas exitosamente; no se generó impuesto a la renta. Las exportaciones de contribución siguen disponibles."
   },
   "insurance": {
     "name": "Fondo de seguro social y vivienda",
@@ -2159,11 +2168,19 @@
     "description": "Calcule la retención del salario de los residentes, el impuesto sobre bonificaciones y el impuesto sobre el salario anual con supuestos explícitos y detalles de cálculo.",
     "monthRange": "Los meses de nómina y de inicio deben ser del 1 al 12, y el mes de inicio no debe ser posterior al mes de nómina.",
     "previousRequired": "Ingrese los montos acumulados anteriores en este empleador; no asuma que son cero.",
+    "firstMonthHistory": "Los totales anteriores deben ser cero en el primer mes fiscal con este empleador. Consulta el mes de inicio y los importes históricos.",
     "bonusExpired": "Se verifica una tributación adicional separada para 2026-2027. Este método no está disponible para otros años.",
     "year": "Ingrese un año fiscal válido entre 2026 y 9999.",
     "duplicateMonth": "Los datos mensuales deben utilizar meses válidos únicos (1 a 12).",
     "housingConflict": "No se pueden ingresar al mismo tiempo las deducciones por el alquiler de la vivienda y los intereses hipotecarios.",
     "policyMissing": "Algunos meses no tienen póliza verificada. Ingrese contribuciones reales o parámetros personalizados explícitos para esos meses.",
-    "cityQuick": "Las estimaciones de la ciudad requieren verificación de la política para cada mes. Utilice el modo anual o acumulativo real, o ingrese las contribuciones confirmadas de los empleados."
+    "cityQuick": "Las estimaciones de la ciudad requieren verificación de la política para cada mes. Utilice el modo anual o acumulativo real, o ingrese las contribuciones confirmadas de los empleados.",
+    "firstMonthZero": "En el primer mes de nómina de este empleador, los totales anteriores son cero. El borrador del mes anterior se conserva para los meses posteriores.",
+    "deductionMode": "Seleccione un método de deducción de gastos básicos admitido.",
+    "deductionConflict": "El indicador heredado de primer empleo entra en conflicto con el método de deducción seleccionado.",
+    "reliefConfirmation": "Confirme todas las condiciones de elegibilidad antes de utilizar la retención simplificada anual de 60 000 CNY.",
+    "reliefStart": "La retención anual simplificada de 60.000 CNY requiere empleo aquí a partir de enero.",
+    "previousBasicRange": "Las deducciones de gastos básicos anteriores entran en conflicto con este método. El monto previo permitido es como máximo {{max}}; la retención simplificada requiere exactamente 60.000 CNY después de enero.",
+    "reliefMonths": "Para retención simplificada, proporcione todos los meses desde enero hasta el último mes seleccionado, sin espacios."
   }
 }

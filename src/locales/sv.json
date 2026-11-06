@@ -2141,7 +2141,16 @@
     "annualSpecial": "Bekräftade årliga extra avdrag (CNY)",
     "annualOther": "Bekräftade årliga andra avdrag (CNY)",
     "employeeRate": "Antal anställda (%)",
-    "employerRate": "Arbetsgivarandel (%)"
+    "employerRate": "Arbetsgivarandel (%)",
+    "basicDeductionMode": "Grundläggande kostnadsavdragsmetod",
+    "predictionMode": "Förutspådd innehållningsmetod",
+    "basicStandard": "Kumulativ standardinnehållning",
+    "basicFirst": "Första löneinkomsten i år",
+    "basicAnnual": "Kvalificerad årlig CNY 60 000 förenklad källskatt",
+    "standardHint": "Dra av 5 000 CNY för varje lönemånad hos denna arbetsgivare.",
+    "reliefEligibility": "Jag bekräftar att jag uppfyller alla behörighetsvillkor nedan.",
+    "reliefHint": "Förra året rapporterade den här arbetsgivaren min lön varje månad och min totala lön inklusive bonusar översteg inte 60 000 CNY. I år har jag fortsatt att få lön här sedan januari.",
+    "partialTax": "Bidrag har beräknats framgångsrikt; inkomstskatt genererades inte. Bidragsexporter förblir tillgängliga."
   },
   "insurance": {
     "name": "Socialförsäkring och bostadskassa",
@@ -2159,11 +2168,19 @@
     "description": "Beräkna inneboende löneinnehållning, bonusskatt och årslöneskatt med uttryckliga antaganden och beräkningsdetaljer.",
     "monthRange": "Löne- och startmånad ska vara 1–12, med startmånad senast lönemånad.",
     "previousRequired": "Ange de tidigare ackumulerade beloppen hos denna arbetsgivare; anta inte att de är noll.",
+    "firstMonthHistory": "Tidigare summor måste vara noll under den första skattemånaden hos denna arbetsgivare. Kontrollera startmånad och historiska belopp.",
     "bonusExpired": "Separat bonusbeskattning verifieras för 2026–2027. Denna metod är inte tillgänglig för andra år.",
     "year": "Ange ett giltigt skatteår mellan 2026 och 9999.",
     "duplicateMonth": "Månadsdata måste använda unika giltiga månader (1–12).",
     "housingConflict": "Bostadshyra och ränteavdrag för bolån kan inte båda bokföras.",
     "policyMissing": "Vissa månader har ingen verifierad policy. Ange faktiska bidrag eller explicita anpassade parametrar för dessa månader.",
-    "cityQuick": "Stadsberäkningar kräver policyverifiering för varje månad. Använd faktisk kumulativt eller årligt läge, eller ange bekräftade anställdas bidrag."
+    "cityQuick": "Stadsberäkningar kräver policyverifiering för varje månad. Använd faktisk kumulativt eller årligt läge, eller ange bekräftade anställdas bidrag.",
+    "firstMonthZero": "Under den första lönemånaden hos denna arbetsgivare är tidigare summor noll. Ditt utkast från föregående månad sparas för senare månader.",
+    "deductionMode": "Välj en grundläggande kostnadsavdragsmetod som stöds.",
+    "deductionConflict": "Den äldre flaggan för första anställning står i konflikt med den valda avdragsmetoden.",
+    "reliefConfirmation": "Bekräfta alla kvalificeringsvillkor innan du använder en årlig förenklad källskatt på 60 000 CNY.",
+    "reliefStart": "Årlig 60 000 CNY förenklad källskatt kräver anställning här från januari.",
+    "previousBasicRange": "Tidigare grundutgiftsavdrag strider mot denna metod. Det tillåtna tidigare beloppet är högst {{max}}; förenklad innehållande kräver exakt 60 000 CNY efter januari.",
+    "reliefMonths": "För förenklat innehåll, tillhandahåll varje månad från januari till och med den senast valda månaden, utan luckor."
   }
 }

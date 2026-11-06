@@ -2141,7 +2141,16 @@
     "annualSpecial": "Potwierdzone roczne specjalne dodatkowe odliczenia (CNY)",
     "annualOther": "Potwierdzone roczne inne odliczenia (CNY)",
     "employeeRate": "Stawka pracownika (%)",
-    "employerRate": "Stawka pracodawcy (%)"
+    "employerRate": "Stawka pracodawcy (%)",
+    "basicDeductionMode": "Podstawowa metoda odliczania wydatków",
+    "predictionMode": "Przewidywana metoda potrącenia",
+    "basicStandard": "Standardowe skumulowane potrącenie u źródła",
+    "basicFirst": "Pierwsza pensja w tym roku",
+    "basicAnnual": "Kwalifikujący się roczny uproszczony podatek u źródła w wysokości 60 000 CNY",
+    "standardHint": "Odlicz 5000 CNY za każdy miesiąc wypłaty u tego pracodawcy.",
+    "reliefEligibility": "Potwierdzam, że spełniam wszystkie poniższe warunki kwalifikacyjne.",
+    "reliefHint": "W zeszłym roku ten pracodawca co miesiąc raportował moje wynagrodzenie, a moje całkowite wynagrodzenie wraz z premiami nie przekroczyło 60 000 CNY. W tym roku nadal otrzymuję tutaj wynagrodzenie od stycznia.",
+    "partialTax": "Składki obliczono pomyślnie; podatek dochodowy nie został wygenerowany. Eksport wkładów pozostaje dostępny."
   },
   "insurance": {
     "name": "Ubezpieczenie społeczne i fundusz mieszkaniowy",
@@ -2159,11 +2168,19 @@
     "description": "Oblicz potrącenie od wynagrodzenia rezydenta, podatek od premii i roczny podatek od wynagrodzenia z wyraźnymi założeniami i szczegółami obliczeń.",
     "monthRange": "Miesiące płacowe i początkowe muszą wynosić 1–12, przy czym miesiąc początkowy nie może być późniejszy niż miesiąc płacowy.",
     "previousRequired": "Wprowadź poprzednie skumulowane kwoty u tego pracodawcy; nie zakładaj, że są zerowe.",
+    "firstMonthHistory": "Poprzednie sumy muszą wynosić zero w pierwszym miesiącu podatkowym u tego pracodawcy. Sprawdź miesiąc rozpoczęcia i kwoty historyczne.",
     "bonusExpired": "Weryfikacja odrębnego opodatkowania premii przypada na lata 2026–2027. Metoda ta nie jest dostępna dla pozostałych lat.",
     "year": "Wpisz prawidłowy rok podatkowy z zakresu od 2026 do 9999.",
     "duplicateMonth": "Dane miesięczne muszą zawierać unikalne, ważne miesiące (1–12).",
     "housingConflict": "Nie można jednocześnie wpisać czynszu mieszkaniowego i odsetek od kredytu hipotecznego.",
     "policyMissing": "W niektórych miesiącach nie ma zweryfikowanych zasad. Wprowadź rzeczywiste składki lub jawne parametry niestandardowe dla tych miesięcy.",
-    "cityQuick": "Szacunki miejskie wymagają weryfikacji zasad w każdym miesiącu. Użyj rzeczywistego trybu skumulowanego lub rocznego lub wprowadź potwierdzone składki pracowników."
+    "cityQuick": "Szacunki miejskie wymagają weryfikacji zasad w każdym miesiącu. Użyj rzeczywistego trybu skumulowanego lub rocznego lub wprowadź potwierdzone składki pracowników.",
+    "firstMonthZero": "W pierwszym miesiącu płacowym u tego pracodawcy poprzednie sumy wynoszą zero. Wersja robocza z poprzedniego miesiąca zostanie zachowana na kolejne miesiące.",
+    "deductionMode": "Wybierz obsługiwaną metodę odliczania wydatków podstawowych.",
+    "deductionConflict": "Starsza flaga pierwszego zatrudnienia powoduje konflikt z wybraną metodą odliczenia.",
+    "reliefConfirmation": "Potwierdź wszystkie warunki kwalifikowalności przed skorzystaniem z rocznego uproszczonego potrącenia u źródła w wysokości 60 000 CNY.",
+    "reliefStart": "Roczny uproszczony podatek u źródła w wysokości 60 000 CNY wymaga zatrudnienia tutaj od stycznia.",
+    "previousBasicRange": "Poprzednie odliczenia kosztów podstawowych są sprzeczne z tą metodą. Dozwolona poprzednia kwota to co najwyżej {{max}}; uproszczone potrącenie podatku u źródła wymaga po styczniu dokładnie 60 000 CNY.",
+    "reliefMonths": "W przypadku uproszczonego poboru podatku należy podawać każdy miesiąc od stycznia do ostatniego wybranego miesiąca, bez luk."
   }
 }

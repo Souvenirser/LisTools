@@ -27,6 +27,7 @@ const refreshFeedback=feedbackFooter?mountFeedbackLink(feedbackFooter,()=>({
   issuesUrl:bugs.url,tool:feedbackTool(location.pathname,location.hash),version,locale:language(),label:t('common.feedback'),hint:t('common.feedbackHint')
 })):()=>{};
 onLanguageChange(refreshFeedback);window.addEventListener('hashchange',refreshFeedback);
+window.addEventListener('listools:workspace-route',refreshFeedback);
 
 function applyLanguage(){
   document.documentElement.lang=language();

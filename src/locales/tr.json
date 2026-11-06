@@ -2141,7 +2141,16 @@
     "annualSpecial": "Onaylanmış yıllık özel ek kesintiler (CNY)",
     "annualOther": "Onaylanmış yıllık diğer kesintiler (CNY)",
     "employeeRate": "Çalışan oranı (%)",
-    "employerRate": "İşveren oranı (%)"
+    "employerRate": "İşveren oranı (%)",
+    "basicDeductionMode": "Temel gider kesintisi yöntemi",
+    "predictionMode": "Tahmini stopaj yöntemi",
+    "basicStandard": "Standart kümülatif stopaj",
+    "basicFirst": "Bu yılın ilk maaş geliri",
+    "basicAnnual": "Uygun yıllık 60.000 CNY basitleştirilmiş stopaj",
+    "standardHint": "Bu işverendeki her maaş bordrosu ayı için 5.000 CNY kesinti yapın.",
+    "reliefEligibility": "Aşağıdaki tüm uygunluk koşullarını karşıladığımı onaylıyorum.",
+    "reliefHint": "Geçen yıl, bu işveren maaşımı her ay rapor ediyordu ve ikramiyeler dahil toplam maaşım 60.000 CNY'yi geçmiyordu. Bu yıl Ocak ayından beri burada maaş almaya devam ediyorum.",
+    "partialTax": "Katkılar başarıyla hesaplandı; gelir vergisi oluşturulmadı. Katkı dışa aktarmaları kullanılabilir durumda kalır."
   },
   "insurance": {
     "name": "Sosyal sigorta ve konut fonu",
@@ -2159,11 +2168,19 @@
     "description": "Yerleşik maaş stopajını, ikramiye vergisini ve yıllık maaş vergisini açık varsayımlar ve hesaplama detaylarıyla hesaplayın.",
     "monthRange": "Bordro ve başlangıç ​​ayları 1-12 arasında olmalı ve başlangıç ​​ayı bordro ayından geç olmamalıdır.",
     "previousRequired": "Bu işverendeki önceki kümülatif tutarları girin; bunların sıfır olduğunu düşünmeyin.",
+    "firstMonthHistory": "Bu işverende ilk vergi ayında önceki toplamlar sıfır olmalıdır. Başlangıç ​​ayını ve geçmiş tutarları kontrol edin.",
     "bonusExpired": "2026-2027 için ayrı ikramiye vergilendirmesi doğrulandı. Bu yöntem diğer yıllar için geçerli değildir.",
     "year": "2026 ile 9999 arasında geçerli bir vergi yılı girin.",
     "duplicateMonth": "Aylık verilerde benzersiz geçerli aylar (1-12) kullanılmalıdır.",
     "housingConflict": "Konut kirası ve konut kredisi faiz kesintileri aynı anda girilemez.",
     "policyMissing": "Bazı ayların doğrulanmış politikası yoktur. Bu aylara ait gerçek katkıları veya açık özel parametreleri girin.",
-    "cityQuick": "Şehir tahminleri her ay için politika doğrulaması gerektirir. Gerçek kümülatif veya yıllık modu kullanın veya onaylanmış çalışan katkılarını girin."
+    "cityQuick": "Şehir tahminleri her ay için politika doğrulaması gerektirir. Gerçek kümülatif veya yıllık modu kullanın veya onaylanmış çalışan katkılarını girin.",
+    "firstMonthZero": "Bu işverendeki ilk maaş bordrosu ayında önceki toplamlar sıfırdır. Önceki aya ait taslağınız daha sonraki aylar için saklanır.",
+    "deductionMode": "Desteklenen bir temel gider kesintisi yöntemini seçin.",
+    "deductionConflict": "Eski ilk işe alım bayrağı, seçilen kesinti yöntemiyle çelişiyor.",
+    "reliefConfirmation": "Yıllık 60.000 CNY tutarındaki basitleştirilmiş stopajı kullanmadan önce tüm uygunluk koşullarını onaylayın.",
+    "reliefStart": "Yıllık 60.000 CNY tutarında basitleştirilmiş stopaj, Ocak ayından itibaren burada çalışmayı gerektirir.",
+    "previousBasicRange": "Önceki temel gider kesintileri bu yöntemle çelişmektedir. İzin verilen önceki tutar en fazla {{max}}'dur; basitleştirilmiş stopaj Ocak ayından sonra tam olarak 60.000 CNY tutarında olmasını gerektirir.",
+    "reliefMonths": "Basitleştirilmiş stopaj için Ocak ayından seçilen son aya kadar her ayı boşluksuz olarak sağlayın."
   }
 }

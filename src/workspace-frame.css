@@ -1,0 +1,5 @@
+html[data-workspace-embedded]{--app-header-height:0px!important}
+html[data-workspace-embedded] .app-header,html[data-workspace-embedded] #workbench-navigation,html[data-workspace-embedded] #tool-menu,html[data-workspace-embedded] #recent-tools,html[data-workspace-embedded] #workbench-settings{display:none!important}
+html[data-workspace-embedded] .workbench-shell .app-layout{display:block!important;height:100dvh!important;min-height:0;grid-template-columns:minmax(0,1fr)!important}
+html[data-workspace-embedded] .app-layout>main{height:100%;width:100%;box-sizing:border-box}
+html[data-workspace-embedded][data-entry-motion] main{animation:none!important}

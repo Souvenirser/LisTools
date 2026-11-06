@@ -2141,7 +2141,16 @@
     "annualSpecial": "Potongan tambahan khas tahunan (CNY) yang disahkan",
     "annualOther": "Potongan lain tahunan (CNY) yang disahkan",
     "employeeRate": "Kadar pekerja (%)",
-    "employerRate": "Kadar majikan (%)"
+    "employerRate": "Kadar majikan (%)",
+    "basicDeductionMode": "Kaedah potongan perbelanjaan asas",
+    "predictionMode": "Kaedah penahanan yang diramalkan",
+    "basicStandard": "Penahanan kumulatif standard",
+    "basicFirst": "Pendapatan gaji pertama tahun ini",
+    "basicAnnual": "Penahanan dipermudahkan CNY 60,000 tahunan yang layak",
+    "standardHint": "Potong CNY 5,000 untuk setiap bulan gaji di majikan ini.",
+    "reliefEligibility": "Saya mengesahkan bahawa saya memenuhi semua syarat kelayakan di bawah.",
+    "reliefHint": "Tahun lepas, majikan ini melaporkan gaji saya setiap bulan dan jumlah gaji saya termasuk bonus tidak melebihi CNY 60,000. Tahun ini saya terus menerima gaji di sini sejak Januari.",
+    "partialTax": "Sumbangan berjaya dikira; cukai pendapatan tidak dijana. Eksport sumbangan kekal tersedia."
   },
   "insurance": {
     "name": "Insurans sosial dan dana perumahan",
@@ -2159,11 +2168,19 @@
     "description": "Kira penahanan gaji pemastautin, cukai bonus dan cukai gaji tahunan dengan andaian yang jelas dan butiran pengiraan.",
     "monthRange": "Bulan gaji dan permulaan mestilah 1–12, dengan bulan permulaan tidak lewat daripada bulan gaji.",
     "previousRequired": "Masukkan jumlah terkumpul sebelumnya di majikan ini; jangan anggap mereka sifar.",
+    "firstMonthHistory": "Jumlah sebelumnya mestilah sifar pada bulan cukai pertama dengan majikan ini. Semak bulan permulaan dan jumlah sejarah.",
     "bonusExpired": "Cukai bonus berasingan disahkan untuk 2026–2027. Kaedah ini tidak tersedia untuk tahun-tahun lain.",
     "year": "Masukkan tahun cukai yang sah antara 2026 dan 9999.",
     "duplicateMonth": "Data bulanan mesti menggunakan bulan sah yang unik (1–12).",
     "housingConflict": "Sewa rumah dan potongan faedah gadai janji tidak boleh dimasukkan kedua-duanya.",
     "policyMissing": "Beberapa bulan tidak mempunyai polisi yang disahkan. Masukkan sumbangan sebenar atau parameter tersuai eksplisit untuk bulan tersebut.",
-    "cityQuick": "Anggaran bandar memerlukan pengesahan dasar untuk setiap bulan. Gunakan mod kumulatif atau tahunan sebenar, atau masukkan caruman pekerja yang disahkan."
+    "cityQuick": "Anggaran bandar memerlukan pengesahan dasar untuk setiap bulan. Gunakan mod kumulatif atau tahunan sebenar, atau masukkan caruman pekerja yang disahkan.",
+    "firstMonthZero": "Pada bulan gaji pertama di majikan ini, jumlah sebelumnya adalah sifar. Draf bulan sebelumnya anda disimpan untuk bulan kemudian.",
+    "deductionMode": "Pilih kaedah potongan perbelanjaan asas yang disokong.",
+    "deductionConflict": "Bendera pekerjaan pertama warisan bercanggah dengan kaedah potongan yang dipilih.",
+    "reliefConfirmation": "Sahkan semua syarat kelayakan sebelum menggunakan penahanan ringkas tahunan CNY 60,000.",
+    "reliefStart": "Penahanan dipermudahkan CNY 60,000 tahunan memerlukan pekerjaan di sini mulai Januari.",
+    "previousBasicRange": "Potongan perbelanjaan asas sebelumnya bercanggah dengan kaedah ini. Jumlah sebelumnya yang dibenarkan adalah paling banyak {{max}}; penahanan dipermudahkan memerlukan tepat CNY 60,000 selepas Januari.",
+    "reliefMonths": "Untuk penahanan yang dipermudahkan, sediakan setiap bulan dari Januari hingga bulan yang dipilih terakhir, tanpa jurang."
   }
 }

@@ -2141,7 +2141,16 @@
     "annualSpecial": "Vahvistetut vuosittaiset erityiset lisävähennykset (CNY)",
     "annualOther": "Vahvistetut vuosittaiset muut vähennykset (CNY)",
     "employeeRate": "Työntekijäaste (%)",
-    "employerRate": "Työnantajaaste (%)"
+    "employerRate": "Työnantajaaste (%)",
+    "basicDeductionMode": "Kulujen perusvähennysmenetelmä",
+    "predictionMode": "Ennakoitu pidätysmenetelmä",
+    "basicStandard": "Normaali kumulatiivinen ennakonpidätys",
+    "basicFirst": "Ensimmäinen palkkatulo tänä vuonna",
+    "basicAnnual": "Tukikelpoinen vuosittainen 60 000 CNY yksinkertaistettu ennakonpidätys",
+    "standardHint": "Vähennä 5 000 CNY jokaiselta tämän työnantajan palkkakuukaudelta.",
+    "reliefEligibility": "Vahvistan, että täytän kaikki alla olevat kelpoisuusehdot.",
+    "reliefHint": "Viime vuonna tämä työnantaja ilmoitti palkkani kuukausittain, ja kokonaispalkkani bonukset mukaan lukien ei ylittänyt 60 000 CNY:ta. Tänä vuonna olen jatkanut palkkaa täällä tammikuusta lähtien.",
+    "partialTax": "Maksut on laskettu onnistuneesti; tuloveroa ei kertynyt. Lahjoitusvienti on edelleen saatavilla."
   },
   "insurance": {
     "name": "Sosiaalivakuutus ja asuntorahasto",
@@ -2159,11 +2168,19 @@
     "description": "Laske kotimaisen palkan ennakonpidätys, bonusvero ja vuosipalkan vero nimenomaisilla olettamuksilla ja laskentatiedoilla.",
     "monthRange": "Palkanlaskenta- ja aloituskuukausien tulee olla 1–12, ja alkamiskuukausi on viimeistään palkkakuukausi.",
     "previousRequired": "Syötä aikaisemmat kumulatiiviset määrät tämän työnantajan kohdalla; älä oleta, että ne ovat nolla.",
+    "firstMonthHistory": "Aiempien summien on oltava nolla ensimmäisenä verokuukautena tämän työnantajan kanssa. Tarkista aloituskuukausi ja historialliset summat.",
     "bonusExpired": "Erillinen bonusverotus vahvistetaan vuosille 2026–2027. Tämä menetelmä ei ole käytettävissä muina vuosina.",
     "year": "Anna voimassa oleva verovuosi 2026-9999.",
     "duplicateMonth": "Kuukausitietojen tulee käyttää yksilöllisiä voimassa olevia kuukausia (1–12).",
     "housingConflict": "Asuntovuokran ja asuntolainan korkovähennyksiä ei voi kirjata molempiin.",
     "policyMissing": "Joillakin kuukausilla ei ole vahvistettua politiikkaa. Anna todelliset panokset tai nimenomaiset muokatut parametrit kyseisiltä kuukausilta.",
-    "cityQuick": "Kaupunkiarviot edellyttävät käytäntöjen vahvistamista joka kuukausi. Käytä todellista kumulatiivista tai vuositilaa tai syötä vahvistetut työntekijöiden maksut."
+    "cityQuick": "Kaupunkiarviot edellyttävät käytäntöjen vahvistamista joka kuukausi. Käytä todellista kumulatiivista tai vuositilaa tai syötä vahvistetut työntekijöiden maksut.",
+    "firstMonthZero": "Ensimmäisenä palkkakuukautena tämän työnantajan aiemmat summat ovat nolla. Edellisen kuukauden luonnoksesi säilytetään myöhempiä kuukausia varten.",
+    "deductionMode": "Valitse tuettu peruskulujen vähennystapa.",
+    "deductionConflict": "Vanha ensimmäisen työsuhteen lippu on ristiriidassa valitun vähennystavan kanssa.",
+    "reliefConfirmation": "Vahvista kaikki kelpoisuusehdot ennen kuin käytät vuosittaista 60 000 CNY:n yksinkertaistettua ennakonpidätystä.",
+    "reliefStart": "Vuotuinen 60 000 CNY:n yksinkertaistettu ennakonpidätys edellyttää työllistämistä täällä tammikuusta alkaen.",
+    "previousBasicRange": "Aiemmat peruskuluvähennykset ovat ristiriidassa tämän menetelmän kanssa. Sallittu aikaisempi määrä on enintään {{max}}; yksinkertaistettu ennakonpidätys vaatii täsmälleen 60 000 CNY tammikuun jälkeen.",
+    "reliefMonths": "Yksinkertaistaaksesi ennakonpidätyksen, anna joka kuukausi tammikuusta viimeiseen valittuun kuukauteen ilman aukkoja."
   }
 }

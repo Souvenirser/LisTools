@@ -2141,7 +2141,16 @@
     "annualSpecial": "Các khoản khấu trừ bổ sung đặc biệt hàng năm đã được xác nhận (CNY)",
     "annualOther": "Các khoản khấu trừ khác hàng năm đã được xác nhận (CNY)",
     "employeeRate": "Tỷ lệ nhân viên (%)",
-    "employerRate": "Tỷ lệ sử dụng lao động (%)"
+    "employerRate": "Tỷ lệ sử dụng lao động (%)",
+    "basicDeductionMode": "Phương pháp khấu trừ chi phí cơ bản",
+    "predictionMode": "Phương pháp khấu trừ dự kiến",
+    "basicStandard": "Khấu trừ tích lũy tiêu chuẩn",
+    "basicFirst": "Thu nhập tiền lương đầu tiên trong năm nay",
+    "basicAnnual": "Khoản khấu trừ đơn giản 60.000 CNY hàng năm đủ điều kiện",
+    "standardHint": "Khấu trừ 5.000 CNY cho mỗi tháng trả lương tại nhà tuyển dụng này.",
+    "reliefEligibility": "Tôi xác nhận rằng tôi đáp ứng tất cả các điều kiện đủ điều kiện dưới đây.",
+    "reliefHint": "Năm ngoái, người sử dụng lao động này đã báo cáo mức lương hàng tháng của tôi và tổng tiền lương của tôi bao gồm cả tiền thưởng không vượt quá 60.000 CNY. Năm nay tôi tiếp tục nhận lương ở đây kể từ tháng 1.",
+    "partialTax": "Đóng góp được tính toán thành công; thuế thu nhập không được tạo ra. Xuất khẩu đóng góp vẫn có sẵn."
   },
   "insurance": {
     "name": "Quỹ bảo hiểm xã hội và nhà ở",
@@ -2159,11 +2168,19 @@
     "description": "Tính toán khấu trừ tiền lương của cư dân, thuế thưởng và thuế tiền lương hàng năm với các giả định và chi tiết tính toán rõ ràng.",
     "monthRange": "Tháng lương và tháng bắt đầu phải từ 1–12, tháng bắt đầu không muộn hơn tháng trả lương.",
     "previousRequired": "Nhập số tiền tích lũy trước đó tại nhà tuyển dụng này; đừng cho rằng chúng bằng không.",
+    "firstMonthHistory": "Tổng số trước đó phải bằng 0 trong tháng tính thuế đầu tiên với chủ lao động này. Kiểm tra tháng bắt đầu và số tiền lịch sử.",
     "bonusExpired": "Thuế tiền thưởng riêng biệt được xác minh cho năm 2026–2027. Phương pháp này không có sẵn cho các năm khác.",
     "year": "Nhập năm tính thuế hợp lệ từ năm 2026 đến 9999.",
     "duplicateMonth": "Dữ liệu hàng tháng phải sử dụng các tháng hợp lệ duy nhất (1–12).",
     "housingConflict": "Không thể nhập cả hai khoản khấu trừ tiền thuê nhà và lãi suất thế chấp.",
     "policyMissing": "Một số tháng không có chính sách được xác minh. Nhập đóng góp thực tế hoặc thông số tùy chỉnh rõ ràng cho những tháng đó.",
-    "cityQuick": "Ước tính của thành phố yêu cầu xác minh chính sách cho mỗi tháng. Sử dụng chế độ tích lũy hoặc hàng năm thực tế hoặc nhập các khoản đóng góp của nhân viên đã được xác nhận."
+    "cityQuick": "Ước tính của thành phố yêu cầu xác minh chính sách cho mỗi tháng. Sử dụng chế độ tích lũy hoặc hàng năm thực tế hoặc nhập các khoản đóng góp của nhân viên đã được xác nhận.",
+    "firstMonthZero": "Trong tháng trả lương đầu tiên tại nhà tuyển dụng này, tổng số trước đó bằng không. Bản nháp tháng trước của bạn sẽ được lưu giữ cho những tháng sau.",
+    "deductionMode": "Chọn phương pháp khấu trừ chi phí cơ bản được hỗ trợ.",
+    "deductionConflict": "Cờ việc làm đầu tiên kế thừa xung đột với phương pháp khấu trừ đã chọn.",
+    "reliefConfirmation": "Xác nhận tất cả các điều kiện đủ điều kiện trước khi sử dụng khoản khấu trừ đơn giản 60.000 CNY hàng năm.",
+    "reliefStart": "Khoản khấu trừ đơn giản 60.000 CNY hàng năm yêu cầu phải có việc làm ở đây từ tháng Giêng.",
+    "previousBasicRange": "Các khoản khấu trừ chi phí cơ bản trước đây xung đột với phương pháp này. Số tiền được phép trước đó tối đa là {{max}}; khoản khấu trừ đơn giản yêu cầu chính xác 60.000 CNY sau tháng 1.",
+    "reliefMonths": "Để khấu trừ đơn giản, hãy cung cấp hàng tháng từ tháng 1 đến tháng được chọn cuối cùng, không có khoảng trống."
   }
 }

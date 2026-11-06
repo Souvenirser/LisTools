@@ -2141,7 +2141,16 @@
     "annualSpecial": "Confirmed annual special additional deductions (CNY)",
     "annualOther": "Confirmed annual other deductions (CNY)",
     "employeeRate": "Employee rate (%)",
-    "employerRate": "Employer rate (%)"
+    "employerRate": "Employer rate (%)",
+    "basicDeductionMode": "Basic expense deduction method",
+    "predictionMode": "Predicted withholding method",
+    "basicStandard": "Standard cumulative withholding",
+    "basicFirst": "First salary income this year",
+    "basicAnnual": "Eligible annual CNY 60,000 simplified withholding",
+    "standardHint": "Deduct CNY 5,000 for each payroll month at this employer.",
+    "reliefEligibility": "I confirm that I meet all eligibility conditions below.",
+    "reliefHint": "Last year, this employer reported my salary every month and my total salary including bonuses did not exceed CNY 60,000. This year I have continued receiving salary here since January.",
+    "partialTax": "Contributions calculated successfully; income tax was not generated. Contribution exports remain available."
   },
   "insurance": {
     "name": "Social insurance and housing fund",
@@ -2159,11 +2168,19 @@
     "description": "Calculate resident salary withholding, bonus tax and annual salary tax with explicit assumptions and calculation details.",
     "monthRange": "Payroll and starting months must be 1–12, with the starting month no later than the payroll month.",
     "previousRequired": "Enter the previous cumulative amounts at this employer; do not assume they are zero.",
+    "firstMonthHistory": "Previous totals must be zero in the first tax month with this employer. Check the start month and historical amounts.",
     "bonusExpired": "Separate bonus taxation is verified for 2026–2027. This method is unavailable for other years.",
     "year": "Enter a valid tax year between 2026 and 9999.",
     "duplicateMonth": "Monthly data must use unique valid months (1–12).",
     "housingConflict": "Housing rent and mortgage interest deductions cannot both be entered.",
     "policyMissing": "Some months have no verified policy. Enter actual contributions or explicit custom parameters for those months.",
-    "cityQuick": "City estimates require policy verification for each month. Use actual cumulative or annual mode, or enter confirmed employee contributions."
+    "cityQuick": "City estimates require policy verification for each month. Use actual cumulative or annual mode, or enter confirmed employee contributions.",
+    "firstMonthZero": "In the first payroll month at this employer, previous totals are zero. Your previous-month draft is kept for later months.",
+    "deductionMode": "Select a supported basic expense deduction method.",
+    "deductionConflict": "The legacy first-employment flag conflicts with the selected deduction method.",
+    "reliefConfirmation": "Confirm all eligibility conditions before using annual CNY 60,000 simplified withholding.",
+    "reliefStart": "Annual CNY 60,000 simplified withholding requires employment here from January.",
+    "previousBasicRange": "Previous basic expense deductions conflict with this method. The permitted previous amount is at most {{max}}; simplified withholding requires exactly CNY 60,000 after January.",
+    "reliefMonths": "For simplified withholding, provide every month from January through the last selected month, without gaps."
   }
 }

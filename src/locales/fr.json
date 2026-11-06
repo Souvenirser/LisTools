@@ -2141,7 +2141,16 @@
     "annualSpecial": "Déductions supplémentaires spéciales annuelles confirmées (CNY)",
     "annualOther": "Autres déductions annuelles confirmées (CNY)",
     "employeeRate": "Taux employé (%)",
-    "employerRate": "Taux employeur (%)"
+    "employerRate": "Taux employeur (%)",
+    "basicDeductionMode": "Méthode de déduction des dépenses de base",
+    "predictionMode": "Méthode de retenue prévue",
+    "basicStandard": "Retenue cumulée standard",
+    "basicFirst": "Premier revenu salarial cette année",
+    "basicAnnual": "Retenue simplifiée annuelle éligible de 60 000 CNY",
+    "standardHint": "Déduisez 5 000 CNY pour chaque mois de paie chez cet employeur.",
+    "reliefEligibility": "Je confirme que je remplis toutes les conditions d'éligibilité ci-dessous.",
+    "reliefHint": "L'année dernière, cet employeur a déclaré mon salaire chaque mois et mon salaire total, primes comprises, ne dépassait pas 60 000 CNY. Cette année, je continue à recevoir mon salaire ici depuis janvier.",
+    "partialTax": "Cotisations calculées avec succès ; l'impôt sur le revenu n'a pas été généré. Les exportations de contributions restent disponibles."
   },
   "insurance": {
     "name": "Fonds d'assurance sociale et de logement",
@@ -2159,11 +2168,19 @@
     "description": "Calculez la retenue sur salaire des résidents, l'impôt sur les bonus et l'impôt sur les salaires annuels avec des hypothèses explicites et des détails de calcul.",
     "monthRange": "Les mois de paie et de départ doivent être compris entre 1 et 12, le mois de départ étant au plus tard le mois de paie.",
     "previousRequired": "Inscrivez les montants cumulés précédents chez cet employeur; ne présumez pas qu’ils sont nuls.",
+    "firstMonthHistory": "Les totaux précédents doivent être nuls au cours du premier mois d’imposition auprès de cet employeur. Vérifiez le mois de début et les montants historiques.",
     "bonusExpired": "Une taxation distincte des bonus est vérifiée pour 2026-2027. Cette méthode n'est pas disponible pour les autres années.",
     "year": "Entrez une année d'imposition valide entre 2026 et 9999.",
     "duplicateMonth": "Les données mensuelles doivent utiliser des mois valides uniques (1 à 12).",
     "housingConflict": "Les déductions du loyer et des intérêts hypothécaires ne peuvent pas être saisies simultanément.",
     "policyMissing": "Certains mois n'ont pas de politique vérifiée. Saisissez les cotisations réelles ou les paramètres personnalisés explicites pour ces mois.",
-    "cityQuick": "Les estimations de la ville nécessitent une vérification de la politique pour chaque mois. Utilisez le mode cumulatif ou annuel réel, ou saisissez les cotisations salariales confirmées."
+    "cityQuick": "Les estimations de la ville nécessitent une vérification de la politique pour chaque mois. Utilisez le mode cumulatif ou annuel réel, ou saisissez les cotisations salariales confirmées.",
+    "firstMonthZero": "Au cours du premier mois de paie chez cet employeur, les totaux précédents sont nuls. Votre brouillon du mois précédent est conservé pour les mois suivants.",
+    "deductionMode": "Sélectionnez une méthode de déduction des dépenses de base prise en charge.",
+    "deductionConflict": "L’ancien indicateur de premier emploi entre en conflit avec la méthode de déduction sélectionnée.",
+    "reliefConfirmation": "Confirmez toutes les conditions d’éligibilité avant d’utiliser la retenue simplifiée annuelle de 60 000 CNY.",
+    "reliefStart": "Une retenue annuelle simplifiée de 60 000 CNY nécessite un emploi ici à partir de janvier.",
+    "previousBasicRange": "Les déductions de dépenses de base antérieures entrent en conflit avec cette méthode. Le montant précédent autorisé est au maximum de {{max}} ; la retenue simplifiée nécessite exactement 60 000 CNY après janvier.",
+    "reliefMonths": "Pour une retenue simplifiée, fournissez chaque mois de janvier jusqu'au dernier mois sélectionné, sans interruption."
   }
 }

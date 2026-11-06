@@ -2141,7 +2141,16 @@
     "annualSpecial": "Bekreftede årlige spesielle tilleggsfradrag (CNY)",
     "annualOther": "Bekreftede årlige andre fradrag (CNY)",
     "employeeRate": "Ansattrate (%)",
-    "employerRate": "Arbeidsgiverandel (%)"
+    "employerRate": "Arbeidsgiverandel (%)",
+    "basicDeductionMode": "Grunnleggende utgiftsfradragsmetode",
+    "predictionMode": "Forutsagt tilbakeholdsmetode",
+    "basicStandard": "Standard kumulativ forskuddstrekk",
+    "basicFirst": "Første lønnsinntekt i år",
+    "basicAnnual": "Kvalifisert årlig CNY 60 000 forenklet forskuddstrekk",
+    "standardHint": "Trekk 5000 CNY for hver lønnsmåned hos denne arbeidsgiveren.",
+    "reliefEligibility": "Jeg bekrefter at jeg oppfyller alle kvalifikasjonsvilkårene nedenfor.",
+    "reliefHint": "I fjor rapporterte denne arbeidsgiveren min lønn hver måned, og min totale lønn inkludert bonuser oversteg ikke 60 000 CNY. I år har jeg fortsatt å motta lønn her siden januar.",
+    "partialTax": "Bidrag beregnet vellykket; inntektsskatt ble ikke generert. Bidragseksport er fortsatt tilgjengelig."
   },
   "insurance": {
     "name": "Trygde- og boligkasse",
@@ -2159,11 +2168,19 @@
     "description": "Beregn innbyggerlønnstrekk, bonusskatt og årslønnsskatt med eksplisitte forutsetninger og beregningsdetaljer.",
     "monthRange": "Lønn og startmåned skal være 1–12, med startmåned senest i lønnsmåned.",
     "previousRequired": "Angi tidligere akkumulerte beløp hos denne arbeidsgiveren; ikke anta at de er null.",
+    "firstMonthHistory": "Tidligere totaler må være null i den første skattemåneden hos denne arbeidsgiveren. Sjekk startmåneden og historiske beløp.",
     "bonusExpired": "Separat bonusbeskatning er verifisert for 2026–2027. Denne metoden er utilgjengelig for andre år.",
     "year": "Angi et gyldig skatteår mellom 2026 og 9999.",
     "duplicateMonth": "Månedsdata må bruke unike gyldige måneder (1–12).",
     "housingConflict": "Boligleie og boliglånsrentefradrag kan ikke både føres.",
     "policyMissing": "Noen måneder har ingen bekreftet policy. Skriv inn faktiske bidrag eller eksplisitte egendefinerte parametere for disse månedene.",
-    "cityQuick": "Byanslag krever verifisering av retningslinjer for hver måned. Bruk faktisk kumulativ eller årlig modus, eller skriv inn bekreftede ansattes bidrag."
+    "cityQuick": "Byanslag krever verifisering av retningslinjer for hver måned. Bruk faktisk kumulativ eller årlig modus, eller skriv inn bekreftede ansattes bidrag.",
+    "firstMonthZero": "I den første lønnsmåneden hos denne arbeidsgiveren er tidligere totaler null. Utkastet ditt fra forrige måned beholdes for senere måneder.",
+    "deductionMode": "Velg en støttet metode for grunnleggende utgiftsfradrag.",
+    "deductionConflict": "Det gamle førstegangsflagget er i konflikt med den valgte fradragsmetoden.",
+    "reliefConfirmation": "Bekreft alle kvalifikasjonsbetingelser før du bruker årlig CNY 60 000 forenklet tilbakehold.",
+    "reliefStart": "Årlig CNY 60 000 forenklet forskuddstrekk krever ansettelse her fra januar.",
+    "previousBasicRange": "Tidligere grunnutgiftsfradrag er i konflikt med denne metoden. Tillatt tidligere beløp er maksimalt {{max}}; forenklet forskuddstrekk krever nøyaktig 60 000 CNY etter januar.",
+    "reliefMonths": "For forenklet forskuddstrekk, oppgi hver måned fra januar til den siste valgte måneden, uten hull."
   }
 }

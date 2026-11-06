@@ -1,0 +1,11 @@
+.workspace-host .app-layout>main{position:relative;display:block;padding:0;overflow:hidden;container-type:normal}
+.workspace-host iframe[data-workspace-frame]{position:absolute;inset:0;width:100%;height:100%;border:0;opacity:0;pointer-events:none;background:var(--canvas)}
+.workspace-host iframe[data-workspace-active]{opacity:1;pointer-events:auto;animation:workspace-reveal .12s ease-out}
+.workspace-host iframe[hidden]{display:none}
+.workspace-host.workspace-focused .app-header{display:none}
+.workspace-host.workspace-focused .app-layout{height:100dvh;display:block}
+.workspace-host.workspace-focused .app-layout>main{height:100%;padding:0}
+.workspace-navigation-status{position:absolute;inset-inline:24px;bottom:24px;display:flex;gap:12px;align-items:center;padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:8px;z-index:2}
+.workspace-navigation-status[hidden]{display:none}
+@keyframes workspace-reveal{from{opacity:.97}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.workspace-host iframe[data-workspace-active]{animation:none}}

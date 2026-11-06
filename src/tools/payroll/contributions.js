@@ -1,9 +1,11 @@
-import {D,amount,rate,fixed,sum,fail} from './money.js';
+import {D,amount,rate,fixed,sum,fail,monthParts} from './money.js';
 
 export function calculateContributions(input,policy){
+ monthParts(policy.month);
  const salary=amount(input.salary,'salary'),items=[],excluded=new Set(input.excluded||[]);
  for(const rule of policy.items){
   const id=rule.id,skip=excluded.has(id)||Boolean(rule.mergedInto);
+  if(skip){items.push({id,base:'0.00',employeeRate:null,employerRate:null,employeeFixed:null,employerFixed:null,employeeAmount:'0.00',employerAmount:'0.00',mergedInto:rule.mergedInto||null,excluded:excluded.has(id),deductible:false,estimated:false});continue;}
   if(!skip&&!policy.custom&&rule.verified!==true)fail('insurance.unverified',`base-${id}`,{item:id});
   let base=skip?new D(0):input.mode==='actual'?amount(input.bases?.[id]??input.base,`base-${id}`):salary;
   const min=rule.min===null||rule.min===undefined?null:new D(rule.min),max=rule.max===null||rule.max===undefined?null:new D(rule.max);
@@ -33,5 +35,7 @@ export function calculateContributions(input,policy){
  const housing=items.filter(i=>['housing','supplemental'].includes(i.id)),housingKnown=housing.every(i=>i.employerAmount!==null);
  const deductible=policy.custom?(input.deductible===undefined||input.deductible===''?null:amount(input.deductible,'deductible')):sum(items.filter(i=>i.deductible).map(i=>i.employeeAmount));
  if(deductible&&deductible.gt(employeeTotal))fail('insurance.deductibleRange','deductible');
- return {items,employeeTotal:fixed(employeeTotal),employerTotal:employerTotal&&fixed(employerTotal),housingCredit:housingKnown?fixed(sum(housing.flatMap(i=>[i.employeeAmount,i.employerAmount]))):null,employeeSocial:fixed(sum(items.filter(i=>!housing.includes(i)).map(i=>i.employeeAmount))),employeeHousing:fixed(sum(housing.map(i=>i.employeeAmount))),cashBeforeTax:fixed(salary.minus(employeeTotal)),companyCost:employerTotal&&fixed(salary.plus(employerTotal)),taxDeductible:deductible&&fixed(deductible),taxableAdjustment:policy.custom?(input.taxableAdjustment===undefined||input.taxableAdjustment===''?null:fixed(amount(input.taxableAdjustment,'taxableAdjustment'))):'0.00',conditions:{...input,cityId:policy.cityId,cityName:policy.cityName,month:policy.month,policyVersion:policy.version,custom:policy.custom,sources:policy.sources||[]}};
+ const skipped=new Set(items.filter(i=>i.excluded||i.mergedInto).map(i=>i.id)),conditions={...input};
+ for(const key of ['bases','rates'])if(input[key])conditions[key]=Object.fromEntries(Object.entries(input[key]).filter(([id])=>!skipped.has(id)));
+ return {items,employeeTotal:fixed(employeeTotal),employerTotal:employerTotal&&fixed(employerTotal),housingCredit:housingKnown?fixed(sum(housing.flatMap(i=>[i.employeeAmount,i.employerAmount]))):null,employeeSocial:fixed(sum(items.filter(i=>!housing.includes(i)).map(i=>i.employeeAmount))),employeeHousing:fixed(sum(housing.map(i=>i.employeeAmount))),cashBeforeTax:fixed(salary.minus(employeeTotal)),companyCost:employerTotal&&fixed(salary.plus(employerTotal)),taxDeductible:deductible&&fixed(deductible),taxableAdjustment:policy.custom?(input.taxableAdjustment===undefined||input.taxableAdjustment===''?null:fixed(amount(input.taxableAdjustment,'taxableAdjustment'))):'0.00',conditions:{...conditions,cityId:policy.cityId,cityName:policy.cityName,month:policy.month,policyVersion:policy.version,custom:policy.custom,sources:policy.sources||[]}};
 }

@@ -163,10 +163,16 @@ export function mountToolMenu(root,{popup=false,close=()=>{}}={}) {
     if(!anchor || event.button!==0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)return;
     if(!popup){
       rememberView();
+      if(window.LisToolsWorkspace?.navigate(anchor.href)){
+        event.preventDefault();
+        if(root.contains(anchor)&&root.classList.contains('is-sidebar')&&!root.classList.contains('is-searching'))return;
+        if(recent.contains(anchor))recent.hidePopover();else close();
+        return;
+      }
       const url=new URL(anchor.href),page=pages.find(page=>page.file===url.pathname.split('/').pop()),preset=page&&resolveTaskRoute(page.id,url.hash).preset;
       if(preset?url.pathname===location.pathname&&url.hash===location.hash:currentTarget(url.pathname,url.hash)===currentTarget(location.pathname,location.hash)){
         event.preventDefault();
-        if(root.classList.contains('is-sidebar')&&!root.classList.contains('is-searching'))return;
+        if(root.contains(anchor)&&root.classList.contains('is-sidebar')&&!root.classList.contains('is-searching'))return;
       }
       else if(new URL(anchor.href).pathname!==location.pathname&&hasUserContent()){anchor.target='_blank';anchor.rel='noopener';}
     }
@@ -206,6 +212,7 @@ export function mountToolMenu(root,{popup=false,close=()=>{}}={}) {
   addEventListener('storage',event=>{if(event.key===preferencesKey)updatePreferences();else if((event.key===menuOrderKey||event.key===menuExpandedKey||event.key===null)&&!editing()){render();if(recent.matches(':popover-open'))renderRecent();}});
   addEventListener('listools:preferences',updatePreferences);
   addEventListener('hashchange',refreshCurrent);
+  addEventListener('listools:workspace-route',refreshCurrent);
   onLanguageChange(translate);translate();
   return {restoreView(){if(Number.isFinite(savedView?.top))scroll.scrollTop=savedView.top;},open(){render();search.focus({preventScroll:true});},reset(){if(editing())finish(false,false);const filtered=Boolean(search.value);composing=false;search.value='';if(filtered)render();}};
 }
@@ -218,6 +225,7 @@ export function mountHeaderMenu() {
   let shell;const menu=mountToolMenu(popover,{close:()=>{if(shell)shell.close();else{popover.hidePopover();trigger.focus();}}});
   shell=mountWorkbenchShell({root:popover,trigger,menu});
   const record=()=>{const target=currentTarget(location.pathname,location.hash),entry=pages.find(page=>page.file===target)||pages.find(page=>page.file===location.pathname.split('/').pop());if(entry)recordRecent(entry.id);};record();addEventListener('hashchange',record);
+  addEventListener('listools:workspace-route',record);
   function position() {
     const rect=trigger.getBoundingClientRect();
     const width=parseFloat(getComputedStyle(popover).width);

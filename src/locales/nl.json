@@ -2141,7 +2141,16 @@
     "annualSpecial": "Bevestigde jaarlijkse speciale aanvullende inhoudingen (CNY)",
     "annualOther": "Bevestigde jaarlijkse andere inhoudingen (CNY)",
     "employeeRate": "Medewerkerspercentage (%)",
-    "employerRate": "Werkgeverstarief (%)"
+    "employerRate": "Werkgeverstarief (%)",
+    "basicDeductionMode": "Basismethode voor kostenaftrek",
+    "predictionMode": "Voorspelde inhoudingsmethode",
+    "basicStandard": "Standaard cumulatieve inhouding",
+    "basicFirst": "Eerste salarisinkomen dit jaar",
+    "basicAnnual": "In aanmerking komende jaarlijkse CNY 60.000 vereenvoudigde inhouding",
+    "standardHint": "Trek CNY 5.000 af voor elke loonmaand bij deze werkgever.",
+    "reliefEligibility": "Ik bevestig dat ik aan alle onderstaande deelnamevoorwaarden voldoe.",
+    "reliefHint": "Vorig jaar rapporteerde deze werkgever elke maand mijn salaris en mijn totale salaris inclusief bonussen bedroeg niet meer dan CNY 60.000. Dit jaar ontvang ik hier sinds januari nog steeds salaris.",
+    "partialTax": "Bijdragen succesvol berekend; inkomstenbelasting is niet gegenereerd. Bijdrageexporten blijven beschikbaar."
   },
   "insurance": {
     "name": "Sociaal verzekerings- en woningfonds",
@@ -2159,11 +2168,19 @@
     "description": "Bereken de ingehouden loonbelasting, bonusbelasting en jaarlijkse loonbelasting met expliciete aannames en berekeningsdetails.",
     "monthRange": "De loon- en startmaanden moeten 1 t/m 12 zijn, waarbij de startmaand niet later mag zijn dan de loonmaand.",
     "previousRequired": "Vul de voorgaande cumulatieve bedragen bij deze werkgever in; Ga er niet vanuit dat ze nul zijn.",
+    "firstMonthHistory": "Eerdere totalen moeten in de eerste belastingmaand bij deze werkgever nul zijn. Controleer de startmaand en historische bedragen.",
     "bonusExpired": "Voor de periode 2026-2027 wordt een afzonderlijke bonusbelasting gecontroleerd. Voor andere jaren is deze methode niet beschikbaar.",
     "year": "Voer een geldig belastingjaar in tussen 2026 en 9999.",
     "duplicateMonth": "Maandelijkse gegevens moeten unieke geldige maanden (1–12) gebruiken.",
     "housingConflict": "De huur- en hypotheekrenteaftrek kunnen niet allebei worden ingevuld.",
     "policyMissing": "Sommige maanden hebben geen geverifieerd beleid. Voer werkelijke bijdragen of expliciete aangepaste parameters voor die maanden in.",
-    "cityQuick": "Voor stadsschattingen is elke maand een beleidsverificatie vereist. Gebruik de werkelijke cumulatieve of jaarlijkse modus, of voer bevestigde werknemersbijdragen in."
+    "cityQuick": "Voor stadsschattingen is elke maand een beleidsverificatie vereist. Gebruik de werkelijke cumulatieve of jaarlijkse modus, of voer bevestigde werknemersbijdragen in.",
+    "firstMonthZero": "In de eerste loonmaand bij deze werkgever zijn de eerdere totalen nul. Uw concept van de vorige maand wordt bewaard voor latere maanden.",
+    "deductionMode": "Selecteer een ondersteunde basismethode voor onkostenaftrek.",
+    "deductionConflict": "De oude vlag voor eerste dienstverband conflicteert met de geselecteerde aftrekmethode.",
+    "reliefConfirmation": "Bevestig alle deelnamevoorwaarden voordat u de jaarlijkse vereenvoudigde inhouding van CNY 60.000 gebruikt.",
+    "reliefStart": "Jaarlijkse CNY 60.000 vereenvoudigde inhouding vereist werk hier vanaf januari.",
+    "previousBasicRange": "Eerdere basisaftrekkosten zijn in strijd met deze methode. Het toegestane voorgaande bedrag is maximaal {{max}}; voor vereenvoudigde inhouding is na januari precies 60.000 CNY vereist.",
+    "reliefMonths": "Voor een vereenvoudigde inhouding dient u elke maand vanaf januari tot en met de laatste geselecteerde maand, zonder onderbrekingen, te verstrekken."
   }
 }
