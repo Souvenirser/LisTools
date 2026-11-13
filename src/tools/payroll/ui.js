@@ -3,7 +3,7 @@ import Papa from 'papaparse';
 import {t,language,onLanguageChange,translateDOM} from '../../i18n.js';
 import {copyText,downloadText} from '../shared/page.js';
 import {cities,policyVersion} from './policy.js';
-import {amount,fail,sum} from './money.js';
+import {D,amount,fail,sum} from './money.js';
 import './style.css';
 
 export const $=id=>document.getElementById(id);
@@ -16,11 +16,12 @@ export function select(id,key,options,value){return `<div class="field"><label f
 export const check=(id,key,checked=false)=>`<label class="payroll-check"><input id="${id}" type="checkbox" ${checked?'checked':''}><span data-i18n="${key}"></span></label>`;
 export const note=key=>`<p class="tool-note" data-i18n="${key}"></p>`;
 export const value=id=>$(id).value;
-export function cityMarkup(prefix){return `<div class="field insurance-picker"><label id="${prefix}-city-label" for="${prefix}-city" data-i18n="payroll.city"></label><select id="${prefix}-city"><option value="" data-placeholder selected data-i18n="payroll.chooseCity"></option>${cities.map(c=>`<option value="${c.id}">${c.name} · ${c.search.split(' ').slice(2).join(' ')}</option>`).join('')}</select></div>`;}
+const cityLabel=c=>language().startsWith('zh')?c.name:c.search.split(' ')[2];
+export function cityMarkup(prefix,selected=''){return `<div class="field insurance-picker"><label id="${prefix}-city-label" for="${prefix}-city" data-i18n="payroll.city"></label><select id="${prefix}-city"><option value="" data-placeholder ${selected?'':'selected'} data-i18n="payroll.chooseCity"></option>${cities.map(c=>`<option value="${c.id}" ${selected===c.id?'selected':''}>${cityLabel(c)}</option>`).join('')}</select></div>`;}
 export function mountCity(prefix){
  const initial=value(prefix+'-city');
  const picker=new Choices($(prefix+'-city'),{allowHTML:false,shouldSort:false,itemSelectText:'',labelId:prefix+'-city-label',searchFields:['label','value','customProperties.search'],searchResultLimit:30,noResultsText:()=>t('units.noMatches'),noChoicesText:()=>t('units.noMatches'),fuseOptions:{threshold:.2,ignoreLocation:true}});
- let initialized=false;const refresh=()=>{const selected=initialized?value(prefix+'-city'):initial;initialized=true;picker.setChoices([{value:'',label:t('payroll.chooseCity'),placeholder:true,selected:!selected},...[...new Set(cities.map(c=>c.province))].map(province=>({label:province,choices:cities.filter(c=>c.province===province).map(c=>({value:c.id,selected:c.id===selected,label:language().startsWith('zh')?c.name:c.name+' · '+c.search.split(' ').slice(2).join(' '),customProperties:{search:c.search}}))}))],'value','label',true,true,true);picker.setChoiceByValue(selected);picker.input.element.setAttribute('aria-label',t('common.search')+' · '+t('payroll.city'));picker.input.element.placeholder=t('common.search')+' · '+t('payroll.city');};
+ let initialized=false;const refresh=()=>{const selected=initialized?value(prefix+'-city'):initial;initialized=true;picker.setChoices([{value:'',label:t('payroll.chooseCity'),placeholder:true,selected:!selected},...cities.map(c=>({value:c.id,selected:c.id===selected,label:cityLabel(c),customProperties:{search:c.search}}))],'value','label',true,true,true);picker.setChoiceByValue(selected);picker.input.element.setAttribute('aria-label',t('common.search')+' · '+t('payroll.city'));picker.input.element.placeholder=t('common.search');};
  refresh();onLanguageChange(refresh);return picker;
 }
 export function deductions(prefix){return `<div class="payroll-deductions">${select(prefix+'-deductionMode','payroll.special',[['total','payroll.totalMode'],['items','payroll.itemMode']],'total')}${field(prefix+'-special','payroll.special','0')}<details id="${prefix}-deductionDetails"><summary data-i18n="payroll.specialDetails"></summary><div class="payroll-fields">${['children','infant','education','rent','mortgage','elderly'].map(k=>field(prefix+'-'+k,'payroll.'+k,'0')).join('')}</div>${note('payroll.deductionHint')}</details></div>`;}
@@ -46,8 +47,11 @@ export function renderRows(prefix,rows){
  $(prefix+'-values').replaceChildren(dl);$(prefix+'-empty').hidden=rows.length>0;$(prefix+'-exports').hidden=rows.length===0;
 }
 export function attachExports(prefix,getRows,getSnapshot,getDetails=()=>[]){
- const text=()=>getRows().map(([,key,v])=>`${t(key)}: ${v??t('payroll.unknown')}`).join('\n')+(getDetails().length?'\n'+JSON.stringify(getDetails(),null,2):'')+'\n\n'+t('payroll.conditions')+'\n'+JSON.stringify(getSnapshot(),null,2)+'\n'+t('payroll.dataVersion')+': '+policyVersion;
- $(prefix+'-copyAll').onclick=()=>copyText(text());$(prefix+'-downloadTxt').onclick=()=>downloadText(text(),prefix+'-result.txt');$(prefix+'-downloadCsv').onclick=()=>{const data=[...getRows().map(([,key,v])=>({item:t(key),value:v,conditions:JSON.stringify(getSnapshot()),policyVersion})),...getDetails().map(row=>({...row,conditions:JSON.stringify(getSnapshot()),policyVersion}))],fields=[...new Set(data.flatMap(row=>Object.keys(row)))];downloadText(Papa.unparse({fields,data:data.map(row=>fields.map(key=>row[key]??''))},{escapeFormulae:true}),prefix+'-result.csv','text/csv;charset=utf-8');};
+ const version=()=>{const s=getSnapshot();return s?.policyVersion||s?.policy?.policyVersion||s?.policies?.[0]?.policyVersion||s?.months?.find(m=>m.policy)?.policy.policyVersion||policyVersion;};
+ const text=()=>getRows().map(([,key,v])=>`${t(key)}: ${v??t('payroll.unknown')}`).join('\n')+(getDetails().length?'\n'+JSON.stringify(getDetails(),null,2):'')+'\n\n'+t('payroll.conditions')+'\n'+JSON.stringify(getSnapshot(),null,2)+'\n'+t('payroll.dataVersion')+': '+version();
+ $(prefix+'-copyAll').onclick=()=>copyText(text());$(prefix+'-downloadTxt').onclick=()=>downloadText(text(),prefix+'-result.txt');$(prefix+'-downloadCsv').onclick=()=>{const data=[...getRows().map(([,key,v])=>({item:t(key),value:v,conditions:JSON.stringify(getSnapshot()),policyVersion:version()})),...getDetails().map(row=>({...row,conditions:JSON.stringify(getSnapshot()),policyVersion:version()}))],fields=[...new Set(data.flatMap(row=>Object.keys(row)))];downloadText(Papa.unparse({fields,data:data.map(row=>fields.map(key=>row[key]??''))},{escapeFormulae:true}),prefix+'-result.csv','text/csv;charset=utf-8');};
 }
 export function setReady(prefix,ready){$(prefix+'-result').dataset.status=ready?'ready':'idle';$(prefix+'-exports').hidden=!ready;}
 export function translate(root=document){translateDOM(root);}
+
+export function formatMoney(text){const [integer,fraction]=new D(String(text).replaceAll(',','')).toFixed(2).split('.'),formatter=new Intl.NumberFormat(language()),decimal=formatter.formatToParts(1.1).find(p=>p.type==='decimal')?.value||'.';return (integer.startsWith('-')?(formatter.formatToParts(-1).find(p=>p.type==='minusSign')?.value||'-'):'')+formatter.format(BigInt(integer.replace('-','')))+decimal+fraction;}

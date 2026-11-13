@@ -1,0 +1,370 @@
+{
+  "version": "1.2.8",
+  "edition": "reference",
+  "officiallyVerified": false,
+  "capturedAt": "2026-11-13",
+  "referenceSha256": "29f501a210f796c3afdb754f82f756fc40a3790c1efe8fe3ef534bf0de59400b",
+  "basis": "Personal rates and bounds: the source homepage calculator. Employer rates: each city page employer column. No source JavaScript or prose copied. Amounts independently enumerated with Python Decimal per-item half-up cents.",
+  "cases": [
+    {
+      "cityId": "beijing",
+      "salary": "1",
+      "employeeTotal": "1253.35",
+      "employerTotal": "2370.63"
+    },
+    {
+      "cityId": "beijing",
+      "salary": "10000",
+      "employeeTotal": "1750.00",
+      "employerTotal": "3310.00"
+    },
+    {
+      "cityId": "beijing",
+      "salary": "999999",
+      "employeeTotal": "6266.93",
+      "employerTotal": "11853.45"
+    },
+    {
+      "cityId": "shanghai",
+      "salary": "1",
+      "employeeTotal": "1279.25",
+      "employerTotal": "2419.61"
+    },
+    {
+      "cityId": "shanghai",
+      "salary": "10000",
+      "employeeTotal": "1750.00",
+      "employerTotal": "3310.00"
+    },
+    {
+      "cityId": "shanghai",
+      "salary": "999999",
+      "employeeTotal": "6396.08",
+      "employerTotal": "12097.73"
+    },
+    {
+      "cityId": "guangzhou",
+      "salary": "1",
+      "employeeTotal": "908.85",
+      "employerTotal": "1749.00"
+    },
+    {
+      "cityId": "guangzhou",
+      "salary": "10000",
+      "employeeTotal": "1720.00",
+      "employerTotal": "3310.00"
+    },
+    {
+      "cityId": "guangzhou",
+      "salary": "999999",
+      "employeeTotal": "4730.17",
+      "employerTotal": "9102.84"
+    },
+    {
+      "cityId": "shenzhen",
+      "salary": "1",
+      "employeeTotal": "408.28",
+      "employerTotal": "781.16"
+    },
+    {
+      "cityId": "shenzhen",
+      "salary": "10000",
+      "employeeTotal": "1730.00",
+      "employerTotal": "3310.00"
+    },
+    {
+      "cityId": "shenzhen",
+      "salary": "999999",
+      "employeeTotal": "6322.98",
+      "employerTotal": "12097.73"
+    },
+    {
+      "cityId": "hangzhou",
+      "salary": "1",
+      "employeeTotal": "842.10",
+      "employerTotal": "1592.78"
+    },
+    {
+      "cityId": "hangzhou",
+      "salary": "10000",
+      "employeeTotal": "1750.00",
+      "employerTotal": "3310.00"
+    },
+    {
+      "cityId": "hangzhou",
+      "salary": "999999",
+      "employeeTotal": "4210.50",
+      "employerTotal": "7963.86"
+    },
+    {
+      "cityId": "nanjing",
+      "salary": "1",
+      "employeeTotal": "786.45",
+      "employerTotal": "1487.51"
+    },
+    {
+      "cityId": "nanjing",
+      "salary": "10000",
+      "employeeTotal": "1750.00",
+      "employerTotal": "3310.00"
+    },
+    {
+      "cityId": "nanjing",
+      "salary": "999999",
+      "employeeTotal": "4207.35",
+      "employerTotal": "7957.91"
+    },
+    {
+      "cityId": "suzhou",
+      "salary": "1",
+      "employeeTotal": "786.45",
+      "employerTotal": "1487.51"
+    },
+    {
+      "cityId": "suzhou",
+      "salary": "10000",
+      "employeeTotal": "1750.00",
+      "employerTotal": "3310.00"
+    },
+    {
+      "cityId": "suzhou",
+      "salary": "999999",
+      "employeeTotal": "4207.35",
+      "employerTotal": "7957.91"
+    },
+    {
+      "cityId": "ningbo",
+      "salary": "1",
+      "employeeTotal": "1015.00",
+      "employerTotal": "1919.80"
+    },
+    {
+      "cityId": "ningbo",
+      "salary": "10000",
+      "employeeTotal": "1750.00",
+      "employerTotal": "3310.00"
+    },
+    {
+      "cityId": "ningbo",
+      "salary": "999999",
+      "employeeTotal": "5600.00",
+      "employerTotal": "10592.00"
+    },
+    {
+      "cityId": "chengdu",
+      "salary": "1",
+      "employeeTotal": "738.80",
+      "employerTotal": "1405.43"
+    },
+    {
+      "cityId": "chengdu",
+      "salary": "10000",
+      "employeeTotal": "1740.00",
+      "employerTotal": "3310.00"
+    },
+    {
+      "cityId": "chengdu",
+      "salary": "999999",
+      "employeeTotal": "3693.67",
+      "employerTotal": "7026.46"
+    },
+    {
+      "cityId": "chongqing",
+      "salary": "1",
+      "employeeTotal": "720.65",
+      "employerTotal": "1363.05"
+    },
+    {
+      "cityId": "chongqing",
+      "salary": "10000",
+      "employeeTotal": "1750.00",
+      "employerTotal": "3310.00"
+    },
+    {
+      "cityId": "chongqing",
+      "salary": "999999",
+      "employeeTotal": "3602.73",
+      "employerTotal": "6814.31"
+    },
+    {
+      "cityId": "tianjin",
+      "salary": "1",
+      "employeeTotal": "770.00",
+      "employerTotal": "1456.40"
+    },
+    {
+      "cityId": "tianjin",
+      "salary": "10000",
+      "employeeTotal": "1750.00",
+      "employerTotal": "3310.00"
+    },
+    {
+      "cityId": "tianjin",
+      "salary": "999999",
+      "employeeTotal": "3853.85",
+      "employerTotal": "7289.29"
+    },
+    {
+      "cityId": "wuhan",
+      "salary": "1",
+      "employeeTotal": "777.46",
+      "employerTotal": "1487.51"
+    },
+    {
+      "cityId": "wuhan",
+      "salary": "10000",
+      "employeeTotal": "1730.00",
+      "employerTotal": "3310.00"
+    },
+    {
+      "cityId": "wuhan",
+      "salary": "999999",
+      "employeeTotal": "3886.79",
+      "employerTotal": "7436.59"
+    },
+    {
+      "cityId": "changsha",
+      "salary": "1",
+      "employeeTotal": "696.67",
+      "employerTotal": "1332.95"
+    },
+    {
+      "cityId": "changsha",
+      "salary": "10000",
+      "employeeTotal": "1730.00",
+      "employerTotal": "3310.00"
+    },
+    {
+      "cityId": "changsha",
+      "salary": "999999",
+      "employeeTotal": "3483.01",
+      "employerTotal": "6664.03"
+    },
+    {
+      "cityId": "hefei",
+      "salary": "1",
+      "employeeTotal": "787.50",
+      "employerTotal": "1489.50"
+    },
+    {
+      "cityId": "hefei",
+      "salary": "10000",
+      "employeeTotal": "1750.00",
+      "employerTotal": "3310.00"
+    },
+    {
+      "cityId": "hefei",
+      "salary": "999999",
+      "employeeTotal": "4025.00",
+      "employerTotal": "7613.00"
+    },
+    {
+      "cityId": "zhengzhou",
+      "salary": "1",
+      "employeeTotal": "684.56",
+      "employerTotal": "1309.78"
+    },
+    {
+      "cityId": "zhengzhou",
+      "salary": "10000",
+      "employeeTotal": "1730.00",
+      "employerTotal": "3310.00"
+    },
+    {
+      "cityId": "zhengzhou",
+      "salary": "999999",
+      "employeeTotal": "3422.81",
+      "employerTotal": "6548.85"
+    },
+    {
+      "cityId": "xian",
+      "salary": "1",
+      "employeeTotal": "720.48",
+      "employerTotal": "1362.74"
+    },
+    {
+      "cityId": "xian",
+      "salary": "10000",
+      "employeeTotal": "1750.00",
+      "employerTotal": "3310.00"
+    },
+    {
+      "cityId": "xian",
+      "salary": "999999",
+      "employeeTotal": "3602.73",
+      "employerTotal": "6814.31"
+    },
+    {
+      "cityId": "jinan",
+      "salary": "1",
+      "employeeTotal": "787.50",
+      "employerTotal": "1489.50"
+    },
+    {
+      "cityId": "jinan",
+      "salary": "10000",
+      "employeeTotal": "1750.00",
+      "employerTotal": "3310.00"
+    },
+    {
+      "cityId": "jinan",
+      "salary": "999999",
+      "employeeTotal": "4025.00",
+      "employerTotal": "7613.00"
+    },
+    {
+      "cityId": "qingdao",
+      "salary": "1",
+      "employeeTotal": "733.87",
+      "employerTotal": "1404.11"
+    },
+    {
+      "cityId": "qingdao",
+      "salary": "10000",
+      "employeeTotal": "1730.00",
+      "employerTotal": "3310.00"
+    },
+    {
+      "cityId": "qingdao",
+      "salary": "999999",
+      "employeeTotal": "3668.81",
+      "employerTotal": "7019.53"
+    },
+    {
+      "cityId": "xiamen",
+      "salary": "1",
+      "employeeTotal": "787.50",
+      "employerTotal": "1489.50"
+    },
+    {
+      "cityId": "xiamen",
+      "salary": "10000",
+      "employeeTotal": "1750.00",
+      "employerTotal": "3310.00"
+    },
+    {
+      "cityId": "xiamen",
+      "salary": "999999",
+      "employeeTotal": "4025.00",
+      "employerTotal": "7613.00"
+    },
+    {
+      "cityId": "fuzhou",
+      "salary": "1",
+      "employeeTotal": "787.50",
+      "employerTotal": "1489.50"
+    },
+    {
+      "cityId": "fuzhou",
+      "salary": "10000",
+      "employeeTotal": "1750.00",
+      "employerTotal": "3310.00"
+    },
+    {
+      "cityId": "fuzhou",
+      "salary": "999999",
+      "employeeTotal": "4025.00",
+      "employerTotal": "7613.00"
+    }
+  ]
+}

@@ -99,3 +99,7 @@ test('header reflows at 200 percent text size on a 320px viewport',async({page})
  }
 });
 
+test('unpublished support illustration fits the 320px content column',async({page})=>{
+ await page.setViewportSize({width:320,height:844});await page.goto('/support.html');
+ const main=page.locator('main');expect(await main.evaluate(el=>el.scrollWidth-el.clientWidth)).toBeLessThanOrEqual(1);
+});

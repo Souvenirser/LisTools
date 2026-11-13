@@ -5,10 +5,12 @@ import { zipSync, unzipSync } from 'fflate';
 import { decodeHTML } from 'entities';
 import { pages } from '../src/tools/shared/navigation.js';
 import { extensionPolicy, pageConnectPolicy } from '../src/tools/shared/policy.js';
+import { checkPayrollRelease } from './payroll-release.js';
 
 const root = path.resolve(import.meta.dirname, '..');
 const dist = path.join(root, 'dist');
 const pkg = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'));
+if(pkg.version==='1.2.8')await checkPayrollRelease();
 const manifest = JSON.parse(await readFile(path.join(dist, 'manifest.json'), 'utf8'));
 assert.equal(manifest.version, pkg.version, 'package 和 manifest 版本必须一致');
 assert.equal(manifest.manifest_version, 3);

@@ -121,3 +121,7 @@ Static SVG node subset from [lucide-static 1.61.0](https://www.npmjs.com/package
 - ikiwihome/income-calc 1.0.0, commit `71e1a1076ece72b8451a770d84653df5acacd57b`, MIT. `app/utils/taxCalculator.ts` informed cumulative/annual calculation cases; LisTools implements isolated Decimal arithmetic and does not bundle Vue/Nuxt. Source: https://github.com/ikiwihome/income-calc/tree/71e1a1076ece72b8451a770d84653df5acacd57b . License: `licenses/income-calc-71e1a10.LICENSE`.
 
 Government policy sources, dates and verification status accompany each local record. Candidate data is not a substitute for official verification. No upstream executable HTML is bundled.
+
+## Payroll reference parameters (2026-11-13 snapshot)
+
+Numerical contribution bases and rates are referenced from https://sbjsq.tixiaolu.com/ and its city pages at the user's request. Personal contributions follow the homepage calculator; employer rates follow the city-page employer columns. Source URLs, capture date and page SHA-256 values are recorded in src/tools/payroll/reference-cities.json. These are reference estimates, not a claim of official policy verification. No source JavaScript, page prose, images or styles are copied.

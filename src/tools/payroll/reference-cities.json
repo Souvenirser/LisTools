@@ -1,0 +1,431 @@
+{
+  "version": "reference-2026-11-13",
+  "capturedAt": "2026-11-13",
+  "source": {
+    "url": "https://sbjsq.tixiaolu.com/",
+    "title": "提效录社保计算器",
+    "sha256": "2093b7928ea146af97398b69fbd7dffc00216e3a324cb771d17872ef1b4da089"
+  },
+  "cities": [
+    {
+      "id": "beijing",
+      "min": "7162",
+      "max": "35811",
+      "employee": {
+        "pension": "0.08",
+        "medical": "0.02",
+        "unemployment": "0.005",
+        "injury": "0",
+        "maternity": "0"
+      },
+      "employer": {
+        "pension": "0.16",
+        "medical": "0.085",
+        "unemployment": "0.005",
+        "injury": "0.003",
+        "maternity": "0.008"
+      },
+      "sourceUrl": "https://sbjsq.tixiaolu.com/beijing/",
+      "sourceSha256": "44a8bc7e7626b1d63798b37c2b492906531913223a3c30f327412177ea64fa0b"
+    },
+    {
+      "id": "shanghai",
+      "min": "7310",
+      "max": "36549",
+      "employee": {
+        "pension": "0.08",
+        "medical": "0.02",
+        "unemployment": "0.005",
+        "injury": "0",
+        "maternity": "0"
+      },
+      "employer": {
+        "pension": "0.16",
+        "medical": "0.085",
+        "unemployment": "0.005",
+        "injury": "0.003",
+        "maternity": "0.008"
+      },
+      "sourceUrl": "https://sbjsq.tixiaolu.com/shanghai/",
+      "sourceSha256": "ffeb936cd334bfa5cd17b6d79d238921521999e975bcce649e7e25859393700e"
+    },
+    {
+      "id": "guangzhou",
+      "min": "5284",
+      "max": "27501",
+      "employee": {
+        "pension": "0.08",
+        "medical": "0.02",
+        "unemployment": "0.002",
+        "injury": "0",
+        "maternity": "0"
+      },
+      "employer": {
+        "pension": "0.16",
+        "medical": "0.085",
+        "unemployment": "0.005",
+        "injury": "0.003",
+        "maternity": "0.008"
+      },
+      "sourceUrl": "https://sbjsq.tixiaolu.com/guangzhou/",
+      "sourceSha256": "548d4bc9aee780125af7b7cf5a9b61468aef7c036d15a8f6edd8df1e9179088b"
+    },
+    {
+      "id": "shenzhen",
+      "min": "2360",
+      "max": "36549",
+      "employee": {
+        "pension": "0.08",
+        "medical": "0.02",
+        "unemployment": "0.003",
+        "injury": "0",
+        "maternity": "0"
+      },
+      "employer": {
+        "pension": "0.16",
+        "medical": "0.085",
+        "unemployment": "0.005",
+        "injury": "0.003",
+        "maternity": "0.008"
+      },
+      "sourceUrl": "https://sbjsq.tixiaolu.com/shenzhen/",
+      "sourceSha256": "7cfa38d9bb09a296e638086a3327063297aa39d362f222210741b23808acd577"
+    },
+    {
+      "id": "hangzhou",
+      "min": "4812",
+      "max": "24060",
+      "employee": {
+        "pension": "0.08",
+        "medical": "0.02",
+        "unemployment": "0.005",
+        "injury": "0",
+        "maternity": "0"
+      },
+      "employer": {
+        "pension": "0.16",
+        "medical": "0.085",
+        "unemployment": "0.005",
+        "injury": "0.003",
+        "maternity": "0.008"
+      },
+      "sourceUrl": "https://sbjsq.tixiaolu.com/hangzhou/",
+      "sourceSha256": "5d56472e57d13a376875aad6c295360fd8548b54660c0c8d6cab3f59b11055e6"
+    },
+    {
+      "id": "nanjing",
+      "min": "4494",
+      "max": "24042",
+      "employee": {
+        "pension": "0.08",
+        "medical": "0.02",
+        "unemployment": "0.005",
+        "injury": "0",
+        "maternity": "0"
+      },
+      "employer": {
+        "pension": "0.16",
+        "medical": "0.085",
+        "unemployment": "0.005",
+        "injury": "0.003",
+        "maternity": "0.008"
+      },
+      "sourceUrl": "https://sbjsq.tixiaolu.com/nanjing/",
+      "sourceSha256": "1f4b5822e5c1b283be11bd5afb1b89640c6a11fbbd224bd61645b53a085e4431"
+    },
+    {
+      "id": "suzhou",
+      "min": "4494",
+      "max": "24042",
+      "employee": {
+        "pension": "0.08",
+        "medical": "0.02",
+        "unemployment": "0.005",
+        "injury": "0",
+        "maternity": "0"
+      },
+      "employer": {
+        "pension": "0.16",
+        "medical": "0.085",
+        "unemployment": "0.005",
+        "injury": "0.003",
+        "maternity": "0.008"
+      },
+      "sourceUrl": "https://sbjsq.tixiaolu.com/suzhou/",
+      "sourceSha256": "835738882ab362e4091984c43ffb37eee46464020305e2f9d77ef65242155afd"
+    },
+    {
+      "id": "ningbo",
+      "min": "5800",
+      "max": "32000",
+      "employee": {
+        "pension": "0.08",
+        "medical": "0.02",
+        "unemployment": "0.005",
+        "injury": "0",
+        "maternity": "0"
+      },
+      "employer": {
+        "pension": "0.16",
+        "medical": "0.085",
+        "unemployment": "0.005",
+        "injury": "0.003",
+        "maternity": "0.008"
+      },
+      "sourceUrl": "https://sbjsq.tixiaolu.com/ningbo/",
+      "sourceSha256": "36b7c979bad50e32cdc3650012fc01a46fbad0f37acc2d04c83cc7bfad84998d"
+    },
+    {
+      "id": "chengdu",
+      "min": "4246",
+      "max": "21228",
+      "employee": {
+        "pension": "0.08",
+        "medical": "0.02",
+        "unemployment": "0.004",
+        "injury": "0",
+        "maternity": "0"
+      },
+      "employer": {
+        "pension": "0.16",
+        "medical": "0.085",
+        "unemployment": "0.005",
+        "injury": "0.003",
+        "maternity": "0.008"
+      },
+      "sourceUrl": "https://sbjsq.tixiaolu.com/chengdu/",
+      "sourceSha256": "e6125b104cce4acbc5f323871b3c192083e0c343d0e57e379b4713d3aa193f53"
+    },
+    {
+      "id": "chongqing",
+      "min": "4118",
+      "max": "20587",
+      "employee": {
+        "pension": "0.08",
+        "medical": "0.02",
+        "unemployment": "0.005",
+        "injury": "0",
+        "maternity": "0"
+      },
+      "employer": {
+        "pension": "0.16",
+        "medical": "0.085",
+        "unemployment": "0.005",
+        "injury": "0.003",
+        "maternity": "0.008"
+      },
+      "sourceUrl": "https://sbjsq.tixiaolu.com/chongqing/",
+      "sourceSha256": "0c870e52dd9f2f32be4abba9db74d2d46d6ad28776088125723cfde1128865d8"
+    },
+    {
+      "id": "tianjin",
+      "min": "4400",
+      "max": "22022",
+      "employee": {
+        "pension": "0.08",
+        "medical": "0.02",
+        "unemployment": "0.005",
+        "injury": "0",
+        "maternity": "0"
+      },
+      "employer": {
+        "pension": "0.16",
+        "medical": "0.085",
+        "unemployment": "0.005",
+        "injury": "0.003",
+        "maternity": "0.008"
+      },
+      "sourceUrl": "https://sbjsq.tixiaolu.com/tianjin/",
+      "sourceSha256": "6cbf218ff5816d4db0d7d481ec248db6bb30b7ace028d36c4b707ac88974b5ec"
+    },
+    {
+      "id": "wuhan",
+      "min": "4494",
+      "max": "22467",
+      "employee": {
+        "pension": "0.08",
+        "medical": "0.02",
+        "unemployment": "0.003",
+        "injury": "0",
+        "maternity": "0"
+      },
+      "employer": {
+        "pension": "0.16",
+        "medical": "0.085",
+        "unemployment": "0.005",
+        "injury": "0.003",
+        "maternity": "0.008"
+      },
+      "sourceUrl": "https://sbjsq.tixiaolu.com/wuhan/",
+      "sourceSha256": "ca8703be194827a6cc82a12848678a534d61d1decc5b0343f61a921cc3626d34"
+    },
+    {
+      "id": "changsha",
+      "min": "4027",
+      "max": "20133",
+      "employee": {
+        "pension": "0.08",
+        "medical": "0.02",
+        "unemployment": "0.003",
+        "injury": "0",
+        "maternity": "0"
+      },
+      "employer": {
+        "pension": "0.16",
+        "medical": "0.085",
+        "unemployment": "0.005",
+        "injury": "0.003",
+        "maternity": "0.008"
+      },
+      "sourceUrl": "https://sbjsq.tixiaolu.com/changsha/",
+      "sourceSha256": "178f806d17aa9cb6ec86e22b135a50fe4218b32cd87bb8586625468584a0739e"
+    },
+    {
+      "id": "hefei",
+      "min": "4500",
+      "max": "23000",
+      "employee": {
+        "pension": "0.08",
+        "medical": "0.02",
+        "unemployment": "0.005",
+        "injury": "0",
+        "maternity": "0"
+      },
+      "employer": {
+        "pension": "0.16",
+        "medical": "0.085",
+        "unemployment": "0.005",
+        "injury": "0.003",
+        "maternity": "0.008"
+      },
+      "sourceUrl": "https://sbjsq.tixiaolu.com/hefei/",
+      "sourceSha256": "f3453d307940c7bcb5490daafe74e4966199423a1a75111ff6bb5ce1556f1c32"
+    },
+    {
+      "id": "zhengzhou",
+      "min": "3957",
+      "max": "19785",
+      "employee": {
+        "pension": "0.08",
+        "medical": "0.02",
+        "unemployment": "0.003",
+        "injury": "0",
+        "maternity": "0"
+      },
+      "employer": {
+        "pension": "0.16",
+        "medical": "0.085",
+        "unemployment": "0.005",
+        "injury": "0.003",
+        "maternity": "0.008"
+      },
+      "sourceUrl": "https://sbjsq.tixiaolu.com/zhengzhou/",
+      "sourceSha256": "ca172884e540c788a43ab28b67ec8c7a431483ce6339ab4d9e6e5d8a9aced1a4"
+    },
+    {
+      "id": "xian",
+      "min": "4117",
+      "max": "20587",
+      "employee": {
+        "pension": "0.08",
+        "medical": "0.02",
+        "unemployment": "0.005",
+        "injury": "0",
+        "maternity": "0"
+      },
+      "employer": {
+        "pension": "0.16",
+        "medical": "0.085",
+        "unemployment": "0.005",
+        "injury": "0.003",
+        "maternity": "0.008"
+      },
+      "sourceUrl": "https://sbjsq.tixiaolu.com/xian/",
+      "sourceSha256": "95359f71159813b1a3de68c4ccf6078010b66f8de7e5342a11ab03ebe8a2a4a4"
+    },
+    {
+      "id": "jinan",
+      "min": "4500",
+      "max": "23000",
+      "employee": {
+        "pension": "0.08",
+        "medical": "0.02",
+        "unemployment": "0.005",
+        "injury": "0",
+        "maternity": "0"
+      },
+      "employer": {
+        "pension": "0.16",
+        "medical": "0.085",
+        "unemployment": "0.005",
+        "injury": "0.003",
+        "maternity": "0.008"
+      },
+      "sourceUrl": "https://sbjsq.tixiaolu.com/jinan/",
+      "sourceSha256": "409d198d171e2bce83f2913cb9960c83514d588dfe48b38d91da064ca3a91d06"
+    },
+    {
+      "id": "qingdao",
+      "min": "4242",
+      "max": "21207",
+      "employee": {
+        "pension": "0.08",
+        "medical": "0.02",
+        "unemployment": "0.003",
+        "injury": "0",
+        "maternity": "0"
+      },
+      "employer": {
+        "pension": "0.16",
+        "medical": "0.085",
+        "unemployment": "0.005",
+        "injury": "0.003",
+        "maternity": "0.008"
+      },
+      "sourceUrl": "https://sbjsq.tixiaolu.com/qingdao/",
+      "sourceSha256": "1baadc1773d80a21af2a9acf1c58e148a593c470c70602052c5cc5cac62f84b5"
+    },
+    {
+      "id": "xiamen",
+      "min": "4500",
+      "max": "23000",
+      "employee": {
+        "pension": "0.08",
+        "medical": "0.02",
+        "unemployment": "0.005",
+        "injury": "0",
+        "maternity": "0"
+      },
+      "employer": {
+        "pension": "0.16",
+        "medical": "0.085",
+        "unemployment": "0.005",
+        "injury": "0.003",
+        "maternity": "0.008"
+      },
+      "sourceUrl": "https://sbjsq.tixiaolu.com/xiamen/",
+      "sourceSha256": "9647ec8e6a08070744486c1637196293ab0ec642a3f7e8e3f7b5a992640b1dc6"
+    },
+    {
+      "id": "fuzhou",
+      "min": "4500",
+      "max": "23000",
+      "employee": {
+        "pension": "0.08",
+        "medical": "0.02",
+        "unemployment": "0.005",
+        "injury": "0",
+        "maternity": "0"
+      },
+      "employer": {
+        "pension": "0.16",
+        "medical": "0.085",
+        "unemployment": "0.005",
+        "injury": "0.003",
+        "maternity": "0.008"
+      },
+      "sourceUrl": "https://sbjsq.tixiaolu.com/fuzhou/",
+      "sourceSha256": "ad190332b2fb325a3829e72513ef8fb40c94e90900c3a586d76677f54d6caa09"
+    }
+  ]
+}

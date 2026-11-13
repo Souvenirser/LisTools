@@ -36,7 +36,7 @@ test('rapid language loading applies only the last selection', async () => {
 
 test('static page translation markers resolve to real English keys', () => {
   const base = flatten(JSON.parse(readFileSync(new URL('../src/locales/en.json', import.meta.url))));
-  for (const page of ['index','diff','timestamp']) {
+  for (const page of ['index','diff','timestamp','support']) {
     const html = readFileSync(new URL(`../pages/${page}.html`, import.meta.url),'utf8');
     for (const [, key] of html.matchAll(/data-(?:i18n(?:-[\w-]+)?|label-key)="([\w.]+)"/g)) assert.ok(base[key], `${page}:${key}`);
   }

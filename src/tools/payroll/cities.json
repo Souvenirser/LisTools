@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-06",
+  "version": "2026-11-13",
   "cities": [
     {
       "id": "beijing",
@@ -67,6 +67,10 @@
               "verification": "verified",
               "sources": [
                 {
+                  "url": "https://sw.beijing.gov.cn/zwxx/swxx/202605/P020260512520283489932.pdf",
+                  "title": "北京市2025—2026投资指南第122页：单位医保9.8%、个人2%+3元（具体包含关系见审核表组合推导）"
+                },
+                {
                   "url": "https://banshi.beijing.gov.cn/zcjd/202608/t20260831_428682.html",
                   "title": "京人社发〔2026〕7号：2026社保缴费基数"
                 },
@@ -100,6 +104,10 @@
               "rounding": "half-up",
               "verification": "verified",
               "sources": [
+                {
+                  "url": "https://www.bjxch.gov.cn/xcfw/shbz/xxxq/pnidpv740562.html",
+                  "title": "西城政府2026-08历年表：含2025-07至2026-06、2026-07至2027-06；同表单位个人0.5%"
+                },
                 {
                   "url": "https://www.bjfsh.gov.cn/zsk/zcwd/202608/t20260818_40116625.shtml",
                   "title": "房山政府2026-08问答：养老16%/8%、失业0.5%/0.5%、工伤浮动"
@@ -227,6 +235,10 @@
                 {
                   "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
                   "title": "MIT开源候选值，未完成官方复核"
+                },
+                {
+                  "url": "https://gjj.beijing.gov.cn/web/zwfw5/386727/386730/386733/387178/index.html",
+                  "title": "北京公积金2026业务指南：5—12%且为整数"
                 }
               ],
               "verifiedAt": "2026-11-03",
@@ -234,7 +246,8 @@
               "to": "2027-06",
               "deductible": true,
               "rateMin": "0.05",
-              "rateMax": "0.12"
+              "rateMax": "0.12",
+              "rateStep": "0.01"
             }
           ]
         },
@@ -279,6 +292,10 @@
               "verification": "verified",
               "sources": [
                 {
+                  "url": "https://sw.beijing.gov.cn/zwxx/swxx/202605/P020260512520283489932.pdf",
+                  "title": "北京市2025—2026投资指南第122页：单位医保9.8%、个人2%+3元（具体包含关系见审核表组合推导）"
+                },
+                {
                   "url": "https://rsj.beijing.gov.cn/xxgk/2024zcwj/202509/t20250918_4204880.html",
                   "title": "京人社发〔2025〕11号：2026上半年沿用基数"
                 },
@@ -304,6 +321,10 @@
               "rounding": "half-up",
               "verification": "verified",
               "sources": [
+                {
+                  "url": "https://www.bjxch.gov.cn/xcfw/shbz/xxxq/pnidpv740562.html",
+                  "title": "西城政府2026-08历年表：含2025-07至2026-06、2026-07至2027-06；同表单位个人0.5%"
+                },
                 {
                   "url": "https://rsj.beijing.gov.cn/xxgk/2024zcwj/202509/t20250918_4204880.html",
                   "title": "京人社发〔2025〕11号：2026上半年沿用基数"
@@ -391,6 +412,10 @@
                 {
                   "url": "https://sw.beijing.gov.cn/zwxx/swxx/202605/P020260512520283489932.pdf",
                   "title": "北京市商务局2026投资服务：社会保险费率"
+                },
+                {
+                  "url": "https://gjj.beijing.gov.cn/web/zwfw5/386727/386730/386733/387178/index.html",
+                  "title": "北京公积金2026业务指南：5—12%且为整数"
                 }
               ],
               "verifiedAt": "2026-11-03",
@@ -398,7 +423,8 @@
               "to": "2026-06",
               "deductible": true,
               "rateMin": "0.05",
-              "rateMax": "0.12"
+              "rateMax": "0.12",
+              "rateStep": "0.01"
             }
           ]
         }
@@ -693,6 +719,10 @@
                 {
                   "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
                   "title": "MIT开源候选值，未完成官方复核"
+                },
+                {
+                  "url": "https://www.shzfgjj.cn/images/ywzlb.pdf",
+                  "title": "上海公积金2026-11-06业务资料：普通公积金5—7%整数比例"
                 }
               ],
               "verifiedAt": "2026-11-03",
@@ -700,7 +730,45 @@
               "to": "2027-06",
               "deductible": true,
               "rateMin": "0.05",
-              "rateMax": "0.07"
+              "rateMax": "0.07",
+              "rateStep": "0.01"
+            }
+          ]
+        },
+        {
+          "items": [
+            {
+              "id": "housing",
+              "min": "2690",
+              "max": "37302",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.shzfgjj.cn/html/newxxgk/zcjd/228183.html",
+                  "title": "上海2025年度调整问答：2025-07—2026-06两侧分别四舍五入到元"
+                },
+                {
+                  "url": "https://www.shzfgjj.cn/html/newxxgk/zcwj/gfxwj/228051.html",
+                  "title": "沪公积金管委会〔2025〕8号：2025年7月起2690—37302，两侧各5—7%整数；2026年7月换段"
+                },
+                {
+                  "url": "https://www.shzfgjj.cn/images/ywzlb.pdf",
+                  "title": "上海公积金2026-11-06业务资料：普通公积金5—7%整数比例"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-01",
+              "to": "2026-06",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.07",
+              "rateStep": "0.01"
             }
           ]
         }
@@ -763,6 +831,10 @@
               "verification": "reference",
               "sources": [
                 {
+                  "url": "https://www.gz.gov.cn/attachment/7/7226/7226384/8778370.pdf",
+                  "title": "穗医保规字〔2022〕1号：基本6%＋生育0.85%；大额从统筹基金支付，无需另缴；有效至2026-12"
+                },
+                {
                   "url": "https://wx12345.gzonline.gov.cn/km/showMsg?id=BEAFDBCFD",
                   "title": "广州12345：2026医保含生育6.85%，基数6234—31170"
                 },
@@ -778,7 +850,7 @@
             },
             {
               "id": "unemployment",
-              "min": "2680",
+              "min": "2500",
               "max": "42933",
               "employee": "0.002",
               "employer": "0.008",
@@ -789,13 +861,17 @@
               "verification": "reference",
               "sources": [
                 {
+                  "url": "https://rsj.gz.gov.cn/zcfg/flfg/content/post_10241930.html",
+                  "title": "广东省失业保险条例第八条：个人基数下限随当地最低工资标准"
+                },
+                {
                   "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
                   "title": "MIT开源候选值，未完成官方复核"
                 }
               ],
               "verifiedAt": null,
               "from": "2026-07",
-              "to": "2026-12",
+              "to": "2026-08",
               "deductible": true
             },
             {
@@ -810,6 +886,10 @@
               "rounding": "half-up",
               "verification": "reference",
               "sources": [
+                {
+                  "url": "https://www.gz.gov.cn/attachment/7/7226/7226384/8778370.pdf",
+                  "title": "穗医保规字〔2022〕1号：基本6%＋生育0.85%；大额从统筹基金支付，无需另缴；有效至2026-12"
+                },
                 {
                   "url": "https://wx12345.gzonline.gov.cn/km/showMsg?id=BEAFDBCFD",
                   "title": "广州12345：生育0.85%已计入医疗单位6.85%"
@@ -850,6 +930,39 @@
             },
             {
               "id": "housing",
+              "min": "2500",
+              "max": "41697",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://gjj.gz.gov.cn/gg/tzgg/content/post_10879601.html",
+                  "title": "广州2026住房年度通知：7月起下限2500、上限41697；5—12%整数"
+                },
+                {
+                  "url": "https://gjj.gz.gov.cn/attachment/8/8042/8042764/10879601.docx",
+                  "title": "2026缴存调整工作指引：两侧分别ROUND(基数×比例,0)"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-07",
+              "to": "2026-08",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12",
+              "rateStep": "0.01"
+            },
+            {
+              "id": "housing",
               "min": "2680",
               "max": "41697",
               "employee": "0.07",
@@ -861,16 +974,67 @@
               "verification": "reference",
               "sources": [
                 {
+                  "url": "https://gjj.gz.gov.cn/gg/tzgg/content/post_10879601.html",
+                  "title": "广州2026住房年度通知：7月起下限2500、上限41697；5—12%整数"
+                },
+                {
+                  "url": "https://gjj.gz.gov.cn/attachment/8/8042/8042764/10879601.docx",
+                  "title": "2026缴存调整工作指引：两侧分别ROUND(基数×比例,0)"
+                },
+                {
+                  "url": "https://gjj.gz.gov.cn/gkmlpt/content/10/10983/post_10983432.html",
+                  "title": "广州官方解读：2026-09起住房下限2680；8月及以前仍可按原基数补缴"
+                },
+                {
+                  "url": "https://www.huadu.gov.cn/zzzs/bmts/content/post_10982678.html",
+                  "title": "穗人社函〔2026〕422号：9月起最低工资2680"
+                },
+                {
                   "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
                   "title": "MIT开源候选值，未完成官方复核"
                 }
               ],
               "verifiedAt": null,
-              "from": "2026-07",
+              "from": "2026-09",
               "to": "2026-12",
               "deductible": true,
               "rateMin": "0.05",
-              "rateMax": "0.12"
+              "rateMax": "0.12",
+              "rateStep": "0.01"
+            },
+            {
+              "id": "unemployment",
+              "min": "2680",
+              "max": "42933",
+              "employee": "0.002",
+              "employer": "0.008",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://rsj.gz.gov.cn/zcfg/flfg/content/post_10241930.html",
+                  "title": "广东省失业保险条例第八条：个人基数下限随当地最低工资标准"
+                },
+                {
+                  "url": "https://gjj.gz.gov.cn/gkmlpt/content/10/10983/post_10983432.html",
+                  "title": "广州官方解读：2026-09起住房下限2680；8月及以前仍可按原基数补缴"
+                },
+                {
+                  "url": "https://www.huadu.gov.cn/zzzs/bmts/content/post_10982678.html",
+                  "title": "穗人社函〔2026〕422号：9月起最低工资2680"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-09",
+              "to": "2026-12",
+              "deductible": true
             }
           ]
         }
@@ -1120,6 +1284,10 @@
               "verification": "reference",
               "sources": [
                 {
+                  "url": "https://zfgb.hangzhou.gov.cn/upload/default/bigfile/2025/10/15/20251015_ec3d3e35772bc2a066570411d334c03f.pdf",
+                  "title": "杭政函〔2025〕88号：2026起单位医保9.5%含生育0.6%、个人2%；大病个人48元/年医保账户扣"
+                },
+                {
                   "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
                   "title": "MIT开源候选值，未完成官方复核"
                 }
@@ -1163,6 +1331,10 @@
               "rounding": "half-up",
               "verification": "reference",
               "sources": [
+                {
+                  "url": "https://zfgb.hangzhou.gov.cn/upload/default/bigfile/2025/10/15/20251015_ec3d3e35772bc2a066570411d334c03f.pdf",
+                  "title": "杭政函〔2025〕88号：2026起单位医保9.5%含生育0.6%、个人2%；大病个人48元/年医保账户扣"
+                },
                 {
                   "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
                   "title": "MIT开源候选值，未完成官方复核"
@@ -1256,6 +1428,10 @@
               "verification": "reference",
               "sources": [
                 {
+                  "url": "https://jshrss.jiangsu.gov.cn/art/2026/10/8/art_77277_11838872.html",
+                  "title": "苏人社发〔2026〕30号原文：2026全年五险基数5025—25127；本记录费率仍待核验"
+                },
+                {
                   "url": "https://www.js.gov.cn/art/2026/10/9/art_60095_11839273.html",
                   "title": "苏人社发〔2026〕30号：全省2026社保基数"
                 },
@@ -1285,6 +1461,10 @@
               "rounding": "half-up",
               "verification": "reference",
               "sources": [
+                {
+                  "url": "https://jshrss.jiangsu.gov.cn/art/2026/10/8/art_77277_11838872.html",
+                  "title": "苏人社发〔2026〕30号原文：2026全年五险基数5025—25127；本记录费率仍待核验"
+                },
                 {
                   "url": "https://www.js.gov.cn/art/2026/10/9/art_60095_11839273.html",
                   "title": "苏人社发〔2026〕30号：全省2026社保基数"
@@ -1316,6 +1496,10 @@
               "verification": "reference",
               "sources": [
                 {
+                  "url": "https://jshrss.jiangsu.gov.cn/art/2026/10/8/art_77277_11838872.html",
+                  "title": "苏人社发〔2026〕30号原文：2026全年五险基数5025—25127；本记录费率仍待核验"
+                },
+                {
                   "url": "https://www.js.gov.cn/art/2026/10/9/art_60095_11839273.html",
                   "title": "苏人社发〔2026〕30号：全省2026社保基数"
                 },
@@ -1345,6 +1529,10 @@
               "rounding": "half-up",
               "verification": "reference",
               "sources": [
+                {
+                  "url": "https://jshrss.jiangsu.gov.cn/art/2026/10/8/art_77277_11838872.html",
+                  "title": "苏人社发〔2026〕30号原文：2026全年五险基数5025—25127；本记录费率仍待核验"
+                },
                 {
                   "url": "https://www.js.gov.cn/art/2026/10/9/art_60095_11839273.html",
                   "title": "苏人社发〔2026〕30号：全省2026社保基数"
@@ -1376,6 +1564,10 @@
               "rounding": "half-up",
               "verification": "reference",
               "sources": [
+                {
+                  "url": "https://jshrss.jiangsu.gov.cn/art/2026/10/8/art_77277_11838872.html",
+                  "title": "苏人社发〔2026〕30号原文：2026全年五险基数5025—25127；本记录费率仍待核验"
+                },
                 {
                   "url": "https://www.js.gov.cn/art/2026/10/9/art_60095_11839273.html",
                   "title": "苏人社发〔2026〕30号：全省2026社保基数"
@@ -1428,6 +1620,42 @@
               "rateMax": "0.12"
             }
           ]
+        },
+        {
+          "items": [
+            {
+              "id": "housing",
+              "min": "2660",
+              "max": "41400",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://gjj.nanjing.gov.cn/zwgk/tzgg/202507/t20250703_5600265.html",
+                  "title": "宁金管规〔2025〕2号：上限41400，有效至2026-06-30"
+                },
+                {
+                  "url": "https://gjj.nanjing.gov.cn/zwgk/tzgg/202601/t20260105_5757440.html",
+                  "title": "宁金管〔2026〕2号：2026-01起最低基数2660"
+                },
+                {
+                  "url": "https://gjj.nanjing.gov.cn/zcfg/jcl/202104/t20210428_2900146.html",
+                  "title": "南京缴存细则：两侧分别元以下四舍五入，5—12%"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-01",
+              "to": "2026-06",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12"
+            }
+          ]
         }
       ],
       "scope": "city-centre-employees",
@@ -1461,6 +1689,10 @@
               "rounding": "half-up",
               "verification": "reference",
               "sources": [
+                {
+                  "url": "https://jshrss.jiangsu.gov.cn/art/2026/10/8/art_77277_11838872.html",
+                  "title": "苏人社发〔2026〕30号原文：2026全年五险基数5025—25127；本记录费率仍待核验"
+                },
                 {
                   "url": "https://www.js.gov.cn/art/2026/10/9/art_60095_11839273.html",
                   "title": "苏人社发〔2026〕30号：全省2026社保基数"
@@ -1496,6 +1728,26 @@
               "verification": "reference",
               "sources": [
                 {
+                  "url": "https://www.suzhou.gov.cn/szsrmzf/zfwj/202608/06c4a2c156084b1ab13cfe9549da1ec9.shtml",
+                  "title": "苏州政规〔2026〕10号：2026-10起单位生育0.8%；已计入医疗7.8%候选，前段另据旧规则"
+                },
+                {
+                  "url": "https://www.suzhou.gov.cn/szsrmzf/bmwj/202312/520891b6afe947829a4fd939c7f82fa7.shtml",
+                  "title": "苏医保待医〔2023〕37号（有效）：普通市区基本医保单位7%、个人2%"
+                },
+                {
+                  "url": "https://ybj.suzhou.gov.cn/szybj/zgylbx/202509/abe0e40b1d8c478d9a5a753f5521c365.shtml",
+                  "title": "苏州医保参保登记：另列生育单位0.8%，个人5元大额由工资代扣"
+                },
+                {
+                  "url": "https://ybj.suzhou.gov.cn/szybj/chxi/202601/936bd897d64a467f90dda67bb1286a82.shtml",
+                  "title": "2026苏州市区长护问答：个人2元/月从医保账户、单位84元/年从已缴医保划转，不重复加到现金"
+                },
+                {
+                  "url": "https://jshrss.jiangsu.gov.cn/art/2026/10/8/art_77277_11838872.html",
+                  "title": "苏人社发〔2026〕30号原文：2026全年五险基数5025—25127；本记录费率仍待核验"
+                },
+                {
                   "url": "https://www.js.gov.cn/art/2026/10/9/art_60095_11839273.html",
                   "title": "苏人社发〔2026〕30号：全省2026社保基数"
                 },
@@ -1529,6 +1781,10 @@
               "rounding": "half-up",
               "verification": "reference",
               "sources": [
+                {
+                  "url": "https://jshrss.jiangsu.gov.cn/art/2026/10/8/art_77277_11838872.html",
+                  "title": "苏人社发〔2026〕30号原文：2026全年五险基数5025—25127；本记录费率仍待核验"
+                },
                 {
                   "url": "https://www.js.gov.cn/art/2026/10/9/art_60095_11839273.html",
                   "title": "苏人社发〔2026〕30号：全省2026社保基数"
@@ -1564,6 +1820,10 @@
               "verification": "reference",
               "sources": [
                 {
+                  "url": "https://jshrss.jiangsu.gov.cn/art/2026/10/8/art_77277_11838872.html",
+                  "title": "苏人社发〔2026〕30号原文：2026全年五险基数5025—25127；本记录费率仍待核验"
+                },
+                {
                   "url": "https://www.js.gov.cn/art/2026/10/9/art_60095_11839273.html",
                   "title": "苏人社发〔2026〕30号：全省2026社保基数"
                 },
@@ -1598,6 +1858,10 @@
               "rounding": "half-up",
               "verification": "reference",
               "sources": [
+                {
+                  "url": "https://jshrss.jiangsu.gov.cn/art/2026/10/8/art_77277_11838872.html",
+                  "title": "苏人社发〔2026〕30号原文：2026全年五险基数5025—25127；本记录费率仍待核验"
+                },
                 {
                   "url": "https://www.js.gov.cn/art/2026/10/9/art_60095_11839273.html",
                   "title": "苏人社发〔2026〕30号：全省2026社保基数"
@@ -1635,7 +1899,7 @@
               "sources": [
                 {
                   "url": "https://www.wujiang.gov.cn/zgwj/c112414/202501/c4d1e493970648c6803e33248d59045d.shtml",
-                  "title": "苏房金规〔2024〕2号第八条：双边分别见角分进元"
+                  "title": "苏州2025起有效细则第八条：个人和单位分别见角分进元；现有向上取元规则保持"
                 },
                 {
                   "url": "https://www.js.gov.cn/art/2026/10/9/art_60095_11839273.html",
@@ -1854,6 +2118,10 @@
               "verification": "reference",
               "sources": [
                 {
+                  "url": "https://rst.sc.gov.cn/rst/gsgg/2026/9/7/8b8edb37d4cd43ed995a0055f46b7705.shtml",
+                  "title": "川人社办发〔2026〕50号：2026年度三险4699—23493；不证明普通企业医保基数"
+                },
+                {
                   "url": "https://chinajob.mohrss.gov.cn/c/2026-09-11/602828.shtml",
                   "title": "四川省2026三项社会保险缴费基数"
                 },
@@ -1863,7 +2131,7 @@
                 }
               ],
               "verifiedAt": null,
-              "from": "2026-07",
+              "from": "2026-01",
               "to": "2026-12",
               "deductible": true
             },
@@ -1906,6 +2174,10 @@
               "verification": "reference",
               "sources": [
                 {
+                  "url": "https://rst.sc.gov.cn/rst/gsgg/2026/9/7/8b8edb37d4cd43ed995a0055f46b7705.shtml",
+                  "title": "川人社办发〔2026〕50号：2026年度三险4699—23493；不证明普通企业医保基数"
+                },
+                {
                   "url": "https://chinajob.mohrss.gov.cn/c/2026-09-11/602828.shtml",
                   "title": "四川省2026三项社会保险缴费基数"
                 },
@@ -1915,7 +2187,7 @@
                 }
               ],
               "verifiedAt": null,
-              "from": "2026-07",
+              "from": "2026-01",
               "to": "2026-12",
               "deductible": true
             },
@@ -1959,6 +2231,10 @@
               "verification": "reference",
               "sources": [
                 {
+                  "url": "https://rst.sc.gov.cn/rst/gsgg/2026/9/7/8b8edb37d4cd43ed995a0055f46b7705.shtml",
+                  "title": "川人社办发〔2026〕50号：2026年度三险4699—23493；不证明普通企业医保基数"
+                },
+                {
                   "url": "https://chinajob.mohrss.gov.cn/c/2026-09-11/602828.shtml",
                   "title": "四川省2026三项社会保险缴费基数"
                 },
@@ -1968,7 +2244,7 @@
                 }
               ],
               "verifiedAt": null,
-              "from": "2026-07",
+              "from": "2026-01",
               "to": "2026-12",
               "deductible": true,
               "estimated": true
@@ -2050,13 +2326,17 @@
               "min": "4553",
               "max": "22765",
               "employee": "0.02",
-              "employer": "0.085",
+              "employer": "0.10",
               "employeeFixed": "5",
               "employerFixed": "0",
               "digits": 2,
               "rounding": "half-up",
               "verification": "reference",
               "sources": [
+                {
+                  "url": "https://ylbzj.cq.gov.cn/igixmj/xjgk/202601/tGovMsgBox_1100403.html",
+                  "title": "重庆医保局2026-01答复：单位基本8%＋大额1.5%＋生育0.5%；个人2%＋5元/月，通道及完整期间待核"
+                },
                 {
                   "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
                   "title": "MIT开源候选值，未完成官方复核"
@@ -2101,6 +2381,10 @@
               "rounding": "half-up",
               "verification": "reference",
               "sources": [
+                {
+                  "url": "https://ylbzj.cq.gov.cn/igixmj/xjgk/202601/tGovMsgBox_1100403.html",
+                  "title": "重庆医保局2026-01答复：生育单位0.5%已计入医疗候选合计10%，不再重复计费"
+                },
                 {
                   "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
                   "title": "MIT开源候选值，未完成官方复核"
@@ -2360,6 +2644,14 @@
               "verification": "reference",
               "sources": [
                 {
+                  "url": "https://www.zfgjj.cn/tjgjjcms/mainSitePc/content/pc_bmfw/pc_rdwt/pc_rdwt/369604.html",
+                  "title": "天津中心计算问答：个人和单位月缴额分别四舍五入到元后相加"
+                },
+                {
+                  "url": "https://www.zfgjj.cn/tjgjjcms/mainSitePc/content/zcfg_gfwj/xzwgk/zcwj/zcfg_gfwj/379418.html",
+                  "title": "天津2026住房通知：2026-07至2027-06，2510—28917；两侧5—12%且同率"
+                },
+                {
                   "url": "https://www.tj.gov.cn/sy/tjxw/202608/t20260823_7356881.html",
                   "title": "天津2026社保基数：9月起"
                 },
@@ -2373,8 +2665,40 @@
                 }
               ],
               "verifiedAt": null,
-              "from": "2026-09",
-              "to": "2026-12",
+              "from": "2026-07",
+              "to": "2027-06",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12"
+            },
+            {
+              "id": "housing",
+              "min": "2320",
+              "max": "27861",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.zfgjj.cn/tjgjjcms/mainSitePc/content/pc_bmfw/pc_rdwt/pc_rdwt/369604.html",
+                  "title": "天津中心计算问答：个人和单位月缴额分别四舍五入到元后相加"
+                },
+                {
+                  "url": "https://www.zfgjj.cn/tjgjjcms/mainSiteApp/content/app_zwgk/app_zcwj/app_bsgfxwj/app_bsgfxwj/369556.html",
+                  "title": "津公积金委〔2025〕4号：2025-07至2026-06，2320—27861；企业两侧5—12%且同率"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-01",
+              "to": "2026-06",
               "deductible": true,
               "rateMin": "0.05",
               "rateMax": "0.12"
@@ -2546,6 +2870,14 @@
               "verification": "reference",
               "sources": [
                 {
+                  "url": "https://www.wuhan.gov.cn/gwfbpt/sbm/szfgjjglzx_80194/202404/t20240403_2383744.shtml",
+                  "title": "武公中规〔2024〕3号：2024-05起有效5年，两侧同率、5—12%整数"
+                },
+                {
+                  "url": "https://gjj.wuhan.gov.cn/hdjl/zcwd/zwzx_content_2024.html?metadataid=69282",
+                  "title": "武汉中心答复：2026自然年度2400—36072.25；7月调整后补1—6月差额，不等同现金扣费月"
+                },
+                {
                   "url": "https://ybj.wuhan.gov.cn/zwgk_52/ybdt/mtdt/202202/t20220214_1922074.shtml",
                   "title": "武汉职工医保及生育合并费率"
                 },
@@ -2555,11 +2887,12 @@
                 }
               ],
               "verifiedAt": null,
-              "from": "2026-07",
+              "from": "2026-01",
               "to": "2026-12",
               "deductible": true,
               "rateMin": "0.05",
-              "rateMax": "0.12"
+              "rateMax": "0.12",
+              "rateStep": "0.01"
             }
           ]
         }
@@ -2596,12 +2929,16 @@
               "verification": "reference",
               "sources": [
                 {
+                  "url": "https://rst.hunan.gov.cn/rst/xxgk/zcfg/zxzc/202608/t20260822_34049202.html",
+                  "title": "湘人社规〔2026〕14号：2026-01至12三险4106—20529；年内差额补缴"
+                },
+                {
                   "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
                   "title": "MIT开源候选值，未完成官方复核"
                 }
               ],
               "verifiedAt": null,
-              "from": "2026-07",
+              "from": "2026-01",
               "to": "2026-12",
               "deductible": true
             },
@@ -2644,12 +2981,16 @@
               "verification": "reference",
               "sources": [
                 {
+                  "url": "https://rst.hunan.gov.cn/rst/xxgk/zcfg/zxzc/202608/t20260822_34049202.html",
+                  "title": "湘人社规〔2026〕14号：2026-01至12三险4106—20529；年内差额补缴"
+                },
+                {
                   "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
                   "title": "MIT开源候选值，未完成官方复核"
                 }
               ],
               "verifiedAt": null,
-              "from": "2026-07",
+              "from": "2026-01",
               "to": "2026-12",
               "deductible": true
             },
@@ -2693,12 +3034,16 @@
               "verification": "reference",
               "sources": [
                 {
+                  "url": "https://rst.hunan.gov.cn/rst/xxgk/zcfg/zxzc/202608/t20260822_34049202.html",
+                  "title": "湘人社规〔2026〕14号：2026-01至12三险4106—20529；年内差额补缴"
+                },
+                {
                   "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
                   "title": "MIT开源候选值，未完成官方复核"
                 }
               ],
               "verifiedAt": null,
-              "from": "2026-07",
+              "from": "2026-01",
               "to": "2026-12",
               "deductible": true,
               "estimated": true
@@ -3165,16 +3510,20 @@
             },
             {
               "id": "medical",
-              "min": "4737",
-              "max": "23685",
+              "min": null,
+              "max": null,
               "employee": "0.02",
-              "employer": "0.08",
+              "employer": "0.07",
               "employeeFixed": "1.6",
               "employerFixed": "6.4",
               "digits": 2,
               "rounding": "half-up",
               "verification": "reference",
               "sources": [
+                {
+                  "url": "https://xdz.xa.gov.cn/zwgk/jbmsbz/shbz/1995686261241171969.html",
+                  "title": "西安医保局：2025-12起12个月单位基本医保7%降至6%，不含生育1%"
+                },
                 {
                   "url": "https://www.xa.gov.cn/gk/zcfg/zcjd/zcwd/shbx/636a1abef8fd1c4c212759a3.html",
                   "title": "西安市2026职工医保费率及大额医疗8元分担"
@@ -3186,7 +3535,7 @@
               ],
               "verifiedAt": null,
               "from": "2026-07",
-              "to": "2026-12",
+              "to": "2026-11",
               "deductible": true
             },
             {
@@ -3296,6 +3645,32 @@
               "deductible": true,
               "rateMin": "0.05",
               "rateMax": "0.12"
+            },
+            {
+              "id": "medical",
+              "min": null,
+              "max": null,
+              "employee": "0.02",
+              "employer": "0.08",
+              "employeeFixed": "1.6",
+              "employerFixed": "6.4",
+              "digits": 2,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://www.xa.gov.cn/gk/zcfg/zcjd/zcwd/shbx/636a1abef8fd1c4c212759a3.html",
+                  "title": "西安市2026职工医保费率及大额医疗8元分担"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-12",
+              "to": "2026-12",
+              "deductible": true
             }
           ]
         }
@@ -3459,6 +3834,38 @@
               "verifiedAt": null,
               "from": "2026-07",
               "to": "2026-12",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12"
+            },
+            {
+              "id": "housing",
+              "min": "2400",
+              "max": "32586",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://gjj.jinan.gov.cn/col65549/art/2025/art_65549_4758642.html?xxgkhide=1",
+                  "title": "济南2025-10起五区住房下限2400；其他所列区县2210，非全市统一2400"
+                },
+                {
+                  "url": "https://gjj.jinan.gov.cn/col65549/art/2025/art_65549_4757798.html",
+                  "title": "济南2025住房年度通知：2025-07至2026-06，上限32586；下限另据2025-10调整通知"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-01",
+              "to": "2026-06",
               "deductible": true,
               "rateMin": "0.05",
               "rateMax": "0.12"
@@ -3761,6 +4168,10 @@
               "verification": "reference",
               "sources": [
                 {
+                  "url": "https://rst.fujian.gov.cn/zw/zfxxgk/zfxxgkml/zyywgz/ldgx/202607/t20260716_7178672.htm",
+                  "title": "闽人社文〔2026〕10号：7月10日印发，次月起执行工伤基数"
+                },
+                {
                   "url": "https://rst.fj.gov.cn/zw/ztzl/zxzt/sbhm/zxsl/zcfg/202610/t20261008_7221778.htm",
                   "title": "闽人社文〔2026〕13号：养老及失业基数"
                 },
@@ -3770,7 +4181,7 @@
                 }
               ],
               "verifiedAt": null,
-              "from": "2026-07",
+              "from": "2026-08",
               "to": "2026-12",
               "deductible": true,
               "estimated": true
@@ -3788,8 +4199,8 @@
               "verification": "reference",
               "sources": [
                 {
-                  "url": "https://rst.fj.gov.cn/zw/ztzl/zxzt/sbhm/zxsl/zcfg/202610/t20261008_7221778.htm",
-                  "title": "闽人社文〔2026〕13号：养老及失业基数"
+                  "url": "https://gjj.xm.gov.cn/zcfg/zfgjjgwhwj/2026n/202606/t20260629_3003625.htm",
+                  "title": "厦门2026住房年度通知：2026-07至2027-06，2265—32937，两侧分别四舍五入到元"
                 },
                 {
                   "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
@@ -3798,7 +4209,7 @@
               ],
               "verifiedAt": null,
               "from": "2026-07",
-              "to": "2026-12",
+              "to": "2027-06",
               "deductible": true,
               "rateMin": "0.05",
               "rateMax": "0.12"
@@ -3917,10 +4328,10 @@
             },
             {
               "id": "maternity",
-              "min": "4043",
-              "max": "22607",
+              "min": "4579",
+              "max": "22893",
               "employee": "0",
-              "employer": "0",
+              "employer": "0.007",
               "employeeFixed": "0",
               "employerFixed": "0",
               "digits": 2,
@@ -3928,23 +4339,18 @@
               "verification": "reference",
               "sources": [
                 {
-                  "url": "https://rst.fj.gov.cn/zw/ztzl/zxzt/sbhm/zxsl/zcfg/202610/t20261008_7221778.htm",
-                  "title": "闽人社文〔2026〕13号：养老及失业基数"
+                  "url": "https://ybj.fuzhou.gov.cn/zwgk/zczn/202607/P020260713389546778449.pdf",
+                  "title": "福州市生育保险政策指南（2026年7月）：单位0.7%，个人不缴"
                 },
                 {
                   "url": "https://ybj.fuzhou.gov.cn/zwgk/tzgg/202607/t20260701_5341143.htm",
-                  "title": "福州市2026医保基数（7月起）"
-                },
-                {
-                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
-                  "title": "MIT开源候选值，未完成官方复核"
+                  "title": "福州2026年7月起医保含生育缴费基数4579—22893"
                 }
               ],
               "verifiedAt": null,
               "from": "2026-07",
               "to": "2026-12",
-              "deductible": true,
-              "mergedInto": "medical"
+              "deductible": true
             },
             {
               "id": "injury",
@@ -3959,6 +4365,10 @@
               "verification": "reference",
               "sources": [
                 {
+                  "url": "https://rst.fujian.gov.cn/zw/zfxxgk/zfxxgkml/zyywgz/ldgx/202607/t20260716_7178672.htm",
+                  "title": "闽人社文〔2026〕10号：7月10日印发，次月起执行工伤基数"
+                },
+                {
                   "url": "https://rst.fj.gov.cn/zw/ztzl/zxzt/sbhm/zxsl/zcfg/202610/t20261008_7221778.htm",
                   "title": "闽人社文〔2026〕13号：养老及失业基数"
                 },
@@ -3972,7 +4382,7 @@
                 }
               ],
               "verifiedAt": null,
-              "from": "2026-07",
+              "from": "2026-08",
               "to": "2026-12",
               "deductible": true,
               "estimated": true
@@ -3990,12 +4400,12 @@
               "verification": "reference",
               "sources": [
                 {
-                  "url": "https://rst.fj.gov.cn/zw/ztzl/zxzt/sbhm/zxsl/zcfg/202610/t20261008_7221778.htm",
-                  "title": "闽人社文〔2026〕13号：养老及失业基数"
+                  "url": "https://www.fuzhou.gov.cn/zwgk/tzgg/202606/t20260625_5338356.htm",
+                  "title": "福州2026住房年度通知：2026-07至2027-06，2195—32430，两侧分别到元"
                 },
                 {
-                  "url": "https://ybj.fuzhou.gov.cn/zwgk/tzgg/202607/t20260701_5341143.htm",
-                  "title": "福州市2026医保基数（7月起）"
+                  "url": "https://zfgjj.fuzhou.gov.cn/zwgk/gzdt/tzgg/202511/t20251117_5232263.htm",
+                  "title": "福州缴存细则第十二至十四条：两侧5—12%且同率，分别四舍五入到元"
                 },
                 {
                   "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
@@ -4004,7 +4414,35 @@
               ],
               "verifiedAt": null,
               "from": "2026-07",
-              "to": "2026-12",
+              "to": "2027-06",
+              "deductible": true,
+              "rateMin": "0.05",
+              "rateMax": "0.12"
+            },
+            {
+              "id": "housing",
+              "min": "2195",
+              "max": "31053",
+              "employee": "0.07",
+              "employer": "0.07",
+              "employeeFixed": "0",
+              "employerFixed": "0",
+              "digits": 0,
+              "rounding": "half-up",
+              "verification": "reference",
+              "sources": [
+                {
+                  "url": "https://zfgjj.fuzhou.gov.cn/zwgk/gzdt/tzgg/202506/t20250625_5038689.htm",
+                  "title": "福州2025年度通知：2025-07至2026-06，2195—31053，两侧分别四舍五入到元"
+                },
+                {
+                  "url": "https://github.com/weante/city-salary/blob/8abd9cdd797aab008d410feb5690d4ee072d33cc/skills/city-salary/assets/calculator.html",
+                  "title": "MIT开源候选值，未完成官方复核"
+                }
+              ],
+              "verifiedAt": null,
+              "from": "2026-01",
+              "to": "2026-06",
               "deductible": true,
               "rateMin": "0.05",
               "rateMax": "0.12"

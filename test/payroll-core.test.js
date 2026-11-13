@@ -91,7 +91,7 @@ test('bonus comparison retains the unused annual basic allowance',()=>{
 });
 test('annual deduction remains 60000 even when only one month has income',()=>{
  const r=calculateAnnual({year:2026,months:[{month:12,salary:'60000'}]});assert.equal(r.annualTax,'0.00');assert.equal(r.refund,null);
- const q=calculateAnnual({year:2026,months:[{month:12,salary:'60000'}],actualWithheld:'1000'});assert.equal(q.refund,'1000.00');
+ const q=calculateAnnual({year:2026,months:Array.from({length:12},(_,i)=>({month:i+1,salary:i===11?'60000':'0',predicted:false})),actualWithheld:'1000'});assert.equal(q.refund,'1000.00');
 });
 test('annual medical deductions do not enter monthly withholding or double count cash',()=>{
  const r=calculateAnnual({year:2026,months:Array.from({length:12},(_,i)=>({month:i+1,salary:'10000'})),medicalDeduction:'10000'});

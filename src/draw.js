@@ -31,7 +31,7 @@ $('draw-copy').onclick=()=>copyText(text());$('draw-txt').onclick=()=>downloadTe
 $('draw-csv').onclick=()=>{const {output,grouped}=results[drawTask];downloadText(csv(output.flatMap((row,index)=>row.map(value=>grouped?[index+1,value]:[value]))),'draw.csv','text/csv;charset=utf-8');};
 onLanguageChange(()=>{render();renderMode();$('draw-range')?.setAttribute('aria-label',t('draw.numbers'));});
 
-registerContentCheck(()=>Boolean($('draw-input').value||Object.values(results).some(result=>result.output.length)));
+registerContentCheck(()=>Boolean($('draw-input').value||Object.values(results).some(result=>result.output.length)||['min','max','number-count','repeat'].some(id=>{const node=$('draw-'+id);return node.type==='checkbox'?node.checked!==node.defaultChecked:node.value!==node.defaultValue;})));
 
 const drawCards=[...document.querySelectorAll('#tool-root>.tool-grid>.tool-card')],drawInputs=document.createElement('div'),drawLayout=document.querySelector('#tool-root>.tool-grid'),drawResults=$('draw-result').closest('section');drawLayout.classList.add('draw-workspace');drawLayout.prepend(drawInputs);drawInputs.append(...drawCards);drawLayout.append(drawResults);
 addTaskGuide('draw',[{id:'list',key:'draw.list'},{id:'numbers',key:'draw.numbers'}],{choose:task=>{drawTask=task;$('draw-run').hidden=task!=='list';$('draw-number-run').hidden=task!=='numbers';drawCards.forEach((card,index)=>{card.hidden=index!==(['list','numbers'].indexOf(task));});if(drawActionArea)(task==='list'?$('draw-dedupe').parentElement:drawCards[1].querySelector('p.tool-note')).after(drawActionArea);render();}});drawCards[1].hidden=true;

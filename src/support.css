@@ -1,0 +1,10 @@
+@import './style.css';
+@import './tools-style.css';
+
+.support-main { max-width:720px; margin-inline:auto; padding-block-end:24px; }
+#support-card { text-align:center; line-height:1.8; overflow-wrap:anywhere; }
+.support-coffee { display:block; margin-block:6px 16px; font-size:2.25rem; }
+.support-amount { color:var(--blue-11); font-weight:600; }
+.support-code { display:grid; grid-template-columns:minmax(0,1fr); justify-items:center; gap:14px; margin:20px 0; }
+.support-code img { display:block; width:288px; max-width:100%; height:auto; background:#fff; }
+.support-code figcaption, .support-privacy { color:var(--muted); font-size:var(--helper-size); }

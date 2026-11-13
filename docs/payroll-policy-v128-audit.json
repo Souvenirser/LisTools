@@ -1,0 +1,822 @@
+{
+  "version": "1.2.8",
+  "reviewDate": "2026-11-13",
+  "scope": "普通企业在职职工；2026-01至2026-11；当前与历史分段",
+  "policySha256": "88b0dfd129d7867a0c6c0e2545f1880c8a50956703e0dd5dd58ab82d76311cef",
+  "status": "blocked",
+  "note": "研究线索尚未完成逐项复核，不升级生产数据核验状态。verifiedMonths 必须逐月完成官方证据、算例及取整复核后填写。",
+  "cities": [
+    {
+      "id": "beijing",
+      "name": "北京",
+      "verifiedMonths": [],
+      "blockers": [
+        "五项社保金额到分的舍入方向、逐人逐险与汇总顺序仍缺正式经办依据。",
+        "2026-01—11全部险种及固定费用范围、历史段与独立算例尚未完成逐字段整体闭合；新增医保通道组合证据不等于全城通过。"
+      ],
+      "confirmedFields": [
+        {
+          "component": "medical-total-and-cash-channel",
+          "from": "2026-01",
+          "to": "2026-11",
+          "values": {
+            "employee": "0.02",
+            "employerTotal": "0.098",
+            "employeeMonthlyCash": "3"
+          },
+          "sources": [
+            "https://sw.beijing.gov.cn/zwxx/swxx/202605/P020260512520283489932.pdf",
+            "https://ybj.beijing.gov.cn/zwgk/2024zcwj/202406/t20240613_3712088.html",
+            "https://www.beijing.gov.cn/zhengce/gfxwj/202101/t20210115_2220135.html",
+            "https://www.beijing.gov.cn/gongkai/zfxxgk/zc/gz/202112/t20211215_2561945.html"
+          ],
+          "limit": "当年官方表直接支持9.8%、2%+3元；大额1%已含在单位总率及3元随工资代扣，是正式条文与当年表合读推断；不证明社保逐人取分算法。"
+        },
+        {
+          "component": "housing-rate-step",
+          "from": "2026-07",
+          "to": "2027-06",
+          "values": {
+            "rateStep": "0.01",
+            "rateMin": "0.05",
+            "rateMax": "0.12"
+          },
+          "source": "https://gjj.beijing.gov.cn/web/zwfw5/386727/386730/386733/387178/index.html",
+          "limit": "2026业务指南直接要求整百分数；历史段同一规则来自已读2025年度文件；未因此升级整城或历史月份。"
+        },
+        {
+          "component": "unemployment-2026-official-table",
+          "from": "2026-01",
+          "to": "2026-11",
+          "values": {
+            "employee": "0.005",
+            "employer": "0.005",
+            "firstHalfBase": [
+              "7162",
+              "35811"
+            ],
+            "secondHalfBase": [
+              "7270",
+              "36348"
+            ]
+          },
+          "sources": [
+            "https://www.bjxch.gov.cn/xcfw/shbz/xxxq/pnidpv740562.html",
+            "https://www.bjfsh.gov.cn/zsk/zcwd/202608/t20260818_40116625.shtml"
+          ],
+          "limit": "当年官方历年表及8月北京人社转载问答；不证明社保金额舍入或单位汇总顺序。",
+          "reviewedAt": "2026-11-13"
+        }
+      ]
+    },
+    {
+      "id": "shanghai",
+      "name": "上海",
+      "verifiedMonths": [],
+      "blockers": [
+        "五项社保金额到分的舍入方向、逐人逐险与汇总顺序尚未取得经办原文。",
+        "2026单位失业费率完整执行期、上半年其他险种完整数据及固定费用范围尚未逐字段闭合；住房补证不代表整城通过。"
+      ],
+      "confirmedFields": [
+        {
+          "component": "housing-bases",
+          "from": "2026-01",
+          "to": "2026-06",
+          "values": {
+            "min": "2690",
+            "max": "37302",
+            "rateMin": "0.05",
+            "rateMax": "0.07"
+          },
+          "source": "https://www.shzfgjj.cn/html/newxxgk/zcwj/gfxwj/228051.html",
+          "limit": "半年度住房候选补入；通用取整完整依据及上半年其他险种仍待核"
+        },
+        {
+          "component": "long-term-care-funding",
+          "from": "2026-01",
+          "to": "2027-12",
+          "values": {
+            "rate": "0.005",
+            "frequency": "quarterly",
+            "channel": "transfer-from-medical-pool"
+          },
+          "source": "https://www.shanghai.gov.cn/202602bgtwj/20260122/83a46aaeed2448e4a54666ceb3d663df.html",
+          "limit": "第六、二十五、二十六条；仅说明内部资金调剂，不能加到单位或个人缴费上；不代表其他费用均为零"
+        },
+        {
+          "component": "housing-rounding-and-integer-rates",
+          "from": "2026-01",
+          "to": "2026-11",
+          "values": {
+            "digits": 0,
+            "rounding": "half-up",
+            "rateStep": "0.01",
+            "supplementalRateStep": "0.01"
+          },
+          "sources": [
+            "https://www.shzfgjj.cn/html/newxxgk/zcjd/228183.html",
+            "https://www.shanghai.gov.cn/gwk/affairs/content/0064@03d6f8b173fb4927b9a475f0e764b9dd",
+            "https://www.shzfgjj.cn/images/ywzlb.pdf"
+          ],
+          "limit": "2025年度FAQ逐侧取元直接覆盖1—6月；2026-11-06资料包含2026年度上下限表和普通5—7%、补充1—5%整数要求；下半年逐侧取元是通用办法、现行图文与表值合读推断，不是2026年度FAQ逐字证明。"
+        }
+      ]
+    },
+    {
+      "id": "guangzhou",
+      "name": "广州",
+      "verifiedMonths": [],
+      "blockers": [
+        "五项社保逐项金额到分及舍入顺序、全部固定费用/现金与账户通道仍待闭合。",
+        "医保/生育2026全年费率、基数及大额无需另缴已补证；仍缺养老当地完整费率链、失业上限/续期、工伤现行基准及住房1—6月政策段。",
+        "住房工作指引中的个人比例不低于单位、最低工资个人部分申请免缴等特殊规则尚未纳入城市自动模式；手动参数能力保留，不能宣称已完整覆盖。"
+      ],
+      "confirmedFields": [
+        {
+          "component": "housing-july-august",
+          "from": "2026-07",
+          "to": "2026-08",
+          "values": {
+            "min": "2500",
+            "max": "41697",
+            "rateMin": "0.05",
+            "rateMax": "0.12",
+            "rateStep": "0.01",
+            "digits": 0,
+            "rounding": "half-up"
+          },
+          "sources": [
+            "https://gjj.gz.gov.cn/gg/tzgg/content/post_10879601.html",
+            "https://gjj.gz.gov.cn/attachment/8/8042/8042764/10879601.docx"
+          ],
+          "limit": "普通在职年度缴存；两侧分别ROUND(基数×比例,0)；仍为reference，不开放整城自动试算。"
+        },
+        {
+          "component": "housing-september-minimum",
+          "from": "2026-09",
+          "to": "2026-12",
+          "values": {
+            "min": "2680"
+          },
+          "source": "https://gjj.gz.gov.cn/gkmlpt/content/10/10983/post_10983432.html",
+          "limit": "官方中心解读明确9月起既有缴存者也调整下限，8月及以前欠缴情形仍用原基数；不能把9月下限提前用于7月。"
+        },
+        {
+          "component": "unemployment-minimum-transition",
+          "from": "2026-07",
+          "to": "2026-11",
+          "values": {
+            "beforeSeptember": "2500",
+            "fromSeptember": "2680"
+          },
+          "sources": [
+            "https://rsj.gz.gov.cn/zcfg/flfg/content/post_10241930.html",
+            "https://www.huadu.gov.cn/zzzs/bmts/content/post_10982678.html"
+          ],
+          "limit": "省条例第八条最低工资下限与9月调整合读推断；只修最低基数，不升级现有失业上限或2026费率。"
+        },
+        {
+          "component": "medical-2026-rates-bounds-and-large-medical",
+          "from": "2026-01",
+          "to": "2026-11",
+          "values": {
+            "min": "6234",
+            "max": "31170",
+            "employee": "0.02",
+            "employerBasic": "0.06",
+            "employerMaternity": "0.0085",
+            "employerCombined": "0.0685",
+            "largeMedicalExtraCash": "0",
+            "largeMedicalChannel": "medical-pool"
+          },
+          "sources": [
+            "https://wx12345.gzonline.gov.cn/km/showMsg?id=BEAFDBCFD",
+            "https://www.gz.gov.cn/attachment/7/7226/7226384/8778370.pdf"
+          ],
+          "limit": "2026全年上下限及总率为官方12345答复；分项、工资代扣与大额无需另缴由有效至2026-12的规范支持。答复有受理指引保留，不等于已核社保取分及全险种。",
+          "reviewedAt": "2026-11-13"
+        }
+      ]
+    },
+    {
+      "id": "shenzhen",
+      "name": "深圳",
+      "verifiedMonths": [],
+      "blockers": [
+        "五项社保逐项金额精确至分及舍入规则；完整列举固定费用/现金与医保账户通道；各字段零值均不能从未提及推导。",
+        "2026医保6727—33633原文；单位一档从5恢复6的当年文件；生育当前0.5及基数；深户补充养老1%；失业各段基数和0.8/0.2续期；工伤基准、浮动、工资口径；住房48471/2520/2700分人群范围、5—12及整数舍入。"
+      ]
+    },
+    {
+      "id": "hangzhou",
+      "name": "杭州",
+      "verifiedMonths": [],
+      "blockers": [
+        "五项社保逐项金额精确至分及舍入规则；完整列举固定费用/现金与医保账户通道；各字段零值均不能从未提及推导。",
+        "医保新2026办法个人2%/单位9.5%、大病及长护账户/统筹通道已补证；仍缺2026社保基数全文、养老个人/失业/工伤现行链、住房两年度上下限及算法。"
+      ],
+      "confirmedFields": [
+        {
+          "component": "medical-2026-and-critical-illness-channel",
+          "from": "2026-01",
+          "to": "2026-11",
+          "values": {
+            "employee": "0.02",
+            "employerCombined": "0.095",
+            "includedMaternity": "0.006",
+            "criticalIllnessAnnual": "125",
+            "employeeAnnualAccount": "48",
+            "poolAnnual": "77"
+          },
+          "sources": [
+            "https://zfgb.hangzhou.gov.cn/upload/default/bigfile/2025/10/15/20251015_ec3d3e35772bc2a066570411d334c03f.pdf"
+          ],
+          "limit": "2026-01起生效规范；个人48元从医保当年账户扣，非每月工资现金4元。未补定具体扣费月、2026上下限和取分。",
+          "reviewedAt": "2026-11-13"
+        },
+        {
+          "component": "long-term-care-annual-fund-channel",
+          "from": "2026-01",
+          "to": "2026-11",
+          "values": {
+            "annualTotal": "90",
+            "employeeAnnual": "45",
+            "employerAnnual": "45",
+            "employeeChannel": "medical-current-year-account",
+            "employerChannel": "paid-medical-pool",
+            "frequency": "annual"
+          },
+          "sources": [
+            "https://zfgb.hangzhou.gov.cn/10/105220253/t117220253054/519016.shtml",
+            "https://zfgb.hangzhou.gov.cn/11/105220253/t119220253054/519174.shtml"
+          ],
+          "limit": "2025起持续规范及基金管理条文合读；普通在职账户与统筹划转不再加工资现金和单位额外成本；特殊账户不足分支未核。",
+          "reviewedAt": "2026-11-13"
+        }
+      ]
+    },
+    {
+      "id": "nanjing",
+      "name": "南京",
+      "verifiedMonths": [],
+      "blockers": [
+        "五项社保逐项金额精确至分及舍入规则；完整列举固定费用/现金与医保账户通道；各字段零值均不能从未提及推导。",
+        "已取得苏人社发〔2026〕30号原通知并核定全年基数、上半年住房和元以下四舍五入；仍缺2026失业有效费率、医保长期7%原通知、长护个人金额/频率/通道等。"
+      ],
+      "confirmedFields": [
+        {
+          "component": "social-bases",
+          "from": "2026-01",
+          "to": "2026-12",
+          "values": {
+            "min": "5025",
+            "max": "25127"
+          },
+          "source": "https://jshrss.jiangsu.gov.cn/art/2026/10/8/art_77277_11838872.html",
+          "limit": "仅基数与法定属期；未闭合各费率和现金补差月份"
+        },
+        {
+          "component": "housing",
+          "from": "2026-01",
+          "to": "2026-06",
+          "values": {
+            "min": "2660",
+            "max": "41400",
+            "digits": 0,
+            "rounding": "half-up"
+          },
+          "sources": [
+            "https://gjj.nanjing.gov.cn/zwgk/tzgg/202507/t20250703_5600265.html",
+            "https://gjj.nanjing.gov.cn/zwgk/tzgg/202601/t20260105_5757440.html",
+            "https://gjj.nanjing.gov.cn/zcfg/jcl/202104/t20210428_2900146.html"
+          ],
+          "limit": "历史住房候选补入；不代表其余险种和整城通过"
+        }
+      ]
+    },
+    {
+      "id": "suzhou",
+      "name": "苏州",
+      "verifiedMonths": [],
+      "blockers": [
+        "社保逐险金额到分的舍入方向、汇总顺序及全部项目固定费用范围尚未闭合。",
+        "2026失业费率完整执行期、住房动态下限追溯时点和上半年完整住房段仍待核；医保/生育费率与长护通道补证不等于整城通过。"
+      ],
+      "confirmedFields": [
+        {
+          "component": "social-bases",
+          "from": "2026-01",
+          "to": "2026-12",
+          "values": {
+            "min": "5025",
+            "max": "25127"
+          },
+          "source": "https://jshrss.jiangsu.gov.cn/art/2026/10/8/art_77277_11838872.html",
+          "limit": "公积金动态下限的追溯调整时点、各费率和精度仍待核"
+        },
+        {
+          "component": "medical-birth-and-large-cash",
+          "from": "2026-01",
+          "to": "2026-11",
+          "values": {
+            "medicalEmployer": "0.07",
+            "maternityEmployer": "0.008",
+            "employee": "0.02",
+            "employeeMonthlyCash": "5"
+          },
+          "sources": [
+            "https://www.suzhou.gov.cn/szsrmzf/bmwj/202312/520891b6afe947829a4fd939c7f82fa7.shtml",
+            "https://ybj.suzhou.gov.cn/szybj/zgylbx/202509/abe0e40b1d8c478d9a5a753f5521c365.shtml"
+          ],
+          "limit": "普通市区、不含工业园区；7%持续规定与完整业务表支持，7.8%合计为算术推断；个人5元发薪代扣。业务表中2025基数不挪用到2026。"
+        },
+        {
+          "component": "long-term-care-funding",
+          "from": "2026-01",
+          "to": "2026-11",
+          "values": {
+            "employeeAnnualAccountTransfer": "24",
+            "employerAnnualMedicalTransfer": "84"
+          },
+          "source": "https://ybj.suzhou.gov.cn/szybj/chxi/202601/936bd897d64a467f90dda67bb1286a82.shtml",
+          "limit": "个人24元/年按月从医保个人账户划转；单位84元/年从已缴基本医保按月划转，不再增加工资现金扣款或单位成本；账户不足等例外未验证。"
+        },
+        {
+          "component": "housing-existing-ceil-yuan-confirmed",
+          "from": "2026-01",
+          "to": "2026-11",
+          "values": {
+            "employeeRounding": "ceil-yuan",
+            "employerRounding": "ceil-yuan",
+            "sameRate": true,
+            "rateMin": "0.05",
+            "rateMax": "0.12"
+          },
+          "sources": [
+            "https://www.wujiang.gov.cn/zgwj/c112414/202501/c4d1e493970648c6803e33248d59045d.shtml"
+          ],
+          "limit": "现有配置原已up，本轮补来源及回归，并未把正确配置再改一遍。基数历史段和社保舍入仍缺。",
+          "reviewedAt": "2026-11-13"
+        },
+        {
+          "component": "maternity-new-2026-law",
+          "from": "2026-10",
+          "to": "2026-11",
+          "values": {
+            "employee": "0",
+            "employer": "0.008",
+            "frequency": "monthly"
+          },
+          "sources": [
+            "https://www.suzhou.gov.cn/szsrmzf/zfwj/202608/06c4a2c156084b1ab13cfe9549da1ec9.shtml"
+          ],
+          "limit": "苏州政规〔2026〕10号10月生效，不用新法追溯1—9月；候选医疗合计7.8%已含此项，不重复加入。",
+          "reviewedAt": "2026-11-13"
+        }
+      ]
+    },
+    {
+      "id": "ningbo",
+      "name": "宁波",
+      "verifiedMonths": [],
+      "blockers": [
+        "五项社保逐项金额精确至分及舍入规则；完整列举固定费用/现金与医保账户通道；各字段零值均不能从未提及推导。",
+        "浙江2026基数原文；医保生育/大病/长护现行完整筹资；失业工伤2026费率；住房7月后最终上限与旧年度范围、整数比例。"
+      ]
+    },
+    {
+      "id": "chengdu",
+      "name": "成都",
+      "verifiedMonths": [],
+      "blockers": [
+        "三险2026年度4699—23493已取得省级原件；普通养老费率现行链和实际补差现金月仍需核，三险原件不得套企业医保。",
+        "失业：0.6/0.4的2026续期原文缺；不得把2025阶段性率自动外推。",
+        "医保/生育：8.3%拆分、合并关系、个人2%、大病与长护缴费及现金/账户通道缺正式原文。",
+        "医保：2026-01—09独立上下限与有效期缺；新4699—23493明确只从10月属期。",
+        "工伤：候选0.24%的2026基准与施行日未核；行业及浮动不能用单一默认替代。",
+        "住房：政务账号正文已读，正式中心通知原件及2026-12终期尚未另核；地理边界不可只写全市2330。",
+        "社保精确金额取整/基数取整未得；固定费用为0未被证明。"
+      ],
+      "confirmedFields": [
+        {
+          "component": "annual-three-insurance-bounds",
+          "from": "2026-01",
+          "to": "2026-11",
+          "values": {
+            "min": "4699",
+            "max": "23493",
+            "components": [
+              "pension",
+              "unemployment",
+              "injury"
+            ]
+          },
+          "sources": [
+            "https://rst.sc.gov.cn/rst/gsgg/2026/9/7/8b8edb37d4cd43ed995a0055f46b7705.shtml"
+          ],
+          "limit": "年度属期原文已读；只补三险上下限，不用于企业医保，不证明三险费率续期或实际补缴现金月份。",
+          "reviewedAt": "2026-11-13"
+        }
+      ]
+    },
+    {
+      "id": "chongqing",
+      "name": "重庆",
+      "verifiedMonths": [],
+      "blockers": [
+        "养老/失业/工伤/医保/生育4553—22765的官方完整基数原件及2026起止未得，旧URL不可访问。",
+        "养老16/8仅旧审核线索，本轮未读可用现行原文。",
+        "失业2026最终续期或恢复费率、单位个人拆分和各月变更未得；Q1暂按1%不能推11月。",
+        "医保局2026-01公开答复全文已读，单位基本8%＋大额1.5%＋生育0.5%=10%，已纠正候选；个人5元支付通道、7—11月完整时间链及长护仍缺。",
+        "工伤0.3%候选缺2026行业基准及实际适用类别。",
+        "住房31393/2330、两侧比例、地区、执行期及取整都缺本轮原文。",
+        "全部社保取整及固定费全量排除证明缺；2026-01—11无完整六项月段。"
+      ],
+      "confirmedFields": [
+        {
+          "component": "medical-three-employer-components",
+          "from": "2026-01",
+          "to": "2026-01",
+          "values": {
+            "employerBasic": "0.08",
+            "employerLargeMedical": "0.015",
+            "employerMaternity": "0.005",
+            "employerCombined": "0.10",
+            "employee": "0.02",
+            "employeeMonthlyFixed": "5"
+          },
+          "sources": [
+            "https://ylbzj.cq.gov.cn/igixmj/xjgk/202601/tGovMsgBox_1100403.html",
+            "https://ylbzj.cq.gov.cn/IGI/nbhd/openGovmsgbox.do?siteId=535&metadataId=1100403&method=viewPublishGovmsgbox"
+          ],
+          "limit": "官方1月答复直接列分项，10%为算术合计。纠正原8.5%候选，但不因此证明7—11月完整时间链、个人5元支付通道或长护。保持reference。",
+          "reviewedAt": "2026-11-13"
+        }
+      ]
+    },
+    {
+      "id": "tianjin",
+      "name": "天津",
+      "verifiedMonths": [],
+      "blockers": [
+        "养老16/8原始依据已在既有研究补到；2026失业完整续期仍缺，不再概括为仅有2023说明。",
+        "医保2026-01—02名义10%+生育0.5的现行依据缺；3月后基本率已得，但大额260的2026续用及长护现行标准/通道缺。",
+        "9月社保上下限仅正式通知的政府新闻报道，原规范通知未读；1—8月旧段终止链还需原件。",
+        "住房两年度上下限、同率及个人/单位分别到元已补证；基数自身精度/舍入仍未取得，不由金额算法推导。",
+        "天津客户端逐人到分再汇总及2026续用佐证已补；普通范围内其他费用、每项适用性及工伤核定仍待整体核对。"
+      ],
+      "confirmedFields": [
+        {
+          "component": "social-client-cent-rounding",
+          "from": "2026-01",
+          "to": "2026-11",
+          "values": {
+            "amountRounding": "half-up-cent",
+            "aggregation": "round-each-employee-then-sum"
+          },
+          "sources": [
+            "https://tianjin.chinatax.gov.cn/11200000000/0500/050002/05000201/zxftlist20250724.html",
+            "https://tianjin.chinatax.gov.cn/11200000000/0300/030005/20260122110437412.shtml"
+          ],
+          "limit": "2025访谈直接给算法；2026官方继续指引客户端为续用佐证，不冒充2026新规范，不外推其他城市或基数取整。",
+          "reviewedAt": "2026-11-13"
+        },
+        {
+          "component": "housing-two-years-and-per-side-rounding",
+          "from": "2026-01",
+          "to": "2026-11",
+          "values": {
+            "firstHalfBase": [
+              "2320",
+              "27861"
+            ],
+            "secondHalfBase": [
+              "2510",
+              "28917"
+            ],
+            "employeeRounding": "half-up-yuan",
+            "employerRounding": "half-up-yuan",
+            "sameRate": true,
+            "rateMin": "0.05",
+            "rateMax": "0.12"
+          },
+          "sources": [
+            "https://www.zfgjj.cn/tjgjjcms/mainSiteApp/content/app_zwgk/app_zcwj/app_bsgfxwj/app_bsgfxwj/369556.html",
+            "https://www.zfgjj.cn/tjgjjcms/mainSitePc/content/zcfg_gfwj/xzwgk/zcwj/zcfg_gfwj/379418.html",
+            "https://www.zfgjj.cn/tjgjjcms/mainSitePc/content/pc_bmfw/pc_rdwt/pc_rdwt/369604.html"
+          ],
+          "limit": "两年度通知起止明确；长期操作问答分别到元；没有从金额到元推导基数本身先到元。",
+          "reviewedAt": "2026-11-13"
+        }
+      ]
+    },
+    {
+      "id": "wuhan",
+      "name": "武汉",
+      "verifiedMonths": [],
+      "blockers": [
+        "2026社保年度的明确月起止未得；4498—22488候选不能冒充2026新通知值。",
+        "养老、失业当年双方费率及工伤行业基准、2026降费状态未得。",
+        "医保8/2及大额7元的2026持续有效性/完整长护费用还缺；生育合并旧文不可代替2026减征查询。",
+        "住房2400—36072.25、自然年度及补1—6月差额已读官方公开接口全文；不再列为仅搜索线索。",
+        "住房基数/金额取整、社保分取整未得；每项固定0未证。"
+      ],
+      "confirmedFields": [
+        {
+          "component": "housing-calendar-year-and-rate-step",
+          "from": "2026-01",
+          "to": "2026-11",
+          "values": {
+            "min": "2400",
+            "max": "36072.25",
+            "sameRate": true,
+            "rateMin": "0.05",
+            "rateMax": "0.12",
+            "rateStep": "0.01",
+            "catchUp": "after-adjustment-for-underpaid-earlier-months"
+          },
+          "sources": [
+            "https://gjj.wuhan.gov.cn/hdjl/zcwd/zwzx_content_2024.html?metadataid=69282",
+            "https://gjj.wuhan.gov.cn/IGI/nbhd/openGovmsgbox.do?method=viewGovmsgbox&siteId=10&metadataId=69282",
+            "https://www.wuhan.gov.cn/gwfbpt/sbm/szfgjjglzx_80194/202404/t20240403_2383744.shtml"
+          ],
+          "limit": "官方动态答复已通过页面指定接口读到，不再列空壳未读。自然年度归属与实际补扣现金月分开；金额取整仍缺。",
+          "reviewedAt": "2026-11-13"
+        }
+      ]
+    },
+    {
+      "id": "changsha",
+      "name": "长沙",
+      "verifiedMonths": [],
+      "blockers": [
+        "养老16/8本轮未读省内当前原文；失业0.7/0.3是暂行率举例，续期不闭合。",
+        "工伤0.6%候选适用行业、基准/浮动与当年降费缺。",
+        "医保2026-01—09旧上下限、适用费率及15元实际支付优先通道缺。",
+        "长沙长护实际实施起月/个人工资与个账选择未得，不能未知当0。",
+        "住房市中心2026只读到外地政府转载长沙晚报；省直来源已明确特殊范围，不替代市中心原件。",
+        "住房2026-01—06旧段和精确取整、社保分取整缺。"
+      ],
+      "confirmedFields": [
+        {
+          "component": "annual-three-insurance-bounds",
+          "from": "2026-01",
+          "to": "2026-11",
+          "values": {
+            "min": "4106",
+            "max": "20529",
+            "components": [
+              "pension",
+              "unemployment",
+              "injury"
+            ]
+          },
+          "sources": [
+            "https://rst.hunan.gov.cn/rst/xxgk/zcfg/zxzc/202608/t20260822_34049202.html"
+          ],
+          "limit": "年度属期原文已读；只补三险上下限，不用于企业医保，不证明三险费率续期或实际补缴现金月份。",
+          "reviewedAt": "2026-11-13"
+        }
+      ]
+    },
+    {
+      "id": "hefei",
+      "name": "合肥",
+      "verifiedMonths": [],
+      "blockers": [
+        "养老16/8、失业0.5/0.5、工伤一类0.2%的本轮现行官方费率/降费/行业证据缺。",
+        "医保6.4/2和生育合并只得到旧办法搜索线索；正文打不开；固定费/长护的全量筹资和通道未证。",
+        "住房2026市中心正式通知未定位可读原文；31564为新线索，现有30540不能盖章；下限及其地理/变更月缺。",
+        "住房比例、基数取整/金额取整和全年执行期缺官方原件；省直不同范围不替代。",
+        "社会保险精确分取整及全部固定费0未证。"
+      ]
+    },
+    {
+      "id": "zhengzhou",
+      "name": "郑州",
+      "verifiedMonths": [],
+      "blockers": [
+        "养老/失业双方2026费率、工伤行业基准及降费/浮动缺。",
+        "医保旧基本8/2不能自动作为含生育总率；2026企业9/2有官方答复，但生育1%拆分、合并规范与有效起止仍缺。",
+        "大额130元/年不能无证除12；个人分担额、强制/可选择、当年扣费月份、工资/账户通道未得；长护未得。",
+        "2026-01—06各险上下限与住房旧段未核；7月后全省基数问答仍需郑州医疗独立执行的相符性核对。",
+        "住房取整算法、社保金额/基数取整与固定费完整性缺。"
+      ]
+    },
+    {
+      "id": "xian",
+      "name": "西安",
+      "verifiedMonths": [],
+      "blockers": [
+        "三险基数当前为官方新闻转述，省级原件未打开；养老双方、失业2026续期、工伤基准/降费未得。",
+        "医疗独立上下限2026全年及变更月缺；绝不可套三险4737—23685。",
+        "生育1%、大额8元80/20的官方正文及2025-12起12个月减征原文均已读；已纠正7—11月单位候选为7%（6+1），12月恢复名义8%，未外推减征。",
+        "医保独立上下限及长护/其他费用、精确取整仍未闭合；2026-08通用名义率不能取代2025-12开始的专项减征。",
+        "住房2026-01—06旧段缺；7月新段三处取整有明确原文。",
+        "社保金额精确分取整未得。"
+      ],
+      "confirmedFields": [
+        {
+          "component": "medical-employer-rate",
+          "from": "2026-07",
+          "to": "2026-11",
+          "values": {
+            "employer": "0.07",
+            "employee": "0.02",
+            "employeeFixed": "1.6",
+            "employerFixed": "6.4"
+          },
+          "sources": [
+            "https://xdz.xa.gov.cn/zwgk/jbmsbz/shbz/1995686261241171969.html",
+            "https://www.xa.gov.cn/gk/zcfg/zcjd/zcwd/shbx/636a1abef8fd1c4c212759a3.html"
+          ],
+          "limit": "单位7%=减征基本6%+生育1%，为两条官方文本合读推导；医疗独立基数及其余项目未闭合，仍reference"
+        }
+      ]
+    },
+    {
+      "id": "jinan",
+      "name": "济南",
+      "verifiedMonths": [],
+      "blockers": [
+        "鲁人社字〔2026〕75号已读市税务局完整官方转载，年度4573—22863；各险当地实际执行及补差规则仍需逐月对应。",
+        "医保2026-01—08旧基数与9月正式通知原件未得；政府转载新华网支持部分内容但未当全部原件闭合。",
+        "2026旧制长护职工个人暂不缴费的现行完整链未得；2027新缴费不能提前。",
+        "工伤0.2%基准乘80%可作选定行业候选，但11月阶段性降费完整续期需核。",
+        "住房上半年2400/2210—32586已由两份中心通知补齐；上下半年精确基数/金额取整、地区选择支持及长期比例条文仍需完整落实。",
+        "社保金额分取整与其余固定费用完整性缺。"
+      ],
+      "confirmedFields": [
+        {
+          "component": "shandong-annual-bounds-original-republication",
+          "from": "2026-01",
+          "to": "2026-11",
+          "values": {
+            "min": "4573",
+            "max": "22863",
+            "components": [
+              "pension",
+              "medical",
+              "long-term-care",
+              "injury",
+              "unemployment"
+            ]
+          },
+          "sources": [
+            "https://www.jinan.gov.cn/col/col118356/art/2026/art_9d5e63220137445a87d95453ab6b51b9.html"
+          ],
+          "limit": "市税务局知识库完整转载四部门通知，明确含青岛税务；各险本地生效与补差另核，未把年度数值强塞到所有现金月。",
+          "reviewedAt": "2026-11-13"
+        },
+        {
+          "component": "housing-first-half-bounds",
+          "from": "2026-01",
+          "to": "2026-06",
+          "values": {
+            "minFiveCentralDistricts": "2400",
+            "minOtherListedDistricts": "2210",
+            "max": "32586"
+          },
+          "sources": [
+            "https://gjj.jinan.gov.cn/col65549/art/2025/art_65549_4757798.html",
+            "https://gjj.jinan.gov.cn/col65549/art/2025/art_65549_4758642.html?xxgkhide=1"
+          ],
+          "limit": "2025年度上限与10月新下限两文合读；按五区普通候选录入2400，未当全市统一下限；舍入及地区选择支持待补。",
+          "reviewedAt": "2026-11-13"
+        }
+      ]
+    },
+    {
+      "id": "qingdao",
+      "name": "青岛",
+      "verifiedMonths": [],
+      "blockers": [
+        "山东2026年度4573—22863已读市税务局完整转载，发文对象明确含青岛；仍需各险本地执行月和补差链。",
+        "养老2026双方费率、失业8月后新依据、工伤行业基准与降费续期缺。",
+        "2026医保8/2、5元个账、新长护过渡及住房2026规则多数官方搜索可读但直开失败，严格门槛仍不通过。",
+        "生育并入8%的2026现行原文和全部固定费用完整性缺。",
+        "住房2026-01—06旧段、社保金额/基数取整缺；不能把旧2024个账0.2/5强制当2026已核。"
+      ],
+      "confirmedFields": [
+        {
+          "component": "shandong-annual-bounds-original-republication",
+          "from": "2026-01",
+          "to": "2026-11",
+          "values": {
+            "min": "4573",
+            "max": "22863",
+            "components": [
+              "pension",
+              "medical",
+              "long-term-care",
+              "injury",
+              "unemployment"
+            ]
+          },
+          "sources": [
+            "https://www.jinan.gov.cn/col/col118356/art/2026/art_9d5e63220137445a87d95453ab6b51b9.html"
+          ],
+          "limit": "市税务局知识库完整转载四部门通知，明确含青岛税务；各险本地生效与补差另核，未把年度数值强塞到所有现金月。",
+          "reviewedAt": "2026-11-13"
+        }
+      ]
+    },
+    {
+      "id": "xiamen",
+      "name": "厦门",
+      "verifiedMonths": [],
+      "blockers": [
+        "五项社保逐项金额精确至分及舍入规则；完整列举固定费用/现金与医保账户通道；各字段零值均不能从未提及推导。",
+        "住房下半年2265—32937、两侧5—12%同率及逐侧到元已补原件；仍缺上半年住房、养老/失业费率、医保生育完整现行链、长护确切开始月/通道、失业1—9月及工伤1—7月原文。"
+      ],
+      "confirmedFields": [
+        {
+          "component": "housing-second-half-original-notice",
+          "from": "2026-07",
+          "to": "2026-11",
+          "values": {
+            "min": "2265",
+            "max": "32937",
+            "employeeRounding": "half-up-yuan",
+            "employerRounding": "half-up-yuan",
+            "sameRate": true,
+            "rateMin": "0.05",
+            "rateMax": "0.12"
+          },
+          "sources": [
+            "https://gjj.xm.gov.cn/zcfg/zfgjjgwhwj/2026n/202606/t20260629_3003625.htm"
+          ],
+          "limit": "正常TLS只读HTTP已得原文；替换无关养老政策来源；住房年度至2027-06，上半年仍缺，不自行增加整数步长。",
+          "reviewedAt": "2026-11-13"
+        }
+      ]
+    },
+    {
+      "id": "fuzhou",
+      "name": "福州",
+      "verifiedMonths": [],
+      "blockers": [
+        "五项社保逐项金额精确至分及舍入规则；完整列举固定费用/现金与医保账户通道；各字段零值均不能从未提及推导。",
+        "住房两年度上下限、同率和逐侧到元已补证；仍缺养老/失业费率、职工大额及长护通道、失业1—9月与工伤1—7月原文。长护2027标准不提前套2026。"
+      ],
+      "confirmedFields": [
+        {
+          "component": "maternity",
+          "from": "2026-07",
+          "to": "2026-12",
+          "values": {
+            "min": "4579",
+            "max": "22893",
+            "employer": "0.007",
+            "employee": "0"
+          },
+          "sources": [
+            "https://ybj.fuzhou.gov.cn/zwgk/zczn/202607/P020260713389546778449.pdf",
+            "https://ybj.fuzhou.gov.cn/zwgk/tzgg/202607/t20260701_5341143.htm"
+          ],
+          "limit": "已人工阅读扫描版第1页；单列生育，不再作医疗内免费项目；其余筹资仍待核"
+        },
+        {
+          "component": "housing-two-years-and-rounding",
+          "from": "2026-01",
+          "to": "2026-11",
+          "values": {
+            "firstHalfBase": [
+              "2195",
+              "31053"
+            ],
+            "secondHalfBase": [
+              "2195",
+              "32430"
+            ],
+            "employeeRounding": "half-up-yuan",
+            "employerRounding": "half-up-yuan",
+            "sameRate": true,
+            "rateMin": "0.05",
+            "rateMax": "0.12"
+          },
+          "sources": [
+            "https://zfgjj.fuzhou.gov.cn/zwgk/gzdt/tzgg/202506/t20250625_5038689.htm",
+            "https://www.fuzhou.gov.cn/zwgk/tzgg/202606/t20260625_5338356.htm",
+            "https://zfgjj.fuzhou.gov.cn/zwgk/gzdt/tzgg/202511/t20251117_5232263.htm"
+          ],
+          "limit": "两年度通知及有效细则直接支持；未新增无依据的1%步长，年内最低工资调整条款仅按通知所述新开户适用。",
+          "reviewedAt": "2026-11-13"
+        }
+      ]
+    }
+  ],
+  "corrections": [
+    "厦门、福州工伤候选生效月改为2026-08并记录官方原文；仍为reference，不升级核验状态。",
+    "西安医保候选7—11月按阶段减征合计单位7%，12月名义8%；仍reference。",
+    "福州生育候选单列单位0.7%、个人0，采用7月起医保含生育基数4579—22893；仍reference。",
+    "补入上海和南京2026-01—06住房候选；补江苏2026全年五险基数原通知，不回填未知历史费率。",
+    "西安医保独立基数未取得依据，两段上下限置为未知；不再显示三险基数或0—∞，仍拒绝自动试算。",
+    "广州住房和失业候选下限按官方生效日拆为7—8月2500、9月起2680；住房逐侧取元及整百分数补入来源，仍reference。",
+    "北京、上海、广州住房增加已证实的整百分数步长；城市模式拒绝小数比例，显式手动参数保留原有能力。",
+    "补入北京医保总率/3元通道组合证据、上海住房取整与普通/补充整数比例、苏州医保生育与长护资金通道；没有升级任何城市verifiedMonths。",
+    "2026-11-13：重庆单位医疗候选由8.5%更正为10%（基本8＋大额1.5＋生育0.5），仍为reference，支付通道/完整时间链不因此升级。",
+    "补福州/济南/天津上半年住房与武汉自然年度住房；成都/长沙仅补全年三险属期基数，不外推医保或现金补扣月份。",
+    "苏州原有住房向上取元保持，补来源与保护回归；厦门/福州/天津住房原件与有效期补入，不升级任何verifiedMonths。"
+  ]
+}

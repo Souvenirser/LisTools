@@ -7,7 +7,7 @@ import { resolveConfig } from 'vite';
 import { pages } from '../src/tools/shared/navigation.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const entries = [...pages.filter(page => !page.file.includes('#')).map(page => page.file), 'popup.html'];
+const entries = [...pages.filter(page => !page.file.includes('#')).map(page => page.file), 'popup.html', 'support.html'];
 
 test('HTML sources live in pages while tool URLs keep their original filenames', () => {
   assert.deepEqual(readdirSync(root).filter(file => file.endsWith('.html')), []);
@@ -20,5 +20,5 @@ test('Vite uses pages as its root while keeping public resources and dist at the
   assert.equal(config.root, path.join(root, 'pages'));
   assert.equal(config.publicDir, path.join(root, 'public'));
   assert.equal(path.resolve(config.root, config.build.outDir), path.join(root, 'dist'));
-  assert.deepEqual(Object.values(config.build.rolldownOptions.input).sort(), entries.map(file => path.join(root, 'pages', file)).sort());
+  assert.deepEqual(Object.values(config.build.rolldownOptions.input).sort(), entries.filter(file => file !== 'support.html').map(file => path.join(root, 'pages', file)).sort());
 });

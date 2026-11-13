@@ -6,7 +6,7 @@ export function calculateContributions(input,policy){
  for(const rule of policy.items){
   const id=rule.id,skip=excluded.has(id)||Boolean(rule.mergedInto);
   if(skip){items.push({id,base:'0.00',employeeRate:null,employerRate:null,employeeFixed:null,employerFixed:null,employeeAmount:'0.00',employerAmount:'0.00',mergedInto:rule.mergedInto||null,excluded:excluded.has(id),deductible:false,estimated:false});continue;}
-  if(!skip&&!policy.custom&&rule.verified!==true)fail('insurance.unverified',`base-${id}`,{item:id});
+  if(!skip&&!policy.custom&&!(policy.reference&&rule.reference)&&rule.verified!==true)fail('insurance.unverified',`base-${id}`,{item:id});
   let base=skip?new D(0):input.mode==='actual'?amount(input.bases?.[id]??input.base,`base-${id}`):salary;
   const min=rule.min===null||rule.min===undefined?null:new D(rule.min),max=rule.max===null||rule.max===undefined?null:new D(rule.max);
   if(!skip){
@@ -20,6 +20,7 @@ export function calculateContributions(input,policy){
    const override=input.rates?.[id]?.[side],value=override===undefined?rule[side]:override;rates[side]=value===null?null:rate(value,`${side}-${id}`);
    if(!skip&&!policy.custom&&id!=='housing'&&id!=='supplemental'&&!(id==='injury'&&side==='employer')&&input.rates?.[id]?.[side]!==undefined&&rates[side]&&!rates[side].eq(rule[side]))fail('insurance.rateRange',`${side}-${id}`);
    if(!skip&&id==='housing'&&rates[side]&&((rule.rateMin&&rates[side].lt(rule.rateMin))||(rule.rateMax&&rates[side].gt(rule.rateMax))))fail('insurance.rateRange',`${side}-${id}`,{min:rule.rateMin,max:rule.rateMax});
+   if(!policy.custom&&rule.rateStep&&rates[side]&&!rates[side].div(rule.rateStep).isInteger())fail('insurance.rateRange',`${side}-${id}`,{min:rule.rateMin,max:rule.rateMax});
   }
   const charge=side=>{
    if(skip)return '0.00';if(rates[side]===null)return null;
@@ -37,5 +38,5 @@ export function calculateContributions(input,policy){
  if(deductible&&deductible.gt(employeeTotal))fail('insurance.deductibleRange','deductible');
  const skipped=new Set(items.filter(i=>i.excluded||i.mergedInto).map(i=>i.id)),conditions={...input};
  for(const key of ['bases','rates'])if(input[key])conditions[key]=Object.fromEntries(Object.entries(input[key]).filter(([id])=>!skipped.has(id)));
- return {items,employeeTotal:fixed(employeeTotal),employerTotal:employerTotal&&fixed(employerTotal),housingCredit:housingKnown?fixed(sum(housing.flatMap(i=>[i.employeeAmount,i.employerAmount]))):null,employeeSocial:fixed(sum(items.filter(i=>!housing.includes(i)).map(i=>i.employeeAmount))),employeeHousing:fixed(sum(housing.map(i=>i.employeeAmount))),cashBeforeTax:fixed(salary.minus(employeeTotal)),companyCost:employerTotal&&fixed(salary.plus(employerTotal)),taxDeductible:deductible&&fixed(deductible),taxableAdjustment:policy.custom?(input.taxableAdjustment===undefined||input.taxableAdjustment===''?null:fixed(amount(input.taxableAdjustment,'taxableAdjustment'))):'0.00',conditions:{...conditions,cityId:policy.cityId,cityName:policy.cityName,month:policy.month,policyVersion:policy.version,custom:policy.custom,sources:policy.sources||[]}};
+ return {items,employeeTotal:fixed(employeeTotal),employerTotal:employerTotal&&fixed(employerTotal),housingCredit:housingKnown?fixed(sum(housing.flatMap(i=>[i.employeeAmount,i.employerAmount]))):null,employeeSocial:fixed(sum(items.filter(i=>!housing.includes(i)).map(i=>i.employeeAmount))),employeeHousing:fixed(sum(housing.map(i=>i.employeeAmount))),cashBeforeTax:fixed(salary.minus(employeeTotal)),companyCost:employerTotal&&fixed(salary.plus(employerTotal)),taxDeductible:deductible&&fixed(deductible),taxableAdjustment:policy.custom?(input.taxableAdjustment===undefined||input.taxableAdjustment===''?null:fixed(amount(input.taxableAdjustment,'taxableAdjustment'))):'0.00',conditions:{...conditions,cityId:policy.cityId,cityName:policy.cityName,month:policy.month,policyVersion:policy.version,custom:policy.custom,...(policy.reference?{reference:true,referenceAsOf:policy.referenceAsOf}:{}),sources:policy.sources||[]}};
 }
