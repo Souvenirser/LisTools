@@ -115,7 +115,7 @@ const digit=label=>({id:label,label,token:label,kind:'number'});
 const operator=(label,token)=>({id:token,label,token,kind:'operator'});
 const fn=(id,label,token,example)=>({id,label,token,fn:true,binary:Boolean(example),example,kind:'function',title:id});
 const standard=[
-  {id:'clear',label:'AC',kind:'clear',title:'clear'},{id:'backspace',label:'⌫',kind:'function',title:'backspace'},digit('('),digit(')'),
+  {id:'clear',label:'AC',kind:'clear',title:'clear'},digit('('),digit(')'),{id:'backspace',label:'⌫',kind:'function',title:'backspace'},
   fn('sqrt','√x','sqrt('),fn('square','x²','square('),operator('%','%'),operator('÷','/'),
   digit('7'),digit('8'),digit('9'),operator('×','*'),
   digit('4'),digit('5'),digit('6'),operator('−','-'),

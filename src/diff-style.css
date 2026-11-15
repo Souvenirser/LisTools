@@ -114,7 +114,7 @@ body[data-status="error"]:not(:has(.cm-mergeView)) .diff-result, body[data-statu
 .diff-page .diff-source .cm-gutters{background:var(--slate-2);color:var(--muted);font-size:.875rem}
 .diff-page .diff-result{min-height:calc(var(--diff-reader-min) + 46px);flex:1}
 .diff-page #diff-view{height:0;min-height:var(--diff-reader-min)}
-.diff-page .diff-editor-help,.diff-page .diff-inputs:not([open]),.diff-page.editing-comparison .diff-result,.diff-page.editing-comparison .diff-overview{display:none}
+.diff-page .diff-editor-help,.diff-page.has-comparison .diff-inputs:not([open]),.diff-page.editing-comparison .diff-result,.diff-page.editing-comparison .diff-overview{display:none}
 .diff-page .workbench-footer{padding-block:10px}
 .diff-page:not(.has-comparison) #only-diff{display:none}.diff-page:not(.has-comparison) .check-label:has(#only-diff){display:none}
 @media(max-width:760px){.diff-input-grid .panel-heading h2{flex:1 1 auto}.diff-input-grid .panel-heading button{flex-basis:100%;width:100%}.diff-input-grid .panel-heading>.validation-badge{margin-inline-start:auto}}

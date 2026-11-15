@@ -31,7 +31,7 @@ settings.innerHTML='<div class="tool-fields"><div class="field"><label for="date
 const zoneValues=new Set(['UTC',device.timeZone]);try{for(const zone of Intl.supportedValuesOf('timeZone'))zoneValues.add(zone);}catch{/* UTC and the device zone remain selectable. */}
 let zonePicker;
 const readInput=id=>id==='shift'?{base:$('date-base').value,amount:$('date-amount').value,unit:$('date-unit').value}:id==='milestone'?{origin:$('date-origin').value,reference:$('date-reference').value}:id==='difference'?{start:$('date-start').value,end:$('date-end').value,inclusive:$('date-inclusive').checked}:{start:$('work-start').value,end:$('work-end').value,inclusive:$('work-inclusive').checked,off:$('date-off').value,work:$('date-work').value};
-function renderStatus(focus=false){clearStatus();const status=statuses[dateTask];if(status?.error)showError(status.error,{field:status.field,focus});else if(status?.stale)setStatus('ux.stale');}
+function renderStatus(focus=false){const target=$(dateTask+'-result');if($('tool-status').parentElement!==target)target.querySelector('h2').after($('tool-status'));clearStatus();const status=statuses[dateTask];if(status?.error)showError(status.error,{field:status.field,focus});else if(status?.stale)setStatus('ux.stale');}
 function errorField(id,error){
  if(error.code==='dates.invalidAmount')return 'date-amount';if(error.code==='dates.futureOrigin')return 'date-origin';if(error.code==='dates.outOfRange')return id==='shift'?'date-amount':'date-reference';if(error.code==='dates.rangeTooLarge')return 'work-end';
  const fields={difference:['date-start','date-end'],shift:['date-base'],milestone:['date-origin','date-reference'],workdays:['date-off','date-work','work-start','work-end']}[id];
@@ -65,19 +65,18 @@ function renderTimes(id){
  for(const item of result.dates)host.append(timeRows(item.date,['result','next'].includes(item.key)?'':t(item.key==='end'?'experience.endDate':'dates.'+item.key)));
  [...host.querySelectorAll('details')].forEach((element,index)=>{element.open=Boolean(open[index]);});
 }
-function render(id){
- const output=$(id+'-output'),result=results[id],open=[...output.querySelectorAll('details')].map(element=>element.open);output.replaceChildren();
+function render(id,refreshTime=false){
+ const output=$(id+'-output'),result=results[id];
+ if(!result)output.replaceChildren();
  if(result){
-  const {value}=result;
-  if(id==='shift')output.append(dateLine(value,t('reading.calculatedDate')));
-  else if(id==='milestone')output.append(node('div','date-conclusion',t('dates.age',{value:value.years})),dateLine(value.next,t('reading.nextDate')),node('p','date-detail',t('dates.countdown',{value:value.days})));
-  else output.append(node('div','date-conclusion',t(id==='difference'?'dates.days':'dates.businessResult',{value:id==='difference'?value.days:value})));
-  if(id==='difference')output.append(node('p','date-detail',t('dates.weeks',{weeks:value.weeks,days:value.remainingDays})),node('p','date-detail',t('dates.calendar',{years:value.years,months:value.months,days:value.calendarDays})));
-  output.append(node('p','date-condition',conditions(result)));
-  const host=node('div');host.id=id+'-times';
-  if(['difference','workdays'].includes(id)){const details=node('details','date-interval-times');details.append(node('summary','',t('reading.rangeTimes')),host);output.append(details);}else output.append(host);
-  renderTimes(id);
-  [...output.querySelectorAll('details')].forEach((element,index)=>{element.open=Boolean(open[index]);});
+  const {value}=result;let content=output.querySelector('.date-result-summary');if(!content){content=node('div','date-result-summary');output.prepend(content);}content.replaceChildren();
+  if(id==='shift')content.append(dateLine(value,t('reading.calculatedDate')));
+  else if(id==='milestone')content.append(node('div','date-conclusion',t('dates.age',{value:value.years})),dateLine(value.next,t('reading.nextDate')),node('p','date-detail',t('dates.countdown',{value:value.days})));
+  else content.append(node('div','date-conclusion',t(id==='difference'?'dates.days':'dates.businessResult',{value:id==='difference'?value.days:value})));
+  if(id==='difference')content.append(node('p','date-detail',t('dates.weeks',{weeks:value.weeks,days:value.remainingDays})),node('p','date-detail',t('dates.calendar',{years:value.years,months:value.months,days:value.calendarDays})));
+  content.append(node('p','date-condition',conditions(result)));
+  if(!$(id+'-times')){const host=node('div');host.id=id+'-times';if(['difference','workdays'].includes(id)){const details=node('details','date-interval-times');details.append(node('summary','',t('reading.rangeTimes')),host);output.append(details);}else output.append(host);refreshTime=true;}
+  if(refreshTime){const summary=output.querySelector('.date-interval-times>summary');if(summary)summary.textContent=t('reading.rangeTimes');renderTimes(id);}
  }
  $(id+'-copy').disabled=!result;$(id+'-copy').hidden=!result;
 }
@@ -97,7 +96,7 @@ for(const [index,card]of dateCards.entries()){
  const unchanged=()=>results[id]&&JSON.stringify(results[id].input)===JSON.stringify(readInput(id));
  const calculate=(focus=false)=>{if(unchanged()){renderStatus(focus);return;}statuses[id]=undefined;try{results[id]=calculateDateResult(id,readInput(id));}catch(error){results[id]=undefined;statuses[id]={error,field:errorField(id,error)};}render(id);renderStatus(focus);};
  $(id+'-run').addEventListener('click',()=>{dateEngaged=true;calculate(true);});$(id+'-copy').onclick=()=>copyText(summary(id));
- form.addEventListener('input',()=>{dateEngaged=true;if(unchanged())return;const stale=Boolean(results[id]||statuses[id]?.stale);results[id]=undefined;statuses[id]=stale?{stale:true}:undefined;render(id);renderStatus();});
+ form.addEventListener('input',event=>{dateEngaged=true;if(unchanged())return;if(event.target.type==='checkbox'&&results[id]){calculate(false);return;}const stale=Boolean(results[id]||statuses[id]?.stale);results[id]=undefined;statuses[id]=stale?{stale:true}:undefined;render(id);renderStatus();});
  const required={difference:['date-start','date-end'],shift:['date-base','date-amount'],milestone:['date-origin','date-reference'],workdays:['work-start','work-end']}[id];
  dateAutos.set(id,bindAutoRun(form,()=>calculate(false),{button:$(id+'-run'),canRun:()=>dateTask===id&&required.every(name=>$(name).value&&$(name).validity.valid)&&(id!=='workdays'||new TextEncoder().encode($('date-off').value+$('date-work').value).length<=256*1024)}));
 }
@@ -107,6 +106,6 @@ zonePicker=mountTimeZoneSelector($('date-zone'),{t,language,labelId:'date-zone-c
 const refreshTimes=()=>{dateEngaged=true;for(const id of dateTasks)renderTimes(id);};$('date-time').addEventListener('input',refreshTimes);$('date-zone').addEventListener('change',refreshTimes);
 for(const edge of ['start','end']){const button=$('date-today-'+edge);button.classList.add('quiet');$('date-'+edge).closest('.field').append(button);button.onclick=()=>{const input=$('date-'+edge),value=Temporal.Now.plainDateISO().toString();if(input.value===value)return;input.value=value;input.dispatchEvent(new Event('input',{bubbles:true}));};}
 addTaskGuide('dates',dateTasks.map(id=>({id,key:`dates.${id}`})),{choose:id=>{for(const auto of dateAutos.values())auto.cancel();dateTask=id;dateCards.forEach((card,index)=>{card.hidden=dateTasks[index]!==id;});dateCards[dateTasks.indexOf(id)].firstElementChild.append(settings);dateAutos.get(id)?.schedule();renderStatus();}});
-function localize(){zonePicker.refresh();translateDOM(settings);for(const [index,card]of dateCards.entries()){card.querySelector('.date-result>h2').textContent=t('common.result');const details=card.querySelector('details:has(#date-off)>summary');if(details)details.textContent=`${t('dates.off')} / ${t('dates.work')}`;render(dateTasks[index]);}}
+function localize(){zonePicker.refresh();translateDOM(settings);for(const [index,card]of dateCards.entries()){card.querySelector('.date-result>h2').textContent=t('common.result');const details=card.querySelector('details:has(#date-off)>summary');if(details)details.textContent=`${t('dates.off')} / ${t('dates.work')}`;render(dateTasks[index],true);}}
 onLanguageChange(localize);dateCards.forEach((card,index)=>{card.hidden=dateTasks[index]!==dateTask;translateDOM(card);render(dateTasks[index]);});translateDOM(settings);
 registerContentCheck(()=>dateEngaged||['date-start','date-end','date-base','date-reference','work-start','work-end'].some(id=>$(id).value!==today)||$('date-origin').value!==''||$('date-amount').value!=='7'||Boolean($('date-off').value||$('date-work').value));

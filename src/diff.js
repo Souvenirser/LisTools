@@ -484,7 +484,7 @@ onLanguageChange(() => {
 });
 refreshModeLabels(); fileLabels(); statusLabels(lastState); diagnostics.clear();
 
-registerContentCheck(()=>Boolean(sourceText('left')||sourceText('right')||filenames.left||filenames.right));
+registerContentCheck(()=>Boolean(sourceText('left')||sourceText('right')||merge?.a.state.doc.length||merge?.b.state.doc.length||filenames.left||filenames.right));
 
 function scheduleAutoCompare(){
  clearTimeout(autoTimer);if(reading.left||reading.right||inputViews.left.composing||inputViews.right.composing)return;
