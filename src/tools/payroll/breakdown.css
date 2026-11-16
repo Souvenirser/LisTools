@@ -1,0 +1,29 @@
+.payroll-breakdowns{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,21rem),1fr));gap:12px;margin-block:16px}
+.payroll-breakdowns:empty{display:none}
+.payroll-breakdown{min-width:0;align-self:start;padding:14px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text)}
+.payroll-breakdown .breakdown-overview{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.breakdown-overview>div{min-width:0}
+.payroll-breakdown h3{margin:0;font-size:1rem;line-height:1.4;overflow-wrap:anywhere}
+.breakdown-overview p,.breakdown-note,.payroll-breakdown th small{margin:6px 0 0;font-size:.875rem;line-height:1.4;color:var(--muted);overflow-wrap:anywhere}
+.breakdown-total{display:block;font-size:1.25rem;font-weight:650;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.breakdown-overview svg{flex:none;display:block;width:clamp(3.5rem,16vw,5.5rem);height:auto}
+.breakdown-overview circle{fill:none;stroke:var(--slice,var(--slate-9));stroke-width:15}
+.payroll-breakdown [data-piece=net],.payroll-breakdown [data-piece=beforeTax],.payroll-breakdown [data-piece=gross]{--slice:var(--teal-10)}
+.payroll-breakdown [data-piece=tax]{--slice:var(--red-10)}
+.payroll-breakdown [data-piece=employeeTotal],.payroll-breakdown [data-piece=pension]{--slice:var(--blue-10)}
+.payroll-breakdown [data-piece=medical]{--slice:var(--amber-10)}
+.payroll-breakdown [data-piece=unemployment]{--slice:var(--green-10)}
+.payroll-breakdown [data-piece=housing]{--slice:#9866b4}
+.payroll-breakdown [data-piece=supplemental]{--slice:#d283b6}
+.payroll-breakdown [data-piece=injury]{--slice:#a56538}
+.payroll-breakdown [data-piece=maternity]{--slice:#508ca1}
+.payroll-breakdown table{width:100%;border-collapse:collapse;table-layout:fixed;margin-top:12px;font-size:.875rem;line-height:1.45}
+.payroll-breakdown th,.payroll-breakdown td{padding:6px 0;vertical-align:top;text-align:end;border-top:1px solid var(--border);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.payroll-breakdown th:first-child{text-align:start;width:43%;padding-inline-end:6px}
+.payroll-breakdown thead th{color:var(--muted);font-weight:500}
+.payroll-breakdown thead th:nth-child(2){width:36%}
+.payroll-breakdown tbody th{font-weight:400}
+.payroll-breakdown th small{display:block;font-size:.8rem;margin:2px 0 0}
+.breakdown-key{display:flex;align-items:baseline;gap:6px}
+.breakdown-dot{align-self:flex-start;flex:none;width:.65em;height:.65em;margin-top:.4em;border-radius:50%;background:var(--slice,var(--slate-9))}
+@media(forced-colors:active){.breakdown-overview svg,.breakdown-dot{display:none}}

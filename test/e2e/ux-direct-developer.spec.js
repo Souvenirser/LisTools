@@ -46,10 +46,10 @@ test('timestamp hides empty result formats and reveals a real result before extr
   await expect(page.locator('#timestamp-more-formats')).not.toHaveAttribute('open','');
 });
 
-test('cron supports manual Enter and labels each copied execution as ISO',async({page})=>{
-  await page.goto('/cron.html');await selectLanguage(page,'en');await page.locator('#cron-auto').uncheck();
+test('cron supports manual Enter and labels each copied execution as ISO',async({page:host})=>{
+  await host.goto('/cron.html');await selectLanguage(host,'en');const page=host.frameLocator('iframe[data-workspace-active]');await page.locator('#cron-auto').uncheck();
   await page.locator('#cron-expression').fill('0 9 * * *');await page.locator('#cron-expression').press('Enter');
-  await expect(page.locator('#cron-dates tbody tr')).toHaveCount(10);await expect(page.locator('#cron-dates tbody button').first()).toHaveText('Copy ISO');
+  await expect(page.locator('#cron-dates tbody tr')).toHaveCount(10);await expect(page.getByRole('button',{name:/^Copy ISO/}).first()).toHaveText('Copy ISO');
   await expect(page.locator('#cron-dates thead th')).toHaveCount(3);
 });
 
@@ -69,13 +69,13 @@ test('password Enter generates masked values and speed test discloses network us
   const positions=await page.locator('#speed-network-notice,#speed-start').evaluateAll(nodes=>nodes.map(node=>node.getBoundingClientRect().top));expect(positions[0]).toBeLessThan(positions[1]);
 });
 
-test('cron reuses the searchable flag timezone selector and retains custom zones and offset reference',async({page})=>{
-  await page.goto('/cron.html');await selectLanguage(page,'en');await page.locator('#cron-auto').uncheck();
+test('cron reuses the searchable flag timezone selector and retains custom zones and offset reference',async({page:host})=>{
+  await host.goto('/cron.html');await selectLanguage(host,'en');const page=host.frameLocator('iframe[data-workspace-active]');await page.locator('#cron-auto').uncheck();
   const picker=page.locator('.cron-timezone-controls .choices');await expect(picker).toBeVisible();await picker.click();
   await picker.locator('input[type="search"]').fill('China');await picker.locator('[data-choice][data-value="Asia/Shanghai"]').click();
   await expect(page.locator('#cron-zone')).toHaveValue('Asia/Shanghai');await expect(picker.locator('.choices__list--single img.timezone-flag')).toHaveCount(1);
   await page.locator('#cron-preview-settings summary').click();await page.locator('#cron-reference').fill('2026-01-01T00:00:00+08:00');await page.locator('#cron-run').click();await expect(page.locator('#cron-dates tbody tr')).toHaveCount(10);
-  const before=await page.locator('#cron-next').textContent();await selectLanguage(page,'zh-Hans');await expect(page.locator('#cron-zone')).toHaveValue('Asia/Shanghai');await expect(page.locator('#cron-reference')).toHaveValue('2026-01-01T00:00:00+08:00');expect(await page.locator('#cron-next').textContent()).toContain(before.split(' · ').at(-1));
+  const before=await page.locator('#cron-next').textContent();await selectLanguage(host,'zh-Hans');await expect(page.locator('#cron-zone')).toHaveValue('Asia/Shanghai');await expect(page.locator('#cron-reference')).toHaveValue('2026-01-01T00:00:00+08:00');expect(await page.locator('#cron-next').textContent()).toContain(before.split(' · ').at(-1));
   await page.locator('#cron-custom-timezone summary').click();await page.locator('#cron-zone').fill('Etc/GMT+8');await page.locator('#cron-zone').press('Enter');await expect(page.locator('#cron-result-context')).toContainText('Etc/GMT+8');
 });
 

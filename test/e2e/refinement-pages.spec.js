@@ -15,7 +15,7 @@ test('completed images appear in the main preview without a second jump',async({
  await page.setViewportSize({width:1440,height:900});await page.goto('/images.html');await page.locator('#images-files').setInputFiles('public/icons/icon-128.png');await page.locator('#images-run').click();await expect(page.locator('.images-preview-pair')).toBeInViewport();await expect(page.locator('#images-download')).toBeVisible();
 });
 test('Cron keeps secondary UTC information collapsed and ISO copying accessible',async({page})=>{
- await page.goto('/cron.html');const row=page.locator('#cron-dates tbody tr').first();await expect(row).toBeVisible();await expect(row.locator('.cron-time-context')).toBeHidden();await row.locator('summary').click();await expect(row.locator('.cron-time-context')).toBeVisible();await expect(row.getByRole('button',{name:/Copy ISO/})).toBeVisible();
+ await page.goto('/cron.html');const frame=page.frameLocator('iframe[data-workspace-active]'),row=frame.locator('#cron-dates tbody tr').first(),panel=frame.getByRole('dialog',{name:'UTC time'});await expect(row).toBeVisible();await expect(panel).toBeHidden();await row.getByRole('button',{name:/^UTC time/}).click();await expect(panel).toBeVisible();await expect(row.getByRole('button',{name:/Copy ISO/})).toBeVisible();
 });
 test('timestamp conversion is near the top and copy targets include their context',async({page})=>{
  await page.setViewportSize({width:1366,height:768});await page.goto('/timestamp.html');await expect(page.locator('#timestamp-source')).toBeInViewport({ratio:1});await expect(page.locator('[data-copy="clock-seconds"]')).toHaveAccessibleName(/Copy seconds timestamp.*Current time/);

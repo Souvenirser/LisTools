@@ -1,0 +1,18 @@
+/* A single salary form, with optional bonus and annual adjustments below the action. */
+.tax-workspace #tax-input>[data-tax-task]{min-width:0}
+.tax-workspace #tax-input>details{border-top:1px solid var(--border);padding-top:8px;margin-top:16px}
+.tax-workspace #tax-input>details>summary{font-size:1rem;font-weight:600}
+.tax-workspace #tax-bonus-section>.payroll-fields{align-items:start}
+.tax-workspace #tax-city-settings .tax-city-profile:empty{display:none}
+.tax-workspace #tax-city-conditions{border-top:1px solid var(--border)}
+.tax-workspace #tax-payment-preview{min-height:70px;box-sizing:border-box}
+.tax-workspace #tax-payment-preview small{min-height:2.8em}
+.tax-workspace :is(#tax-bonus-result,#tax-annual-result){border-top:1px solid var(--border);padding-top:16px;margin-top:20px}
+.tax-workspace :is(#tax-bonus-result,#tax-annual-result) h3{font-size:1.125rem;margin:0 0 8px}
+.tax-workspace #tax-result-months{margin-top:0}
+.tax-workspace .payroll-table :is(th,td){vertical-align:top}
+.tax-workspace #tax-values .primary-value output{font-variant-numeric:tabular-nums}
+@media(max-width:479px){.tax-workspace #tax-payment-preview{min-height:130px}}
+
+.tax-bonus-main{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.tax-bonus-main>.field{min-width:0;display:flex;align-items:center;gap:8px;margin:0!important}.tax-bonus-main label{font-size:1rem;flex:1;min-width:0;margin:0!important}.tax-bonus-main input{width:104px!important;min-width:0;flex:1;max-width:145px}.tax-workspace #tax-bonus-basis{font-size:.875rem;line-height:1.5;margin:6px 0 12px;min-height:1.5em}
+@media(max-width:479px){.tax-bonus-main{grid-template-columns:minmax(0,1fr);gap:8px}}

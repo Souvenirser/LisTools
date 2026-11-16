@@ -1,0 +1,9 @@
+/* The tool dialog and its host chrome share one continuous backdrop across the iframe edge. */
+.workspace-modal-open .app-header{position:relative}
+.workspace-modal-open :is(.app-header,#workbench-navigation)::after{content:"";position:absolute;inset:0;z-index:10;pointer-events:none}
+.workspace-modal-open :is(.app-header,#workbench-navigation)::after,
+dialog.tax-deduction-assistant::backdrop{background:rgb(28 43 62 / .27);backdrop-filter:blur(3px)}
+html.dark .workspace-modal-open :is(.app-header,#workbench-navigation)::after,
+html.dark dialog.tax-deduction-assistant::backdrop{background:rgb(3 6 12 / .58);backdrop-filter:blur(4px)}
+dialog.tax-deduction-assistant{box-shadow:0 12px 40px rgb(25 39 59 / .2)}
+html.dark dialog.tax-deduction-assistant{border-color:var(--slate-8);box-shadow:0 12px 40px rgb(0 0 0 / .64)}

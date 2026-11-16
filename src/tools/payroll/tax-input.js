@@ -1,5 +1,11 @@
 import {D,amount,fixed,sum,fail} from './money.js';
 
+export function bonusForMonths(salary,months){
+ const text=String(months??'').trim();
+ if(!/^\d{1,15}(?:\.\d{1,6})?$/.test(text))fail('tax.bonusMonths','tax-bonus-months');
+ const count=new D(text);return count.isZero()?'0.00':fixed(amount(salary,'tax-salary').mul(count));
+}
+
 // UI adapters keep calendar-month inputs separate from one-off annual deductions.
 export function sameSalaryMonths(input,currentMonth){
  const salary=amount(input.salary,'annual-salary'),cash=amount(input.contributions,'annual-contributions');

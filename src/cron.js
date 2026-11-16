@@ -49,6 +49,11 @@ $('tool-root').innerHTML=`
     <div class="cron-table-scroll"><table class="tool-table" id="cron-fields"><thead><tr><th ${label('cron.field')}></th><th ${label('common.value')}></th><th ${label('cron.range')}></th><th ${label('cron.meaning')}></th></tr></thead><tbody></tbody></table></div>
     </details>
   </section>
+  </div>
+  <div id="cron-utc-panel" popover="auto" role="dialog" aria-labelledby="cron-utc-title" tabindex="-1">
+    <dl><dt id="cron-utc-title" ${label('timestamp.utc')}></dt><dd><time id="cron-utc-instant" dir="ltr"></time></dd>
+    <dt ${label('timestamp.zone')}></dt><dd><bdi id="cron-utc-zone" dir="ltr"></bdi> <bdi id="cron-utc-offset" dir="ltr"></bdi></dd></dl>
+    <button id="cron-utc-close" type="button" data-i18n-aria-label="common.close">×</button>
   </div>`;
 mountTool('cron');
 translateDOM($('tool-root'));
@@ -91,6 +96,42 @@ function calculate(auto=false) {
 }
 function inputChanged() { if($('cron-auto').checked) calculate(true); else controller.invalidate(); }
 function cell(row,value,mono=false) {const td=document.createElement('td');td.textContent=value;if(mono)td.className='cron-mono';row.append(td);return td;}
+const utcPanel=$('cron-utc-panel'),datesScroll=$('cron-dates').parentElement;
+let utcAnchor;
+function closeUtc(restoreFocus=false){
+  if(!utcAnchor)return;
+  const button=utcAnchor;utcPanel.hidePopover();
+  if(restoreFocus)button.focus({preventScroll:true});
+}
+function positionUtc(){
+  if(!utcAnchor)return;
+  const box=utcAnchor.getBoundingClientRect(),clip=datesScroll.getBoundingClientRect();
+  if(box.bottom<=Math.max(0,clip.top)||box.top>=Math.min(innerHeight,clip.bottom)||box.right<=Math.max(0,clip.left)||box.left>=Math.min(innerWidth,clip.right))return closeUtc();
+  const {width,height}=utcPanel.getBoundingClientRect();
+  const top=box.bottom+4+height<=innerHeight-8?box.bottom+4:box.top-height-4;
+  utcPanel.style.top=Math.max(8,Math.min(top,innerHeight-height-8))+'px';
+  const left=document.dir==='rtl'?box.right-width:box.left;
+  utcPanel.style.left=Math.max(8,Math.min(left,innerWidth-width-8))+'px';
+}
+function utcControl(date,zone,ready){
+  const button=document.createElement('button');button.type='button';button.className='cron-utc-trigger';button.textContent='UTC';button.disabled=!ready;
+  button.setAttribute('aria-label',t('timestamp.utc')+' · '+date.localTime);button.setAttribute('aria-haspopup','dialog');button.setAttribute('aria-expanded','false');
+  button.setAttribute('aria-controls',utcPanel.id);button.setAttribute('popovertarget',utcPanel.id);
+  button.addEventListener('click',event=>{
+    event.preventDefault();
+    if(button===utcAnchor)return closeUtc(true);
+    if(utcAnchor)closeUtc();
+    utcAnchor=button;button.setAttribute('aria-expanded','true');
+    $('cron-utc-instant').dateTime=$('cron-utc-instant').textContent=date.utcTime;
+    $('cron-utc-zone').textContent=zone;$('cron-utc-offset').textContent='UTC'+date.offset;
+    utcPanel.showPopover();positionUtc();utcPanel.focus({preventScroll:true});
+  });
+  return button;
+}
+utcPanel.addEventListener('beforetoggle',event=>{if(event.newState==='closed'){utcAnchor?.setAttribute('aria-expanded','false');utcAnchor=undefined;}});
+$('cron-utc-close').addEventListener('click',()=>closeUtc(true));
+document.addEventListener('keydown',event=>{if(utcAnchor&&event.key==='Escape'){event.preventDefault();closeUtc(true);}});
+document.addEventListener('scroll',positionUtc,true);window.addEventListener('resize',positionUtc);window.addEventListener('blur',()=>closeUtc());
 function meaning(field) {
   const value=field.value;
   const key=value==='?'?'unspecified':value==='*'?'every':value==='LW'?'lastWeekday':value==='L'?(field.id==='weekday'?'saturday':'lastDay'):/^L-/.test(value)?'offset':value.endsWith('W')?'nearest':value.endsWith('L')?'lastNamedWeekday':value.includes('#')?'nth':value.includes('/')?'step':/[,-]/.test(value)?'list':'value';
@@ -127,7 +168,9 @@ function renderState() {
   $('cron-error-details').textContent=state.status==='error'?`${state.code || state.errorCode || 'invalid'}: ${state.messageEn || state.message || ''}`:'';
   for(const [id,field] of [['cron-expression','expression'],['cron-zone','timeZone'],['cron-reference','reference']]) $(id).setAttribute('aria-invalid',String(state.status==='error' && (state.field===field || (field==='expression' && !['timeZone','reference','count'].includes(state.field)))));
   for(const format of ['csv','json'])$(`cron-download-${format}`).textContent=`${t('common.download')} ${format.toUpperCase()}`;
+  if(!ready)closeUtc();
   if(renderedPresentation===shown && renderedLanguage===language())return;
+  closeUtc();
   renderedPresentation=shown;renderedLanguage=language();
   const effective=$('cron-effective-context');effective.hidden=!shown;effective.textContent=shown?t('refinement.cronContext',{dialect:$('cron-dialect').selectedOptions[0].textContent,count:shown.parsed.fields.length,zone:shown.timeZone}):'';
   $('cron-next').textContent=shown?.dates.length?t('ux.nextExecution')+' · '+shown.dates[0].localTime:'';
@@ -141,7 +184,7 @@ function renderState() {
   if(!shown) return;
   for(const field of shown.parsed.fields) {const row=document.createElement('tr');cell(row,t(`cron.fields.${field.id}`));cell(row,field.value,true);cell(row,`${field.min}–${field.max}`,true);cell(row,meaning(field));fields.append(row);}
   shown.dates.forEach((date,index)=>{
-    const row=document.createElement('tr');cell(row,index+1);const dateCell=cell(row,'');const local=document.createElement('span');local.className='cron-local-time';local.textContent=date.localTime;const secondary=document.createElement('small');secondary.className='cron-time-context';secondary.textContent=`${date.utcTime} · UTC${date.offset}`;const detail=document.createElement('details'),summary=document.createElement('summary');summary.textContent='UTC';summary.setAttribute('aria-label',t('ux.otherFormats')+' · UTC');detail.append(summary,secondary);dateCell.append(local,detail);
+    const row=document.createElement('tr');cell(row,index+1);const dateCell=cell(row,'');const local=document.createElement('span');local.className='cron-local-time';local.textContent=date.localTime;dateCell.append(local,utcControl(date,shown.timeZone,ready));
     const button=document.createElement('button');button.disabled=!ready;button.textContent=t('direct.developer.copyIso');button.setAttribute('aria-label',`${button.textContent} · ${t('direct.developer.copyIsoDate',{index:index+1})}`);button.addEventListener('click',()=>copyText(date.isoTime));cell(row,'').append(button);dates.append(row);
   });
 }

@@ -1,8 +1,9 @@
-import {pages,currentTarget} from './tools/shared/navigation.js';
+import {pages} from './tools/shared/navigation.js';
 import {registerContentCheck} from './tools/shared/content-state.js';
 import {language,onLanguageChange} from './i18n-runtime.js';
 import {restoreWorkspaceNavigation} from './i18n.js';
 import './workspace-host.css';
+import './workspace-modal.css';
 
 // The shell belongs to this document. Each tool retains its original module scope.
 export async function mountWorkspace(){
@@ -13,16 +14,27 @@ export async function mountWorkspace(){
  main.replaceChildren();
  const notice=document.createElement('div');notice.className='workspace-navigation-status';notice.hidden=true;notice.setAttribute('role','status');
  const message=document.createElement('span'),retry=document.createElement('button');retry.type='button';notice.append(message,retry);main.append(notice);
- const cache=new Map();let active,pending,sequence=0,disposed=false,noticeFailed=false;
+ const cache=new Map();let active,pending,sequence=0,disposed=false,noticeFailed=false,modal,blocked=[];
  const identify=value=>{try{const url=new URL(value,location.href);if(url.pathname.endsWith('/'))url.pathname+='index.html';return url.origin===location.origin&&pages.some(page=>page.file.split('#')[0]===url.pathname.split('/').pop())?url:undefined;}catch{return undefined;}};
  const content=record=>{try{return Boolean(record?.frame.contentWindow.LisToolsTool?.hasContent());}catch{return false;}};
  function updateRoute(url,push=false){if(location.href!==url.href)history[push?'pushState':'replaceState'](null,'',url);dispatchEvent(new Event('listools:workspace-route'));}
  function status(failed){noticeFailed=failed;const labels=window.LisToolsBootCatalog?.labels[language()]||window.LisToolsBootCatalog?.labels.en;message.textContent=labels?.[failed?'loadFailed':'stillLoading']||'Loading…';retry.textContent=labels?.reload||'Reload';notice.hidden=false;retry.hidden=!failed;}
- function discard(record){if(!record)return;clearTimeout(record.slow);clearTimeout(record.timeout);try{record.frame.contentWindow?.LisToolsTool?.suspend(false);}catch{/* A failed navigation may be a browser error document. */}record.frame.remove();}
- function cancelPending(){if(!pending)return;discard(pending);pending=undefined;notice.hidden=true;}
+ function stopWaiting(record){clearTimeout(record.slow);clearTimeout(record.timeout);record.bootObserver?.disconnect();}
+ function discard(record){if(!record)return;stopWaiting(record);try{record.frame.contentWindow?.LisToolsTool?.suspend(false);}catch{/* A failed navigation may be a browser error document. */}record.frame.remove();}
+ function cancelPending(){discard(pending);pending=undefined;notice.hidden=true;retry.onclick=null;}
+ // A native modal only blocks its own document. Block the other branches of the host as well.
+ function setModal(dialog){
+  for(const node of blocked)node.inert=false;
+  blocked=[];modal=dialog;document.body.classList.toggle('workspace-modal-open',Boolean(dialog));
+  if(dialog)for(let branch=active.frame;branch!==document.body;branch=branch.parentElement){
+   for(const sibling of branch.parentElement.children)if(sibling!==branch&&!sibling.inert){sibling.inert=true;blocked.push(sibling);}
+  }
+ }
+ function dismissModal(){if(modal){modal.close();setModal(null);}}
  function reveal(record,push){
   if(pending!==record)return;
-  clearTimeout(record.slow);clearTimeout(record.timeout);
+  dismissModal();
+  stopWaiting(record);
   const old=active;pending=undefined;active=record;
   record.url=new URL(record.frame.contentWindow.location.href);
   // Keep protected history drafts in memory; sensitive tools still run their leave cleanup.
@@ -37,8 +49,9 @@ export async function mountWorkspace(){
   const url=identify(value);if(!url||disposed||source&&source!==active?.frame)return false;
   const same=active&&url.pathname===active.url.pathname;
   if(!history&&!same&&content(active)){window.open(url.href,'_blank','noopener');return true;}
-  if(same){cancelPending();if(currentTarget(url.pathname,url.hash)===currentTarget(active.url.pathname,active.url.hash)&&url.hash===active.url.hash)return true;
-   active.frame.contentWindow.LisToolsTool.navigate(url.href);queueMicrotask(()=>{if(!active)return;active.url=new URL(active.frame.contentWindow.location.href);document.title=active.frame.contentDocument.title;updateRoute(active.url,!history);});return true;}
+  if(modal&&url.href!==active.url.href)dismissModal();
+  if(same){cancelPending();if(url.href===active.url.href){if(location.href!==url.href)updateRoute(url,!history);return true;}
+   const record=active;record.frame.contentWindow.LisToolsTool.navigate(url.href);queueMicrotask(()=>{if(active!==record)return;active.url=new URL(active.frame.contentWindow.location.href);document.title=active.frame.contentDocument.title;updateRoute(active.url,!history);});return true;}
   if(pending?.url.href===url.href)return true;
   cancelPending();const frame=document.createElement('iframe');frame.dataset.workspaceFrame=String(++sequence);frame.setAttribute('inert','');frame.title=pages.find(page=>page.file.split('#')[0]===url.pathname.split('/').pop())?.en||'LisTools';
   let record=cache.get(url.pathname);if(record){cache.delete(url.pathname);record.url=url;record.frame.contentWindow.LisToolsTool.navigate(url.href);pending=record;reveal(record,!history);return true;}
@@ -48,15 +61,23 @@ export async function mountWorkspace(){
   frame.addEventListener('error',()=>failed(frame),{once:true});
   frame.addEventListener('load',()=>{try{if(!frame.contentDocument||frame.contentDocument.documentElement.dataset.uiState==='failed')failed(frame);}catch{failed(frame);}},{once:true});return true;
  }
- function failed(frame){if(pending?.frame!==frame)return;const url=pending.url;cancelPending();status(true);window.LisToolsBoot?.ready();retry.onclick=()=>navigate(url.href,{history:true});}
+ function failed(frame){if(pending?.frame!==frame)return;const {url,push}=pending;cancelPending();status(true);window.LisToolsBoot?.ready();retry.onclick=()=>navigate(url.href,{history:!push});}
  window.LisToolsWorkspace={navigate,
-  ready(frame){const record=pending;if(record?.frame!==frame)return;void frame.contentWindow.LisToolsTool.setLanguage(language()).then(()=>{if(pending===record)reveal(record,record.push);}).catch(()=>failed(frame));},
+  ready(frame){const record=pending;if(record?.frame!==frame)return;void frame.contentWindow.LisToolsTool.setLanguage(language()).then(()=>{
+   if(pending!==record)return;
+   const root=frame.contentDocument.documentElement;
+   const show=()=>{if(root.dataset.uiState==='ready')reveal(record,record.push);else if(root.dataset.uiState==='failed')failed(frame);};
+   if(root.dataset.uiState==='booting'){record.bootObserver=new MutationObserver(show);record.bootObserver.observe(root,{attributes:true,attributeFilter:['data-ui-state']});}
+   else show();
+  }).catch(()=>failed(frame));},
   failed,
   route(frame,value,push){if(frame!==active?.frame)return;const url=identify(value);if(!url)return;active.url=url;document.title=frame.contentDocument.title;updateRoute(url,push);},
-  search(frame){if(frame===active?.frame)document.querySelector('.header-search')?.click();},
+  modal(frame,dialog,open){if(frame===active?.frame&&(open||modal===dialog))setModal(open?dialog:null);},
+  search(frame){if(!modal&&frame===active?.frame)document.querySelector('.header-search')?.click();},
   focus(frame,value){if(frame===active?.frame)document.body.classList.toggle('workspace-focused',value);}
  };
  registerContentCheck(()=>content(active));
+ document.addEventListener('pointerdown',event=>{if(modal)event.preventDefault();},true);
  document.addEventListener('click',event=>{
   const anchor=event.target.closest('a[href]');if(!anchor||event.defaultPrevented||event.button||event.ctrlKey||event.metaKey||event.altKey||event.shiftKey||anchor.target==='_blank'||anchor.download)return;
   if(navigate(anchor.href))event.preventDefault();
@@ -64,7 +85,7 @@ export async function mountWorkspace(){
  addEventListener('popstate',()=>navigate(location.href,{history:true}));
  addEventListener('hashchange',()=>{if(active?.url.href!==location.href)navigate(location.href,{history:true});});
  onLanguageChange(()=>{for(const record of [active,pending,...cache.values()])void record?.frame.contentWindow.LisToolsTool?.setLanguage(language()).then(()=>{if(record===active){document.title=record.frame.contentDocument.title;record.frame.title=document.title;}}).catch(()=>{});if(!notice.hidden)status(noticeFailed);});
- addEventListener('pagehide',event=>{if(!event.persisted){disposed=true;cancelPending();for(const record of [active,...cache.values()])record?.frame.contentWindow.LisToolsTool?.suspend(false);}});
+ addEventListener('pagehide',event=>{dismissModal();if(!event.persisted){disposed=true;cancelPending();for(const record of [active,...cache.values()])record?.frame.contentWindow.LisToolsTool?.suspend(false);}});
  addEventListener('pageshow',event=>{if(event.persisted)active?.frame.contentWindow.LisToolsTool?.resume();});
  navigate(location.href,{history:true});restoreWorkspaceNavigation();
 }

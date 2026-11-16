@@ -6,6 +6,9 @@ export function taxOn(value){
  const taxable=D.max(new D(value),0),[,r,quick]=brackets.find(([limit])=>limit===null||taxable.lte(limit));
  return {tax:fixed(D.max(taxable.mul(r).minus(quick),0)),rate:r,quick:fixed(quick),taxable:fixed(taxable)};
 }
+export function wageComputation(result){
+ return Object.fromEntries(['cumulativeIncome','cumulativeTax','cumulativeTaxable','basicDeduction','rate','quick','previousWithheld'].map(key=>[key,result[key]]));
+}
 function period(input){const month=Number(input.month),start=Number(input.startMonth??1);if(!Number.isInteger(month)||!Number.isInteger(start)||start<1||month>12||start>month)fail('tax.monthRange','startMonth');return {month,start,n:month-start+1};}
 function deductionMode(input,annual=false){
  const mode=input.basicDeductionMode??(input.firstEmployment?'first-employment':'standard');
@@ -67,7 +70,7 @@ export function calculateAnnual(input){
   if(deductible.gt(cash))fail('insurance.deductibleRange',`deductible-${month}`);
   acc.income=acc.income.plus(salary);acc.contributions=acc.contributions.plus(deductible);acc.special=acc.special.plus(special);acc.other=acc.other.plus(other);acc.adjustment=acc.adjustment.plus(adjustment);acc.basic=basicDeductionMode==='annual-60000'?new D(60000):acc.basic.plus(5000);
   const tax=taxOn(acc.income.plus(acc.adjustment).minus(acc.contributions).minus(acc.special).minus(acc.other).minus(acc.basic)),withheld=D.max(new D(tax.tax).minus(acc.withheld),0);acc.withheld=acc.withheld.plus(withheld);
-  months.push({...row,salary:fixed(salary),contributions:fixed(cash),deductibleContributions:fixed(deductible),specialDeduction:fixed(special),withheld:fixed(withheld),net:fixed(salary.minus(cash).minus(withheld))});
+  months.push({...row,salary:fixed(salary),contributions:fixed(cash),deductibleContributions:fixed(deductible),specialDeduction:fixed(special),withheld:fixed(withheld),net:fixed(salary.minus(cash).minus(withheld)),computation:{cumulativeIncome:fixed(acc.income),cumulativeTax:tax.tax,cumulativeTaxable:tax.taxable,basicDeduction:fixed(acc.basic),rate:tax.rate,quick:tax.quick,previousWithheld:fixed(acc.withheld.minus(withheld))}});
  }
  const annualTax=taxOn(acc.income.plus(acc.adjustment).minus(acc.contributions).minus(acc.special).minus(acc.other).minus(60000).minus(amount(input.medicalDeduction,'medicalDeduction',0)).minus(amount(input.annualSpecialDeduction,'annualSpecialDeduction',0)));
  const actual=input.actualWithheld===undefined||input.actualWithheld===''?null:amount(input.actualWithheld,'actualWithheld');
