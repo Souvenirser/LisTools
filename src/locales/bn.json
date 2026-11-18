@@ -1,5 +1,6 @@
 {
   "common": {
+    "updateVersion": "আপডেট {{version}}",
     "feedback": "Report an issue",
     "feedbackHint": "Open public feedback on GitHub (sign-in required)",
     "convert": "এনকোডিং ও রূপান্তর",

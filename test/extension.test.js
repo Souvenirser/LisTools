@@ -1,9 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {pageConnectPolicy} from '../src/tools/shared/policy.js';
+import {pageConnectPolicy, storeExtensionPolicy} from '../src/tools/shared/policy.js';
+import {githubReleaseEndpoint} from '../src/tools/updates/releases.js';
 
-test('扩展图标打开离线工具菜单，不需要后台或网页访问权限', () => {
+test('通用包只允许工具栏弹窗连接指定的更新接口，无后台脚本或网页访问权限', () => {
   const manifest = JSON.parse(fs.readFileSync(new URL('../public/manifest.json', import.meta.url)));
   assert.equal(manifest.manifest_version, 3);
   assert.equal(manifest.name, 'LisTools - 实用工具箱');
@@ -12,7 +13,10 @@ test('扩展图标打开离线工具菜单，不需要后台或网页访问权�
   assert.equal(manifest.action.default_popup,'popup.html');
   assert.ok(fs.existsSync(new URL(`../pages/${manifest.action.default_popup}`,import.meta.url)));
   assert.equal(manifest.background,undefined);
-  assert.equal(pageConnectPolicy(manifest.action.default_popup),"connect-src 'none'");
+  assert.equal(pageConnectPolicy(manifest.action.default_popup), `connect-src ${githubReleaseEndpoint}`);
+  assert.equal(pageConnectPolicy('tax.html'), "connect-src 'none'");
+  assert.ok(!pageConnectPolicy('speedtest.html').includes(githubReleaseEndpoint));
+  assert.ok(!storeExtensionPolicy.includes(githubReleaseEndpoint));
 });
 
 test('通用扩展清单声明 Firefox 和 Safari 的最低版本与稳定身份', () => {

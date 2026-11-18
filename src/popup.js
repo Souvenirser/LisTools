@@ -1,6 +1,7 @@
 import {mountSettings} from './tools/shared/shell.js';
 import {t,language,languages,onLanguageChange} from './i18n-runtime.js';
 import {mountToolMenu} from './tools/shared/menu.js';
+import {mountPopupUpdates} from './tools/updates/popup.js';
 import './popup.css';
 
 document.documentElement.lang=language();
@@ -8,6 +9,7 @@ document.documentElement.dir=languages.find(item=>item.code===language()).dir;
 document.getElementById('popup-caption').textContent=t('common.tools');
 const menu=document.getElementById('popup-menu');
 mountToolMenu(menu,{popup:true}).open();
+mountPopupUpdates(menu.querySelector('.tool-menu-footer'));
 mountSettings(document.querySelector('.popup-header'),{sort:()=>document.getElementById('menu-edit').click()});
 onLanguageChange(()=>{document.documentElement.lang=language();document.documentElement.dir=languages.find(item=>item.code===language()).dir;document.getElementById('popup-caption').textContent=t('common.tools');});
 

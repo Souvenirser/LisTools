@@ -1,5 +1,6 @@
 {
   "common": {
+    "updateVersion": "အပ်ဒိတ် {{version}}",
     "feedback": "Report an issue",
     "feedbackHint": "Open public feedback on GitHub (sign-in required)",
     "convert": "ကုဒ်ပြောင်းခြင်းနှင့် ပြောင်းလဲခြင်း",

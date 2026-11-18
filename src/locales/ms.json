@@ -1,5 +1,6 @@
 {
   "common": {
+    "updateVersion": "Kemas kini {{version}}",
     "feedback": "Report an issue",
     "feedbackHint": "Open public feedback on GitHub (sign-in required)",
     "convert": "Pengekodan dan penukaran",

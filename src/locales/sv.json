@@ -1,5 +1,6 @@
 {
   "common": {
+    "updateVersion": "Uppdatera {{version}}",
     "feedback": "Report an issue",
     "feedbackHint": "Open public feedback on GitHub (sign-in required)",
     "convert": "Kodning och konvertering",

@@ -1,5 +1,6 @@
 {
   "common": {
+    "updateVersion": "నవీకరించు {{version}}",
     "feedback": "Report an issue",
     "feedbackHint": "Open public feedback on GitHub (sign-in required)",
     "convert": "ఎన్‌కోడింగ్ మరియు మార్పిడి",

@@ -1,10 +1,12 @@
 import { readFile, readdir, writeFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { zipSync, unzipSync } from 'fflate';
 import { decodeHTML } from 'entities';
 import { pages } from '../src/tools/shared/navigation.js';
-import { extensionPolicy, pageConnectPolicy } from '../src/tools/shared/policy.js';
+import { extensionPolicy, pageConnectPolicy, storeExtensionPolicy } from '../src/tools/shared/policy.js';
+import { storeWorkerPath } from '../src/tools/updates/store-state.js';
 import { checkPayrollRelease } from './payroll-release.js';
 
 const root = path.resolve(import.meta.dirname, '..');
@@ -17,7 +19,7 @@ assert.equal(manifest.manifest_version, 3);
 assert.ok(!manifest.permissions?.length && !manifest.host_permissions?.length);
 assert.equal(manifest.content_security_policy.extension_pages,extensionPolicy);
 assert.equal(manifest.action.default_popup,'popup.html');
-assert.ok(!manifest.background, '工具菜单不需要后台脚本');
+assert.ok(!manifest.background, '通用包不应注册商店后台脚本');
 assert.ok(manifest.browser_specific_settings.gecko.id);
 assert.deepEqual(manifest.browser_specific_settings.gecko.data_collection_permissions,{required:['none']});
 assert.ok(manifest.browser_specific_settings.safari.strict_min_version);
@@ -97,10 +99,37 @@ for (const name of ['@radix-ui/colors', 'i18next','choices.js','flag-icons','fus
 const flagCodes=new Set((await readdir(path.join(root,'node_modules/flag-icons/flags/4x3'))).filter(name=>/^[a-z]{2}\.svg$/.test(name)).map(name=>name.slice(0,2)));
 for(const flag of flagCodes)assert.ok(Object.keys(files).some(name=>name.startsWith(`assets/${flag}-`)&&name.endsWith('.svg')),`扩展缺少国旗：${flag}`);
 assert.equal(Object.keys(files).filter(name=>/^assets\/[a-z]{2}-[^/]+\.svg$/.test(name)).length,flagCodes.size,'国家和地区国旗必须完整且不重复');
-const archive = zipSync(files, { level: 6 });
-assert.ok(unzipSync(archive)['manifest.json'], 'ZIP 根目录必须包含 manifest.json');
-await mkdir(path.join(root, 'releases'), { recursive: true });
-const output = path.join(root, 'releases', `LisTools-${pkg.version}.zip`);
-await writeFile(output, archive);
+const storeManifest = {
+  ...manifest,
+  background: { service_worker: storeWorkerPath, type: 'module' },
+  content_security_policy: { extension_pages: storeExtensionPolicy }
+};
+delete storeManifest.browser_specific_settings;
+const popupFile = manifest.action.default_popup;
+const popup = new TextDecoder().decode(files[popupFile]);
+const storePopup = popup.replace(pageConnectPolicy(popupFile), "connect-src 'none'");
+assert.notEqual(storePopup, popup, '商店包必须关闭弹窗的 GitHub 版本查询权限');
+const storeFiles = {
+  ...files,
+  'manifest.json': Buffer.from(JSON.stringify(storeManifest, null, 2) + '\n'),
+  [popupFile]: Buffer.from(storePopup),
+  [storeWorkerPath]: await readFile(path.join(root, 'src/tools', storeWorkerPath)),
+  'updates/store-state.js': await readFile(path.join(root, 'src/tools/updates/store-state.js'))
+};
+
+const outputDir = path.join(root, 'releases');
+await mkdir(outputDir, { recursive: true });
+const hashes = [];
 console.log(`浏览器扩展资源：${dist}`);
-console.log(`通用 ZIP：${output} (${(archive.length / 1024 / 1024).toFixed(2)} MB)`);
+for (const [name, contents] of [
+  [`LisTools-${pkg.version}.zip`, files],
+  [`LisTools-Chrome-Store-${pkg.version}.zip`, storeFiles]
+]) {
+  const archive = zipSync(contents, { level: 6 });
+  assert.ok(unzipSync(archive)['manifest.json'], 'ZIP 根目录必须包含 manifest.json');
+  const output = path.join(outputDir, name);
+  await writeFile(output, archive);
+  hashes.push(`${createHash('sha256').update(archive).digest('hex')}  ${name}`);
+  console.log(`ZIP：${output} (${(archive.length / 1024 / 1024).toFixed(2)} MB)`);
+}
+await writeFile(path.join(outputDir, `SHA256SUMS-${pkg.version}`), hashes.join('\n') + '\n');

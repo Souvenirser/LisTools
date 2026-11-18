@@ -1,5 +1,6 @@
 {
   "common": {
+    "updateVersion": "ወደ {{version}} አዘምን",
     "feedback": "Report an issue",
     "feedbackHint": "Open public feedback on GitHub (sign-in required)",
     "convert": "ኢንኮዲንግ እና ልወጣ",

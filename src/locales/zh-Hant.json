@@ -1,5 +1,6 @@
 {
   "common": {
+    "updateVersion": "更新 {{version}}",
     "feedback": "問題回饋",
     "feedbackHint": "在 GitHub 公開回饋（需要登入）",
     "convert": "編碼與轉換",

@@ -1,5 +1,6 @@
 {
   "common": {
+    "updateVersion": "อัปเดต {{version}}",
     "feedback": "Report an issue",
     "feedbackHint": "Open public feedback on GitHub (sign-in required)",
     "convert": "การเข้ารหัสและการแปลง",

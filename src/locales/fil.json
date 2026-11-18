@@ -1,5 +1,6 @@
 {
   "common": {
+    "updateVersion": "I-update {{version}}",
     "feedback": "Report an issue",
     "feedbackHint": "Open public feedback on GitHub (sign-in required)",
     "convert": "Pag-encode at conversion",

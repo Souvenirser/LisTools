@@ -1,5 +1,6 @@
 {
   "common": {
+    "updateVersion": "Ṣe ìmúdójúìwọ̀n {{version}}",
     "feedback": "Report an issue",
     "feedbackHint": "Open public feedback on GitHub (sign-in required)",
     "convert": "Ìfipamọ́ àti ìyípadà",

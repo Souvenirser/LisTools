@@ -1,5 +1,6 @@
 {
   "common": {
+    "updateVersion": "Cập nhật {{version}}",
     "feedback": "Report an issue",
     "feedbackHint": "Open public feedback on GitHub (sign-in required)",
     "convert": "Mã hóa và chuyển đổi",

@@ -1,5 +1,6 @@
 {
   "common": {
+    "updateVersion": "Päivitä {{version}}",
     "feedback": "Report an issue",
     "feedbackHint": "Open public feedback on GitHub (sign-in required)",
     "convert": "Koodaus ja muunnos",

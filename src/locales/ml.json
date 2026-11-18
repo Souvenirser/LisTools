@@ -1,5 +1,6 @@
 {
   "common": {
+    "updateVersion": "അപ്‌ഡേറ്റ് {{version}}",
     "feedback": "Report an issue",
     "feedbackHint": "Open public feedback on GitHub (sign-in required)",
     "toolbox": "യൂട്ടിലിറ്റി ടൂൾബോക്സ്",

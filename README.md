@@ -1,6 +1,6 @@
 # LisTools
 
-独立的浏览器实用工具箱，覆盖开发和日常办公。提供 JSON、编码转换、计算器、日期、二维码、图片、PDF、文本、单位、计时等实用工具，复用开源编辑器和专用算法库。除手动测速连接公共节点外，其余工具均离线处理，不申请网页访问权限。
+独立的浏览器实用工具箱，覆盖开发和日常办公。提供 JSON、编码转换、计算器、日期、二维码、图片、PDF、文本、单位、计时等实用工具，复用开源编辑器和专用算法库。工具数据在本机处理。网络连接用于手动测速和解压安装版的更新检查，扩展不申请网页访问权限。
 
 项目采用 [MIT 许可证](./LICENSE)，欢迎通过 [Issue](https://github.com/Souvenirser/LisTools/issues) 反馈问题，通过 Fork 和 Pull Request 提交改进，详见 [贡献指南](./CONTRIBUTING.md)。
 
@@ -30,7 +30,16 @@
 3. 点击 **加载已解压的扩展程序**，选择解压后直接包含 `manifest.json` 的目录。
 4. 固定 LisTools 图标，点击后展开工具菜单，选择工具会在新标签页打开。页面内点击左上角 LisTools 可切换工具。
 
-[Microsoft 官方迁移说明](https://learn.microsoft.com/en-us/microsoft-edge/extensions-chromium/developer-guide/port-chrome-extension)确认 Edge 复用 Chrome 的扩展 API 和清单；本项目不依赖 Chrome 专用后台服务。
+[Microsoft 官方迁移说明](https://learn.microsoft.com/en-us/microsoft-edge/extensions-chromium/developer-guide/port-chrome-extension)确认 Edge 复用 Chrome 的扩展 API 和清单。
+
+### 更新 LisTools
+
+从 v1.3.3 开始，工具栏弹窗在确认有新版时在左下角显示「更新」。平时该位置显示已安装版本。
+
+- **GitHub ZIP 安装版**。点「更新」进入该版本的发布页。下载 `LisTools-<版本>.zip`，解压并替换原扩展目录，再到扩展管理页点 LisTools 的「重新加载」。保留原目录路径有助于继续使用已有扩展设置。发布页提供 ZIP 的 SHA-256 校验文件。
+- **Chrome 应用商店安装版**。Chrome 下载新版后，点「更新」进入 LisTools 的扩展管理页。保存当前内容并关闭打开的 LisTools 页面，Chrome 会在扩展空闲时完成安装。
+
+`npm run build` 生成通用 ZIP、供 Chrome 应用商店上传的 `LisTools-Chrome-Store-<版本>.zip` 和两个包的 `SHA256SUMS-<版本>`。早于 v1.3.3 的安装可沿用原安装方式升级一次。
 
 ### Firefox
 

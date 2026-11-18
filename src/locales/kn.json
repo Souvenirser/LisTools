@@ -1,5 +1,6 @@
 {
   "common": {
+    "updateVersion": "ನವೀಕರಿಸಿ {{version}}",
     "feedback": "Report an issue",
     "feedbackHint": "Open public feedback on GitHub (sign-in required)",
     "convert": "ಎನ್‌ಕೋಡಿಂಗ್ ಮತ್ತು ಪರಿವರ್ತನೆ",

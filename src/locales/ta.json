@@ -1,5 +1,6 @@
 {
   "common": {
+    "updateVersion": "புதுப்பி {{version}}",
     "feedback": "Report an issue",
     "feedbackHint": "Open public feedback on GitHub (sign-in required)",
     "convert": "குறியாக்கமும் மாற்றமும்",

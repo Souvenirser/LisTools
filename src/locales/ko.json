@@ -1,5 +1,6 @@
 {
   "common": {
+    "updateVersion": "업데이트 {{version}}",
     "feedback": "Report an issue",
     "feedbackHint": "Open public feedback on GitHub (sign-in required)",
     "convert": "인코딩 및 변환",

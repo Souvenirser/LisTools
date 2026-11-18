@@ -1,5 +1,6 @@
 {
   "common": {
+    "updateVersion": "ធ្វើបច្ចុប្បន្នភាព {{version}}",
     "feedback": "Report an issue",
     "feedbackHint": "Open public feedback on GitHub (sign-in required)",
     "convert": "ការអ៊ិនកូដ និងការបម្លែង",

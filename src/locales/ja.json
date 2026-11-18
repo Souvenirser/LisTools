@@ -1,5 +1,6 @@
 {
   "common": {
+    "updateVersion": "更新 {{version}}",
     "feedback": "Report an issue",
     "feedbackHint": "Open public feedback on GitHub (sign-in required)",
     "convert": "エンコードと変換",

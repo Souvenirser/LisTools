@@ -1,5 +1,6 @@
 {
   "common": {
+    "updateVersion": "અપડેટ {{version}}",
     "feedback": "Report an issue",
     "feedbackHint": "Open public feedback on GitHub (sign-in required)",
     "convert": "એન્કોડિંગ અને રૂપાંતર",
