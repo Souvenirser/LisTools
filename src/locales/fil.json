@@ -1641,6 +1641,7 @@
     },
     "files": {
       "fileActions": "Mga aksiyon sa file",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "Itapon ang mga hindi na-save na pagsasaayos sa crop?",
       "imageInfo": "{{name}} · {{width}} × {{height}} px",
       "pastedImage": "Idinikit na larawan",
@@ -2330,6 +2331,18 @@
     "reference": "Tantiyang sanggunian",
     "referenceHint": "Tantiya gamit ang mga halagang sanggunian. Ilagay ang aktuwal na pamantayan ng hulog sa mga setting.",
     "referenceScope": "Iisang sanggunian ang gamit sa lahat ng buwan, hindi ang aktuwal na hulog noon."
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "Tinatayang suweldo sa pag-uwi",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "Tinatayang netong sahod sa buong taon (kasama ang bonus) · Tantya mula sa suweldo",
+    "autoRatioEstimateVerified": "Tantya mula sa suweldo · Na-verify",
+    "autoRatioEstimateReference": "Tantya mula sa suweldo · Tantiyang sanggunian"
   },
   "taxUnified": {
     "run": "Kalkulahin ang sahod at taunang kita",

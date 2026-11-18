@@ -160,7 +160,8 @@ export async function run(id, input, options) {
   if (id === 'query-json') {
     if (!reverse) {
       const object = Object.create(null);
-      for (const segment of source.split('&')) if (segment) {
+      const query=source.startsWith('?') ? source.slice(1) : source;
+      for (const segment of query.split('&')) if (segment) {
         const at = segment.indexOf('='), key = at < 0 ? segment : segment.slice(0,at), value = at < 0 ? '' : segment.slice(at+1);
         const decode = text => decodeURIComponent(text.replace(/\+/g,' '));
         const name = decode(key);

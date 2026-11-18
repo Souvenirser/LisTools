@@ -1852,6 +1852,7 @@
     },
     "files": {
       "fileActions": "ဖိုင်လုပ်ဆောင်ချက်များ",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "မသိမ်းရသေးသော ဖြတ်တောက်ပြင်ဆင်မှုများကို ပယ်ဖျက်မလား။",
       "pastedImage": "ကူးထည့်ထားသော ပုံ",
       "lineDedupeHelp": "နေရာလွတ်နှင့် စာလုံးအကြီးအသေး အပါအဝင် လိုင်းတစ်ခုလုံးကို အတိအကျ နှိုင်းယှဉ်သည်။ ပထမဆုံးပေါ်လာမှုကို ထိန်းထားသည်။",
@@ -2330,6 +2331,18 @@
     "reference": "ကိုးကားခန့်မှန်းချက်",
     "referenceHint": "ကိုးကားတန်ဖိုးများဖြင့် ခန့်မှန်းသည်။ အမှန်တကယ်ထည့်ဝင်ငွေ သတ်မှတ်ချက်များကို ဆက်တင်တွင် ဖြည့်နိုင်သည်။",
     "referenceScope": "လတိုင်းသည် တူညီသော ကိုးကားတန်ဖိုးများကို သုံးပြီး ယခင်အမှန်တကယ်ပေးချေမှုများ မဟုတ်ပါ။"
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "အိမ်ပြန်လစာ ခန့်မှန်းခြေ",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "ခန့်မှန်းတစ်နှစ်စာ အမှန်တကယ်ရမည့်လစာ (ဆုကြေးအပါအဝင်) · လစာထဲက ခန့်မှန်းချက်",
+    "autoRatioEstimateVerified": "လစာထဲက ခန့်မှန်းချက် · စိစစ်ပြီး",
+    "autoRatioEstimateReference": "လစာထဲက ခန့်မှန်းချက် · ကိုးကားခန့်မှန်းချက်"
   },
   "taxUnified": {
     "run": "လစာနှင့် တစ်နှစ်စာဝင်ငွေကို တွက်ချက်ရန်",

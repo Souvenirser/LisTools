@@ -3,7 +3,8 @@ import {pages,toolGroups} from './navigation.js';
 export const menuOrderKey='listools-menu-order-v1';
 export const menuExpandedKey='listools-menu-expanded-v1';
 let memory,unsaved=false;
-let expandedMemory=[],expandedUnsaved=false;
+const defaultExpanded=['developer'];
+let expandedMemory=defaultExpanded,expandedUnsaved=false;
 const expandedGroups=raw=>toolGroups.filter(group=>Array.isArray(raw)&&raw.includes(group.id)).map(group=>group.id);
 const ordered=(ids,valid)=>[...new Set([...(Array.isArray(ids)?ids:[]).filter(id=>valid.includes(id)),...valid])];
 export function normalizeMenuOrder(raw){
@@ -22,8 +23,10 @@ export function saveMenuOrder(order,storage){
 }
 export function readMenuExpanded(storage){
  if(expandedUnsaved)return expandedMemory;
- try{return expandedGroups(JSON.parse((storage??localStorage).getItem(menuExpandedKey)));}
- catch{return expandedMemory;}
+ try{
+  const raw=(storage??localStorage).getItem(menuExpandedKey);
+  return raw==null?defaultExpanded:expandedGroups(JSON.parse(raw));
+ }catch(error){return error instanceof SyntaxError?[]:expandedMemory;}
 }
 export function saveMenuExpanded(groups,storage){
  expandedMemory=expandedGroups(groups);

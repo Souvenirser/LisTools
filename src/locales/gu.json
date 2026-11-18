@@ -1641,6 +1641,7 @@
     },
     "files": {
       "fileActions": "ફાઇલ ક્રિયાઓ",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "સાચવ્યા વગરના ક્રોપ ગોઠવણો કાઢી નાખવા છે?",
       "imageInfo": "{{name}} · {{width}} × {{height}} પિક્સેલ",
       "pastedImage": "પેસ્ટ કરેલી છબી",
@@ -2330,6 +2331,18 @@
     "reference": "સંદર્ભ અંદાજ",
     "referenceHint": "સંદર્ભ મૂલ્યો દ્વારા અંદાજ. વાસ્તવિક ફાળાના મૂલ્યો સેટિંગ્સમાં દાખલ કરી શકાય છે.",
     "referenceScope": "બધા મહિના સમાન સંદર્ભ મૂલ્યો વાપરે છે, ઐતિહાસિક વાસ્તવિક ચુકવણી નહીં."
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "ઘરે લઈ જવાનો અંદાજિત પગાર",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "અંદાજિત વાર્ષિક ચોખ્ખો પગાર (બોનસ સહિત) · પગાર પરથી અંદાજ",
+    "autoRatioEstimateVerified": "પગાર પરથી અંદાજ · ચકાસાયેલ",
+    "autoRatioEstimateReference": "પગાર પરથી અંદાજ · સંદર્ભ અંદાજ"
   },
   "taxUnified": {
     "run": "પગાર અને વાર્ષિક આવક ગણો",

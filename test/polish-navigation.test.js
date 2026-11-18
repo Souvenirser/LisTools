@@ -8,7 +8,7 @@ test('common joined tasks lead directly to their existing task or tool without d
 });
 test('exact names outrank generic related tools and old broad conversion searches remain available',()=>{
  assert.equal(searchNavigation('base64')[0].file,'convert.html#base64');assert.equal(searchNavigation('base64url')[0].file,'convert.html#base64url');
- assert.deepEqual(searchNavigation('编码 base64').map(item=>item.file),['convert.html#base64','convert.html#base64url']);
+ assert.deepEqual(searchNavigation('编码 base64').map(item=>item.file),['convert.html#base64-encode','convert.html#base64','convert.html#base64url']);
  assert.ok(searchNavigation('decode').some(item=>item.file==='convert.html#jwt'));
  assert.deepEqual(searchNavigation('no such task 987'),[]);
 });

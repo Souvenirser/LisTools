@@ -1641,6 +1641,7 @@
     },
     "files": {
       "fileActions": "Ayyukan fayil",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "A watsar da gyare-gyaren yankan hoton da ba a adana ba?",
       "imageInfo": "{{name}} · {{width}} × {{height}} px",
       "pastedImage": "Hoton da aka liƙa",
@@ -2330,6 +2331,18 @@
     "reference": "Kimantawar manuniya",
     "referenceHint": "Kimantawa da ƙimomin manuniya. Ana iya shigar da ainihin ƙimomin gudummawa a saituna.",
     "referenceScope": "Dukkan watanni suna amfani da manuniya ɗaya, ba ainihin biyan kuɗin baya ba."
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "Kiyasin albashin kai-gida",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "Kiyasin albashin da za a karɓa a shekara (tare da kuɗin kari) · Kiyasin daga albashi",
+    "autoRatioEstimateVerified": "Kiyasin daga albashi · Tabbatarwa",
+    "autoRatioEstimateReference": "Kiyasin daga albashi · Kimantawar manuniya"
   },
   "taxUnified": {
     "run": "Lissafa albashi da kuɗin shiga na shekara",

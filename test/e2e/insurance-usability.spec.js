@@ -41,7 +41,11 @@ test('CSV contains original amounts, bases, rates and the same condition snapsho
  expect(JSON.parse(summary.conditions)).toMatchObject({cityId:'beijing',month:'2026-11',rates:{housing:{employee:'0.07'}}});expect(summary.policyVersion).toBeTruthy();expect(rows.every(r=>r.conditions===summary.conditions&&r.policyVersion===summary.policyVersion)).toBe(true);
 });
 
-test('default payment month uses the device date rather than a hardcoded fixture',async({page})=>{await open(page,{fixtureMonth:false});await expect(tool(page).locator('#insurance-month')).toHaveValue('2026-12');});
+test('default payment month follows the Shanghai calendar across the UTC month boundary',async({page})=>{
+ await page.clock.setFixedTime(new Date('2026-11-30T16:00:00Z'));
+ await page.goto('/insurance.html');
+ await expect(tool(page).locator('#insurance-month')).toHaveValue('2026-12');
+});
 test('city label stays short while policy information is confined to details',async({page})=>{
  await open(page);const f=tool(page),label=f.locator('.insurance-picker .choices__list--single'),policy=f.locator('#insurance-policy-availability');await city(f);
  await expect(label).toHaveText('北京');await f.locator('#insurance-policy-details > summary').click();await expect(policy).toContainText('个人与单位可试算');

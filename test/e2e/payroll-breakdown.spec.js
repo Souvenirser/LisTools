@@ -16,7 +16,7 @@ async function downloadRows(page,f,id){
 }
 
 test('salary charts expose exact amounts, each contribution and its exported percentage',async({page})=>{
- const f=await open(page,'tax');await f.locator('#tax-period').fill('2026-11');await f.locator('#tax-salary').fill('20000');await f.locator('#tax-run').click();
+ const f=await open(page,'tax');const picker=f.locator('#tax-city-control');await picker.click();await picker.locator('input[type=search]').fill('Beijing');await picker.locator('[data-choice-selectable][data-value=beijing]').click();await f.locator('#tax-period').fill('2026-11');await f.locator('#tax-salary').fill('20000');await f.locator('#tax-run').click();
  const personal=card(f,'personal'),employer=card(f,'employer');
  await expect(personal).toHaveAttribute('aria-label','个人工资构成');await expect(employer).toHaveAttribute('aria-label','单位用工成本构成');
  await expect(personal.locator('.breakdown-total')).toHaveText('20,000.00');await expect(employer.locator('.breakdown-total')).toHaveText('27,700.00');
@@ -53,7 +53,7 @@ test('at 320px the RTL manual chart fits without horizontal scrolling or fabrica
 });
 
 test('in the bonus payment month the chart and CSV name both parts of gross income',async({page})=>{
- const f=await open(page,'tax');await f.locator('#tax-period').fill('2026-11');await f.locator('#tax-salary').fill('20000');
+ const f=await open(page,'tax');const picker=f.locator('#tax-city-control');await picker.click();await picker.locator('input[type=search]').fill('Beijing');await picker.locator('[data-choice-selectable][data-value=beijing]').click();await f.locator('#tax-period').fill('2026-11');await f.locator('#tax-salary').fill('20000');
  await f.locator('#tax-bonus-section>summary').click();await f.locator('#tax-bonus').fill('30000');await f.locator('#tax-bonusMonth').fill('11');
  await f.locator('#tax-run').click();const personal=card(f,'personal'),employer=card(f,'employer');
  const grossLabel='税前工资（元） + 年终奖';

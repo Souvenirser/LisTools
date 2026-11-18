@@ -29,11 +29,11 @@ WebKit 的 6 项跳过分别涉及 Chromium 专有跨文档／顶层退出增强
 
 ## 产物
 
-- 可加载目录：`/Users/lili02/.codex/worktrees/redesign-v2/LisTools/releases/popup-fold-candidate-20261104/LisTools-1.2.4-popup-fold-final`
-- Chrome ZIP：`/Users/lili02/.codex/worktrees/redesign-v2/LisTools/releases/popup-fold-candidate-20261104/LisTools-1.2.4-popup-fold-final.zip`
+- 可加载目录：`./releases/popup-fold-candidate-20261104/LisTools-1.2.4-popup-fold-final`
+- Chrome ZIP：`./releases/popup-fold-candidate-20261104/LisTools-1.2.4-popup-fold-final.zip`
 - SHA-256：`c4d3173f8aa0aa01c7def506b52b0eb049d32dcf6bce5557bb06f4497e85355f`
 - ZIP 大小：4768222 字节；文件数 506。
-- 源码快照：`/Users/lili02/.codex/worktrees/redesign-v2/LisTools/.superpowers/sdd/popup-fold-20261104/source`；源码逐文件哈希见 source-sha256.json。
+- 源码快照：`./.superpowers/sdd/popup-fold-20261104/source`；源码逐文件哈希见 source-sha256.json。
 - 依赖清单和锁文件与上一候选源码逐字节相同；历史包及原工作树修改保留。
 - 支持页仍按既有隔离构建规则排除；未关闭工作树中的真实资源校验。
 

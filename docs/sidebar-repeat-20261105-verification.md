@@ -14,7 +14,7 @@
 - 修改前：新增的 3 项 Chromium 用例全部按目标缺陷失败。
 - 修改后：新增 3 项通过。
 - `npm test`：退出码 0，371 项通过、0 失败。
-- 独立构建：`npx vite build --outDir /Users/lili02/.codex/worktrees/redesign-v2/LisTools/.superpowers/sdd/sidebar-20261105/dist`，退出码 0；有既有大分块体积提示。
+- 独立构建：`npx vite build --outDir ./.superpowers/sdd/sidebar-20261105/dist`，退出码 0；有既有大分块体积提示。
 - 构建资源上的 Chromium 回归：`sidebar-repeat`、`menu-expansion`、`menu-sorting`、`motion-polish`、`header-navigation-motion`、`popup-fold-motion` 六个文件，共 39 项通过、0 失败。
 - 最初在 Vite 开发服务上的 36 项回归中，35 项通过；慢页面用例拦截的是 `/assets/money-*.js`，开发服务不使用此构建路径，因此该用例失败。未修改测试规避；改用独立构建资源后该用例及全部相关回归通过。
 - 修复后快速反向折叠逐帧记录：分类行宽度为 243 CSS px、文字透明度保持 1，记录到 17 个不同的整数高度。高度仍连续过渡，没有用关闭动画代替修复。

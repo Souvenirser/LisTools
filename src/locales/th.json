@@ -1852,6 +1852,7 @@
     },
     "files": {
       "fileActions": "การดำเนินการกับไฟล์",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "ละทิ้งการปรับครอบตัดที่ยังไม่บันทึกหรือไม่",
       "imageInfo": "{{name}} · {{width}} × {{height}} พิกเซล",
       "pastedImage": "รูปภาพที่วาง",
@@ -2330,6 +2331,18 @@
     "reference": "ประมาณการอ้างอิง",
     "referenceHint": "คำนวณด้วยค่าอ้างอิง สามารถกรอกข้อมูลเงินสมทบจริงได้ในการตั้งค่า",
     "referenceScope": "ทุกเดือนใช้ค่าอ้างอิงชุดเดียวกัน ไม่ใช่ยอดชำระจริงในอดีต"
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "ประมาณการเงินเดือนกลับบ้าน",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "ประมาณการเงินรับสุทธิทั้งปี (รวมโบนัส) · ประมาณการจากเงินเดือน",
+    "autoRatioEstimateVerified": "ประมาณการจากเงินเดือน · ตรวจสอบแล้ว",
+    "autoRatioEstimateReference": "ประมาณการจากเงินเดือน · ประมาณการอ้างอิง"
   },
   "taxUnified": {
     "run": "คำนวณเงินเดือนและรายได้ทั้งปี",

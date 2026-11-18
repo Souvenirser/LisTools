@@ -1641,6 +1641,7 @@
     },
     "files": {
       "fileActions": "ফাইলের কাজ",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "সংরক্ষণ না করা ক্রপ সমন্বয় বাতিল করবেন?",
       "imageInfo": "{{name}} · {{width}} × {{height}} পিক্সেল",
       "pastedImage": "পেস্ট করা ছবি",
@@ -2330,6 +2331,18 @@
     "reference": "রেফারেন্স অনুমান",
     "referenceHint": "রেফারেন্স মান দিয়ে অনুমান। প্রয়োজনে সেটিংসে প্রকৃত অবদানের মান লিখুন।",
     "referenceScope": "সব মাসে একই রেফারেন্স মান ব্যবহার করা হয়, অতীতের প্রকৃত অর্থপ্রদান নয়।"
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "বাড়িতে নেওয়ার আনুমানিক বেতন",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "বছরে সম্ভাব্য হাতে পাওয়া বেতন (বোনাসসহ) · বেতন থেকে অনুমান",
+    "autoRatioEstimateVerified": "বেতন থেকে অনুমান · যাচাই করা হয়েছে",
+    "autoRatioEstimateReference": "বেতন থেকে অনুমান · রেফারেন্স অনুমান"
   },
   "taxUnified": {
     "run": "বেতন ও বার্ষিক আয় হিসাব করুন",

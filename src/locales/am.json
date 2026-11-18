@@ -1641,6 +1641,7 @@
     },
     "files": {
       "fileActions": "የፋይል ድርጊቶች",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "ያልተቀመጡ የመከርከሚያ ማስተካከያዎችን ይተዉ?",
       "imageInfo": "{{name}} · {{width}} × {{height}} ፒክስል",
       "pastedImage": "የተለጠፈ ምስል",
@@ -2330,6 +2331,18 @@
     "reference": "የማጣቀሻ ግምት",
     "referenceHint": "በማጣቀሻ መለኪያዎች የተሰላ ግምት። እውነተኛ የክፍያ መለኪያዎችን በቅንብሮች ያስገቡ።",
     "referenceScope": "ሁሉም ወራት ተመሳሳይ የማጣቀሻ መለኪያዎችን ይጠቀማሉ፤ ያለፉ እውነተኛ ክፍያዎች አይደሉም።"
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "የሚገመተው የቤት ውጣ ደሞዝ",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "የሚገመት ዓመታዊ የተጣራ ደመወዝ (ጉርሻን ጨምሮ) · ከደመወዝ ግምት",
+    "autoRatioEstimateVerified": "ከደመወዝ ግምት · የተረጋገጠ",
+    "autoRatioEstimateReference": "ከደመወዝ ግምት · የማጣቀሻ ግምት"
   },
   "taxUnified": {
     "run": "ደመወዝንና ዓመታዊ ገቢን አስላ",

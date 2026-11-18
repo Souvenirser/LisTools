@@ -1852,6 +1852,7 @@
     },
     "files": {
       "fileActions": "Filåtgärder",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "Kasta osparade beskärningsändringar?",
       "imageInfo": "{{name}} · {{width}} × {{height}} px",
       "pastedImage": "Inklistrad bild",
@@ -2330,6 +2331,18 @@
     "reference": "Vägledande uppskattning",
     "referenceHint": "Uppskattning med referensvärden. Faktiska avgiftsvärden kan anges i inställningarna.",
     "referenceScope": "Alla månader använder samma referensvärden, inte historiska betalningar."
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "Beräknad hemtagningslön",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "Beräknad årslön efter skatt (inklusive bonus) · Uppskattning från lön",
+    "autoRatioEstimateVerified": "Uppskattning från lön · Verifierad",
+    "autoRatioEstimateReference": "Uppskattning från lön · Vägledande uppskattning"
   },
   "taxUnified": {
     "run": "Beräkna lön och årsinkomst",

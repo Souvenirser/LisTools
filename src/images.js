@@ -14,11 +14,12 @@ initTool('images',`<section class="tool-card" id="images-drop"><h2 ${label('impo
 <section class="tool-card"><h2 ${label('queue')}></h2><ol id="images-queue" class="media-queue"></ol><button id="images-clear" ${label('clear')}></button></section>
 <section class="tool-card" id="images-crop-panel" hidden><h2 ${label('crop')}></h2><p id="images-crop-name"></p><p class="tool-note" ${label('cropNote')}></p><div id="images-crop-container" class="images-crop-container"></div><div class="tool-fields"><label class="field"><span ${label('ratio')}></span><select id="images-ratio"><option value="0" ${label('free')}></option><option value="1" ${label('square')}></option><option value="1.3333333333333333">4:3</option><option value="1.7777777777777777">16:9</option><option value="0.75">3:4</option><option value="0.5625">9:16</option></select></label></div><div class="tool-actions"><button id="images-rotate" ${label('rotate')}></button><button id="images-flip-h" ${label('flipH')}></button><button id="images-flip-v" ${label('flipV')}></button><button id="images-apply" ${label('applyCrop')}></button><button id="images-reset" ${label('resetCrop')}></button></div></section>
 <section class="tool-card" id="images-settings"><h2 ${label('settings')}></h2><div class="tool-fields">${numeric('images-width','width',0,0,16384)}${numeric('images-height','height',0,0,16384)}${numeric('images-scale','scale',100,1,400)}${numeric('images-quality','quality',80,1,100)}${numeric('images-target','target',0,0,102400)}<label class="field"><span ${label('format')}></span><select id="images-format"><option value="original" ${label('original')}></option><option value="image/jpeg">JPG</option><option value="image/png">PNG</option><option value="image/webp">WebP</option></select></label></div><label class="check-label"><input id="images-aspect" type="checkbox" checked><span ${label('aspect')}></span></label><label class="check-label"><input id="images-reduce" type="checkbox"><span ${label('allowReduce')}></span></label><p class="tool-note" ${label('jpegNotice')}></p><div class="tool-actions"><button id="images-run" class="primary" ${label('run')}></button><button id="images-cancel" ${label('cancel')}></button></div></section>
-<section class="tool-card" id="images-results" hidden><h2 ${label('results')}></h2><div id="images-output" class="images-output"></div><button id="images-zip" ${label('downloadZip')}></button></section>`);
+<section class="tool-card" id="images-results" hidden><h2 ${label('results')}></h2><p id="images-previous-result" class="tool-note tool-warning" role="status" hidden data-i18n="direct.files.previousResult"></p><div id="images-output" class="images-output"></div><button id="images-zip" ${label('downloadZip')}></button></section>`);
 let resultFailedCount=0;
 let nextFileId=0,importFailures=[],processFailures=[],cropGeneration=0;
 let files=[],results=[],cropper,selected,generation=0,importGeneration=0,importing=false,processing=false,outputUrls=[],previewFileId,cropDirty=false,imageTask='compress';
-function releaseResults(){for(const url of outputUrls)URL.revokeObjectURL(url);outputUrls=[];results=[];previewFileId=undefined;resultFailedCount=0;$('images-results').hidden=true;document.querySelector('.media-workspace')?.classList.remove('has-results');if($('images-queue-details'))$('images-queue-details').open=true;const summary=$('images-result-summary');if(summary)summary.hidden=true;$('images-output').replaceChildren();}
+function retainLastResult(){if(results.length)$('images-previous-result').hidden=false;}
+function releaseResults(){$('images-previous-result').hidden=true;for(const url of outputUrls)URL.revokeObjectURL(url);outputUrls=[];results=[];previewFileId=undefined;resultFailedCount=0;$('images-results').hidden=true;document.querySelector('.media-workspace')?.classList.remove('has-results');if($('images-queue-details'))$('images-queue-details').open=true;const summary=$('images-result-summary');if(summary)summary.hidden=true;$('images-output').replaceChildren();}
 function renderQueue(){
   const list=$('images-queue');list.replaceChildren();
   if(!files.length){const row=document.createElement('li');row.textContent=t('images.empty');list.append(row);}
@@ -81,7 +82,7 @@ async function addFiles(incoming){
   if(importing){setStatus('images.importing');return;}
   const list=Array.from(incoming);if(!list.length)return;
   const total=[...files.map(f=>f.blob),...list].reduce((n,f)=>n+f.size,0);
-  if(files.length+list.length>30||total>100*1024*1024){showError(mediaError('images.limit'));return;}
+  if(files.length+list.length>30||total>100*1024*1024){retainLastResult();showError(mediaError('images.limit'));return;}
   const token=++importGeneration;let accepted=0;importing=true;importFailures=[];setBusy(processing);
   try {
     for(const blob of list){
@@ -97,7 +98,10 @@ async function addFiles(incoming){
       renderQueue();
     }
     if(token!==importGeneration)return;
-    if(importFailures.length)setStatus('images.batchDone',{success:accepted,failed:importFailures.length});else clearStatus();
+    if(importFailures.length){
+      if(!accepted)retainLastResult();
+      setStatus('images.batchDone',{success:accepted,failed:importFailures.length});
+    }else clearStatus();
     if(accepted&&imageTask==='crop'&&!selected&&files.length)await openCrop(files[0]);
   }finally{if(token===importGeneration){importing=false;setBusy(processing);}}
 }

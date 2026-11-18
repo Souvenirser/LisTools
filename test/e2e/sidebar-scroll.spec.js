@@ -3,7 +3,7 @@ import {selectLanguage} from './language-helpers.js';
 
 async function fullMenu(page,language='zh-Hans'){
  await page.addInitScript(language=>{localStorage.setItem('listools-language',language);localStorage.setItem('listools-preferences-v1',JSON.stringify({theme:'dark',recent:['timer','draw','money','units','dates'],favorites:['json','diff','qr','text','pdf']}));localStorage.setItem('listools-menu-expanded-v1',JSON.stringify(['daily','files','developer','network']));},language);
- await page.goto('/timer.html');await expect(page.locator('#tool-menu.is-sidebar')).toBeVisible();
+ await page.goto('/timer.html');await page.locator('#global-search-open').click();await expect(page.locator('#tool-menu')).toBeVisible();
 }
 for(const {width,height,font,language} of [
  {width:1440,height:900,font:100,language:'zh-Hans'},
@@ -11,11 +11,11 @@ for(const {width,height,font,language} of [
  {width:1440,height:480,font:100,language:'en'},
  {width:1920,height:1080,font:200,language:'de'},
  {width:1366,height:600,font:100,language:'en'}
-])test(`expanded sidebar scrolls independently at ${width}x${height}, ${font}% text`,async({page})=>{
+])test(`expanded dropdown scrolls independently at ${width}x${height}, ${font}% text`,async({page})=>{
  await page.setViewportSize({width,height});await fullMenu(page,language);
  if(font!==100)await page.addStyleTag({content:`html{font-size:${font}%!important}`});
- const aside=page.locator('#workbench-navigation'),scroll=page.locator('#tool-menu .tool-menu-scroll');
- await expect.poll(()=>aside.evaluate(n=>n.getBoundingClientRect().bottom),{timeout:1500}).toBeLessThanOrEqual(height+1);
+ const dropdown=page.locator('#tool-menu'),scroll=page.locator('#tool-menu .tool-menu-scroll');
+ await expect.poll(()=>dropdown.evaluate(n=>n.getBoundingClientRect().bottom),{timeout:1500}).toBeLessThanOrEqual(height+1);
  expect(await scroll.evaluate(n=>n.scrollHeight-n.clientHeight)).toBeGreaterThan(100);
  const mainTop=await page.locator('main').evaluate(n=>n.scrollTop);await scroll.hover();await page.mouse.wheel(0,20000);
  await expect.poll(()=>scroll.evaluate(n=>n.scrollTop)).toBeGreaterThan(100);
@@ -34,13 +34,13 @@ test('settings remain scrollable at 200% text in a short mobile viewport',async(
 });
 
 test('resizing within the desktop layout preserves an active menu search',async({page})=>{
- await page.setViewportSize({width:1440,height:900});await fullMenu(page);await page.locator('#global-search-open').click();await page.locator('#tool-menu-search').fill('pdf');
+ await page.setViewportSize({width:1440,height:900});await fullMenu(page);await page.locator('#tool-menu-search').fill('pdf');
  await page.setViewportSize({width:1540,height:900});await expect(page.locator('#tool-menu-search')).toBeFocused({timeout:1500});await expect(page.locator('#tool-menu-search')).toHaveValue('pdf');await expect(page.locator('#tool-menu nav a[data-target="pdf.html"]')).toBeVisible();
 });
 
 test('a storage write failure does not undo theme or favorites in the current page',async({page})=>{
  await page.setViewportSize({width:1440,height:900});await page.addInitScript(()=>{localStorage.setItem('listools-menu-expanded-v1',JSON.stringify(['daily']));const write=Storage.prototype.setItem;Storage.prototype.setItem=function(key,value){if(key==='listools-preferences-v1')throw Error('quota exceeded');return write.call(this,key,value);};});
- await page.goto('/money.html');await page.locator('#settings-open').click();await page.locator('#theme-preference').selectOption('dark');await page.locator('#settings-close').click();await page.locator('#tool-menu nav [data-favorite="money"]').click();
+ await page.goto('/money.html');await page.locator('#settings-open').click();await page.locator('#theme-preference').selectOption('dark');await page.locator('#settings-close').click();await page.locator('#global-search-open').click();await page.locator('#tool-menu nav [data-favorite="money"]').click();
  await expect(page.locator('#tool-menu nav [data-favorite="money"]')).toHaveAttribute('aria-pressed','true');await expect(page.locator('html')).toHaveAttribute('data-theme','dark');await expect(page.locator('.tool-menu-saved a[data-tool-id="money"]')).toHaveCount(1);
 });
 
@@ -49,7 +49,7 @@ test('Escape closes an open language dropdown before closing settings',async({pa
  await expect(dialog).toBeVisible({timeout:1500});await expect(choice).toHaveAttribute('aria-expanded','false');await expect(choice).toBeFocused();await page.keyboard.press('Escape');await expect(dialog).toBeHidden();await expect(page.locator('#settings-open')).toBeFocused();
 });
 
-test('an active sidebar search stays visible when entering compact desktop layout',async({page})=>{
- await page.setViewportSize({width:1440,height:900});await fullMenu(page);await page.locator('#global-search-open').click();await page.locator('#tool-menu-search').fill('pdf');await page.setViewportSize({width:1366,height:900});
+test('an active search stays visible across the previous desktop breakpoint',async({page})=>{
+ await page.setViewportSize({width:1440,height:900});await fullMenu(page);await page.locator('#tool-menu-search').fill('pdf');await page.setViewportSize({width:1199,height:900});
  await expect(page.locator('#tool-menu-search')).toBeVisible({timeout:1500});await expect(page.locator('#tool-menu-search')).toBeFocused();await expect(page.locator('#tool-menu-search')).toHaveValue('pdf');
 });

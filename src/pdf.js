@@ -11,7 +11,7 @@ const modes=['merge','split','extract','reorder','delete','rotate','images'];
 initTool('pdf',`<section class="tool-card" id="pdf-drop"><h2 ${label('import')}></h2><label class="media-drop" for="pdf-files" ${label('drop')}></label><input id="pdf-files" type="file" multiple accept="application/pdf,image/jpeg,image/png,image/webp" aria-labelledby="pdf-drop"><p class="tool-note" ${label('limits')}></p></section>
 <section class="tool-card"><div class="tool-fields"><label class="field"><span ${label('mode')}></span><select id="pdf-mode">${modes.map(m=>`<option value="${m}" ${label(m)}></option>`).join('')}</select></label></div><h2 ${label('queue')}></h2><ol id="pdf-queue" class="media-queue"></ol><div class="tool-actions"><button id="pdf-sort" ${label('sort')}></button><button id="pdf-clear" ${label('clear')}></button><button id="pdf-inspect" ${label('inspect')}></button></div></section>
 <section class="tool-card"><div class="tool-fields"><label class="field" id="pdf-pages-field"><span ${label('pages')}></span><input id="pdf-pages" dir="ltr" placeholder="1-3,5" value="1"><span class="tool-note" ${label('rangeHelp')}></span></label><label class="field" id="pdf-rotation-field"><span ${label('rotation')}></span><select id="pdf-rotation" dir="ltr"><option value="90">90°</option><option value="180">180°</option><option value="270">270°</option></select></label><label class="field" id="pdf-size-field"><span ${label('pageSize')}></span><select id="pdf-page-size"><option value="a4" ${label('a4')}></option><option value="original" ${label('original')}></option></select></label><label class="field" id="pdf-orientation-field"><span ${label('orientation')}></span><select id="pdf-orientation"><option value="portrait" ${label('portrait')}></option><option value="landscape" ${label('landscape')}></option></select></label></div><p class="tool-note" ${label('preservation')}></p><div class="tool-actions"><button id="pdf-run" class="primary" ${label('run')}></button><button id="pdf-cancel" ${label('cancel')}></button></div></section>
-<section class="tool-card" id="pdf-result" hidden><h2 ${label('output')}></h2><p id="pdf-output-info"></p><p id="pdf-output-order" class="tool-output" dir="ltr"></p><button id="pdf-download" ${label('download')}></button></section>`);
+<section class="tool-card" id="pdf-result" hidden><h2 ${label('output')}></h2><p id="pdf-previous-result" class="tool-note tool-warning" role="status" hidden data-i18n="direct.files.previousResult"></p><p id="pdf-output-info"></p><p id="pdf-output-order" class="tool-output" dir="ltr"></p><button id="pdf-download" ${label('download')}></button></section>`);
 let files=[],result,generation=0,busy=false,importing=false,importGeneration=0,nextFileId=0,activeFileId,processingFiles=[],importFailures=[];
 addEventListener('pagehide',()=>{generation++;importGeneration++;importing=false;setBusy(false);});
 const singleMode=()=>['split','extract','reorder','delete','rotate'].includes($('pdf-mode').value);
@@ -44,11 +44,12 @@ const runner=taskRunner(()=>new Worker(new URL('./tools/pdf/worker.js',import.me
   timeoutMs:120000,onState:state=>{setBusy(state.status==='pending');if(state.status==='error'&&['pdf.rangeError','pdf.completeOrder','pdf.empty'].includes(state.code))showError(state,{field:'pdf-pages',focus:true});},onEvent:event=>setStatus('pdf.progress',event),
   onResult:state=>{const value=state.result;for(const [index,info] of (value.files||value.sourceFiles||[]).entries()){if(files.includes(processingFiles[index]))processingFiles[index].pageCount=info.pageCount;}renderQueue();if(value.files)setStatus('pdf.inspected',{count:value.pageCount});else{result=value;renderResult();setStatus('pdf.done',{count:value.pageCount});}}
 });
-function invalidate(){generation++;runner.invalidate();result=undefined;renderResult();}
+function retainLastResult(){if(result)$('pdf-previous-result').hidden=false;}
+function invalidate(){generation++;runner.invalidate();result=undefined;$('pdf-previous-result').hidden=true;renderResult();}
 async function addFiles(incoming){
   if(importing){setStatus('diff.reading');return;}
   const list=Array.from(incoming);if(!list.length)return;
-  if(list.length+files.length>100||list.reduce((n,file)=>n+file.size,0)+files.reduce((n,file)=>n+file.size,0)>100*1024*1024){showError(mediaError('pdf.limit'));return;}
+  if(list.length+files.length>100||list.reduce((n,file)=>n+file.size,0)+files.reduce((n,file)=>n+file.size,0)>100*1024*1024){retainLastResult();showError(mediaError('pdf.limit'));return;}
   const token=++importGeneration,mode=$('pdf-mode').value;importing=true;setBusy(busy);const accepted=[],rejected=[];
   try{
     for(const blob of list){
@@ -62,7 +63,7 @@ async function addFiles(incoming){
     }
     if(token!==importGeneration)return;
     importFailures=rejected;renderImportErrors();
-    if(!accepted.length)return;
+    if(!accepted.length){retainLastResult();return;}
     if(files.length+accepted.length>100||files.reduce((n,f)=>n+f.size,0)+accepted.reduce((n,f)=>n+f.size,0)>100*1024*1024){showError(mediaError('pdf.limit'));return;}
     invalidate();files.push(...accepted.map(blob=>({id:++nextFileId,blob,name:blob.name,size:blob.size})));renderQueue();
   }finally{if(token===importGeneration){importing=false;setBusy(busy);if(!busy&&!$('tool-status').classList.contains('is-error'))clearStatus();}}

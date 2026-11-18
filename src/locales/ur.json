@@ -1852,6 +1852,7 @@
     },
     "files": {
       "fileActions": "فائل کے اعمال",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "تراشنے کی غیر محفوظ شدہ تبدیلیاں ترک کریں؟",
       "imageInfo": "{{name}} · {{width}} × {{height}} پکسل",
       "pastedImage": "چسپاں کردہ تصویر",
@@ -2330,6 +2331,18 @@
     "reference": "حوالہ جاتی تخمینہ",
     "referenceHint": "حوالہ جاتی اقدار سے تخمینہ۔ اصل ادائیگی کی اقدار ترتیبات میں درج کی جا سکتی ہیں۔",
     "referenceScope": "تمام مہینوں میں ایک ہی حوالہ جاتی اقدار ہیں، تاریخی اصل ادائیگیاں نہیں۔"
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "گھر لے جانے کی تخمینی تنخواہ",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "تخمینی سالانہ خالص تنخواہ (بونس سمیت) · تنخواہ سے اندازہ لگائیں۔",
+    "autoRatioEstimateVerified": "تنخواہ سے اندازہ لگائیں۔ · تصدیق شدہ",
+    "autoRatioEstimateReference": "تنخواہ سے اندازہ لگائیں۔ · حوالہ جاتی تخمینہ"
   },
   "taxUnified": {
     "run": "تنخواہ اور سالانہ آمدنی کا حساب لگائیں",

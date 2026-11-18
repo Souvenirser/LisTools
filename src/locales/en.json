@@ -1641,6 +1641,7 @@
     },
     "files": {
       "fileActions": "File actions",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "Discard the unsaved crop adjustments?",
       "imageInfo": "{{name}} · {{width}} × {{height}} px",
       "pastedImage": "Pasted image",
@@ -2330,6 +2331,18 @@
     "reference": "Reference estimate",
     "referenceHint": "Estimated using reference parameters. Enter actual payment parameters in settings if needed.",
     "referenceScope": "All months use the same reference snapshot, not historical payments."
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "Monthly wage take-home",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "Estimated annual take-home",
+    "autoRatioEstimateVerified": "Estimated contribution rates · verified policy data",
+    "autoRatioEstimateReference": "Estimated contribution rates · reference data"
   },
   "taxUnified": {
     "run": "Calculate pay and annual income",

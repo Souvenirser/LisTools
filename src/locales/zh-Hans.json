@@ -1641,6 +1641,7 @@
     },
     "files": {
       "fileActions": "文件操作",
+      "previousResult": "保留的下载对应上一次输入。",
       "discardCrop": "放弃尚未保存的裁剪调整？",
       "imageInfo": "{{name}} · {{width}} × {{height}} 像素",
       "pastedImage": "粘贴的图片",
@@ -2330,6 +2331,18 @@
     "reference": "参考试算",
     "referenceHint": "按参考参数试算，可在设置中填写实际缴费参数。",
     "referenceScope": "各月使用同一参考参数快照，不代表历史实际缴费。"
+  },
+  "taxFinance": {
+    "monthHistory": "当月收入状态",
+    "confirmedActual": "已确认实际工资",
+    "confirmedNoIncome": "已确认当月无工资收入",
+    "refundRequirements": "纳税年度结束后，须确认全部 12 个月的工资收入情况，并填写实际工资预扣税及适用的奖金预扣税，才会估算退补税。未预扣时填 0。",
+    "noIncomeConflict": "确认无工资收入的月份，工资、个人缴费和应税调整须为 0。",
+    "wageNet": "当月工资到手",
+    "monthNetWithBonus": "当月到手（含奖金）",
+    "annualNetEstimate": "年度到手估算",
+    "autoRatioEstimateVerified": "自动比例估算 · 已核验政策数据",
+    "autoRatioEstimateReference": "自动比例估算 · 参考数据"
   },
   "taxUnified": {
     "run": "计算工资与全年收入",

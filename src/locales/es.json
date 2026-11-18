@@ -1641,6 +1641,7 @@
     },
     "files": {
       "fileActions": "Acciones de archivo",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "¿Descartar los ajustes de recorte sin guardar?",
       "imageInfo": "{{name}} · {{width}} × {{height}} px",
       "pastedImage": "Imagen pegada",
@@ -2330,6 +2331,18 @@
     "reference": "Estimación de referencia",
     "referenceHint": "Estimación con parámetros de referencia. Introduce los parámetros reales en los ajustes.",
     "referenceScope": "Todos los meses usan los mismos parámetros de referencia, no pagos históricos."
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "Salario neto estimado",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "Sueldo neto anual estimado (con bono) · estimación del salario",
+    "autoRatioEstimateVerified": "estimación del salario · Verificado",
+    "autoRatioEstimateReference": "estimación del salario · Estimación de referencia"
   },
   "taxUnified": {
     "run": "Calcular el sueldo y los ingresos anuales",

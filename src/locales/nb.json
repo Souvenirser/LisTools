@@ -1852,6 +1852,7 @@
     },
     "files": {
       "fileActions": "Filhandlinger",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "Forkaste ulagrede beskjæringsjusteringer?",
       "pastedImage": "Innlimt bilde",
       "lineDedupeHelp": "Sammenligner hver fullstendige linje nøyaktig, inkludert mellomrom og store/små bokstaver. Beholder første forekomst.",
@@ -2330,6 +2331,18 @@
     "reference": "Veiledende anslag",
     "referenceHint": "Anslag med referanseverdier. Faktiske bidragsverdier kan angis i innstillingene.",
     "referenceScope": "Alle måneder bruker de samme referanseverdiene, ikke historiske betalinger."
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "Beregnet hjemtakslønn",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "Anslått årlig nettolønn (inkludert bonus) · Estimat fra lønn",
+    "autoRatioEstimateVerified": "Estimat fra lønn · Verifisert",
+    "autoRatioEstimateReference": "Estimat fra lønn · Veiledende anslag"
   },
   "taxUnified": {
     "run": "Beregn lønn og årsinntekt",

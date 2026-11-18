@@ -1852,6 +1852,7 @@
     },
     "files": {
       "fileActions": "Izenzo zefayela",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "Lahla izinguquko zokusika ezingalondoloziwe?",
       "imageInfo": "{{name}} · {{width}} × {{height}} amaphikseli",
       "pastedImage": "Isithombe esinamathiselwe",
@@ -2330,6 +2331,18 @@
     "reference": "Isilinganiso esiyinkomba",
     "referenceHint": "Isilinganiso sisebenzisa amanani ayinkomba. Faka amanani angempela eminikelo kuzilungiselelo uma kudingeka.",
     "referenceScope": "Zonke izinyanga zisebenzisa amanani ayinkomba afanayo, hhayi izinkokhelo zangaphambilini."
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "Iholo elilinganiselwe lokuyisa ekhaya",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "Umholo wonyaka olinganisiwe osalayo ngemva kokudonswa (kuhlanganise nebhonasi) · Linganisa kusuka emholweni",
+    "autoRatioEstimateVerified": "Linganisa kusuka emholweni · Kuqinisekisiwe",
+    "autoRatioEstimateReference": "Linganisa kusuka emholweni · Isilinganiso esiyinkomba"
   },
   "taxUnified": {
     "run": "Bala umholo nemali engenayo yonyaka",

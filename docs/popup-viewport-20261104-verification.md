@@ -34,11 +34,11 @@ Chrome 官方说明弹窗有最大尺寸限制：[chrome.action 文档](https://
 ## 产物
 
 - 版本沿用1.2.4，独立候选目录，保留上一包。
-- ZIP：`/Users/lili02/.codex/worktrees/redesign-v2/LisTools/releases/popup-bottom-candidate-20261104/LisTools-1.2.4-popup-bottom-fixed.zip`
-- 可加载目录：`/Users/lili02/.codex/worktrees/redesign-v2/LisTools/releases/popup-bottom-candidate-20261104/LisTools-1.2.4-popup-bottom-fixed`
+- ZIP：`./releases/popup-bottom-candidate-20261104/LisTools-1.2.4-popup-bottom-fixed.zip`
+- 可加载目录：`./releases/popup-bottom-candidate-20261104/LisTools-1.2.4-popup-bottom-fixed`
 - SHA-256：`6fcec4164353dc56a5951ca7de62f9364828d1d3f44e10f8fceb5bb3d2bad330`
 - 4768368字节，506个文件。
-- 隔离源码快照：`/Users/lili02/.codex/worktrees/redesign-v2/LisTools/.superpowers/sdd/popup-viewport-20261104/source`，本轮修改文件哈希见source-sha256.json。
+- 隔离源码快照：`./.superpowers/sdd/popup-viewport-20261104/source`，本轮修改文件哈希见source-sha256.json。
 - 支持页仍按既有隔离规则排除；工作树的真实资源检查没有关闭。
 
 ## 验证边界

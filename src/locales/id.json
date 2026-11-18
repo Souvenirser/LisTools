@@ -1852,6 +1852,7 @@
     },
     "files": {
       "fileActions": "Tindakan berkas",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "Buang penyesuaian pemotongan yang belum disimpan?",
       "pastedImage": "Gambar yang ditempel",
       "lineDedupeHelp": "Mencocokkan setiap baris lengkap secara persis, termasuk spasi dan besar kecil huruf. Mempertahankan kemunculan pertama.",
@@ -2330,6 +2331,18 @@
     "reference": "Perkiraan acuan",
     "referenceHint": "Perkiraan memakai parameter acuan. Parameter iuran aktual dapat diisi di pengaturan.",
     "referenceScope": "Semua bulan memakai parameter acuan yang sama, bukan pembayaran historis."
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "Perkiraan gaji untuk dibawa pulang",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "Perkiraan gaji bersih tahunan (termasuk bonus) · Perkiraan dari gaji",
+    "autoRatioEstimateVerified": "Perkiraan dari gaji · Terverifikasi",
+    "autoRatioEstimateReference": "Perkiraan dari gaji · Perkiraan acuan"
   },
   "taxUnified": {
     "run": "Hitung gaji dan pendapatan tahunan",

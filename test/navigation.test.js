@@ -20,7 +20,7 @@ test('search directly opens conversion subtools and deduplicates MD5 routes', ()
 });
 test('search combines bilingual category names, aliases and localized labels', () => {
   assert.equal(typeof navigation.searchNavigation, 'function');
-  assert.deepEqual(navigation.searchNavigation('编码 base64').map(item=>item.file), ['convert.html#base64','convert.html#base64url']);
+  assert.deepEqual(navigation.searchNavigation('编码 base64').map(item=>item.file), ['convert.html#base64-encode','convert.html#base64','convert.html#base64url']);
   assert.ok(navigation.searchNavigation('decode').some(item=>item.file==='convert.html#jwt'));
   assert.deepEqual(navigation.searchNavigation('crontab').map(item=>item.file), ['cron.html']);
   assert.deepEqual(navigation.searchNavigation('horloge',key=>key==='timestamp.name'?'Horloge':'').map(item=>item.file), ['timestamp.html']);
@@ -43,7 +43,7 @@ test('current target distinguishes conversion tools and normalizes fallback hash
 });
 
 test('ordinary task search prefers text tasks and preserves every advanced conversion',()=>{
- assert.deepEqual(navigation.toolGroups.map(group=>group.id),['daily','files','developer','network']);
+ assert.deepEqual(navigation.toolGroups.map(group=>group.id),['developer','daily','files','network']);
  assert.equal(navigation.pages.find(page=>page.id==='password').group,'network');
  for(const [query,task]of [['去重','dedupe'],['大小写','case'],['换行','newline']]){
   const matches=navigation.searchNavigation(query);assert.equal(matches[0].file,`text.html#${task}`);
@@ -62,4 +62,15 @@ test('task aliases stay inside their parent tool',()=>{
   assert.ok(!files.includes('pdf.html#extract'),query+' must not match PDF page extraction');
  }
  assert.ok(navigation.searchNavigation('PDF 提取').some(item=>item.file==='pdf.html#extract'));
+});
+
+test('qualified PDF tasks and exact Base64 decode presets rank before their parent tools',()=>{
+ for(const query of ['PDF 拆分','PDF拆分','拆分 PDF','拆分PDF','split pdf']){
+  assert.equal(navigation.searchNavigation(query)[0]?.file,'pdf.html#split',query);
+ }
+ assert.equal(navigation.searchNavigation('PDF')[0]?.file,'pdf.html');
+ for(const query of ['解码 Base64','Base64 解码','解碼Base64','Base64解碼','decode base64','Base64 decode']){
+  assert.equal(navigation.searchNavigation(query)[0]?.file,'convert.html#base64-decode',query);
+ }
+ assert.equal(navigation.searchNavigation('解码 Base64URL')[0]?.file,'convert.html#base64url-decode');
 });

@@ -1852,6 +1852,7 @@
     },
     "files": {
       "fileActions": "கோப்புச் செயல்கள்",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "சேமிக்காத செதுக்கல் மாற்றங்களை கைவிடவா?",
       "imageInfo": "{{name}} · {{width}} × {{height}} பிக்சல்கள்",
       "pastedImage": "ஒட்டப்பட்ட படம்",
@@ -2330,6 +2331,18 @@
     "reference": "குறிப்பு மதிப்பீடு",
     "referenceHint": "குறிப்பு மதிப்புகளால் கணக்கிடப்படுகிறது. உண்மையான பங்களிப்பு மதிப்புகளை அமைப்புகளில் உள்ளிடலாம்.",
     "referenceScope": "எல்லா மாதங்களும் ஒரே குறிப்பு மதிப்புகளைப் பயன்படுத்தும்; கடந்தகால உண்மையான செலுத்தல்கள் அல்ல."
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "மதிப்பிடப்பட்ட வீட்டிற்கு எடுத்துச் செல்லும் சம்பளம்",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "மதிப்பிடப்பட்ட ஆண்டு நிகரச் சம்பளம் (போனஸ் உட்பட) · சம்பளத்திலிருந்து மதிப்பீடு",
+    "autoRatioEstimateVerified": "சம்பளத்திலிருந்து மதிப்பீடு · சரிபார்க்கப்பட்டது",
+    "autoRatioEstimateReference": "சம்பளத்திலிருந்து மதிப்பீடு · குறிப்பு மதிப்பீடு"
   },
   "taxUnified": {
     "run": "சம்பளத்தையும் ஆண்டு வருமானத்தையும் கணக்கிடு",

@@ -1852,6 +1852,7 @@
     },
     "files": {
       "fileActions": "檔案操作",
+      "previousResult": "保留的下載對應上一次輸入。",
       "discardCrop": "放棄尚未儲存的裁切調整？",
       "imageInfo": "{{name}} · {{width}} × {{height}} 像素",
       "pastedImage": "貼上的圖片",
@@ -2330,6 +2331,18 @@
     "reference": "參考試算",
     "referenceHint": "依參考參數試算，可在設定中填寫實際繳費參數。",
     "referenceScope": "各月使用同一參考參數快照，不代表歷史實際繳費。"
+  },
+  "taxFinance": {
+    "monthHistory": "當月收入狀態",
+    "confirmedActual": "已確認實際薪資",
+    "confirmedNoIncome": "已確認當月無薪資收入",
+    "refundRequirements": "納稅年度結束後，須確認全部 12 個月的薪資收入情況，並填寫實際薪資預扣稅及適用的獎金預扣稅，才會估算退補稅。未預扣時填 0。",
+    "noIncomeConflict": "確認無薪資收入的月份，薪資、個人繳費和應稅調整須為 0。",
+    "wageNet": "當月薪資實領",
+    "monthNetWithBonus": "當月實領（含獎金）",
+    "annualNetEstimate": "年度實領估算",
+    "autoRatioEstimateVerified": "自動比率估算 · 已核驗政策資料",
+    "autoRatioEstimateReference": "自動比率估算 · 參考資料"
   },
   "taxUnified": {
     "run": "計算工資與全年收入",

@@ -1852,6 +1852,7 @@
     },
     "files": {
       "fileActions": "ගොනු ක්‍රියා",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "සුරැකූ නැති කැපීම් වෙනස්කම් අත්හරින්නද?",
       "imageInfo": "{{name}} · {{width}} × {{height}} පික්සල",
       "pastedImage": "අලවන ලද රූපය",
@@ -2330,6 +2331,18 @@
     "reference": "යොමු ඇස්තමේන්තුව",
     "referenceHint": "යොමු අගයන් අනුව ඇස්තමේන්තුවකි. සැබෑ දායක අගයන් සැකසුම්වල ඇතුළත් කළ හැක.",
     "referenceScope": "සියලු මාස එකම යොමු අගයන් භාවිතා කරයි; අතීත සැබෑ ගෙවීම් නොවේ."
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "ඇස්තමේන්තුගත රැගෙන යාමේ වැටුප",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "ඇස්තමේන්තුගත වාර්ෂික ශුද්ධ වැටුප (ප්‍රසාද දීමනාව ඇතුළුව) · වැටුපෙන් ඇස්තමේන්තු කරන්න",
+    "autoRatioEstimateVerified": "වැටුපෙන් ඇස්තමේන්තු කරන්න · තහවුරු කර ඇත",
+    "autoRatioEstimateReference": "වැටුපෙන් ඇස්තමේන්තු කරන්න · යොමු ඇස්තමේන්තුව"
   },
   "taxUnified": {
     "run": "වැටුප සහ වාර්ෂික ආදායම ගණනය කරන්න",

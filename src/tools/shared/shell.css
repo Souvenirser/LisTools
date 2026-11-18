@@ -24,16 +24,13 @@ html.dark .jse-main{color:var(--text)}
 [dir=rtl] #workbench-settings{margin-inline:12px auto}#workbench-settings::backdrop{background:#0005}
 .settings-heading{position:sticky;top:-24px;z-index:2;background:var(--surface);display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px}.settings-heading h2{font-size:1.25rem;margin:0}
 #workbench-settings .field{display:flex;flex-direction:column;gap:8px;margin-block:24px}#workbench-settings select{min-height:44px;padding:8px;border:1px solid var(--border);border-radius:6px;font:inherit}#settings-language .language-control{flex-direction:column;align-items:stretch;gap:8px}#settings-language .choices{width:100%;margin:0}
-#workbench-navigation{min-width:0;min-height:0;position:relative;border-inline-end:1px solid var(--border);background:var(--surface)}
-.workbench-shell #tool-menu.is-sidebar{display:flex;position:relative;inset:auto;width:100%;max-width:none;height:100%;max-height:100%;border:0;border-radius:0;box-shadow:none}
 .tool-menu-scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain}.tool-menu-scroll>.tool-menu-list{overflow:visible;padding:6px}.tool-menu-saved{padding:6px}.tool-menu-saved section+section{margin-top:12px}.tool-menu-saved h3{font-size:.875rem;font-weight:600;color:var(--muted);margin:8px 10px}.tool-menu-saved p{font-size:.875rem;color:var(--muted);padding:0 10px;margin:8px 0}.tool-menu-item,.tool-menu-quick-row{display:flex;align-items:center;min-width:0}.tool-menu-item>a,.tool-menu-quick-row>a{flex:1;min-width:0}.tool-menu-favorite{flex:0 0 32px;width:32px;height:36px;min-height:36px;padding:6px;border:0;background:transparent;color:var(--muted);border-radius:6px;cursor:pointer}.tool-menu-favorite[aria-pressed=true]{color:var(--amber-11)}.tool-menu-favorite svg{width:18px;height:18px}.tool-menu-saved[hidden]{display:none}
-#tool-menu.is-sidebar .tool-menu-hint{display:none}.tool-menu.is-sorting .tool-menu-saved{display:none}
-@media(min-width:1200px){.workbench-shell .app-layout{display:grid;grid-template-columns:256px minmax(0,1fr)}}
+.tool-menu.is-sorting .tool-menu-saved{display:none}
+.workspace-focused.workbench-shell .app-layout{display:block}
 @container(max-width:999px){.workbench-shell .workspace,.workbench-shell .editor-workspace,.workbench-shell.qr-page .tool-grid{grid-template-columns:minmax(0,1fr)}.workbench-shell .workspace>.panel+.panel,.workbench-shell .editor-workspace>.tool-card+.tool-card{border-inline-start:0;border-top:1px solid var(--border)}}
 @container(max-width:1199px){.media-workspace{grid-template-columns:minmax(0,1fr)}}
 .workbench-shell[data-layout=form] #tool-root{max-width:1040px}.workbench-shell .tool-card,.workbench-shell .workspace,.workbench-shell .panel{border-radius:var(--card-radius)}
 .workbench-shell #workspace-focus{position:static;align-self:start}.workbench-shell .tool-heading.has-workspace-focus{display:flex;flex-wrap:wrap;align-items:start;gap:8px 16px}.workbench-shell .tool-heading.has-workspace-focus>h1{flex:1 1 auto}.workbench-shell .tool-heading.has-workspace-focus>p{flex:1 1 100%;order:2;margin:0}
-.workspace-focused.workbench-shell .app-layout{display:block}.workspace-focused #workbench-navigation{display:none}
 @media (min-width:761px) and (pointer:fine){.workbench-shell main button.quiet,.workbench-shell main .panel-heading button,.workbench-shell main .output-actions button,.tool-menu-order-controls button{min-height:36px;height:auto;padding-block:6px}.workbench-shell .toolbar button:not(.primary){min-height:36px}.tool-menu-search input{min-height:40px}}
 @media(max-width:760px){.workbench-shell .app-header{flex-wrap:nowrap;padding:12px 16px;gap:10px}.header-search{max-width:44px;min-width:44px;justify-content:center;padding:10px}.header-search>span,.header-search>kbd{display:none}.header-settings{min-height:44px}.tool-menu-favorite{min-height:44px;flex-basis:40px;width:40px}.workbench-shell main .tool-card{padding:16px}}
 
@@ -76,11 +73,8 @@ html.dark .brand-mark{background:var(--accent)}
 .header-settings{display:inline-flex;align-items:center;justify-content:center;gap:8px}.header-settings svg{flex-shrink:0}.popup-header .header-settings{margin-inline-start:auto}.popup-header .header-settings .settings-caption{display:none}
 @media(max-width:600px){.workbench-shell .header-settings .settings-caption{display:none}}
 
-#tool-menu.is-sidebar:not(.is-searching):not(.is-sorting) .tool-menu-search{display:none}
 .tool-menu:not(.is-sorting) .tool-menu-order-controls{padding:0;border:0;gap:0}.tool-menu:not(.is-sorting) #menu-edit{display:none}.tool-menu:not(.is-sorting) #menu-sort-status:not(:empty){padding:8px 12px}
 
 /* Empty results do not present unusable export controls. */
 .workbench-shell button[data-copy]:disabled,.workbench-shell button[data-copy-all]:disabled,.workbench-shell #regex-copy:disabled,.workbench-shell #regex-download:disabled,.workbench-shell #regex-json:disabled,.workbench-shell #regex-use-result:disabled,.workbench-shell #text-copy:disabled,.workbench-shell #text-download:disabled,.workbench-shell #text-use:disabled,.workbench-shell #qr-png:disabled,.workbench-shell #qr-svg:disabled,.workbench-shell #qr-copy:disabled{display:none}
 .calculator-page .calculator-display #copy:disabled{visibility:hidden}
-/* Fixed tool actions reserve main-content space without shortening the desktop navigation. */
-@media(min-width:1200px){.workbench-shell .app-layout{grid-template-rows:minmax(0,1fr)}.workbench-shell #workbench-navigation{height:calc(100dvh - var(--app-header-height));align-self:start}}

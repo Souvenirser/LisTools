@@ -1,11 +1,11 @@
 import {test,expect} from '@playwright/test';
 async function setup(page,theme='dark'){
  await page.setViewportSize({width:1440,height:900});
- await page.addInitScript(theme=>{localStorage.setItem('listools-language','zh-Hans');localStorage.setItem('listools-preferences-v1',JSON.stringify({theme}));window.startFrames=[];let last='';const end=performance.now()+1500;function record(){const m=document.querySelector('main'),h=document.querySelector('h1'),b=document.getElementById('format');if(m&&h&&getComputedStyle(m).visibility!=='hidden'&&getComputedStyle(document.body).visibility!=='hidden'&&h.textContent){const v={title:h.textContent,button:b?.textContent,x:m.getBoundingClientRect().x};const s=JSON.stringify(v);if(s!==last){startFrames.push(v);last=s;}}if(performance.now()<end)requestAnimationFrame(record);}requestAnimationFrame(record);},theme);
+ await page.addInitScript(theme=>{localStorage.setItem('listools-language','zh-Hans');localStorage.setItem('listools-preferences-v1',JSON.stringify({theme}));window.startFrames=[];let last='';const end=performance.now()+1500;function record(){const m=document.querySelector('main'),h=document.querySelector('h1'),b=document.getElementById('format');if(window.frameElement?.hasAttribute('data-workspace-active')&&m&&h&&getComputedStyle(m).visibility!=='hidden'&&getComputedStyle(document.body).visibility!=='hidden'&&h.textContent){const v={title:h.textContent,button:b?.textContent,x:m.getBoundingClientRect().x};const s=JSON.stringify(v);if(s!==last){startFrames.push(v);last=s;}}if(performance.now()<end)requestAnimationFrame(record);}requestAnimationFrame(record);},theme);
 }
-test('first visible JSON frame already has final text and sidebar geometry',async({page})=>{
- await setup(page);await page.goto('/index.html');await page.locator('#source .cm-content').waitFor();await page.waitForTimeout(200);
- const frames=await page.evaluate(()=>window.startFrames);expect(frames.length).toBeGreaterThan(0);for(const frame of frames){expect(frame.title).toBe('JSON 解析与格式化');expect(frame.button).toBe('格式化');expect(frame.x).toBe(256);}
+test('first visible JSON frame already has final text and full-width workspace geometry',async({page})=>{
+ await setup(page);await page.goto('/index.html');const pane=page.frameLocator('iframe[data-workspace-active]');await pane.locator('#source .cm-content').waitFor();await page.waitForTimeout(200);
+ const frames=await pane.locator('body').evaluate(()=>window.startFrames);expect(frames.length).toBeGreaterThan(0);for(const frame of frames){expect(frame.title).toBe('JSON 解析与格式化');expect(frame.button).toBe('格式化');expect(frame.x).toBe(0);}
 });
 test('dark JSON caret is readable and edit toolbar reuses editor history',async({page,context,browserName})=>{
  await setup(page);await page.goto('/index.html');const editor=page.locator('#source .cm-content');await editor.click();expect(await editor.evaluate(n=>getComputedStyle(n).caretColor)).not.toBe('rgb(0, 0, 0)');

@@ -19,7 +19,7 @@ root.innerHTML=`
     <div class="tool-actions"><button class="primary" id="speed-start" data-i18n="uiText.sa751a9cd"></button><button id="speed-cancel" disabled data-i18n="uiText.s35afca3b"></button><button id="speed-clear" data-i18n="uiText.s4a57fc2"></button><button id="speed-copy" disabled data-i18n="uiText.s3c8c0614"></button><button id="speed-download" disabled data-i18n="uiText.s41fa1c79"></button></div>
     <p class="tool-status" id="speed-status" role="status" aria-live="polite"></p><progress id="speed-progress" value="0" max="100" data-i18n-aria-label="uiText.s535d93b"></progress>
   </section>
-  <section id="speed-metrics"><div id="speed-primary-metrics" class="speed-metrics"></div>  <section class="tool-card speed-rating" id="speed-rating" aria-labelledby="speed-rating-heading">
+  <section id="speed-metrics" hidden><div id="speed-primary-metrics" class="speed-metrics"></div>  <section class="tool-card speed-rating" id="speed-rating" aria-labelledby="speed-rating-heading">
     <h2 id="speed-rating-heading" data-i18n="speedtestRating.heading"></h2>
     <p id="speed-rating-waiting" class="tool-note"></p><p id="speed-rating-partial" class="tool-note" data-i18n="speedtestRating.partial" hidden></p>
     <div id="speed-rating-results" aria-live="polite" hidden></div>
@@ -28,7 +28,7 @@ root.innerHTML=`
     <p class="tool-note" data-i18n="speedtestRating.scaleHint"></p></details>
   </section>
 <div id="speed-idle-metrics" class="speed-metrics speed-secondary"></div><details id="speed-loaded-details"><summary data-i18n="uiText.loadedMetrics"></summary><div id="speed-loaded-metrics" class="speed-metrics speed-secondary"></div></details><div class="tool-actions" id="speed-result-actions"></div></section>
-  <details class="tool-card speed-chart-card">
+  <details class="tool-card speed-chart-card" hidden>
     <summary><div class="speed-chart-heading"><h2 data-i18n="uiText.seb894ce3"></h2><div class="speed-chart-legend"><span class="speed-legend-download" data-i18n="uiText.s6964bb19"></span><span class="speed-legend-upload" data-i18n="uiText.s826f7f7c"></span></div></div></summary>
     <div class="speed-chart-frame">
       <div id="speed-chart-unit" dir="ltr"></div><canvas id="speed-chart" role="img"></canvas>
@@ -112,7 +112,14 @@ function draw() {
 }
 function render(next=state) {
   const completed=['complete','incomplete'].includes(next.status)&&!['complete','incomplete'].includes(state.status);state=next;const running=state.status==='running',hasResult=['complete','incomplete'].includes(state.status);
-  if(completed)$('speed-settings').open=false;
+  const idle=state.status==='idle';
+  if(completed||idle)$('speed-settings').open=idle;
+  $('speed-clear').hidden=idle;
+  $('speed-metrics').hidden=idle;
+  const chart=$('speed-chart').closest('details');
+  const hasSamples=Object.values(state.series||{}).some(points=>points.length);
+  if(!hasSamples||chart.hidden||completed)chart.open=hasSamples;
+  chart.hidden=!hasSamples;
   $('speed-start').disabled=running;$('speed-profile').disabled=running;$('speed-cancel').disabled=!running;
   $('speed-copy').disabled=!hasResult;$('speed-download').disabled=!hasResult;
   $('speed-start').textContent=hasResult?t('uiText.s2717a0fd'):t('uiText.sa751a9cd');
@@ -120,7 +127,7 @@ function render(next=state) {
   $('speed-budget').textContent=t('uiText.scf6db0aa',{p0:budget.toFixed(1)});
   $('speed-settings-summary').textContent=hasResult?t('direct.developer.speedSummary',{profile:$('speed-profile').selectedOptions[0].textContent,unit:speedUnit(),budget:budget.toFixed(1)}):t('direct.developer.speedSettings');
   const phases={latency:t('uiText.s99152d25'),download:t('uiText.s6964bb19'),upload:t('uiText.s826f7f7c')};
-  const label=running?`${t('uiText.s535d93b')} · ${phases[state.phase]}`:state.status==='complete'?t('uiText.se54758cc'):state.status==='incomplete'?t('uiText.sef726d4b'):t('uiText.s3a32febf');
+  const label=running?`${t('uiText.s535d93b')} · ${phases[state.phase]}`:state.status==='complete'?t('uiText.se54758cc'):state.status==='incomplete'?t('uiText.sef726d4b'):t('uiText.s40941bdb');
   const reason=state.reason==='timeout'?t('uiText.se345fc07'):state.reason==='cancelled'?t('uiText.s48e3ebbb'):['network','error'].includes(state.reason)?' · '+t(state.reason==='network'?'refinement.speedNetworkError':'refinement.speedStartError'):state.message?` · ${state.message}`:'';
   $('speed-status').textContent=`${label}${reason}${state.elapsedMs!==undefined?` · ${(state.elapsedMs/1000).toFixed(1)} s · ${t('uiText.s6b1ddb3a')} ${(state.completedBytes/1024**2).toFixed(2)} MiB`:''}`;
   $('speed-progress').value=state.status==='complete'?100:Math.min(99,(state.completedBytes || 0)/(state.plannedBytes || 1)*100);
@@ -134,7 +141,7 @@ function render(next=state) {
     card.append(title,value);return card;
   });$('speed-primary-metrics').replaceChildren(...metricCards.slice(0,2));$('speed-idle-metrics').replaceChildren(...metricCards.slice(2,4));$('speed-loaded-metrics').replaceChildren(...metricCards.slice(4));renderRatings();draw();
 }
-const networkDetails=document.createElement('details');networkDetails.className='speed-network-details';networkDetails.innerHTML='<summary data-i18n="experience.networkDetails"></summary>';networkDetails.append(document.querySelector('[data-i18n="uiText.saecdb926"]'));$('speed-settings').append($('speed-budget'),$('speed-network-notice'),networkDetails);translateDOM(networkDetails);
+const networkDetails=document.createElement('details');networkDetails.className='speed-network-details';networkDetails.innerHTML='<summary data-i18n="experience.networkDetails"></summary>';networkDetails.append(document.querySelector('[data-i18n="uiText.saecdb926"]'));$('speed-settings').append($('speed-network-notice'),networkDetails);translateDOM(networkDetails);
 $ ('speed-result-actions').append($('speed-copy'),$('speed-download'));
 const controller=createSpeedTestController({onState:render});
 $('speed-start').addEventListener('click',()=>void controller.start($('speed-profile').value));

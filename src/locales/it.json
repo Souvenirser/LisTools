@@ -1852,6 +1852,7 @@
     },
     "files": {
       "fileActions": "Azioni sui file",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "Scartare le modifiche al ritaglio non salvate?",
       "pastedImage": "Immagine incollata",
       "lineDedupeHelp": "Confronta esattamente ogni riga completa, inclusi spazi e maiuscole. Mantiene la prima occorrenza.",
@@ -2330,6 +2331,18 @@
     "reference": "Stima indicativa",
     "referenceHint": "Stima con parametri di riferimento. Inserisci i parametri effettivi nelle impostazioni, se necessario.",
     "referenceScope": "Tutti i mesi usano gli stessi parametri di riferimento, non i versamenti storici."
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "Stipendio stimato da portare a casa",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "Stipendio netto annuo stimato (premio incluso) · Stima dallo stipendio",
+    "autoRatioEstimateVerified": "Stima dallo stipendio · Verificato",
+    "autoRatioEstimateReference": "Stima dallo stipendio · Stima indicativa"
   },
   "taxUnified": {
     "run": "Calcola stipendio e reddito annuo",

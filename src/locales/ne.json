@@ -1852,6 +1852,7 @@
     },
     "files": {
       "fileActions": "फाइल कार्यहरू",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "सुरक्षित नगरिएका काटछाँट परिवर्तन त्याग्ने?",
       "pastedImage": "टाँसिएको छवि",
       "lineDedupeHelp": "खाली ठाउँ र ठूला/साना अक्षरसहित पूरै पङ्क्ति ठ्याक्कै तुलना गर्छ। पहिलो उपस्थिति राख्छ।",
@@ -2330,6 +2331,18 @@
     "reference": "सन्दर्भ अनुमान",
     "referenceHint": "सन्दर्भ मानबाट अनुमान। वास्तविक योगदानका मान सेटिङमा राख्न सकिन्छ।",
     "referenceScope": "सबै महिनामा एउटै सन्दर्भ मान प्रयोग हुन्छ, ऐतिहासिक वास्तविक भुक्तानी होइन।"
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "अनुमानित घर-घर जाने तलब",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "अनुमानित वार्षिक खुद तलब (बोनससहित) · तलबबाट अनुमान गर्नुहोस्",
+    "autoRatioEstimateVerified": "तलबबाट अनुमान गर्नुहोस् · प्रमाणित",
+    "autoRatioEstimateReference": "तलबबाट अनुमान गर्नुहोस् · सन्दर्भ अनुमान"
   },
   "taxUnified": {
     "run": "तलब र वार्षिक आम्दानी गणना गर्नुहोस्",

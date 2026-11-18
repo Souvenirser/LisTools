@@ -1,7 +1,9 @@
-export async function chooseTask(page,tool,task){
+export const activeTool=page=>page.frameLocator('iframe[data-workspace-active]');
+
+export async function chooseTask(page,tool,task,controls=page){
  await page.waitForFunction(()=>document.documentElement.dataset.uiState!=='booting');
- const select=page.locator(`#${tool}-task-select`);
- if(await select.isVisible())await select.selectOption(task);else {const button=page.locator(`#${tool}-task-${task}`);if(tool==='pdf'&&!await button.isVisible())await page.locator('#pdf-task-adjustments').click();await button.click();}
+ const select=controls.locator(`#${tool}-task-select`);
+ if(await select.isVisible())await select.selectOption(task);else {const button=controls.locator(`#${tool}-task-${task}`);if(tool==='pdf'&&!await button.isVisible())await controls.locator('#pdf-task-adjustments').click();await button.click();}
 }
 export async function countdownDuration(page,seconds){
  await page.locator('#timer-hours').fill(String(Math.floor(seconds/3600)));

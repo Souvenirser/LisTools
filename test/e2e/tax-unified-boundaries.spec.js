@@ -40,7 +40,7 @@ test('opening monthly editing does not invent salary before employment started',
 });
 
 test('monthly editing keeps the actual social and housing bases until a row explicitly overrides them',async({page})=>{
- const f=await wages(page);await f.locator('#tax-source').selectOption('city');await f.locator('#tax-salary').fill('100000');
+ const f=await wages(page);await f.locator('#tax-source').selectOption('city');const picker=f.locator('#tax-city-control');await picker.click();await picker.locator('input[type=search]').fill('Beijing');await picker.locator('[data-choice-selectable][data-value=beijing]').click();await f.locator('#tax-salary').fill('100000');
  await f.locator('#tax-city-options>summary').click();await f.locator('#tax-base-mode').selectOption('actual');
  await f.locator('#tax-base').fill('20000');await f.locator('#tax-base-housing').fill('10000');await f.locator('#tax-run').click();
  const monthlyCash=f.locator('#tax-months-table tr.is-current-month td').nth(2);await expect(monthlyCash).toHaveText('3,303.00');
@@ -52,7 +52,7 @@ test('combined bonus in the first month of first employment uses the calendar-mo
  const f=await wages(page,'2026-03');await f.locator('#tax-employment>summary').click();
  await f.locator('#tax-startMonth').fill('3');await f.locator('#tax-basicDeductionMode').selectOption('first-employment');await f.locator('#tax-firstConfirmed').check();
  await f.locator('#tax-bonus-section>summary').click();await f.locator('#tax-bonus').fill('36000');await f.locator('#tax-bonusMonth').fill('3');await f.locator('#tax-bonus-method').selectOption('combined');
- await f.locator('#tax-run').click();await expect(out(f,'currentTax')).toHaveText('1,380.00');await expect(out(f,'net')).toHaveText('52,620.00');
+ await f.locator('#tax-run').click();await expect(out(f,'currentTax')).toHaveText('90.00');await expect(out(f,'net')).toHaveText('17,910.00');await expect(out(f,'monthNetWithBonus')).toHaveText('52,620.00');await expect(f.locator('#tax-months-table tr.is-current-month')).toContainText('1,380.00');
 });
 
 test('an invalid entered bonus suppresses refund conclusions while preserving the valid salary',async({page})=>{

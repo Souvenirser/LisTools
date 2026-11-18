@@ -15,16 +15,19 @@ async function open(page,id='dates',hash=''){
  await page.goto('/'+id+'.html'+hash);
  await expect(tool(page).locator('main h1')).toBeVisible();
 }
+async function select(page,id){
+ await page.locator('#global-search-open').click();await link(page,id).click();
+}
 async function choose(page,id,field){
- await link(page,id).click();
+ await select(page,id);
  await expect(tool(page).locator('#'+field)).toBeVisible();
 }
 const rejectNext=(page,id)=>page.route(`**/${id}.html`,r=>r.fulfill({status:503,contentType:'text/html',body:'<!doctype html><html data-ui-state="failed"><title>Unavailable</title>'}),{times:1});
 
-test('retry of a sidebar choice commits once and Back returns to its source',async({page})=>{
+test('retry of a dropdown choice commits once and Back returns to its source',async({page})=>{
  await seed(page);await open(page);await choose(page,'units','unit-value');
  const before=await page.evaluate(()=>history.length);
- await rejectNext(page,'money');await link(page,'money').click();
+ await rejectNext(page,'money');await select(page,'money');
  await expect(retry(page)).toBeVisible();await expect(page).toHaveURL(/units.html$/);
  expect(await page.evaluate(()=>history.length)).toBe(before);
  await retry(page).click();await expect(tool(page).locator('#money-input')).toBeVisible();
@@ -51,7 +54,7 @@ test('a prepared iframe cannot replace visible content before its boot screen ha
   // Hold only the final bootstrap acknowledgement; load the real HTML, tool, styles and locale.
   let boot;Object.defineProperty(window,'LisToolsBoot',{configurable:true,get:()=>boot,set(api){boot=api;const ready=api.ready;api.ready=()=>{window.finishBoot=ready;};}});
  });
- await open(page);await link(page,'units').click();
+ await open(page);await select(page,'units');
  await page.waitForFunction(()=>typeof document.querySelector('iframe[src$="units.html"]')?.contentWindow?.finishBoot==='function');
  await expect(tool(page).locator('#date-start')).toBeVisible();await expect(page).toHaveURL(/dates.html$/);
  await page.evaluate(()=>document.querySelector('iframe[src$="units.html"]').contentWindow.finishBoot());
@@ -61,7 +64,7 @@ test('a prepared iframe cannot replace visible content before its boot screen ha
 test('choosing the visible tool withdraws a failed Back without leaving a stale retry or address',async({page})=>{
  await seed(page);await open(page);await choose(page,'units','unit-value');
  await rejectNext(page,'dates');await page.goBack();await expect(retry(page)).toBeVisible();
- await link(page,'units').click();await expect(retry(page)).toBeHidden();
+ await select(page,'units');await expect(retry(page)).toBeHidden();
  await expect(page).toHaveURL(/units.html$/);await expect(tool(page).locator('#unit-value')).toBeVisible();
  await page.goBack();await expect(tool(page).locator('#date-start')).toBeVisible();
 });
@@ -86,7 +89,7 @@ for(const [entry,task,prefix,opener,theme] of [
  const before=PNG.sync.read(await page.screenshot());
  await trigger.press('Enter');await expect(dialog).toBeVisible();
  const shot=await page.screenshot(),after=PNG.sync.read(shot);await info.attach('open-assistant',{body:shot,contentType:'image/png'});
- const painted={header:changedPixels(before,after,{x:0,y:0,w:1200,h:55}),sidebar:changedPixels(before,after,{x:0,y:90,w:210,h:600}),workspace:changedPixels(before,after,{x:1290,y:200,w:55,h:400})};
+ const painted={header:changedPixels(before,after,{x:0,y:0,w:1200,h:55}),workspaceLeft:changedPixels(before,after,{x:0,y:90,w:210,h:600}),workspace:changedPixels(before,after,{x:1290,y:200,w:55,h:400})};
  await info.attach('background-pixel-change',{body:JSON.stringify(painted),contentType:'application/json'});
  for(const [region,changed] of Object.entries(painted))expect(changed,`${region} needs a visible backdrop`).toBeGreaterThan(.75);
  const settings=await page.locator('#settings-open').boundingBox();await page.mouse.click(settings.x+8,settings.y+8);
@@ -129,7 +132,7 @@ function ink(png,theme,x1,y1,x2,y2){
  }
  return count;
 }
-for(const theme of ['light','dark'])test(`cold startup, slow sidebar switch and rapid Back/Forward keep real workspace pixels (${theme})`,async({page,browserName},info)=>{
+for(const theme of ['light','dark'])test(`cold startup, slow dropdown switch and rapid Back/Forward keep real workspace pixels (${theme})`,async({page,browserName},info)=>{
  test.skip(browserName!=='chromium','Paint samples come from the Chromium compositor.');
  await seed(page,theme);const cold=pauseResponse(),slow=pauseResponse(),superseded=pauseResponse();
  let dates=0;await page.route('**/dates.html',route=>++dates===2?cold.handle(route):route.continue());
@@ -141,18 +144,18 @@ for(const theme of ['light','dark'])test(`cold startup, slow sidebar switch and 
  cdp.on('Page.screencastFrame',ev=>{frames.push(Buffer.from(ev.data,'base64'));void cdp.send('Page.screencastFrameAck',{sessionId:ev.sessionId}).catch(()=>{});});
  await cdp.send('Page.startScreencast',{format:'png',maxWidth:800,maxHeight:600,everyNthFrame:1});
  try{
-  await page.route('**/units.html',r=>slow.handle(r),{times:1});await link(page,'units').click();await slow.requested;
+  await page.route('**/units.html',r=>slow.handle(r),{times:1});await select(page,'units');await slow.requested;
   await expect(page.locator('.workspace-navigation-status')).toBeVisible();await expect(tool(page).locator('#date-start')).toBeVisible();await expect(page).toHaveURL(/dates.html$/);
   await info.attach('slow-with-previous-tool',{body:await page.screenshot(),contentType:'image/png'});
   slow.resume();await expect(tool(page).locator('#unit-value')).toBeVisible();
-  await page.route('**/money.html',r=>superseded.handle(r),{times:1});await link(page,'money').click();await superseded.requested;
+  await page.route('**/money.html',r=>superseded.handle(r),{times:1});await select(page,'money');await superseded.requested;
   await page.goBack();await page.goForward();superseded.resume();
   await expect(page).toHaveURL(/units.html$/);await expect(tool(page).locator('#unit-value')).toBeVisible();
   await expect(page.locator('iframe[data-workspace-frame]')).toHaveCount(1);
   await expect(page.locator('.workspace-navigation-status')).toBeHidden();
   await page.evaluate(()=>new Promise(done=>requestAnimationFrame(()=>requestAnimationFrame(done))));
  }finally{slow.resume();superseded.resume();await cdp.send('Page.stopScreencast');await cdp.detach();}
- const counts=frames.map(buffer=>{const p=PNG.sync.read(buffer);return {header:ink(p,theme,0,0,.99,.061),sidebar:ink(p,theme,.012,.13,.16,.9),workspace:ink(p,theme,.24,.13,.92,.8)};});
+ const counts=frames.map(buffer=>{const p=PNG.sync.read(buffer);return {header:ink(p,theme,0,0,.99,.061),workspace:ink(p,theme,.08,.13,.92,.8)};});
  await info.attach('paint-counts',{body:JSON.stringify(counts),contentType:'application/json'});
  expect(counts.length).toBeGreaterThan(2);
  for(const [i,frame] of counts.entries())for(const [region,count] of Object.entries(frame)){

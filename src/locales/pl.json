@@ -1852,6 +1852,7 @@
     },
     "files": {
       "fileActions": "Operacje na plikach",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "Odrzucić niezapisane zmiany kadrowania?",
       "pastedImage": "Wklejony obraz",
       "lineDedupeHelp": "Porównuje dokładnie całe wiersze, łącznie ze spacjami i wielkością liter. Zachowuje pierwsze wystąpienie.",
@@ -2330,6 +2331,18 @@
     "reference": "Szacunek referencyjny",
     "referenceHint": "Szacunek według wartości referencyjnych. Rzeczywiste parametry składek można wpisać w ustawieniach.",
     "referenceScope": "Wszystkie miesiące używają tych samych wartości referencyjnych, a nie historycznych wpłat."
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "Szacunkowe wynagrodzenie na rękę",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "Szacowane roczne wynagrodzenie netto (z premią) · Szacunek z wynagrodzenia",
+    "autoRatioEstimateVerified": "Szacunek z wynagrodzenia · Zweryfikowano",
+    "autoRatioEstimateReference": "Szacunek z wynagrodzenia · Szacunek referencyjny"
   },
   "taxUnified": {
     "run": "Oblicz wynagrodzenie i roczny dochód",

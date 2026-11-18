@@ -1641,6 +1641,7 @@
     },
     "files": {
       "fileActions": "Ενέργειες αρχείων",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "Απόρριψη των μη αποθηκευμένων προσαρμογών περικοπής;",
       "imageInfo": "{{name}} · {{width}} × {{height}} px",
       "pastedImage": "Επικολλημένη εικόνα",
@@ -2330,6 +2331,18 @@
     "reference": "Ενδεικτική εκτίμηση",
     "referenceHint": "Εκτίμηση με τιμές αναφοράς. Οι πραγματικές παράμετροι εισφορών εισάγονται στις ρυθμίσεις.",
     "referenceScope": "Όλοι οι μήνες χρησιμοποιούν τις ίδιες τιμές αναφοράς, όχι τις ιστορικές πληρωμές."
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "Εκτιμώμενος μισθός κατ' οίκον",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "Εκτιμώμενες καθαρές ετήσιες αποδοχές (με το μπόνους) · Υπολογισμός από μισθό",
+    "autoRatioEstimateVerified": "Υπολογισμός από μισθό · Επαληθεύτηκε",
+    "autoRatioEstimateReference": "Υπολογισμός από μισθό · Ενδεικτική εκτίμηση"
   },
   "taxUnified": {
     "run": "Υπολογισμός μισθού και ετήσιου εισοδήματος",

@@ -1852,6 +1852,7 @@
     },
     "files": {
       "fileActions": "Thao tác với tệp",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "Bỏ các điều chỉnh cắt chưa lưu?",
       "imageInfo": "{{name}} · {{width}} × {{height}} px",
       "pastedImage": "Ảnh đã dán",
@@ -2330,6 +2331,18 @@
     "reference": "Ước tính tham khảo",
     "referenceHint": "Ước tính theo thông số tham khảo. Có thể nhập thông số đóng thực tế trong cài đặt.",
     "referenceScope": "Mọi tháng dùng cùng một bộ thông số tham khảo, không phải khoản đóng thực tế trước đây."
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "Ước tính mức lương mang về nhà",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "Thu nhập thực nhận cả năm dự kiến (gồm tiền thưởng) · Ước tính từ tiền lương",
+    "autoRatioEstimateVerified": "Ước tính từ tiền lương · Đã xác minh",
+    "autoRatioEstimateReference": "Ước tính từ tiền lương · Ước tính tham khảo"
   },
   "taxUnified": {
     "run": "Tính lương và thu nhập cả năm",

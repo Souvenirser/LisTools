@@ -1852,6 +1852,7 @@
     },
     "files": {
       "fileActions": "파일 작업",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "저장하지 않은 자르기 조정을 버릴까요?",
       "pastedImage": "붙여넣은 이미지",
       "lineDedupeHelp": "공백과 대소문자를 포함해 각 줄 전체를 정확하게 비교합니다. 처음 나온 항목을 유지합니다.",
@@ -2330,6 +2331,18 @@
     "reference": "참고 추정",
     "referenceHint": "참고 값으로 계산합니다. 실제 납부 기준은 설정에서 입력할 수 있습니다.",
     "referenceScope": "모든 월에 동일한 참고 값을 사용하며 과거 실제 납부액이 아닙니다."
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "예상 실손 급여",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "예상 연간 실수령액(상여금 포함) · 급여로 추정",
+    "autoRatioEstimateVerified": "급여로 추정 · 확인됨",
+    "autoRatioEstimateReference": "급여로 추정 · 참고 추정"
   },
   "taxUnified": {
     "run": "급여 및 연간 소득 계산",

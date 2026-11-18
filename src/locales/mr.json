@@ -1852,6 +1852,7 @@
     },
     "files": {
       "fileActions": "फाइल कृती",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "जतन न केलेले कापणी बदल टाकून द्यायचे?",
       "pastedImage": "पेस्ट केलेली प्रतिमा",
       "lineDedupeHelp": "मोकळ्या जागा आणि मोठी/लहान अक्षरे यांसह प्रत्येक पूर्ण ओळीची अचूक तुलना करते. पहिली नोंद ठेवते.",
@@ -2330,6 +2331,18 @@
     "reference": "संदर्भ अंदाज",
     "referenceHint": "संदर्भ मूल्यांनुसार अंदाज. प्रत्यक्ष योगदानाची मूल्ये सेटिंगमध्ये भरता येतात.",
     "referenceScope": "सर्व महिने समान संदर्भ मूल्ये वापरतात, पूर्वीची प्रत्यक्ष देयके नव्हेत."
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "घरी घेऊन जाण्याचा अंदाजे पगार",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "अंदाजित वार्षिक निव्वळ पगार (बोनससह) · पगारावरून अंदाज",
+    "autoRatioEstimateVerified": "पगारावरून अंदाज · सत्यापित",
+    "autoRatioEstimateReference": "पगारावरून अंदाज · संदर्भ अंदाज"
   },
   "taxUnified": {
     "run": "पगार आणि वार्षिक उत्पन्न मोजा",

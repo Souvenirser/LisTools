@@ -1852,6 +1852,7 @@
     },
     "files": {
       "fileActions": "ഫയൽ പ്രവർത്തനങ്ങൾ",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "സംരക്ഷിക്കാത്ത ക്രോപ്പ് മാറ്റങ്ങൾ ഉപേക്ഷിക്കണോ?",
       "pastedImage": "ഒട്ടിച്ച ചിത്രം",
       "lineDedupeHelp": "ഇടങ്ങളും വലിയ/ചെറിയ അക്ഷരങ്ങളും ഉൾപ്പെടെ പൂർണ്ണ വരികൾ കൃത്യമായി താരതമ്യം ചെയ്യുന്നു. ആദ്യത്തേത് നിലനിർത്തുന്നു.",
@@ -2330,6 +2331,18 @@
     "reference": "റഫറൻസ് കണക്ക്",
     "referenceHint": "റഫറൻസ് മൂല്യങ്ങൾ ഉപയോഗിച്ചുള്ള കണക്ക്. യഥാർഥ വിഹിതങ്ങൾ ക്രമീകരണങ്ങളിൽ നൽകാം.",
     "referenceScope": "എല്ലാ മാസങ്ങളിലും ഒരേ റഫറൻസ് മൂല്യങ്ങൾ ഉപയോഗിക്കുന്നു; പഴയ യഥാർഥ അടവുകളല്ല."
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "കണക്കാക്കിയ ടേക്ക്-ഹോം ശമ്പളം",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "പ്രതീക്ഷിക്കുന്ന വാർഷിക അറ്റശമ്പളം (ബോണസ് ഉൾപ്പെടെ) · ശമ്പളത്തിൽ നിന്നുള്ള എസ്റ്റിമേറ്റ്",
+    "autoRatioEstimateVerified": "ശമ്പളത്തിൽ നിന്നുള്ള എസ്റ്റിമേറ്റ് · പരിശോധിച്ചുറപ്പിച്ചു",
+    "autoRatioEstimateReference": "ശമ്പളത്തിൽ നിന്നുള്ള എസ്റ്റിമേറ്റ് · റഫറൻസ് കണക്ക്"
   },
   "taxUnified": {
     "run": "ശമ്പളവും വാർഷിക വരുമാനവും കണക്കാക്കുക",

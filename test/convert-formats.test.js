@@ -91,6 +91,13 @@ test('Query String 保留重复参数、空值和特殊键，反向映射严格�
   assert.equal((await convert('query-json','{"a":1}',{direction:'decode'})).status,'error');
   assert.equal((await convert('query-json','a=%GG')).status,'error');
 });
+test('Query String consumes one optional leading delimiter and preserves encoded keys and values', async () => {
+  const json=await output('query-json','?a=1&a=2&%3Fa=%2B&empty=&space=+');
+  assert.deepEqual(JSON.parse(json),{a:['1','2'],'?a':['+'],empty:[''],space:[' ']});
+  assert.equal(await output('query-json',json,{direction:'decode'}),'a=1&a=2&%3Fa=%2B&empty=&space=+');
+  assert.deepEqual(JSON.parse(await output('query-json','?')),{});
+  assert.equal((await convert('query-json','?a=%GG')).status,'error');
+});
 test('Query 反向拒绝 JSON 转义中的孤立代理项，不由 URLSearchParams 替换为 U+FFFD', async () => {
   for(const input of ['{"a":["\\ud800"]}','{"\\ud800":["x"]}']) assert.equal((await convert('query-json',input,{direction:'decode'})).status,'error');
   assert.equal(await output('query-json','{"emoji":["\\ud83d\\ude42"]}',{direction:'decode'}),'emoji=%F0%9F%99%82');

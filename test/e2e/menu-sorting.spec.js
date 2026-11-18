@@ -27,13 +27,13 @@ test('menu sorting saves groups and tools across popup and pages, while cancelli
  await startMenuSorting(page);await page.locator('#menu-reset').click();await page.locator('#menu-cancel').click();
  await expect(page.locator('nav>details').nth(2)).toHaveAttribute('data-group-id','network');
  await startMenuSorting(page);await page.locator('#menu-reset').click();await page.locator('#menu-save').click();
- await expect(other.locator('#tool-menu nav>details').nth(2)).toHaveAttribute('data-group-id','developer');
+ await expect(other.locator('#tool-menu nav>details').nth(2)).toHaveAttribute('data-group-id','files');
 });
 
 test('real drag reorders categories and tools without navigating or changing category membership',async({page})=>{
  await page.goto('/popup.html');await startMenuSorting(page);
  const daily=page.locator('[data-group-id="daily"]');
- await page.locator('[data-group-id="network"]>summary .tool-menu-sort-handle').dragTo(daily.locator('summary .tool-menu-sort-handle'));
+ await page.locator('[data-group-id="network"]>summary .tool-menu-sort-handle').dragTo(page.locator('[data-group-id="developer"]>summary .tool-menu-sort-handle'));
  await expect(page.locator('nav>details').first()).toHaveAttribute('data-group-id','network');
  await daily.locator('summary').click();
  await page.locator('[data-tool-id="timer"] .tool-menu-sort-handle').dragTo(page.locator('[data-tool-id="draw"] .tool-menu-sort-handle'));
@@ -57,7 +57,7 @@ test('dragging an item over another category does not move it across groups',asy
 
 test('touch long press reorders a category with the same saved preference',async({page,context,browserName})=>{
  test.skip(browserName!=='chromium','Touch dispatch uses Chromium CDP; other engines retain mouse and keyboard coverage.');
- await page.goto('/popup.html');await startMenuSorting(page);const from=await page.locator('[data-group-id="network"]>summary .tool-menu-sort-handle').boundingBox(),to=await page.locator('[data-group-id="developer"]>summary .tool-menu-sort-handle').boundingBox(),cdp=await context.newCDPSession(page);
+ await page.goto('/popup.html');await startMenuSorting(page);const from=await page.locator('[data-group-id="network"]>summary .tool-menu-sort-handle').boundingBox(),to=await page.locator('[data-group-id="files"]>summary .tool-menu-sort-handle').boundingBox(),cdp=await context.newCDPSession(page);
  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:from.x+18,y:from.y+22,id:0}]});await page.waitForTimeout(240);
  for(let step=1;step<=12;step++){await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:from.x+18,y:from.y+22+(to.y-from.y-10)*step/12,id:0}]});await page.waitForTimeout(20);}
  await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await expect(page.locator('nav>details').nth(2)).toHaveAttribute('data-group-id','network');await page.locator('#menu-save').click();await page.reload();await expect(page.locator('nav>details').nth(2)).toHaveAttribute('data-group-id','network');

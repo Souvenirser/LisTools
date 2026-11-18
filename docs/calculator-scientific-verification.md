@@ -27,7 +27,7 @@ Firefox 使用项目此前已验证的独立 CFFIXED_USER_HOME 目录，避免�
 
 ```sh
 npm test
-CFFIXED_USER_HOME=/private/tmp/listools-calculator-firefox npm run test:cross-browser
+CFFIXED_USER_HOME=.superpowers/tmp/listools-calculator-firefox npm run test:cross-browser
 ```
 
 新增回归覆盖：`0.1+0.2`、百分比、DEG/RAD、反三角、正负特殊角、`7*pi/2`、`90±1e-78`、极小合法数值、正切近极点精度、非法定义域和参数个数、floor/ceil 可选精度、Ans 完整精度与 `2Ans` 历史复现、语言/模式切换、选区与键盘操作、Worker 错误恢复/超时/取消。

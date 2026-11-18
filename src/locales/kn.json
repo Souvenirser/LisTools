@@ -1852,6 +1852,7 @@
     },
     "files": {
       "fileActions": "ಕಡತ ಕ್ರಿಯೆಗಳು",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "ಉಳಿಸದ ಕ್ರಾಪ್ ಬದಲಾವಣೆಗಳನ್ನು ತ್ಯಜಿಸಬೇಕೆ?",
       "pastedImage": "ಅಂಟಿಸಿದ ಚಿತ್ರ",
       "lineDedupeHelp": "ಖಾಲಿ ಜಾಗ ಮತ್ತು ದೊಡ್ಡ/ಸಣ್ಣ ಅಕ್ಷರಗಳನ್ನೂ ಸೇರಿಸಿ ಪೂರ್ಣ ಸಾಲುಗಳನ್ನು ನಿಖರವಾಗಿ ಹೋಲಿಸುತ್ತದೆ. ಮೊದಲ ಸಂಭವವನ್ನು ಉಳಿಸುತ್ತದೆ.",
@@ -2330,6 +2331,18 @@
     "reference": "ಉಲ್ಲೇಖ ಅಂದಾಜು",
     "referenceHint": "ಉಲ್ಲೇಖ ಮೌಲ್ಯಗಳಿಂದ ಅಂದಾಜು. ನಿಜವಾದ ಕೊಡುಗೆ ಮೌಲ್ಯಗಳನ್ನು ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ನಮೂದಿಸಬಹುದು.",
     "referenceScope": "ಎಲ್ಲ ತಿಂಗಳುಗಳು ಒಂದೇ ಉಲ್ಲೇಖ ಮೌಲ್ಯಗಳನ್ನು ಬಳಸುತ್ತವೆ; ಹಿಂದಿನ ನಿಜವಾದ ಪಾವತಿಗಳಲ್ಲ."
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "ಅಂದಾಜು ಟೇಕ್-ಹೋಮ್ ಸಂಬಳ",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "ಅಂದಾಜು ವಾರ್ಷಿಕ ನಿವ್ವಳ ಸಂಬಳ (ಬೋನಸ್ ಸೇರಿ) · ಸಂಬಳದಿಂದ ಅಂದಾಜು",
+    "autoRatioEstimateVerified": "ಸಂಬಳದಿಂದ ಅಂದಾಜು · ಪರಿಶೀಲಿಸಲಾಗಿದೆ",
+    "autoRatioEstimateReference": "ಸಂಬಳದಿಂದ ಅಂದಾಜು · ಉಲ್ಲೇಖ ಅಂದಾಜು"
   },
   "taxUnified": {
     "run": "ಸಂಬಳ ಮತ್ತು ವಾರ್ಷಿಕ ಆದಾಯ ಲೆಕ್ಕಹಾಕಿ",

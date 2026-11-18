@@ -33,12 +33,12 @@ test('error recovery keeps disclosure, error location and a subsequent valid com
  }
 });
 
-test('content created only in an initially empty comparison is protected on navigation',async({page})=>{
+test('content created only in an initially empty comparison is protected on navigation',async({page,context})=>{
  await open(page);const f=tool(page);
  await f.locator('#diff-mode').selectOption('text');await f.locator('#compare').click();await expect(f.locator('body')).toHaveAttribute('data-status','ready');
  await f.locator('#diff-view .cm-content').first().fill('只有结果中写入的草稿 🌏');await expect(f.locator('body')).toHaveAttribute('data-status','dirty');
  expect(await f.locator('body').evaluate(()=>window.LisToolsTool.hasContent())).toBe(true);
- const group=page.locator('#tool-menu details').filter({has:page.locator('a[data-tool-id=units]')});await group.evaluate(node=>node.open=true);
- const popupPromise=page.waitForEvent('popup');await page.locator('#tool-menu nav a[data-tool-id=units]').click();const popup=await popupPromise;
+ await page.locator('button.brand').click();await page.locator('#tool-menu-search').fill('单位换算');
+ const opened=context.waitForEvent('page');await page.locator('#tool-menu nav a[data-tool-id=units]').click();const popup=await opened;await expect(popup).toHaveURL(/units\.html$/);
  await expect(f.locator('#diff-view .cm-content').first()).toContainText('只有结果中写入的草稿 🌏');await popup.close();
 });

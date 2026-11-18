@@ -39,7 +39,7 @@
 ```sh
 npm test
 npx vite build
-CFFIXED_USER_HOME=/private/tmp/listools-calculator-firefox npx playwright test --project=chromium --project=firefox --project=webkit --output=.superpowers/sdd/speed-rating/browser-results --reporter=line
+CFFIXED_USER_HOME=.superpowers/tmp/listools-calculator-firefox npx playwright test --project=chromium --project=firefox --project=webkit --output=.superpowers/sdd/speed-rating/browser-results --reporter=line
 ```
 
 机器记录：[总验收与素材摘要](./speed-rating-verification.json)、[真实离线扩展](./speed-rating-extension.json)、[示例截图数据](./speed-rating-preview.json)。

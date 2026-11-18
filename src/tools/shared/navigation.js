@@ -1,7 +1,7 @@
 import {textKey} from './label-key.js';
 import { tools, categories, findTools } from '../convert/registry.js';
 
-export const toolGroups=[{id:'daily',key:'ux.group_daily',icon:'calculator'},{id:'files',key:'ux.group_files',icon:'folder-open'},{id:'developer',key:'ux.group_developer',icon:'code-xml'},{id:'network',key:'ux.group_network',icon:'shield-check'}];
+export const toolGroups=[{id:'developer',key:'ux.group_developer',icon:'code-xml'},{id:'daily',key:'ux.group_daily',icon:'calculator'},{id:'files',key:'ux.group_files',icon:'folder-open'},{id:'network',key:'ux.group_network',icon:'shield-check'}];
 export const pages = [
   {id:'json',file:'index.html',key:'json.title',icon:'braces',zh:'JSON 解析与格式化',en:'JSON parser & formatter',group:'developer',summaryKey:'ux.purpose_json'},
   {id:'diff',file:'diff.html',key:'diff.name',icon:'columns-2',zh:'JSON / 文本对比',en:'JSON / text comparison',group:'developer',summaryKey:'ux.purpose_diff'},
@@ -44,7 +44,9 @@ export const taskPresets=[
   ...[['phone','Phone','手机号提取|提取手机号|extract phone|phone extraction'],['email','Email','提取邮箱|邮箱提取|extract email|email extraction'],['url','Url','提取链接|链接提取|提取网址|extract links|extract urls']].map(([value,name,aliases])=>({page:'text',id:`extract-${value}`,task:'extract',control:'text-kind',value,key:`experience.extract${name}`,aliases})),
   ...[['dedupe','text.dedupe','删除重复行|remove duplicate lines|deduplicate lines'],['remove-empty','text.removeBlank','删除空行|删除空白行|remove empty lines|remove blank lines'],['trim','text.trim','逐行去空白|去除每行首尾空白|trim lines'],['sort','text.sort','排序|按行排序|sort lines']].map(([value,key,aliases])=>({page:'text',id:`lines-${value}`,task:'dedupe',control:'text-lines',value,key,aliases})),
   ...[['upper','text.upper','转大写|文本转大写|uppercase|convert to uppercase'],['lower','text.lower','转小写|文本转小写|lowercase|convert to lowercase']].map(([value,key,aliases])=>({page:'text',id:`case-${value}`,task:'case',control:'text-case',value,key,aliases})),
-  ...['base64','base64url'].flatMap(task=>['encode','decode'].map(value=>({page:'convert',id:`${task}-${value}`,task,value,key:`experience.${task}${value}`,aliases:`${task}${value==='decode'?'解码':'编码'}|${task} ${value}|${value} ${task}`})))
+  ...['base64','base64url'].flatMap(task=>[
+    ['encode',['编码','編碼']],['decode',['解码','解碼']]
+  ].map(([value,words])=>({page:'convert',id:`${task}-${value}`,task,value,key:`experience.${task}${value}`,aliases:[value,...words].flatMap(word=>[`${task} ${word}`,`${word} ${task}`]).join('|')})))
 ];
 export function resolveTaskRoute(id,hash=''){
   const value=hash.replace(/^#/,''),preset=taskPresets.find(item=>item.page===id&&item.id===value);
@@ -65,7 +67,14 @@ export function searchNavigation(query='',translate=()=> '') {
   ].join(' ').toLowerCase().includes(term)));
   if(!query.trim())return matches;
   const presets=taskPresets.filter(item=>[...item.aliases.split('|'),translate(item.key)].filter(Boolean).some(alias=>compact(alias)===compact(query))).map(item=>{const page=pages.find(page=>page.id===item.page);return {...page,id:`${item.page}-${item.id}`,file:`${page.file}#${item.id}`,key:item.key,parentKey:page.key};});
-  const tasks=taskLeaves.filter(item=>terms.every(term=>[item.zh,item.en,item.aliases,translate(item.key)].join(' ').toLowerCase().includes(term)));
+  const pdfOperation=terms.join(' ').match(/^(?:pdf\s*(.*)|(.*?)\s*pdf)$/);
+  const tasks=taskLeaves.filter(item=>{
+    if(item.parentKey==='pdf.name'&&pdfOperation){
+      const operation=(pdfOperation[1]??pdfOperation[2]).trim();
+      return Boolean(operation)&&[item.aliases,translate(item.key)].some(label=>compact(label||'').includes(compact(operation)));
+    }
+    return terms.every(term=>[item.zh,item.en,item.aliases,translate(item.key)].join(' ').toLowerCase().includes(term));
+  });
   const ordinary=new Set(tasks.filter(item=>['text-dedupe','text-case','text-newline'].includes(item.id)).map(item=>({'text-dedupe':'lines','text-case':'case','text-newline':'newline'})[item.id]));
   for(const id of ordinary){if(!matches.some(item=>item.id===id))matches.push(leaves.find(item=>item.id===id));}
   const ranked=[...presets,...tasks.filter(item=>!presets.some(preset=>currentTarget(preset.file.split('#')[0],'#'+preset.file.split('#')[1])===item.file)),...matches.filter(item=>!ordinary.has(item.id)),...matches.filter(item=>ordinary.has(item.id)).map(item=>({...item,secondary:true}))];

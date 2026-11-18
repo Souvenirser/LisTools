@@ -239,7 +239,7 @@ npm run build
 构建输出：
 
 - `dist/`：共用的 Manifest V3 扩展资源，按上文各浏览器方式加载或转换。
-- `releases/LisTools-1.2.6.zip`：根目录包含 manifest.json 的完整资源包。
+- `releases/LisTools-1.3.2.zip`：根目录包含 manifest.json 的完整资源包。
 
 Chrome / Edge 等 Chromium 浏览器开启开发者模式，点击 **加载已解压的扩展程序**，选择本项目的 `dist`；Firefox 按上文临时加载，Safari 使用官方转换工具。固定 LisTools 图标，点击图标打开工具菜单；JSON 工作台仍使用 `index.html`。无需为 Edge 另写或另打包一套工具代码。
 

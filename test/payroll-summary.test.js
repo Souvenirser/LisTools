@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {calculateAnnual,calculateBonus} from '../src/tools/payroll/tax.js';
 import {combinePayrollResults,annualBasisForBonus} from '../src/tools/payroll/tax-summary.js';
 
-const annual=(extra={})=>calculateAnnual({year:2026,months:Array.from({length:12},(_,i)=>({month:i+1,salary:'20000',contributions:'2000',specialDeduction:'0',predicted:i===11})),...extra});
+const annual=(extra={})=>calculateAnnual({year:2026,months:Array.from({length:12},(_,i)=>({month:i+1,salary:'20000',contributions:'2000',specialDeduction:'0',predicted:i===11})),...extra},new Date('2027-01-01T00:00:00Z'));
 test('one shared salary basis includes yearly deductions exactly once',()=>{
  const r=annual();assert.deepEqual(annualBasisForBonus(r),{salary:'240000.00',contributions:'24000.00',special:'0.00',other:'0.00',medical:'0.00',adjustment:'0.00'});
  const s=combinePayrollResults({annual:r});assert.equal(s.totalIncome,'240000.00');assert.equal(s.totalAnnualTax,'14280.00');assert.equal(s.annualNet,'201720.00');assert.equal(s.refund,null);
@@ -25,6 +25,6 @@ test('combined bonus preserves unused annual allowance rather than adding to cli
 });
 test('bonus in an absent month is rejected and actual refunds require actual bonus withholding too',()=>{
  const b=calculateBonus({year:2026,bonus:'36000'});assert.throws(()=>combinePayrollResults({annual:annual(),bonus:b,bonusMonth:'13'}));
- const a=annual({months:Array.from({length:12},(_,i)=>({month:i+1,salary:'20000',contributions:'2000',predicted:false})),actualWithheld:'14280'});
+ const a=annual({months:Array.from({length:12},(_,i)=>({month:i+1,salary:'20000',contributions:'2000',confirmedActual:true,predicted:false})),actualWithheld:'14280'});
  assert.equal(combinePayrollResults({annual:a,bonus:b}).refund,null);assert.equal(combinePayrollResults({annual:a,bonus:b,bonusActualWithheld:'1080'}).refund,'0.00');
 });

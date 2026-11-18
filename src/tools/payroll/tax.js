@@ -58,7 +58,14 @@ export function calculateBonus(input){
  const cliff=brackets.slice(0,-1).map(([limit])=>new D(limit)).find(limit=>bonus.gt(limit)&&bonus.minus(separate).lt(limit.minus(calculateBonus({year,bonus:limit.toString()}).separateTax)));
  return {separateTax:fixed(separate),bonusNet:fixed(bonus.minus(separate)),rate:r,quick:fixed(quick),salaryBalance:baseline&&fixed(baseline),separateTotal:separateTotal&&fixed(separateTotal),combinedTotal:combinedTotal&&fixed(combinedTotal),saving:separateTotal&&fixed(separateTotal.minus(combinedTotal).abs()),preferred:separateTotal===null?null:separateTotal.eq(combinedTotal)?'equal':separateTotal.lt(combinedTotal)?'separate':'combined',cliff:cliff?.toString()??null,conditions:{...input}};
 }
-export function calculateAnnual(input){
+const shanghaiCalendar=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai',year:'numeric',month:'numeric'});
+export function shanghaiPeriod(now=new Date()){
+ const parts=shanghaiCalendar.formatToParts(now);
+ return {year:Number(parts.find(part=>part.type==='year').value),month:Number(parts.find(part=>part.type==='month').value)};
+}
+
+export function calculateAnnual(input,now=new Date()){
+ const current=shanghaiPeriod(now);
  const year=Number(input.year);if(!Number.isInteger(year)||year<2026||year>9999)fail('tax.year','year');
  const basicDeductionMode=deductionMode(input,true);
  if(!Array.isArray(input.months)||!input.months.length||input.months.length>12)fail('tax.monthRange','months');
@@ -68,12 +75,18 @@ export function calculateAnnual(input){
   const month=Number(row.month);if(!Number.isInteger(month)||month<1||month>12||seen.has(month))fail('tax.duplicateMonth','months');seen.add(month);
   const salary=amount(row.salary,`salary-${month}`),cash=amount(row.contributions,`contributions-${month}`,0),deductible=amount(row.deductibleContributions,`deductible-${month}`,cash),special=amount(row.specialDeduction,`special-${month}`,0),other=amount(row.otherDeduction,`other-${month}`,0),adjustment=amount(row.taxableAdjustment,`adjustment-${month}`,0);
   if(deductible.gt(cash))fail('insurance.deductibleRange',`deductible-${month}`);
+  const future=year>current.year||year===current.year&&month>current.month;
+  const predicted=future||Boolean(row.predicted);
+  const noIncome=row.confirmedNoIncome===true;
+  if(noIncome&&(!salary.isZero()||!cash.isZero()||!adjustment.isZero()))fail('taxFinance.noIncomeConflict',`salary-${month}`);
+  const confirmed=!predicted&&row.estimated!==true&&(row.confirmedActual===true||noIncome);
   acc.income=acc.income.plus(salary);acc.contributions=acc.contributions.plus(deductible);acc.special=acc.special.plus(special);acc.other=acc.other.plus(other);acc.adjustment=acc.adjustment.plus(adjustment);acc.basic=basicDeductionMode==='annual-60000'?new D(60000):acc.basic.plus(5000);
   const tax=taxOn(acc.income.plus(acc.adjustment).minus(acc.contributions).minus(acc.special).minus(acc.other).minus(acc.basic)),withheld=D.max(new D(tax.tax).minus(acc.withheld),0);acc.withheld=acc.withheld.plus(withheld);
-  months.push({...row,salary:fixed(salary),contributions:fixed(cash),deductibleContributions:fixed(deductible),specialDeduction:fixed(special),withheld:fixed(withheld),net:fixed(salary.minus(cash).minus(withheld)),computation:{cumulativeIncome:fixed(acc.income),cumulativeTax:tax.tax,cumulativeTaxable:tax.taxable,basicDeduction:fixed(acc.basic),rate:tax.rate,quick:tax.quick,previousWithheld:fixed(acc.withheld.minus(withheld))}});
+  months.push({...row,predicted,confirmedActual:confirmed&&!noIncome,confirmedNoIncome:confirmed&&noIncome,salary:fixed(salary),contributions:fixed(cash),deductibleContributions:fixed(deductible),specialDeduction:fixed(special),withheld:fixed(withheld),net:fixed(salary.minus(cash).minus(withheld)),computation:{cumulativeIncome:fixed(acc.income),cumulativeTax:tax.tax,cumulativeTaxable:tax.taxable,basicDeduction:fixed(acc.basic),rate:tax.rate,quick:tax.quick,previousWithheld:fixed(acc.withheld.minus(withheld))}});
  }
  const annualTax=taxOn(acc.income.plus(acc.adjustment).minus(acc.contributions).minus(acc.special).minus(acc.other).minus(60000).minus(amount(input.medicalDeduction,'medicalDeduction',0)).minus(amount(input.annualSpecialDeduction,'annualSpecialDeduction',0)));
- const actual=input.actualWithheld===undefined||input.actualWithheld===''?null:amount(input.actualWithheld,'actualWithheld');
+ const actual=String(input.actualWithheld??'').trim()===''?null:amount(input.actualWithheld,'actualWithheld');
  const cash=sum(months.map(m=>m.contributions));
- return {months,gross:fixed(acc.income),contributions:fixed(cash),annualTax:annualTax.tax,predictedWithheld:fixed(acc.withheld),actualWithheld:actual&&fixed(actual),refund:actual&&months.length===12&&!months.some(row=>row.predicted)?fixed(actual.minus(annualTax.tax)):null,cashAfterAnnualTax:fixed(acc.income.minus(cash).minus(annualTax.tax)),annualTaxable:annualTax.taxable,conditions:{...input,basicDeductionMode}};
+ const refundAvailable=year<current.year&&actual!==null&&months.length===12&&months.every(row=>row.confirmedActual||row.confirmedNoIncome);
+ return {months,gross:fixed(acc.income),contributions:fixed(cash),annualTax:annualTax.tax,predictedWithheld:fixed(acc.withheld),actualWithheld:actual&&fixed(actual),refund:refundAvailable?fixed(actual.minus(annualTax.tax)):null,cashAfterAnnualTax:fixed(acc.income.minus(cash).minus(annualTax.tax)),annualTaxable:annualTax.taxable,conditions:{...input,months,basicDeductionMode}};
 }

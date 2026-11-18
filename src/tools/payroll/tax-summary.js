@@ -9,13 +9,13 @@ export function annualBasisForBonus(annual){
 
 export function combinePayrollResults({annual,bonus=null,method='separate',bonusMonth='',bonusActualWithheld='',wageConditions=null}){
  if(!['separate','combined'].includes(method))fail('office.error','tax-bonus-method');
- const hasBonus=Boolean(bonus),bonusAmount=hasBonus?amount(bonus.conditions.bonus,'bonus'):new D(0),hasMonth=String(bonusMonth).trim()!=='';
+ const bonusAmount=bonus?amount(bonus.conditions.bonus,'bonus'):new D(0),hasBonus=bonusAmount.gt(0),hasMonth=String(bonusMonth).trim()!=='';
  if(hasBonus&&hasMonth&&(!Number.isInteger(Number(bonusMonth))||!annual.months.some(row=>Number(row.month)===Number(bonusMonth))))fail('tax.monthRange','tax-bonusMonth');
  const comparison=hasBonus?calculateBonus({...bonus.conditions,annualBasis:annualBasisForBonus(annual)}):null;
  const totalTax=new D(!hasBonus?annual.annualTax:method==='combined'?comparison.combinedTotal:comparison.separateTotal);
  let calculated=annual.months;
  if(hasBonus&&method==='combined'&&hasMonth){
-  const adjusted=annual.months.map(row=>({...row,salary:fixed(new D(row.salary).plus(Number(row.month)===Number(bonusMonth)?bonusAmount:0))}));
+  const adjusted=annual.months.map(row=>Number(row.month)===Number(bonusMonth)?{...row,confirmedNoIncome:false,salary:fixed(new D(row.salary).plus(bonusAmount))}:row);
   if(wageConditions){
    let previous={income:'0',contributions:'0',special:'0',other:'0',adjustment:'0',basic:'0',withheld:'0'};
    calculated=adjusted.map(row=>{
@@ -29,6 +29,6 @@ export function combinePayrollResults({annual,bonus=null,method='separate',bonus
   const paid=hasBonus&&hasMonth&&Number(row.month)===Number(bonusMonth),extra=paid?bonusAmount:new D(0),bonusTax=paid&&method==='separate'?new D(comparison.separateTax):new D(0),withheld=calculated[index].withheld;
   return {...row,computation:calculated[index].computation,withheld,net:fixed(new D(row.salary).minus(row.contributions).minus(withheld)),bonus:fixed(extra),bonusTax:fixed(bonusTax),totalWithheld:fixed(new D(withheld).plus(bonusTax)),totalNet:fixed(new D(row.salary).plus(extra).minus(row.contributions).minus(withheld).minus(bonusTax))};
  });
- const actual=annual.actualWithheld===null||hasBonus&&String(bonusActualWithheld).trim()===''?null:new D(annual.actualWithheld).plus(hasBonus?amount(bonusActualWithheld,'tax-bonusWithheld'):0);
- return {gross:annual.gross,contributions:annual.contributions,bonus:fixed(bonusAmount),totalIncome:fixed(new D(annual.gross).plus(bonusAmount)),totalAnnualTax:fixed(totalTax),annualNet:fixed(new D(annual.gross).plus(bonusAmount).minus(annual.contributions).minus(totalTax)),comparison,method,months,unallocatedBonus:hasBonus&&!hasMonth,refund:actual!==null&&months.length===12&&!months.some(row=>row.predicted)?fixed(actual.minus(totalTax)):null,conditions:{annual:annual.conditions,bonus:bonus?.conditions??null,bonusMonth:hasMonth?Number(bonusMonth):null,method,bonusActualWithheld:bonusActualWithheld||null}};
+ const actual=annual.refund===null||hasBonus&&String(bonusActualWithheld??'').trim()===''?null:new D(annual.actualWithheld).plus(hasBonus?amount(bonusActualWithheld,'tax-bonusWithheld'):0);
+ return {gross:annual.gross,contributions:annual.contributions,bonus:fixed(bonusAmount),totalIncome:fixed(new D(annual.gross).plus(bonusAmount)),totalAnnualTax:fixed(totalTax),annualNet:fixed(new D(annual.gross).plus(bonusAmount).minus(annual.contributions).minus(totalTax)),comparison,method,months,unallocatedBonus:hasBonus&&!hasMonth,refund:actual!==null?fixed(actual.minus(totalTax)):null,conditions:{annual:annual.conditions,bonus:bonus?.conditions??null,bonusMonth:hasMonth?Number(bonusMonth):null,method,bonusActualWithheld:bonusActualWithheld||null,refundEligible:actual!==null}};
 }

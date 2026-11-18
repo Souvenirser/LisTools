@@ -8,7 +8,7 @@
 - 本轮最终候选为本目录 `LisTools-1.2.6.zip`，可加载目录 `LisTools-1.2.6/`。
 - ZIP SHA-256：`5c4953774b3ebdaee1e40910749b796a03cf995787672a50c5fd046ba94269c3`。
 - ZIP字节：4774985；506个文件。比现存 `releases/v1.2.6/LisTools-1.2.6.zip` 增加6389字节。没有新增依赖或权限。
-- 冻结源码：`/Users/lili02/.codex/worktrees/redesign-v2/LisTools/.superpowers/sdd/stability-20261106/source-r2`。基础Git HEAD为e0704f43bbe8a8837d45a1c4bf1b56b4c3a52e5a，但包含大量原有WIP，不把该提交当作源码快照。
+- 冻结源码：`./.superpowers/sdd/stability-20261106/source-r2`。基础Git HEAD为e0704f43bbe8a8837d45a1c4bf1b56b4c3a52e5a，但包含大量原有WIP，不把该提交当作源码快照。
 - 源码逐文件清单：`source-manifest.json`，527个文件；规范化清单SHA-256：`ded51edfbf4381ccdcd8db26ae3b4b4e855c9d829b3a9f0559f9b6cfd2905180`。包清单：`artifact-manifest.json`。
 - 隔离构建排除未发布支持页及入口，工作区原文件未删除。ZIP与目录逐文件一致；真实扩展从此ZIP解压目录加载。
 
@@ -30,7 +30,7 @@
 
 ## 验证命令与结果
 
-全部命令及日志在 `/Users/lili02/.codex/worktrees/redesign-v2/LisTools/.superpowers/sdd/stability-20261106`，复制的关键日志在本目录 `evidence/`。
+全部命令及日志在 `./.superpowers/sdd/stability-20261106`，复制的关键日志在本目录 `evidence/`。
 
 | 检查 | 命令/范围 | 结果 |
 |---|---|---|

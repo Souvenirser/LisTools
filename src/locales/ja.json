@@ -1852,6 +1852,7 @@
     },
     "files": {
       "fileActions": "ファイル操作",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "保存していない切り抜きの調整を破棄しますか？",
       "pastedImage": "貼り付けた画像",
       "lineDedupeHelp": "空白と大文字・小文字を含め、行全体の完全一致で比較します。最初の出現を残します。",
@@ -2330,6 +2331,18 @@
     "reference": "参考試算",
     "referenceHint": "参考値による試算です。実際の保険料などは設定で入力できます。",
     "referenceScope": "全月に同じ参考値を使用します。過去の実際の納付額ではありません。"
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "推定手取り給与",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "年間の予想手取り額（賞与込み） · 給料から見積もる",
+    "autoRatioEstimateVerified": "給料から見積もる · 確認済み",
+    "autoRatioEstimateReference": "給料から見積もる · 参考試算"
   },
   "taxUnified": {
     "run": "給与と年収を計算",

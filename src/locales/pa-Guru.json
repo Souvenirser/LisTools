@@ -1852,6 +1852,7 @@
     },
     "files": {
       "fileActions": "ਫ਼ਾਈਲ ਕਾਰਵਾਈਆਂ",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "ਨਾ ਸੰਭਾਲੀਆਂ ਕੱਟਣ ਦੀਆਂ ਤਬਦੀਲੀਆਂ ਛੱਡਣੀਆਂ ਹਨ?",
       "pastedImage": "ਪੇਸਟ ਕੀਤਾ ਚਿੱਤਰ",
       "lineDedupeHelp": "ਖਾਲੀ ਥਾਂ ਅਤੇ ਵੱਡੇ/ਛੋਟੇ ਅੱਖਰਾਂ ਸਮੇਤ ਹਰ ਪੂਰੀ ਲਾਈਨ ਦੀ ਸਟੀਕ ਤੁਲਨਾ ਕਰਦਾ ਹੈ। ਪਹਿਲੀ ਵਾਰ ਆਈ ਐਂਟਰੀ ਰੱਖਦਾ ਹੈ।",
@@ -2330,6 +2331,18 @@
     "reference": "ਹਵਾਲਾ ਅਨੁਮਾਨ",
     "referenceHint": "ਹਵਾਲਾ ਮੁੱਲਾਂ ਨਾਲ ਅਨੁਮਾਨ। ਅਸਲ ਯੋਗਦਾਨ ਦੇ ਮੁੱਲ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਭਰੇ ਜਾ ਸਕਦੇ ਹਨ।",
     "referenceScope": "ਸਾਰੇ ਮਹੀਨੇ ਇੱਕੋ ਹਵਾਲਾ ਮੁੱਲ ਵਰਤਦੇ ਹਨ, ਪਿਛਲੇ ਅਸਲ ਭੁਗਤਾਨ ਨਹੀਂ।"
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "ਘਰ ਲੈ ਜਾਣ ਦੀ ਅੰਦਾਜ਼ਨ ਤਨਖਾਹ",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "ਅਨੁਮਾਨਿਤ ਸਾਲਾਨਾ ਸ਼ੁੱਧ ਤਨਖਾਹ (ਬੋਨਸ ਸਮੇਤ) · ਤਨਖਾਹ ਤੋਂ ਅੰਦਾਜ਼ਾ",
+    "autoRatioEstimateVerified": "ਤਨਖਾਹ ਤੋਂ ਅੰਦਾਜ਼ਾ · ਪ੍ਰਮਾਣਿਤ",
+    "autoRatioEstimateReference": "ਤਨਖਾਹ ਤੋਂ ਅੰਦਾਜ਼ਾ · ਹਵਾਲਾ ਅਨੁਮਾਨ"
   },
   "taxUnified": {
     "run": "ਤਨਖਾਹ ਅਤੇ ਸਾਲਾਨਾ ਆਮਦਨ ਦੀ ਗਣਨਾ ਕਰੋ",

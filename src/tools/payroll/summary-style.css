@@ -6,7 +6,7 @@
 .tax-workspace #tax-city-settings .tax-city-profile:empty{display:none}
 .tax-workspace #tax-city-conditions{border-top:1px solid var(--border)}
 .tax-workspace #tax-payment-preview{min-height:70px;box-sizing:border-box}
-.tax-workspace #tax-payment-preview small{min-height:2.8em}
+.tax-workspace #tax-payment-preview small{min-height:3.2em}
 .tax-workspace :is(#tax-bonus-result,#tax-annual-result){border-top:1px solid var(--border);padding-top:16px;margin-top:20px}
 .tax-workspace :is(#tax-bonus-result,#tax-annual-result) h3{font-size:1.125rem;margin:0 0 8px}
 .tax-workspace #tax-result-months{margin-top:0}

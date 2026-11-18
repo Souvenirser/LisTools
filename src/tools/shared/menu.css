@@ -7,7 +7,7 @@
 .tool-menu-link, .tool-menu summary { display:flex; align-items:center; gap:10px; min-height:44px; padding:10px; border-radius:8px; color:var(--text); text-decoration:none; cursor:pointer; list-style:none; }
 .tool-menu summary::-webkit-details-marker { display:none; }
 .tool-menu-link:hover, .tool-menu summary:hover { background:var(--slate-3); }
-.tool-menu-icon svg{display:block;flex-shrink:0}
+.tool-menu-icon svg{display:block;width:18px;height:18px;flex-shrink:0}
 .tool-menu-link:focus-visible,.tool-menu summary:focus-visible{outline:2px solid var(--blue-11);outline-offset:-2px}
 .tool-menu-link[aria-current="page"]{box-shadow:inset 3px 0 var(--blue-11)}
 [dir="rtl"] .tool-menu-link[aria-current="page"]{box-shadow:inset -3px 0 var(--blue-11)}
@@ -43,7 +43,7 @@
 .tool-menu-sort-row .tool-menu-name{flex:1;overflow-wrap:anywhere}.is-sort-selected{outline:2px solid var(--blue-8);outline-offset:-2px}.tool-menu-sort-ghost{opacity:.35;background:var(--blue-3)}.tool-menu.is-sorting summary{padding-inline-start:4px}.tool-menu.is-sorting .tool-menu-list{overscroll-behavior:contain}.tool-menu.is-sorting .tool-menu-sort-handle:focus-visible{outline:2px solid var(--blue-11)}
 .tool-menu.is-sorting .tool-menu-search{display:none}.tool-menu.is-sorting summary{min-height:48px;padding-block:2px}.tool-menu-sort-row{padding-block:2px}
 
-/* Recent history updates independently of the stable category sidebar. */
+/* Recent history updates independently of the category list. */
 .header-recent{order:2;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;flex-shrink:0;font:inherit}
 .header-recent svg{flex-shrink:0}.workbench-shell .header-search{order:1}.header-settings{order:3}
 .recent-tools{position:fixed;inset:auto;margin:0;padding:8px;width:min(360px,calc(100vw - 24px));overflow:auto;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text);box-shadow:0 12px 40px #0002;font:1rem/1.5 system-ui}

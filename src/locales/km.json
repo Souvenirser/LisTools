@@ -1852,6 +1852,7 @@
     },
     "files": {
       "fileActions": "សកម្មភាពឯកសារ",
+      "previousResult": "Download is from the previous input.",
       "discardCrop": "បោះបង់ការកែសម្រួលច្រឹបដែលមិនទាន់រក្សាទុក?",
       "pastedImage": "រូបភាពដែលបានបិទភ្ជាប់",
       "lineDedupeHelp": "ប្រៀបធៀបបន្ទាត់ទាំងមូលឱ្យដូចគ្នាពិតប្រាកដ រួមទាំងចន្លោះ និងអក្សរធំតូច។ រក្សាទុកលើកដំបូង។",
@@ -2330,6 +2331,18 @@
     "reference": "ការប៉ាន់ស្មានយោង",
     "referenceHint": "ប៉ាន់ស្មានតាមតម្លៃយោង។ អាចបញ្ចូលតម្លៃវិភាគទានពិតក្នុងការកំណត់។",
     "referenceScope": "គ្រប់ខែប្រើតម្លៃយោងដូចគ្នា មិនមែនជាការបង់ប្រាក់ពិតពីមុនទេ។"
+  },
+  "taxFinance": {
+    "monthHistory": "Monthly income status",
+    "confirmedActual": "Actual income confirmed",
+    "confirmedNoIncome": "No wage income confirmed",
+    "refundRequirements": "A refund or tax due estimate requires a closed tax year, confirmed records for all 12 months, and actual wage withholding plus actual bonus withholding when a bonus applies. Enter 0 if nothing was withheld.",
+    "noIncomeConflict": "Confirmed months without wage income must have zero wage, contributions, and taxable adjustments.",
+    "wageNet": "ប្រាក់ខែប៉ាន់ស្មាននៅផ្ទះ",
+    "monthNetWithBonus": "Monthly take-home including bonus",
+    "annualNetEstimate": "ប្រាក់ខែសុទ្ធប្រចាំឆ្នាំប៉ាន់ស្មាន (រួមទាំងប្រាក់រង្វាន់) · ការប៉ាន់ស្មានពីប្រាក់ខែ",
+    "autoRatioEstimateVerified": "ការប៉ាន់ស្មានពីប្រាក់ខែ · ផ្ទៀងផ្ទាត់",
+    "autoRatioEstimateReference": "ការប៉ាន់ស្មានពីប្រាក់ខែ · ការប៉ាន់ស្មានយោង"
   },
   "taxUnified": {
     "run": "គណនាប្រាក់ខែ និងប្រាក់ចំណូលប្រចាំឆ្នាំ",

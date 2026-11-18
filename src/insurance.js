@@ -4,7 +4,7 @@ import {registerContentCheck} from './tools/shared/content-state.js';
 import {actionArea} from './tools/shared/workspace.js';
 import {calculateContributions} from './tools/payroll/contributions.js';
 import {buildPayrollBreakdowns,renderPayrollBreakdowns,payrollBreakdownRows} from './tools/payroll/breakdown.js';
-import {calculateWage} from './tools/payroll/tax.js';
+import {calculateWage,shanghaiPeriod} from './tools/payroll/tax.js';
 import {mountDeductionAssistant} from './tools/payroll/deduction-assistant.js';
 import {resolveEstimatePolicy as resolvePolicy,cities,policyVersion} from './tools/payroll/policy.js';
 import {copyText} from './tools/shared/page.js';
@@ -14,11 +14,12 @@ import {$,field,select,check,note,value,cityMarkup,mountCity,deductions,mountDed
 document.body.classList.add('payroll-page');
 const ids=['pension','medical','unemployment','maternity','injury','housing'];
 const details=(id,key,body)=>`<details id="${id}"><summary data-i18n="${key}"></summary>${body}</details>`;
-const currentMonth=new Date().getFullYear()+'-'+String(new Date().getMonth()+1).padStart(2,'0');
+const {year,month}=shanghaiPeriod(),currentMonth=year+'-'+String(month).padStart(2,'0');
 initTool('insurance',`<div class="payroll-workspace insurance-workspace"><section class="tool-card" id="insurance-input">
 <div class="payroll-period-row">${field('insurance-month','payroll.month',currentMonth,'month','min="2026-01" max="9999-12"')}</div>
 <div class="payroll-fields insurance-primary">${cityMarkup('insurance')}${field('insurance-salary','payroll128.salary')}<div class="field"><label for="insurance-housing-choice" data-i18n="payroll128.housingRate"></label><select id="insurance-housing-choice">${Array.from({length:8},(_,i)=>`<option value="${i+5}" ${i===2?'selected':''}>${i+5}%</option>`).join('')}<option value="custom" data-i18n="payroll128.customRate"></option><option value="none" data-i18n="payroll128.noHousing"></option></select></div></div>
 <div class="tool-actions" id="insurance-actions"><button type="button" id="insurance-run" class="primary" data-i18n="payroll128.runInsurance"></button></div>
+<p class="tool-note" id="insurance-estimate-context"></p>
 <details id="insurance-city-settings"><summary><span data-i18n="taxUnified.cityConditions"></span> <small id="insurance-city-notice" class="tool-note" role="status" hidden></small></summary>
 <p id="insurance-base-hint" class="tool-note"></p>${field('insurance-housing-employee','payroll128.customHousing')}<div hidden>${check('insurance-active-housing','insuranceEase.includeHousing',true)}</div>
 <div id="insurance-profile" hidden>${select('insurance-tier','payroll.medicalTier',[['0','payroll.tier1'],['1','payroll.tier2']],'0')}${check('insurance-hukou','payroll.hukou')}</div></details>
@@ -32,6 +33,11 @@ const title=document.querySelector('#tool-root h1');title.id='insurance-title';t
 const getSpecial=mountDeductions('insurance-tax'),basicDeduction=mountBasicDeduction('insurance-tax');
 let policy,result,rows=[],snapshot,breakdowns,fingerprint='',previousPolicy='',resultForm='',housingEdited=false,customHousing='';
 const custom=()=>$('insurance-custom-mode').checked;
+const ratioStatus=p=>t(!p?'insuranceEase.policyMissing':p.reference?'taxFinance.autoRatioEstimateReference':p.items.some(item=>!item.verified)?'insuranceEase.policyMissing':'taxFinance.autoRatioEstimateVerified');
+function estimateContext(){
+ const city=$('insurance-city').selectedOptions[0]?.textContent,housing=value('insurance-housing-employee');
+ $('insurance-estimate-context').textContent=[value('insurance-month'),custom()?t('insuranceEase.customWarning'):value('insurance-city')?city+' · '+ratioStatus(policy):t('payroll.chooseCity'),$('insurance-active-housing').checked&&housing?t('payroll.housingEmployee')+' '+housing+'%':null].filter(Boolean).join(' · ');
+}
 function policyStatus(p){if(p?.reference)return 'payroll128.reference';return !p||p.items.some(i=>!i.verified)?'insuranceEase.policyMissing':p.items.some(i=>!i.mergedInto&&i.employer===null)?'insuranceEase.personalOnly':'insuranceEase.bothReady';}
 mountCity('insurance');
 const cityControl=$('insurance-city').closest('.choices');cityControl.id='insurance-city-control';cityControl.tabIndex=0;
@@ -46,7 +52,7 @@ function syncHousing(){
  $('insurance-housing-employee').closest('.field').hidden=value('insurance-housing-choice')!=='custom';
  $('insurance-housing-employee').disabled=!enabled;$('insurance-housing-employer').disabled=!enabled;
  $('insurance-linked-summary').hidden=!enabled||!value('insurance-housing-employer');
- $('insurance-linked-summary').textContent=t(linked?'insuranceEase.linkedSummary':'insuranceEase.separateSummary',{rate:value('insurance-housing-employer')||'—'});
+ $('insurance-linked-summary').textContent=t(linked?'insuranceEase.linkedSummary':'insuranceEase.separateSummary',{rate:value('insurance-housing-employer')||'—'});estimateContext();
 }
 function refreshPolicy(){
  policy=undefined;try{if(value('insurance-city'))policy=resolvePolicy(value('insurance-city'),value('insurance-month'),{tier:value('insurance-tier'),hukou:$('insurance-hukou').checked});}catch{/* Explicit calculation reports missing policy or month. */}
@@ -105,7 +111,8 @@ function render(){
  const root=$('insurance-values'),dl=root.firstElementChild;dl.classList.add('payroll-summary-grid');
  const footer=document.createElement('dl');footer.id='insurance-company';footer.className='payroll-values insurance-subtotals';
  for(const out of dl.querySelectorAll('output')){const raw=rows.find(row=>row[0]===out.dataset.value)?.[2];if(/^-?\d+(?:\.\d+)?$/.test(raw))out.textContent=formatMoney(raw);if(['employeeSocial','employeeHousing','companyCost'].includes(out.dataset.value))footer.append(out.closest('.payroll-value'));else out.closest('.payroll-value').querySelector('button').hidden=true;}
- const condition=document.createElement('p');condition.className='payroll-result-context';condition.id='insurance-condition';condition.textContent=[snapshot.cityName||t('payroll.custom'),snapshot.month,snapshot.custom?t('insuranceEase.customWarning'):snapshot.reference?t('payroll128.reference'):value('insurance-mode')==='actual'?t('payroll.actualBase'):t('payroll128.estimateBase')].join(' · ');root.prepend(condition);
+ const condition=document.createElement('p');condition.className='payroll-result-context';condition.id='insurance-condition';const housing=result.items.find(item=>item.id==='housing');
+ condition.textContent=[snapshot.custom?snapshot.cityName||t('payroll.custom'):$('insurance-city').selectedOptions[0]?.textContent||snapshot.cityName,snapshot.month,snapshot.custom?t('insuranceEase.customWarning'):ratioStatus(policy),t(snapshot.mode==='actual'?'payroll.actualBase':'payroll128.estimateBase'),t('payroll.housingEmployee')+' '+new D(housing.employeeRate??0).mul(100).toString()+'%'].join(' · ');root.prepend(condition);
  breakdowns=buildPayrollBreakdowns({gross:amount(snapshot.salary,'salary').toFixed(2),net:result.tax?.net??result.cashBeforeTax,tax:result.tax?.currentTax??null,employeeTotal:result.employeeTotal,contributions:result});
  const charts=document.createElement('div');charts.id='insurance-breakdowns';renderPayrollBreakdowns(charts,breakdowns);dl.after(charts);
  const detail=document.createElement('section');detail.id='insurance-result-details';const table=document.createElement('table');table.className='payroll-table';
@@ -127,7 +134,7 @@ function errorField(error){
  if(error.field==='employee-supplemental')return 'insurance-supplemental-employee';if(error.field==='employer-supplemental')return 'insurance-supplemental-employer';
  return $(error.field)?error.field:$('insurance-'+error.field)?'insurance-'+error.field:error.field==='specialDeduction'?'insurance-tax-special':error.field==='otherDeduction'?'insurance-tax-other':$('insurance-tax-'+error.field)?'insurance-tax-'+error.field:'insurance-salary';
 }
-function run(){try{const input=read(),key=JSON.stringify(input);if(result&&key===fingerprint)return;clearStatus();const next=calculateContributions(input.data,input.policy);let taxError;if(input.taxDraft!==null)try{attachTax(next,input);}catch(error){taxError=error;}result=next;fingerprint=key;resultForm=financialDraft($('insurance-input'));snapshot={...next.conditions,items:next.items,tax:input.taxDraft!==null?{...(next.tax?.conditions||{...monthParts(value('insurance-month')),startMonth:value('insurance-tax-startMonth'),...basicDeduction.read()}),status:taxError?'failed':'ready',...(taxError?{errorCode:taxError.code}:{})}:null};result.taxError=taxError;render();if(taxError)showError(taxError,{field:errorField(taxError),focus:true});}catch(error){clearStatus();showError(error,{field:errorField(error),focus:true});}}
+function run(){try{const input=read(),key=JSON.stringify(input);if(result&&key===fingerprint)return;clearStatus();const next=calculateContributions(input.data,input.policy);let taxError;if(input.taxDraft!==null)try{attachTax(next,input);}catch(error){taxError=error;}result=next;fingerprint=key;resultForm=financialDraft($('insurance-input'));snapshot={...next.conditions,ratioSource:input.policy.custom?'manual':input.policy.reference?'reference':input.policy.items.some(item=>!item.verified)?'missing':'verified',items:next.items,tax:input.taxDraft!==null?{...(next.tax?.conditions||{...monthParts(value('insurance-month')),startMonth:value('insurance-tax-startMonth'),...basicDeduction.read()}),status:taxError?'failed':'ready',...(taxError?{errorCode:taxError.code}:{})}:null};result.taxError=taxError;render();if(taxError)showError(taxError,{field:errorField(taxError),focus:true});}catch(error){clearStatus();showError(error,{field:errorField(error),focus:true});}}
 const input=$('insurance-input');
 // Mode drafts stay in this page; salary, payment month and attached tax settings are shared.
 const modeFields=[...input.querySelectorAll('input[id],select[id]')].filter(node=>!['insurance-salary','insurance-month','insurance-custom-mode','insurance-city','insurance-tier','insurance-hukou'].includes(node.id)&&!node.id.startsWith('insurance-tax-'));
