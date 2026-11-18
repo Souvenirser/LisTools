@@ -7,7 +7,7 @@ test.beforeEach(async({page})=>{page.on('dialog',dialog=>dialog.accept());});
 
 test('removed low-value tools are absent from navigation and search',async({page})=>{
  await page.goto('/text.html');await page.locator('button.brand').click();
- for(const name of ['interview','experience','salary']){await page.locator('#tool-menu-search').fill(name);await expect(page.locator(`#tool-menu a[data-target="${name}.html"]`)).toHaveCount(0);}
+ for(const name of ['interview','experience']){await page.locator('#tool-menu-search').fill(name);await expect(page.locator(`#tool-menu a[data-target="${name}.html"]`)).toHaveCount(0);}
  await page.locator('#tool-menu-search').fill('');await expect(page.locator('#tool-menu summary').filter({hasText:/Recruiting helpers|招聘助手/})).toHaveCount(0);
 });
 test('text task examples demonstrate deduplication and extraction without writing patterns',async({page})=>{

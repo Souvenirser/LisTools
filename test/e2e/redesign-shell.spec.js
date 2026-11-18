@@ -4,7 +4,7 @@ test('tool menu uses decorative SVG icons without losing text or current-tool se
  await page.goto('/qr.html');await page.locator('button.brand').click();
  await expect(page.locator('#tool-menu nav>details')).toHaveCount(4);
  await expect(page.locator('#tool-menu nav>details[open]')).toHaveCount(1);
- await expect(page.locator('#tool-menu nav .tool-menu-icon svg')).toHaveCount(21);
+ await expect(page.locator('#tool-menu nav .tool-menu-icon svg')).toHaveCount(22);
  await expect(page.locator('#tool-menu nav>details>summary .tool-menu-icon')).toHaveCount(0);
  const columns=await page.locator('#tool-menu details[data-group-id=developer] a').evaluateAll(rows=>rows.map(row=>['.tool-menu-icon','.tool-menu-name'].map(selector=>row.querySelector(selector).getBoundingClientRect().x)));
  expect(new Set(columns.map(row=>row.join(','))).size).toBe(1);

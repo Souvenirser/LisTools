@@ -125,3 +125,13 @@ Government policy sources, dates and verification status accompany each local re
 ## Payroll reference parameters (2026-11-13 snapshot)
 
 Numerical contribution bases and rates are referenced from https://sbjsq.tixiaolu.com/ and its city pages at the user's request. Personal contributions follow the homepage calculator; employer rates follow the city-page employer columns. Source URLs, capture date and page SHA-256 values are recorded in src/tools/payroll/reference-cities.json. These are reference estimates, not a claim of official policy verification. No source JavaScript, page prose, images or styles are copied.
+
+## salary-clock adapted salary/calendar flow
+
+Source: https://github.com/XiaoZ-0218/salary-clock/tree/47009d018d5489025743c98bc49752ab8eb42045
+MIT; copyright (c) 2026 Zhang Xiao. See `licenses/salary-clock-47009d0.LICENSE` and `src/tools/salary/NOTICE.md`.
+
+## holiday-cn offline holiday data
+
+Source: https://github.com/NateScarlet/holiday-cn/tree/2026.01.01
+MIT; copyright (c) 2019 NateScarlet. The 2025/2026/2027 JSON snapshots are bundled without runtime requests. An empty placeholder is not an available calendar. See `src/tools/salary/data/NOTICE.md` and `licenses/holiday-cn-2026.01.01.LICENSE`.

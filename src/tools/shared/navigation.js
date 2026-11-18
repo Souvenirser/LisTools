@@ -24,9 +24,10 @@ export const pages = [
   {id:'timer',file:'timer.html',key:'timer.name',icon:'timer',zh:'倒计时与秒表',en:'Timer & stopwatch',group:'daily',summaryKey:'ux.purpose_timer'},
   {id:'insurance',file:'insurance.html',key:'insurance.name',icon:'shield-check',zh:'五险一金计算器',en:'Social insurance and housing fund',group:'daily',summaryKey:'insurance.description'},
   {id:'tax',file:'tax.html',key:'tax.name',icon:'banknote',zh:'个税计算器',en:'Individual income tax calculator',group:'daily',summaryKey:'tax.description'},
+  {id:'salary',file:'salary.html',key:'salary.name',icon:'banknote',zh:'牛马激励',en:'Salary motivation',group:'daily',summaryKey:'salary.description',standalone:true},
 ];
 
-const aliases = {insurance:'五险一金 社保 公积金 住房公积金 social insurance housing fund',tax:'个税 个人所得税 税后工资 工资 到手工资 income tax take home pay',json:'format beautify 美化',diff:'compare 对比',timestamp:'date time 日期',speedtest:'speed network 网速',cron:'crontab schedule 定时',password:'passphrase random 随机 口令',regex:'regexp regular expression 正则 匹配 正则测试（开发用） Regex testing (developers)'};
+const aliases = {insurance:'五险一金 社保 公积金 住房公积金 social insurance housing fund',tax:'个税 个人所得税 税后工资 工资 到手工资 income tax take home pay',salary:'salary wage payroll earnings 牛马 工资 薪资 薪水 收入 激励',json:'format beautify 美化',diff:'compare 对比',timestamp:'date time 日期',speedtest:'speed network 网速',cron:'crontab schedule 定时',password:'passphrase random 随机 口令',regex:'regexp regular expression 正则 匹配 正则测试（开发用） Regex testing (developers)'};
 export const conversionGroups = categories.map(category=>({
   ...category,
   tools:tools.filter(tool=>tool.category===category.id).map(tool=>({

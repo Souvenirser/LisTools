@@ -65,6 +65,8 @@ const wordlistLicense=await readFile(path.join(wordlistDirectory,'LICENSE-CC-BY-
 licenses+=`\n## EFF Large Wordlist (CC-BY-4.0)\n\n${wordlistNotice}\n\n${wordlistLicense}\n`;
 licenses+=`\n## Lucide static SVG subset - 1.61.0 (ISC; Feather MIT)\n\n${await readFile(path.join(root,'licenses/lucide-1.61.0.LICENSE'),'utf8')}\n`;
 for(const [name,file]of [['city-salary / 8abd9cd','city-salary-8abd9cd.LICENSE'],['income-calc / 71e1a10','income-calc-71e1a10.LICENSE']])licenses+=`\n## ${name} (MIT; payroll policy and calculation references)\n\n${await readFile(path.join(root,'licenses',file),'utf8')}\n`;
+licenses+=`\n## salary-clock adapted flow - 47009d0 (MIT)\n\n${await readFile(path.join(root,'licenses/salary-clock-47009d0.LICENSE'),'utf8')}\n`;
+licenses+=`\n## holiday-cn - 2026.01.01 (MIT)\n\n${await readFile(path.join(root,'licenses/holiday-cn-2026.01.01.LICENSE'),'utf8')}\n`;
 await writeFile(licensePath, licenses);
 await writeFile(path.join(dist, 'LICENSE'), await readFile(path.join(root, 'LICENSE')));
 await writeFile(path.join(dist,'THIRD_PARTY_NOTICES.md'),await readFile(path.join(root,'THIRD_PARTY_NOTICES.md')));

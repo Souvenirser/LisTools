@@ -234,7 +234,7 @@ MD5 是不可逆摘要，适用于校验和及旧系统兼容；不能用于密�
 
 图片默认清除 EXIF，JPEG 透明区域填白；达到目标大小可能需要用户允许降低分辨率。PNG 目标压缩可能减少颜色，无法达到时如实提示。图片最多 30 个、合计 100 MiB，单图最多 40 MP / 单边 16,384 px。PDF 最多 100 个文件、合计 100 MiB / 1,000 页；图片转 PDF 总像素最多 120 MP。加密 PDF 不支持，表单、书签、附件和数字签名的保留有限制。所有导出生成新文件。
 
-计时器仅保存当前标签页的数字计时状态；关闭页面后不承诺后台提醒。其他输入、文件和结果不持久保存。
+计时器仅保存当前标签页的数字计时状态；关闭页面后不承诺后台提醒。牛马激励按用户确认保存工资与排班配置。其他工具输入、文件和结果不持久保存。
 
 运行 `npm test` 检查核心逻辑，运行 `npm run test:browser` 构建并验证 Chrome 页面；非 macOS 环境可通过 `LISTOOLS_CHROME` 指定浏览器可执行文件。`npx playwright install firefox webkit` 安装独立测试引擎后，运行 `npm run test:cross-browser` 验证 Chromium、Firefox、WebKit；`npm run test:edge` 使用已安装的 Edge，也可通过 `LISTOOLS_EDGE` 指定其可执行文件。页面测试与实际扩展安装分别记录。本轮移除记录见 [Offer 对比移除验收](./docs/remove-offer-verification.md)，此前交互调整见 [用途与交互验收记录](./docs/tool-usability-verification.md)，之前版本的验收证据保留在 [办公工具原始记录](./docs/office-tools-verification.md)。
 
@@ -366,3 +366,9 @@ PDF 导入时暂不接收第二批并显示读取状态，结束后可以继续�
 城市目录包含20城和自定义，但目录覆盖不代表政策全部核验。完整状态见 [20城政策覆盖表](docs/payroll-policy-coverage.md)。缺失或待核验政策必须填写并确认自定义参数；年度自动估算按每月匹配，不能用当前规则乘12。未知单位费率不显示成0。
 
 政策维护：将候选数据转换为同结构本地JSON后，执行 `node scripts/compare-payroll-policy.js candidate.json`，仅输出差异，不更新参数。先官方复核有效期、基数、比例、固定费用及舍入，再更新算例和随版本发布。开源来源与MIT许可见 THIRD_PARTY_NOTICES.md。
+
+## 牛马激励
+
+在工具栏菜单的「日常工具」打开牛马激励，填写月工资、时区与排班后选择「保存并启用」。工资按工作时段估算。默认上 5 休 2，每天计薪 8 小时。日历可调整休息日，也可将本地收录的中国大陆放假与调休应用到草稿。
+
+看板提供底部工资条、桌面小窗和金额遮罩。工资条可在 LisTools 其他工具页显示。桌面小窗需要浏览器支持 Document Picture-in-Picture，随来源工资页关闭。工资和排班配置保存在当前浏览器，可在工资页清除。

@@ -5,9 +5,9 @@ import {activeTool} from './task-helpers.js';
 test('all packaged pages load without external requests or JavaScript errors',async({page})=>{
   const errors=[],external=[];page.on('pageerror',error=>errors.push(error.message));
   page.on('request',request=>{if(/^https?:/.test(request.url())&&!request.url().startsWith('http://127.0.0.1:'))external.push(request.url());});
-  for(const {file} of pages.filter(item=>!item.file.includes('#'))) {
+  for(const {file,standalone} of pages.filter(item=>!item.file.includes('#'))) {
     await page.goto(`/${file}`);await expect(page.locator('#settings-open')).toBeVisible();
-    await expect(activeTool(page).locator('html')).toHaveAttribute('data-ui-state','ready');
+    await expect((standalone?page:activeTool(page)).locator('html')).toHaveAttribute('data-ui-state','ready');
     await page.locator('button.brand').click();await expect(page.locator('#tool-menu')).toBeVisible();await page.locator('#tool-menu-search').press('Escape');await expect(page.locator('#tool-menu')).toBeHidden();
   }
   expect(errors).toEqual([]);expect(external).toEqual([]);

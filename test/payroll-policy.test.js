@@ -40,7 +40,7 @@ test('both independent tools are searchable while retired recruiting tools remai
  for(const query of ['五险一金','社保','公积金'])assert.ok(searchNavigation(query).some(p=>p.file==='insurance.html'));
  assert.ok(searchNavigation('年终奖').some(p=>p.file==='tax.html#bonus'));
  assert.equal(currentTarget('/tax.html','#annual'),'tax.html#annual');
- assert.ok(!pages.some(p=>['salary','interview','experience'].includes(p.id)));
+ assert.ok(!pages.some(p=>['interview','experience'].includes(p.id)));
 });
 test('Fujian injury candidate starts after the July 2026 notice and remains unverified',()=>{
  for(const id of ['xiamen','fuzhou']){

@@ -26,7 +26,7 @@ for(const language of ['zh-Hans','en','de','ar','ru'])test(`${language} menu and
  test.setTimeout(120000);
  await page.goto('/index.html');await selectLanguage(page,language);
  for(const entry of pages){
-  await page.goto('/'+entry.file);await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');const heading=(await activeTool(page).getByRole('heading',{level:1}).innerText()).trim();await page.locator('button.brand').click();await settled(page);
+  await page.goto('/'+entry.file);await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');const heading=(await (entry.standalone?page:activeTool(page)).getByRole('heading',{level:1}).innerText()).trim();await page.locator('button.brand').click();await settled(page);
   await expect(page.locator('#tool-menu a[aria-current="page"] .tool-menu-name')).toHaveText(heading);await page.locator('#tool-menu-search').press('Escape');
  }
 });
@@ -34,10 +34,11 @@ for(const language of ['zh-Hans','en','de','ar','ru'])test(`${language} menu and
 for(const width of [1440,390])test(`all tool, conversion and task routes keep one current entry at ${width}px`,async({page})=>{
  test.setTimeout(180000);
  await page.setViewportSize({width,height:900});
- const tool=activeTool(page);
  const routes=[...new Set([...pages.map(page=>page.file),...tools.map(tool=>'convert.html#'+tool.id),...Object.entries(taskRoutes).flatMap(([id,tasks])=>tasks.map(task=>`${id}.html#${task}`))])];
  for(const route of routes){
-  await page.goto('/'+route);await expect(tool.locator('html')).toHaveAttribute('data-ui-state','ready');const [file,task]=route.split('#');
+  const [file,task]=route.split('#'),entry=pages.find(page=>page.file===file);
+  const tool=entry?.standalone?page:activeTool(page);
+  await page.goto('/'+route);await expect(tool.locator('html')).toHaveAttribute('data-ui-state','ready');
   const selectedTask=tool.locator('.task-guide [data-task][aria-pressed="true"]');
   if(await tool.locator('.task-guide').count())await expect(selectedTask).toHaveCount(1);
   if(file==='tax.html'&&task==='wage')await expect(tool.locator('#tax-salary')).toBeVisible();

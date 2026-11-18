@@ -12,6 +12,7 @@ export async function mountWorkspace(){
  delete document.body.dataset.layout;
  const main=document.querySelector('.app-layout>main');
  main.replaceChildren();
+ const salaryBarSlot=document.createElement('div');salaryBarSlot.id='workspace-salary-bar-slot';document.body.append(salaryBarSlot);
  const notice=document.createElement('div');notice.className='workspace-navigation-status';notice.hidden=true;notice.setAttribute('role','status');
  const message=document.createElement('span'),retry=document.createElement('button');retry.type='button';notice.append(message,retry);main.append(notice);
  const cache=new Map();let active,pending,sequence=0,disposed=false,noticeFailed=false,modal,blocked=[];
@@ -48,12 +49,16 @@ export async function mountWorkspace(){
  function navigate(value,{history=false,source}={}){
   const url=identify(value);if(!url||disposed||source&&source!==active?.frame)return false;
   const same=active&&url.pathname===active.url.pathname;
-  if(!history&&!same&&content(active)){window.open(url.href,'_blank','noopener');return true;}
+  const page=pages.find(page=>page.file.split('#')[0]===url.pathname.split('/').pop());
+  const cachedDraft=page?.standalone&&Array.from(cache.values()).some(content);
+  if(!history&&!same&&(content(active)||cachedDraft)){window.open(url.href,'_blank','noopener');return true;}
+  // Document Picture-in-Picture needs a top-level source document.
+  if(page?.standalone){location.assign(url.href);return true;}
   if(modal&&url.href!==active.url.href)dismissModal();
   if(same){cancelPending();if(url.href===active.url.href){if(location.href!==url.href)updateRoute(url,!history);return true;}
    const record=active;record.frame.contentWindow.LisToolsTool.navigate(url.href);queueMicrotask(()=>{if(active!==record)return;active.url=new URL(active.frame.contentWindow.location.href);document.title=active.frame.contentDocument.title;updateRoute(active.url,!history);});return true;}
   if(pending?.url.href===url.href)return true;
-  cancelPending();const frame=document.createElement('iframe');frame.dataset.workspaceFrame=String(++sequence);frame.setAttribute('inert','');frame.title=pages.find(page=>page.file.split('#')[0]===url.pathname.split('/').pop())?.en||'LisTools';
+  cancelPending();const frame=document.createElement('iframe');frame.dataset.workspaceFrame=String(++sequence);frame.setAttribute('inert','');frame.title=page?.en||'LisTools';
   let record=cache.get(url.pathname);if(record){cache.delete(url.pathname);record.url=url;record.frame.contentWindow.LisToolsTool.navigate(url.href);pending=record;reveal(record,!history);return true;}
   record={frame,url,push:!history};pending=record;frame.src=url.href;main.insertBefore(frame,notice);
   record.slow=setTimeout(()=>{if(pending===record)status(false);},3000);

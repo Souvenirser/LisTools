@@ -2,6 +2,15 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as navigation from '../src/tools/shared/navigation.js';
 
+test('salary is a searchable standalone daily tool',()=>{
+ const salary=navigation.pages.find(page=>page.id==='salary');
+ assert.equal(salary?.file,'salary.html');
+ assert.equal(salary.group,'daily');
+ assert.equal(salary.standalone,true);
+ assert.equal(navigation.searchNavigation('牛马激励')[0]?.file,'salary.html');
+ assert.ok(navigation.searchNavigation('salary').some(page=>page.file==='salary.html'));
+});
+
 test('MD5 uses a plain checksum name without changing its stable route', () => {
   const md5=navigation.pages.find(page=>page.id==='md5');
   assert.equal(md5.zh,'MD5 校验');

@@ -27,7 +27,19 @@ initTool('tax',`<div class="payroll-workspace tax-workspace"><section class="too
 <div id="tax-wage-columns"><section id="tax-current-fields"><h2 id="tax-current-heading" data-i18n="payroll128.thisMonth" hidden></h2>
 ${citySettings('tax')}
 <div class="payroll-fields tax-amount-fields">${field('tax-salary','taxEase.monthlySalary')}<div class="tax-deduction-total">${field('tax-special','payroll.special','0')}${assistantButton('tax')}</div></div>
-<div class="tax-bonus-main">${field('tax-bonus-months','taxUnified.bonusMonths','0','text','list="tax-bonus-month-options" aria-describedby="tax-bonus-basis"')}<datalist id="tax-bonus-month-options">${[0,1,2,3,4].map(n=>`<option value="${n}"></option>`).join('')}</datalist>${field('tax-bonus','payroll.bonusAmount','0')}</div><p id="tax-bonus-basis" class="tool-note"></p>
+<div class="tax-bonus-main">
+  <div class="field">
+    <label for="tax-bonus-months" data-i18n="taxUnified.bonusMonths"></label>
+    <div class="tax-bonus-months-control" dir="ltr">
+      <input id="tax-bonus-months" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="0" aria-describedby="tax-bonus-basis">
+      <button id="tax-bonus-months-toggle" type="button" popovertarget="tax-bonus-month-options" data-i18n-aria-label="taxUnified.bonusMonths"><span aria-hidden="true">▾</span></button>
+      <div id="tax-bonus-month-options" popover role="group" data-i18n-aria-label="taxUnified.bonusMonths">
+        ${[0,1,2,3,4,5,6].map(n=>`<button type="button" value="${n}">${n}</button>`).join('')}
+      </div>
+    </div>
+  </div>
+  ${field('tax-bonus','payroll.bonusAmount','0')}
+</div><p id="tax-bonus-basis" class="tool-note"></p>
 <div id="tax-payment-preview" class="payroll-payment-preview" hidden></div>
 <div id="tax-manual">${field('tax-contributions','taxEase.personalPayment')}${note('payroll128.paymentHint')}</div>
 <div class="tax-assumption-line"><p class="tool-note" id="tax-assumption"></p><button type="button" class="tax-text-action" id="tax-edit-employment" data-i18n="payroll128.edit"></button></div>
@@ -231,6 +243,28 @@ function fillMonths(confirmOverwrite,quiet=false){
  for(const row of months){const n=row.month;for(const [k,source]of [['salary','salary'],['contributions','contributions'],['deductible','deductibleContributions'],['special','specialDeduction'],['other','otherDeduction'],['adjustment','taxableAdjustment']])$(`tax-a-${n}-${k}`).value=row[source];$(`tax-a-${n}-reduced`).checked=$('tax-annual-reduced').checked;$(`tax-a-${n}-predicted`).checked=row.predicted;}
  monthlyPrepared=true;return true;
 }
+const bonusMonths=$('tax-bonus-months'),bonusOptions=$('tax-bonus-month-options');
+function positionBonusOptions(event){
+ if(event.type==='beforetoggle' ? event.newState!=='open' : !bonusOptions.matches(':popover-open'))return;
+ const {left,top,bottom,width}=bonusMonths.getBoundingClientRect();
+ const below=innerHeight-bottom,above=top,openAbove=above>below;
+ Object.assign(bonusOptions.style,{
+  left:`${left}px`,width:`${width}px`,
+  top:openAbove?'auto':`${bottom+4}px`,bottom:openAbove?`${innerHeight-top+4}px`:'auto',
+  maxHeight:`${Math.max(above,below)-8}px`
+ });
+}
+bonusOptions.addEventListener('beforetoggle',positionBonusOptions);
+addEventListener('resize',positionBonusOptions);
+document.addEventListener('scroll',positionBonusOptions,true);
+bonusOptions.addEventListener('click',event=>{
+ const option=event.target.closest('button');
+ if(!option)return;
+ bonusMonths.value=option.value;
+ bonusMonths.dispatchEvent(new Event('input',{bubbles:true}));
+ bonusOptions.hidePopover();
+ bonusMonths.focus({preventScroll:true});
+});
 for(const event of ['input','change'])$('tax-input').addEventListener(event,event=>{
  const id=event.target.id;if(!id||(event.target.closest('.choices')&&!event.target.matches('select')))return;
  if(id==='tax-bonus')bonusEntry='amount';else if(id==='tax-bonus-months')bonusEntry='months';if(['tax-salary','tax-bonus','tax-bonus-months'].includes(id))syncBonus();

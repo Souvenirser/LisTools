@@ -1,9 +1,35 @@
 import {test,expect} from '@playwright/test';
 async function open(page){await page.addInitScript(()=>localStorage.setItem('listools-language','zh-Hans'));await page.goto('/tax.html');const f=page.frameLocator('iframe[data-workspace-active]');await f.locator('#tax-salary').waitFor();await f.locator('#tax-source').selectOption('manual');await f.locator('#tax-contributions').fill('0');return f;}
-test('bonus months start at zero beside salary, and offer 1/2/3/4 without limiting custom input',async({page})=>{
- const f=await open(page);await expect(f.locator('#tax-bonus-months')).toBeVisible();await expect(f.locator('#tax-bonus-months')).toHaveValue('0');await expect(f.locator('#tax-bonus')).toHaveValue('0.00');expect(await f.locator('#tax-bonus-month-options option').evaluateAll(ns=>ns.map(n=>n.value))).toEqual(['0','1','2','3','4']);
- const rect=await f.locator('#tax-bonus-months').boundingBox(),action=await f.locator('#tax-run').boundingBox();expect(rect.y).toBeLessThan(action.y);
- await f.locator('#tax-salary').fill('20000');for(const n of ['1','2','3','4','1.3','6.5']){await f.locator('#tax-bonus-months').fill(n);await expect(f.locator('#tax-bonus')).toHaveValue((Number(n)*20000).toFixed(2));}
+test('bonus presets are visible and selectable when months already has a value',async({page})=>{
+ const f=await open(page),months=f.locator('#tax-bonus-months'),amount=f.locator('#tax-bonus');
+ const toggle=f.getByRole('button',{name:'年终奖（个月）',exact:true});
+ const options=f.getByRole('group',{name:'年终奖（个月）',exact:true});
+ await expect(months).toBeVisible();
+ await expect(months).toHaveValue('0');
+ await expect(amount).toHaveValue('0.00');
+ const rect=await months.boundingBox(),action=await f.locator('#tax-run').boundingBox();
+ expect(rect.y).toBeLessThan(action.y);
+ await f.locator('#tax-salary').fill('20000');
+ await expect(toggle).toBeVisible();
+
+ for(const [n,expected] of [['1','20000.00'],['2','40000.00'],['3','60000.00'],['4','80000.00'],['5','100000.00'],['6','120000.00'],['0','0.00']]){
+  await toggle.click();
+  await expect(options.getByRole('button')).toHaveText(['0','1','2','3','4','5','6']);
+  const option=options.getByRole('button',{name:n,exact:true});
+  await expect(option).toBeInViewport();
+  await option.click();
+  await expect(options).toBeHidden();
+  await expect(months).toHaveValue(n);
+  await expect(amount).toHaveValue(expected);
+ }
+
+ await months.fill('6.5');
+ await expect(amount).toHaveValue('130000.00');
+ await toggle.click();
+ await expect(options.getByRole('button')).toHaveText(['0','1','2','3','4','5','6']);
+ await options.getByRole('button',{name:'5',exact:true}).click();
+ await expect(months).toHaveValue('5');
+ await expect(amount).toHaveValue('100000.00');
 });
 test('fractional bonus follows salary, manual amount remains independent, and exports use full amount',async({page})=>{
  const f=await open(page);await f.locator('#tax-period').fill('2026-11');await f.locator('#tax-salary').fill('20000');await f.locator('#tax-bonus-months').fill('1.3');await f.locator('#tax-run').click();await expect(f.locator('[data-value=bonusNet]')).toHaveText('25,220.00');await f.locator('#tax-salary').fill('30000');await expect(f.locator('#tax-bonus')).toHaveValue('39000.00');
