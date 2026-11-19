@@ -40,6 +40,75 @@ test('confirming a salary draft preserves the latest display choices from anothe
  await expect.poll(stored).toMatchObject({salary:'20000',masked:true,showBar:false});
  await expect(page.locator('#salary-earned')).toHaveText('¥••••');await expect(other.locator('#salary-earned')).toHaveText('¥••••');await expect(page.locator('#salary-bar')).toBeHidden();
 });
+
+test('a stale save confirmation cannot restore a schedule that another page cleared',async({page,context})=>{
+ await open(page);
+ const amount=page.locator('#salary-amount');
+ await amount.fill('16800');
+ await page.locator('#salary-save').click();
+ const other=await context.newPage();
+ await open(other);
+ await amount.fill('20000');
+ await page.locator('#salary-save').click();
+ await expect(page.locator('#salary-confirm')).toBeVisible();
+ await other.locator('#salary-clear').click();
+ await other.locator('#salary-confirm-apply').click();
+ await expect.poll(()=>other.evaluate(()=>localStorage.getItem('listools-salary-v1'))).toBeNull();
+ await page.locator('#salary-confirm-apply').click();
+ await expect(page.locator('#tool-status')).toContainText(/review|confirm/i);
+ await expect(amount).toHaveValue('20000');
+ expect(await page.evaluate(()=>localStorage.getItem('listools-salary-v1'))).toBeNull();
+ await page.locator('#salary-save').click();
+ await page.locator('#salary-confirm-apply').click();
+ await expect.poll(()=>page.evaluate(()=>JSON.parse(localStorage.getItem('listools-salary-v1'))?.salary)).toBe('20000');
+});
+
+test('the bottom bar reports a local-only mask and keeps it after a storage event',async({page,context})=>{
+ await open(page);
+ await page.locator('#salary-amount').fill('16800');
+ await page.locator('#salary-save').click();
+ await page.locator('#salary-bar-toggle').click();
+ const other=await context.newPage();
+ await open(other);
+ await page.evaluate(()=>{
+  const write=Storage.prototype.setItem;
+  Storage.prototype.setItem=function(key,value){
+   if(key==='listools-salary-v1')throw new DOMException('test quota','QuotaExceededError');
+   return write.call(this,key,value);
+  };
+ });
+ const bar=page.locator('#salary-bar');
+ await bar.locator('[data-salary-mask]').click();
+ await expect(bar.getByRole('status')).toContainText(/only on this page/i);
+ await page.evaluate(()=>{window.addEventListener('storage',()=>{window.salaryStorageSeen=true;},{once:true});});
+ await other.getByRole('button',{name:'Hide salary bar'}).first().click();
+ await expect.poll(()=>page.evaluate(()=>window.salaryStorageSeen)).toBe(true);
+ await expect(page.locator('#salary-earned')).toHaveText('¥••••');
+});
+test('two queued clicks on Hide both preserve the intended masking',async({page,context})=>{
+ await open(page);
+ await page.locator('#salary-amount').fill('16800');
+ await page.locator('#salary-save').click();
+ const other=await context.newPage();
+ await open(other);
+ await expect(other.locator('#salary-earned')).toHaveText('¥100.0000');
+ await page.evaluate(()=>new Promise(resolve=>{
+  void navigator.locks.request('listools-salary-v1',()=>new Promise(release=>{
+   window.releaseSalaryMaskLock=release;
+   resolve();
+  }));
+ }));
+ const pending=()=>page.evaluate(async()=> (await navigator.locks.query()).pending.filter(lock=>lock.name==='listools-salary-v1').length);
+ try{
+  await page.locator('#salary-mask').click();
+  await expect.poll(pending).toBe(1);
+  await other.locator('#salary-mask').click();
+  await expect.poll(pending).toBe(2);
+ }finally{await page.evaluate(()=>window.releaseSalaryMaskLock());}
+ await expect.poll(pending).toBe(0);
+ await expect(page.locator('#salary-earned')).toHaveText('¥••••');
+ await expect(other.locator('#salary-earned')).toHaveText('¥••••');
+});
 test('switching calendar modes restores each mode draft until the month changes',async({page})=>{
  await open(page,'2026-11-01T00:30:00+08:00');const mode=page.locator('#salary-mode'),day=page.locator('[data-salary-date="2026-11-02"]');
  await day.click();await expect(day).toHaveAttribute('data-overridden','true');

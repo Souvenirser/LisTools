@@ -2,7 +2,7 @@ import {initTool,$,showError,setStatus} from './tools/shared/office.js';
 import {registerContentCheck} from './tools/shared/content-state.js';
 import {t,language,onLanguageChange} from './i18n-runtime.js';
 import {defaultConfig,normalizeConfig,calendarDays,shiftTimes,monthAt} from './tools/salary/core.js';
-import {salaryStore} from './tools/salary/store.js';
+import {salaryStore,scheduleKey} from './tools/salary/store.js';
 import {money,readSalarySnapshot,toggleMask} from './tools/salary/view.js';
 import {toggleSalaryWindow,isSalaryWindowOpen} from './tools/salary/floating.js';
 import {mountTimeZoneSelector} from './timezone-selector.js';
@@ -16,7 +16,7 @@ initTool('salary',`<div class="salary-dashboard"><section class="tool-card salar
 ${label('mode','<select id="salary-mode"><option value="cycle" data-i18n="salary.cycle"></option><option value="monthly" data-i18n="salary.monthly"></option></select>')}<div class="salary-review-action"><button id="salary-review" type="button" class="primary" data-i18n="salary.reviewCalendar"></button></div>
 <div id="salary-cycle-fields" class="salary-form-fields salary-full">${label('work-days',number('work-days','5','min="1" step="1"'))}${label('rest-days',number('rest-days','2','min="0" step="1"'))}${label('anchor','<input id="salary-anchor" type="date">')}</div><div id="salary-monthly-fields" class="salary-full" hidden>${label('monthly-rest',number('monthly-rest','0','min="0" step="1"'))}</div>
 ${label('lunch-start','<input id="salary-lunch-start" type="time" value="12:00">')}${label('lunch-minutes',number('lunch-minutes','60','min="0" step="1"'))}
-<div class="field salary-full salary-timezone timezone-controls"><label id="salary-zone-caption" for="salary-zone" data-i18n="salary.zone"></label><select id="salary-zone"></select><button id="salary-zone-device" type="button" data-i18n="timestamp.restore"></button><p class="tool-note" data-i18n="salary.zoneHelp"></p></div></div><p id="salary-draft-notice" class="tool-note" hidden></p><p class="tool-note" data-i18n="salary.storageNote"></p></form></section><section class="tool-card"><h2 id="salary-calendar-title" tabindex="-1"></h2><p class="tool-note" data-i18n="salary.calendarHint"></p><p id="salary-calendar-notice" class="tool-note" role="status" hidden></p><div class="tool-actions"><button id="salary-apply-holidays" type="button" data-i18n="salary.applyHolidays"></button><button id="salary-weekends" type="button" data-i18n="salary.weekends"></button><button id="salary-reset-days" type="button" data-i18n="salary.resetDays"></button></div><p id="salary-holiday-info" class="tool-note"></p><a href="https://github.com/NateScarlet/holiday-cn/tree/2026.01.01" class="tool-note" target="_blank" rel="noopener" data-i18n="salary.holidaySourceLink"></a><p id="salary-calendar-summary" class="tool-note"></p><div id="salary-calendar" class="salary-calendar" tabindex="-1"></div><p class="tool-note" data-i18n="salary.scopeNote"></p><div class="tool-actions"><button id="salary-save" form="salary-form" type="submit" class="primary" data-i18n="salary.save"></button><button id="salary-clear" type="button" data-i18n="salary.clear" hidden></button></div></section></div><dialog id="salary-confirm" class="salary-confirm" aria-labelledby="salary-confirm-title"><h2 id="salary-confirm-title"></h2><p id="salary-confirm-copy"></p><div class="tool-actions"><button id="salary-confirm-apply" type="button" class="primary" data-i18n="salary.confirm"></button><button id="salary-confirm-cancel" type="button" data-i18n="salary.cancel"></button></div></dialog>`);
+<div class="field salary-full salary-timezone timezone-controls"><label id="salary-zone-caption" for="salary-zone" data-i18n="salary.zone"></label><select id="salary-zone"></select><button id="salary-zone-device" type="button" data-i18n="timestamp.restore"></button><p class="tool-note" data-i18n="salary.zoneHelp"></p></div></div><p id="salary-draft-notice" class="tool-note" hidden></p><p class="tool-note" data-i18n="salary.storageNote"></p></form></section><section class="tool-card"><h2 id="salary-calendar-title" tabindex="-1"></h2><p class="tool-note" data-i18n="salary.calendarHint"></p><p id="salary-calendar-notice" class="tool-note" role="status" hidden></p><div class="tool-actions"><button id="salary-apply-holidays" type="button" data-i18n="salary.applyHolidays"></button><button id="salary-weekends" type="button" data-i18n="salary.weekends"></button><button id="salary-reset-days" type="button" data-i18n="salary.resetDays"></button></div><p id="salary-holiday-info" class="tool-note"></p><a id="salary-holiday-source" href="https://github.com/NateScarlet/holiday-cn/releases" class="tool-note" target="_blank" rel="noopener" data-i18n="salary.holidaySourceLink"></a><p id="salary-calendar-summary" class="tool-note"></p><div id="salary-calendar" class="salary-calendar" tabindex="-1"></div><p class="tool-note" data-i18n="salary.scopeNote"></p><div class="tool-actions"><button id="salary-save" form="salary-form" type="submit" class="primary" data-i18n="salary.save"></button><button id="salary-clear" type="button" data-i18n="salary.clear" hidden></button></div></section></div><dialog id="salary-confirm" class="salary-confirm" aria-labelledby="salary-confirm-title"><h2 id="salary-confirm-title"></h2><p id="salary-confirm-copy"></p><div class="tool-actions"><button id="salary-confirm-apply" type="button" class="primary" data-i18n="salary.confirm"></button><button id="salary-confirm-cancel" type="button" data-i18n="salary.cancel"></button></div></dialog>`);
 let draft,dirty=false,external=false,pendingAction,previousState='',clearPending=false,pipPending=false,writePending=false,draftMasked=false,calendarNotice,activeConfig;
 registerContentCheck(()=>dirty||writePending||pipPending||isSalaryWindowOpen()||Boolean(draft&&(
  inputs().mode==='cycle'?draft.offDays.length:Object.keys(draft.overrides).length)));
@@ -45,6 +45,7 @@ function renderCalendar(){
  try{$('salary-end').textContent=minuteText(shiftTimes(raw).endMinutes);}catch{$('salary-end').textContent='—';}
  const notice=$('salary-calendar-notice');notice.hidden=!calendarNotice;if(calendarNotice&&notice.textContent!==t(calendarNotice))notice.textContent=t(calendarNotice);
  const holidays=monthHolidays(draft.month),holidayDates=new Map(holidays.days.map(day=>[day.date,day]));
+ $('salary-holiday-source').href='https://github.com/NateScarlet/holiday-cn/'+(holidays.version?'tree/'+holidays.version:'releases');
  $('salary-apply-holidays').disabled=!holidays.available||!holidays.days.length;$('salary-holiday-info').textContent=holidays.available?t('salary.holidaySource',{year:holidays.year,version:holidays.version})+(holidays.days.length?'':' '+t('salary.noMonthHolidays')):t('salary.holidaysUnavailable',{year:holidays.year});
  container.replaceChildren();let days;
  try{days=calendarDays(raw,draft.month);}catch{$('salary-calendar-summary').textContent=t('salary.completeSchedule');return;}
@@ -67,24 +68,26 @@ function render(){
  const activeMonth=$('salary-active-month');if(config){const month=monthAt(Date.now(),config.timeZone);activeMonth.dateTime=month;activeMonth.textContent=month;}$('salary-earned').textContent=money(result.earned,config?.masked);for(const key of ['today','hourly','perMinute','perSecond'])$('salary-'+key).textContent=money(result[key],config?.masked);
  const state=$('salary-state');if(previousState!==result.state||state.textContent!==t('salary.state_'+result.state)){state.textContent=t('salary.state_'+result.state);state.dataset.state=result.state;previousState=result.state;}
  $('salary-encouragement').textContent=t('salary.encourage_'+result.state);$('salary-progress').value=result.progress||0;
- $('salary-plan-stats').textContent=result.plan?.totalMs?t('salary.planStats',{work:result.plan.workDays,rest:result.plan.restDays,hours:String(result.plan.totalMs/3600000)}):'';
+ $('salary-plan-stats').textContent=result.error?t(result.error.code,result.error.params):result.plan?.totalMs?t('salary.planStats',{work:result.plan.workDays,rest:result.plan.restDays,hours:String(result.plan.totalMs/3600000)}):'';
  const pipOpen=isSalaryWindowOpen();$('salary-pip').disabled=pipPending||(!config&&!pipOpen);$('salary-pip').dataset.i18n=pipOpen?'salary.pipClose':'salary.pip';$('salary-pip').textContent=t($('salary-pip').dataset.i18n);$('salary-pip').setAttribute('aria-pressed',String(pipOpen));$('salary-mask').disabled=$('salary-bar-toggle').disabled=!config;$('salary-bar-toggle').textContent=t(config?.showBar?'salary.hideBar':'salary.showBar');$('salary-bar-toggle').setAttribute('aria-pressed',String(Boolean(config?.showBar)));$('salary-clear').disabled=!config&&!clearPending;$('salary-mask').textContent=t(config?.masked?'salary.showAmounts':'salary.mask');$('salary-mask').setAttribute('aria-pressed',String(Boolean(config?.masked)));if(config)draftMasked=config.masked;$('salary-amount').type=draftMasked?'password':'text';
  $('salary-draft-notice').hidden=!dirty;$('salary-draft-notice').textContent=t(external?'salary.externalNotice':'salary.draftNotice');
 }
 function ask(key,action){pendingAction=action;$('salary-confirm-title').textContent=t('salary.'+key);$('salary-confirm-copy').textContent=t('salary.'+(key==='clear'?'clearConfirm':'recalcConfirm'));$('salary-confirm').showModal();}
 $('salary-confirm-cancel').onclick=()=>$('salary-confirm').close();$('salary-confirm-apply').onclick=()=>{const action=pendingAction;$('salary-confirm').close();action?.();};$('salary-confirm').addEventListener('close',()=>{pendingAction=undefined;});
-async function saveDraft(confirmedMonth){
+async function saveDraft(confirmation){
  if(writePending)return;
  syncMonth();
- if(confirmedMonth&&confirmedMonth!==draft.month){render();$('salary-calendar-title').focus();return;}
+ if(confirmation&&confirmation.month!==draft.month){render();$('salary-calendar-title').focus();return;}
  try{
   const raw=inputs();
   const config=normalizeConfig({...raw,masked:draftMasked,offDays:raw.mode==='monthly'?raw.offDays:[],overrides:raw.mode==='cycle'?raw.overrides:{}});
-  if(!confirmedMonth&&salaryStore.read()){ask('recalculate',()=>saveDraft(config.month));return;}
+  const expected=confirmation?confirmation.expected:scheduleKey(salaryStore.read());
+  if(!confirmation&&(expected!==null||external)){ask('recalculate',()=>saveDraft({month:config.month,expected}));return;}
   clearPending=false;
   writePending=true;render();
-  const result=await salaryStore.saveSchedule(config);
+  const result=await salaryStore.saveSchedule(config,expected);
   writePending=false;
+  if(result.conflict){dirty=true;external=true;setStatus('salary.saveConflict');render();return;}
   dirty=false;external=false;calendarNotice=undefined;renderCalendar();setStatus(result.saved?'salary.saved':'salary.notSaved');render();
   const overview=document.querySelector('.salary-overview');overview.scrollIntoView({block:'start'});overview.focus({preventScroll:true});
  }catch(error){writePending=false;render();showError(error,{field:error.field,focus:true});}
@@ -96,22 +99,23 @@ $('salary-calendar').addEventListener('input',()=>{dirty=true;renderCalendar();r
 $('salary-mode').addEventListener('change',()=>{dirty=true;calendarNotice='salary.modeDrafts';renderCalendar();render();});
 $('salary-weekends').onclick=()=>{try{const raw=inputs(),days=calendarDays(raw,draft.month);if(raw.mode==='monthly')draft.offDays=days.filter(day=>day.weekday>5).map(day=>day.date);else draft.overrides=Object.fromEntries(days.filter(day=>(day.weekday<=5)!==day.baseWork).map(day=>[day.date,day.weekday<=5?'work':'rest']));dirty=true;$('salary-calendar').dispatchEvent(new Event('input',{bubbles:true}));}catch(error){showError(error,{field:error.field,focus:true});}};
 $('salary-reset-days').onclick=()=>{if(inputs().mode==='monthly')draft.offDays=[];else draft.overrides={};calendarNotice='salary.dateDraftReset';$('salary-calendar').dispatchEvent(new Event('input',{bubbles:true}));};
-$('salary-clear').onclick=()=>ask('clear',async()=>{
- writePending=true;render();
- try{
-  const cleared=await salaryStore.clear();clearPending=!cleared;fill(defaultConfig());setStatus(cleared?'salary.cleared':'salary.clearFailed');
- }finally{writePending=false;render();}
-});
-$('salary-mask').onclick=async()=>{if((await toggleMask())?.saved===false)setStatus('salary.notSaved');};
+$('salary-clear').onclick=()=>{
+ const expected=scheduleKey(salaryStore.read());
+ ask('clear',async()=>{
+  writePending=true;render();
+  try{
+   const cleared=await salaryStore.clear(expected);
+   if(cleared===null){setStatus('salary.clearConflict');return;}
+   clearPending=!cleared;fill(defaultConfig());setStatus(cleared?'salary.cleared':'salary.clearFailed');
+  }finally{writePending=false;render();}
+ });
+};
+$('salary-mask').onclick=async()=>{if((await toggleMask())?.saved===false)setStatus('salary.localDisplayOnly');};
 $('salary-apply-holidays').onclick=()=>{try{draft=applyHolidaySchedule(inputs());dirty=true;renderCalendar();render();setStatus('salary.holidaysDraft');}catch(error){showError(error,{field:error.field,focus:true});}};
 $('salary-zone').addEventListener('change',()=>{dirty=true;if(!syncMonth('salary.zoneMonthReset'))renderCalendar();render();});
 $('salary-zone-device').onclick=()=>{const zone=getDeviceTimeZone().timeZone;zoneValues.add(zone);zonePicker.setZones(zoneValues,zone);$('salary-zone').dispatchEvent(new Event('change',{bubbles:true}));};
 $('salary-bar-toggle').onclick=async()=>{try{const result=await salaryStore.updateDisplay(config=>({showBar:!config.showBar}));if(!result)return;if(result.config.showBar)(await import('./tools/salary/widget.js')).mountSalaryBar();if(!result.saved)setStatus('salary.notSaved');}catch(error){showError(error);}};
 $('salary-pip').onclick=async()=>{if(pipPending)return;pipPending=true;render();try{await toggleSalaryWindow(render);}catch(error){showError(error);}finally{pipPending=false;render();}};
-function scheduleKey(config){
- if(!config)return null;
- const {masked,showBar,...schedule}=config;return JSON.stringify(schedule);
-}
 activeConfig=salaryStore.read();fill(activeConfig||defaultConfig());render();
 salaryStore.subscribe((config,isExternal)=>{
  if(scheduleKey(config)!==scheduleKey(activeConfig)){

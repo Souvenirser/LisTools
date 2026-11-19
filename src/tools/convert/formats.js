@@ -1,5 +1,6 @@
 import { parseJson, stringifyJson, LosslessNumber } from './json.js';
 import { validText } from './bytes.js';
+import { validateXmlCharacterReferences } from './xml-characters.js';
 
 const failure = (message, reasonCode, params) => Object.assign(new Error(message), { reasonCode, ...(params ? {params} : {}) });
 const structureNotices = [{code:'StructureOnly'}];
@@ -59,7 +60,8 @@ function validateOrdered(value) {
 }
 async function xmlConvert(source, reverse) {
   const { XMLParser, XMLBuilder, XMLValidator } = await import('fast-xml-parser');
-  const options = {preserveOrder:true,ignoreAttributes:false,trimValues:false,parseTagValue:false,parseAttributeValue:false,commentPropName:'#comment',cdataPropName:'#cdata',processEntities:true,htmlEntities:true,maxNestedTags:100,
+  const {decodeXML,escapeUTF8} = await import('entities');
+  const options = {preserveOrder:true,ignoreAttributes:false,trimValues:false,parseTagValue:false,parseAttributeValue:false,commentPropName:'#comment',cdataPropName:'#cdata',processEntities:false,maxNestedTags:100,
     onDangerousProperty:name => { throw new Error(`XML 节点或属性名 ${name} 为解析器保留名称，不能无损转换`); }};
   function validate(xml) {
     validText(xml);
@@ -67,16 +69,17 @@ async function xmlConvert(source, reverse) {
     const declarations = xml.replace(/<!--[\s\S]*?-->|<!\[CDATA\[[\s\S]*?\]\]>/g,'');
     if (/<!\s*(DOCTYPE|ENTITY)\b/i.test(declarations)) throw new Error('不支持 DTD 或实体声明');
     if (/&(?!(?:amp|lt|gt|quot|apos|#\d+|#x[\da-fA-F]+);)/.test(declarations)) throw new Error('XML 包含未定义或非法实体');
-    for (const match of declarations.matchAll(/&#(x[\da-fA-F]+|\d+);/g)) {
-      const cp = match[1][0] === 'x' ? parseInt(match[1].slice(1),16) : Number(match[1]);
-      if (!([9,10,13].includes(cp) || cp >= 0x20 && cp <= 0xD7FF || cp >= 0xE000 && cp <= 0xFFFD || cp >= 0x10000 && cp <= 0x10FFFF)) throw new Error('XML 数字字符引用超出 XML 1.0 合法范围');
-    }
+    validateXmlCharacterReferences(declarations);
     const valid = XMLValidator.validate(xml);
     if (valid !== true) throw Object.assign(new Error(valid.err.msg),{line:valid.err.line,column:valid.err.col});
   }
   function parse(xml) {
     validate(xml);
-    const nodes = new XMLParser(options).parse(xml);
+    const nodes = new XMLParser({
+      ...options,
+      tagValueProcessor:(_,text)=>decodeXML(text),
+      attributeValueProcessor:(_,text)=>decodeXML(text.replace(/[\t\n\r]/g,' '))
+    }).parse(xml);
     const roots = nodes.filter(node => Object.keys(node).some(key => key !== ':@' && !/^[#?]/.test(key)));
     if (roots.length !== 1 || nodes.some(node => node['#text']?.trim() || node['#cdata'])) throw new Error('XML 必须只有一个文档根元素，根元素之外不能包含文本或 CDATA');
     return nodes;
@@ -84,7 +87,11 @@ async function xmlConvert(source, reverse) {
   if (reverse) {
     const value = parseJson(source);
     validateOrdered(value);
-    const xml = new XMLBuilder(options).build(value);
+    const xml = new XMLBuilder({
+      ...options,
+      tagValueProcessor:(_,text)=>escapeUTF8(String(text)).replaceAll('\r','&#13;'),
+      attributeValueProcessor:(_,text)=>escapeUTF8(String(text)).replace(/[\t\n\r]/g,char=>'&#'+char.charCodeAt(0)+';')
+    }).build(value);
     // Builder must not drop unsupported metadata or normalize malformed nodes silently.
     const parsed = parse(xml);
     if (stringifyJson(parsed,0) !== stringifyJson(value,0)) throw failure('该节点结构无法无损还原 XML','XmlOrdered');

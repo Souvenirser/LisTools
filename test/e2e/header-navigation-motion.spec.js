@@ -1,4 +1,5 @@
 import {test,expect} from '@playwright/test';
+import {activeTool} from './task-helpers.js';
 
 async function ready(page,path='/index.html'){
  await page.goto(path);await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');await page.waitForTimeout(250);
@@ -25,12 +26,20 @@ for(const [button,panel,close] of [['settings-open','workbench-settings','close'
  });
 }
 
-test('tool navigation keeps the old screen until the initialized destination can arrive',async({page,browserName})=>{
- test.skip(browserName!=='chromium','Cross-document transition readiness is checked in Chromium.');
- await page.addInitScript(()=>{window.navigationFrames=[];addEventListener('pagereveal',event=>{navigationFrames.push({state:document.documentElement.dataset.uiState,native:!!event.viewTransition});event.viewTransition?.ready.then(()=>navigationFrames.push('ready'),error=>navigationFrames.push(error.name));event.viewTransition?.finished.then(()=>navigationFrames.push('finished'));});});
- await ready(page);await page.locator('details[data-group-id="daily"]>summary').click();await page.locator('[data-tool-id="money"]').click();
- await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');await page.waitForTimeout(300);
- const frames=await page.evaluate(()=>navigationFrames);expect(frames.some(frame=>frame?.native)).toBe(true);expect(frames).toContain('finished');await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');expect(await page.locator('html').getAttribute('data-native-phase')).toBeNull();
+async function openMoney(page){
+ await page.locator('button.brand').click();
+ await page.locator('#tool-menu-search').fill('money');
+ await page.locator('#tool-menu a[data-target="money.html"]').click();
+}
+test('tool navigation keeps the shell visible until the initialized destination can arrive',async({page})=>{
+ await ready(page);
+ const header=await page.locator('.app-header').elementHandle();
+ await expect(activeTool(page).locator('#source')).toHaveCount(1);
+ await openMoney(page);
+ await expect(activeTool(page).locator('#money-input')).toBeVisible();
+ await expect(activeTool(page).locator('html')).toHaveAttribute('data-ui-state','ready');
+ expect(await header.evaluate(node=>node===document.querySelector('.app-header'))).toBe(true);
+ await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');
 });
 
 test('new tab entrance keeps the shell visible and respects reduced motion',async({page})=>{
@@ -42,10 +51,13 @@ test('new tab entrance keeps the shell visible and respects reduced motion',asyn
  await page.locator('#settings-open').click();await page.locator('#settings-close').click();await expect(page.locator('#workbench-settings')).not.toBeVisible();
 });
 
-test('an unusually slow destination releases its old-screen hold and remains recoverable',async({page,browserName})=>{
- test.skip(browserName!=='chromium','Native holding path is checked in Chromium.');await ready(page);
+test('an unusually slow destination keeps the current tool visible and remains recoverable',async({page})=>{
+ await ready(page);
  let release;const held=new Promise(resolve=>release=resolve);await page.route('**/assets/money-*.js',async route=>{await held;await route.continue();});
- await page.locator('details[data-group-id="daily"]>summary').click();await page.locator('[data-tool-id="money"]').click();
- await expect(page.locator('#page-boot')).toBeVisible();await expect.poll(()=>page.evaluate(()=>document.documentElement.dataset.nativePhase)).toBeUndefined();
- release();await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');await expect(page.locator('#page-boot')).toHaveCount(0);
+ await openMoney(page);
+ await expect(page.locator('.workspace-navigation-status')).toBeVisible();
+ await expect(activeTool(page).locator('#source .cm-content')).toBeVisible();
+ release();
+ await expect(activeTool(page).locator('#money-input')).toBeVisible();
+ await expect(page.locator('.workspace-navigation-status')).toBeHidden();
 });

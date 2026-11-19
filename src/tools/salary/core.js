@@ -3,7 +3,7 @@
 import {Temporal} from 'temporal-polyfill/implementation';
 import Decimal from 'decimal.js';
 const D=Decimal.clone({precision:80,rounding:Decimal.ROUND_DOWN});
-const fail=(key,field)=>{throw Object.assign(new RangeError(key),{code:'salary.'+key,field:field&&'salary-'+field});};
+const fail=(key,field,params)=>{throw Object.assign(new RangeError(key),{code:'salary.'+key,field:field&&'salary-'+field,params});};
 const plainDate=value=>{try{if(!/^\d{4}-\d{2}-\d{2}$/.test(value))throw Error();return Temporal.PlainDate.from(value,{overflow:'reject'});}catch{fail('invalidDate','anchor');}};
 function firstDay(month){try{if(!/^\d{4}-\d{2}$/.test(month))throw Error();return plainDate(month+'-01');}catch{fail('invalidDate','calendar');}}
 export function monthAt(now,timeZone){return Temporal.Instant.fromEpochMilliseconds(now).toZonedDateTimeISO(timeZone).toPlainDate().toString().slice(0,7);}
@@ -33,19 +33,26 @@ export function calendarDays(config,month){
   return {date:name,day:index+1,weekday:date.dayOfWeek,work:override?override==='work':baseWork,baseWork,overridden:Boolean(override)};
  });
 }
-function instant(date,minutes,timeZone){
- try{const day=plainDate(date).add({days:minutes===1440?1:0}),value=minutes%1440;return day.toPlainDateTime({hour:Math.floor(value/60),minute:value%60}).toZonedDateTime(timeZone,{disambiguation:'reject'}).epochMilliseconds;}catch{fail('ambiguousTime','start');}
+function instant(date,minutes,timeZone,field='start'){
+ const day=plainDate(date).add({days:minutes===1440?1:0}),value=minutes%1440;
+ const local=day.toPlainDateTime({hour:Math.floor(value/60),minute:value%60});
+ try{return local.toZonedDateTime(timeZone,{disambiguation:'reject'}).epochMilliseconds;}
+ catch{fail('ambiguousTime',field,{date:day.toString(),time:local.toPlainTime().toString({smallestUnit:'minute'}),zone:timeZone});}
 }
 export function buildMonthPlan(config,now=Date.now()){
  const month=monthAt(now,config.timeZone);
  if(config.mode==='monthly'&&config.month!==month)return {month,state:'pending',config};
- const times=shiftTimes(config),days=calendarDays(config,month),intervals=[];
+ const times=shiftTimes(config),days=calendarDays(config,month),intervals=[],shifts=new Map();
  for(const day of days.filter(day=>day.work)){
-  const ranges=times.lunchMinutes?[[times.startMinutes,times.lunchStartMinutes],[times.lunchEndMinutes,times.endMinutes]]:[[times.startMinutes,times.endMinutes]];
-  for(const [start,end]of ranges)if(end>start){const from=instant(day.date,start,config.timeZone),to=instant(day.date,end,config.timeZone);if(to<=from)fail('ambiguousTime','start');intervals.push({from,to,date:day.date});}
+  const start=instant(day.date,times.startMinutes,config.timeZone);
+  const end=instant(day.date,times.endMinutes,config.timeZone,'hours');
+  const breakStart=times.lunchMinutes?instant(day.date,times.lunchStartMinutes,config.timeZone,'lunch-start'):start;
+  const breakEnd=times.lunchMinutes?instant(day.date,times.lunchEndMinutes,config.timeZone,'lunch-minutes'):start;
+  shifts.set(day.date,{start,end,breakStart,breakEnd});
+  for(const [from,to] of [[start,breakStart],[breakEnd,end]])if(to>from)intervals.push({from,to,date:day.date});
  }
  const totalMs=intervals.reduce((sum,range)=>sum+range.to-range.from,0);if(!totalMs)fail('noWork','calendar');
- return {month,config,days,intervals,totalMs,workDays:days.filter(day=>day.work).length,restDays:days.filter(day=>!day.work).length,...times};
+ return {month,config,days,intervals,shifts,totalMs,workDays:shifts.size,restDays:days.length-shifts.size,...times};
 }
 export function normalizeConfig(raw){
  if(!raw||raw.version!==1)fail('invalidConfig');
@@ -70,6 +77,8 @@ export function snapshot(config,now=Date.now(),cachedPlan){
  if(plan.state==='pending')return {state:'pending',month,earned:null,today:null,plan};
  const date=Temporal.Instant.fromEpochMilliseconds(now).toZonedDateTimeISO(config.timeZone).toPlainDate().toString(),today=plan.intervals.filter(range=>range.date===date);
  const elapsed=range=>Math.max(0,Math.min(now,range.to)-range.from),earnedMs=plan.intervals.reduce((sum,range)=>sum+elapsed(range),0),todayMs=today.reduce((sum,range)=>sum+elapsed(range),0),money=new D(config.salary);
- let state='rest';if(today.length){state=now<today[0].from?'before':now>=today.at(-1).to?'after':today.some(range=>now>=range.from&&now<range.to)?'working':'lunch';}
+ const shift=plan.shifts.get(date);
+ let state='rest';
+ if(shift)state=now<shift.start?'before':now>=shift.end?'after':now>=shift.breakStart&&now<shift.breakEnd?'lunch':'working';
  return {state,month,date,earned:shown(money.mul(earnedMs).div(plan.totalMs)),today:shown(money.mul(todayMs).div(plan.totalMs)),hourly:shown(money.mul(3600000).div(plan.totalMs)),perMinute:shown(money.mul(60000).div(plan.totalMs)),perSecond:shown(money.mul(1000).div(plan.totalMs)),progress:earnedMs/plan.totalMs*100,workedMs:earnedMs,plan};
 }

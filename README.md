@@ -65,7 +65,7 @@ xcrun safari-web-extension-packager dist --app-name LisTools --bundle-identifier
 
 GitHub 的 **Source code** 压缩包是源码，需要按下文构建后加载 `dist/`。手动安装的版本需要自行下载更新并在扩展管理页重新加载。
 
-本次版本为 **v1.2.6**，发布下载见 [GitHub Releases](https://github.com/Souvenirser/LisTools/releases)。`LisTools-1.2.6.zip` 可上传 Chrome 开发者后台，或解压后加载。本版修复工具切换闪屏、快速连续点击失效和侧栏滚动位置偏移；完整更新见 [发布说明](./docs/release-1.2.6.md)。本次按用户要求不重跑测试，仅更新版本、构建和打包。支持页继续排除发布源码与安装包，未代为提交商店审核。
+手动安装时下载 `LisTools-<版本>.zip`。维护者提交 Chrome 应用商店时使用同版的 `LisTools-Chrome-Store-<版本>.zip`。两个包及校验清单随 [GitHub Releases](https://github.com/Souvenirser/LisTools/releases) 提供。
 
 ## 支持作者
 

@@ -67,3 +67,50 @@ test('monthly changes update every calculation-process field and exported cumula
  await expect(out(f,'currentTax')).toHaveText('2,600.00');await expect(out(f,'cumulativeIncome')).toHaveText('240,000.00');await expect(out(f,'cumulativeTax')).toHaveText('15,680.00');await expect(out(f,'cumulativeTaxable')).toHaveText('163,000.00');await expect(out(f,'rate')).toHaveText('20%');
  const [d]=await Promise.all([page.waitForEvent('download'),f.locator('#tax-downloadTxt').click()]);const chunks=[];for await(const c of await d.createReadStream())chunks.push(c);const data=Buffer.concat(chunks).toString();expect(data).toContain('240000.00');expect(data).toContain('15680.00');expect(data).toContain('163000.00');
 });
+
+test('the month chooser selects another year and month with the keyboard',async({page})=>{
+ await page.setViewportSize({width:1160,height:760});
+ const f=await wages(page);
+ const monthValue=f.locator('#tax-period');
+ expect((await monthValue.boundingBox()).width).toBeGreaterThanOrEqual(120);
+ const trigger=f.locator('#tax-period-picker');
+ const chooser=f.locator('#tax-period-options');
+ await trigger.click();
+ await expect(chooser).toBeVisible();
+ await f.locator('#tax-period-options [data-month]').first().press('Escape');
+ await expect(chooser).toBeHidden();
+ await trigger.focus();
+ await trigger.press('Enter');
+ await expect(chooser).toBeVisible();
+ await chooser.locator('#tax-period-year-choice').fill('2027');
+ await chooser.locator('[data-month="3"]').press('Enter');
+ await expect(monthValue).toHaveValue('2027-03');
+ await expect(trigger).toBeFocused();
+ await expect(chooser).toBeHidden();
+ await f.locator('#tax-run').click();
+ await expect(out(f,'salary')).toHaveText('20,000.00');
+ await expect(f.locator('#tax-months-table tr.is-current-month td').first()).toHaveText('3 · 预测月份');
+ const [download]=await Promise.all([page.waitForEvent('download'),f.locator('#tax-downloadTxt').click()]);
+ const chunks=[];for await(const chunk of await download.createReadStream())chunks.push(chunk);
+ const data=Buffer.concat(chunks).toString();
+ const conditions=JSON.parse(data.slice(data.lastIndexOf('\n{\n')+1,data.lastIndexOf('\n}')+2));
+ expect(conditions.wage).toMatchObject({year:'2027',month:3,predicted:true});
+});
+
+test('combined bonus for a future year is available and export says it is an estimate',async({page})=>{
+ const f=await wages(page,'2028-01');
+ await f.locator('#tax-bonus-section>summary').click();
+ await f.locator('#tax-bonus').fill('36000');
+ await f.locator('#tax-bonusMonth').fill('1');
+ await expect(f.locator('#tax-bonus-method')).toHaveValue('combined');
+ await f.locator('#tax-run').click();
+ await expect(out(f,'totalAnnualTax')).toHaveText('21,480.00');
+ await expect(out(f,'separateTax')).toHaveCount(0);
+ await expect(out(f,'refund')).toHaveCount(0);
+ await expect(f.locator('#tax-bonus-result')).toContainText('预测');
+ const [download]=await Promise.all([page.waitForEvent('download'),f.locator('#tax-downloadTxt').click()]);
+ const chunks=[];for await(const chunk of await download.createReadStream())chunks.push(chunk);
+ const data=Buffer.concat(chunks).toString();
+ expect(data).toMatch(/"method":\s*"combined"/);
+ expect(data).toMatch(/"bonusCombinedEstimate":\s*true/);
+});

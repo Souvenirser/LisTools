@@ -1,8 +1,9 @@
 import {initTool,clearStatus,showError,setStatus} from './tools/shared/office.js';
 import {actionArea} from './tools/shared/workspace.js';
 import {registerContentCheck} from './tools/shared/content-state.js';
-import {t,onLanguageChange,translateDOM} from './i18n.js';
-import {calculateWage,calculateBonus,calculateAnnual,calculateWageWithPolicy,wageComputation,shanghaiPeriod} from './tools/payroll/tax.js';
+import {t,language,onLanguageChange,translateDOM} from './i18n.js';
+import {calculateWage,calculateBonus,separateBonusAvailable,calculateAnnual,calculateWageWithPolicy,wageComputation,shanghaiPeriod} from './tools/payroll/tax.js';
+import {createMenuIcon} from './tools/shared/icons.js';
 import {sameSalaryMonths,manualWagePayment,bonusForMonths} from './tools/payroll/tax-input.js';
 import {mountDeductionAssistant} from './tools/payroll/deduction-assistant.js';
 import {calculateContributions} from './tools/payroll/contributions.js';
@@ -154,7 +155,7 @@ function render(){
  displayedWage=effective;resultPayment=wageMonth?.payment??states.wage.payment;rows=[];if(effective)rows.push(...definitions.wage.map(([key,main,label])=>[key,key==='net'?'taxFinance.wageNet':'payroll.'+(label||key),key==='rate'?new D(effective[key]).mul(100).toString()+'%':effective[key],main]));
  if(current?.bonus&&new D(current.bonus).gt(0))rows.push(['bonusGross','payroll.bonusAmount',current.bonus],['monthNetWithBonus','taxFinance.monthNetWithBonus',current.totalNet]);
  if(bonus)rows.push(...definitions.bonus.filter(([key])=>bonus[key]!==null&&bonus[key]!==undefined&&!['rate','quick'].includes(key)&&!(value('tax-bonus-method')==='combined'&&bonus.combinedTotal!==null&&['bonusNet','separateTax'].includes(key))).map(([key,main,label])=>[key,'payroll.'+(label||key),bonus[key],main]));
- if(bonus&&value('tax-bonus-method')==='combined'&&bonus.combinedTotal!==null){const extra=new D(bonus.combinedTotal).minus(new D(bonus.separateTotal).minus(bonus.separateTax));rows.push(['bonusNet','taxUnified.bonusIncrementalNet',new D(bonus.conditions.bonus).minus(extra).toFixed(2),true],['bonusCombinedTax','taxUnified.bonusIncrementalTax',extra.toFixed(2)]);}
+ if(bonus&&value('tax-bonus-method')==='combined'&&bonus.combinedIncrement!==null){rows.push(['bonusNet','taxUnified.bonusIncrementalNet',new D(bonus.conditions.bonus).minus(bonus.combinedIncrement).toFixed(2),true],['bonusCombinedTax','taxUnified.bonusIncrementalTax',bonus.combinedIncrement]);}
  if(unified)rows.push(['totalIncome','taxUnified.annualTotalIncome',unified.totalIncome],['totalAnnualTax','taxUnified.annualTotalTax',unified.totalAnnualTax],['annualNet','taxFinance.annualNetEstimate',unified.annualNet,true],['gross','payroll.annualGross',annual.gross],['annualTax','payroll.annualTax',annual.annualTax]);
  else if(annual)rows.push(['gross','payroll.annualGross',annual.gross],['annualTax','payroll.annualTax',annual.annualTax],['annualNet','taxFinance.annualNetEstimate',annual.cashAfterAnnualTax,true]);
  const refund=unified?.refund;if(refund!==null&&refund!==undefined)rows.push(['refund',new D(refund).isNegative()?'taxEase.extraTax':'taxEase.refund',new D(refund).abs().toFixed(2)]);
@@ -170,6 +171,10 @@ function render(){
  if(wage){const condition=document.createElement('p');condition.className='tax-condition';condition.textContent=[current&&value('tax-annual-mode')==='monthly'?t('taxUnified.monthlyContext',{month:current.month}):t(wage.conditions.mode==='estimate'||states.wage.input?.predicted?'taxEase.estimateContext':'taxEase.actualContext',{year:wage.conditions.year,month:wage.conditions.month,start:wage.conditions.startMonth}),states.wage.input?.predicted?t('payroll.predicted'):null,paymentContext(wageMonth?.payment??states.wage.payment)].filter(Boolean).join(' · ');root.prepend(condition);const formula=document.createElement('p');formula.className='tool-note';formula.textContent=t('taxEase.netFormula');root.append(formula);
   const payment=wageMonth?.payment??(value('tax-annual-mode')==='monthly'?null:states.wage.payment),hasCurrentBonus=Number(current?.bonus)>0,gross=hasCurrentBonus?new D(effective.salary).plus(current.bonus).toFixed(2):effective.salary;
   breakdowns=buildPayrollBreakdowns({gross,net:hasCurrentBonus?current.totalNet:effective.net,tax:hasCurrentBonus?current.totalWithheld:effective.currentTax,employeeTotal:effective.contributions,contributions:payment,...(hasCurrentBonus?{grossLabel:'payroll.salary+taxEase.bonus'}:{})});const chart=document.createElement('div');chart.id='tax-breakdowns';renderPayrollBreakdowns(chart,breakdowns);root.append(chart);
+ }
+ if(bonus?.combinedEstimate){
+  const hint=document.createElement('p');hint.className='tool-note';hint.textContent=t('taxUnified.bonusCombinedForecast');
+  bonusHeading.after(hint);
  }
  if(bonusList.children.length)root.append(bonusSection);if(annualList.children.length)root.append(annualSection);
  if(unified?.unallocatedBonus){const p=document.createElement('p');p.id='tax-bonus-unallocated';p.className='tool-note';p.textContent=t('taxUnified.bonusUnallocated');root.append(p);}
@@ -196,7 +201,7 @@ function run(){
  if(hasWage&&value('tax-mode')!=='actual'||hasMonthly)attempt('annual',()=>{
   syncAnnualInputs();let input;if(value('tax-annual-mode')==='monthly')input=annualInput();else {const months=states.wage.months;if(!months?.length)fail('tax.easeNoEstimate','tax-salary');const missing=months.find(row=>row.unavailable);if(missing)fail(missing.unavailable,missing.field??'tax-city-control',missing.params);input={year:value('tax-year'),...annualDeduction.read(),medicalDeduction:value('tax-medicalDeduction'),annualSpecialDeduction:value('tax-annualSpecialDeduction'),actualWithheld:value('tax-actualWithheld'),months};}const result=calculateAnnual(input);if(value('tax-annual-mode')==='same'){result.months=result.months.map((row,i)=>({...row,withheld:input.months[i].withheld,net:input.months[i].net,computation:input.months[i].computation}));result.predictedWithheld=result.months.reduce((sum,row)=>sum.plus(row.withheld),new D(0)).toFixed(2);}return result;
  });
- if(hasBonus)attempt('bonus',()=>{if(bonusIssue)throw bonusIssue;const input=read();if(states.annual.result)input.annualBasis=annualBasisForBonus(states.annual.result);if(value('tax-bonus-method')==='combined'&&!input.annualBasis)fail('tax.easeNoEstimate','tax-bonus-method');return calculateBonus(input);});
+ if(hasBonus)attempt('bonus',()=>{if(bonusIssue)throw bonusIssue;const input=read();if(states.annual.result)input.annualBasis=annualBasisForBonus(states.annual.result);return calculateBonus(input,value('tax-bonus-method'));});
  if(states.annual.result&&(!hasBonus||states.bonus.result))try{unified=combinePayrollResults({annual:states.annual.result,bonus:states.bonus.result,method:value('tax-bonus-method'),bonusMonth:value('tax-bonusMonth'),bonusActualWithheld:value('tax-bonusWithheld'),wageConditions:value('tax-annual-mode')==='same'?states.wage.input:null});}catch(error){states.bonus.error=error;errors.push({error,scope:'bonus'});}
  task='wage';unifiedForm=currentDraft();render();if(errors.length){const {error,scope}=errors[0];showError(error,{field:fieldFor(error,scope),focus:true});}
 }
@@ -226,6 +231,11 @@ function visibility(){
  $('tax-baseline').hidden=!$('tax-compare').checked;const same=value('tax-annual-mode')==='same';$('tax-annual-same').hidden=true;$('tax-months').hidden=same;$('tax-annual-city-settings').hidden=value('tax-annual-source')!=='city';$('tax-annual-contributions').closest('.field').hidden=value('tax-annual-source')==='city';document.querySelector('#tax-annual-same>[data-i18n="taxEase.paymentHint"]').hidden=value('tax-annual-source')==='city';$('tax-annual-deductible').closest('.field').hidden=!$('tax-annual-reduced').checked;
  for(const prefix of ['tax','tax-annual']){const city=value(prefix+'-city'),source=value(prefix+'-source');$(prefix+'-tier').closest('.field').hidden=source!=='city'||city!=='shenzhen';$(prefix+'-hukou').closest('label').hidden=source!=='city'||city!=='shenzhen';}
  $('tax-city-conditions').hidden=manual||value('tax-city')!=='shenzhen';placeActions();refreshPaymentPreview();$('tax-bonusWithheld').disabled=!hasBonusAmount();
+ const separate=separateBonusAvailable(value('tax-year'));
+ const method=$('tax-bonus-method');
+ method.querySelector('option[value="separate"]').disabled=!separate;
+ if(!separate&&method.value==='separate')method.value='combined';
+ bonusForecast.hidden=separate;
  const elapsed=completedMonths();
  for(let n=1;n<=12;n++){
   const future=n>elapsed,predicted=$(`tax-a-${n}-predicted`),history=$(`tax-a-${n}-history`);
@@ -244,19 +254,28 @@ function fillMonths(confirmOverwrite,quiet=false){
  monthlyPrepared=true;return true;
 }
 const bonusMonths=$('tax-bonus-months'),bonusOptions=$('tax-bonus-month-options');
-function positionBonusOptions(event){
- if(event.type==='beforetoggle' ? event.newState!=='open' : !bonusOptions.matches(':popover-open'))return;
- const {left,top,bottom,width}=bonusMonths.getBoundingClientRect();
+const bonusForecast=document.createElement('p');bonusForecast.className='tool-note';bonusForecast.dataset.i18n='taxUnified.bonusCombinedForecast';
+$('tax-bonus-method').parentElement.parentElement.after(bonusForecast);
+function positionOptions(popup,anchor,event,requestedWidth){
+ if(event.type==='beforetoggle' ? event.newState!=='open' : !popup.matches(':popover-open'))return;
+ const rect=anchor.getBoundingClientRect(),{top,bottom}=rect;
+ const width=Math.min(requestedWidth??rect.width,innerWidth-24);
+ const edge=document.dir==='rtl'?rect.right-width:rect.left;
+ const left=Math.max(12,Math.min(edge,innerWidth-width-12));
  const below=innerHeight-bottom,above=top,openAbove=above>below;
- Object.assign(bonusOptions.style,{
+ Object.assign(popup.style,{
   left:`${left}px`,width:`${width}px`,
   top:openAbove?'auto':`${bottom+4}px`,bottom:openAbove?`${innerHeight-top+4}px`:'auto',
   maxHeight:`${Math.max(above,below)-8}px`
  });
 }
-bonusOptions.addEventListener('beforetoggle',positionBonusOptions);
-addEventListener('resize',positionBonusOptions);
-document.addEventListener('scroll',positionBonusOptions,true);
+function anchorOptions(popup,anchor,width){
+ const position=event=>positionOptions(popup,anchor,event,width);
+ popup.addEventListener('beforetoggle',position);
+ addEventListener('resize',position);
+ document.addEventListener('scroll',position,true);
+}
+anchorOptions(bonusOptions,bonusMonths);
 bonusOptions.addEventListener('click',event=>{
  const option=event.target.closest('button');
  if(!option)return;
@@ -265,6 +284,46 @@ bonusOptions.addEventListener('click',event=>{
  bonusOptions.hidePopover();
  bonusMonths.focus({preventScroll:true});
 });
+
+const periodInput=$('tax-period'),periodControl=document.createElement('div'),periodTrigger=document.createElement('button');
+periodControl.className='tax-period-control';periodInput.before(periodControl);periodControl.append(periodInput,periodTrigger);
+periodTrigger.type='button';periodTrigger.id='tax-period-picker';periodTrigger.setAttribute('popovertarget','tax-period-options');
+periodTrigger.setAttribute('aria-haspopup','dialog');periodTrigger.setAttribute('aria-expanded','false');
+periodTrigger.dataset.i18nAriaLabel=periodTrigger.dataset.i18nTitle='taxEase.viewPeriod';periodTrigger.append(createMenuIcon('calendar-days'));
+const periodOptions=document.createElement('div');
+periodOptions.id='tax-period-options';periodOptions.setAttribute('popover','');periodOptions.setAttribute('role','dialog');periodOptions.dataset.i18nAriaLabel='taxEase.viewPeriod';
+periodOptions.innerHTML=`${field('tax-period-year-choice','payroll.year','','number','required min="2026" max="9999" step="1" inputmode="numeric" autocomplete="off" dir="ltr"')}<div class="tax-period-grid">${Array.from({length:12},(_,i)=>`<button type="button" data-month="${i+1}" aria-pressed="false"></button>`).join('')}</div>`;
+document.body.append(periodOptions);
+const periodYear=$('tax-period-year-choice'),periodMonths=[...periodOptions.querySelectorAll('[data-month]')];
+anchorOptions(periodOptions,periodControl,268);
+function labelMonths(){
+ const formatter=new Intl.DateTimeFormat(language(),{calendar:'gregory',month:'short',timeZone:'UTC'});
+ for(const button of periodMonths)button.textContent=formatter.format(new Date(Date.UTC(2026,Number(button.dataset.month)-1,1)));
+ translateDOM(periodOptions);
+ periodOptions.setAttribute('aria-label',t('taxEase.viewPeriod'));
+}
+function markPeriod(){
+ const [selectedYear,selectedMonth]=periodInput.value.split('-').map(Number);
+ for(const button of periodMonths)button.setAttribute('aria-pressed',String(periodYear.valueAsNumber===selectedYear&&Number(button.dataset.month)===selectedMonth));
+}
+periodOptions.addEventListener('beforetoggle',event=>{
+ if(event.newState!=='open')return;
+ periodYear.value=String(Number(periodInput.value.slice(0,4))||shanghaiPeriod().year);
+ markPeriod();
+});
+periodOptions.addEventListener('toggle',()=>{
+ const open=periodOptions.matches(':popover-open');periodTrigger.setAttribute('aria-expanded',String(open));
+ if(open)(periodOptions.querySelector('[aria-pressed="true"]')||periodYear).focus({preventScroll:true});
+});
+periodYear.addEventListener('input',markPeriod);
+periodOptions.addEventListener('click',event=>{
+ const option=event.target.closest('[data-month]');
+ if(!option||!periodYear.reportValidity())return;
+ periodInput.value=periodYear.valueAsNumber+'-'+option.dataset.month.padStart(2,'0');
+ periodInput.dispatchEvent(new Event('input',{bubbles:true}));
+ periodOptions.hidePopover();periodTrigger.focus({preventScroll:true});
+});
+onLanguageChange(labelMonths);labelMonths();
 for(const event of ['input','change'])$('tax-input').addEventListener(event,event=>{
  const id=event.target.id;if(!id||(event.target.closest('.choices')&&!event.target.matches('select')))return;
  if(id==='tax-bonus')bonusEntry='amount';else if(id==='tax-bonus-months')bonusEntry='months';if(['tax-salary','tax-bonus','tax-bonus-months'].includes(id))syncBonus();
@@ -290,6 +349,6 @@ $('tax-use-wage').onclick=()=>{
  }catch(error){showError(error,{field:fieldFor(error,'bonus'),focus:true});}
 };
 addEventListener('hashchange',()=>chooseTask(location.hash.slice(1)));queueMicrotask(()=>chooseTask(location.hash.slice(1)));
-attachExports('tax',()=>rows,()=>({year:value('tax-year'),wage:states.wage.result?.conditions,payment:resultPayment?.conditions,contributionRates:resultPayment?.items.map(({id,employeeRate,employerRate})=>({id,employeeRate,employerRate})),refundEligible:unified?.refund!=null,currentMonth:displayedWage?{predicted:states.wage.input?.predicted??false,...wageComputation(displayedWage),salary:displayedWage.salary,contributions:displayedWage.contributions,currentTax:displayedWage.currentTax,net:displayedWage.net}:null,bonus:states.bonus.result?.conditions,annual:states.annual.result?.conditions,summary:unified?.conditions,partial:Object.entries(states).filter(([,s])=>s.error).map(([scope,s])=>({scope,code:s.error.code}))}),()=>[...(unified?.months||states.annual.result?.months||states.wage.months||[]),...(breakdowns?payrollBreakdownRows(breakdowns):[])]);
+attachExports('tax',()=>rows,()=>({year:value('tax-year'),wage:states.wage.result?.conditions,payment:resultPayment?.conditions,contributionRates:resultPayment?.items.map(({id,employeeRate,employerRate})=>({id,employeeRate,employerRate})),refundEligible:unified?.refund!=null,currentMonth:displayedWage?{predicted:states.wage.input?.predicted??false,...wageComputation(displayedWage),salary:displayedWage.salary,contributions:displayedWage.contributions,currentTax:displayedWage.currentTax,net:displayedWage.net}:null,bonus:states.bonus.result?.conditions,bonusCombinedEstimate:states.bonus.result?.combinedEstimate??false,annual:states.annual.result?.conditions,summary:unified?.conditions,partial:Object.entries(states).filter(([,s])=>s.error).map(([scope,s])=>({scope,code:s.error.code}))}),()=>[...(unified?.months||states.annual.result?.months||states.wage.months||[]),...(breakdowns?payrollBreakdownRows(breakdowns):[])]);
 onLanguageChange(()=>{syncBonus();visibility();render();});for(const prefix of ['tax','tax-annual'])syncHousingDefault(prefix);syncBonus();visibility();chooseTask(task);translateDOM($('tax-input'));
 const initialDraft=financialDraft($('tax-input')),initialBonusBasis=financialDraft($('tax-baseline'));registerContentCheck(()=>Boolean(monthlyPrepared||assistants.some(a=>a.hasDraft())||Object.values(states).some(state=>state.result)||financialDraft($('tax-input'))!==initialDraft));

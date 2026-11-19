@@ -133,5 +133,5 @@ MIT; copyright (c) 2026 Zhang Xiao. See `licenses/salary-clock-47009d0.LICENSE` 
 
 ## holiday-cn offline holiday data
 
-Source: https://github.com/NateScarlet/holiday-cn/tree/2026.01.01
-MIT; copyright (c) 2019 NateScarlet. The 2025/2026/2027 JSON snapshots are bundled without runtime requests. An empty placeholder is not an available calendar. See `src/tools/salary/data/NOTICE.md` and `licenses/holiday-cn-2026.01.01.LICENSE`.
+Sources: https://github.com/NateScarlet/holiday-cn/tree/2026.01.01 (2025 and 2026), https://github.com/NateScarlet/holiday-cn/tree/a91748e8d6dd21ede3728a2f5bbb16e3a30daf6e (2027).
+MIT. Copyright (c) 2019 NateScarlet. The JSON snapshots are bundled for offline use. See `src/tools/salary/data/NOTICE.md` and `licenses/holiday-cn-2026.01.01.LICENSE`.

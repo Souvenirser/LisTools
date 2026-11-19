@@ -50,13 +50,41 @@ export function calculateWageWithPolicy(input,contributionForMonth){
  }
  return {...result,conditions:{...input,basicDeductionMode:result.conditions.basicDeductionMode,policies}};
 }
-export function calculateBonus(input){
- const year=Number(input.year);if(!Number.isInteger(year)||year<2026||year>2027)fail('tax.bonusExpired','year');
- const bonus=amount(input.bonus,'bonus'),monthly=bonus.div(12),[,r,quick]=bonusBrackets.find(([limit])=>limit===null||monthly.lte(limit));
- const separate=new D(fixed(D.max(bonus.mul(r).minus(quick),0))),hasBaseline=Boolean(input.annualBasis)||(input.annualTaxable!==undefined&&input.annualTaxable!=='');
- const basis=input.annualBasis,baseline=basis?amount(basis.salary,'bonusAnnualSalary').plus(amount(basis.adjustment,'bonusAnnualAdjustment',0)).minus(60000).minus(amount(basis.contributions,'bonusAnnualContributions',0)).minus(amount(basis.special,'bonusAnnualSpecial',0)).minus(amount(basis.other,'bonusAnnualOther',0)).minus(amount(basis.medical,'bonusAnnualMedical',0)):hasBaseline?amount(input.annualTaxable,'annualTaxable'):null,separateTotal=baseline?new D(taxOn(baseline).tax).plus(separate):null,combinedTotal=baseline?new D(taxOn(baseline.plus(bonus)).tax):null;
- const cliff=brackets.slice(0,-1).map(([limit])=>new D(limit)).find(limit=>bonus.gt(limit)&&bonus.minus(separate).lt(limit.minus(calculateBonus({year,bonus:limit.toString()}).separateTax)));
- return {separateTax:fixed(separate),bonusNet:fixed(bonus.minus(separate)),rate:r,quick:fixed(quick),salaryBalance:baseline&&fixed(baseline),separateTotal:separateTotal&&fixed(separateTotal),combinedTotal:combinedTotal&&fixed(combinedTotal),saving:separateTotal&&fixed(separateTotal.minus(combinedTotal).abs()),preferred:separateTotal===null?null:separateTotal.eq(combinedTotal)?'equal':separateTotal.lt(combinedTotal)?'separate':'combined',cliff:cliff?.toString()??null,conditions:{...input}};
+export function separateBonusAvailable(year){
+ return Number.isInteger(Number(year))&&Number(year)>=2026&&Number(year)<=2027;
+}
+function separateBonus(bonus){
+ const monthly=bonus.div(12),[,rate,quick]=bonusBrackets.find(([limit])=>limit===null||monthly.lte(limit));
+ return {tax:fixed(D.max(bonus.mul(rate).minus(quick),0)),rate,quick:fixed(quick)};
+}
+function bonusSalaryBalance(input){
+ const basis=input.annualBasis;
+ if(!basis)return input.annualTaxable===undefined||input.annualTaxable===''?null:amount(input.annualTaxable,'annualTaxable');
+ return amount(basis.salary,'bonusAnnualSalary').plus(amount(basis.adjustment,'bonusAnnualAdjustment',0)).minus(60000)
+  .minus(amount(basis.contributions,'bonusAnnualContributions',0)).minus(amount(basis.special,'bonusAnnualSpecial',0))
+  .minus(amount(basis.other,'bonusAnnualOther',0)).minus(amount(basis.medical,'bonusAnnualMedical',0));
+}
+export function calculateBonus(input,method='separate'){
+ const year=Number(input.year);
+ if(!Number.isInteger(year)||year<2026||year>9999)fail('tax.year','year');
+ const available=separateBonusAvailable(year);
+ if(!available&&method!=='combined')fail('tax.bonusExpired','year');
+ const bonus=amount(input.bonus,'bonus'),baseline=bonusSalaryBalance(input);
+ if(method==='combined'&&!baseline)fail('tax.easeNoEstimate','tax-bonus-method');
+ const salaryTax=baseline&&new D(taxOn(baseline).tax);
+ const combinedTotal=baseline&&new D(taxOn(baseline.plus(bonus)).tax);
+ const separate=available?separateBonus(bonus):null;
+ const separateTotal=salaryTax&&separate&&salaryTax.plus(separate.tax);
+ const bonusNet=separate&&bonus.minus(separate.tax);
+ const cliff=bonusNet&&brackets.slice(0,-1).map(([limit])=>new D(limit)).find(limit=>bonus.gt(limit)&&bonusNet.lt(limit.minus(separateBonus(limit).tax)));
+ return {
+  separateTax:separate?.tax??null,bonusNet:bonusNet&&fixed(bonusNet),rate:separate?.rate??null,quick:separate?.quick??null,
+  salaryBalance:baseline&&fixed(baseline),separateTotal:separateTotal&&fixed(separateTotal),combinedTotal:combinedTotal&&fixed(combinedTotal),
+  combinedIncrement:combinedTotal&&fixed(combinedTotal.minus(salaryTax)),combinedEstimate:!available&&combinedTotal!==null,
+  saving:separateTotal&&fixed(separateTotal.minus(combinedTotal).abs()),
+  preferred:separateTotal===null?null:separateTotal.eq(combinedTotal)?'equal':separateTotal.lt(combinedTotal)?'separate':'combined',
+  cliff:cliff?.toString()??null,conditions:{...input}
+ };
 }
 const shanghaiCalendar=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai',year:'numeric',month:'numeric'});
 export function shanghaiPeriod(now=new Date()){

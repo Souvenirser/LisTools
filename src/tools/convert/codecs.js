@@ -1,5 +1,6 @@
 import { base64, base64url, base32, base32hex, base58, hex } from '@scure/base';
 import { checkSize, decodeText, encodeText } from './bytes.js';
+import { validateXmlCharacterReferences } from './xml-characters.js';
 
 const coders = { base64, base64url, base32, base32hex, base58, hex };
 export function decodeBase(source, id = 'base64') {
@@ -48,6 +49,7 @@ export async function run(id, input, options, maximum) {
   if (id === 'form') return { text: decode ? decodeURIComponent(source.replace(/\+/g,' ')) : encodeURIComponent(source).replace(/%20/g,'+') };
   if (id === 'html-entities' || id === 'xml-entities') {
     const entities = await import('entities');
+    if (decode && id === 'xml-entities') validateXmlCharacterReferences(source);
     const name = `${decode ? 'decode' : 'encode'}${id === 'html-entities' ? 'HTML' : 'XML'}`;
     return { text: entities[name](source) };
   }

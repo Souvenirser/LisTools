@@ -20,6 +20,14 @@ test('salary backfills scheduled work and freezes over lunch, evenings and rest 
 test('a monthly salary is capped at the last shift and resets only in the next month',()=>{
  const c=config();assert.equal(snapshot(c,at('2026-11-30T18:00:00')).earned,'16800.0000');assert.equal(snapshot(c,at('2026-11-30T23:59:59')).earned,'16800.0000');assert.equal(snapshot(c,at('2026-12-01T00:00:00')).earned,'0.0000');
 });
+test('lunch at the very start or end of a shift is still a break inside the shift',()=>{
+ const leading=config({lunchStart:'09:00'}),trailing=config({lunchStart:'17:00'});
+ for(const [shift,time,earned] of [[leading,'09:30','0.0000'],[trailing,'17:30','800.0000']]){
+  const result=snapshot(shift,at('2026-11-02T'+time+':00'));
+  assert.equal(result.state,'lunch');
+  assert.equal(result.today,earned);
+ }
+});
 test('cycle phase continues across months and date exceptions do not shift the cycle',()=>{
  const c=config({workDays:2,restDays:1,anchor:'2026-10-31',overrides:{'2026-11-02':'work','2026-11-03':'rest'}}),days=calendarDays(c,'2026-11');
  assert.deepEqual(days.slice(0,5).map(d=>d.work),[true,true,false,true,false]);assert.equal(days[1].baseWork,false);assert.equal(days[2].baseWork,true);
@@ -51,6 +59,12 @@ test('DST ambiguous and missing work boundaries are rejected',()=>{
   const t=Date.parse(date+'T12:00:00Z'),raw={...defaultConfig(t,'America/New_York'),salary:'1000',hours:'1',start,lunchMinutes:0,overrides:{[date]:'work'}};
   assert.throws(()=>normalizeConfig(raw),{code:'salary.ambiguousTime'});
  }
+});
+test('a DST conflict after rollover identifies the date, local time and timezone',()=>{
+ const time=Date.parse('2027-02-02T12:00:00Z'),timeZone='America/New_York';
+ const config=normalizeConfig({...defaultConfig(time,timeZone),salary:'1000',start:'02:00',lunchMinutes:0,workDays:1,restDays:0});
+ assert.throws(()=>snapshot(config,Date.parse('2027-03-03T12:00:00Z')),
+  {code:'salary.ambiguousTime',params:{date:'2027-03-14',time:'02:00',zone:timeZone}});
 });
 test('normalization only retains salary settings and accepts disabled unpaid breaks',()=>{
  const c=config({lunchMinutes:0,extraSecret:'synthetic-private-marker'});assert.equal(c.extraSecret,undefined);assert.equal(buildMonthPlan(c,now).endMinutes,17*60);assert.equal(snapshot(null,now).state,'unconfigured');

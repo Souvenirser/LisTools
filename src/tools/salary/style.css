@@ -11,3 +11,5 @@ body.salary-bar-visible.workspace-focused .app-layout{height:calc(100dvh - var(-
 .salary-review-action{align-self:end;min-width:0}
 .salary-review-action:has([hidden]){display:none}
 .salary-review-action button{max-width:100%;white-space:normal}
+.salary-mini-display-notice{grid-column:1/-1;margin:0;color:var(--muted);font-size:.75rem;line-height:1.25}
+.salary-mini-compact .salary-mini-display-notice{flex-basis:100%}

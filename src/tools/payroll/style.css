@@ -34,6 +34,18 @@
 .tax-bonus-months-control{position:relative;flex:1;min-width:0;max-width:145px}
 .tax-bonus-main .tax-bonus-months-control input{width:100%!important;padding-inline-end:38px}
 #tax-bonus-months-toggle{position:absolute;inset:0 0 auto auto;width:36px;padding:0;border-color:transparent;background:transparent;color:var(--muted)}
-#tax-bonus-month-options{position:fixed;inset:auto;margin:0;padding:4px;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:auto}
+#tax-bonus-month-options,#tax-period-options{position:fixed;inset:auto;margin:0;padding:4px;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:auto}
 #tax-bonus-month-options button{display:block;width:100%;background:transparent;border:0}
 #tax-bonus-months-toggle:hover:enabled,#tax-bonus-month-options button:hover:enabled{background:var(--subtle)}
+.tax-workspace .tax-period-row>.field:first-child{flex:none;min-inline-size:0;max-inline-size:100%;flex-wrap:wrap}
+.tax-period-control{display:grid;grid-template-columns:minmax(0,1fr) 44px;align-items:stretch;inline-size:180px;max-inline-size:100%;flex:none}
+.tax-period-control input{width:100%!important;min-width:0;max-width:100%;border-start-end-radius:0;border-end-end-radius:0}
+.tax-period-control input::-webkit-calendar-picker-indicator{display:none}
+#tax-period-picker{display:grid;place-items:center;min-width:44px;border-inline-start:0;border-start-start-radius:0;border-end-start-radius:0;padding:0 8px}
+#tax-period-picker[aria-expanded="true"]{background:var(--blue-3);color:var(--blue-11)}
+#tax-period-options{box-sizing:border-box;padding:12px;box-shadow:0 8px 24px #0003}
+#tax-period-options .field{display:flex;flex-direction:row;justify-content:space-between;align-items:center;gap:8px;margin-block-end:10px}
+#tax-period-options input{inline-size:100px;min-width:0}
+.tax-period-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
+.tax-period-grid button{min-height:40px;padding:4px;overflow-wrap:anywhere}
+.tax-period-grid button[aria-pressed="true"]{background:var(--blue-3);border-color:var(--blue-8);color:var(--blue-11)}

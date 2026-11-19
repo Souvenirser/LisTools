@@ -1,3 +1,4 @@
+import {activeTool,evaluateTool} from './task-helpers.js';
 import {test,expect} from '@playwright/test';
 
 async function ready(page,path='/index.html'){
@@ -36,28 +37,28 @@ test('categories ease open and closed, keep final state and restore their prefer
 
 test('conversion categories animate without covering tools and preserve search and folding',async({page})=>{
  await page.setViewportSize({width:1920,height:1080});await ready(page,'/convert.html');
- const group=page.locator('#convert-tool-list details').first();await expect(group).toHaveJSProperty('open',true);
+ const group=activeTool(page).locator('#convert-tool-list details').first();await expect(group).toHaveJSProperty('open',true);
  await sampleToggle(group);await expect(group).toHaveJSProperty('open',false);
- await page.locator('#convert-search').fill('base64');await expect(group).toHaveJSProperty('open',true);
- await page.locator('#convert-search').clear();await expect(group).toHaveJSProperty('open',false);
+ await activeTool(page).locator('#convert-search').fill('base64');await expect(group).toHaveJSProperty('open',true);
+ await activeTool(page).locator('#convert-search').clear();await expect(group).toHaveJSProperty('open',false);
  await group.locator('summary').click();await page.waitForTimeout(250);
  const summary=await group.locator('summary').boundingBox(),item=await group.locator('a').first().boundingBox();expect(item.y).toBeGreaterThanOrEqual(summary.y+summary.height);
 });
 
 test('task switch eases its content without recreating inputs or replaying on the current task',async({page})=>{
- await ready(page,'/password.html');await page.locator('#password-generate').click();
- await page.evaluate(()=>window.originalField=document.querySelector('#password-batch'));
- const active=await page.locator('#password-task-passphrase').evaluate(node=>{node.click();return document.querySelector('.password-workspace').getAnimations().length;});
+ await ready(page,'/password.html');await activeTool(page).locator('#password-generate').click();
+ await evaluateTool(page,()=>window.originalField=document.querySelector('#password-batch'));
+ const active=await activeTool(page).locator('#password-task-passphrase').evaluate(node=>{node.click();return document.querySelector('.password-workspace').getAnimations().length;});
  expect(active).toBe(1);await page.waitForTimeout(150);
- expect(await page.evaluate(()=>window.originalField===document.querySelector('#password-batch'))).toBe(true);
- await page.locator('#password-generate').click();const value=await page.locator('#password-results textarea').first().inputValue();
- await page.locator('#password-task-passphrase').click();expect(await page.locator('.password-workspace').evaluate(node=>node.getAnimations().length)).toBe(0);
- expect(await page.locator('#password-results textarea').first().inputValue()).toBe(value);
+ expect(await evaluateTool(page,()=>window.originalField===document.querySelector('#password-batch'))).toBe(true);
+ await activeTool(page).locator('#password-generate').click();const value=await activeTool(page).locator('#password-results textarea').first().inputValue();
+ await activeTool(page).locator('#password-task-passphrase').click();expect(await activeTool(page).locator('.password-workspace').evaluate(node=>node.getAnimations().length)).toBe(0);
+ expect(await activeTool(page).locator('#password-results textarea').first().inputValue()).toBe(value);
 });
 
 test('reduced motion preserves immediate task changes and removes category animation',async({page})=>{
  await page.emulateMedia({reducedMotion:'reduce'});await ready(page,'/password.html');
- await page.locator('#password-task-passphrase').click();expect(await page.locator('.password-workspace').evaluate(node=>node.getAnimations().length)).toBe(0);
+ await activeTool(page).locator('#password-task-passphrase').click();expect(await activeTool(page).locator('.password-workspace').evaluate(node=>node.getAnimations().length)).toBe(0);
  const group=page.locator('#tool-menu details').first();await group.locator('summary').click();
  expect(await group.evaluate(node=>getComputedStyle(node,'::details-content').transitionDuration)).toBe('0s');
 });
@@ -81,16 +82,16 @@ test('closing a category never lets ArrowDown enter its fading links',async({pag
 });
 
 test('tax task switching shares the same gentle arrival without changing input values',async({page})=>{
- await ready(page,'/tax.html');await page.locator('#tax-salary').fill('12345');
- const active=await page.locator('#tax-task-bonus').evaluate(node=>{node.click();return document.querySelector('.payroll-workspace').getAnimations().length;});
- expect(active).toBe(1);await page.waitForTimeout(150);await page.locator('#tax-task-wage').click();
- await expect(page.locator('#tax-salary')).toHaveValue('12345');
+ await ready(page,'/tax.html');await activeTool(page).locator('#tax-salary').fill('12345');
+ const active=await activeTool(page).locator('#tax-task-bonus').evaluate(node=>{node.click();return document.querySelector('.payroll-workspace').getAnimations().length;});
+ expect(active).toBe(1);await page.waitForTimeout(150);await activeTool(page).locator('#tax-task-wage').click();
+ await expect(activeTool(page).locator('#tax-salary')).toHaveValue('12345');
 });
 
 test('newly opened disclosure fields can receive focus synchronously',async({page})=>{
  await ready(page,'/qr.html');
- expect(await page.locator('#qr-level').evaluate(node=>{node.closest('details').open=true;node.focus();return document.activeElement===node;})).toBe(true);
- await page.waitForTimeout(220);await expect(page.locator('#qr-level')).toBeFocused();
+ expect(await activeTool(page).locator('#qr-level').evaluate(node=>{node.closest('details').open=true;node.focus();return document.activeElement===node;})).toBe(true);
+ await page.waitForTimeout(220);await expect(activeTool(page).locator('#qr-level')).toBeFocused();
 });
 
 test('native Tab skips closing category links while their visual transition finishes',async({page})=>{

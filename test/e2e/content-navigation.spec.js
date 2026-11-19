@@ -17,3 +17,17 @@ test('conversion subtools retain the same tab and input',async({page,context})=>
 test('opening the toolbox cannot consume a countdown expiry',async({page})=>{
  await page.clock.install();await page.goto('/timer.html');const tool=activeTool(page);await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');await page.clock.pauseAt(new Date(Date.now()+10000));await countdownDuration(tool,1);await tool.locator('#timer-start').click();const started=await page.evaluate(()=>Date.now());await page.clock.setFixedTime(new Date(started+2000));await page.locator('button.brand').click();await page.clock.runFor(150);await expect(tool.locator('#tool-status')).toContainText(/complete|结束/);
 });
+test('an invalid countdown draft stays available for correction when opening another tool',async({page,context})=>{
+ await page.goto('/timer.html');
+ const seconds=activeTool(page).locator('#timer-seconds');
+ await seconds.fill('60');
+ await seconds.blur();
+ await page.locator('button.brand').click();
+ await page.locator('#tool-menu-search').fill('calculator');
+ const link=page.locator('#tool-menu a[data-target="calculator.html"]');
+ await expect(link).toHaveAttribute('target','_blank');
+ const next=context.waitForEvent('page');
+ await link.click();
+ await (await next).close();
+ await expect(seconds).toHaveValue('60');
+});

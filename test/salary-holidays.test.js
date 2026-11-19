@@ -16,6 +16,17 @@ test('monthly application keeps the explicit rest target and requires resolving 
  const input=raw({mode:'monthly',monthlyRestDays:2,offDays:['2026-10-10','2026-10-12']}),draft=applyHolidaySchedule(input);
  assert.equal(draft.monthlyRestDays,2);assert.equal(draft.offDays.includes('2026-10-10'),false);assert.equal(draft.offDays.includes('2026-10-12'),true);assert.equal(draft.offDays.includes('2026-10-01'),true);assert.throws(()=>normalizeConfig(draft),{code:'salary.restCount'});assert.deepEqual(input.offDays,['2026-10-10','2026-10-12']);
 });
-test('empty next-year placeholders remain unavailable and cannot silently clear a schedule',()=>{
- const month=monthHolidays('2027-02');assert.equal(month.available,false);assert.deepEqual(month.days,[]);assert.throws(()=>applyHolidaySchedule(raw({month:'2027-02'})),{code:'salary.holidaysUnavailable'});assert.equal(monthHolidays('2026-11').available,true);assert.deepEqual(monthHolidays('2026-11').days,[]);
+test('2027 contains the official holidays and makeup days, including adjacent months',()=>{
+ const months=Array.from({length:12},(_,i)=>monthHolidays('2027-'+String(i+1).padStart(2,'0')));
+ assert.ok(months.every(month=>month.available&&month.version==='2026.11.05'));
+ const days=months.flatMap(month=>month.days);
+ assert.equal(days.filter(day=>day.isOffDay).length,29);
+ assert.deepEqual(days.filter(day=>!day.isOffDay).map(day=>day.date),
+  ['2027-01-31','2027-02-14','2027-05-08','2027-09-26','2027-10-09']);
+ assert.deepEqual(months[1].days.filter(day=>day.isOffDay).map(day=>day.date),
+  ['05','06','07','08','09','10','11','12','13'].map(day=>'2027-02-'+day));
+ assert.equal(months[9].days.filter(day=>day.isOffDay&&day.name==='国庆节').length,7);
+});
+test('an unpublished year cannot apply holidays but a known month can have none',()=>{
+ const month=monthHolidays('2028-02');assert.equal(month.available,false);assert.deepEqual(month.days,[]);assert.throws(()=>applyHolidaySchedule(raw({month:'2028-02'})),{code:'salary.holidaysUnavailable'});assert.equal(monthHolidays('2027-03').available,true);assert.deepEqual(monthHolidays('2027-03').days,[]);
 });

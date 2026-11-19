@@ -1,3 +1,4 @@
+import {activeTool} from './task-helpers.js';
 import {test,expect} from '@playwright/test';
 
 for(const {file,selector,name,compare} of [
@@ -8,12 +9,12 @@ for(const {file,selector,name,compare} of [
   await page.addInitScript(()=>localStorage.setItem('listools-language','en'));
   await page.goto('/'+file);
   if(compare){
-    await page.locator('#left-source .cm-content').fill('{"first":1,"last":2}');
-    await page.locator('#right-source .cm-content').fill('{"first":3,"last":4}');
-    await page.locator('#compare').click();
-    await expect(page.locator('body')).toHaveAttribute('data-status','ready');
+    await activeTool(page).locator('#left-source .cm-content').fill('{"first":1,"last":2}');
+    await activeTool(page).locator('#right-source .cm-content').fill('{"first":3,"last":4}');
+    await activeTool(page).locator('#compare').click();
+    await expect(activeTool(page).locator('body')).toHaveAttribute('data-status','ready');
   }
-  const group=page.locator(selector);
+  const group=activeTool(page).locator(selector);
   await expect(group).toBeVisible();
   await expect(group).toHaveRole('group');
   await expect(group).toHaveAccessibleName(name);
@@ -24,9 +25,9 @@ for(const {file,selector,name,compare} of [
 test('JSON result tokens and line numbers retain readable contrast',async({page},testInfo)=>{
   await page.addInitScript(()=>localStorage.setItem('listools-language','en'));
   await page.goto('/index.html');
-  await page.locator('#source .cm-content').fill('{"number":12,"truth":true,"falsehood":false,"empty":null,"name":"LisTools"}');
-  await page.locator('#format').click();await expect(page.locator('#copy')).toBeEnabled();
-  const values=await page.locator('#editor .cm-content span, #editor .cm-gutters .cm-gutterElement').evaluateAll(nodes=>{
+  await activeTool(page).locator('#source .cm-content').fill('{"number":12,"truth":true,"falsehood":false,"empty":null,"name":"LisTools"}');
+  await activeTool(page).locator('#format').click();await expect(activeTool(page).locator('#copy')).toBeEnabled();
+  const values=await activeTool(page).locator('#editor .cm-content span, #editor .cm-gutters .cm-gutterElement').evaluateAll(nodes=>{
     const canvas=document.createElement('canvas');canvas.width=canvas.height=1;
     const context=canvas.getContext('2d');
     const parse=color=>{context.clearRect(0,0,1,1);context.fillStyle=color;context.fillRect(0,0,1,1);const [r,g,b,a]=context.getImageData(0,0,1,1).data;return[r,g,b,a/255];};

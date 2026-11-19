@@ -30,14 +30,19 @@ $('timer-export').onclick=()=>{const timer=current();downloadText([`${t('timer.n
 render();$('timer-duration').value=String(JSON.parse(timers.countdown.serialize()).duration/1000);renderLaps();
 let interval=setInterval(render,100);document.addEventListener('visibilitychange',()=>{render();save();});addEventListener('pagehide',()=>{save();clearInterval(interval);void audio?.close();audio=undefined;});addEventListener('pageshow',()=>{clearInterval(interval);interval=setInterval(render,100);render();});onLanguageChange(()=>{render();renderLaps();soundStatus(soundUnavailable);});
 
-registerContentCheck(()=>Object.values(timers).some(timer=>{const state=JSON.parse(timer.serialize());return state.running||state.base!==(timer.mode==='countdown'?state.duration:0)||state.laps.length;})||$('timer-duration').value!=='300');
+registerContentCheck(()=>Object.values(timers).some(timer=>{const state=JSON.parse(timer.serialize());return state.running||state.base!==(timer.mode==='countdown'?state.duration:0)||state.laps.length;})||$('timer-duration').value!=='300'||durationParts(300).some((value,index)=>{
+ const field=$('timer-'+durationUnits[index]);
+ return field&&field.value!==String(value);
+}));
 
 $('timer-mode').closest('.field').hidden=true;$('timer-duration').hidden=true;
 const durationFields=document.createElement('div');durationFields.className='timer-duration-inputs';
-durationFields.innerHTML=['hours','minutes','seconds'].map((id,index)=>`<label for="timer-${id}"><span data-i18n="cron.fields.${['hour','minute','second'][index]}"></span><input id="timer-${id}" type="number" min="0" max="${index?59:8760}" step="1" inputmode="numeric" dir="ltr"></label>`).join('');$('timer-duration-field').append(durationFields);
+const durationUnits=['hours','minutes','seconds'];
+durationFields.innerHTML=durationUnits.map((id,index)=>`<label for="timer-${id}"><span data-i18n="cron.fields.${['hour','minute','second'][index]}"></span><input id="timer-${id}" type="number" min="0" max="${index?59:8760}" step="1" inputmode="numeric" dir="ltr"></label>`).join('');$('timer-duration-field').append(durationFields);
 document.querySelector('label[for="timer-duration"]').remove();translateDOM($('timer-duration-field'));
-function syncDuration(){if(!$('timer-hours'))return;const seconds=Number($('timer-duration').value);$('timer-hours').value=String(Math.floor(seconds/3600));$('timer-minutes').value=String(Math.floor(seconds/60)%60);$('timer-seconds').value=String(seconds%60);}
-function durationSeconds(){const parts=['hours','minutes','seconds'].map(id=>Number($('timer-'+id).value)),seconds=parts[0]*3600+parts[1]*60+parts[2];const invalid=parts.findIndex((part,index)=>!Number.isSafeInteger(part)||part<0||index>0&&part>59);if(invalid>=0||seconds<1||seconds>31536000)throw {code:'timer.invalidDuration',field:'timer-'+['hours','minutes','seconds'][invalid>=0?invalid:seconds>31536000?0:2]};return seconds;}
+function durationParts(seconds){return [Math.floor(seconds/3600),Math.floor(seconds/60)%60,seconds%60];}
+function syncDuration(){if(!$('timer-hours'))return;durationParts(Number($('timer-duration').value)).forEach((value,index)=>{$('timer-'+durationUnits[index]).value=String(value);});}
+function durationSeconds(){const parts=durationUnits.map(id=>Number($('timer-'+id).value)),seconds=parts[0]*3600+parts[1]*60+parts[2];const invalid=parts.findIndex((part,index)=>!Number.isSafeInteger(part)||part<0||index>0&&part>59);if(invalid>=0||seconds<1||seconds>31536000)throw {code:'timer.invalidDuration',field:'timer-'+durationUnits[invalid>=0?invalid:seconds>31536000?0:2]};return seconds;}
 for(const field of durationFields.querySelectorAll('input')){field.addEventListener('input',()=>{try{durationSeconds();clearStatus();}catch{/* Keep the current validation message until the duration is valid. */}});field.addEventListener('change',()=>{try{setDuration(durationSeconds());}catch(error){showError(error,{field:error.field||field.id});}});}
 const timerGuide=addTaskGuide('timer',['countdown','stopwatch'].map(id=>({id,key:'timer.'+id})),{choose:mode=>{$('timer-mode').value=mode;$('timer-mode').onchange();}});timerGuide.select($('timer-mode').value);$('timer-mode').addEventListener('change',()=>timerGuide.select($('timer-mode').value));syncDuration();
 $('timer-display').removeAttribute('style');

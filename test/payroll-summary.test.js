@@ -28,3 +28,27 @@ test('bonus in an absent month is rejected and actual refunds require actual bon
  const a=annual({months:Array.from({length:12},(_,i)=>({month:i+1,salary:'20000',contributions:'2000',confirmedActual:true,predicted:false})),actualWithheld:'14280'});
  assert.equal(combinePayrollResults({annual:a,bonus:b}).refund,null);assert.equal(combinePayrollResults({annual:a,bonus:b,bonusActualWithheld:'1080'}).refund,'0.00');
 });
+test('a future combined estimate stays available beyond the verified separate-tax window',()=>{
+ const a=annual({year:2028,actualWithheld:'20000'});
+ const input={year:2028,bonus:'36000',annualBasis:annualBasisForBonus(a)};
+ assert.throws(()=>calculateBonus(input),{code:'tax.bonusExpired'});
+ const bonus=calculateBonus(input,'combined');
+ assert.equal(bonus.separateTax,null);
+ assert.equal(bonus.saving,null);
+ assert.equal(bonus.combinedTotal,'21480.00');
+ const summary=combinePayrollResults({annual:a,bonus,method:'combined',bonusMonth:'6',bonusActualWithheld:'1080'});
+ assert.equal(summary.totalAnnualTax,'21480.00');
+ assert.equal(summary.months[5].bonus,'36000.00');
+ assert.equal(summary.refund,null);
+ assert.equal(summary.conditions.refundEligible,false);
+});
+test('a combined-only forecast does not become an actual refund when the device date advances',()=>{
+ const months=Array.from({length:12},(_,i)=>({month:i+1,salary:'10000',confirmedActual:true}));
+ const a=calculateAnnual({year:2028,months,actualWithheld:'20000'},new Date('2029-01-02T00:00:00Z'));
+ assert.notEqual(a.refund,null);
+ const bonus=calculateBonus({year:2028,bonus:'36000',annualBasis:annualBasisForBonus(a)},'combined');
+ const summary=combinePayrollResults({annual:a,bonus,method:'combined',bonusActualWithheld:'1080'});
+ assert.equal(summary.conditions.bonusCombinedEstimate,true);
+ assert.equal(summary.refund,null);
+ assert.equal(summary.conditions.refundEligible,false);
+});

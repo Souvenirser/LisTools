@@ -1,3 +1,4 @@
+import {activeTool,evaluateTool} from './task-helpers.js';
 import {test,expect} from '@playwright/test';
 async function setup(page,theme='dark'){
  await page.setViewportSize({width:1440,height:900});
@@ -8,14 +9,14 @@ test('first visible JSON frame already has final text and full-width workspace g
  const frames=await pane.locator('body').evaluate(()=>window.startFrames);expect(frames.length).toBeGreaterThan(0);for(const frame of frames){expect(frame.title).toBe('JSON 解析与格式化');expect(frame.button).toBe('格式化');expect(frame.x).toBe(0);}
 });
 test('dark JSON caret is readable and edit toolbar reuses editor history',async({page,context,browserName})=>{
- await setup(page);await page.goto('/index.html');const editor=page.locator('#source .cm-content');await editor.click();expect(await editor.evaluate(n=>getComputedStyle(n).caretColor)).not.toBe('rgb(0, 0, 0)');
- await expect(page.locator('#json-edit')).toBeVisible();await editor.fill('{"中文":"头中尾", "invalid": }');const text=await editor.innerText();await page.locator('#json-edit').click();await page.locator('#json-edit-select-all').click();await page.keyboard.type('replacement');await page.locator('#json-edit').click();await page.locator('#json-edit-undo').click();await expect(editor).toHaveText(text);await expect(editor).toBeFocused();
- if(browserName==='chromium')await context.grantPermissions(['clipboard-read','clipboard-write']);else await page.evaluate(()=>Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async value=>window.copiedInput=value}}));await page.locator('#json-copy-input').click();expect(await page.evaluate(browserName=>browserName==='chromium'?navigator.clipboard.readText():window.copiedInput,browserName)).toBe(text);
+ await setup(page);await page.goto('/index.html');const editor=activeTool(page).locator('#source .cm-content');await editor.click();expect(await editor.evaluate(n=>getComputedStyle(n).caretColor)).not.toBe('rgb(0, 0, 0)');
+ await expect(activeTool(page).locator('#json-edit')).toBeVisible();await editor.fill('{"中文":"头中尾", "invalid": }');const text=await editor.innerText();await activeTool(page).locator('#json-edit').click();await activeTool(page).locator('#json-edit-select-all').click();await page.keyboard.type('replacement');await activeTool(page).locator('#json-edit').click();await activeTool(page).locator('#json-edit-undo').click();await expect(editor).toHaveText(text);await expect(editor).toBeFocused();
+ if(browserName==='chromium')await context.grantPermissions(['clipboard-read','clipboard-write']);else await evaluateTool(page,()=>Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async value=>window.copiedInput=value}}));await activeTool(page).locator('#json-copy-input').click();expect(await page.evaluate(browserName=>browserName==='chromium'?navigator.clipboard.readText():window.copiedInput,browserName)).toBe(text);
 });
 test('fast text rerun does not flash a processing notice',async({page})=>{
- await setup(page);await page.goto('/text.html');await page.locator('#text-input').fill('A\nB\nA');await expect(page.locator('#text-copy')).toBeEnabled();
- await page.evaluate(()=>{window.processingFlashes=[];const node=document.getElementById('tool-status');const end=performance.now()+500;function frame(){if(!node.hidden&&getComputedStyle(node).visibility!=='hidden'&&node.textContent.includes('处理中'))processingFlashes.push(node.textContent);if(performance.now()<end)requestAnimationFrame(frame);}requestAnimationFrame(frame);});
- await page.locator('#text-run').click();await expect(page.locator('#text-copy')).toBeEnabled();await page.waitForTimeout(550);expect(await page.evaluate(()=>processingFlashes)).toEqual([]);
+ await setup(page);await page.goto('/text.html');await activeTool(page).locator('#text-input').fill('A\nB\nA');await expect(activeTool(page).locator('#text-copy')).toBeEnabled();
+ await evaluateTool(page,()=>{window.processingFlashes=[];const node=document.getElementById('tool-status');const end=performance.now()+500;function frame(){if(!node.hidden&&getComputedStyle(node).visibility!=='hidden'&&node.textContent.includes('处理中'))processingFlashes.push(node.textContent);if(performance.now()<end)requestAnimationFrame(frame);}requestAnimationFrame(frame);});
+ await activeTool(page).locator('#text-run').click();await expect(activeTool(page).locator('#text-copy')).toBeEnabled();await page.waitForTimeout(550);expect(await evaluateTool(page,()=>processingFlashes)).toEqual([]);
 });
 
 test('slow startup offers recovery and then reveals the initialized page',async({page})=>{
@@ -24,7 +25,7 @@ test('slow startup offers recovery and then reveals the initialized page',async(
  await page.goto('/index.html',{waitUntil:'commit'});
  await expect(page.locator('#page-boot')).toBeVisible();await expect(page.locator('main')).toBeHidden();
  await expect(page.locator('#page-boot button')).toBeVisible({timeout:5000});release();
- await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');await expect(page.locator('#page-boot')).toHaveCount(0);await expect(page.locator('#json-edit')).toBeVisible();
+ await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');await expect(page.locator('#page-boot')).toHaveCount(0);await expect(activeTool(page).locator('#json-edit')).toBeVisible();
 });
 test('failed tool script offers a visible reload action',async({page})=>{
  await setup(page);await page.route('**/assets/main-*.js',route=>route.abort());await page.goto('/index.html');
@@ -32,24 +33,24 @@ test('failed tool script offers a visible reload action',async({page})=>{
 });
 test('failed preferred language falls back to English before showing content',async({page})=>{
  await setup(page);await page.route('**/assets/zh-Hans-*.js',route=>route.abort());await page.goto('/index.html');
- await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');await expect(page.locator('html')).toHaveAttribute('lang','en');await expect(page.locator('#format')).toHaveText('Format');
+ await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');await expect(page.locator('html')).toHaveAttribute('lang','en');await expect(activeTool(page).locator('#format')).toHaveText('Format');
 });
 test('slow text feedback retains immediate cancellation and cannot return after cancel',async({page})=>{
  await setup(page);await page.addInitScript(()=>{const Native=Worker;window.Worker=class extends Native{set onmessage(handler){super.onmessage=event=>setTimeout(()=>handler(event),450);}};});
- await page.goto('/text.html');await page.locator('#text-input').evaluate(n=>n.value='A\nA');await page.locator('#text-run').click();
- await expect(page.locator('#text-cancel')).toBeEnabled();await expect(page.locator('#text-run')).toHaveAttribute('aria-busy','true');await expect(page.locator('#tool-status')).toBeVisible();
- await page.locator('#text-cancel').click();await expect(page.locator('#tool-status')).toHaveAttribute('data-task-state','cancelled');await page.waitForTimeout(600);await expect(page.locator('#tool-status')).toHaveAttribute('data-task-state','cancelled');
+ await page.goto('/text.html');await activeTool(page).locator('#text-input').evaluate(n=>n.value='A\nA');await activeTool(page).locator('#text-run').click();
+ await expect(activeTool(page).locator('#text-cancel')).toBeEnabled();await expect(activeTool(page).locator('#text-run')).toHaveAttribute('aria-busy','true');await expect(activeTool(page).locator('#tool-status')).toBeVisible();
+ await activeTool(page).locator('#text-cancel').click();await expect(activeTool(page).locator('#tool-status')).toHaveAttribute('data-task-state','cancelled');await page.waitForTimeout(600);await expect(activeTool(page).locator('#tool-status')).toHaveAttribute('data-task-state','cancelled');
 });
 test('reduced motion disables entry and menu transitions; Escape restores edit trigger',async({page})=>{
- await setup(page);await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/index.html');await page.locator('#json-edit').click();await page.keyboard.press('Escape');await expect(page.locator('#json-edit')).toBeFocused();
+ await setup(page);await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/index.html');await activeTool(page).locator('#json-edit').click();await page.keyboard.press('Escape');await expect(activeTool(page).locator('#json-edit')).toBeFocused();
  expect(await page.locator('main').evaluate(n=>getComputedStyle(n).animationName)).toBe('none');
 });
 test('initial focus toolbar is included in readiness, even when its chunk is slow',async({page})=>{
- await setup(page);let release;const held=new Promise(resolve=>release=resolve);await page.route('**/assets/focus-*.js',async route=>{await held;await route.continue();});await page.goto('/text.html',{waitUntil:'commit'});await expect(page.locator('#page-boot')).toBeVisible();await expect(page.locator('html')).toHaveAttribute('data-ui-state','booting');release();await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');await expect(page.locator('#workspace-focus')).toBeVisible();
+ await setup(page);let release;const held=new Promise(resolve=>release=resolve);await page.route('**/assets/focus-*.js',async route=>{await held;await route.continue();});await page.goto('/text.html',{waitUntil:'commit'});await expect(page.locator('#page-boot')).toBeVisible();await expect(page.locator('html')).toHaveAttribute('data-ui-state','booting');release();await expect(page.locator('html')).toHaveAttribute('data-ui-state','ready');await expect(activeTool(page).locator('#workspace-focus')).toBeVisible();
 });
 test('short PDF progress events do not bypass delayed feedback',async({page})=>{
  await setup(page);await page.addInitScript(()=>{window.Worker=class{postMessage(request){setTimeout(()=>this.onmessage?.({data:{taskId:request.taskId,event:'progress',done:1,total:2}}),50);setTimeout(()=>this.onmessage?.({data:{taskId:request.taskId,status:'error',code:'pdf.encrypted'}}),150);}terminate(){}};});
- await page.goto('/pdf.html');await page.locator('#pdf-files').setInputFiles({name:'test.pdf',mimeType:'application/pdf',buffer:Buffer.from('%PDF-1.7\nfixture')});
+ await page.goto('/pdf.html');await activeTool(page).locator('#pdf-files').setInputFiles({name:'test.pdf',mimeType:'application/pdf',buffer:Buffer.from('%PDF-1.7\nfixture')});
  await page.evaluate(()=>{window.earlyProgress=[];const start=performance.now();function frame(){const node=document.getElementById('tool-status');if(node.dataset.taskState==='pending'&&getComputedStyle(node).visibility!=='hidden')earlyProgress.push(node.textContent);if(performance.now()-start<400)requestAnimationFrame(frame);}requestAnimationFrame(frame);});
- await page.locator('#pdf-run').click();await expect(page.locator('#tool-status')).toHaveClass(/is-error/);expect(await page.evaluate(()=>earlyProgress)).toEqual([]);
+ await activeTool(page).locator('#pdf-run').click();await expect(activeTool(page).locator('#tool-status')).toHaveClass(/is-error/);expect(await page.evaluate(()=>earlyProgress)).toEqual([]);
 });

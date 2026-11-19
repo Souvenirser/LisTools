@@ -1,7 +1,7 @@
 # LisTools 隐私政策
 
 更新日期：2026 年 11 月 18 日\
-适用版本：LisTools 1.3.3\
+适用版本：LisTools 1.3.4\
 维护者：Souvenirser
 
 LisTools 是一款提供 JSON、文本、编码转换、计算、图片及 PDF 等实用功能的浏览器扩展。本文说明扩展如何处理数据。

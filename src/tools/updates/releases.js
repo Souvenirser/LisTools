@@ -4,6 +4,8 @@ export const githubReleaseEndpoint = `https://api.github.com/repos/${repository}
 const cacheKey = 'listools-release-check-v1';
 const timeout = 3000;
 const hour = 60 * 60 * 1000;
+const cacheFallback = new WeakMap();
+const unavailableStorage = {};
 
 function versionParts(version) {
   if (typeof version !== 'string') return null;
@@ -48,16 +50,24 @@ function retryTime(response, now) {
   return Math.max(now + hour, Number.isFinite(requested) ? requested : 0, Number.isFinite(reset) ? reset : 0);
 }
 
-export async function checkGitHubUpdate(installed, {storage = globalThis.localStorage, fetcher = globalThis.fetch, now = Date.now} = {}) {
+export async function checkGitHubUpdate(installed, {storage, fetcher = globalThis.fetch, now = Date.now} = {}) {
+  try { storage ??= globalThis.localStorage; } catch { /* The page can still check for updates. */ }
+  const storageKey = storage ?? unavailableStorage;
+  const saveCheck = record => {
+    cacheFallback.set(storageKey, record);
+    try { storage?.setItem(cacheKey, JSON.stringify(record)); } catch { /* This popup can still use the result. */ }
+  };
   let cached;
   try { cached = JSON.parse(storage.getItem(cacheKey)); } catch { /* An unreadable cache can be refreshed. */ }
+  const fallback = cacheFallback.get(storageKey);
+  if (fallback && !(cached?.nextCheckAt >= fallback.nextCheckAt)) cached = fallback;
   const startedAt = now();
   if (Number.isFinite(cached?.nextCheckAt) && cached.nextCheckAt > startedAt) {
     return isNewerVersion(cached.version, installed) ? cached.version : null;
   }
 
   // A short lease covers popups closed before a response can be cached.
-  storage.setItem(cacheKey, JSON.stringify({nextCheckAt: startedAt + timeout}));
+  saveCheck({nextCheckAt: startedAt + timeout});
   let response;
   let version;
   try {
@@ -71,8 +81,8 @@ export async function checkGitHubUpdate(installed, {storage = globalThis.localSt
   } catch { /* Leave the footer on its installed version. */ }
 
   const checkedAt = now();
-  storage.setItem(cacheKey, JSON.stringify(version
+  saveCheck(version
     ? {version, nextCheckAt: checkedAt + 24 * hour}
-    : {nextCheckAt: retryTime(response, checkedAt)}));
+    : {nextCheckAt: retryTime(response, checkedAt)});
   return isNewerVersion(version, installed) ? version : null;
 }

@@ -105,3 +105,20 @@ test('GitHub limit takes precedence over the local cooldown', async () => {
   await checkGitHubUpdate('1.3.9', options);
   assert.equal(calls.length, 2);
 });
+
+test('an unreadable or unwritable cache never suppresses a valid GitHub update', async () => {
+ const {checkGitHubUpdate} = await releases();
+ for(const failAt of [1,2]){
+  const {options,calls}=client(()=>Response.json(stable('1.3.10')));
+  const {setItem}=options.storage;
+  let writes=0;
+  options.storage.setItem=(key,value)=>{
+   if(++writes===failAt)throw new DOMException('test quota','QuotaExceededError');
+   setItem(key,value);
+  };
+  if(failAt===1)options.storage.getItem=()=>{throw new DOMException('test policy','SecurityError');};
+  assert.equal(await checkGitHubUpdate('1.3.9',options),'1.3.10');
+  assert.equal(await checkGitHubUpdate('1.3.9',options),'1.3.10');
+  assert.equal(calls.length,1);
+ }
+});

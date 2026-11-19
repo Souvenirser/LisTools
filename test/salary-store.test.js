@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {createSalaryStore as storeWithLocks,salaryKey} from '../src/tools/salary/store.js';
+import {createSalaryStore as storeWithLocks,salaryKey,scheduleKey} from '../src/tools/salary/store.js';
 import {defaultConfig,normalizeConfig,snapshot} from '../src/tools/salary/core.js';
 const createSalaryStore=(storage,locks={request:async (_name,operation)=>operation()})=>storeWithLocks(storage,locks);
 const now=Date.parse('2026-11-02T10:00:00+08:00');
@@ -29,4 +29,54 @@ test('unavailable locks keep changes in memory without persisting unlocked write
  assert.equal(store.read().masked,true);assert.equal(s.getItem(salaryKey),null);
  assert.equal((await store.updateDisplay(()=>({showBar:true}))).saved,false);
  assert.equal(await store.clear(),false);assert.equal(store.read(),null);
+});
+
+test('a mask that could not be saved survives unrelated changes from another page',async()=>{
+ const shared=storage(),other=createSalaryStore(shared);
+ await other.save(config());
+ const local=createSalaryStore({...shared,setItem(){throw new DOMException('test quota','QuotaExceededError');}});
+ const localMask=await local.updateDisplay(()=>({masked:true}));
+ assert.equal(localMask.saved,false);
+ await other.updateDisplay(()=>({showBar:true}));
+ local.refresh();
+ assert.equal(local.read().masked,true);
+ assert.equal(local.read().showBar,true);
+ await local.updateDisplay(()=>({masked:false}));
+ assert.equal(local.read().masked,false);
+});
+
+test('a queued schedule save must observe the same schedule it started with',async()=>{
+ const shared=storage(),other=createSalaryStore(shared);
+ await other.save(config());
+ let finish;
+ const local=createSalaryStore(shared,{request:(_name,operation)=>new Promise(resolve=>{finish=()=>resolve(operation());})});
+ const pending=local.saveSchedule({...config(),salary:'20000'});
+ await other.clear();
+ finish();
+ assert.deepEqual(await pending,{conflict:true});
+ assert.equal(shared.getItem(salaryKey),null);
+});
+test('an unreadable latest record cannot be overwritten by stale local settings',async()=>{
+ const shared=storage(),other=createSalaryStore(shared);
+ await other.save(config());
+ let blocked=false;
+ const local=createSalaryStore({...shared,getItem(key){
+  if(blocked)throw new DOMException('test storage','SecurityError');
+  return shared.getItem(key);
+ }});
+ local.read();
+ await other.save({...config(),salary:'22000'});
+ blocked=true;
+ assert.equal((await local.saveSchedule({...config(),salary:'20000'})).saved,false);
+ assert.equal((await local.updateDisplay(()=>({showBar:true}))).saved,false);
+ assert.equal(JSON.parse(shared.getItem(salaryKey)).salary,'22000');
+ assert.equal(JSON.parse(shared.getItem(salaryKey)).showBar,false);
+});
+test('clear leaves a different schedule saved after the confirmation was opened',async()=>{
+ const shared=storage(),local=createSalaryStore(shared),other=createSalaryStore(shared);
+ await local.save(config());
+ const confirmed=scheduleKey(local.read());
+ await other.save({...config(),salary:'22000'});
+ assert.equal(await local.clear(confirmed),null);
+ assert.equal(JSON.parse(shared.getItem(salaryKey)).salary,'22000');
 });

@@ -45,6 +45,26 @@ test('XML 拒绝非法字符引用、原始字符和多个文档根节点', asyn
     assert.equal((await convert('xml-json',source)).status,'error',source);
   }
 });
+test('XML 字符引用的回车与属性空白可以经过 JSON 无损往返',async()=>{
+ const source='<r a="&#9;&#10;&#13;&amp;#13;">&#13;&amp;#13;<![CDATA[中&文]]></r>';
+ const json=await output('xml-json',source);
+ const xml=await output('xml-json',json,{direction:'decode'});
+ assert.equal(await output('xml-json',xml),json);
+});
+test('XML 区分属性中原样空白与显式字符引用',async()=>{
+ const source='<r a="a\t\nb&#9;&#10;&#13;">literal\t text<![CDATA[&amp;&#9;]]></r>';
+ const json=await output('xml-json',source);
+ const [node]=JSON.parse(json);
+ assert.equal(node[':@']['@_a'],'a  b\t\n\r');
+ assert.deepEqual(node.r,[{'#text':'literal\t text'},{'#cdata':[{'#text':'&amp;&#9;'}]}]);
+ assert.equal(await output('xml-json',await output('xml-json',json,{direction:'decode'})),json);
+});
+test('XML 实体不能把非法数值引用替换为乱码',async()=>{
+ for(const value of ['&#0;','&#xD800;','&#xFFFF;','&#x110000;','&#x;', '&#65']){
+  assert.equal((await convert('xml-entities',value,{direction:'decode'})).status,'error',value);
+ }
+ assert.equal(await output('xml-entities','&#13;&amp;#0;&lt;',{direction:'decode'}),'\r&#0;<');
+});
 
 test('CSV/TSV 字段保持字符串，严格列数与表头；引用换行完整保留', async () => {
   const source='id,note\r\n001,"中,文\nnext"\r\n9007199254740993,"a""b"';
