@@ -81,7 +81,7 @@ h2 { font-size: var(--section-size); margin: 0; font-weight: 650; }
 #file-name { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 #result-state { border-radius: 4px; padding: 2px 7px; }
 [data-status="ready"] #result-state { background: var(--success-bg); color: var(--success-text); }
-[data-status="error"] #result-state { background: var(--error-bg); color: var(--error-text); }
+[data-status="error"] #result-state, [data-invalid] #result-state { background: var(--error-bg); color: var(--error-text); }
 .result-body { position: relative; flex: 1; min-height: 270px; display: flex; }
 .placeholder { width: 100%; align-self: center; text-align: center; padding: 28px; color: var(--muted); overflow: auto; max-height: 100%; }
 .empty-braces { display: block; font: 1.875rem/1.5 var(--mono); color: var(--slate-9); margin-bottom: 12px; }
@@ -92,7 +92,7 @@ h2 { font-size: var(--section-size); margin: 0; font-weight: 650; }
 #error-detail { background: var(--surface); color: var(--error-text); border: 1px solid var(--error-border); text-align: start; white-space: pre-wrap; overflow-wrap: anywhere; padding: 14px; font-size: var(--text-size); margin: 16px auto; direction: ltr; }
 #locate-error { margin-top: 6px; }
 #editor { flex: 1; min-width: 0; min-height: 0; width: 100%; direction: ltr; --jse-theme-color: var(--slate-3); --jse-theme-color-highlight: var(--blue-3); --jse-menu-color: var(--slate-12); --jse-modal-overlay-background: #0004; --jse-theme-color-contrast: var(--slate-12); --jse-font-family: inherit; --jse-font-family-mono: var(--mono); --jse-font-size: 1rem; --jse-font-size-mono: 1rem; --jse-line-height: 26px; --jse-border: none; --jse-menu-button-size: 44px; --jse-panel-color-readonly: var(--text); --jse-delimiter-color: var(--muted); --jse-value-color-number: var(--red-11); --jse-value-color-boolean: var(--amber-12); }
-#editor .jse-menu .lis-menu-label { width: auto; min-width: 38px; padding-inline: 9px; font-size: 1rem; }
+#editor .jse-menu .lis-menu-label { width: auto; min-width: 38px; padding-inline: 9px; column-gap: 6px; white-space: nowrap; font-size: 1rem; }
 .workbench-footer { padding: 14px 0 18px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; color: var(--muted); font-size: var(--helper-size); flex-shrink: 0; }
 .file-drop-overlay { position: fixed; inset: 12px; z-index: 200; display: grid; place-content: center; gap: 12px; text-align: center; color: var(--blue-11); background: var(--blue-2); border: 2px dashed var(--accent); border-radius: 8px; pointer-events: none; }
 .file-drop-overlay strong { font-size: 1.5rem; font-weight: 600; }

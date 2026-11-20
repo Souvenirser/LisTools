@@ -1,6 +1,13 @@
 {
   "common": {
-    "updateVersion": "更新 {{version}}",
+    "checkUpdates": "检查更新",
+    "updateChecking": "正在检查…",
+    "updateCurrent": "已是最新版",
+    "updateFound": "发现新版 {{version}}",
+    "updateFailed": "检查更新失败",
+    "updateLimited": "检查限流，请稍后重试",
+    "updateOpenRelease": "查看发布页",
+    "updateOpenManager": "管理扩展",
     "feedback": "问题反馈",
     "feedbackHint": "在 GitHub 公开反馈（需要登录）",
     "convert": "编码与转换",

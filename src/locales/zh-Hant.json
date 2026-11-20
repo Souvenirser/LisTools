@@ -1,6 +1,13 @@
 {
   "common": {
-    "updateVersion": "更新 {{version}}",
+    "checkUpdates": "檢查更新",
+    "updateChecking": "正在檢查…",
+    "updateCurrent": "已是最新版",
+    "updateFound": "發現新版 {{version}}",
+    "updateFailed": "檢查更新失敗",
+    "updateLimited": "檢查頻率受限，請稍後重試",
+    "updateOpenRelease": "查看發布頁",
+    "updateOpenManager": "管理擴充功能",
     "feedback": "問題回饋",
     "feedbackHint": "在 GitHub 公開回饋（需要登入）",
     "convert": "編碼與轉換",

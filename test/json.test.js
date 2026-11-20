@@ -25,6 +25,15 @@ test('统计结构节点，为大文件批量展开提供判断依据', () => {
   assert.equal(transformJson('[1,2,3]', { action: 'compact' }).nodeCount, 4);
 });
 
+test('关闭自动美化时校验并保留同步文本原样', () => {
+  const source = ' { "id" : 9007199254740993, "message" : "\\u4f60" } \n';
+  const result = transformJson(source, { action: 'preserve' });
+  assert.equal(result.status, 'ready');
+  assert.equal(result.text, source);
+  assert.equal(result.outputBytes, Buffer.byteLength(source));
+  assert.equal(transformJson('{"id":', { action: 'preserve' }).status, 'error');
+});
+
 test('空输入与错误包含明确的位置，重复键不静默覆盖', () => {
   assert.deepEqual(transformJson(' \n\t '), { status: 'empty' });
   const invalid = transformJson('{\n  "a": ]\n}');

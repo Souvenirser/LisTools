@@ -52,9 +52,9 @@ const resultButtons = document.querySelectorAll('[data-result]');
 const cancelButton=document.createElement('button');cancelButton.id='json-cancel';cancelButton.hidden=true;cancelButton.disabled=true;cancelButton.dataset.i18n='common.cancel';$('compact').after(cancelButton);
 const parser = { parse, stringify };
 let editor;
-let resultText = '', resultVersion=-1;
+let resultText = '';
 let errorPosition;
-let inputVersion = 0, sourceComposing=false;
+let sourceComposing=false;
 let filename = 'formatted.json';
 let lastState = { status: 'empty' };
 let importedName = '';
@@ -68,7 +68,9 @@ function syncPending(){
   const pending=readPending||lastState.status==='pending',visible=pending||lastState.status==='ready';
   for(const id of ['format','compress'])$(id)?.setAttribute('aria-busy',String(pending));
   cancelButton.disabled=!pending;cancelButton.hidden=!visible;cancelButton.style.visibility=pending?'':'hidden';cancelButton.style.setProperty('display',visible?'inline-flex':'','important');
-  for(const button of resultButtons)button.disabled=pending||lastState.status!=='ready';
+  for (const button of resultButtons) {
+    button.disabled = pending || lastState.status !== 'ready' || !resultText || (button.id === 'download' && lastState.invalid);
+  }
 }
 function invalidateRead(){readVersion++;readPending=false;showImportStatus();syncPending();}
 
@@ -79,16 +81,50 @@ function size(bytes) {
 }
 
 const notify = createNotifier();
+const outputPanel = document.querySelector('.output-panel');
+
+function renderResultInfo(state) {
+  $('result-info').textContent = `${size(state.outputBytes)} · ${t('common.characters', { count: state.text.length })}`;
+  $('result-state').textContent = t(state.invalid ? 'common.error' : 'json.success');
+  outputPanel.toggleAttribute('data-invalid', Boolean(state.invalid));
+}
+
+function resultChanged(content, _previous, { contentErrors }) {
+  if (lastState.status !== 'ready') return;
+  const text = content.text ?? stringify(content.json, null, Number($('indent').value)) ?? '';
+  const invalid = !text.trim() || Boolean(contentErrors);
+  const bytes = new Blob([text]).size;
+  controller.cancel();
+  // The source setter suppresses input events, leaving the active editor and its history intact.
+  if (source.value !== text) source.value = text;
+  sourceEditor.markError(contentErrors?.parseError?.position);
+  $('input-info').textContent = text ? size(bytes) : t('json.raw');
+  resultText = text;
+  largeResult ||= text.length > 1000000;
+  lastState = { ...lastState, text, inputBytes: bytes, outputBytes: bytes, invalid };
+  renderResultInfo(lastState);
+  invalidateRead();
+}
+
+const menuActionLabels = {
+  Format: 'json.format', Compact: 'json.compact', Sort: 'common.sort',
+  Transform: 'common.transform', Undo: 'common.undo', Redo: 'common.redo'
+};
 
 function renderMenu(items, { mode }) {
   const labels = { text: t('common.text'), tree: t('common.tree'), 'Expand all': t('common.expand'), 'Collapse all': t('common.collapse'), 'Search (Ctrl+F)': t('common.search') };
   return items.filter((item) => item.text !== 'table' && item.className !== 'jse-copy').map((item) => {
-    const label = labels[item.text] || labels[item.title];
-    const translated = label ? {
-      ...item, icon: undefined, text: label,
-      className: `${item.className || ''} lis-menu-label${item.text === 'tree' ? ' jse-last' : ''}`,
-      title: label === labels['Search (Ctrl+F)'] ? `${label} (Ctrl / ⌘ + F)` : label
-    } : translateMenuItem(item);
+    const actionKey = menuActionLabels[item.title?.split(' ', 1)[0]];
+    const label = labels[item.text] || labels[item.title] || (actionKey && t(actionKey));
+    const translated = translateMenuItem(item);
+    if (label) {
+      translated.text = label;
+      translated.className = `${item.className || ''} lis-menu-label${item.text === 'tree' ? ' jse-last' : ''}`;
+      if (!actionKey) {
+        translated.icon = undefined;
+        translated.title = item.title === 'Search (Ctrl+F)' ? `${label} (Ctrl / ⌘ + F)` : label;
+      }
+    }
     if (mode === Mode.tree && largeResult && ['Expand all', 'Collapse all'].includes(item.title)) {
       return { ...translated, onClick: async () => {
         const currentEditor = editor;
@@ -106,10 +142,12 @@ function renderMenu(items, { mode }) {
 
 function render(state) {
   if(state.status!=='pending')resultFeedback(false);
-  const retainResult=state.status==='pending'&&editor&&resultVersion===inputVersion;
+  const retainResult=state.status==='pending'&&editor;
   lastState = state;
   syncPending();
-  document.querySelector('.output-panel').dataset.status = state.status;
+  outputPanel.dataset.status = state.status;
+  outputPanel.removeAttribute('data-invalid');
+  if (retainResult) editor.updateProps({ readOnly: true });
   resultText = '';
   errorPosition = undefined;sourceEditor.markError();
   for (const button of resultButtons) {button.disabled = true;button.style.display=retainResult?'inline-flex':'';}
@@ -131,24 +169,26 @@ function render(state) {
         editor = createJSONEditor({
           target: $('editor'),
           props: {
-            content: { text: state.text }, mode: Mode.text, readOnly: true,
+            content: { text: state.text }, mode: Mode.text,
             parser, validationParser: parser, askToFormat: false,
             indentation: Number($('indent').value), tabSize: Number($('indent').value),
             maxDocumentSizeTextMode: 50 * 1024 * 1024,
             queryLanguages: [jsonQueryLanguage],
             ariaLabel: t('json.output'), onRenderMenu: renderMenu, onRenderContextMenu: renderContextMenu,
+            onChange: resultChanged,
             onError: (error) => notify('common.editorError', { message: error.message })
           }
         });
       } else {
-        editor.updateProps({ indentation: Number($('indent').value), tabSize: Number($('indent').value) });
+        if (state.invalid) editor.updateProps({ mode: Mode.text });
+        editor.updateProps({ readOnly: false, indentation: Number($('indent').value), tabSize: Number($('indent').value) });
         if(editor.get().text!==state.text)editor.set({ text: state.text });
       }
-      resultText = state.text;resultVersion=inputVersion;
-      for (const button of resultButtons) button.disabled = readPending;
+      resultText = state.text;
+      if (state.invalid) sourceEditor.markError(state.position);
+      syncPending();
       $('input-info').textContent = size(state.inputBytes);
-      $('result-info').textContent = `${size(state.outputBytes)} · ${t('common.characters', { count: state.text.length })}`;
-      $('result-state').textContent = t('json.success');
+      renderResultInfo(state);
     } catch (error) {
       render({ status: 'error', code: 'common.displayError', params: { message: error.message }, message: error.message });
     }
@@ -176,7 +216,16 @@ function render(state) {
 
 const controller = createJsonController({
   createWorker: () => new Worker(new URL('./tools/json/worker.js', import.meta.url), { type: 'module' }),
-  onState: state=>{resultFeedback(state.status==='pending');render(state);}
+  onState(state) {
+    resultFeedback(state.status === 'pending');
+    if (editor && (state.status === 'empty' || (state.status === 'error' && !state.code))) {
+      const text = source.value;
+      const bytes = new Blob([text]).size;
+      render({ status: 'ready', text, inputBytes: bytes, outputBytes: bytes, invalid: true, position: state.position });
+      return;
+    }
+    render(state);
+  }
 });
 
 function process(action = 'format', wait = 0) {
@@ -185,11 +234,11 @@ function process(action = 'format', wait = 0) {
 }
 
 function inputChanged() {
-  inputVersion += 1;
   invalidateRead();
   $('input-info').textContent = source.value ? t('common.characters', { count: source.value.length }) : t('json.raw');
-  if(sourceComposing){controller.cancel();render({status:'idle'});return;}
+  if(sourceComposing){controller.cancel();render({status:editor?'pending':'idle'});return;}
   if ($('auto-format').checked || !source.value.trim()) process('format', 350);
+  else if (editor) process('preserve');
   else {
     controller.cancel();
     render({ status: 'idle' });
@@ -206,7 +255,8 @@ $('indent').addEventListener('change', () => process());
 $('auto-format').addEventListener('change', () => {
   controller.cancel();
   if ($('auto-format').checked) process();
-  else if (!resultText) render({ status: source.value.trim() ? 'idle' : 'empty' });
+  else if (editor && lastState.status === 'pending') process('preserve');
+  else if (!editor) render({ status: source.value.trim() ? 'idle' : 'empty' });
 });
 $('clear').addEventListener('click', () => {
   source.value = '';
@@ -214,7 +264,10 @@ $('clear').addEventListener('click', () => {
   $('file-name').textContent = t('json.supported');
   filename = 'formatted.json';
   importedName = '';
-  inputChanged();
+  invalidateRead();
+  controller.cancel();
+  $('input-info').textContent = t('json.raw');
+  render({ status: 'empty' });
   source.focus();
 });
 $('import').addEventListener('click', () => $('file').click());
@@ -230,7 +283,7 @@ async function loadFile(file) {
     let text;
     try {text=new TextDecoder('utf-8',{fatal:true}).decode(bytes);}
     catch(error){showImportStatus(error instanceof TypeError?'diagnostic.InvalidEncoding':'office.fileReadError',{name:file.name});return;}
-    readPending=false;inputVersion++;showImportStatus();
+    readPending=false;showImportStatus();
     source.value = text;
     filename = `${file.name.replace(/\.[^.]+$/, '')}.formatted.json`;
     importedName = file.name;
@@ -255,7 +308,7 @@ $('locate-error').addEventListener('click', () => {
   source.scrollTop = Math.max(0, (line - 3) * parseFloat(getComputedStyle(source).lineHeight));
 });
 $('copy').addEventListener('click', async () => {
-  if(lastState.status!=='ready')return;
+  if ($('copy').disabled) return;
   try {
     await navigator.clipboard.writeText(resultText);
     notify('common.copiedAll');
@@ -265,7 +318,7 @@ $('copy').addEventListener('click', async () => {
   }
 });
 $('download').addEventListener('click', () => {
-  if(lastState.status!=='ready')return;
+  if ($('download').disabled) return;
   const url = URL.createObjectURL(new Blob([resultText], { type: 'application/json;charset=utf-8' }));
   const link = document.createElement('a');
   link.href = url;
@@ -274,13 +327,13 @@ $('download').addEventListener('click', () => {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 });
 document.addEventListener('keydown', (event) => {
-  if (event.target.closest?.('.tool-menu')) return;
+  if (event.target.closest?.('.tool-menu, #editor')) return;
   if ((event.metaKey || event.ctrlKey) && event.key === 'Enter') {
     event.preventDefault();
     process();
   }
 });
-window.addEventListener('pagehide', () => {const reading=readPending;inputVersion++;invalidateRead();controller.cancel();if(reading)showImportStatus('direct.developer.jsonCancelled');if(lastState.status==='pending')render({status:'cancelled'});});
+window.addEventListener('pagehide', () => {const reading=readPending;invalidateRead();controller.cancel();if(reading)showImportStatus('direct.developer.jsonCancelled');if(lastState.status==='pending')render({status:'cancelled'});});
 
 // The public menu hooks update labels without resetting editor content or its history.
 function translateMenuItem(item) {
@@ -293,7 +346,7 @@ function translateMenuItem(item) {
   };
   return { ...item, ...(item.text ? { text:translate(item.text) } : {}), ...(item.title ? { title:translate(item.title) } : {}), ...(item.main ? { main:translateMenuItem(item.main) } : {}), ...(item.items ? { items:item.items.map(translateMenuItem) } : {}) };
 }
-// Results are read-only. Keep available context actions and omit disabled edit/type controls.
+// Keep available context actions and omit disabled or empty groups.
 function renderContextMenu(items) {
   const prune = items => items.filter(item => !item.disabled && !item.main?.disabled)
     .map(item => item.items ? { ...item, items:prune(item.items) } : item)
@@ -307,13 +360,16 @@ function refreshLabels() {
   $('input-info').textContent = source.value ? t('common.characters', { count:source.value.length }) : t('json.raw');
   $('file-name').textContent = importedName || t('json.supported');
   for (const option of $('indent').options) option.textContent = t('json.spaces', { count:Number(option.value) });
-  $('result-info').textContent = state.status === 'ready' ? `${size(state.outputBytes)} · ${t('common.characters', { count:state.text.length })}` : t('json.precision');
-  $('result-state').textContent = t(state.status === 'ready' ? 'json.success' : state.status === 'error' ? 'common.error' : state.status === 'pending' ? 'common.processing' : 'common.ready');
+  if (state.status === 'ready') renderResultInfo(state);
+  else {
+    $('result-info').textContent = t('json.precision');
+    $('result-state').textContent = t(state.status === 'error' ? 'common.error' : state.status === 'pending' ? 'common.processing' : 'common.ready');
+  }
   $('placeholder-title').textContent = t(state.status === 'error' ? 'json.failed' : state.status === 'pending' ? 'json.parsing' : state.status === 'idle' ? 'json.updated' : 'json.waiting');
   $('placeholder-description').textContent = state.status === 'error' ? state.line ? t('common.location',state) : t('common.retry') : t(state.status === 'pending' ? 'json.largeHint' : state.status === 'idle' ? 'json.actionHint' : 'json.viewHint');
   if(state.status==='cancelled')$('placeholder-description').textContent=t('direct.developer.jsonCancelled');
   if (state.status === 'error') $('error-detail').textContent = errorText(state);
-  editor?.updateProps({ ariaLabel:t('json.output'), onRenderMenu:(items, context) => renderMenu(items, context), onRenderContextMenu:items => items.map(translateMenuItem) });
+  editor?.updateProps({ ariaLabel:t('json.output'), onRenderMenu:(items, context) => renderMenu(items, context), onRenderContextMenu:renderContextMenu });
 }
 onLanguageChange(refreshLabels);
 refreshLabels();

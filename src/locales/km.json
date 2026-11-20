@@ -1,6 +1,13 @@
 {
   "common": {
-    "updateVersion": "ធ្វើបច្ចុប្បន្នភាព {{version}}",
+    "checkUpdates": "Check for updates",
+    "updateChecking": "Checking…",
+    "updateCurrent": "Up to date",
+    "updateFound": "New version {{version}}",
+    "updateFailed": "Update check failed",
+    "updateLimited": "Rate limited. Try again later.",
+    "updateOpenRelease": "View release",
+    "updateOpenManager": "Manage extension",
     "feedback": "Report an issue",
     "feedbackHint": "Open public feedback on GitHub (sign-in required)",
     "convert": "ការអ៊ិនកូដ និងការបម្លែង",

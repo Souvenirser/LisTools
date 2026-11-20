@@ -1,6 +1,13 @@
 {
   "common": {
-    "updateVersion": "تحديث {{version}}",
+    "checkUpdates": "التحقق من التحديثات",
+    "updateChecking": "جارٍ التحقق…",
+    "updateCurrent": "أحدث إصدار",
+    "updateFound": "إصدار جديد {{version}}",
+    "updateFailed": "تعذر التحقق من التحديث",
+    "updateLimited": "محاولات كثيرة. حاول مرة أخرى لاحقًا.",
+    "updateOpenRelease": "عرض الإصدار",
+    "updateOpenManager": "إدارة الإضافة",
     "feedback": "Report an issue",
     "feedbackHint": "Open public feedback on GitHub (sign-in required)",
     "convert": "الترميز والتحويل",

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 
 const releases = () => import('../src/tools/updates/releases.js');
 const hour = 60 * 60 * 1000;
+const update = {status: 'available', version: '1.3.10'};
 const stable = version => ({
   tag_name: `v${version}`,
   draft: false,
@@ -53,8 +54,8 @@ test('the GitHub update needs a published stable release with its actual ZIP', a
 test('GitHub makes a private, bounded request and reuses the successful check for 24 hours', async () => {
   const {checkGitHubUpdate, githubReleaseEndpoint} = await releases();
   const {options, calls, advance} = client(() => Response.json(stable('1.3.10')));
-  assert.equal(await checkGitHubUpdate('1.3.9', options), '1.3.10');
-  assert.equal(await checkGitHubUpdate('1.3.10', options), null);
+  assert.deepEqual(await checkGitHubUpdate('1.3.9', options), update);
+  assert.deepEqual(await checkGitHubUpdate('1.3.10', options), {status: 'current'});
   assert.equal(calls.length, 1);
   const [{url, config}] = calls;
   assert.equal(url, githubReleaseEndpoint);
@@ -63,10 +64,10 @@ test('GitHub makes a private, bounded request and reuses the successful check fo
   assert.equal(config.redirect, 'error');
   assert.ok(config.signal instanceof AbortSignal);
   advance(24 * hour - 1);
-  assert.equal(await checkGitHubUpdate('1.3.9', options), '1.3.10');
+  assert.deepEqual(await checkGitHubUpdate('1.3.9', options), update);
   assert.equal(calls.length, 1);
   advance(1);
-  assert.equal(await checkGitHubUpdate('1.3.9', options), '1.3.10');
+  assert.deepEqual(await checkGitHubUpdate('1.3.9', options), update);
   assert.equal(calls.length, 2);
 });
 
@@ -77,16 +78,16 @@ test('offline refresh clears stale notices and waits an hour before retrying', a
     if (!online) throw new TypeError('offline');
     return Response.json(stable('1.3.10'));
   });
-  assert.equal(await checkGitHubUpdate('1.3.9', options), '1.3.10');
+  assert.deepEqual(await checkGitHubUpdate('1.3.9', options), update);
   advance(24 * hour);
   online = false;
-  assert.equal(await checkGitHubUpdate('1.3.9', options), null);
+  assert.deepEqual(await checkGitHubUpdate('1.3.9', options), {status: 'failed'});
   advance(hour - 1);
   online = true;
-  assert.equal(await checkGitHubUpdate('1.3.9', options), null);
+  assert.deepEqual(await checkGitHubUpdate('1.3.9', options), {status: 'failed'});
   assert.equal(calls.length, 2);
   advance(1);
-  assert.equal(await checkGitHubUpdate('1.3.9', options), '1.3.10');
+  assert.deepEqual(await checkGitHubUpdate('1.3.9', options), update);
   assert.equal(calls.length, 3);
 });
 
@@ -97,9 +98,10 @@ test('GitHub limit takes precedence over the local cooldown', async () => {
     'X-RateLimit-Remaining': '0',
     'X-RateLimit-Reset': String((options.now() + 3 * hour) / 1000)
   }}));
-  assert.equal(await checkGitHubUpdate('1.3.9', options), null);
+  const limit = {status: 'limited', retryAt: options.now() + 3 * hour};
+  assert.deepEqual(await checkGitHubUpdate('1.3.9', options), limit);
   advance(3 * hour - 1);
-  assert.equal(await checkGitHubUpdate('1.3.9', options), null);
+  assert.deepEqual(await checkGitHubUpdate('1.3.9', options), limit);
   assert.equal(calls.length, 1);
   advance(1);
   await checkGitHubUpdate('1.3.9', options);
@@ -117,8 +119,68 @@ test('an unreadable or unwritable cache never suppresses a valid GitHub update',
    setItem(key,value);
   };
   if(failAt===1)options.storage.getItem=()=>{throw new DOMException('test policy','SecurityError');};
-  assert.equal(await checkGitHubUpdate('1.3.9',options),'1.3.10');
-  assert.equal(await checkGitHubUpdate('1.3.9',options),'1.3.10');
+  assert.deepEqual(await checkGitHubUpdate('1.3.9',options), update);
+  assert.deepEqual(await checkGitHubUpdate('1.3.9',options), update);
   assert.equal(calls.length,1);
  }
+});
+
+test('a manual GitHub check reads the latest release even with a valid old cache', async () => {
+  const {checkGitHubUpdate} = await releases();
+  let version = '1.3.9';
+  const {options, calls} = client(() => Response.json(stable(version)));
+  await checkGitHubUpdate('1.3.9', options);
+  version = '1.3.10';
+
+  const result = await checkGitHubUpdate('1.3.9', {...options, manual: true});
+  assert.equal(calls.length, 2);
+  assert.equal(calls[1].config.cache, 'no-store');
+  assert.deepEqual(result, {status: 'available', version: '1.3.10'});
+});
+
+test('a manual retry honors GitHub Retry-After and resumes when the limit expires', async () => {
+  const {checkGitHubUpdate} = await releases();
+  let limited = true;
+  const {options, calls, advance} = client(() => limited
+    ? new Response('', {status: 403, headers: {'Retry-After': '120'}})
+    : Response.json(stable('1.3.10')));
+  const retryAt = options.now() + 120_000;
+  const manual = {...options, manual: true};
+
+  assert.deepEqual(await checkGitHubUpdate('1.3.9', manual), {status: 'limited', retryAt});
+  limited = false;
+  advance(119_999);
+  assert.deepEqual(await checkGitHubUpdate('1.3.9', manual), {status: 'limited', retryAt});
+  assert.equal(calls.length, 1);
+  advance(1);
+  assert.deepEqual(await checkGitHubUpdate('1.3.9', manual), {status: 'available', version: '1.3.10'});
+  assert.equal(calls.length, 2);
+});
+
+test('GitHub distinguishes forbidden responses, limits reported in JSON, and a later successful retry', async () => {
+  const {checkGitHubUpdate} = await releases();
+  let response = () => Response.json({message: 'Forbidden'}, {status: 403});
+  const {options, calls} = client(() => response());
+  const manual = {...options, manual: true};
+  assert.deepEqual(await checkGitHubUpdate('1.3.9', manual), {status: 'failed'});
+  response = () => Response.json(stable('1.3.9'));
+  assert.deepEqual(await checkGitHubUpdate('1.3.9', manual), {status: 'current'});
+  response = () => Response.json({message: 'You have exceeded a secondary rate limit.'}, {status: 403});
+  assert.deepEqual(await checkGitHubUpdate('1.3.9', manual), {status: 'limited', retryAt: options.now() + hour});
+  assert.equal(calls.length, 3);
+});
+
+test('a denied cache write cannot bring back an older success while a GitHub limit is active', async () => {
+  const {checkGitHubUpdate} = await releases();
+  const {options, calls} = client(() => new Response('', {status: 429, headers: {'Retry-After': '120'}}));
+  options.storage.setItem('listools-release-check-v1', JSON.stringify({
+    version: '1.3.9', nextCheckAt: options.now() + 24 * hour
+  }));
+  options.storage.setItem = () => { throw new DOMException('test quota', 'QuotaExceededError'); };
+  const manual = {...options, manual: true};
+  const limit = {status: 'limited', retryAt: options.now() + 120_000};
+
+  assert.deepEqual(await checkGitHubUpdate('1.3.9', manual), limit);
+  assert.deepEqual(await checkGitHubUpdate('1.3.9', manual), limit);
+  assert.equal(calls.length, 1);
 });

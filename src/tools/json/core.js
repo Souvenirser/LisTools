@@ -8,12 +8,13 @@ export function transformJson(source, { action = 'format', indent = 2 } = {}) {
       nodeCount += 1;
       return value;
     });
-    const text = stringify(value, null, action === 'compact' ? undefined : indent);
+    const text = action === 'preserve' ? source : stringify(value, null, action === 'compact' ? undefined : indent);
     const encoder = new TextEncoder();
+    const inputBytes = encoder.encode(source).length;
     return {
       status: 'ready', text, nodeCount,
-      inputBytes: encoder.encode(source).length,
-      outputBytes: encoder.encode(text).length
+      inputBytes,
+      outputBytes: action === 'preserve' ? inputBytes : encoder.encode(text).length
     };
   } catch (error) {
     const match = error.message.match(/at position (\d+)/);

@@ -15,13 +15,20 @@ html, body { width:360px; max-width:100%; margin:0; overflow:hidden; }
 
 .popup-header .header-recent{appearance:none;background:transparent;color:var(--text);border:0;border-radius:6px;min-height:44px;padding:6px;cursor:pointer}.popup-header .header-recent:hover{background:var(--slate-3)}
 
-.tool-menu-version {
-  position:relative; display:inline-flex; align-items:center; min-block-size:24px;
-  white-space:nowrap;
+#popup-menu .tool-menu-footer:has(>.tool-menu-version) { display:grid; grid-template-columns:minmax(0,1fr) auto; }
+.tool-menu-version { display:inline-flex; align-items:center; gap:8px; grid-area:1/1; }
+.tool-menu-version > span { direction:ltr; unicode-bidi:isolate; white-space:nowrap; }
+#popup-menu .tool-menu-footer:has(>.tool-menu-version) > .tool-menu-hint { grid-area:1/2; justify-self:end; }
+#popup-menu .tool-menu-footer:has(>.tool-menu-version) > .feedback-link { grid-area:2/2; justify-self:end; }
+.tool-menu-check-updates, .tool-menu-update {
+  min-block-size:24px; padding:1px 6px; border:1px solid var(--border); border-radius:5px;
+  background:var(--surface); color:var(--blue-11); font:inherit; line-height:1.2; cursor:pointer;
+  min-inline-size:0; overflow-wrap:anywhere;
 }
-.tool-menu-version-replaced { visibility:hidden; }
-.tool-menu-update {
-  position:absolute; inset:0; padding:0 5px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-  font:inherit; font-weight:600; border:0; border-radius:5px; background:#1169b7; color:#fff; cursor:pointer;
+.tool-menu-check-updates:hover, .tool-menu-update:hover { background:var(--blue-3); }
+.tool-menu-check-updates[aria-disabled="true"] { color:var(--muted); cursor:wait; }
+.tool-menu-update-result {
+  display:flex; align-items:center; gap:8px; grid-area:2/1; min-block-size:2.75em; line-height:1.2;
 }
-.tool-menu-update:hover { background:#0b5596; }
+.tool-menu-update-status { min-inline-size:0; overflow-wrap:anywhere; }
+.tool-menu-update-result[data-status="available"] .tool-menu-update-status { color:var(--blue-11); }
